@@ -17,7 +17,7 @@ OMDALAT không phải:
 OMDALAT là:
 
 ```
-→ City Node của OMDALA
+→ Standalone city-layer brand for Da Lat
 → Living Intelligence City
 → Real-world activation layer
 → Trust-based local system
@@ -26,22 +26,17 @@ OMDALAT là:
 
 **Câu định nghĩa chuẩn (dùng nhất quán trong toàn bộ hệ thống):**
 
-> OMDALAT is the first living intelligence city built on OMDALA,
+> OMDALAT is the living intelligence city interface for Da Lat,
 > where people, places, and communities activate real-world value
 > through trust and coordination.
 
 **Tagline chính:**
 
-> Where OMDALA becomes real.
+> Trusted places, people, and activity in Da Lat.
 
 ---
 
-# 2. VAI TRÒ TRONG HỆ SINH THÁI
-
-| Layer | Vai trò |
-|---|---|
-| OMDALA | Global system — defines the architecture |
-| OMDALAT | Local implementation — proves the system works |
+# 2. VAI TRÒ TRONG HỆ THỐNG
 
 OMDALAT phải tạo ra:
 - **density** — mật độ hoạt động thực
@@ -88,8 +83,8 @@ OMDALAT — The First Living Intelligence City in Da Lat
 
 ```
 OMDALAT connects trusted places, hosts, experts, communities,
-and real-world activity in Da Lat — the first living intelligence
-city layer built on OMDALA.
+and real-world activity in Da Lat — a living city layer built
+around trust, proof, and participation.
 ```
 
 ---
@@ -629,7 +624,7 @@ Target:
 Full city coverage
 Multi-community activity
 Public proof ecosystem
-OMDALA integration visible
+cross-entity coordination visible
 ```
 
 ---
@@ -680,7 +675,7 @@ SEO chuẩn không thay thế được điều này.
 
 ```
 OMDALAT
-Where OMDALA becomes real.
+Trusted places, people, and activity in Da Lat.
 ```
 
 ---

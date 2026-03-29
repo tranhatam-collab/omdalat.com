@@ -1,7 +1,7 @@
 # OMDALAT.COM
 ## Missing Files Audit
 ## Final Audit for Dev, Product, Design, and Founder
-## Version 1.0
+## Version 1.1
 
 ---
 
@@ -25,11 +25,11 @@ Repository: `tranhatam-collab/omdalat.com`
 
 Current state:
 - root has `apps/`, `data/`, `docs/`, `.gitignore`, `README.md`, `index.html`, `styles.css`
-- `apps/app/` and `apps/web/` contain only placeholder `README.md` files
-- `docs/` contains brand and build docs but lacks product + tech specs
-- `data/` contains only `README.md`
+- `apps/app/` and `apps/web/` now contain static-first runtime foundations plus Stage 2 shell work
+- `docs/` now contains brand, build, SEO, and core product/data/API/trust/matching specs
+- `data/` now contains JSON mock datasets for public and local operating layers
 
-**Conclusion:** The repository is useful as a direction shell but not yet as a production build foundation.
+**Conclusion:** The repository has moved beyond direction-only docs, but still lacks several scale and operations files before it can be treated as a full production build foundation.
 
 ---
 
@@ -52,14 +52,19 @@ Current state:
 
 ---
 
-# 4. ROOT-LEVEL MISSING FILES
+# 4. ROOT-LEVEL FOUNDATION STATUS
 
-## Required
+## Already present
 
 ```
 package.json
 pnpm-workspace.yaml
 turbo.json
+```
+
+## Still missing
+
+```
 .editorconfig
 .nvmrc
 .env.example
@@ -85,46 +90,24 @@ SECURITY.md
 
 ---
 
-# 5. MISSING FILES — `apps/web`
+# 5. STATUS — `apps/web`
 
 `apps/web` = `omdalat.com` public website (SSR, SEO-first)
 
-## Config
+## Already present
 
 ```
 apps/web/package.json
 apps/web/next.config.js
 apps/web/tsconfig.json
-```
-
-## Public / SEO
-
-```
-apps/web/public/robots.txt
-apps/web/public/sitemap.xml
-apps/web/public/_headers
-apps/web/public/_redirects
-apps/web/public/og/
-apps/web/public/icons/
-```
-
-## App routes
-
-```
 apps/web/app/layout.tsx
-apps/web/app/page.tsx              ← homepage
+apps/web/app/page.tsx
 apps/web/app/places/page.tsx
-apps/web/app/places/[slug]/page.tsx
 apps/web/app/hosts/page.tsx
-apps/web/app/hosts/[slug]/page.tsx
 apps/web/app/experts/page.tsx
-apps/web/app/experts/[slug]/page.tsx
 apps/web/app/communities/page.tsx
-apps/web/app/communities/[slug]/page.tsx
 apps/web/app/events/page.tsx
-apps/web/app/events/[slug]/page.tsx
 apps/web/app/proofs/page.tsx
-apps/web/app/proofs/[slug]/page.tsx
 apps/web/app/join/page.tsx
 apps/web/app/about/page.tsx
 apps/web/app/vision/page.tsx
@@ -135,7 +118,29 @@ apps/web/app/terms/page.tsx
 apps/web/app/contact/page.tsx
 ```
 
-## Support modules
+## Still missing — public / SEO
+
+```
+apps/web/public/robots.txt
+apps/web/public/sitemap.xml
+apps/web/public/_headers
+apps/web/public/_redirects
+apps/web/public/og/
+apps/web/public/icons/
+```
+
+## Still missing — detail routes
+
+```
+apps/web/app/places/[slug]/page.tsx
+apps/web/app/hosts/[slug]/page.tsx
+apps/web/app/experts/[slug]/page.tsx
+apps/web/app/communities/[slug]/page.tsx
+apps/web/app/events/[slug]/page.tsx
+apps/web/app/proofs/[slug]/page.tsx
+```
+
+## Still missing — support modules
 
 ```
 apps/web/lib/metadata.ts      ← title, description, OG helper
@@ -147,21 +152,25 @@ apps/web/lib/hreflang.ts      ← hreflang scaffold
 
 ---
 
-# 6. MISSING FILES — `apps/app`
+# 6. STATUS — `apps/app`
 
 `apps/app` = `app.omdalat.com` (authenticated dashboard)
 
-## Config
+## Already present
+
+```
+apps/app/README.md
+apps/app/index.html
+apps/app/app.js
+apps/app/styles.css
+```
+
+## Still missing — Next.js app runtime
 
 ```
 apps/app/package.json
 apps/app/next.config.js
 apps/app/tsconfig.json
-```
-
-## App routes
-
-```
 apps/app/app/layout.tsx
 apps/app/app/page.tsx
 apps/app/app/dashboard/page.tsx
@@ -175,7 +184,7 @@ apps/app/app/profile/page.tsx
 apps/app/app/settings/page.tsx
 ```
 
-## Support modules
+## Still missing — support modules
 
 ```
 apps/app/lib/auth.ts
@@ -189,7 +198,15 @@ apps/app/components/activity-feed.tsx
 
 ---
 
-# 7. MISSING `packages/` LAYER
+# 7. STATUS — `packages/` LAYER
+
+## Already present
+
+```
+packages/README.md
+```
+
+## Still missing
 
 ```
 packages/ui/           ← shared components
@@ -207,7 +224,15 @@ packages/config/       ← shared ESLint, TS, Tailwind configs
 
 ---
 
-# 8. MISSING `services/` LAYER
+# 8. STATUS — `services/` LAYER
+
+## Already present
+
+```
+services/README.md
+```
+
+## Still missing
 
 ```
 services/api/          ← backend API (Cloudflare Workers / D1)
@@ -234,7 +259,7 @@ services/notifications/
 
 ---
 
-# 10. MISSING PRODUCT DOCUMENTATION
+# 10. COMPLETED CORE PRODUCT DOCUMENTATION
 
 | File | Purpose |
 |---|---|
@@ -246,12 +271,17 @@ services/notifications/
 
 ---
 
-# 11. MISSING DATA MODEL DOCUMENTATION
+# 11. COMPLETED CORE DATA MODEL DOCUMENTATION
 
 | File | Purpose |
 |---|---|
 | `docs/DATA_MODEL_OMDALAT.md` | Entity definitions and relationships |
 | `docs/DB_SCHEMA_OMDALAT.md` | Database table schemas |
+ 
+**Still missing in this layer:**
+
+| File | Purpose |
+|---|---|
 | `data/schemas/place.json` | Place entity schema |
 | `data/schemas/host.json` | Host entity schema |
 | `data/schemas/expert.json` | Expert entity schema |
@@ -263,11 +293,16 @@ services/notifications/
 
 ---
 
-# 12. MISSING API DOCUMENTATION
+# 12. COMPLETED CORE API DOCUMENTATION
 
 | File | Purpose |
 |---|---|
 | `docs/API_SPEC_OMDALAT.md` | Full API specification |
+
+**Still missing in this layer:**
+
+| File | Purpose |
+|---|---|
 | `docs/API_ROUTE_MAP_OMDALAT.md` | Route map and method overview |
 | `docs/API_AUTH_RULES_OMDALAT.md` | Auth and permission rules |
 
@@ -287,14 +322,19 @@ services/notifications/
 
 ---
 
-# 13. MISSING TRUST + MATCHING DOCS
+# 13. COMPLETED CORE TRUST + MATCHING DOCS
 
 | File | Purpose |
 |---|---|
 | `docs/TRUST_ENGINE_OMDALAT.md` | Trust scoring logic, inputs, outputs |
+| `docs/MATCHING_ENGINE_OMDALAT.md` | Local discovery and matching logic |
+
+**Still missing in this layer:**
+
+| File | Purpose |
+|---|---|
 | `docs/VERIFICATION_MODEL_OMDALAT.md` | Verification process and rules |
 | `docs/PROOF_SYSTEM_OMDALAT.md` | Proof submission and validation |
-| `docs/MATCHING_ENGINE_OMDALAT.md` | Local discovery and matching logic |
 | `docs/RANKING_RULES_OMDALAT.md` | Visibility and ranking rules |
 
 **Why critical:**
@@ -356,56 +396,76 @@ apps/admin/app/users/page.tsx
 
 # 18. PRIORITY ORDER
 
-## Priority 1 — workspace foundation
+## Priority 1 — app runtime + SEO foundation
 
 ```
-package.json
-pnpm-workspace.yaml
-turbo.json
-.nvmrc
-.env.example
-apps/web/package.json
 apps/app/package.json
-```
-
-## Priority 2 — public web runtime
-
-```
-apps/web/app/layout.tsx
-apps/web/app/page.tsx
+apps/app/next.config.js
+apps/app/tsconfig.json
+apps/app/app/layout.tsx
+apps/app/app/page.tsx
 apps/web/public/robots.txt
 apps/web/public/_headers
 apps/web/public/_redirects
 apps/web/lib/metadata.ts
 apps/web/lib/schema.ts
+apps/web/lib/canonical.ts
 ```
 
-## Priority 3 — product lock docs
+## Priority 2 — public web completion
 
 ```
-docs/PRODUCT_SPEC_OMDALAT.md
-docs/DATA_MODEL_OMDALAT.md
-docs/API_SPEC_OMDALAT.md
-docs/TRUST_ENGINE_OMDALAT.md
-docs/OMDALAT_THEME_SYSTEM.md
+apps/web/app/places/[slug]/page.tsx
+apps/web/app/hosts/[slug]/page.tsx
+apps/web/app/experts/[slug]/page.tsx
+apps/web/app/communities/[slug]/page.tsx
+apps/web/app/events/[slug]/page.tsx
+apps/web/app/proofs/[slug]/page.tsx
+apps/web/public/sitemap.xml
+apps/web/public/og/
+apps/web/public/icons/
+apps/web/lib/breadcrumb.ts
+apps/web/lib/hreflang.ts
 ```
 
-## Priority 4 — system quality
+## Priority 3 — shared packages + backend services
 
 ```
 packages/ui/
+packages/core/
 packages/types/
+packages/seo/
+packages/config/
 services/api/
-docs/MATCHING_ENGINE_OMDALAT.md
-.github/workflows/
+services/auth/
+services/trust/
+services/matching/
+services/notifications/
 ```
 
-## Priority 5 — scale readiness
+## Priority 4 — remaining system docs
+
+```
+docs/API_ROUTE_MAP_OMDALAT.md
+docs/API_AUTH_RULES_OMDALAT.md
+docs/VERIFICATION_MODEL_OMDALAT.md
+docs/PROOF_SYSTEM_OMDALAT.md
+docs/RANKING_RULES_OMDALAT.md
+docs/OMDALAT_THEME_SYSTEM.md
+docs/OMDALAT_COPY_SYSTEM.md
+docs/OMDALAT_MOTION_SYSTEM.md
+docs/FIGMA_STRUCTURE_OMDALAT.md
+```
+
+## Priority 5 — operations + quality
 
 ```
 apps/admin/
 apps/docs/
 data/seed/
+.github/workflows/
+vitest.config.ts
+playwright.config.ts
 docs/DEPLOYMENT_RUNBOOK_OMDALAT.md
 docs/METRICS_OMDALAT.md
 ```
@@ -417,15 +477,14 @@ docs/METRICS_OMDALAT.md
 Do not start building random UI screens first.
 
 Correct order:
-1. Lock workspace foundation
-2. Lock web runtime and SEO foundation
-3. Lock app runtime
-4. Lock product and data specs
-5. Lock trust and matching specs
-6. Add packages and services
-7. Add admin and CI
-8. Add seed data and analytics
+1. Finish app runtime
+2. Finish public SEO foundation
+3. Complete public detail pages
+4. Add packages and services
+5. Add remaining system docs
+6. Add admin, docs, and CI
+7. Add seed data, deploy docs, and analytics
 
 ---
 
-*OMDALAT Missing Files Audit — Version 1.0*
+*OMDALAT Missing Files Audit — Version 1.1*

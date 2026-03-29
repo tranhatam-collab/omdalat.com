@@ -4,7 +4,7 @@
 
 ## 1. Core concept
 
-OMDALAT is the first real-world implementation of OMDALA.
+OMDALAT is a standalone city-layer product for Da Lat.
 
 It is the first city node where the global system becomes visible through:
 
@@ -93,7 +93,7 @@ P3:
 
 - local app shell
 - trust overlays
-- connection to OMDALA platform APIs later
+- connection to real data and operational workflows later
 
 ## 9. Design rules
 
@@ -125,4 +125,4 @@ do not build it.
 
 ## 11. Final definition
 
-OMDALAT is where the global OMDALA system becomes real, local, and verifiable.
+OMDALAT is a living city interface for trusted places, hosts, experts, communities, events, requests, and proofs in Da Lat.

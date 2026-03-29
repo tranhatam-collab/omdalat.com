@@ -1,21 +1,16 @@
 # OMDALAT
 
-OMDALAT is the first city implementation of OMDALA.
+OMDALAT is a standalone city-layer product for Da Lat.
 
 This repository is the foundation for:
 
 - `omdalat.com`
 - `app.omdalat.com`
-- the first local living lab
-- real density, proof, and activity
+- a public city-layer web experience
+- a local operating layer for trusted activity, proof, and participation
 
 OMDALAT is not a tourism site and not a generic community landing page.
-It is the first operating city layer under OMDALA.
-
-## Role in the brand system
-
-- `OMDALA` = master/global system
-- `OMDALAT` = first city node and proof layer
+It is a living city interface centered on places, hosts, experts, communities, events, requests, and proofs in Da Lat.
 
 ## Positioning
 
@@ -26,13 +21,13 @@ Primary line:
 
 Supporting line:
 
-- Where OMDALA becomes real.
+- Trusted places, people, and activity in Da Lat.
 
 ## Start here
 
 Read:
 
-1. `docs/MASTER_BUILD_SYSTEM_OMDALA_OMDALAT.md`
+1. `docs/MASTER_BUILD_SYSTEM_OMDALAT.md`
 2. `docs/BRAND_ARCHITECTURE_OMDALAT.md`
 3. `docs/README_DEV_HANDOFF_OMDALAT.md`
 
@@ -105,4 +100,4 @@ omdalat.com/
 ## Immediate build intent
 
 This repo now carries both a static-first city layer foundation and a parallel Stage 2 runtime scaffold for `apps/web`.
-The next build phase should wire runtime routes to real entities, SEO helpers, and shared packages without interrupting the current static proof surface.
+The next build phase should wire runtime routes to real Da Lat entities, SEO helpers, and shared packages without interrupting the current static proof surface.

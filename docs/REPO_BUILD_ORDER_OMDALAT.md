@@ -314,6 +314,9 @@ docs/DATA_MODEL_OMDALAT.md
 docs/API_SPEC_OMDALAT.md
 docs/TRUST_ENGINE_OMDALAT.md
 docs/MATCHING_ENGINE_OMDALAT.md
+docs/SCREEN_FLOW_OMDALAT.md
+docs/USER_ROLES_OMDALAT.md
+docs/DB_SCHEMA_OMDALAT.md
 ```
 
 ## Mock data to create
@@ -554,11 +557,14 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 - [ ] 41. Sitemap system
 
 ## Phase 6 — Docs and data
-- [ ] 42. `docs/PRODUCT_SPEC_OMDALAT.md`
-- [ ] 43. `docs/DATA_MODEL_OMDALAT.md`
-- [ ] 44. `docs/API_SPEC_OMDALAT.md`
-- [ ] 45. `docs/TRUST_ENGINE_OMDALAT.md`
-- [ ] 46. `docs/MATCHING_ENGINE_OMDALAT.md`
+- [x] 42. `docs/PRODUCT_SPEC_OMDALAT.md`
+- [x] 43. `docs/DATA_MODEL_OMDALAT.md`
+- [x] 44. `docs/API_SPEC_OMDALAT.md`
+- [x] 45. `docs/TRUST_ENGINE_OMDALAT.md`
+- [x] 46. `docs/MATCHING_ENGINE_OMDALAT.md`
+- [x] 46a. `docs/SCREEN_FLOW_OMDALAT.md`
+- [x] 46b. `docs/USER_ROLES_OMDALAT.md`
+- [x] 46c. `docs/DB_SCHEMA_OMDALAT.md`
 - [ ] 47. Mock data for all core entities
 
 ## Phase 7 — Operations

@@ -33,14 +33,13 @@ No team member should invent a new visual direction, naming style, or interactio
 
 # 2. WHAT IS OMDALAT
 
-OMDALAT is the first real-world implementation of OMDALA.
+OMDALAT is a standalone city-layer brand for Da Lat.
 
 It represents:
-- the first city node
-- the living pilot
+- the living city interface
 - the localized experience
 - the green intelligence city interface
-- the first proof that OMDALA works in reality
+- the first proof that trusted local activity can be made visible at city scale
 
 OMDALAT is not a tourism brand.
 OMDALAT is not a community page.
@@ -53,18 +52,15 @@ OMDALAT is:
 - a green trust network
 - a real-world activation surface
 
-**Formula:**
-> OMDALA defines the system. OMDALAT demonstrates the system.
-
 ---
 
 # 3. BRAND POSITIONING
 
 **Primary statement:**
-> OMDALAT is the first living intelligence city built on OMDALA.
+> OMDALAT is the first living intelligence city interface for Da Lat.
 
 **Short version:**
-> OMDALAT is where OMDALA becomes real.
+> Trusted places, people, and activity in Da Lat.
 
 **Alternative approved positioning lines:**
 - OMDALAT is the green city node of living intelligence.
@@ -161,7 +157,7 @@ OMDALAT must **never** feel like:
 ## 6.6 Color Rules
 
 - OMDALAT owns **green-mist-earth** as primary identity.
-- Blue space colors are **not** OMDALAT's identity — they may appear only as inherited system signal from OMDALA (e.g., a small "Powered by OMDALA" badge).
+- Blue space colors are **not** OMDALAT's identity and, if used at all, must remain minor and subordinate to the green system.
 - OMDALAT homepage must **not** become blue-space dominant.
 - Green tones must remain **premium and restrained** — never neon-cheap.
 
@@ -482,13 +478,13 @@ Communities
 Events
 Proofs
 Join
-[ Back to OMDALA ]
+Trust
 ```
 
 ## 15.3 Rule
 
-OMDALAT nav must always preserve the relationship to OMDALA.
-The "Back to OMDALA" or "Powered by OMDALA" signal must remain visible.
+OMDALAT navigation must stay self-contained, clear, and local-first.
+It should always help users move between places, people, proof, and participation without relying on another brand layer.
 
 ---
 
@@ -562,7 +558,7 @@ Icons must be:
 ## 18.2 Example Lines
 
 ```
-Where OMDALA becomes real.
+Trusted places, people, and activity in Da Lat.
 A living city node for trusted activity.
 Nature, technology, and human value moving together.
 Real places. Real people. Real proof.
@@ -770,7 +766,6 @@ Design team must create:
 - keep motion subtle
 - maintain the same typography family
 - use shared spacing scale
-- preserve the OMDALA → OMDALAT relationship signal
 - build green-first dark theme as default
 
 ---
@@ -779,7 +774,7 @@ Design team must create:
 
 | Type | Line |
 |---|---|
-| Primary | Where OMDALA becomes real. |
+| Primary | Trusted places, people, and activity in Da Lat. |
 | Alternative | The first living intelligence city. |
 | Alternative | Nature, technology, and human value moving together. |
 | Short | The city is the interface. |
@@ -789,7 +784,7 @@ Design team must create:
 
 # 26. BRAND SUMMARY
 
-OMDALAT is the first living green city node built on OMDALA.
+OMDALAT is the living green city interface for Da Lat.
 
 Its visual language must express:
 - nature
@@ -802,13 +797,13 @@ Its visual language must express:
 It must feel like:
 - a city where technology is embedded into living systems
 - a trusted local layer anyone can enter
-- proof that a global intelligence system works in a real place
+- a system with enough proof and clarity to feel real from the first visit
 
 ---
 
 # 27. FINAL DIRECTIVE TO DEV
 
-Build OMDALAT as the green city implementation of OMDALA.
+Build OMDALAT as the green city interface for Da Lat.
 
 Use the green palette. Build the mist surfaces. Animate the living city.
 
