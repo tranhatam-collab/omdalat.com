@@ -1,132 +1,125 @@
 # OMDALAT.COM
-## Complete File Tree — V1
-## Reference Directory Structure for DEV
+## Full Repository File Tree
+## Production-Ready Structure
 ## Version 1.0
 
 ---
 
-# PURPOSE
+# 1. PURPOSE
 
-This file defines the complete target directory structure for the `omdalat.com` monorepo.
+This file defines the exact folder and file structure for the `omdalat.com` monorepo.
 
-Use this as the single reference when:
-- setting up the repo from scratch
-- onboarding a new developer
-- reviewing what has been built vs what is missing
-- planning next work in the correct location
+It ensures:
+- consistent architecture
+- clean scaling
+- separation of concerns
+- easy onboarding
+- zero structural refactor later
 
-Levels shown: root → L1 → L2 → L3
+**Rule:** Create this structure exactly before writing feature code.
 
 ---
 
-# ROOT
+# 2. ROOT STRUCTURE
 
 ```
 omdalat.com/
-├── .editorconfig
-├── .env.example
-├── .gitignore
-├── .nvmrc
-├── CHANGELOG.md
-├── CODEOWNERS
-├── LICENSE
-├── README.md
+│
+├── apps/
+├── packages/
+├── services/
+├── docs/
+├── data/
+├── scripts/
+├── .github/
+│
 ├── package.json
 ├── pnpm-workspace.yaml
 ├── turbo.json
-│
-├── .github/
-├── apps/
-├── data/
-├── docs/
-├── packages/
-└── services/
+├── .editorconfig
+├── .nvmrc
+├── .env.example
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-# .github/
-
-```
-.github/
-├── PULL_REQUEST_TEMPLATE.md
-└── workflows/
-    ├── build.yml
-    ├── deploy-app.yml
-    ├── deploy-web.yml
-    └── lint.yml
-```
-
----
-
-# apps/
+# 3. APPS STRUCTURE
 
 ```
 apps/
-├── admin/
-├── app/
-├── docs/
-└── web/
+│
+├── web/       # omdalat.com        (public website, SSR, SEO-first)
+├── app/       # app.omdalat.com    (user app, authenticated)
+├── admin/     # admin.omdalat.com  (internal, noindex)
+└── docs/      # docs.omdalat.com   (public documentation)
 ```
 
 ---
 
-## apps/web/  →  omdalat.com
+# 4. apps/web/  →  omdalat.com
 
 ```
 apps/web/
+│
 ├── package.json
-├── next.config.js
 ├── tsconfig.json
+├── next.config.js
 │
 ├── app/
-│   ├── layout.tsx                  root layout
-│   ├── page.tsx                    homepage
-│   ├── about/
-│   │   └── page.tsx
-│   ├── communities/
-│   │   ├── page.tsx
-│   │   └── [slug]/
-│   │       └── page.tsx
-│   ├── contact/
-│   │   └── page.tsx
-│   ├── events/
-│   │   ├── page.tsx
-│   │   └── [slug]/
-│   │       └── page.tsx
-│   ├── experts/
-│   │   ├── page.tsx
-│   │   └── [slug]/
-│   │       └── page.tsx
-│   ├── faq/
-│   │   └── page.tsx
-│   ├── hosts/
-│   │   ├── page.tsx
-│   │   └── [slug]/
-│   │       └── page.tsx
-│   ├── join/
-│   │   └── page.tsx
+│   ├── layout.tsx
+│   ├── page.tsx
+│   │
 │   ├── places/
 │   │   ├── page.tsx
 │   │   └── [slug]/
 │   │       └── page.tsx
-│   ├── privacy/
-│   │   └── page.tsx
+│   │
+│   ├── hosts/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   │
+│   ├── experts/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   │
+│   ├── communities/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   │
+│   ├── events/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   │
 │   ├── proofs/
 │   │   ├── page.tsx
 │   │   └── [slug]/
 │   │       └── page.tsx
-│   ├── terms/
+│   │
+│   ├── join/
+│   │   └── page.tsx
+│   ├── about/
+│   │   └── page.tsx
+│   ├── vision/
 │   │   └── page.tsx
 │   ├── trust/
 │   │   └── page.tsx
-│   └── vision/
+│   ├── faq/
+│   │   └── page.tsx
+│   ├── privacy/
+│   │   └── page.tsx
+│   └── terms/
 │       └── page.tsx
 │
 ├── components/
 │   ├── layout/
-│   │   ├── Footer.tsx
 │   │   ├── Header.tsx
+│   │   ├── Footer.tsx
 │   │   └── Nav.tsx
 │   ├── sections/
 │   │   ├── HeroSection.tsx
@@ -138,58 +131,79 @@ apps/web/
 │   │   ├── EventsSection.tsx
 │   │   ├── ProofSection.tsx
 │   │   └── JoinSection.tsx
+│   ├── cards/
+│   │   ├── PlaceCard.tsx
+│   │   ├── HostCard.tsx
+│   │   ├── ExpertCard.tsx
+│   │   ├── CommunityCard.tsx
+│   │   ├── EventCard.tsx
+│   │   └── ProofCard.tsx
+│   ├── navigation/
+│   │   └── Breadcrumb.tsx
 │   └── shared/
-│       ├── Breadcrumb.tsx
-│       ├── EntityCard.tsx
 │       ├── TrustBadge.tsx
-│       └── ProofCard.tsx
+│       └── EntityMeta.tsx
 │
 ├── lib/
-│   ├── canonical.ts
-│   ├── hreflang.ts
-│   ├── metadata.ts
-│   └── schema.ts
+│   ├── metadata.ts        # title, description, OG helper
+│   ├── schema.ts          # JSON-LD builders
+│   ├── canonical.ts       # canonical URL builder
+│   ├── hreflang.ts        # /vi/ /en/ scaffold
+│   └── routes.ts          # route constants
 │
-├── public/
-│   ├── _headers
-│   ├── _redirects
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   ├── icons/
-│   └── og/
+├── styles/
+│   ├── globals.css
+│   └── tokens.css         # design tokens
 │
-└── styles/
-    ├── globals.css
-    └── tokens.css
+└── public/
+    ├── robots.txt
+    ├── sitemap.xml
+    ├── _headers
+    ├── _redirects
+    ├── icons/
+    └── og/
 ```
 
 ---
 
-## apps/app/  →  app.omdalat.com
+# 5. apps/app/  →  app.omdalat.com
 
 ```
 apps/app/
+│
 ├── package.json
-├── next.config.js
 ├── tsconfig.json
+├── next.config.js
 │
 ├── app/
 │   ├── layout.tsx
 │   ├── page.tsx
-│   ├── communities/
-│   │   └── page.tsx
 │   ├── dashboard/
 │   │   └── page.tsx
-│   ├── events/
-│   │   └── page.tsx
-│   ├── experts/
-│   │   └── page.tsx
-│   ├── hosts/
-│   │   └── page.tsx
 │   ├── places/
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── hosts/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── experts/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── communities/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── events/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
 │   ├── proofs/
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
 │   ├── profile/
 │   │   └── page.tsx
 │   └── settings/
@@ -199,14 +213,16 @@ apps/app/
 │   ├── layout/
 │   │   ├── AppNav.tsx
 │   │   └── AppShell.tsx
+│   ├── cards/
+│   │   ├── NodeCard.tsx
+│   │   └── ProofCard.tsx
 │   └── shared/
 │       ├── ActivityFeed.tsx
 │       ├── LocalMap.tsx
-│       ├── NodeCard.tsx
-│       ├── ProofCard.tsx
 │       └── TrustBadge.tsx
 │
 └── lib/
+    ├── api.ts
     ├── auth.ts
     ├── roles.ts
     └── trust.ts
@@ -214,246 +230,227 @@ apps/app/
 
 ---
 
-## apps/admin/  →  admin.omdalat.com
+# 6. apps/admin/  →  admin.omdalat.com
 
 ```
 apps/admin/
-├── package.json
-├── next.config.js
-├── tsconfig.json
 │
-└── app/
-    ├── layout.tsx
-    ├── page.tsx
-    ├── communities/
-    │   └── page.tsx
-    ├── events/
-    │   └── page.tsx
-    ├── experts/
-    │   └── page.tsx
-    ├── hosts/
-    │   └── page.tsx
-    ├── moderation/
-    │   └── page.tsx
-    ├── places/
-    │   └── page.tsx
-    ├── proofs/
-    │   └── page.tsx
-    ├── users/
-    │   └── page.tsx
-    └── verifications/
-        └── page.tsx
+├── package.json
+├── tsconfig.json
+├── next.config.js
+│
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── users/
+│   │   └── page.tsx
+│   ├── places/
+│   │   └── page.tsx
+│   ├── hosts/
+│   │   └── page.tsx
+│   ├── experts/
+│   │   └── page.tsx
+│   ├── communities/
+│   │   └── page.tsx
+│   ├── events/
+│   │   └── page.tsx
+│   ├── proofs/
+│   │   └── page.tsx
+│   ├── verifications/
+│   │   └── page.tsx
+│   └── moderation/
+│       └── page.tsx
+│
+├── components/
+│   ├── tables/
+│   └── forms/
+│
+└── lib/
+    └── admin-api.ts
 ```
 
 ---
 
-## apps/docs/  →  docs.omdalat.com
+# 7. apps/docs/  →  docs.omdalat.com
 
 ```
 apps/docs/
-├── package.json
-├── next.config.js
-├── tsconfig.json
 │
-└── app/
-    ├── layout.tsx
-    ├── page.tsx
-    ├── api/
-    │   └── page.tsx
+├── package.json
+├── tsconfig.json
+├── next.config.js
+│
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── brand/
+│   │   └── page.tsx
+│   ├── product/
+│   │   └── page.tsx
+│   ├── seo/
+│   │   └── page.tsx
+│   ├── trust/
+│   │   └── page.tsx
+│   ├── api/
+│   │   └── page.tsx
+│   └── data/
+│       └── page.tsx
+│
+└── content/
     ├── brand/
-    │   └── page.tsx
-    ├── data-model/
-    │   └── page.tsx
     ├── product/
-    │   └── page.tsx
     ├── seo/
-    │   └── page.tsx
-    └── trust/
-        └── page.tsx
+    ├── trust/
+    ├── api/
+    └── data/
 ```
 
 ---
 
-# packages/
+# 8. packages/
 
 ```
 packages/
-├── config/
-├── core/
-├── seo/
+│
+├── ui/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── index.ts
+│       ├── Badge.tsx
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       ├── Container.tsx
+│       ├── EmptyState.tsx
+│       ├── Input.tsx
+│       ├── Modal.tsx
+│       ├── NavItem.tsx
+│       ├── PageIntro.tsx
+│       └── Section.tsx
+│
 ├── types/
-└── ui/
-```
-
-## packages/config/
-
-```
-packages/config/
-├── package.json
-├── eslint.js
-├── tailwind.js
-└── tsconfig.base.json
-```
-
-## packages/types/
-
-```
-packages/types/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── community.ts
-    ├── event.ts
-    ├── expert.ts
-    ├── host.ts
-    ├── node.ts
-    ├── place.ts
-    ├── proof.ts
-    ├── trust.ts
-    ├── user.ts
-    └── verification.ts
-```
-
-## packages/ui/
-
-```
-packages/ui/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── Badge.tsx
-    ├── Button.tsx
-    ├── Card.tsx
-    ├── Container.tsx
-    ├── EmptyState.tsx
-    ├── Input.tsx
-    ├── Modal.tsx
-    ├── NavItem.tsx
-    ├── PageIntro.tsx
-    └── Section.tsx
-```
-
-## packages/core/
-
-```
-packages/core/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── constants.ts
-    ├── routes.ts
-    └── labels.ts
-```
-
-## packages/seo/
-
-```
-packages/seo/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── canonical.ts
-    ├── hreflang.ts
-    ├── metadata.ts
-    └── schema.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── index.ts
+│       ├── community.ts
+│       ├── event.ts
+│       ├── expert.ts
+│       ├── host.ts
+│       ├── node.ts
+│       ├── place.ts
+│       ├── proof.ts
+│       ├── trust.ts
+│       ├── user.ts
+│       └── verification.ts
+│
+├── core/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── index.ts
+│       ├── constants.ts
+│       ├── routes.ts
+│       └── labels.ts
+│
+└── seo/
+    ├── package.json
+    ├── tsconfig.json
+    └── src/
+        ├── index.ts
+        ├── canonical.ts
+        ├── hreflang.ts
+        ├── metadata.ts
+        └── schema.ts
 ```
 
 ---
 
-# services/
+# 9. services/
 
 ```
 services/
+│
 ├── api/
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── wrangler.toml
+│   └── src/
+│       ├── index.ts
+│       └── routes/
+│           ├── auth.ts
+│           ├── communities.ts
+│           ├── events.ts
+│           ├── experts.ts
+│           ├── hosts.ts
+│           ├── nodes.ts
+│           ├── places.ts
+│           ├── proofs.ts
+│           └── trust.ts
+│
 ├── auth/
-├── matching/
-├── notifications/
-└── trust/
-```
-
-## services/api/
-
-```
-services/api/
-├── package.json
-├── tsconfig.json
-├── wrangler.toml
-└── src/
-    ├── index.ts
-    └── routes/
-        ├── auth.ts
-        ├── communities.ts
-        ├── events.ts
-        ├── experts.ts
-        ├── hosts.ts
-        ├── nodes.ts
-        ├── places.ts
-        ├── proofs.ts
-        └── trust.ts
-```
-
-## services/trust/
-
-```
-services/trust/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── calculator.ts
-    ├── proof-validator.ts
-    └── verification.ts
-```
-
-## services/matching/
-
-```
-services/matching/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts
-    ├── local-discovery.ts
-    └── ranking.ts
+│   ├── package.json
+│   └── src/
+│       ├── index.ts
+│       ├── session.ts
+│       └── tokens.ts
+│
+├── trust/
+│   ├── package.json
+│   └── src/
+│       ├── index.ts
+│       ├── calculator.ts
+│       ├── proof-validator.ts
+│       └── verification.ts
+│
+└── matching/
+    ├── package.json
+    └── src/
+        ├── index.ts
+        ├── local-discovery.ts
+        └── ranking.ts
 ```
 
 ---
 
-# data/
+# 10. data/
 
 ```
 data/
+│
 ├── README.md
+│
 ├── mock/
+│   ├── places.json
+│   ├── hosts.json
+│   ├── experts.json
 │   ├── communities.json
 │   ├── events.json
-│   ├── experts.json
-│   ├── hosts.json
-│   ├── places.json
 │   └── proofs.json
+│
 ├── schemas/
-│   ├── community.json
-│   ├── event.json
-│   ├── expert.json
-│   ├── host.json
-│   ├── place.json
-│   └── proof.json
+│   ├── place.schema.json
+│   ├── host.schema.json
+│   ├── expert.schema.json
+│   ├── community.schema.json
+│   ├── event.schema.json
+│   └── proof.schema.json
+│
 └── seed/
-    └── README.md
+    ├── README.md
+    └── seed.ts
 ```
 
 ---
 
-# docs/
+# 11. docs/
 
 ```
 docs/
+│
+├── — EXISTING —
 ├── BRAND_ARCHITECTURE_OMDALAT.md
-├── FILE_TREE_OMDALAT_V1.md             ← this file
+├── FILE_TREE_OMDALAT_V1.md               ← this file
 ├── MASTER_BUILD_SYSTEM_OMDALA_OMDALAT.md
 ├── MISSING_FILES_AUDIT_OMDALAT.md
 ├── OMDALAT_BRAND_SYSTEM_LOCK.md
@@ -462,69 +459,126 @@ docs/
 ├── README_DEV_HANDOFF_OMDALAT.md
 ├── REPO_BUILD_ORDER_OMDALAT.md
 │
-├── API_SPEC_OMDALAT.md                 (to create — Stage 6)
-├── CLOUDFLARE_SETUP_OMDALAT.md         (to create — Stage 9)
-├── DATA_MODEL_OMDALAT.md               (to create — Stage 6)
-├── DB_SCHEMA_OMDALAT.md                (to create — Stage 6)
-├── DEPLOYMENT_RUNBOOK_OMDALAT.md       (to create — Stage 9)
-├── MATCHING_ENGINE_OMDALAT.md          (to create — Stage 6)
-├── METRICS_OMDALAT.md                  (to create — Stage 10)
-├── OMDALAT_MOTION_SYSTEM.md            (to create — Stage 4)
-├── PRODUCT_SPEC_OMDALAT.md             (to create — Stage 6)
-├── SCREEN_FLOW_OMDALAT.md              (to create — Stage 6)
-├── TRUST_ENGINE_OMDALAT.md             (to create — Stage 6)
-└── USER_ROLES_OMDALAT.md               (to create — Stage 6)
+├── — TO CREATE (Stage 6) —
+├── API_SPEC_OMDALAT.md
+├── DATA_MODEL_OMDALAT.md
+├── DB_SCHEMA_OMDALAT.md
+├── MATCHING_ENGINE_OMDALAT.md
+├── PRODUCT_SPEC_OMDALAT.md
+├── SCREEN_FLOW_OMDALAT.md
+├── TRUST_ENGINE_OMDALAT.md
+├── USER_ROLES_OMDALAT.md
+│
+└── — TO CREATE (Stage 9–10) —
+    ├── CLOUDFLARE_SETUP_OMDALAT.md
+    ├── DEPLOYMENT_RUNBOOK_OMDALAT.md
+    └── METRICS_OMDALAT.md
 ```
 
 ---
 
-# FILE COUNT OVERVIEW
+# 12. scripts/
 
-| Location | Files in V1 target |
-|---|---|
-| Root | 10 files |
-| .github/workflows | 4 files |
-| apps/web | ~60 files |
-| apps/app | ~30 files |
-| apps/admin | ~15 files |
-| apps/docs | ~10 files |
-| packages/ui | ~15 files |
-| packages/types | ~12 files |
-| packages/core | ~5 files |
-| packages/seo | ~6 files |
-| packages/config | ~4 files |
-| services/api | ~12 files |
-| services/trust | ~5 files |
-| services/matching | ~4 files |
-| data/ | ~15 files |
-| docs/ | ~22 files |
-| **Total estimate** | **~240 files** |
+```
+scripts/
+│
+├── build.ts
+├── generate-sitemap.ts
+└── seed-db.ts
+```
 
 ---
 
-# NAMING CONVENTIONS
+# 13. .github/
+
+```
+.github/
+│
+├── PULL_REQUEST_TEMPLATE.md
+└── workflows/
+    ├── build.yml
+    ├── deploy-app.yml
+    ├── deploy-web.yml
+    └── lint.yml
+```
+
+---
+
+# 14. FILE COUNT OVERVIEW
+
+| Location | Files (V1 target) |
+|---|---|
+| Root | 10 |
+| .github/workflows | 4 |
+| apps/web | ~60 |
+| apps/app | ~30 |
+| apps/admin | ~15 |
+| apps/docs | ~12 |
+| packages/ui | ~13 |
+| packages/types | ~12 |
+| packages/core | ~5 |
+| packages/seo | ~6 |
+| services/api | ~12 |
+| services/trust | ~5 |
+| services/matching | ~4 |
+| data/ | ~16 |
+| docs/ | ~22 |
+| scripts/ | 3 |
+| **Total estimate** | **~230 files** |
+
+---
+
+# 15. NAMING CONVENTIONS
 
 | Type | Convention | Example |
 |---|---|---|
 | React components | PascalCase | `PlaceCard.tsx` |
-| Lib/utility files | camelCase | `metadata.ts` |
-| Route directories | lowercase-hyphen | `places/` |
-| Data files | lowercase-hyphen | `places.json` |
-| Doc files | UPPER_SNAKE_CASE | `DATA_MODEL_OMDALAT.md` |
-| CSS files | lowercase-hyphen | `tokens.css` |
-| Config files | camelCase or dotfile | `next.config.js` |
+| Lib / utility files | camelCase | `metadata.ts` |
+| Route directories | lowercase | `places/` |
+| Data files | camelCase | `places.json` |
+| Doc files | UPPER_SNAKE | `DATA_MODEL_OMDALAT.md` |
+| CSS files | kebab-case | `tokens.css` |
+| Config files | camelCase | `next.config.js` |
+| Service files | kebab-case.service | `trust.service.ts` |
 
 ---
 
-# FINAL RULE
+# 16. KEY RULES
 
-This tree is the V1 target.
-Not everything must exist on day one.
-But nothing should be created outside this structure without approval.
+```
+✓ Follow this tree exactly
+✓ Keep web and app components separate
+✓ Share types and ui through packages/
+✓ SEO utilities live in packages/seo or apps/web/lib
+✓ API logic lives in services/, not in apps/
+✓ All data schemas live in data/schemas/
+✓ Mock data lives in data/mock/
+
+✗ No random folders outside this structure
+✗ No duplicate components between web and app
+✗ No missing robots.txt or SEO files
+✗ No API logic in frontend components
+✗ No data access without schema definition
+```
+
+---
+
+# 17. FINAL DIRECTIVE
+
+Create this file tree exactly.
+Do not improvise structure.
+
+Structure defines:
+- speed
+- scale
+- clarity
+- maintainability
 
 If a new file does not fit cleanly into this tree,
-it is a signal that the feature or concern needs to be re-evaluated.
+the feature or concern needs to be re-evaluated first.
+
+This file is the structure lock for the repository.
 
 ---
 
-*OMDALAT File Tree V1 — Version 1.0*
+*OMDALAT File Tree V1 — Version 1.0 — Production-Ready*
