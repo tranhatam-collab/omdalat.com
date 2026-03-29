@@ -101,8 +101,10 @@ omdalat.com/
     core/
   services/
     api/
+    auth/
     trust/
     matching/
+    notifications/
   data/
   docs/
   package.json
@@ -118,6 +120,6 @@ This repo now carries:
 - a Next runtime for `apps/web`
 - a Next runtime for `apps/app`
 - shared `packages/ui`, `packages/types`, and `packages/core`
-- starter `services/api`, `services/trust`, and `services/matching`
+- starter `services/api`, `services/auth`, `services/trust`, `services/matching`, and `services/notifications`
 
-The current build phase is moving from shell-only screens to fixture-backed app flows so routes can read real Da Lat entities, trust summaries, and local matches before persistence and write actions are added.
+The current build phase is moving from shell-only screens to fixture-backed app flows so routes can read real Da Lat entities, switch demo sessions, submit proofs, review moderation decisions, and surface notifications before persistent storage is added.

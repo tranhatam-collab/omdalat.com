@@ -5,6 +5,8 @@ const rootDir = process.cwd();
 const requiredPaths = [
   "apps/app/index.html",
   "apps/app/app/dashboard/page.tsx",
+  "apps/app/app/actions.ts",
+  "apps/app/app/api/health/route.ts",
   "apps/app/app/places/page.tsx",
   "apps/app/app/hosts/page.tsx",
   "apps/app/app/experts/page.tsx",
@@ -13,6 +15,10 @@ const requiredPaths = [
   "apps/app/app/proofs/page.tsx",
   "apps/app/app/profile/page.tsx",
   "apps/app/app/settings/page.tsx",
+  "apps/app/components/NotificationFeed.tsx",
+  "apps/app/components/SessionSwitcher.tsx",
+  "apps/app/components/ProofSubmissionForm.tsx",
+  "apps/app/components/ModerationQueue.tsx",
   "apps/web/app/layout.tsx",
   "apps/web/app/page.tsx",
   "apps/web/app/about/page.tsx",
@@ -46,8 +52,10 @@ const requiredPaths = [
   "packages/types/index.ts",
   "packages/ui/index.ts",
   "services/api/index.ts",
+  "services/auth/index.ts",
   "services/trust/index.ts",
   "services/matching/index.ts",
+  "services/notifications/index.ts",
   "package.json"
 ];
 

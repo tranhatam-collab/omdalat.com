@@ -1,8 +1,6 @@
-import type { ReactNode } from "react";
-
 type BadgeProps = {
   className?: string;
-  children: ReactNode;
+  children: any;
 };
 
 export function Badge({ className, children }: BadgeProps) {

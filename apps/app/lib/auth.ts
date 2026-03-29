@@ -1,12 +1,16 @@
 import type { MemberSession } from "../../../packages/types";
-import { getCurrentMemberSession } from "../../../services/api/index";
+import { getCurrentAuthSession, listAuthFixtures } from "../../../services/auth/index";
 
 export function getCurrentMember(): MemberSession {
-  return getCurrentMemberSession();
+  return getCurrentAuthSession();
 }
 
 export function requireCurrentMember(): MemberSession {
   return getCurrentMember();
+}
+
+export function getAuthFixtures() {
+  return listAuthFixtures();
 }
 
 export function getAuthNotice() {

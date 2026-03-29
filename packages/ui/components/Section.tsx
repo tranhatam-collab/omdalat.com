@@ -1,8 +1,6 @@
-import type { ReactNode } from "react";
-
 type SectionProps = {
   className?: string;
-  children: ReactNode;
+  children: any;
 };
 
 export function Section({ className, children }: SectionProps) {

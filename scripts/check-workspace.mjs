@@ -27,8 +27,10 @@ const expectations = {
     "packages/types/index.ts",
     "packages/ui/index.ts",
     "services/api/index.ts",
+    "services/auth/index.ts",
     "services/trust/index.ts",
-    "services/matching/index.ts"
+    "services/matching/index.ts",
+    "services/notifications/index.ts"
   ],
   format: [
     ".editorconfig",

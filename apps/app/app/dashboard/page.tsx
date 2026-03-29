@@ -1,13 +1,16 @@
 import { ActivityFeed } from "../../components/ActivityFeed";
+import { NotificationFeed } from "../../components/NotificationFeed";
 import { NodeCard } from "../../components/NodeCard";
 import { ProofCard } from "../../components/ProofCard";
 import { TrustBadge } from "../../components/TrustBadge";
 import { getAuthNotice, getCurrentMember } from "../../lib/auth";
+import { listNotifications } from "../../lib/notifications";
 import { getDashboardSnapshot } from "../../lib/runtime-data";
 import { permissionHighlights, roleSummaries } from "../../lib/roles";
 import {
   buildActivityTimeline,
   buildDashboardTrust,
+  buildModerationSummary,
   buildProofHighlights,
   buildRequestMatches
 } from "../../lib/trust";
@@ -19,6 +22,8 @@ export default function DashboardPage() {
   const proofHighlights = buildProofHighlights();
   const activityTimeline = buildActivityTimeline();
   const requestMatches = buildRequestMatches();
+  const moderationSummary = buildModerationSummary();
+  const notifications = listNotifications();
   const snapshot = getDashboardSnapshot();
   const leadMatch = requestMatches[0];
   const secondaryMatch = requestMatches[1];
@@ -99,6 +104,26 @@ export default function DashboardPage() {
                 ? `Second-best request path: ${secondaryMatch.targetName} can support ${secondaryMatch.requestTitle}.`
                 : "Extend matching to include richer moderation and approval flows next."}
             </li>
+            <li>
+              {moderationSummary.pendingCount > 0
+                ? `${moderationSummary.pendingCount} moderation items are waiting in the proof lane.`
+                : "No moderation backlog at the moment."}
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div className="app-page-grid">
+        <NotificationFeed items={notifications} redirectTo="/dashboard" title="Latest demo notifications" />
+        <section className="app-panel">
+          <p className="app-kicker">Moderation lane</p>
+          <h2>Current review queue snapshot</h2>
+          <ul className="app-list">
+            {moderationSummary.items.length > 0 ? (
+              moderationSummary.items.map((item) => <li key={item}>{item}</li>)
+            ) : (
+              <li>No proof items are currently waiting for review.</li>
+            )}
           </ul>
         </section>
       </div>

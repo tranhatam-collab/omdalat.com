@@ -3,6 +3,7 @@ export {
   events,
   experts,
   getDashboardSnapshot,
+  getModerationQueue,
   hosts,
   nodes,
   places,

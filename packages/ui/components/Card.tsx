@@ -1,9 +1,7 @@
-import type { ReactNode } from "react";
-
 type CardProps = {
   as?: "article" | "section" | "div";
   className?: string;
-  children: ReactNode;
+  children: any;
 };
 
 export function Card({ as = "article", className, children }: CardProps) {

@@ -1,4 +1,7 @@
+import type { ModerationState, ProofReviewStatus } from "./trust";
+
 export type SlugRecord = {
+  id: string;
   slug: string;
 };
 
@@ -55,6 +58,13 @@ export type ProofRecord = SlugRecord & {
   title: string;
   outcome: string;
   evidence: string;
+  subjectType: "place" | "host" | "expert" | "community" | "event";
+  subjectName: string;
+  reviewStatus: ProofReviewStatus;
+  moderationState: ModerationState;
+  moderationNote?: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
 };
 
 export type RequestRecord = SlugRecord & {

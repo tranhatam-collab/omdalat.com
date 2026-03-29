@@ -183,8 +183,7 @@ apps/app/components/layout/AppFooter.tsx
 
 ```
 role-based route protection
-request and moderation flows
-write-back actions for proof, trust, and verification
+persistent auth beyond fixture sessions
 server-backed persistence beyond fixture datasets
 ```
 
@@ -227,18 +226,21 @@ packages/config/       ← shared ESLint, TS, Tailwind configs
 services/README.md
 services/api/
 services/api/index.ts
+services/auth/
+services/auth/index.ts
 services/trust/
 services/trust/index.ts
 services/matching/
 services/matching/index.ts
+services/notifications/
+services/notifications/index.ts
 ```
 
 ## Still missing
 
 ```
-services/auth/         ← authentication service
-services/notifications/
 services/search/
+services/persistence/
 ```
 
 ---

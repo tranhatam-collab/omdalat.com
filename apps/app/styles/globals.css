@@ -166,6 +166,13 @@ a {
   font-size: 1.35rem;
 }
 
+.app-panel h3,
+.app-card h3,
+.app-proof-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
 .app-list {
   margin: 1rem 0 0;
   padding-left: 1rem;
@@ -199,6 +206,130 @@ a {
   align-items: center;
 }
 
+.app-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.app-action-card,
+.app-notification-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--app-line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.app-action-copy,
+.app-notification-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.app-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.app-form-compact {
+  width: min(100%, 22rem);
+}
+
+.app-form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.app-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.app-field span {
+  color: #b7f3cf;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.app-input {
+  width: 100%;
+  border: 1px solid var(--app-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--app-text);
+  padding: 0.8rem 0.95rem;
+  font: inherit;
+}
+
+.app-input::placeholder {
+  color: rgba(238, 252, 244, 0.55);
+}
+
+.app-textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1e7a5b, #4fc38a);
+  color: #07150f;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app-button-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--app-text);
+  border-color: var(--app-line);
+}
+
+.app-button-ghost {
+  background: transparent;
+  color: var(--app-muted);
+  border-color: var(--app-line);
+}
+
+.app-inline-form,
+.app-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.app-inline-link {
+  color: #b7f3cf;
+  text-decoration: none;
+}
+
+.app-notification-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.app-notification-item-read {
+  opacity: 0.72;
+}
+
+.app-empty-state {
+  margin-top: 1rem;
+}
+
 .app-footer {
   display: flex;
   justify-content: space-between;
@@ -214,6 +345,13 @@ a {
 
   .app-page {
     padding: 1.5rem;
+  }
+
+  .app-action-card,
+  .app-notification-item,
+  .app-form-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .app-footer {
