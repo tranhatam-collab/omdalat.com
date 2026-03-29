@@ -1,17 +1,25 @@
 import { AppScaffold } from "../../components/AppScaffold";
+import { getCurrentMember } from "../../lib/auth";
+import { roleSummaries } from "../../lib/roles";
+import { buildDashboardTrust } from "../../lib/trust";
 
 export default function ProfilePage() {
+  const currentMember = getCurrentMember();
+  const dashboardTrust = buildDashboardTrust();
+  const currentRole = roleSummaries.find((item) => item.role === currentMember.role);
+
   return (
     <AppScaffold
-      eyebrow="Account shell"
+      eyebrow="Account runtime"
       title="Profile settings"
-      description="Internal route shell for user identity, node ownership, and future trust-related profile controls."
+      description="Internal route backed by the current authenticated fixture session, role framing, and live trust score."
       highlights={[
-        "Local member identity shell",
-        "Node ownership placeholder",
-        "Future verification actions"
+        `${currentMember.name} · ${currentMember.role} · ${currentMember.zone}`,
+        `${currentMember.homeNode} · ${currentMember.status}`,
+        currentRole ? currentRole.summary : "Role summary will appear here.",
+        `${dashboardTrust.level} · ${dashboardTrust.score}/100`
       ]}
-      nextStep="Wire member profile fields to auth state and trust preferences."
+      nextStep="Next, wire editable member fields and verification actions on top of this real session state."
     />
   );
 }

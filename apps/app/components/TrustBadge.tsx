@@ -1,3 +1,5 @@
+import { Badge } from "../../../packages/ui";
+
 type TrustBadgeProps = {
   label: string;
   score: number;
@@ -5,9 +7,9 @@ type TrustBadgeProps = {
 
 export function TrustBadge({ label, score }: TrustBadgeProps) {
   return (
-    <div className="app-badge">
+    <Badge className="app-badge">
       <span>{label}</span>
       <strong>{score}/100</strong>
-    </div>
+    </Badge>
   );
 }

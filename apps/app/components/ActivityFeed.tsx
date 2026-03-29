@@ -1,17 +1,20 @@
+import { Section } from "../../../packages/ui";
+
 type ActivityFeedProps = {
+  title?: string;
   items: string[];
 };
 
-export function ActivityFeed({ items }: ActivityFeedProps) {
+export function ActivityFeed({ title = "Current runtime progress", items }: ActivityFeedProps) {
   return (
-    <section className="app-panel">
+    <Section className="app-panel">
       <p className="app-kicker">Activity feed</p>
-      <h2>Current runtime progress</h2>
+      <h2>{title}</h2>
       <ul className="app-list">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-    </section>
+    </Section>
   );
 }

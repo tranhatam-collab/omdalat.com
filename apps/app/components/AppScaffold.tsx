@@ -1,3 +1,5 @@
+import { Section } from "../../../packages/ui";
+
 type AppScaffoldProps = {
   eyebrow: string;
   title: string;
@@ -14,18 +16,18 @@ export function AppScaffold({ eyebrow, title, description, highlights, nextStep 
       <p>{description}</p>
 
       <div className="app-page-grid">
-        <section className="app-panel">
-          <h2>Current shell</h2>
+        <Section className="app-panel">
+          <h2>Current runtime state</h2>
           <ul className="app-list">
             {highlights.map((highlight) => (
               <li key={highlight}>{highlight}</li>
             ))}
           </ul>
-        </section>
-        <section className="app-panel">
+        </Section>
+        <Section className="app-panel">
           <h2>Next implementation step</h2>
           <p>{nextStep}</p>
-        </section>
+        </Section>
       </div>
     </article>
   );

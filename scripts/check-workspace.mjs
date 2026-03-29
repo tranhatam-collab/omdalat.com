@@ -16,11 +16,19 @@ const expectations = {
     "package.json",
     "apps/app/app.js",
     "apps/web/app.js",
+    "apps/app/app/dashboard/page.tsx",
+    "apps/app/lib/runtime-data.ts",
     "apps/web/app/layout.tsx",
     "apps/web/app/page.tsx",
     "apps/web/lib/routes.ts",
     "apps/web/package.json",
-    "apps/web/tsconfig.json"
+    "apps/web/tsconfig.json",
+    "packages/core/index.ts",
+    "packages/types/index.ts",
+    "packages/ui/index.ts",
+    "services/api/index.ts",
+    "services/trust/index.ts",
+    "services/matching/index.ts"
   ],
   format: [
     ".editorconfig",

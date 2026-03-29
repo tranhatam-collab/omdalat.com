@@ -88,8 +88,21 @@ omdalat.com/
       styles/
       tsconfig.json
     app/
+      app/
+      components/
+      lib/
+      styles/
+      next.config.js
+      package.json
+      tsconfig.json
   packages/
+    ui/
+    types/
+    core/
   services/
+    api/
+    trust/
+    matching/
   data/
   docs/
   package.json
@@ -99,5 +112,12 @@ omdalat.com/
 
 ## Immediate build intent
 
-This repo now carries both a static-first city layer foundation and a parallel Stage 2 runtime scaffold for `apps/web`.
-The next build phase should wire runtime routes to real Da Lat entities, SEO helpers, and shared packages without interrupting the current static proof surface.
+This repo now carries:
+
+- a static-first city layer foundation for the public proof surface
+- a Next runtime for `apps/web`
+- a Next runtime for `apps/app`
+- shared `packages/ui`, `packages/types`, and `packages/core`
+- starter `services/api`, `services/trust`, and `services/matching`
+
+The current build phase is moving from shell-only screens to fixture-backed app flows so routes can read real Da Lat entities, trust summaries, and local matches before persistence and write actions are added.

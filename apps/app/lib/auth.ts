@@ -1,9 +1,16 @@
-export const currentMember = {
-  name: "OMDALAT Operator",
-  role: "verified_member",
-  homeNode: "Da Lat Local Operator",
-  status: "Signed-in shell"
-};
+import type { MemberSession } from "../../../packages/types";
+import { getCurrentMemberSession } from "../../../services/api/index";
 
-export const authNotice =
-  "Auth is still mocked in this runtime. The next step is wiring session state and route protection into the app shell.";
+export function getCurrentMember(): MemberSession {
+  return getCurrentMemberSession();
+}
+
+export function requireCurrentMember(): MemberSession {
+  return getCurrentMember();
+}
+
+export function getAuthNotice() {
+  const currentMember = getCurrentMember();
+
+  return `${currentMember.name} is currently operating through a fixture-backed authenticated session for ${currentMember.zone}.`;
+}

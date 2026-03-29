@@ -1,17 +1,19 @@
 import { AppScaffold } from "../../components/AppScaffold";
+import { getDashboardSnapshot } from "../../lib/runtime-data";
 
 export default function PlacesPage() {
+  const snapshot = getDashboardSnapshot();
+  const openRequests = snapshot.requests.filter((request) => request.status === "Open").length;
+
   return (
     <AppScaffold
-      eyebrow="App route shell"
+      eyebrow="App route runtime"
       title="Places operating layer"
-      description="Internal route shell for tracking city places, readiness, proof volume, and trust-backed local context."
-      highlights={[
-        "Place roster view",
-        "Future moderation and verification state",
-        "Linked proof and request history"
-      ]}
-      nextStep="Connect place records to shared types and local trust summaries."
+      description="Internal route backed by live place records, node readiness, and request-aware local context."
+      highlights={snapshot.places.map(
+        (place) => `${place.name} · ${place.mode} · ${place.activity} · ${place.signal}`
+      )}
+      nextStep={`${openRequests} open requests can now be routed against ${snapshot.places.length} tracked places with real shared data.`}
     />
   );
 }

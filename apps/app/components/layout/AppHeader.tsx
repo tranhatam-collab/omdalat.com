@@ -1,7 +1,9 @@
-import { currentMember } from "../../lib/auth";
+import { getCurrentMember } from "../../lib/auth";
 import { AppNav } from "./AppNav";
 
 export function AppHeader() {
+  const currentMember = getCurrentMember();
+
   return (
     <header className="app-header">
       <div className="app-brand">

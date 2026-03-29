@@ -1,3 +1,5 @@
+import { Card } from "../../../packages/ui";
+
 type NodeCardProps = {
   title: string;
   detail: string;
@@ -6,10 +8,10 @@ type NodeCardProps = {
 
 export function NodeCard({ title, detail, meta }: NodeCardProps) {
   return (
-    <article className="app-card">
+    <Card className="app-card">
       <p className="app-card-meta">{meta}</p>
       <h2>{title}</h2>
       <p>{detail}</p>
-    </article>
+    </Card>
   );
 }

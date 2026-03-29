@@ -167,6 +167,7 @@ apps/app/app/profile/page.tsx
 apps/app/app/settings/page.tsx
 apps/app/lib/auth.ts
 apps/app/lib/roles.ts
+apps/app/lib/runtime-data.ts
 apps/app/lib/trust.ts
 apps/app/components/AppScaffold.tsx
 apps/app/components/NodeCard.tsx
@@ -181,11 +182,10 @@ apps/app/components/layout/AppFooter.tsx
 ## Still missing — app data wiring
 
 ```
-auth session integration
 role-based route protection
-real trust and proof data
-entity-backed app lists
 request and moderation flows
+write-back actions for proof, trust, and verification
+server-backed persistence beyond fixture datasets
 ```
 
 ---
@@ -196,14 +196,17 @@ request and moderation flows
 
 ```
 packages/README.md
+packages/ui/
+packages/ui/index.ts
+packages/core/
+packages/core/index.ts
+packages/types/
+packages/types/index.ts
 ```
 
 ## Still missing
 
 ```
-packages/ui/           ← shared components
-packages/core/         ← shared business logic
-packages/types/        ← shared TypeScript types
 packages/seo/          ← shared SEO utilities
 packages/config/       ← shared ESLint, TS, Tailwind configs
 ```
@@ -222,32 +225,36 @@ packages/config/       ← shared ESLint, TS, Tailwind configs
 
 ```
 services/README.md
+services/api/
+services/api/index.ts
+services/trust/
+services/trust/index.ts
+services/matching/
+services/matching/index.ts
 ```
 
 ## Still missing
 
 ```
-services/api/          ← backend API (Cloudflare Workers / D1)
 services/auth/         ← authentication service
-services/trust/        ← trust scoring engine
-services/matching/     ← local discovery matching
 services/notifications/
+services/search/
 ```
 
 ---
 
-# 9. MISSING SEO FOUNDATION
+# 9. SEO FOUNDATION STATUS
 
-| File | Location | Priority |
+| File | Location | Status |
 |---|---|---|
-| `robots.txt` | `apps/web/public/` | Critical |
-| `sitemap.xml` | `apps/web/public/` or generated | Critical |
-| `_headers` | `apps/web/public/` | High |
-| `_redirects` | `apps/web/public/` | High |
-| metadata helper | `apps/web/lib/metadata.ts` | Critical |
-| JSON-LD builder | `apps/web/lib/schema.ts` | Critical |
-| canonical helper | `apps/web/lib/canonical.ts` | Critical |
-| hreflang scaffold | `apps/web/lib/hreflang.ts` | Medium |
+| `robots.txt` | `apps/web/public/` | Present |
+| `sitemap.xml` | `apps/web/public/` or generated | Present |
+| `_headers` | `apps/web/public/` | Present |
+| `_redirects` | `apps/web/public/` | Present |
+| metadata helper | `apps/web/lib/metadata.ts` | Present |
+| JSON-LD builder | `apps/web/lib/schema.ts` | Present |
+| canonical helper | `apps/web/lib/canonical.ts` | Present |
+| hreflang scaffold | `apps/web/lib/hreflang.ts` | Present |
 
 ---
 
