@@ -32,8 +32,9 @@ Supporting line:
 
 Read:
 
-1. `docs/BRAND_ARCHITECTURE_OMDALAT.md`
-2. `docs/README_DEV_HANDOFF_OMDALAT.md`
+1. `docs/MASTER_BUILD_SYSTEM_OMDALA_OMDALAT.md`
+2. `docs/BRAND_ARCHITECTURE_OMDALAT.md`
+3. `docs/README_DEV_HANDOFF_OMDALAT.md`
 
 ## Repo structure
 
@@ -52,4 +53,3 @@ omdalat.com/
 
 This repo starts as a static-first city layer foundation plus handoff docs.
 The next build phase should turn it into the first real-world activity surface for hosts, experts, communities, requests, and proofs.
-
