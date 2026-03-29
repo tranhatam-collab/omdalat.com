@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OMDALAT App - Local Operating Layer</title>
+    <meta
+      name="description"
+      content="Local operating layer for OMDALAT: requests, live nodes, hosts, activities, and visible proof."
+    />
+    <meta name="theme-color" content="#1f2b26" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">app.omdalat.com prototype</p>
+          <h1>Local operating layer for hosts, requests, and proof.</h1>
+          <p class="lede">
+            This surface is for coordination: what needs response first, which
+            nodes are ready, and where trust is compounding across Da Lat.
+          </p>
+          <p class="snapshot" id="snapshot-text">Loading operator snapshot...</p>
+          <div class="hero-actions">
+            <a class="button primary" href="../../">Open public city page</a>
+            <a class="button secondary" href="../../docs/README_DEV_HANDOFF_OMDALAT.md">Open dev handoff</a>
+            <a class="button secondary" href="../../data/nodes.json">Open node data</a>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <article class="signal-card">
+            <p class="panel-label">Operator notes</p>
+            <div class="note-list" id="ops-notes"></div>
+          </article>
+        </aside>
+      </header>
+
+      <section class="summary-grid" id="summary-grid"></section>
+
+      <section class="workspace-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Priority queue</p>
+              <h2>Requests that need movement</h2>
+            </div>
+            <div class="filter-row" id="request-filters"></div>
+          </div>
+          <div class="stack-list" id="request-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Next timeline</p>
+              <h2>Upcoming activity and due moments</h2>
+            </div>
+          </div>
+          <div class="timeline-list" id="timeline-list"></div>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Live nodes</p>
+              <h2>Places and surfaces in the active loop</h2>
+            </div>
+          </div>
+          <div class="node-grid" id="node-grid"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Host roster</p>
+              <h2>People carrying local trust</h2>
+            </div>
+          </div>
+          <div class="stack-list" id="host-roster"></div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Proof feed</p>
+              <h2>Signals that make the system repeatable</h2>
+            </div>
+          </div>
+          <div class="proof-grid" id="proof-feed"></div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+@import "./tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--omdalat-text);
+  background:
+    radial-gradient(circle at top left, rgba(79, 195, 138, 0.24), transparent 24rem),
+    linear-gradient(180deg, var(--omdalat-bg) 0%, #dce8df 100%);
+  font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.runtime-theme {
+  min-height: 100vh;
+}
+
+.runtime-shell {
+  width: min(1140px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+
+.runtime-header,
+.runtime-footer,
+.runtime-hero,
+.runtime-section,
+.runtime-page {
+  border: 1px solid var(--omdalat-line);
+  background: var(--omdalat-surface);
+  box-shadow: var(--omdalat-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.runtime-header,
+.runtime-footer {
+  border-radius: var(--omdalat-radius-lg);
+  padding: 1rem 1.25rem;
+}
+
+.runtime-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.runtime-brand {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.runtime-brand strong {
+  font-size: 1.05rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.runtime-brand span,
+.runtime-nav a,
+.runtime-note,
+.runtime-meta,
+.runtime-list li {
+  color: var(--omdalat-muted);
+}
+
+.runtime-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.runtime-nav a {
+  text-decoration: none;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--omdalat-line);
+}
+
+.runtime-main {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.runtime-hero,
+.runtime-page {
+  border-radius: var(--omdalat-radius-xl);
+  padding: 2rem;
+}
+
+.runtime-hero h1,
+.runtime-page h1 {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 1.02;
+}
+
+.runtime-hero p,
+.runtime-page p,
+.runtime-section p,
+.runtime-footer p {
+  line-height: 1.7;
+}
+
+.runtime-kicker {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--omdalat-green-700);
+}
+
+.runtime-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+.runtime-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.8rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.runtime-button.primary {
+  color: #effff5;
+  background: linear-gradient(135deg, var(--omdalat-green-700), var(--omdalat-green-500));
+}
+
+.runtime-button.secondary {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--omdalat-line);
+}
+
+.runtime-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.runtime-section {
+  border-radius: var(--omdalat-radius-lg);
+  padding: 1.35rem;
+}
+
+.runtime-section h2,
+.runtime-page h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.runtime-list {
+  margin: 1rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.runtime-page-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.runtime-panel {
+  padding: 1rem;
+  border-radius: 20px;
+  background: var(--omdalat-surface-strong);
+  border: 1px solid var(--omdalat-line);
+}
+
+.runtime-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: flex-start;
+}
+
+.runtime-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.runtime-footer-links a {
+  text-decoration: none;
+  color: var(--omdalat-muted);
+}
+
+@media (max-width: 860px) {
+  .runtime-header,
+  .runtime-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .runtime-grid,
+  .runtime-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .runtime-hero,
+  .runtime-page {
+    padding: 1.5rem;
+  }
+}

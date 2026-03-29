@@ -99,8 +99,19 @@ P3:
 
 - warm but premium
 - local but structured
+- green-mist-earth visual system
+- dark green first, mist-light secondary
 - real activity over marketing claims
 - visible trust over decorative polish
+
+Final visual source of truth:
+
+- `docs/OMDALAT_BRAND_SYSTEM_LOCK.md`
+
+Interpretation rule:
+
+- use the green brand system to express warmth, locality, and trust
+- do not treat green as a reason to become loud, neon, or tourism-like
 
 ## 10. Critical principle
 
@@ -115,4 +126,3 @@ do not build it.
 ## 11. Final definition
 
 OMDALAT is where the global OMDALA system becomes real, local, and verifiable.
-

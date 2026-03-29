@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Linh Pham",
+    "role": "Community host",
+    "zone": "Ward 1",
+    "verified": true,
+    "focus": "Warm small-group hosting, guest care, and first-introduction rituals.",
+    "trust": "Verified through repeat hosting, guest references, and visible follow-through.",
+    "availability": "Available Tuesday to Thursday evenings"
+  },
+  {
+    "name": "Quoc Nguyen",
+    "role": "Place steward",
+    "zone": "Ward 3",
+    "verified": true,
+    "focus": "Turning underused residential space into trusted city-layer activity.",
+    "trust": "Verified by venue history, local references, and recurring partner use.",
+    "availability": "Open for weekend sessions and morning site walks"
+  },
+  {
+    "name": "Mai Tran",
+    "role": "Learning host",
+    "zone": "Trai Mat",
+    "verified": true,
+    "focus": "Expert circles, community kitchens, and reflective proof collection.",
+    "trust": "Verified through event stewardship and documented participant outcomes.",
+    "availability": "Available Friday afternoons and selected Sunday dinners"
+  }
+]

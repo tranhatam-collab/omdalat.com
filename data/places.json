@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Lake Edge Signal Loop",
+    "area": "Xuan Huong / Central Da Lat",
+    "type": "Public civic edge",
+    "mode": "Open now",
+    "cadence": "Daily 06:00-08:00",
+    "hostCount": 4,
+    "activity": "Morning walks, host check-ins, and lightweight request matching.",
+    "signal": "18 local check-ins this week"
+  },
+  {
+    "name": "Pine Courtyard House",
+    "area": "Ward 3 / Da Lat slope",
+    "type": "Hosted domestic node",
+    "mode": "Hosting tonight",
+    "cadence": "Tue, Thu, Sat",
+    "hostCount": 2,
+    "activity": "Small circles for visiting experts, founders, and trusted guests.",
+    "signal": "3 repeat gatherings in 10 days"
+  },
+  {
+    "name": "Studio Garden Kitchen",
+    "area": "Trai Mat corridor",
+    "type": "Food and conversation node",
+    "mode": "Request-linked",
+    "cadence": "By invitation",
+    "hostCount": 3,
+    "activity": "Meals, proof capture, and local introductions after work sessions.",
+    "signal": "5 hosted intros completed"
+  }
+]

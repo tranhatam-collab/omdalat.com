@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Host a six-person founder breakfast",
+    "priority": "High",
+    "status": "Open",
+    "lane": "Host matching",
+    "owner": "Ops desk",
+    "dueAt": "2026-03-31T09:00:00+07:00",
+    "area": "Central Da Lat",
+    "window": "Needed by March 31",
+    "need": "A trusted venue and one local host for a focused breakfast with visiting builders."
+  },
+  {
+    "title": "Document proof from a community dinner",
+    "priority": "Medium",
+    "status": "In Progress",
+    "lane": "Proof capture",
+    "owner": "Mai Tran",
+    "dueAt": "2026-04-02T21:00:00+07:00",
+    "area": "Ward 3",
+    "window": "Needed by April 2",
+    "need": "Capture photos, short notes, and follow-up outcomes from a hosted evening gathering."
+  },
+  {
+    "title": "Connect a visiting expert to local operators",
+    "priority": "High",
+    "status": "Open",
+    "lane": "Introductions",
+    "owner": "Linh Pham",
+    "dueAt": "2026-04-04T17:00:00+07:00",
+    "area": "Trai Mat corridor",
+    "window": "Needed by April 4",
+    "need": "Two thoughtful introductions with hosts already active in place-making and education."
+  }
+]

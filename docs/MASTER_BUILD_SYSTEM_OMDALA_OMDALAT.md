@@ -296,22 +296,29 @@ OMDALAT Proofs
 Current verified state:
 both `omdala.com` and `omdalat.com` already contain an initial brand foundation, DEV handoff docs, and static landing scaffolds pushed to `main`.
 
-Production-ready recommendation:
+Production-ready recommendation for this repository:
 
-Option A, preferred long term:
-single monorepo centered on OMDALA
+Treat `omdalat.com` as the source-of-truth repository for the first local city implementation.
+
+Repository-specific ownership:
+
+- `apps/web` = public `omdalat.com`
+- `apps/app` = local operating layer for `app.omdalat.com`
+- `apps/admin` = internal moderation and ops
+- `apps/docs` = public documentation for the OMDALAT system
 
 Reason:
-shared types
-shared design system
-shared auth logic
-shared API contracts
-shared deployment discipline
 
-Recommended target structure:
+- shared types
+- shared design system
+- shared auth logic
+- shared API contracts
+- shared deployment discipline
+
+Recommended target structure for `omdalat.com`:
 
 ```text
-omdala/
+omdalat.com/
   README.md
   package.json
   pnpm-workspace.yaml
@@ -320,7 +327,6 @@ omdala/
   apps/
     web/
     app/
-    omdalat/
     admin/
     docs/
 
@@ -355,8 +361,12 @@ omdala/
     launch/
 ```
 
+Future integration rule:
+
+If OMDALA later consolidates repos into a wider platform monorepo, this repository can be absorbed as the OMDALAT domain slice.
+
 Near-term practical rule:
-keep both public repos usable now, but build toward the monorepo shape above as the single source of truth for heavy product development.
+keep `omdalat.com` buildable on its own now, and preserve `apps/web = omdalat.com` plus `apps/app = app.omdalat.com` if the codebase is migrated later.
 
 ---
 
@@ -617,43 +627,43 @@ OMDALAT = evidence
 
 # 16. GIT EXECUTION PLAN FOR DEV
 
-First commit sequence for the future monorepo:
+First commit sequence for the `omdalat.com` implementation:
 
 Commit 01
-Initialize monorepo foundation
+Initialize workspace foundation
 
 Commit 02
-Add apps/web with OMDALA homepage shell
+Add apps/web with OMDALAT public homepage shell
 
 Commit 03
-Add apps/app with app shell
+Add apps/app with local operating shell
 
 Commit 04
-Add apps/omdalat with city homepage shell
+Add shared packages and design tokens
 
 Commit 05
-Add packages/ui and shared design tokens
-
-Commit 06
 Add services/api base
 
+Commit 06
+Add places + hosts + requests + proofs model
+
 Commit 07
-Add auth + user + node models
+Add public listing routes and detail templates
 
 Commit 08
-Add resource + offer + request models
+Add trust + verification + proof surfaces
 
 Commit 09
-Add matching + messaging
-
-Commit 10
-Add booking + payment + trust basics
-
-Commit 11
 Add admin shell
 
-Commit 12
+Commit 10
 Add docs shell
+
+Commit 11
+Integrate with OMDALA platform APIs
+
+Commit 12
+Add CI, quality checks, and release discipline
 
 Branching:
 main = production-ready only
@@ -665,32 +675,7 @@ hotfix/* = urgent fixes
 
 # 17. INITIAL ROUTE MAP
 
-OMDALA public:
-/
-/what-is-omdala
-/how-it-works
-/for-experts
-/for-hosts
-/for-communities
-/trust
-/omdalat
-/docs
-/contact
-
-App:
-/dashboard
-/node
-/resources
-/offers
-/requests
-/matches
-/messages
-/bookings
-/transactions
-/trust
-/settings
-
-OMDALAT:
+Public web (`apps/web`):
 /
 /places
 /hosts
@@ -699,19 +684,61 @@ OMDALAT:
 /events
 /proofs
 /join
+/about
+/vision
+/trust
+/faq
+/contact
 
-Admin:
+Local app (`apps/app`):
+/ 
+/dashboard
+/places
+/hosts
+/experts
+/communities
+/events
+/proofs
+/profile
+/settings
+
+Admin (`apps/admin`):
 /
 /users
-/nodes
-/offers
-/requests
-/bookings
-/payments
+/places
+/hosts
+/experts
+/communities
+/events
 /proofs
 /verifications
-/support
-/analytics
+/moderation
+
+Docs (`apps/docs`):
+/
+/brand
+/product
+/seo
+/trust
+/api
+/data-model
+
+Future OMDALA platform integration:
+
+/omdala
+/omdala/app
+/omdala/docs
+
+Shared API concepts:
+/nodes
+/resources
+/offers
+/requests
+/matches
+/messages
+/bookings
+/transactions
+/payments
 
 ---
 
@@ -827,12 +854,12 @@ If a page makes OMDALA feel like a random AI startup, shallow marketplace, gener
 3. lock route map
 4. lock core data model
 5. initialize monorepo
-6. set up apps/web, apps/app, apps/omdalat, apps/admin, apps/docs
+6. set up apps/web, apps/app, apps/admin, apps/docs
 7. create shared UI package
 8. create shared types package
-9. build OMDALA homepage first
-10. build app shell second
-11. build OMDALAT homepage third
+9. build OMDALAT public web first
+10. build OMDALAT app shell second
+11. build admin and docs shells third
 12. build auth and node model
 13. build resource, offer, and request flows
 14. build matching and messaging
