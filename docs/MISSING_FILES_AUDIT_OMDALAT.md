@@ -27,7 +27,7 @@ Current state:
 - root has `apps/`, `data/`, `docs/`, `.gitignore`, `README.md`, `index.html`, `styles.css`
 - `apps/app/` and `apps/web/` now contain static-first runtime foundations plus Stage 2 shell work
 - `docs/` now contains brand, build, SEO, and core product/data/API/trust/matching specs
-- `data/` now contains JSON mock datasets for public and local operating layers
+- `data/` now contains JSON mock datasets for public and local operating layers, including places, hosts, experts, communities, activities, proofs, requests, and nodes
 
 **Conclusion:** The repository has moved beyond direction-only docs, but still lacks several scale and operations files before it can be treated as a full production build foundation.
 
@@ -116,6 +116,12 @@ apps/web/app/faq/page.tsx
 apps/web/app/privacy/page.tsx
 apps/web/app/terms/page.tsx
 apps/web/app/contact/page.tsx
+apps/web/app/places/[slug]/page.tsx
+apps/web/app/hosts/[slug]/page.tsx
+apps/web/app/experts/[slug]/page.tsx
+apps/web/app/communities/[slug]/page.tsx
+apps/web/app/events/[slug]/page.tsx
+apps/web/app/proofs/[slug]/page.tsx
 apps/web/public/robots.txt
 apps/web/public/sitemap.xml
 apps/web/public/_headers
@@ -127,17 +133,8 @@ apps/web/lib/schema.ts
 apps/web/lib/canonical.ts
 apps/web/lib/breadcrumb.ts
 apps/web/lib/hreflang.ts
-```
-
-## Still missing — detail routes
-
-```
-apps/web/app/places/[slug]/page.tsx
-apps/web/app/hosts/[slug]/page.tsx
-apps/web/app/experts/[slug]/page.tsx
-apps/web/app/communities/[slug]/page.tsx
-apps/web/app/events/[slug]/page.tsx
-apps/web/app/proofs/[slug]/page.tsx
+apps/web/lib/public-data.ts
+apps/web/components/shared/DetailScaffold.tsx
 ```
 
 ---
@@ -391,20 +388,7 @@ apps/admin/app/users/page.tsx
 
 # 18. PRIORITY ORDER
 
-## Priority 1 — public and app route completion
-
-```
-apps/web/app/places/[slug]/page.tsx
-apps/web/app/hosts/[slug]/page.tsx
-apps/web/app/experts/[slug]/page.tsx
-apps/web/app/communities/[slug]/page.tsx
-apps/web/app/events/[slug]/page.tsx
-apps/web/app/proofs/[slug]/page.tsx
-entity-backed app list views
-request and moderation route shells
-```
-
-## Priority 2 — shared packages + backend services
+## Priority 1 — shared packages + backend services
 
 ```
 packages/ui/
@@ -417,6 +401,16 @@ services/auth/
 services/trust/
 services/matching/
 services/notifications/
+```
+
+## Priority 2 — app data wiring + moderation flows
+
+```
+entity-backed app list views
+auth session integration
+role-based route protection
+request and moderation route shells
+real trust and proof data
 ```
 
 ## Priority 3 — remaining system docs

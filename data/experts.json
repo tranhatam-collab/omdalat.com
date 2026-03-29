@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Bao An",
+    "specialty": "Small-group facilitation and trusted introductions for new arrivals.",
+    "zone": "Ward 1",
+    "availability": "Wednesday afternoons and Friday mornings",
+    "signal": "Three follow-on working sessions confirmed in the last cycle"
+  },
+  {
+    "name": "Thao Le",
+    "specialty": "Place activation strategy for domestic nodes, supper circles, and warm onboarding.",
+    "zone": "Ward 3",
+    "availability": "Tuesday evenings and selected weekends",
+    "signal": "Two host teams reused her activation plan in the same month"
+  },
+  {
+    "name": "Minh Duc",
+    "specialty": "Local operations design for proof capture, requests, and host relays.",
+    "zone": "Trai Mat corridor",
+    "availability": "Thursday afternoons and Sunday sessions",
+    "signal": "One request loop moved from first intro to repeat collaboration"
+  }
+]
