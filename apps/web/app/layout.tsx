@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
+import { defaultWebMetadata } from "../lib/metadata";
 import "../styles/globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default: "OMDALAT Runtime Scaffold",
-    template: "%s | OMDALAT"
-  },
-  description: "Stage 2 runtime scaffold for the public OMDALAT web experience.",
-  applicationName: "OMDALAT",
-  metadataBase: new URL("https://omdalat.com"),
-  alternates: {
-    canonical: "/"
-  }
-};
+export const metadata: Metadata = defaultWebMetadata;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

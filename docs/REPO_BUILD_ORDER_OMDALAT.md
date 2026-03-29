@@ -515,32 +515,32 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 # 14. CHECKLIST — 50 STEPS
 
 ## Phase 1 — Workspace
-- [ ] 1. `package.json`
-- [ ] 2. `pnpm-workspace.yaml`
-- [ ] 3. `turbo.json`
+- [x] 1. `package.json`
+- [x] 2. `pnpm-workspace.yaml`
+- [x] 3. `turbo.json`
 - [ ] 4. `.editorconfig`
 - [ ] 5. `.nvmrc`
 - [ ] 6. `.env.example`
 
 ## Phase 2 — Web runtime
-- [ ] 7. `apps/web/package.json`
-- [ ] 8. `apps/web/tsconfig.json`
-- [ ] 9. `apps/web/next.config.js`
-- [ ] 10. `apps/web/app/layout.tsx`
-- [ ] 11. `apps/web/app/page.tsx` — homepage
-- [ ] 12. Global nav + footer components
-- [ ] 13. Homepage sections (Hero, What is OMDALAT, Live Activity, Places, Hosts, Experts, Communities, Events, Proof, Join)
-- [ ] 14–27. Route shells: `/places`, `/hosts`, `/experts`, `/communities`, `/events`, `/proofs`, `/join`, `/about`, `/vision`, `/trust`, `/faq`, `/privacy`, `/terms`, `/contact`
+- [x] 7. `apps/web/package.json`
+- [x] 8. `apps/web/tsconfig.json`
+- [x] 9. `apps/web/next.config.js`
+- [x] 10. `apps/web/app/layout.tsx`
+- [x] 11. `apps/web/app/page.tsx` — homepage
+- [x] 12. Global nav + footer components
+- [x] 13. Homepage sections (Hero, What is OMDALAT, Live Activity, Places, Hosts, Experts, Communities, Events, Proof, Join)
+- [x] 14–27. Route shells: `/places`, `/hosts`, `/experts`, `/communities`, `/events`, `/proofs`, `/join`, `/about`, `/vision`, `/trust`, `/faq`, `/privacy`, `/terms`, `/contact`
 
 ## Phase 3 — App runtime
-- [ ] 24. `apps/app/package.json`
-- [ ] 25. `apps/app/tsconfig.json`
-- [ ] 26. `apps/app/next.config.js`
-- [ ] 27. `apps/app/app/layout.tsx`
-- [ ] 28. `apps/app/app/page.tsx`
-- [ ] 29. `/dashboard`
-- [ ] 30. `/profile`
-- [ ] 31. `/settings`
+- [x] 24. `apps/app/package.json`
+- [x] 25. `apps/app/tsconfig.json`
+- [x] 26. `apps/app/next.config.js`
+- [x] 27. `apps/app/app/layout.tsx`
+- [x] 28. `apps/app/app/page.tsx`
+- [x] 29. `/dashboard`
+- [x] 30. `/profile`
+- [x] 31. `/settings`
 
 ## Phase 4 — Packages
 - [ ] 32. `packages/ui` — base components
@@ -548,13 +548,13 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 - [ ] 34. `packages/core` — constants + route map
 
 ## Phase 5 — SEO
-- [ ] 35. `robots.txt`
-- [ ] 36. `_headers`
-- [ ] 37. `_redirects`
-- [ ] 38. `lib/metadata.ts`
-- [ ] 39. `lib/canonical.ts`
-- [ ] 40. `lib/schema.ts`
-- [ ] 41. Sitemap system
+- [x] 35. `robots.txt`
+- [x] 36. `_headers`
+- [x] 37. `_redirects`
+- [x] 38. `lib/metadata.ts`
+- [x] 39. `lib/canonical.ts`
+- [x] 40. `lib/schema.ts`
+- [x] 41. Sitemap system
 
 ## Phase 6 — Docs and data
 - [x] 42. `docs/PRODUCT_SPEC_OMDALAT.md`

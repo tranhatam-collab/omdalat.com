@@ -1,33 +1,53 @@
+import { buildBreadcrumbSchema } from "../../lib/breadcrumb";
+import { buildWebPageSchema } from "../../lib/schema";
+
 type PageScaffoldProps = {
   eyebrow: string;
   title: string;
   description: string;
   highlights: string[];
   nextStep: string;
+  path: string;
 };
 
-export function PageScaffold({ eyebrow, title, description, highlights, nextStep }: PageScaffoldProps) {
+export function PageScaffold({ eyebrow, title, description, highlights, nextStep, path }: PageScaffoldProps) {
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: title, path }
+  ]);
+  const pageSchema = buildWebPageSchema({ title, description, path });
+
   return (
-    <article className="runtime-page">
-      <p className="runtime-kicker">{eyebrow}</p>
-      <h1>{title}</h1>
-      <p>{description}</p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <article className="runtime-page">
+        <p className="runtime-kicker">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
 
-      <div className="runtime-page-grid">
-        <section className="runtime-panel">
-          <h2>Current shell</h2>
-          <ul className="runtime-list">
-            {highlights.map((highlight) => (
-              <li key={highlight}>{highlight}</li>
-            ))}
-          </ul>
-        </section>
+        <div className="runtime-page-grid">
+          <section className="runtime-panel">
+            <h2>Current shell</h2>
+            <ul className="runtime-list">
+              {highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+          </section>
 
-        <section className="runtime-panel">
-          <h2>Next implementation step</h2>
-          <p>{nextStep}</p>
-        </section>
-      </div>
-    </article>
+          <section className="runtime-panel">
+            <h2>Next implementation step</h2>
+            <p>{nextStep}</p>
+          </section>
+        </div>
+      </article>
+    </>
   );
 }

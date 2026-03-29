@@ -1,12 +1,12 @@
 # apps/app
 
-Prototype home for `app.omdalat.com`.
+Next.js runtime scaffold for `app.omdalat.com`.
 
-This route is now the local operating layer for:
+This app is now the local operating layer shell for:
 
-- request queue
-- live nodes
-- host roster
-- proof feed
+- dashboard and trust summary
+- places, hosts, experts, communities, events, and proofs
+- profile and settings routes
+- future auth, moderation, and proof workflows
 
-Run the repo root dev server and open `/apps/app/`.
+Run the root workspace install, then start the app package or open the repo root dev surface while the runtime is still being wired into deployment.

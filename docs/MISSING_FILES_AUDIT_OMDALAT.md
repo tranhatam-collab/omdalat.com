@@ -116,17 +116,17 @@ apps/web/app/faq/page.tsx
 apps/web/app/privacy/page.tsx
 apps/web/app/terms/page.tsx
 apps/web/app/contact/page.tsx
-```
-
-## Still missing — public / SEO
-
-```
 apps/web/public/robots.txt
 apps/web/public/sitemap.xml
 apps/web/public/_headers
 apps/web/public/_redirects
 apps/web/public/og/
 apps/web/public/icons/
+apps/web/lib/metadata.ts
+apps/web/lib/schema.ts
+apps/web/lib/canonical.ts
+apps/web/lib/breadcrumb.ts
+apps/web/lib/hreflang.ts
 ```
 
 ## Still missing — detail routes
@@ -138,16 +138,6 @@ apps/web/app/experts/[slug]/page.tsx
 apps/web/app/communities/[slug]/page.tsx
 apps/web/app/events/[slug]/page.tsx
 apps/web/app/proofs/[slug]/page.tsx
-```
-
-## Still missing — support modules
-
-```
-apps/web/lib/metadata.ts      ← title, description, OG helper
-apps/web/lib/schema.ts        ← JSON-LD builder
-apps/web/lib/canonical.ts     ← canonical URL helper
-apps/web/lib/breadcrumb.ts    ← breadcrumb builder
-apps/web/lib/hreflang.ts      ← hreflang scaffold
 ```
 
 ---
@@ -163,14 +153,10 @@ apps/app/README.md
 apps/app/index.html
 apps/app/app.js
 apps/app/styles.css
-```
-
-## Still missing — Next.js app runtime
-
-```
 apps/app/package.json
 apps/app/next.config.js
 apps/app/tsconfig.json
+apps/app/next-env.d.ts
 apps/app/app/layout.tsx
 apps/app/app/page.tsx
 apps/app/app/dashboard/page.tsx
@@ -182,18 +168,27 @@ apps/app/app/events/page.tsx
 apps/app/app/proofs/page.tsx
 apps/app/app/profile/page.tsx
 apps/app/app/settings/page.tsx
-```
-
-## Still missing — support modules
-
-```
 apps/app/lib/auth.ts
 apps/app/lib/roles.ts
 apps/app/lib/trust.ts
-apps/app/components/node-card.tsx
-apps/app/components/trust-badge.tsx
-apps/app/components/proof-card.tsx
-apps/app/components/activity-feed.tsx
+apps/app/components/AppScaffold.tsx
+apps/app/components/NodeCard.tsx
+apps/app/components/TrustBadge.tsx
+apps/app/components/ProofCard.tsx
+apps/app/components/ActivityFeed.tsx
+apps/app/components/layout/AppHeader.tsx
+apps/app/components/layout/AppNav.tsx
+apps/app/components/layout/AppFooter.tsx
+```
+
+## Still missing — app data wiring
+
+```
+auth session integration
+role-based route protection
+real trust and proof data
+entity-backed app lists
+request and moderation flows
 ```
 
 ---
@@ -396,23 +391,7 @@ apps/admin/app/users/page.tsx
 
 # 18. PRIORITY ORDER
 
-## Priority 1 — app runtime + SEO foundation
-
-```
-apps/app/package.json
-apps/app/next.config.js
-apps/app/tsconfig.json
-apps/app/app/layout.tsx
-apps/app/app/page.tsx
-apps/web/public/robots.txt
-apps/web/public/_headers
-apps/web/public/_redirects
-apps/web/lib/metadata.ts
-apps/web/lib/schema.ts
-apps/web/lib/canonical.ts
-```
-
-## Priority 2 — public web completion
+## Priority 1 — public and app route completion
 
 ```
 apps/web/app/places/[slug]/page.tsx
@@ -421,14 +400,11 @@ apps/web/app/experts/[slug]/page.tsx
 apps/web/app/communities/[slug]/page.tsx
 apps/web/app/events/[slug]/page.tsx
 apps/web/app/proofs/[slug]/page.tsx
-apps/web/public/sitemap.xml
-apps/web/public/og/
-apps/web/public/icons/
-apps/web/lib/breadcrumb.ts
-apps/web/lib/hreflang.ts
+entity-backed app list views
+request and moderation route shells
 ```
 
-## Priority 3 — shared packages + backend services
+## Priority 2 — shared packages + backend services
 
 ```
 packages/ui/
@@ -443,7 +419,7 @@ services/matching/
 services/notifications/
 ```
 
-## Priority 4 — remaining system docs
+## Priority 3 — remaining system docs
 
 ```
 docs/API_ROUTE_MAP_OMDALAT.md
@@ -457,7 +433,7 @@ docs/OMDALAT_MOTION_SYSTEM.md
 docs/FIGMA_STRUCTURE_OMDALAT.md
 ```
 
-## Priority 5 — operations + quality
+## Priority 4 — operations + quality
 
 ```
 apps/admin/
