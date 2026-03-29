@@ -1,114 +1,257 @@
 # OMDALAT.COM
-## Repo Build Order
-## Sequential 50-Step Checklist for DEV
-## Version 1.0
+## Repository Build Order
+## Final Step-by-Step Build Sequence
+## Version 2.0
 
 ---
 
-# PURPOSE
+# 1. PURPOSE
 
-This file gives DEV a single ordered checklist to build the `omdalat.com` repository from zero to production-ready.
+This file defines the exact build order for the `omdalat.com` repository.
 
-Follow steps in order. Do not skip ahead.
-Mark each step complete before moving to the next.
+It exists to:
+- prevent chaotic development
+- prevent premature UI work
+- prevent SEO debt
+- prevent missing system foundations
+- ensure correct sequence from repo shell to working product
 
----
+This is the mandatory implementation order for:
+- frontend developers
+- backend developers
+- AI-assisted code generation
+- design handoff coordination
+- product implementation tracking
 
-# PHASE 1 — WORKSPACE FOUNDATION
-## Steps 1–7
-
-- [ ] **Step 1** — Create `package.json` at root
-  - define workspace name
-  - define Node engine version
-  - add scripts: `dev`, `build`, `lint`, `type-check`
-
-- [ ] **Step 2** — Create `pnpm-workspace.yaml`
-  - register `apps/*`, `packages/*`, `services/*`
-
-- [ ] **Step 3** — Create `turbo.json`
-  - define pipelines: `build`, `dev`, `lint`, `type-check`
-  - set correct `dependsOn` for build order
-
-- [ ] **Step 4** — Create `.nvmrc`
-  - lock Node.js version
-
-- [ ] **Step 5** — Create `.editorconfig`
-  - indent style, charset, end of line, trim trailing whitespace
-
-- [ ] **Step 6** — Create `.env.example`
-  - list all required environment variables with placeholder values
-  - never commit real secrets
-
-- [ ] **Step 7** — Create `packages/config/`
-  - shared `tsconfig.base.json`
-  - shared ESLint config
-  - shared Tailwind config (if used)
+**Rule:** Do not skip ahead to later layers before earlier dependencies are locked.
 
 ---
 
-# PHASE 2 — SHARED PACKAGES
-## Steps 8–10
+# 2. BUILD PHILOSOPHY
 
-- [ ] **Step 8** — Create `packages/types/`
-  - define TypeScript types for all core entities:
-    `User`, `Node`, `Place`, `Host`, `Expert`, `Community`, `Event`, `Proof`, `TrustScore`
-  - export from `packages/types/index.ts`
+```
+foundation first
+public structure second
+product objects third
+interaction fourth
+trust fifth
+admin sixth
+scale layers later
+```
 
-- [ ] **Step 9** — Create `packages/core/`
-  - shared business logic utilities
-  - trust score helpers
-  - entity validators
+OMDALAT must be built:
+- as a system
+- as a city-node
+- as a local proof layer
+- as a trust-based experience
 
-- [ ] **Step 10** — Create `packages/ui/`
-  - design token CSS variables
-  - base components: `Button`, `Card`, `Badge`, `Input`, `Modal`
-  - brand-locked to OMDALAT green system
-
----
-
-# PHASE 3 — WEB APP FOUNDATION
-## Steps 11–18
-
-- [ ] **Step 11** — Create `apps/web/package.json`
-  - dependencies: Next.js, React, TypeScript
-  - reference shared config packages
-
-- [ ] **Step 12** — Create `apps/web/next.config.js`
-  - enable SSR or hybrid rendering
-  - configure image domains
-  - configure i18n locale routing if multilingual
-
-- [ ] **Step 13** — Create `apps/web/tsconfig.json`
-  - extend from `packages/config/tsconfig.base.json`
-
-- [ ] **Step 14** — Create `apps/web/app/layout.tsx`
-  - root layout with metadata defaults
-  - font preload
-  - global CSS import
-  - navigation and footer
-
-- [ ] **Step 15** — Create `apps/web/lib/metadata.ts`
-  - `generateMetadata()` helper
-  - default title, description, OG image
-  - per-page override support
-
-- [ ] **Step 16** — Create `apps/web/lib/schema.ts`
-  - JSON-LD builder for: `Organization`, `WebSite`, `Place`, `Person`, `Event`, `ItemList`, `BreadcrumbList`, `FAQPage`
-
-- [ ] **Step 17** — Create `apps/web/lib/canonical.ts`
-  - canonical URL builder
-  - enforce `https://omdalat.com` base
-
-- [ ] **Step 18** — Create `apps/web/lib/hreflang.ts`
-  - hreflang scaffold for `/vi/` and `/en/`
-  - x-default support
+Not as:
+- a random homepage first
+- a dashboard without data model
+- a UI kit without product logic
+- a content site without entity structure
 
 ---
 
-# PHASE 4 — SEO FOUNDATION
-## Steps 19–22
+# 3. MASTER STAGE OVERVIEW
 
-- [ ] **Step 19** — Create `apps/web/public/robots.txt`
+| Stage | Name | Gate |
+|---|---|---|
+| 1 | Workspace Foundation | repo installs cleanly |
+| 2 | Public Web Runtime | public site renders |
+| 3 | App Runtime | app shell works |
+| 4 | Shared Packages | no duplication between apps |
+| 5 | SEO Foundation | metadata visible on real pages |
+| 6 | Product Data Model | entities and mock data stable |
+| 7 | Core Feature Implementation | city node is navigable |
+| 8 | Trust + Proof Layer | trust appears in UI |
+| 9 | Admin + Docs Layer | ops and docs work |
+| 10 | Scale + Quality | CI, tests, analytics reliable |
+
+---
+
+# 4. STAGE 1 — WORKSPACE FOUNDATION
+
+## Files to create
+
+```
+package.json
+pnpm-workspace.yaml
+turbo.json
+.editorconfig
+.nvmrc
+.env.example
+```
+
+## Root scripts required
+
+```
+dev
+build
+lint
+typecheck
+format
+```
+
+## Directory structure to confirm
+
+```
+apps/
+packages/
+services/
+docs/
+data/
+```
+
+## Gate
+
+Repo installs cleanly. Workspace runs. New developer can onboard consistently.
+
+---
+
+# 5. STAGE 2 — PUBLIC WEB RUNTIME
+
+## Files to create
+
+```
+apps/web/package.json
+apps/web/tsconfig.json
+apps/web/next.config.js
+apps/web/app/layout.tsx
+apps/web/app/page.tsx
+```
+
+## Route shells to create
+
+```
+/
+/places
+/hosts
+/experts
+/communities
+/events
+/proofs
+/join
+/about
+/vision
+/trust
+/faq
+/privacy
+/terms
+/contact
+```
+
+## Global layout must include
+
+- header / navigation
+- footer
+- theme wrapper
+- metadata hook
+- font preload
+
+## Gate
+
+Public site boots. Homepage renders. Core routes exist as shells. Theme wrapper is stable.
+
+---
+
+# 6. STAGE 3 — APP RUNTIME
+
+## Files to create
+
+```
+apps/app/package.json
+apps/app/tsconfig.json
+apps/app/next.config.js
+apps/app/app/layout.tsx
+apps/app/app/page.tsx
+```
+
+## Route shells to create
+
+```
+/dashboard
+/places
+/hosts
+/experts
+/communities
+/events
+/proofs
+/profile
+/settings
+```
+
+## App layout must include
+
+- app nav
+- page frame
+- placeholder auth guard
+- card system
+- local theme wrapper
+- noindex on all pages
+
+## Gate
+
+App boots. Dashboard shell exists. Route map is stable.
+
+---
+
+# 7. STAGE 4 — SHARED PACKAGES
+
+## packages/ui — required components
+
+```
+Button
+Card
+Section
+Container
+Badge
+NavItem
+EmptyState
+PageIntro
+```
+
+## packages/types — required types
+
+```
+User
+Node
+Place
+Host
+Expert
+Community
+Event
+Proof
+TrustSummary
+Verification
+```
+
+## packages/core — required contents
+
+```
+constants
+route map
+config
+shared labels
+```
+
+## Gate
+
+Shared component library exists. Domain types are shared. Web and app stop duplicating primitives.
+
+---
+
+# 8. STAGE 5 — SEO FOUNDATION
+
+## Public SEO files
+
+```
+apps/web/public/robots.txt
+apps/web/public/_headers
+apps/web/public/_redirects
+```
+
+## robots.txt
 
 ```
 User-agent: *
@@ -121,11 +264,7 @@ Disallow: /staging/
 Sitemap: https://omdalat.com/sitemap.xml
 ```
 
-- [ ] **Step 20** — Create `apps/web/public/sitemap.xml` or sitemap generator
-  - cover: homepage, listings, detail pages
-  - auto-update as entities are published
-
-- [ ] **Step 21** — Create `apps/web/public/_headers`
+## _headers
 
 ```
 /*
@@ -135,7 +274,7 @@ Sitemap: https://omdalat.com/sitemap.xml
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 ```
 
-- [ ] **Step 22** — Create `apps/web/public/_redirects`
+## _redirects
 
 ```
 http://omdalat.com/*       https://omdalat.com/:splat  301
@@ -143,205 +282,345 @@ http://www.omdalat.com/*   https://omdalat.com/:splat  301
 https://www.omdalat.com/*  https://omdalat.com/:splat  301
 ```
 
----
+## Metadata system — apps/web/lib/
 
-# PHASE 5 — WEB APP ROUTES
-## Steps 23–28
+```
+metadata.ts     title, description, OG defaults + per-page override
+schema.ts       JSON-LD builders: Organization, WebSite, Place, Person, Event, BreadcrumbList, ItemList, FAQPage
+canonical.ts    canonical URL builder enforcing https://omdalat.com base
+hreflang.ts     /vi/ and /en/ scaffold with x-default
+```
 
-- [ ] **Step 23** — Create `apps/web/app/page.tsx` (homepage)
-  - H1: `OMDALAT — The First Living Intelligence City in Da Lat`
-  - server-rendered intro copy
-  - internal links to all main sections
-  - `Organization` + `WebSite` JSON-LD
-  - homepage OG image
+## Sitemap
 
-- [ ] **Step 24** — Create listing pages
-  - `/places/page.tsx`
-  - `/hosts/page.tsx`
-  - `/experts/page.tsx`
-  - `/communities/page.tsx`
-  - `/events/page.tsx`
-  - each with unique H1, meta, `ItemList` JSON-LD
+At minimum cover: homepage, listing pages, published detail pages.
+Auto-update as entities are published or archived.
 
-- [ ] **Step 25** — Create detail page templates
-  - `/places/[slug]/page.tsx`
-  - `/hosts/[slug]/page.tsx`
-  - `/experts/[slug]/page.tsx`
-  - `/communities/[slug]/page.tsx`
-  - `/events/[slug]/page.tsx`
-  - each with unique title, H1, breadcrumb, entity JSON-LD
+## Gate
 
-- [ ] **Step 26** — Create brand pages
-  - `/about/page.tsx`
-  - `/vision/page.tsx`
-  - `/trust/page.tsx`
-  - `/join/page.tsx`
-
-- [ ] **Step 27** — Create utility pages
-  - `/faq/page.tsx` with `FAQPage` JSON-LD
-  - `/privacy/page.tsx`
-  - `/terms/page.tsx`
-  - `/contact/page.tsx`
-
-- [ ] **Step 28** — Create proof pages
-  - `/proofs/page.tsx`
-  - `/proofs/[slug]/page.tsx`
+Public pages are safely indexable. Metadata is centralized. No canonical chaos.
 
 ---
 
-# PHASE 6 — APP FOUNDATION
-## Steps 29–32
+# 9. STAGE 6 — PRODUCT DATA MODEL
 
-- [ ] **Step 29** — Create `apps/app/package.json`
-  - same stack as web but no public SEO requirements
+## Docs to write first
 
-- [ ] **Step 30** — Create `apps/app/app/layout.tsx`
-  - auth shell
-  - role context
-  - noindex on all pages
+```
+docs/PRODUCT_SPEC_OMDALAT.md
+docs/DATA_MODEL_OMDALAT.md
+docs/API_SPEC_OMDALAT.md
+docs/TRUST_ENGINE_OMDALAT.md
+docs/MATCHING_ENGINE_OMDALAT.md
+```
 
-- [ ] **Step 31** — Create core app routes
-  - `/dashboard/page.tsx`
-  - `/places/page.tsx`
-  - `/hosts/page.tsx`
-  - `/experts/page.tsx`
-  - `/communities/page.tsx`
-  - `/events/page.tsx`
-  - `/proofs/page.tsx`
-  - `/profile/page.tsx`
-  - `/settings/page.tsx`
+## Mock data to create
 
-- [ ] **Step 32** — Create core app components
-  - `NodeCard`
-  - `TrustBadge`
-  - `ProofCard`
-  - `ActivityFeed`
-  - `LocalMap`
+```
+data/mock/places.json        min 5 real entries
+data/mock/hosts.json         min 3 real entries
+data/mock/experts.json       min 3 real entries
+data/mock/communities.json   min 2 real entries
+data/mock/events.json        min 2 real entries
+data/mock/proofs.json        min 2 real entries
+```
 
----
+## Schema definitions to code
 
-# PHASE 7 — API + DATA
-## Steps 33–38
+```
+Place
+Host
+Expert
+Community
+Event
+Proof
+TrustSummary
+```
 
-- [ ] **Step 33** — Create `services/api/`
-  - Cloudflare Workers + D1 setup
-  - route families: `/v1/places`, `/v1/hosts`, `/v1/experts`, `/v1/communities`, `/v1/events`, `/v1/proofs`, `/v1/trust`
+## Gate
 
-- [ ] **Step 34** — Create `services/auth/`
-  - session management
-  - role system
-  - JWT or session tokens
-
-- [ ] **Step 35** — Create `data/schemas/`
-  - `place.json`
-  - `host.json`
-  - `expert.json`
-  - `community.json`
-  - `event.json`
-  - `proof.json`
-
-- [ ] **Step 36** — Create `data/seed/`
-  - minimum 5 real places
-  - minimum 3 real hosts
-  - minimum 3 real experts
-  - minimum 2 real communities
-  - minimum 2 real events
-
-- [ ] **Step 37** — Create `services/trust/`
-  - trust score calculation
-  - verification rules
-  - proof validation
-
-- [ ] **Step 38** — Create `services/matching/`
-  - local discovery logic
-  - ranking rules
-  - relevance scoring
+Product objects are locked. Cards and pages can render real structured content.
 
 ---
 
-# PHASE 8 — PRODUCT DOCS
-## Steps 39–43
+# 10. STAGE 7 — CORE FEATURE IMPLEMENTATION
 
-- [ ] **Step 39** — Write `docs/PRODUCT_SPEC_OMDALAT.md`
-  - full product specification
-  - modules, flows, acceptance criteria
+## 10.1 Places
 
-- [ ] **Step 40** — Write `docs/DATA_MODEL_OMDALAT.md`
-  - entity definitions
-  - relationships
-  - field types and constraints
+- listing page
+- detail page with Place JSON-LD
+- place card component
+- related host link
+- trust signal area
 
-- [ ] **Step 41** — Write `docs/API_SPEC_OMDALAT.md`
-  - all routes, methods, request/response shapes
-  - auth rules per route
+## 10.2 Hosts
 
-- [ ] **Step 42** — Write `docs/TRUST_ENGINE_OMDALAT.md`
-  - trust score inputs and weights
-  - verification flow
-  - proof submission and validation rules
+- listing page
+- detail page with Person JSON-LD
+- host card component
+- linked places
 
-- [ ] **Step 43** — Write `docs/MATCHING_ENGINE_OMDALAT.md`
-  - discovery logic
-  - ranking factors
-  - local relevance signals
+## 10.3 Experts
 
----
+- listing page
+- detail page with Person JSON-LD
+- expertise card
+- locality context
+- related events or communities
 
-# PHASE 9 — CI/CD + DEPLOY
-## Steps 44–47
+## 10.4 Communities
 
-- [ ] **Step 44** — Create `.github/workflows/lint.yml`
-  - run on every PR
-  - ESLint + TypeScript check
+- listing page
+- detail page
+- member or activity summary
+- linked events and places
 
-- [ ] **Step 45** — Create `.github/workflows/build.yml`
-  - run on every PR
-  - build all apps
+## 10.5 Events
 
-- [ ] **Step 46** — Create `.github/workflows/deploy-web.yml`
-  - deploy `apps/web` to Cloudflare Pages on merge to main
+- listing page
+- detail page with Event JSON-LD
+- schedule display
+- location and related entities
 
-- [ ] **Step 47** — Write `docs/DEPLOYMENT_RUNBOOK_OMDALAT.md`
-  - step-by-step deploy for web, app, admin
-  - environment variable checklist
-  - post-deploy SEO verification checklist
+## 10.6 Proofs
 
----
+- listing page
+- detail page
+- proof card
+- linked entities
 
-# PHASE 10 — SCALE READINESS
-## Steps 48–50
+## Gate
 
-- [ ] **Step 48** — Create `apps/admin/`
-  - verification review queue
-  - proof moderation
-  - user management
-  - trust score overrides
-
-- [ ] **Step 49** — Create `apps/docs/`
-  - public-facing documentation site
-  - rendered from markdown or MDX
-  - covers: how OMDALAT works, trust system, proof system, API (public parts)
-
-- [ ] **Step 50** — Write `docs/METRICS_OMDALAT.md`
-  - define success metrics
-  - analytics event naming
-  - growth phase targets
+OMDALAT is navigable as a real city-node system. Core entity pages exist. Internal linking is meaningful.
 
 ---
 
-# FINAL RULE
+# 11. STAGE 8 — TRUST + PROOF LAYER
 
-Steps 1–22 must be complete before any real feature UI is built.
+## Verification summary component
 
-If SEO and workspace foundation are skipped:
-- metadata will be patched later expensively
-- canonical chaos will appear
-- monorepo will become hard to maintain
-- DEV will build on an unstable base
+Must show:
+- verification state
+- trust state
+- proof count
+- credibility labels
 
-Steps 23–50 define the full product surface.
-Do not invent features outside this order without explicit product approval.
+## Proof UI
+
+- proof card
+- proof detail
+- proof relationship display
+- proof badges
+
+## Trust summaries
+
+- place trust summary
+- host trust summary
+- expert trust summary
+- community trust summary
+
+## Trust fields to lock
+
+```
+verified: boolean
+active: boolean
+proof_count: number
+trust_level: enum
+```
+
+## Gate
+
+System visibly differentiates real from generic. OMDALAT feels like a trusted network, not a directory.
 
 ---
 
-*OMDALAT Repo Build Order — Version 1.0*
+# 12. STAGE 9 — ADMIN + DOCS LAYER
+
+## apps/admin routes
+
+```
+/
+/users
+/places
+/hosts
+/experts
+/communities
+/events
+/proofs
+/verifications
+/moderation
+```
+
+## apps/docs routes
+
+```
+/
+/brand
+/product
+/seo
+/trust
+/api
+/data-model
+```
+
+## Gate
+
+Internal operations are possible. Documentation is navigable. System is maintainable.
+
+---
+
+# 13. STAGE 10 — SCALE + QUALITY
+
+## CI workflows
+
+```
+.github/workflows/lint.yml
+.github/workflows/build.yml
+.github/workflows/deploy-web.yml
+.github/workflows/deploy-app.yml
+```
+
+## Testing
+
+```
+vitest.config.ts
+playwright.config.ts
+```
+
+Test coverage required:
+- metadata output per page type
+- route integrity
+- schema JSON-LD output
+- component rendering
+
+## Performance targets
+
+| Metric | Target |
+|---|---|
+| LCP | < 2.5s on mobile |
+| CLS | < 0.1 |
+| JS bundle (content pages) | minimal, aggressively split |
+
+## Gate
+
+Build, deploy, and quality checks are reliable. Repo is production-grade.
+
+---
+
+# 14. CHECKLIST — 50 STEPS
+
+## Phase 1 — Workspace
+- [ ] 1. `package.json`
+- [ ] 2. `pnpm-workspace.yaml`
+- [ ] 3. `turbo.json`
+- [ ] 4. `.editorconfig`
+- [ ] 5. `.nvmrc`
+- [ ] 6. `.env.example`
+
+## Phase 2 — Web runtime
+- [ ] 7. `apps/web/package.json`
+- [ ] 8. `apps/web/tsconfig.json`
+- [ ] 9. `apps/web/next.config.js`
+- [ ] 10. `apps/web/app/layout.tsx`
+- [ ] 11. `apps/web/app/page.tsx` — homepage
+- [ ] 12. Global nav + footer components
+- [ ] 13. Homepage sections (Hero, What is OMDALAT, Live Activity, Places, Hosts, Experts, Communities, Events, Proof, Join)
+- [ ] 14–23. Route shells: `/places`, `/hosts`, `/experts`, `/communities`, `/events`, `/proofs`, `/join`, `/about`, `/vision`, `/trust`
+
+## Phase 3 — App runtime
+- [ ] 24. `apps/app/package.json`
+- [ ] 25. `apps/app/tsconfig.json`
+- [ ] 26. `apps/app/next.config.js`
+- [ ] 27. `apps/app/app/layout.tsx`
+- [ ] 28. `apps/app/app/page.tsx`
+- [ ] 29. `/dashboard`
+- [ ] 30. `/profile`
+- [ ] 31. `/settings`
+
+## Phase 4 — Packages
+- [ ] 32. `packages/ui` — base components
+- [ ] 33. `packages/types` — domain types
+- [ ] 34. `packages/core` — constants + route map
+
+## Phase 5 — SEO
+- [ ] 35. `robots.txt`
+- [ ] 36. `_headers`
+- [ ] 37. `_redirects`
+- [ ] 38. `lib/metadata.ts`
+- [ ] 39. `lib/canonical.ts`
+- [ ] 40. `lib/schema.ts`
+- [ ] 41. Sitemap system
+
+## Phase 6 — Docs and data
+- [ ] 42. `docs/PRODUCT_SPEC_OMDALAT.md`
+- [ ] 43. `docs/DATA_MODEL_OMDALAT.md`
+- [ ] 44. `docs/API_SPEC_OMDALAT.md`
+- [ ] 45. `docs/TRUST_ENGINE_OMDALAT.md`
+- [ ] 46. `docs/MATCHING_ENGINE_OMDALAT.md`
+- [ ] 47. Mock data for all core entities
+
+## Phase 7 — Operations
+- [ ] 48. `apps/admin`
+- [ ] 49. `apps/docs`
+- [ ] 50. CI workflows
+
+---
+
+# 15. WHAT MUST NOT HAPPEN
+
+```
+❌ build UI before workspace setup
+❌ build detail pages before entity types exist
+❌ ship indexable pages before metadata system
+❌ create app dashboards before route structure
+❌ invent trust UI before trust model
+❌ start admin before core entities exist
+❌ deploy to production before SEO foundation
+```
+
+---
+
+# 16. WHAT CAN RUN IN PARALLEL (after Stage 1)
+
+```
+homepage visual design
+component library design
+mock data creation
+product spec writing
+API spec writing
+copy system writing
+```
+
+---
+
+# 17. BETA READINESS DEFINITION
+
+OMDALAT is ready for beta only when:
+
+- [ ] homepage works with real content
+- [ ] core listing pages work
+- [ ] at least one detail template works per entity type
+- [ ] trust summary is visible
+- [ ] proof objects exist and link correctly
+- [ ] metadata system works on all public pages
+- [ ] sitemap is live
+- [ ] admin can inspect core entities
+- [ ] docs explain the system clearly
+
+---
+
+# 18. FINAL DIRECTIVE
+
+Build OMDALAT in order.
+Do not let UI outrun the product model.
+Do not let product outrun the SEO foundation.
+Do not let trust become an afterthought.
+
+Correct order creates compounding speed later.
+Wrong order creates compounding cleanup later.
+
+This file is the build sequence lock for the repository.
+
+---
+
+*OMDALAT Repo Build Order — Version 2.0*
