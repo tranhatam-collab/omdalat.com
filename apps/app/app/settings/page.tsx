@@ -1,3 +1,5 @@
+import { OMDALAT_INBOXES } from "../../../../packages/core";
+import { SupportRequestForm } from "../../components/SupportRequestForm";
 import { NotificationFeed } from "../../components/NotificationFeed";
 import { getAuthNotice, getCurrentMember } from "../../lib/auth";
 import { listNotifications } from "../../lib/notifications";
@@ -32,6 +34,29 @@ export default function SettingsPage() {
           </ul>
         </section>
         <NotificationFeed items={notifications} redirectTo="/settings" title="Notification preferences preview" />
+      </div>
+
+      <div className="app-page-grid">
+        <section className="app-panel">
+          <p className="app-kicker">Support and routing</p>
+          <h2>Send a live support request</h2>
+          <p>
+            This form sends directly into the OMDALAT support inbox, so the app runtime has a real
+            operational contact path instead of placeholder copy.
+          </p>
+          <SupportRequestForm defaultRoute="/settings" replyEmail={currentMember.email} />
+        </section>
+
+        <section className="app-panel">
+          <p className="app-kicker">Official app mailboxes</p>
+          <h2>Current inbox map</h2>
+          <ul className="app-list">
+            <li>{`${OMDALAT_INBOXES.app} for app notifications and operator replies`}</li>
+            <li>{`${OMDALAT_INBOXES.support} for support and issue routing`}</li>
+            <li>{`${OMDALAT_INBOXES.hello} for public intake and cross-surface contact`}</li>
+            <li>{`${OMDALAT_INBOXES.trust} for trust and proof-related follow-up`}</li>
+          </ul>
+        </section>
       </div>
     </section>
   );

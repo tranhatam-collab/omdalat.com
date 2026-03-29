@@ -183,6 +183,59 @@ a {
   margin-top: 1rem;
 }
 
+.runtime-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.runtime-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.runtime-field span {
+  color: var(--omdalat-green-700);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.runtime-input {
+  width: 100%;
+  border: 1px solid var(--omdalat-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--omdalat-text);
+  padding: 0.85rem 1rem;
+  font: inherit;
+}
+
+.runtime-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.runtime-status {
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+}
+
+.runtime-status--error {
+  background: rgba(191, 74, 74, 0.12);
+  border: 1px solid rgba(191, 74, 74, 0.2);
+}
+
+.runtime-status--info {
+  background: rgba(79, 195, 138, 0.14);
+  border: 1px solid rgba(79, 195, 138, 0.22);
+}
+
+.runtime-status--success {
+  background: rgba(30, 122, 91, 0.12);
+  border: 1px solid rgba(30, 122, 91, 0.2);
+}
+
 .runtime-panel {
   padding: 1rem;
   border-radius: 20px;

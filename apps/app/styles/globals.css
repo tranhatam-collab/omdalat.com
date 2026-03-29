@@ -301,6 +301,26 @@ a {
   border-color: var(--app-line);
 }
 
+.app-status {
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+}
+
+.app-status--error {
+  background: rgba(191, 74, 74, 0.14);
+  border: 1px solid rgba(191, 74, 74, 0.22);
+}
+
+.app-status--info {
+  background: rgba(79, 195, 138, 0.14);
+  border: 1px solid rgba(79, 195, 138, 0.22);
+}
+
+.app-status--success {
+  background: rgba(30, 122, 91, 0.14);
+  border: 1px solid rgba(30, 122, 91, 0.22);
+}
+
 .app-inline-form,
 .app-inline-actions {
   display: flex;

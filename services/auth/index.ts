@@ -10,7 +10,7 @@ const authFixtures: AuthFixture[] = [
     session: {
       id: "guest-demo",
       name: "Guest Observer",
-      email: "guest@omdalat.local",
+      email: "guest@omdalat.com",
       role: "guest",
       homeNode: "Ward 1 Host Relay",
       homeNodeSlug: slugify("Ward 1 Host Relay"),
@@ -25,7 +25,7 @@ const authFixtures: AuthFixture[] = [
     session: {
       id: "bao-an-member",
       name: "Bao An",
-      email: "bao-an@omdalat.local",
+      email: "bao-an@omdalat.com",
       role: "member",
       homeNode: nodes[2]?.name ?? "Studio Garden Kitchen",
       homeNodeSlug: nodes[2]?.slug ?? slugify("Studio Garden Kitchen"),
@@ -40,7 +40,7 @@ const authFixtures: AuthFixture[] = [
     session: {
       id: "linh-verified",
       name: hosts[0]?.name ?? "Linh Pham",
-      email: "linh-pham@omdalat.local",
+      email: "linh-pham@omdalat.com",
       role: "verified_member",
       homeNode: nodes[0]?.name ?? "Lake Edge Signal Loop",
       homeNodeSlug: nodes[0]?.slug ?? slugify("Lake Edge Signal Loop"),
