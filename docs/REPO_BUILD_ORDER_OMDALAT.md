@@ -518,9 +518,9 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 - [x] 1. `package.json`
 - [x] 2. `pnpm-workspace.yaml`
 - [x] 3. `turbo.json`
-- [ ] 4. `.editorconfig`
-- [ ] 5. `.nvmrc`
-- [ ] 6. `.env.example`
+- [x] 4. `.editorconfig`
+- [x] 5. `.nvmrc`
+- [x] 6. `.env.example`
 
 ## Phase 2 — Web runtime
 - [x] 7. `apps/web/package.json`
@@ -541,11 +541,19 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 - [x] 29. `/dashboard`
 - [x] 30. `/profile`
 - [x] 31. `/settings`
+- [x] 31a. Demo auth: fixture sessions, SessionSwitcher, logout (no real auth backend — intentional)
+- [x] 31b. `apps/web/app/api/contact/route.ts` — public contact form intake (build pass)
+- [x] 31c. `apps/app/app/api/support/route.ts` — app support form intake (build pass)
+- [x] 31d. `services/notifications/mail.ts` — shared mail helper (sendPublicContactIntake, sendMemberSupportRequest)
+- [x] 31e. `packages/core/mail.ts` — OMDALAT_INBOXES, OMDALAT_MAIL_API_ORIGIN
+- [ ] 31f. Production mail: set MAIL_API_KEY env var + confirm MAIL_API_URL=https://mail.iai.one/_mail
+- [ ] 31g. Mailcow: create mailbox/alias for hello@, support@, app@, join@, partnerships@, trust@, noreply@omdalat.com
+- [ ] 31h. iai.one: add omdalat.com to ALLOWED_FROM_DOMAINS
 
 ## Phase 4 — Packages
-- [ ] 32. `packages/ui` — base components
-- [ ] 33. `packages/types` — domain types
-- [ ] 34. `packages/core` — constants + route map
+- [x] 32. `packages/ui` — Badge, Card, Container, EmptyState, Section (missing: Button, NavItem, PageIntro)
+- [x] 33. `packages/types` — auth.ts, content.ts, trust.ts
+- [x] 34. `packages/core` — config.ts, routes.ts, utils.ts, mail.ts
 
 ## Phase 5 — SEO
 - [x] 35. `robots.txt`
@@ -565,7 +573,7 @@ Build, deploy, and quality checks are reliable. Repo is production-grade.
 - [x] 46a. `docs/SCREEN_FLOW_OMDALAT.md`
 - [x] 46b. `docs/USER_ROLES_OMDALAT.md`
 - [x] 46c. `docs/DB_SCHEMA_OMDALAT.md`
-- [ ] 47. Mock data for all core entities
+- [x] 47. Mock data — places.json, hosts.json, experts.json, communities.json, events.json, proofs.json, requests.json
 
 ## Phase 7 — Operations
 - [ ] 48. `apps/admin`

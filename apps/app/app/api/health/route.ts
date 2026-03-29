@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { NextResponse } from "next/server";
 import { getCurrentAuthSession } from "../../../../../services/auth/index";
 import { getDashboardSnapshot, getModerationQueue } from "../../../../../services/api/index";
