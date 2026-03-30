@@ -14,35 +14,51 @@ export default function TermsPage() {
       eyebrow={{ vi: "Điều khoản", en: "Terms" }}
       title={{ vi: "Nguyên tắc sử dụng OMDALAT", en: "OMDALAT usage principles" }}
       intro={{
-        vi: "Mục tiêu của điều khoản là giữ hệ vận hành địa phương an toàn, tin cậy và có trách nhiệm. OMDALAT được tài trợ và phát hành bởi Angel Edu Tam Foundation Inc (4809 W 41st St, Ste 202 #426, Sioux Falls, SD 57106, USA; us@angeledutam.com), đồng thời với omdala.com và *.iai.one.",
-        en: "These terms aim to keep the local operating system safe, trustworthy, and accountable. OMDALAT is sponsored and published by Angel Edu Tam Foundation Inc (4809 W 41st St, Ste 202 #426, Sioux Falls, SD 57106, USA; us@angeledutam.com), together with omdala.com and *.iai.one."
+        vi: "Mục tiêu của điều khoản là giữ hệ vận hành địa phương an toàn, tin cậy và có trách nhiệm. Website omdalat.com do CÔNG TNHH THÁI LÂM (ĐÀ LẠT) quản lý vận hành tại địa chỉ 42 Cao Bá Quát, Phường Lang Biang - Đà Lạt, Tỉnh Lâm Đồng, Việt Nam. Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc. Liên hệ công khai: hello@omdalat.com và join@omdalat.com.",
+        en: "These terms aim to keep the local operating layer safe, trustworthy, and accountable. The omdalat.com site is operated by THAI LAM CO., LTD (DA LAT) at 42 Cao Bá Quat, Lang Biang Ward — Da Lat, Lam Dong Province, Vietnam. Technology and application design sponsorship: Angel Edu Tam Foundation Inc. Public contact: hello@omdalat.com and join@omdalat.com."
       }}
       sections={[
         {
-          heading: { vi: "Pháp nhân và tài trợ", en: "Legal entity and sponsorship" },
+          heading: { vi: "Pháp nhân và tài trợ", en: "Legal roles and sponsorship" },
           points: [
             {
-              vi: "Angel Edu Tam Foundation Inc là tổ chức phi lợi nhuận tài trợ toàn bộ hạ tầng công nghệ cho OMDALAT (miễn phí), omdala.com và hệ sinh thái *.iai.one theo các trang chính thức đã công bố.",
-              en: "Angel Edu Tam Foundation Inc is the nonprofit sponsor of all technology for OMDALAT (at no charge), omdala.com, and the *.iai.one ecosystem, as published on the official sites."
+              vi: "Đơn vị quản lý vận hành: CÔNG TNHH THÁI LÂM (ĐÀ LẠT), Việt Nam.",
+              en: "Operating entity: THAI LAM CO., LTD (DA LAT), Vietnam."
             },
             {
-              vi: "Văn bản pháp lý bổ sung cho nền tảng IAI (IAI Flow) nằm tại https://docs.iai.one/legal/.",
-              en: "Additional legal texts for the IAI platform (IAI Flow) are at https://docs.iai.one/legal/."
+              vi: "Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc (hỗ trợ miễn phí trong khuôn khổ tài trợ, không thay thế trách nhiệm vận hành tại Việt Nam).",
+              en: "Technology and application design sponsorship: Angel Edu Tam Foundation Inc (provided at no charge under sponsorship; does not replace Vietnam operating responsibility)."
+            },
+            {
+              vi: "Chính sách quyền riêng tư chi tiết nằm tại trang Quyền riêng tư trên cùng website.",
+              en: "The Privacy page on this site describes data handling in more detail."
             }
           ]
         },
         {
           heading: { vi: "Nguyên tắc chung", en: "General principles" },
           points: [
-            { vi: "Tôn trọng bối cảnh địa phương và an toàn cộng đồng.", en: "Respect local context and community safety." },
-            { vi: "Không cung cấp thông tin sai lệch hoặc bằng chứng giả mạo.", en: "Do not submit misleading information or fabricated evidence." }
+            {
+              vi: "Tôn trọng bối cảnh địa phương và an toàn cộng đồng.",
+              en: "Respect local context and community safety."
+            },
+            {
+              vi: "Không cung cấp thông tin sai lệch hoặc bằng chứng giả mạo.",
+              en: "Do not submit misleading information or fabricated evidence."
+            }
           ]
         },
         {
           heading: { vi: "Thực thi", en: "Enforcement" },
           points: [
-            { vi: "Nội dung vi phạm có thể bị gắn cờ, giới hạn hoặc loại khỏi trust layer.", en: "Violating content may be flagged, limited, or removed from the trust layer." },
-            { vi: "Các thay đổi lớn về điều khoản sẽ được thông báo rõ trước khi áp dụng.", en: "Major term updates are announced clearly before enforcement." }
+            {
+              vi: "Nội dung vi phạm có thể bị gắn cờ, giới hạn hoặc loại khỏi trust layer.",
+              en: "Violating content may be flagged, limited, or removed from the trust layer."
+            },
+            {
+              vi: "Các thay đổi lớn về điều khoản sẽ được thông báo rõ trước khi áp dụng.",
+              en: "Major term updates are announced clearly before enforcement."
+            }
           ]
         }
       ]}

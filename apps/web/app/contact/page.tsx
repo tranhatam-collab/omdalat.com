@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { ANGEL_EDU_TAM_FOUNDATION, OMDALAT_INBOXES } from "../../../../packages/core";
+import {
+  ANGEL_EDU_TAM_FOUNDATION,
+  OMDALAT_INBOXES,
+  OMDALAT_OPERATING_ENTITY
+} from "../../../../packages/core";
 import { getRequestLocale } from "../../lib/locale";
 import { buildPageMetadata } from "../../lib/metadata";
 import { ContactForm } from "./ContactForm";
@@ -65,22 +69,20 @@ export default async function ContactPage() {
         </section>
 
         <section className="runtime-panel">
-          <h2>{locale === "vi" ? "Pháp nhân tài trợ" : "Sponsoring legal entity"}</h2>
+          <h2>{locale === "vi" ? "Pháp lý và vận hành" : "Legal and operations"}</h2>
           <p>
             {locale === "vi"
-              ? "OMDALAT được tài trợ bởi Angel Edu Tam Foundation Inc; công nghệ và vận hành nền tảng được hỗ trợ hoàn toàn miễn phí trong khuôn khổ tổ chức. Cùng hệ thống pháp lý với omdala.com và *.iai.one (xem docs.iai.one/legal)."
-              : "OMDALAT is sponsored by Angel Edu Tam Foundation Inc; platform technology and operations are fully sponsored at no charge. Legal framework aligns with omdala.com and *.iai.one (see docs.iai.one/legal)."}
+              ? "Đơn vị quản lý vận hành website omdalat.com: CÔNG TNHH THÁI LÂM (ĐÀ LẠT). Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc."
+              : "Operating entity for omdalat.com: THAI LAM CO., LTD (DA LAT). Technology and application design sponsorship: Angel Edu Tam Foundation Inc."}
           </p>
+          <p style={{ whiteSpace: "pre-line" }}>{OMDALAT_OPERATING_ENTITY.addressLines.join("\n")}</p>
           <p>
             <strong>{ANGEL_EDU_TAM_FOUNDATION.legalName}</strong>
           </p>
-          <p style={{ whiteSpace: "pre-line" }}>{ANGEL_EDU_TAM_FOUNDATION.addressLines.join("\n")}</p>
           <p>
-            <a href={`mailto:${ANGEL_EDU_TAM_FOUNDATION.email}`}>{ANGEL_EDU_TAM_FOUNDATION.email}</a>
+            <a href={`mailto:${OMDALAT_INBOXES.hello}`}>{OMDALAT_INBOXES.hello}</a>
             {" · "}
-            <a href="https://docs.iai.one/legal/">docs.iai.one/legal</a>
-            {" — "}
-            {locale === "vi" ? "trung tâm điều khoản IAI Flow" : "IAI Flow legal hub"}
+            <a href={`mailto:${OMDALAT_INBOXES.join}`}>{OMDALAT_INBOXES.join}</a>
           </p>
         </section>
       </div>

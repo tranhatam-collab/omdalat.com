@@ -1,4 +1,10 @@
-import { ANGEL_EDU_TAM_FOUNDATION, OMDALAT_INBOXES, localizePath } from "../../../../packages/core";
+import {
+  ANGEL_EDU_TAM_FOUNDATION,
+  OMDALAT_INBOXES,
+  OMDALAT_OPERATING_ENTITY,
+  OMDALAT_SITE_BRAND,
+  localizePath
+} from "../../../../packages/core";
 import { contextRoutes } from "../../lib/routes";
 import { getRequestLocale } from "../../lib/locale";
 
@@ -14,39 +20,27 @@ const secondaryLabels: Record<string, { vi: string; en: string }> = {
 
 export async function Footer() {
   const locale = await getRequestLocale();
+  const isVi = locale === "vi";
+  const operatorName = isVi ? OMDALAT_OPERATING_ENTITY.legalNameVi : OMDALAT_OPERATING_ENTITY.legalNameEn;
 
   return (
     <footer className="runtime-footer">
       <div>
         <p>
-          {locale === "vi" ? "Khung runtime OMDALAT cho `apps/web`." : "OMDALAT runtime scaffold for `apps/web`."}
+          <strong>{OMDALAT_SITE_BRAND}</strong>
         </p>
         <p>
-          {locale === "vi"
-            ? "Static route hiện tại vẫn hoạt động đến khi runtime này được gắn vào deployment."
-            : "The static route remains active until this runtime is wired into deployment."}
+          {isVi ? "Tài trợ công nghệ và thiết kế ứng dụng:" : "Technology and application design sponsorship:"}{" "}
+          {ANGEL_EDU_TAM_FOUNDATION.legalName}
         </p>
         <p>
-          {locale === "vi" ? "Hộp thư công khai:" : "Public inboxes:"}{" "}
-          <a href={`mailto:${OMDALAT_INBOXES.hello}`}>{OMDALAT_INBOXES.hello}</a> ·{" "}
-          <a href={`mailto:${OMDALAT_INBOXES.join}`}>{OMDALAT_INBOXES.join}</a>
+          {isVi ? "Đơn vị QUẢN LÝ VẬN HÀNH:" : "Operating entity:"} {operatorName}
         </p>
+        <p style={{ whiteSpace: "pre-line", margin: 0 }}>{OMDALAT_OPERATING_ENTITY.addressLines.join("\n")}</p>
         <p>
-          {locale === "vi" ? "Pháp nhân tài trợ:" : "Sponsoring legal entity:"}{" "}
-          <strong>{ANGEL_EDU_TAM_FOUNDATION.legalName}</strong>
-        </p>
-        <p style={{ whiteSpace: "pre-line", margin: 0 }}>
-          {ANGEL_EDU_TAM_FOUNDATION.addressLines.join("\n")}
-        </p>
-        <p>
-          <a href={`mailto:${ANGEL_EDU_TAM_FOUNDATION.email}`}>{ANGEL_EDU_TAM_FOUNDATION.email}</a>
+          <a href={`mailto:${OMDALAT_INBOXES.hello}`}>{OMDALAT_INBOXES.hello}</a>
           {" · "}
-          <a href="https://docs.iai.one/legal/">docs.iai.one/legal</a>
-        </p>
-        <p>
-          {locale === "vi"
-            ? "Ba trang omdalat.com, omdala.com và *.iai.one là bề mặt chính thức trong cùng khuôn khổ tài trợ; công nghệ cho omdalat.com được hỗ trợ hoàn toàn miễn phí."
-            : "omdalat.com, omdala.com, and *.iai.one are official surfaces under the same sponsorship; technology for omdalat.com is fully sponsored at no charge."}
+          <a href={`mailto:${OMDALAT_INBOXES.join}`}>{OMDALAT_INBOXES.join}</a>
         </p>
       </div>
       <nav className="runtime-footer-links" aria-label="Secondary">
