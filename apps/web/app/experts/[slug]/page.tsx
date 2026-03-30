@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailScaffold } from "../../../components/shared/DetailScaffold";
 import { buildPageMetadata } from "../../../lib/metadata";
-import { experts, getExpertBySlug } from "../../../lib/public-data";
+import { experts, getExpertBySlug, resolveLocalizedText } from "../../../lib/public-data";
 
 type Params = {
   slug: string;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   return buildPageMetadata({
     title: `${expert.name} | OMDALAT Expert in Da Lat`,
-    description: expert.specialty,
+    description: resolveLocalizedText(expert.specialty),
     path: `/experts/${expert.slug}`
   });
 }
@@ -42,18 +42,18 @@ export default async function ExpertDetailPage({ params }: { params: Promise<Par
 
   return (
     <DetailScaffold
-      eyebrow="Expert detail"
+      eyebrow={{ vi: "Chi tiết chuyên gia", en: "Expert detail" }}
       title={expert.name}
       description={expert.specialty}
       path={`/experts/${expert.slug}`}
       backHref="/experts"
-      backLabel="Experts"
+      backLabel={{ vi: "Chuyên gia", en: "Experts" }}
       facts={[
-        { label: "Zone", value: expert.zone },
-        { label: "Availability", value: expert.availability },
-        { label: "Specialty", value: expert.specialty }
+        { label: { vi: "Khu vực", en: "Zone" }, value: expert.zone },
+        { label: { vi: "Khả dụng", en: "Availability" }, value: expert.availability },
+        { label: { vi: "Chuyên môn", en: "Specialty" }, value: expert.specialty }
       ]}
-      signals={[expert.signal, "Expert routes are now generated from the shared public dataset."]}
+      signals={[expert.signal, { vi: "Route chuyên gia hiện được sinh từ bộ dữ liệu public dùng chung.", en: "Expert routes are now generated from the shared public dataset." }]}
     />
   );
 }

@@ -1,7 +1,8 @@
+import type { OmdalatLocale } from "../../packages/core";
 import type { ProofHighlight, TrustSummary } from "../../packages/types";
-import { getDashboardSnapshot, getModerationQueue } from "../api";
+import { getDashboardSnapshot, getModerationQueue, resolveLocalizedText } from "../api";
 
-export function buildDashboardTrust(): TrustSummary {
+export function buildDashboardTrust(locale: OmdalatLocale = "en"): TrustSummary {
   const snapshot = getDashboardSnapshot();
   const acceptedProofs = snapshot.proofs.filter((proof) => proof.reviewStatus === "accepted").length;
   const flaggedProofs = snapshot.proofs.filter((proof) => proof.moderationState === "flagged").length;
@@ -17,42 +18,70 @@ export function buildDashboardTrust(): TrustSummary {
   return {
     level:
       score >= 90
-        ? "Trusted Local Node"
+        ? locale === "vi"
+          ? "Node địa phương đáng tin cậy"
+          : "Trusted Local Node"
         : score >= 78
-          ? "Proof-backed Local Node"
+          ? locale === "vi"
+            ? "Node địa phương có bằng chứng"
+            : "Proof-backed Local Node"
           : score >= 60
-            ? "Verified Local Node"
-            : "Basic Local Node",
+            ? locale === "vi"
+              ? "Node địa phương đã xác minh"
+              : "Verified Local Node"
+            : locale === "vi"
+              ? "Node địa phương cơ bản"
+              : "Basic Local Node",
     score,
-    summary: `${acceptedProofs} accepted proofs and ${snapshot.hosts.filter((host) => host.verified).length} verified hosts are currently reinforcing trust.`,
+    summary:
+      locale === "vi"
+        ? `${acceptedProofs} bằng chứng đã chấp nhận và ${snapshot.hosts.filter((host) => host.verified).length} host đã xác minh đang củng cố trust.`
+        : `${acceptedProofs} accepted proofs and ${snapshot.hosts.filter((host) => host.verified).length} verified hosts are currently reinforcing trust.`,
     verificationState: acceptedProofs > 0 ? "proof_backed" : "verified",
     proofCount: snapshot.proofs.length,
     moderationState: flaggedProofs > 0 ? "flagged" : getModerationQueue().length > 0 ? "needs_review" : "clear"
   };
 }
 
-export function buildProofHighlights(): ProofHighlight[] {
+export function buildProofHighlights(locale: OmdalatLocale = "en"): ProofHighlight[] {
   const snapshot = getDashboardSnapshot();
 
   return snapshot.proofs.slice(0, 3).map((proof) => ({
     id: proof.id,
     title: proof.title,
-    detail: proof.evidence,
+    detail: resolveLocalizedText(proof.evidence, locale),
     status: proof.reviewStatus,
     trustImpact:
       proof.reviewStatus === "accepted"
-        ? "Strengthening trust"
+        ? locale === "vi"
+          ? "Đang củng cố trust"
+          : "Strengthening trust"
         : proof.reviewStatus === "flagged"
-          ? "Needs moderation attention"
+          ? locale === "vi"
+            ? "Cần moderation xử lý"
+            : "Needs moderation attention"
           : proof.reviewStatus === "rejected"
-            ? "Removed from public trust"
-            : "Pending trust review"
+            ? locale === "vi"
+              ? "Đã loại khỏi lớp trust công khai"
+              : "Removed from public trust"
+            : locale === "vi"
+              ? "Đang chờ rà soát trust"
+              : "Pending trust review"
   }));
 }
 
-export function buildActivityTimeline() {
+export function buildActivityTimeline(locale: OmdalatLocale = "en") {
   const snapshot = getDashboardSnapshot();
   const pendingModeration = getModerationQueue().length;
+
+  if (locale === "vi") {
+    return [
+      `${snapshot.events.length} sự kiện công khai đang hiển thị trong lớp hoạt động hiện tại.`,
+      `${snapshot.requests.filter((request) => request.status === "Open").length} yêu cầu mở đã sẵn sàng để ghép nối.`,
+      `${snapshot.nodes.filter((node) => node.status.toLowerCase().includes("active") || node.status.toLowerCase().includes("live")).length} node hiện đang có tín hiệu địa phương hoạt động.`,
+      `${pendingModeration} hồ sơ bằng chứng hiện cần theo dõi moderation.`
+    ];
+  }
 
   return [
     `${snapshot.events.length} public events are visible in the current activity layer.`,
@@ -62,11 +91,15 @@ export function buildActivityTimeline() {
   ];
 }
 
-export function buildModerationSummary() {
+export function buildModerationSummary(locale: OmdalatLocale = "en") {
   const queue = getModerationQueue();
 
   return {
     pendingCount: queue.length,
-    items: queue.map((proof) => `${proof.title} · ${proof.reviewStatus} · ${proof.subjectName}`)
+    items: queue.map((proof) =>
+      locale === "vi"
+        ? `${proof.title} · ${proof.reviewStatus === "submitted" ? "đã gửi" : proof.reviewStatus === "accepted" ? "đã chấp nhận" : proof.reviewStatus === "flagged" ? "đã đánh dấu" : "đã từ chối"} · ${proof.subjectName}`
+        : `${proof.title} · ${proof.reviewStatus} · ${proof.subjectName}`
+    )
   };
 }

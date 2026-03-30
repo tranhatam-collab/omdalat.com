@@ -1,5 +1,5 @@
 import type { MatchSuggestion } from "../../packages/types";
-import { getDashboardSnapshot } from "../api";
+import { getDashboardSnapshot, resolveLocalizedText, searchableText } from "../api";
 
 function scoreTextMatch(need: string, haystack: string) {
   const tokens = need.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
@@ -18,8 +18,8 @@ export function buildRequestMatches(): MatchSuggestion[] {
         .map((host) => ({
           targetName: host.name,
           targetType: "host" as const,
-          reason: host.focus,
-          score: scoreTextMatch(request.need, `${host.focus} ${host.zone}`)
+          reason: resolveLocalizedText(host.focus),
+          score: scoreTextMatch(request.need, `${searchableText(host.focus)} ${searchableText(host.zone)}`)
         }))
         .sort((left, right) => right.score - left.score)[0];
 
@@ -27,8 +27,8 @@ export function buildRequestMatches(): MatchSuggestion[] {
         .map((place) => ({
           targetName: place.name,
           targetType: "place" as const,
-          reason: place.activity,
-          score: scoreTextMatch(request.need, `${place.activity} ${place.area}`)
+          reason: resolveLocalizedText(place.activity),
+          score: scoreTextMatch(request.need, `${searchableText(place.activity)} ${searchableText(place.area)}`)
         }))
         .sort((left, right) => right.score - left.score)[0];
 
@@ -36,8 +36,8 @@ export function buildRequestMatches(): MatchSuggestion[] {
         .map((expert) => ({
           targetName: expert.name,
           targetType: "expert" as const,
-          reason: expert.specialty,
-          score: scoreTextMatch(request.need, `${expert.specialty} ${expert.zone}`)
+          reason: resolveLocalizedText(expert.specialty),
+          score: scoreTextMatch(request.need, `${searchableText(expert.specialty)} ${searchableText(expert.zone)}`)
         }))
         .sort((left, right) => right.score - left.score)[0];
 
@@ -45,8 +45,8 @@ export function buildRequestMatches(): MatchSuggestion[] {
         .map((community) => ({
           targetName: community.name,
           targetType: "community" as const,
-          reason: community.focus,
-          score: scoreTextMatch(request.need, `${community.focus} ${community.zone}`)
+          reason: resolveLocalizedText(community.focus),
+          score: scoreTextMatch(request.need, `${searchableText(community.focus)} ${searchableText(community.zone)}`)
         }))
         .sort((left, right) => right.score - left.score)[0];
 

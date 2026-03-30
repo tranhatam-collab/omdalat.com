@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailScaffold } from "../../../components/shared/DetailScaffold";
 import { buildPageMetadata } from "../../../lib/metadata";
-import { communities, getCommunityBySlug } from "../../../lib/public-data";
+import { communities, getCommunityBySlug, resolveLocalizedText } from "../../../lib/public-data";
 
 type Params = {
   slug: string;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   return buildPageMetadata({
     title: `${community.name} | OMDALAT Community in Da Lat`,
-    description: community.focus,
+    description: resolveLocalizedText(community.focus),
     path: `/communities/${community.slug}`
   });
 }
@@ -42,18 +42,18 @@ export default async function CommunityDetailPage({ params }: { params: Promise<
 
   return (
     <DetailScaffold
-      eyebrow="Community detail"
+      eyebrow={{ vi: "Chi tiết cộng đồng", en: "Community detail" }}
       title={community.name}
       description={community.focus}
       path={`/communities/${community.slug}`}
       backHref="/communities"
-      backLabel="Communities"
+      backLabel={{ vi: "Cộng đồng", en: "Communities" }}
       facts={[
-        { label: "Zone", value: community.zone },
-        { label: "Cadence", value: community.cadence },
-        { label: "Focus", value: community.focus }
+        { label: { vi: "Khu vực", en: "Zone" }, value: community.zone },
+        { label: { vi: "Nhịp độ", en: "Cadence" }, value: community.cadence },
+        { label: { vi: "Trọng tâm", en: "Focus" }, value: community.focus }
       ]}
-      signals={[community.signal, "Community routes now exist beyond listing shells."]}
+      signals={[community.signal, { vi: "Route cộng đồng hiện đã vượt ra ngoài lớp listing shell.", en: "Community routes now exist beyond listing shells." }]}
     />
   );
 }

@@ -1,4 +1,5 @@
 import { slugify } from "../../packages/core/utils";
+import type { OmdalatLocale } from "../../packages/core";
 import type { NotificationRecord } from "../../packages/types";
 import { getCurrentAuthSession } from "../auth";
 import { getDashboardSnapshot } from "../api";
@@ -41,8 +42,60 @@ let notifications: NotificationRecord[] = [
   }
 ];
 
-export function listNotifications() {
-  return [...notifications].sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+function localizeCtaLabel(label: string, locale: OmdalatLocale) {
+  if (locale !== "vi") return label;
+
+  const map: Record<string, string> = {
+    "Review requests": "Rà soát yêu cầu",
+    "Open proofs": "Mở bằng chứng",
+    "View profile": "Xem hồ sơ",
+    "Open profile": "Mở hồ sơ",
+    "View dashboard": "Xem dashboard"
+  };
+
+  return map[label] ?? label;
+}
+
+function localizeNotification(notification: NotificationRecord, locale: OmdalatLocale): NotificationRecord {
+  if (locale !== "vi") {
+    return notification;
+  }
+
+  const mappedTitle: Record<string, string> = {
+    "Open host request needs attention": "Yêu cầu host mở cần được chú ý",
+    "Proof review lane is active": "Luồng rà soát bằng chứng đang hoạt động",
+    "Demo session loaded": "Phiên demo đã được tải",
+    "Demo session switched": "Đã chuyển phiên demo",
+    "Session returned to guest mode": "Phiên đã quay về chế độ khách",
+    "Proof submitted for review": "Đã gửi bằng chứng để rà soát",
+    "Proof accepted into trust ledger": "Bằng chứng đã được chấp nhận vào sổ trust",
+    "Proof flagged for follow-up": "Bằng chứng đã được đánh dấu để theo dõi",
+    "Proof rejected from public trust": "Bằng chứng đã bị từ chối khỏi trust công khai"
+  };
+
+  const mappedDetail = notification.detail
+    .replace("is still open and ready for a trusted response.", "vẫn đang mở và sẵn sàng cho phản hồi đáng tin cậy.")
+    .replace("seed proofs are shaping the current trust ledger for demo review.", "bằng chứng seed đang định hình sổ trust hiện tại cho quá trình rà soát demo.")
+    .replace("is the current authenticated fixture session.", "là phiên fixture đã xác thực hiện tại.")
+    .replace("is now the active session for", "hiện là phiên đang hoạt động cho")
+    .replace("is now the active observer session.", "hiện là phiên quan sát đang hoạt động.")
+    .replace("is now waiting for moderation review and trust scoring.", "đang chờ rà soát moderation và chấm điểm trust.")
+    .replace('now has review status "accepted".', 'hiện có trạng thái rà soát "đã chấp nhận".')
+    .replace('now has review status "flagged".', 'hiện có trạng thái rà soát "đã đánh dấu".')
+    .replace('now has review status "rejected".', 'hiện có trạng thái rà soát "đã từ chối".');
+
+  return {
+    ...notification,
+    title: mappedTitle[notification.title] ?? notification.title,
+    detail: mappedDetail,
+    ctaLabel: notification.ctaLabel ? localizeCtaLabel(notification.ctaLabel, locale) : notification.ctaLabel
+  };
+}
+
+export function listNotifications(locale: OmdalatLocale = "en") {
+  return [...notifications]
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+    .map((item) => localizeNotification(item, locale));
 }
 
 export function getUnreadNotificationCount() {

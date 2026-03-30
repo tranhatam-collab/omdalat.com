@@ -1,9 +1,11 @@
 import { slugify } from "../../packages/core/utils";
+import type { OmdalatLocale } from "../../packages/core";
 import type {
   CommunityRecord,
   EventRecord,
   ExpertRecord,
   HostRecord,
+  MaybeLocalizedText,
   NodeRecord,
   PlaceRecord,
   ProofRecord,
@@ -46,6 +48,14 @@ function formatDisplayDate(iso: string) {
     day: "numeric",
     year: "numeric"
   }).format(new Date(iso));
+}
+
+export function resolveLocalizedText(value: MaybeLocalizedText, locale: OmdalatLocale = "en") {
+  return typeof value === "string" ? value : locale === "vi" ? value.vi : value.en;
+}
+
+export function searchableText(value: MaybeLocalizedText) {
+  return typeof value === "string" ? value : `${value.en} ${value.vi}`;
 }
 
 const enrich = <T extends { name?: string; title?: string }>(item: T, index: number) => {

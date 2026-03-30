@@ -56,6 +56,7 @@ const requiredPaths = [
   "services/trust/index.ts",
   "services/matching/index.ts",
   "services/notifications/index.ts",
+  "scripts/validate-i18n-data.mjs",
   "package.json"
 ];
 

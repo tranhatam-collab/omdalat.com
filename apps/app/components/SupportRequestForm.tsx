@@ -3,6 +3,7 @@
 import { OMDALAT_INBOXES } from "../../../packages/core";
 import type { FormEvent } from "react";
 import { useState } from "react";
+import type { OmdalatLocale } from "../../../packages/core";
 
 type SupportFormState = {
   subject: string;
@@ -16,7 +17,16 @@ const initialState: SupportFormState = {
   message: ""
 };
 
-export function SupportRequestForm({ defaultRoute, replyEmail }: { defaultRoute: string; replyEmail: string }) {
+export function SupportRequestForm({
+  defaultRoute,
+  replyEmail,
+  locale
+}: {
+  defaultRoute: string;
+  replyEmail: string;
+  locale: OmdalatLocale;
+}) {
+  const isVi = locale === "vi";
   const [form, setForm] = useState<SupportFormState>(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ message: string; tone: StatusTone }>({
@@ -29,7 +39,7 @@ export function SupportRequestForm({ defaultRoute, replyEmail }: { defaultRoute:
     setIsSubmitting(true);
     setStatus({
       tone: "info",
-      message: "Đang gửi yêu cầu hỗ trợ... / Sending your support request..."
+      message: isVi ? "Đang gửi yêu cầu hỗ trợ..." : "Sending your support request..."
     });
 
     try {
@@ -46,20 +56,24 @@ export function SupportRequestForm({ defaultRoute, replyEmail }: { defaultRoute:
       const payload = await response.json();
 
       if (!response.ok) {
-        throw new Error(payload.error?.message ?? "Unable to submit support request.");
+        throw new Error(payload.error?.message ?? (isVi ? "Không thể gửi yêu cầu hỗ trợ." : "Unable to submit support request."));
       }
 
       setForm(initialState);
       setStatus({
         tone: "success",
-        message: `Đã gửi. Hỗ trợ sẽ phản hồi qua ${OMDALAT_INBOXES.support}. / Sent. Support will reply via ${OMDALAT_INBOXES.support}.`
+        message: isVi
+          ? `Đã gửi. Hỗ trợ sẽ phản hồi qua ${OMDALAT_INBOXES.support}.`
+          : `Sent. Support will reply via ${OMDALAT_INBOXES.support}.`
       });
     } catch (error) {
       setStatus({
         tone: "error",
         message: error instanceof Error
           ? error.message
-          : "Không gửi được yêu cầu hỗ trợ. / Unable to send your support request."
+          : isVi
+            ? "Không gửi được yêu cầu hỗ trợ."
+            : "Unable to send your support request."
       });
     } finally {
       setIsSubmitting(false);
@@ -69,39 +83,45 @@ export function SupportRequestForm({ defaultRoute, replyEmail }: { defaultRoute:
   return (
     <form className="app-form" onSubmit={handleSubmit}>
       <label className="app-field">
-        <span>Reply email / Email phản hồi</span>
+        <span>{isVi ? "Email phản hồi" : "Reply email"}</span>
         <input className="app-input" value={replyEmail} readOnly />
       </label>
 
       <label className="app-field">
-        <span>Subject / Chủ đề</span>
+        <span>{isVi ? "Chủ đề" : "Subject"}</span>
         <input
           className="app-input"
           type="text"
           value={form.subject}
           onChange={(event) => setForm((current) => ({ ...current, subject: event.target.value }))}
-          placeholder="What needs support right now?"
+          placeholder={isVi ? "Bạn cần hỗ trợ gì ngay lúc này?" : "What needs support right now?"}
           required
         />
       </label>
 
       <label className="app-field">
-        <span>Message / Nội dung</span>
+        <span>{isVi ? "Nội dung" : "Message"}</span>
         <textarea
           className="app-input app-textarea"
           value={form.message}
           onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
-          placeholder="Describe the blocker, request, or coordination need."
+          placeholder={
+            isVi
+              ? "Mô tả vướng mắc, yêu cầu hoặc nhu cầu phối hợp."
+              : "Describe the blocker, request, or coordination need."
+          }
           required
         />
       </label>
 
       <button className="app-button" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Đang gửi... / Sending..." : "Gửi yêu cầu hỗ trợ / Send support request"}
+        {isSubmitting ? (isVi ? "Đang gửi..." : "Sending...") : isVi ? "Gửi yêu cầu hỗ trợ" : "Send support request"}
       </button>
 
       <p className="app-card-meta">
-        Mail vận hành trả lời từ <a className="app-inline-link" href={`mailto:${OMDALAT_INBOXES.support}`}>{OMDALAT_INBOXES.support}</a>. App notifications có thể dùng{" "}
+        {isVi ? "Mail vận hành trả lời từ" : "Operations replies from"}{" "}
+        <a className="app-inline-link" href={`mailto:${OMDALAT_INBOXES.support}`}>{OMDALAT_INBOXES.support}</a>.{" "}
+        {isVi ? "Thông báo ứng dụng có thể dùng" : "App notifications can use"}{" "}
         <a className="app-inline-link" href={`mailto:${OMDALAT_INBOXES.app}`}>{OMDALAT_INBOXES.app}</a>.
       </p>
 

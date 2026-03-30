@@ -10,5 +10,6 @@ export {
   getProofBySlug,
   hosts,
   places,
-  proofs
+  proofs,
+  resolveLocalizedText
 } from "../../../services/api/index";

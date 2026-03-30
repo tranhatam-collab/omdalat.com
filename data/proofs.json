@@ -1,26 +1,44 @@
 [
   {
-    "kind": "Hosting proof",
+    "kind": { "vi": "Bằng chứng host", "en": "Hosting proof" },
     "recordedAt": "2026-03-24T09:00:00+07:00",
-    "date": "March 24, 2026",
+    "date": { "vi": "24 Tháng 3, 2026", "en": "March 24, 2026" },
     "title": "Repeat breakfast circle reached second session",
-    "outcome": "Six participants returned for a follow-up breakfast after the first hosted introduction loop.",
-    "evidence": "Attendance log, participant notes, and one confirmed collaboration follow-up."
+    "outcome": {
+      "vi": "Sáu người tham gia đã quay lại cho một buổi breakfast tiếp theo sau vòng giới thiệu có host đầu tiên.",
+      "en": "Six participants returned for a follow-up breakfast after the first hosted introduction loop."
+    },
+    "evidence": {
+      "vi": "Log điểm danh, ghi chú người tham gia và một lượt hợp tác tiếp theo đã được xác nhận.",
+      "en": "Attendance log, participant notes, and one confirmed collaboration follow-up."
+    }
   },
   {
-    "kind": "Place proof",
+    "kind": { "vi": "Bằng chứng địa điểm", "en": "Place proof" },
     "recordedAt": "2026-03-26T15:00:00+07:00",
-    "date": "March 26, 2026",
+    "date": { "vi": "26 Tháng 3, 2026", "en": "March 26, 2026" },
     "title": "Domestic courtyard converted into an active node",
-    "outcome": "A residential venue hosted two gatherings without losing warmth or operational clarity.",
-    "evidence": "Host feedback, guest confirmations, and documented reuse of the space in the same week."
+    "outcome": {
+      "vi": "Một không gian nhà dân đã host hai buổi tụ họp mà vẫn giữ được sự ấm áp và rõ ràng vận hành.",
+      "en": "A residential venue hosted two gatherings without losing warmth or operational clarity."
+    },
+    "evidence": {
+      "vi": "Phản hồi từ host, xác nhận của khách và ghi nhận việc tái sử dụng không gian trong cùng tuần.",
+      "en": "Host feedback, guest confirmations, and documented reuse of the space in the same week."
+    }
   },
   {
-    "kind": "Trust proof",
+    "kind": { "vi": "Bằng chứng trust", "en": "Trust proof" },
     "recordedAt": "2026-03-28T16:00:00+07:00",
-    "date": "March 28, 2026",
+    "date": { "vi": "28 Tháng 3, 2026", "en": "March 28, 2026" },
     "title": "Visitor-to-local introduction produced a concrete next step",
-    "outcome": "A visiting expert was matched to two local operators and agreed to a follow-on working session.",
-    "evidence": "Shared notes, confirmed scheduling, and one retained cross-city relationship."
+    "outcome": {
+      "vi": "Một chuyên gia ghé thăm đã được ghép nối với hai người vận hành địa phương và đồng ý một phiên làm việc tiếp theo.",
+      "en": "A visiting expert was matched to two local operators and agreed to a follow-on working session."
+    },
+    "evidence": {
+      "vi": "Ghi chú dùng chung, lịch hẹn đã xác nhận và một mối quan hệ liên thành phố được duy trì.",
+      "en": "Shared notes, confirmed scheduling, and one retained cross-city relationship."
+    }
   }
 ]

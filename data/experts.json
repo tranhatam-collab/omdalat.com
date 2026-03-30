@@ -1,23 +1,41 @@
 [
   {
     "name": "Bao An",
-    "specialty": "Small-group facilitation and trusted introductions for new arrivals.",
-    "zone": "Ward 1",
-    "availability": "Wednesday afternoons and Friday mornings",
-    "signal": "Three follow-on working sessions confirmed in the last cycle"
+    "specialty": {
+      "vi": "Điều phối nhóm nhỏ và kết nối đáng tin cậy cho người mới đến.",
+      "en": "Small-group facilitation and trusted introductions for new arrivals."
+    },
+    "zone": { "vi": "Phường 1", "en": "Ward 1" },
+    "availability": { "vi": "Chiều Thứ Tư và sáng Thứ Sáu", "en": "Wednesday afternoons and Friday mornings" },
+    "signal": {
+      "vi": "Ba phiên làm việc tiếp theo đã được xác nhận trong chu kỳ gần nhất",
+      "en": "Three follow-on working sessions confirmed in the last cycle"
+    }
   },
   {
     "name": "Thao Le",
-    "specialty": "Place activation strategy for domestic nodes, supper circles, and warm onboarding.",
-    "zone": "Ward 3",
-    "availability": "Tuesday evenings and selected weekends",
-    "signal": "Two host teams reused her activation plan in the same month"
+    "specialty": {
+      "vi": "Chiến lược kích hoạt địa điểm cho node nhà dân, vòng tròn bữa tối và onboarding ấm áp.",
+      "en": "Place activation strategy for domestic nodes, supper circles, and warm onboarding."
+    },
+    "zone": { "vi": "Phường 3", "en": "Ward 3" },
+    "availability": { "vi": "Tối Thứ Ba và một số cuối tuần", "en": "Tuesday evenings and selected weekends" },
+    "signal": {
+      "vi": "Hai nhóm host đã tái sử dụng kế hoạch kích hoạt của cô trong cùng tháng",
+      "en": "Two host teams reused her activation plan in the same month"
+    }
   },
   {
     "name": "Minh Duc",
-    "specialty": "Local operations design for proof capture, requests, and host relays.",
-    "zone": "Trai Mat corridor",
-    "availability": "Thursday afternoons and Sunday sessions",
-    "signal": "One request loop moved from first intro to repeat collaboration"
+    "specialty": {
+      "vi": "Thiết kế vận hành địa phương cho ghi nhận bằng chứng, yêu cầu và relay host.",
+      "en": "Local operations design for proof capture, requests, and host relays."
+    },
+    "zone": { "vi": "Hành lang Trại Mát", "en": "Trai Mat corridor" },
+    "availability": { "vi": "Chiều Thứ Năm và các phiên Chủ Nhật", "en": "Thursday afternoons and Sunday sessions" },
+    "signal": {
+      "vi": "Một vòng yêu cầu đã chuyển từ giới thiệu đầu tiên sang hợp tác lặp lại",
+      "en": "One request loop moved from first intro to repeat collaboration"
+    }
   }
 ]

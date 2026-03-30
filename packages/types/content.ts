@@ -1,5 +1,12 @@
 import type { ModerationState, ProofReviewStatus } from "./trust";
 
+export type LocalizedTextValue = {
+  vi: string;
+  en: string;
+};
+
+export type MaybeLocalizedText = string | LocalizedTextValue;
+
 export type SlugRecord = {
   id: string;
   slug: string;
@@ -7,57 +14,57 @@ export type SlugRecord = {
 
 export type PlaceRecord = SlugRecord & {
   name: string;
-  area: string;
-  type: string;
-  mode: string;
-  cadence: string;
+  area: MaybeLocalizedText;
+  type: MaybeLocalizedText;
+  mode: MaybeLocalizedText;
+  cadence: MaybeLocalizedText;
   hostCount: number;
-  activity: string;
-  signal: string;
+  activity: MaybeLocalizedText;
+  signal: MaybeLocalizedText;
 };
 
 export type HostRecord = SlugRecord & {
   name: string;
-  role: string;
-  zone: string;
+  role: MaybeLocalizedText;
+  zone: MaybeLocalizedText;
   verified: boolean;
-  focus: string;
-  trust: string;
-  availability: string;
+  focus: MaybeLocalizedText;
+  trust: MaybeLocalizedText;
+  availability: MaybeLocalizedText;
 };
 
 export type ExpertRecord = SlugRecord & {
   name: string;
-  specialty: string;
-  zone: string;
-  availability: string;
-  signal: string;
+  specialty: MaybeLocalizedText;
+  zone: MaybeLocalizedText;
+  availability: MaybeLocalizedText;
+  signal: MaybeLocalizedText;
 };
 
 export type CommunityRecord = SlugRecord & {
   name: string;
-  focus: string;
-  zone: string;
-  cadence: string;
-  signal: string;
+  focus: MaybeLocalizedText;
+  zone: MaybeLocalizedText;
+  cadence: MaybeLocalizedText;
+  signal: MaybeLocalizedText;
 };
 
 export type EventRecord = SlugRecord & {
   startsAt: string;
-  date: string;
+  date: MaybeLocalizedText;
   title: string;
   place: string;
   host: string;
-  description: string;
+  description: MaybeLocalizedText;
 };
 
 export type ProofRecord = SlugRecord & {
-  kind: string;
+  kind: MaybeLocalizedText;
   recordedAt: string;
-  date: string;
+  date: MaybeLocalizedText;
   title: string;
-  outcome: string;
-  evidence: string;
+  outcome: MaybeLocalizedText;
+  evidence: MaybeLocalizedText;
   subjectType: "place" | "host" | "expert" | "community" | "event";
   subjectName: string;
   reviewStatus: ProofReviewStatus;

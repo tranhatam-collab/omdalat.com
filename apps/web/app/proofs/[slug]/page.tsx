@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailScaffold } from "../../../components/shared/DetailScaffold";
 import { buildPageMetadata } from "../../../lib/metadata";
-import { getProofBySlug, proofs } from "../../../lib/public-data";
+import { getProofBySlug, proofs, resolveLocalizedText } from "../../../lib/public-data";
 
 type Params = {
   slug: string;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   return buildPageMetadata({
     title: `${proof.title} | OMDALAT Proof in Da Lat`,
-    description: proof.outcome,
+    description: resolveLocalizedText(proof.outcome),
     path: `/proofs/${proof.slug}`
   });
 }
@@ -42,18 +42,18 @@ export default async function ProofDetailPage({ params }: { params: Promise<Para
 
   return (
     <DetailScaffold
-      eyebrow="Proof detail"
+      eyebrow={{ vi: "Chi tiết bằng chứng", en: "Proof detail" }}
       title={proof.title}
       description={proof.outcome}
       path={`/proofs/${proof.slug}`}
       backHref="/proofs"
-      backLabel="Proofs"
+      backLabel={{ vi: "Bằng chứng", en: "Proofs" }}
       facts={[
-        { label: "Kind", value: proof.kind },
-        { label: "Recorded", value: proof.date },
-        { label: "Outcome", value: proof.outcome }
+        { label: { vi: "Loại", en: "Kind" }, value: proof.kind },
+        { label: { vi: "Ghi nhận", en: "Recorded" }, value: proof.date },
+        { label: { vi: "Kết quả", en: "Outcome" }, value: proof.outcome }
       ]}
-      signals={[proof.evidence, "Proof detail routes now make evidence-backed outcomes linkable."]}
+      signals={[proof.evidence, { vi: "Route chi tiết bằng chứng hiện giúp liên kết được các kết quả có dữ liệu xác thực.", en: "Proof detail routes now make evidence-backed outcomes linkable." }]}
     />
   );
 }

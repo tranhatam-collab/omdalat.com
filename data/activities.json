@@ -1,26 +1,35 @@
 [
   {
     "startsAt": "2026-03-30T07:00:00+07:00",
-    "date": "March 30, 2026 at 07:00",
+    "date": { "vi": "30 Tháng 3, 2026 lúc 07:00", "en": "March 30, 2026 at 07:00" },
     "title": "Morning Density Walk",
     "place": "Lake Edge Signal Loop",
     "host": "Linh Pham",
-    "description": "A short walk to surface who is active, what is needed, and where trust is compounding."
+    "description": {
+      "vi": "Một buổi đi bộ ngắn để xác định ai đang hoạt động, điều gì đang cần và nơi trust đang tích lũy.",
+      "en": "A short walk to surface who is active, what is needed, and where trust is compounding."
+    }
   },
   {
     "startsAt": "2026-04-01T18:30:00+07:00",
-    "date": "April 1, 2026 at 18:30",
+    "date": { "vi": "1 Tháng 4, 2026 lúc 18:30", "en": "April 1, 2026 at 18:30" },
     "title": "Hosted Supper for New Nodes",
     "place": "Pine Courtyard House",
     "host": "Quoc Nguyen",
-    "description": "A warm dinner to connect newcomers with active hosts, requests, and local proofs."
+    "description": {
+      "vi": "Một bữa tối ấm áp để kết nối người mới với host đang hoạt động, yêu cầu và bằng chứng địa phương.",
+      "en": "A warm dinner to connect newcomers with active hosts, requests, and local proofs."
+    }
   },
   {
     "startsAt": "2026-04-03T15:00:00+07:00",
-    "date": "April 3, 2026 at 15:00",
+    "date": { "vi": "3 Tháng 4, 2026 lúc 15:00", "en": "April 3, 2026 at 15:00" },
     "title": "Expert Circle on Small-Scale Activation",
     "place": "Studio Garden Kitchen",
     "host": "Mai Tran",
-    "description": "A practical session on how local places become trusted operating surfaces."
+    "description": {
+      "vi": "Một phiên thực hành về cách các địa điểm địa phương trở thành bề mặt vận hành đáng tin cậy.",
+      "en": "A practical session on how local places become trusted operating surfaces."
+    }
   }
 ]

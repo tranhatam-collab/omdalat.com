@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailScaffold } from "../../../components/shared/DetailScaffold";
 import { buildPageMetadata } from "../../../lib/metadata";
-import { events, getEventBySlug } from "../../../lib/public-data";
+import { events, getEventBySlug, resolveLocalizedText } from "../../../lib/public-data";
 
 type Params = {
   slug: string;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   return buildPageMetadata({
     title: `${event.title} | OMDALAT Event in Da Lat`,
-    description: event.description,
+    description: resolveLocalizedText(event.description),
     path: `/events/${event.slug}`
   });
 }
@@ -42,18 +42,21 @@ export default async function EventDetailPage({ params }: { params: Promise<Para
 
   return (
     <DetailScaffold
-      eyebrow="Event detail"
+      eyebrow={{ vi: "Chi tiết sự kiện", en: "Event detail" }}
       title={event.title}
       description={event.description}
       path={`/events/${event.slug}`}
       backHref="/events"
-      backLabel="Events"
+      backLabel={{ vi: "Sự kiện", en: "Events" }}
       facts={[
-        { label: "Date", value: event.date },
-        { label: "Place", value: event.place },
-        { label: "Host", value: event.host }
+        { label: { vi: "Ngày", en: "Date" }, value: event.date },
+        { label: { vi: "Địa điểm", en: "Place" }, value: event.place },
+        { label: { vi: "Host", en: "Host" }, value: event.host }
       ]}
-      signals={["Event detail routes are now generated from activity data.", "Use these pages to connect future proof and booking layers."]}
+      signals={[
+        { vi: "Route chi tiết sự kiện hiện đã được sinh từ dữ liệu hoạt động.", en: "Event detail routes are now generated from activity data." },
+        { vi: "Dùng các trang này để kết nối lớp bằng chứng và đặt chỗ trong tương lai.", en: "Use these pages to connect future proof and booking layers." }
+      ]}
     />
   );
 }

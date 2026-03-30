@@ -1,6 +1,7 @@
 import { slugify } from "../../packages/core/utils";
+import type { OmdalatLocale } from "../../packages/core";
 import type { AuthFixture, MemberSession } from "../../packages/types";
-import { hosts, nodes } from "../api";
+import { hosts, nodes, resolveLocalizedText } from "../api";
 
 const authFixtures: AuthFixture[] = [
   {
@@ -45,19 +46,54 @@ const authFixtures: AuthFixture[] = [
       homeNode: nodes[0]?.name ?? "Lake Edge Signal Loop",
       homeNodeSlug: nodes[0]?.slug ?? slugify("Lake Edge Signal Loop"),
       status: "Verified member session with proof and moderation access",
-      zone: hosts[0]?.zone ?? "Ward 1"
+      zone: resolveLocalizedText(hosts[0]?.zone ?? "Ward 1")
     }
   }
 ];
 
 let currentFixtureId = "linh-verified";
 
-export function listAuthFixtures() {
-  return authFixtures;
+function localizeFixture(fixture: AuthFixture, locale: OmdalatLocale): AuthFixture {
+  if (locale !== "vi") {
+    return fixture;
+  }
+
+  const viLabelMap: Record<string, string> = {
+    "guest-demo": "Khách quan sát",
+    "bao-an-member": "Bao An · thành viên",
+    "linh-verified": "Linh Pham · đã xác minh"
+  };
+
+  const viSummaryMap: Record<string, string> = {
+    "guest-demo": "Chế độ quan sát công khai chỉ đọc để xem tầng vận hành địa phương.",
+    "bao-an-member": "Phiên thành viên tập trung vào kết nối, vòng tròn chuyên gia và theo dõi yêu cầu địa phương.",
+    "linh-verified": "Phiên host đã xác minh với quyền gửi bằng chứng và các luồng trust trọng yếu."
+  };
+
+  const viStatusMap: Record<string, string> = {
+    "Public observer mode": "Chế độ quan sát công khai",
+    "Member session with request and proof visibility": "Phiên thành viên có quyền xem yêu cầu và bằng chứng",
+    "Verified member session with proof and moderation access": "Phiên thành viên đã xác minh có quyền bằng chứng và moderation"
+  };
+
+  return {
+    ...fixture,
+    label: viLabelMap[fixture.id] ?? fixture.label,
+    summary: viSummaryMap[fixture.id] ?? fixture.summary,
+    session: {
+      ...fixture.session,
+      status: viStatusMap[fixture.session.status] ?? fixture.session.status
+    }
+  };
 }
 
-export function getCurrentAuthSession(): MemberSession {
-  return authFixtures.find((fixture) => fixture.id === currentFixtureId)?.session ?? authFixtures[0].session;
+export function listAuthFixtures(locale: OmdalatLocale = "en") {
+  return authFixtures.map((fixture) => localizeFixture(fixture, locale));
+}
+
+export function getCurrentAuthSession(locale: OmdalatLocale = "en"): MemberSession {
+  const fixture = authFixtures.find((item) => item.id === currentFixtureId) ?? authFixtures[0];
+  return localizeFixture(fixture, locale).session;
 }
 
 export function switchAuthSession(sessionId: string) {

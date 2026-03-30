@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "node ./scripts/dev-server.mjs",
     "start": "node ./scripts/dev-server.mjs",
-    "build": "node ./scripts/build.mjs",
+    "build": "pnpm run validate:i18n-data && node ./scripts/build.mjs",
     "lint": "node ./scripts/check-workspace.mjs lint",
     "typecheck": "node ./scripts/check-workspace.mjs typecheck",
-    "format": "node ./scripts/check-workspace.mjs format"
+    "format": "node ./scripts/check-workspace.mjs format",
+    "validate:i18n-data": "node ./scripts/validate-i18n-data.mjs"
   }
 }

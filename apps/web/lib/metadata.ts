@@ -14,9 +14,6 @@ export function buildPageMetadata({ title, description, path, noindex = false }:
     description,
     applicationName: "OMDALAT",
     metadataBase: new URL(absoluteUrl("/")),
-    alternates: {
-      canonical: path
-    },
     openGraph: {
       title,
       description,

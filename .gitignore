@@ -6,3 +6,7 @@ node_modules
 .wrangler
 dist
 coverage
+playwright-report
+apps/web/test-results
+.vercel
+**/tsconfig.tsbuildinfo

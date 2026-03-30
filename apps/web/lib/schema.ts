@@ -1,4 +1,5 @@
 import { absoluteUrl } from "./canonical";
+import { localizePath } from "../../../packages/core";
 
 type WebPageSchemaInput = {
   title: string;
@@ -11,7 +12,7 @@ export function buildOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "OMDALAT",
-    url: absoluteUrl("/"),
+    url: absoluteUrl(localizePath("/")),
     description: "Trusted places, people, and activity in Da Lat."
   };
 }
@@ -21,22 +22,24 @@ export function buildWebSiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "OMDALAT",
-    url: absoluteUrl("/"),
-    inLanguage: "en"
+    url: absoluteUrl(localizePath("/")),
+    inLanguage: ["vi-VN", "en"]
   };
 }
 
 export function buildWebPageSchema({ title, description, path }: WebPageSchemaInput) {
+  const pagePath = path.startsWith("/") ? path : `/${path}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: title,
     description,
-    url: absoluteUrl(path),
+    url: absoluteUrl(pagePath),
     isPartOf: {
       "@type": "WebSite",
       name: "OMDALAT",
-      url: absoluteUrl("/")
+      url: absoluteUrl(localizePath("/"))
     }
   };
 }

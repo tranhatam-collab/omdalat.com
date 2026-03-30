@@ -1,32 +1,41 @@
 [
   {
     "name": "Lake Edge Signal Loop",
-    "area": "Xuan Huong / Central Da Lat",
-    "type": "Public civic edge",
-    "mode": "Open now",
-    "cadence": "Daily 06:00-08:00",
+    "area": { "vi": "Xuân Hương / Trung tâm Đà Lạt", "en": "Xuan Huong / Central Da Lat" },
+    "type": { "vi": "Rìa công cộng dân sự", "en": "Public civic edge" },
+    "mode": { "vi": "Đang mở", "en": "Open now" },
+    "cadence": { "vi": "Hàng ngày 06:00-08:00", "en": "Daily 06:00-08:00" },
     "hostCount": 4,
-    "activity": "Morning walks, host check-ins, and lightweight request matching.",
-    "signal": "18 local check-ins this week"
+    "activity": {
+      "vi": "Đi bộ buổi sáng, check-in của host và ghép nối yêu cầu nhẹ.",
+      "en": "Morning walks, host check-ins, and lightweight request matching."
+    },
+    "signal": { "vi": "18 lượt check-in địa phương trong tuần này", "en": "18 local check-ins this week" }
   },
   {
     "name": "Pine Courtyard House",
-    "area": "Ward 3 / Da Lat slope",
-    "type": "Hosted domestic node",
-    "mode": "Hosting tonight",
-    "cadence": "Tue, Thu, Sat",
+    "area": { "vi": "Phường 3 / sườn dốc Đà Lạt", "en": "Ward 3 / Da Lat slope" },
+    "type": { "vi": "Node nhà dân có host", "en": "Hosted domestic node" },
+    "mode": { "vi": "Tối nay có host", "en": "Hosting tonight" },
+    "cadence": { "vi": "Thứ Ba, Thứ Năm, Thứ Bảy", "en": "Tue, Thu, Sat" },
     "hostCount": 2,
-    "activity": "Small circles for visiting experts, founders, and trusted guests.",
-    "signal": "3 repeat gatherings in 10 days"
+    "activity": {
+      "vi": "Vòng tròn nhỏ cho chuyên gia ghé thăm, nhà sáng lập và khách đáng tin cậy.",
+      "en": "Small circles for visiting experts, founders, and trusted guests."
+    },
+    "signal": { "vi": "3 buổi tụ họp lặp lại trong 10 ngày", "en": "3 repeat gatherings in 10 days" }
   },
   {
     "name": "Studio Garden Kitchen",
-    "area": "Trai Mat corridor",
-    "type": "Food and conversation node",
-    "mode": "Request-linked",
-    "cadence": "By invitation",
+    "area": { "vi": "Hành lang Trại Mát", "en": "Trai Mat corridor" },
+    "type": { "vi": "Node ẩm thực và đối thoại", "en": "Food and conversation node" },
+    "mode": { "vi": "Liên kết theo yêu cầu", "en": "Request-linked" },
+    "cadence": { "vi": "Theo thư mời", "en": "By invitation" },
     "hostCount": 3,
-    "activity": "Meals, proof capture, and local introductions after work sessions.",
-    "signal": "5 hosted intros completed"
+    "activity": {
+      "vi": "Bữa ăn, ghi nhận bằng chứng và kết nối địa phương sau các phiên làm việc.",
+      "en": "Meals, proof capture, and local introductions after work sessions."
+    },
+    "signal": { "vi": "Đã hoàn tất 5 lượt giới thiệu có host", "en": "5 hosted intros completed" }
   }
 ]

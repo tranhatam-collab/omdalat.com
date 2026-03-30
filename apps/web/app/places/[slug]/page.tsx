@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailScaffold } from "../../../components/shared/DetailScaffold";
 import { buildPageMetadata } from "../../../lib/metadata";
-import { getPlaceBySlug, places } from "../../../lib/public-data";
+import { getPlaceBySlug, places, resolveLocalizedText } from "../../../lib/public-data";
 
 type Params = {
   slug: string;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   return buildPageMetadata({
     title: `${place.name} | OMDALAT Place in Da Lat`,
-    description: place.activity,
+    description: resolveLocalizedText(place.activity),
     path: `/places/${place.slug}`
   });
 }
@@ -42,19 +42,19 @@ export default async function PlaceDetailPage({ params }: { params: Promise<Para
 
   return (
     <DetailScaffold
-      eyebrow="Place detail"
+      eyebrow={{ vi: "Chi tiết địa điểm", en: "Place detail" }}
       title={place.name}
       description={place.activity}
       path={`/places/${place.slug}`}
       backHref="/places"
-      backLabel="Places"
+      backLabel={{ vi: "Địa điểm", en: "Places" }}
       facts={[
-        { label: "Area", value: place.area },
-        { label: "Type", value: place.type },
-        { label: "Mode", value: place.mode },
-        { label: "Cadence", value: place.cadence }
+        { label: { vi: "Khu vực", en: "Area" }, value: place.area },
+        { label: { vi: "Loại hình", en: "Type" }, value: place.type },
+        { label: { vi: "Chế độ", en: "Mode" }, value: place.mode },
+        { label: { vi: "Nhịp độ", en: "Cadence" }, value: place.cadence }
       ]}
-      signals={[place.signal, `${place.hostCount} hosts currently linked to this place`]}
+      signals={[place.signal, { vi: `${place.hostCount} host đang liên kết với địa điểm này`, en: `${place.hostCount} hosts currently linked to this place` }]}
     />
   );
 }
