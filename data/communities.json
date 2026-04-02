@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Dawn Walk Circle",
+    "focus": {
+      "vi": "Giới thiệu hằng tuần, check-in đi bộ và xây trust với áp lực thấp.",
+      "en": "Weekly introductions, walking check-ins, and low-pressure trust building."
+    },
+    "zone": { "vi": "Vòng Xuân Hương", "en": "Xuan Huong loop" },
+    "cadence": { "vi": "Sáng Thứ Hai và Thứ Năm", "en": "Monday and Thursday mornings" },
+    "signal": { "vi": "Đã ghi nhận 18 lượt check-in lặp lại trong tháng này", "en": "Eighteen repeat check-ins recorded this month" }
+  },
+  {
+    "name": "Courtyard Supper Network",
+    "focus": {
+      "vi": "Các bữa tối có host theo nhóm nhỏ, kết nối khách, người vận hành địa phương và các yêu cầu tương lai.",
+      "en": "Small hosted dinners that connect guests, local operators, and future requests."
+    },
+    "zone": { "vi": "Phường 3", "en": "Ward 3" },
+    "cadence": { "vi": "Tối Thứ Tư và Thứ Bảy", "en": "Wednesday and Saturday evenings" },
+    "signal": { "vi": "Bốn host hiện dùng chung một mẫu mời lặp lại", "en": "Four hosts now share one repeat invitation pattern" }
+  },
+  {
+    "name": "Garden Session Commons",
+    "focus": {
+      "vi": "Vòng tròn chuyên gia, bữa ăn phản tư và các phiên theo dõi có bằng chứng.",
+      "en": "Expert circles, reflective meals, and proof-backed follow-up sessions."
+    },
+    "zone": { "vi": "Hành lang Trại Mát", "en": "Trai Mat corridor" },
+    "cadence": { "vi": "Chiều Thứ Sáu", "en": "Friday afternoons" },
+    "signal": { "vi": "Ba phiên đã tạo cam kết bước tiếp theo có ghi nhận", "en": "Three sessions produced documented next-step commitments" }
+  }
+]

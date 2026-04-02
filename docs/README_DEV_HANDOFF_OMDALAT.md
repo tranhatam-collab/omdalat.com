@@ -4,7 +4,7 @@
 
 ## 1. Core concept
 
-OMDALAT is the first real-world implementation of OMDALA.
+OMDALAT is a standalone city-layer product for Da Lat.
 
 It is the first city node where the global system becomes visible through:
 
@@ -93,14 +93,25 @@ P3:
 
 - local app shell
 - trust overlays
-- connection to OMDALA platform APIs later
+- connection to real data and operational workflows later
 
 ## 9. Design rules
 
 - warm but premium
 - local but structured
+- green-mist-earth visual system
+- dark green first, mist-light secondary
 - real activity over marketing claims
 - visible trust over decorative polish
+
+Final visual source of truth:
+
+- `docs/OMDALAT_BRAND_SYSTEM_LOCK.md`
+
+Interpretation rule:
+
+- use the green brand system to express warmth, locality, and trust
+- do not treat green as a reason to become loud, neon, or tourism-like
 
 ## 10. Critical principle
 
@@ -114,5 +125,4 @@ do not build it.
 
 ## 11. Final definition
 
-OMDALAT is where the global OMDALA system becomes real, local, and verifiable.
-
+OMDALAT is a living city interface for trusted places, hosts, experts, communities, events, requests, and proofs in Da Lat.
