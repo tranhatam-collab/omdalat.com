@@ -101,6 +101,15 @@ a {
   padding: 2rem;
 }
 
+.runtime-homepage {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.runtime-section-wide {
+  grid-column: 1 / -1;
+}
+
 .runtime-hero h1,
 .runtime-page h1 {
   margin: 0;
@@ -167,6 +176,43 @@ a {
 .runtime-page h2 {
   margin: 0;
   font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.runtime-panel h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.runtime-signal-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.runtime-stat {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--omdalat-green-700);
+}
+
+.runtime-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.runtime-link-card {
+  display: block;
+  text-decoration: none;
+  border-radius: 16px;
+  border: 1px solid var(--omdalat-line);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.8rem 0.9rem;
+  color: var(--omdalat-text);
 }
 
 .runtime-list {
@@ -278,7 +324,9 @@ a {
 
   .runtime-grid,
   .runtime-page-grid,
-  .runtime-card-grid {
+  .runtime-card-grid,
+  .runtime-signal-grid,
+  .runtime-link-grid {
     grid-template-columns: 1fr;
   }
 

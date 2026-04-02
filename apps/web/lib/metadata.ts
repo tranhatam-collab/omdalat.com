@@ -51,7 +51,8 @@ export function buildPageMetadata({ title, description, path, noindex = false }:
 }
 
 export const defaultWebMetadata = buildPageMetadata({
-  title: "OMDALAT — The First Living Intelligence City in Da Lat",
-  description: "Trusted places, people, and activity in Da Lat.",
+  title: "OMDALAT - Living technology city layer for trusted work and proof",
+  description:
+    "OMDALAT is the first city operating layer under OMDALA, coordinating people, places, skills, requests, and proof in Da Lat.",
   path: "/"
 });

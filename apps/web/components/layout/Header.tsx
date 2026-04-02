@@ -7,11 +7,11 @@ export async function Header() {
   return (
     <header className="runtime-header">
       <div className="runtime-brand">
-        <strong>{locale === "vi" ? "OMDALAT Runtime (Bản phát triển)" : "OMDALAT Runtime Scaffold"}</strong>
+        <strong>{locale === "vi" ? "OMDALAT - Lớp vận hành thành phố" : "OMDALAT - City operating layer"}</strong>
         <span>
           {locale === "vi"
-            ? "Các khung runtime web công khai giai đoạn 2 đang chạy song song với bề mặt static."
-            : "Stage 2 public web runtime shells running alongside the static surface."}
+            ? "Trusted places, people, requests, and proof in Da Lat."
+            : "Trusted places, people, requests, and proof in Da Lat."}
         </span>
         <span>
           <a href={viHref} aria-current={locale === "vi" ? "page" : undefined}>

@@ -1,5 +1,11 @@
 export const primaryRoutes = [
   { href: "/", label: "Home" },
+  { href: "/what-is-omdalat", label: "What is OMDALAT" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/city-signals", label: "City signals" },
+  { href: "/work-and-opportunity", label: "Work & Opportunity" },
+  { href: "/creative-economy", label: "Creative economy" },
+  { href: "/requests", label: "Requests" },
   { href: "/places", label: "Places" },
   { href: "/hosts", label: "Hosts" },
   { href: "/experts", label: "Experts" },

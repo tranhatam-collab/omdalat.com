@@ -1,38 +1,70 @@
 import type { Metadata } from "next";
-import { ContentPage } from "../../components/shared/ContentPage";
+import { localizePath } from "../../../../packages/core";
+import { getRequestLocale } from "../../lib/locale";
 import { buildPageMetadata } from "../../lib/metadata";
+import { getTrustEvents, proofs } from "../../lib/public-data";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Niềm tin trong OMDALAT | Trust in OMDALAT",
-  description: "Cơ chế xác minh, bằng chứng và độ tin cậy hiển thị trong OMDALAT.",
+  title: "Niềm tin và bằng chứng | Trust and proof",
+  description: "Verification, moderation, and trust-proof loops in OMDALAT.",
   path: "/trust"
 });
 
-export default function TrustPage() {
+export default async function TrustPage() {
+  const locale = await getRequestLocale();
+  const trustEvents = getTrustEvents().slice(0, 5);
+
   return (
-    <ContentPage
-      eyebrow={{ vi: "Trust", en: "Trust" }}
-      title={{ vi: "Cách OMDALAT tạo trust", en: "How OMDALAT builds trust" }}
-      intro={{
-        vi: "Trust trong OMDALAT được tạo từ bằng chứng, moderation, và các lượt tương tác lặp lại đã được xác nhận.",
-        en: "Trust in OMDALAT is built from evidence, moderation, and verified repeat interactions."
-      }}
-      sections={[
-        {
-          heading: { vi: "Nguồn tín hiệu", en: "Signal sources" },
-          points: [
-            { vi: "Proof records: kết quả và dữ liệu xác thực gắn với chủ thể cụ thể.", en: "Proof records: outcomes and evidence tied to specific entities." },
-            { vi: "Host verification: độ tin cậy của người điều phối địa phương.", en: "Host verification: reliability of local operators." }
-          ]
-        },
-        {
-          heading: { vi: "Quản trị trust", en: "Trust governance" },
-          points: [
-            { vi: "Moderation lane giúp rà soát các mục có rủi ro trước khi công khai.", en: "The moderation lane reviews risk-sensitive items before broad exposure." },
-            { vi: "Mỗi cập nhật đều để lại dấu vết trong trust timeline nội bộ.", en: "Each update leaves a trail in the internal trust timeline." }
-          ]
-        }
-      ]}
-    />
+    <article className="runtime-page">
+      <p className="runtime-kicker">{locale === "vi" ? "Trust" : "Trust"}</p>
+      <h1>{locale === "vi" ? "Niềm tin phải nhìn thấy được" : "Trust must stay visible"}</h1>
+      <p>
+        {locale === "vi"
+          ? "OMDALAT không dùng trust như khẩu hiệu. Trust được tạo từ proof, moderation và lịch sử hoàn thành có thể kiểm tra."
+          : "OMDALAT does not treat trust as a slogan. Trust is built from proof, moderation, and verifiable completion history."}
+      </p>
+
+      <div className="runtime-page-grid">
+        <section className="runtime-panel">
+          <h2>{locale === "vi" ? "Nguồn tín hiệu trust" : "Trust signal sources"}</h2>
+          <ul className="runtime-list">
+            <li>{locale === "vi" ? `Proof records đang hiển thị: ${proofs.length}` : `Visible proof records: ${proofs.length}`}</li>
+            <li>{locale === "vi" ? "Host verification và trạng thái moderation" : "Host verification and moderation states"}</li>
+            <li>{locale === "vi" ? "Repeat collaboration được ghi thành trust events" : "Repeat collaboration captured as trust events"}</li>
+          </ul>
+        </section>
+
+        <section className="runtime-panel">
+          <h2>{locale === "vi" ? "Luồng quản trị" : "Governance flow"}</h2>
+          <ul className="runtime-list">
+            <li>{locale === "vi" ? "Proof submission" : "Proof submission"}</li>
+            <li>{locale === "vi" ? "Moderation review" : "Moderation review"}</li>
+            <li>{locale === "vi" ? "Accepted / flagged / rejected" : "Accepted / flagged / rejected"}</li>
+            <li>{locale === "vi" ? "Trust timeline cập nhật theo sự kiện" : "Trust timeline updates by event"}</li>
+          </ul>
+        </section>
+      </div>
+
+      <section className="runtime-panel">
+        <h2>{locale === "vi" ? "Sự kiện trust gần nhất" : "Recent trust events"}</h2>
+        <ul className="runtime-list">
+          {trustEvents.map((event) => (
+            <li key={event.id}>{event.detail}</li>
+          ))}
+        </ul>
+      </section>
+
+      <div className="runtime-actions">
+        <a className="runtime-button secondary" href={localizePath("/requests", locale)}>
+          {locale === "vi" ? "Xem nhu cầu đang mở" : "View open requests"}
+        </a>
+        <a className="runtime-button secondary" href={localizePath("/proofs", locale)}>
+          {locale === "vi" ? "Xem proof ledger" : "View proof ledger"}
+        </a>
+        <a className="runtime-button primary" href={localizePath("/join", locale)}>
+          {locale === "vi" ? "Tham gia như node tin cậy" : "Join as a trusted node"}
+        </a>
+      </div>
+    </article>
   );
 }
