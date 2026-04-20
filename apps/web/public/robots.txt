@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /preview/
-Disallow: /staging/
-
-Sitemap: https://omdalat.com/sitemap.xml

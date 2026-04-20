@@ -1,54 +1,73 @@
-import { DEFAULT_LOCALE, localizePath, stripLocaleFromPath } from "../../packages/core";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const PUBLIC_FILE = /\.[^/]+$/;
+const LOCALES = new Set(["vi", "en"]);
 
-function shouldBypass(pathname: string) {
-  return (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/icons") ||
-    pathname.startsWith("/og") ||
-    pathname.startsWith("/images") ||
-    PUBLIC_FILE.test(pathname)
-  );
+const LEGACY_ROUTE_MAP: Record<string, string> = {
+  "what-is-omdalat": "/about",
+  "free-member": "/join",
+  packages: "/stay",
+  vision: "/about",
+  "creative-economy": "/work",
+  trust: "/faq",
+  proofs: "/community",
+  events: "/community",
+  places: "/stay",
+  hosts: "/community",
+  experts: "/learning",
+  communities: "/community",
+  "work-and-opportunity": "/work"
+};
+
+const LEGACY_DETAIL_PREFIX = new Set(["events", "places", "hosts", "experts", "communities", "proofs"]);
+
+function redirectTo(request: NextRequest, location: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = location;
+  url.search = "";
+  return NextResponse.redirect(url, 308);
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const internalLocale = request.headers.get("x-omdalat-locale");
 
-  if (shouldBypass(pathname)) {
+  if (pathname === "/") {
+    return redirectTo(request, "/vi");
+  }
+
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) {
     return NextResponse.next();
   }
 
-  const { locale, path } = stripLocaleFromPath(pathname);
+  const hasLocale = LOCALES.has(segments[0]);
+  const locale = hasLocale ? segments[0] : "vi";
+  const startIndex = hasLocale ? 1 : 0;
+  const route = segments[startIndex] ?? "";
 
-  if (!locale) {
-    if (internalLocale && (internalLocale === "vi" || internalLocale === "en")) {
-      return NextResponse.next();
+  if (!route) {
+    if (!hasLocale) {
+      return redirectTo(request, `/${locale}`);
     }
-
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = localizePath(pathname, DEFAULT_LOCALE);
-    return NextResponse.redirect(redirectUrl);
+    return NextResponse.next();
   }
 
-  const rewriteUrl = request.nextUrl.clone();
-  rewriteUrl.pathname = path;
+  const mapped = LEGACY_ROUTE_MAP[route];
+  if (mapped) {
+    return redirectTo(request, `/${locale}${mapped}`);
+  }
 
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-omdalat-locale", locale);
-  requestHeaders.set("x-omdalat-pathname", pathname);
+  if (segments.length > startIndex + 1 && LEGACY_DETAIL_PREFIX.has(route)) {
+    const fallback = LEGACY_ROUTE_MAP[route] ?? "/community";
+    return redirectTo(request, `/${locale}${fallback}`);
+  }
 
-  return NextResponse.rewrite(rewriteUrl, {
-    request: {
-      headers: requestHeaders
-    }
-  });
+  if (!hasLocale) {
+    return redirectTo(request, `/${locale}/${segments.join("/")}`);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"]
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|icons|robots.txt|sitemap.xml|api|.*\\.[^/]+$).*)"]
 };
