@@ -2,8 +2,8 @@
 
 Dự án: Ôm Đà Lạt  
 Kho mã: `omdalat.com`  
-Ngày cập nhật: 2026-04-20  
-Trạng thái: Đã rà soát lại theo evidence Round 2 mới nhất
+Ngày cập nhật: 2026-04-21  
+Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
 
 ## 1. Cổng chặn build và kiểm thử
 
@@ -27,6 +27,15 @@ Trạng thái: Đã rà soát lại theo evidence Round 2 mới nhất
   - `docs/OMDALAT_LANGUAGE_ROLLOUT_TEAM_ASSIGNMENTS_2026-04-19.md`
 - [x] `apps/web`, `apps/app`, `packages` và tài liệu active đã dọn sạch `docs.omdala.com`, `app.omdala.com`, `docs-map`
 - [ ] `apps/docs` vẫn là bundle static legacy, cần archive hoặc rewrite riêng trước beta rộng hơn
+
+## 2A. Cổng chặn tái cấu trúc song ngữ (MANDATORY)
+
+- [x] Đã khóa lệnh tổng: `docs/UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND.md`
+- [x] Đã tạo kế hoạch áp dụng bắt buộc: `docs/OMDALAT_UNIVERSAL_BILINGUAL_EXECUTION_PLAN_2026-04-21.md`
+- [x] Đã có báo cáo interim theo mẫu: `docs/OMDALAT_UNIVERSAL_BILINGUAL_PRELIVE_REPORT_2026-04-21.md`
+- [ ] Chưa hoàn tất bảng kiểm kê tổng tất cả URL/text node theo mẫu 10 mục bắt buộc trước live
+- [ ] Chưa nộp báo cáo tổng hợp cuối theo format universal command (đủ VI/EN/SEO/ALT/CTA/META)
+- [ ] Còn thiếu xác nhận cuối 4 pass cho toàn bộ page public (`AI -> Editor -> SEO -> QA`)
 
 ## 3. Cổng chặn điều hướng và SEO
 
@@ -55,8 +64,8 @@ Trạng thái: Đã rà soát lại theo evidence Round 2 mới nhất
 - [x] `pnpm --filter @omdalat/app build:cf` pass
 - [x] Đã chốt lệnh deploy thật cho Cloudflare Pages
 - [x] Đã deploy bản mới nhất sau language lock:
-  - Web: `https://0cfa08d1.omdalat-web-ezk.pages.dev`
-  - App: `https://e69c5732.omdalat-app-2ol.pages.dev`
+  - Web: `https://1bd018f2.omdalat-web-ezk.pages.dev`
+  - App: `https://d86d73c0.omdalat-app-2ol.pages.dev`
 - [x] Hạ tầng Cloudflare Pages đã deploy thành công vào project `omdalat-web` và `omdalat-app`
 - [ ] Domain custom của app chưa bind vào `omdalat-app` trong account hiện tại (hiện chỉ có `omdalat-app-2ol.pages.dev`)
 
@@ -92,20 +101,20 @@ pnpm --filter @omdalat/app build:cf
 
 ## 9. Quyết định phát hành
 
-**No-Go cho cutover production custom domain (cập nhật 2026-04-20, 15:11 ICT).**
+**No-Go cho cutover production custom domain (cập nhật 2026-04-21, 20:40 ICT).**
 
 Ghi chú đi kèm:
 
 - Build/deploy preview cho `omdalat-web` và `omdalat-app` đã pass ở mức pages.dev.
-- Runtime production hiện tại còn lệch vai trò domain:
-  - `curl -I https://app.omdalat.com/vi/member/login` vẫn trả `308` sang `https://ap.omdalat.com/...`.
-  - `curl -I https://omdalat-app.pages.dev/vi/member/login` trả `200` (ứng dụng chạy đúng ở pages.dev).
-- Runtime web production chưa mở mail smoke outbox:
-  - `GET https://omdalat.com/api/_mail-smoke/outbox` trả `404` (route chưa khả dụng trên runtime đang live).
+- Runtime production hiện tại còn lệch domain app:
+  - `curl -I https://app.omdalat.com/vi/member/login` trả `200`, nhưng `POST /api/support` trên host này còn lỗi `502`.
+  - `https://d86d73c0.omdalat-app-2ol.pages.dev` phục vụ app runtime ổn định và pass smoke lane.
+- Runtime web production đã mở lại outbox endpoint:
+  - `GET https://omdalat.com/api/_mail-smoke/outbox` trả `200`.
 - Chỉ chuyển sang `Go` khi:
-  1. `app.omdalat.com` phục vụ đúng ứng dụng member (không redirect sang `ap`).
-  2. `omdalat.com` mở được outbox smoke endpoint.
-  3. smoke production chạy lại pass đủ `5/5`.
+  1. `app.omdalat.com` pass đầy đủ API runtime (không chỉ UI route).
+  2. smoke production pass `5/5` trên cặp domain canonical cuối (`omdalat.com` + `app.omdalat.com`).
+  3. gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` đã có báo cáo tổng hợp 10 mục và không còn lỗi P0.
 
 ## 10. Email runtime (bổ sung)
 
@@ -113,12 +122,9 @@ Ghi chú đi kèm:
 - [x] Đã thêm smoke script E2E 5 flow: `npm run mail:smoke:e2e`.
 - [x] Đã thêm checklist deploy secrets theo runtime hiện tại:
   - `docs/OMDALAT_EMAIL_SECRETS_DEPLOY_CHECKLIST_2026-04-19.md`
-- [ ] Smoke live `5/5` chưa đạt ở runtime production hiện tại.
-  - Lần chạy mới nhất (live target, không dùng `next dev` local):
-    - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://omdalat-app.pages.dev npm run mail:smoke:e2e`
-    - Report: `reports/email-smoke/2026-04-20T08-11-02-413Z`
-    - Kết quả: fail sớm tại bước outbox (`Unable to clear smoke outbox: 404`).
-  - Blocker đang tồn tại:
-    - Runtime web live chưa mở endpoint smoke outbox (`/api/_mail-smoke/outbox`).
-    - `app.omdalat.com` vẫn redirect sang `ap.omdalat.com`, chưa đúng vai trò ứng dụng canonical.
-  - Trạng thái email lane: `partial` (chưa được chuyển `done`).
+- [x] Smoke live `5/5` đã đạt trên runtime live (không dùng `next dev` local).
+  - Lần chạy pass mới nhất:
+    - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://d86d73c0.omdalat-app-2ol.pages.dev npm run mail:smoke:e2e`
+    - Report: `reports/email-smoke/2026-04-21T13-22-50-789Z`
+    - Kết quả: `success=true`, `5/5 flow` (mode `runtime`).
+  - Trạng thái email lane: `done`.
