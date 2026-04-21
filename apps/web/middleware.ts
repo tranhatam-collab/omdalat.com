@@ -7,15 +7,21 @@ const LEGACY_ROUTE_MAP: Record<string, string> = {
   "free-member": "/join",
   packages: "/stay",
   vision: "/about",
-  "creative-economy": "/work",
-  trust: "/faq",
-  proofs: "/community",
+  "creative-economy": "/learning",
+  trust: "/community",
+  proofs: "/articles",
   events: "/community",
   places: "/stay",
   hosts: "/community",
-  experts: "/learning",
+  experts: "/work",
   communities: "/community",
-  "work-and-opportunity": "/work"
+  "work-and-opportunity": "/work",
+  "city-signals": "/community",
+  requests: "/work",
+  help: "/docs",
+  vitals: "/about",
+  "how-it-works": "/docs/how-it-works",
+  faq: "/docs/faq"
 };
 
 const LEGACY_DETAIL_PREFIX = new Set(["events", "places", "hosts", "experts", "communities", "proofs"]);
@@ -27,7 +33,55 @@ function redirectTo(request: NextRequest, location: string) {
   return NextResponse.redirect(url, 308);
 }
 
+function continueWithLocaleHeaders(request: NextRequest, locale: "vi" | "en", pathname: string) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-omdalat-locale", locale);
+  requestHeaders.set("x-omdalat-pathname", pathname);
+  requestHeaders.delete("x-omdalat-rewritten");
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  });
+}
+
+function rewriteWithLocaleHeaders(
+  request: NextRequest,
+  locale: "vi" | "en",
+  localizedPathname: string,
+  internalPathname: string
+) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-omdalat-locale", locale);
+  requestHeaders.set("x-omdalat-pathname", localizedPathname);
+  requestHeaders.set("x-omdalat-rewritten", "1");
+
+  const url = request.nextUrl.clone();
+  url.pathname = internalPathname;
+
+  return NextResponse.rewrite(url, {
+    request: {
+      headers: requestHeaders
+    }
+  });
+}
+
 export function middleware(request: NextRequest) {
+  const rewrittenFlag = request.headers.get("x-omdalat-rewritten");
+  const rewrittenLocale = request.headers.get("x-omdalat-locale");
+  const rewrittenPathname = request.headers.get("x-omdalat-pathname");
+
+  if (
+    rewrittenFlag === "1" &&
+    (rewrittenLocale === "vi" || rewrittenLocale === "en")
+  ) {
+    return continueWithLocaleHeaders(
+      request,
+      rewrittenLocale,
+      rewrittenPathname && rewrittenPathname.startsWith("/") ? rewrittenPathname : `/${rewrittenLocale}`
+    );
+  }
+
   const { pathname } = request.nextUrl;
 
   if (pathname === "/") {
@@ -48,7 +102,7 @@ export function middleware(request: NextRequest) {
     if (!hasLocale) {
       return redirectTo(request, `/${locale}`);
     }
-    return NextResponse.next();
+    return rewriteWithLocaleHeaders(request, locale as "vi" | "en", pathname, "/");
   }
 
   const mapped = LEGACY_ROUTE_MAP[route];
@@ -65,7 +119,13 @@ export function middleware(request: NextRequest) {
     return redirectTo(request, `/${locale}/${segments.join("/")}`);
   }
 
-  return NextResponse.next();
+  const internalPath = `/${segments.slice(1).join("/")}`;
+  return rewriteWithLocaleHeaders(
+    request,
+    locale as "vi" | "en",
+    pathname,
+    internalPath === "/" ? "/" : internalPath.replace(/\/+$/, "")
+  );
 }
 
 export const config = {
