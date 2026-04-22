@@ -2,7 +2,7 @@
 
 Dự án: Ôm Đà Lạt  
 Kho mã: `omdalat.com`  
-Ngày cập nhật: 2026-04-21  
+Ngày cập nhật: 2026-04-22  
 Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
 
 ## 1. Cổng chặn build và kiểm thử
@@ -101,20 +101,23 @@ pnpm --filter @omdalat/app build:cf
 
 ## 9. Quyết định phát hành
 
-**No-Go cho cutover production custom domain (cập nhật 2026-04-21, 20:40 ICT).**
+**Go cho live bước đầu trên canonical runtime (cập nhật 2026-04-22, 09:05 ICT).**
 
 Ghi chú đi kèm:
 
-- Build/deploy preview cho `omdalat-web` và `omdalat-app` đã pass ở mức pages.dev.
-- Runtime production hiện tại còn lệch domain app:
-  - `curl -I https://app.omdalat.com/vi/member/login` trả `200`, nhưng `POST /api/support` trên host này còn lỗi `502`.
-  - `https://d86d73c0.omdalat-app-2ol.pages.dev` phục vụ app runtime ổn định và pass smoke lane.
-- Runtime web production đã mở lại outbox endpoint:
-  - `GET https://omdalat.com/api/_mail-smoke/outbox` trả `200`.
-- Chỉ chuyển sang `Go` khi:
-  1. `app.omdalat.com` pass đầy đủ API runtime (không chỉ UI route).
-  2. smoke production pass `5/5` trên cặp domain canonical cuối (`omdalat.com` + `app.omdalat.com`).
-  3. gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` đã có báo cáo tổng hợp 10 mục và không còn lỗi P0.
+- `https://omdalat.com/` trả `308` về `https://omdalat.com/vi`.
+- `GET https://app.omdalat.com/vi/member/login` trả `200` + `x-robots-tag: noindex, nofollow`.
+- `POST https://app.omdalat.com/api/support` trả `200`.
+- Smoke live trên cặp canonical cuối đã pass `5/5`:
+  - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
+  - report: `reports/email-smoke/2026-04-22T02-03-56-746Z`
+- Team 2 canonical re-smoke UI/public: PASS theo evidence `34/34`.
+
+Trạng thái chưa đóng release tổng:
+
+1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` vẫn chưa có báo cáo tổng hợp cuối đủ 10 mục.
+2. `www.app.omdalat.com` vẫn chưa resolve DNS.
+3. Local workspace build cần được chuẩn hóa lại dependency linking trước vòng dev kế tiếp.
 
 ## 10. Email runtime (bổ sung)
 
@@ -124,7 +127,7 @@ Ghi chú đi kèm:
   - `docs/OMDALAT_EMAIL_SECRETS_DEPLOY_CHECKLIST_2026-04-19.md`
 - [x] Smoke live `5/5` đã đạt trên runtime live (không dùng `next dev` local).
   - Lần chạy pass mới nhất:
-    - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://d86d73c0.omdalat-app-2ol.pages.dev npm run mail:smoke:e2e`
-    - Report: `reports/email-smoke/2026-04-21T13-22-50-789Z`
+    - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
+    - Report: `reports/email-smoke/2026-04-22T02-03-56-746Z`
     - Kết quả: `success=true`, `5/5 flow` (mode `runtime`).
   - Trạng thái email lane: `done`.

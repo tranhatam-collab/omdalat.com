@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cf": "node ../../scripts/clean-vercel-output.mjs && NEXT_DISABLE_BUILD_WORKER=1 pnpm --dir ../.. --filter @omdalat/web exec next-on-pages",
+    "build:cf": "node ../../scripts/clean-vercel-output.mjs && node ../../scripts/build-cf.mjs",
     "start": "next start",
     "lint": "next lint",
     "validate:web-locales": "node ../../scripts/validate-web-locales.mjs",
