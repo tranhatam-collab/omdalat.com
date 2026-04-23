@@ -49,11 +49,12 @@ Nếu một team xong phần của mình nhưng đang chờ team khác, trạng 
 
 ### Team 3 channel
 
-- Vai trò: App/member/runtime/CMS/infra, app canonical, noindex, DNS, API smoke
+- Vai trò: App/member/runtime/CMS/infra, app canonical, noindex, DNS, API smoke, email live smoke, payment readiness
 - Báo cáo vào:
   - `docs/DEV_TEAM_3_PLAN_OMDALAT.md`
   - `docs/TEAM3_LIVE_STATUS_YYYY-MM-DD.md`
   - `docs/TEAM3_RUNTIME_CANONICAL_AND_ACCOUNT_DECISION_YYYY-MM-DD.md`
+  - `docs/OMDALAT_EMAIL_PAYMENT_LIVE_PRIORITY_CHECK_YYYY-MM-DD.md`
 
 ---
 
@@ -126,7 +127,17 @@ Team 3 phải báo cáo:
 - support API còn lỗi không,
 - noindex/member guard còn đúng không,
 - CMS/publish rule song ngữ đã khóa chưa,
+- email live smoke có report mới `5/5` chưa,
+- payment lane là `DONE`, `PHASE_2`, hay `BLOCKED` chưa,
 - file evidence mới nhất.
+
+Nếu payment được giữ trong scope live đồng bộ, Team 3 phải bổ sung và chạy:
+
+```bash
+npm run payment:smoke:live
+```
+
+Nếu payment không thuộc live hiện tại, Team 3 phải ghi rõ `Phase 2 / not in scope` trong release note để không bị hiểu nhầm là đã hoàn tất.
 
 ---
 
@@ -136,7 +147,7 @@ Automation chỉ được tắt khi tất cả các dòng sau đều `DONE`:
 
 - Team 1: release gate + report tổng + Go/No-Go cuối
 - Team 2: canonical public UI + bilingual public evidence + alt/metadata report
-- Team 3: app runtime + DNS phụ + CMS/publish rule + noindex evidence
+- Team 3: app runtime + DNS phụ + CMS/publish rule + noindex evidence + email smoke live + payment scope/evidence
 
 Nếu chỉ một team xong, automation vẫn chạy cho các team còn lại.
 
