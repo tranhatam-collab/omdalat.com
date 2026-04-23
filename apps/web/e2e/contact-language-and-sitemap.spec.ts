@@ -14,6 +14,11 @@ test.describe("Contact language and sitemap lock", () => {
     expect(formText).not.toContain("Your name");
     expect(formText).not.toContain("Send message");
     expect(formText).not.toContain("Sending");
+    await expect(page.getByText("Tên của bạn / Your name")).toHaveCount(0);
+    await expect(page.getByText("Gửi liên hệ / Send message")).toHaveCount(0);
+    await expect(page.getByText("onboarding và tham gia")).toHaveCount(0);
+    await expect(page.getByText("luồng app và thông báo")).toHaveCount(0);
+    await expect(page.getByText("luồng trust và bằng chứng")).toHaveCount(0);
 
     const docsHref = await page.locator("article.runtime-page > .runtime-actions a").first().getAttribute("href");
     expect(docsHref).toBe("/vi/docs/getting-started");
@@ -41,9 +46,21 @@ test.describe("Contact language and sitemap lock", () => {
     expect(formText).not.toContain("Tên của bạn");
     expect(formText).not.toContain("Gửi liên hệ");
     expect(formText).not.toContain("Đang gửi");
+    await expect(page.getByText("Tên của bạn / Your name")).toHaveCount(0);
+    await expect(page.getByText("Gửi liên hệ / Send message")).toHaveCount(0);
 
     const docsHref = await page.locator("article.runtime-page > .runtime-actions a").first().getAttribute("href");
     expect(docsHref).toBe("/en/docs/getting-started");
+  });
+
+  test("homepage keeps Vietnamese-only locked labels on /vi", async ({ page }) => {
+    await page.goto("/vi");
+
+    await expect(page.getByText("Ôm Đà Lạt / Om Dalat")).toHaveCount(0);
+    await expect(page.getByText("Life / Work / Learning / Community")).toHaveCount(0);
+    await expect(page.getByText("Fit")).toHaveCount(0);
+    await expect(page.getByText("Sống / Làm / Học / Cộng đồng")).toBeVisible();
+    await expect(page.getByText("Phù hợp")).toBeVisible();
   });
 
   test("homepage image alt and loading attributes follow current locale", async ({ page }) => {

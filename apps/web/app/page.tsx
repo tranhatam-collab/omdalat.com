@@ -278,7 +278,7 @@ export default async function HomePage() {
         <section className="runtime-home-hero">
           <div className="runtime-home-hero-panel">
             <div className="runtime-home-hero-copy">
-              <p className="runtime-kicker">{locale === "vi" ? "Ôm Đà Lạt / Om Dalat" : "Om Dalat / Ôm Đà Lạt"}</p>
+              <p className="runtime-kicker">{locale === "vi" ? "Ôm Đà Lạt" : "Om Dalat"}</p>
               <p className="runtime-home-place">{locale === "vi" ? heroPrimary.vi : heroPrimary.en}</p>
               <h1>{locale === "vi" ? "Ôm Đà Lạt" : "Om Dalat"}</h1>
               <p className="runtime-home-subline">
@@ -363,7 +363,7 @@ export default async function HomePage() {
 
         <section className="runtime-home-section">
           <div className="runtime-home-section-head">
-            <p className="runtime-kicker">Life / Work / Learning / Community</p>
+            <p className="runtime-kicker">{locale === "vi" ? "Sống / Làm / Học / Cộng đồng" : "Life / Work / Learning / Community"}</p>
             <h2>{locale === "vi" ? "Bốn trục giữ hệ đứng vững" : "Four paths that keep the system standing"}</h2>
             <p>
               {locale === "vi"
@@ -389,7 +389,7 @@ export default async function HomePage() {
 
         <section className="runtime-home-section">
           <div className="runtime-home-section-head">
-            <p className="runtime-kicker">{locale === "vi" ? "Fit" : "Fit"}</p>
+            <p className="runtime-kicker">{locale === "vi" ? "Phù hợp" : "Fit"}</p>
             <h2>{locale === "vi" ? "Ai phù hợp và ai nên dừng lại trước" : "Who fits and who should pause first"}</h2>
           </div>
 

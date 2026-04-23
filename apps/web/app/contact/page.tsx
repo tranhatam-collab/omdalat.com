@@ -67,7 +67,7 @@ export default async function ContactPage() {
             </li>
             <li>
               <a href={`mailto:${OMDALAT_INBOXES.join}`}>{OMDALAT_INBOXES.join}</a> —{" "}
-              {locale === "vi" ? "onboarding và tham gia" : "onboarding and participation"}
+              {locale === "vi" ? "đón nhận ban đầu và tham gia" : "onboarding and participation"}
             </li>
             <li>
               <a href={`mailto:${OMDALAT_INBOXES.support}`}>{OMDALAT_INBOXES.support}</a> —{" "}
@@ -75,7 +75,7 @@ export default async function ContactPage() {
             </li>
             <li>
               <a href={`mailto:${OMDALAT_INBOXES.app}`}>{OMDALAT_INBOXES.app}</a> —{" "}
-              {locale === "vi" ? "luồng app và thông báo" : "app workflow and notifications"}
+              {locale === "vi" ? "luồng ứng dụng và thông báo" : "app workflow and notifications"}
             </li>
             <li>
               <a href={`mailto:${OMDALAT_INBOXES.partnerships}`}>{OMDALAT_INBOXES.partnerships}</a> —{" "}
@@ -83,7 +83,7 @@ export default async function ContactPage() {
             </li>
             <li>
               <a href={`mailto:${OMDALAT_INBOXES.trust}`}>{OMDALAT_INBOXES.trust}</a> —{" "}
-              {locale === "vi" ? "luồng trust và bằng chứng" : "trust and proof routing"}
+              {locale === "vi" ? "luồng tin cậy và bằng chứng" : "trust and proof routing"}
             </li>
           </ul>
         </section>
