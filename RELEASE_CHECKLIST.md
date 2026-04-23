@@ -116,9 +116,11 @@ Ghi chú đi kèm:
 Trạng thái chưa đóng release tổng:
 
 1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` vẫn chưa có báo cáo tổng hợp cuối đủ 10 mục.
-2. `ap.omdalat.com` chưa canonical sạch trong runtime live hiện tại:
-   - `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1 npm run cf:runtime-map:check` đang fail ở check `ap host canonical cleanup`.
-   - DNS `ap.omdalat.com` hiện trỏ `76.76.21.21` (Vercel), nên redirect mới ở Cloudflare runtime chưa có hiệu lực.
+2. Không còn blocker Team 2 hoặc Team 3 cho Om/app live bước đầu.
+3. `ap.omdalat.com` không còn là release blocker của repo này:
+   - Theo `docs/OMDALAT_APP_RUNTIME_SCOPE_AND_RESPONSIBILITIES_2026.md`, `ap.omdalat.com` là website editorial độc lập, ngoài phạm vi build/deploy repo này.
+   - DNS `ap.omdalat.com` hiện trỏ `76.76.21.21` (Vercel), đúng với trạng thái host ngoài runtime Om/app hiện tại.
+   - Không chạy `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1` như gate bắt buộc cho Om/app release.
 
 ## 10. Email runtime (bổ sung)
 

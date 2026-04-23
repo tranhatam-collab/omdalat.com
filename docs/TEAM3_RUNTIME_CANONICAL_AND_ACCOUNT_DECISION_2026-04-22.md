@@ -66,9 +66,9 @@ Operational decision hiện tại: giữ runtime mode làm gate chính; strict o
 
 ---
 
-## 4) `ap.omdalat.com` long-term canonical cleanup
+## 4) `ap.omdalat.com` scope decision
 
-Status: `IN_PROGRESS`
+Status: `OUT_OF_SCOPE_FOR_OM_APP_RELEASE`
 
 - Team 3 đã thêm canonical redirect guard vào app middleware và web middleware cho:
   - `ap.omdalat.com`
@@ -79,13 +79,14 @@ Status: `IN_PROGRESS`
 - Tuy nhiên `ap` vẫn chưa canonical sạch vì DNS hiện tại đang trỏ Vercel:
   - `dig +short ap.omdalat.com` -> `76.76.21.21`
   - `curl -I https://ap.omdalat.com/` -> `HTTP/2 200` + `server: Vercel`
-- Kết luận: redirect đã có trong runtime Cloudflare nhưng chưa có hiệu lực cho `ap` cho đến khi đổi DNS/binding hoặc decommission host ở hạ tầng ngoài repo.
+- Kết luận Team 1 cập nhật ngày `2026-04-23`: không đổi DNS/binding `ap.omdalat.com` trong repo này, vì `ap.omdalat.com` là website editorial độc lập theo `docs/OMDALAT_APP_RUNTIME_SCOPE_AND_RESPONSIBILITIES_2026.md` và `docs/OMDALAT_SCOPE_REALIGNMENT_OM_APP_ONLY_2026-04-19.md`.
+- Vì vậy `ap.omdalat.com` không còn là blocker Team 3 cho Om/app release hiện tại.
 
 Runtime check đã bổ sung cảnh báo:
 
 - `npm run cf:runtime-map:check` có mục `ap host canonical cleanup`
-- Có thể bật mode enforce bằng: `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1`
-- Enforce check hiện tại: `FAIL` do `ap` chưa đi vào runtime Cloudflare.
+- Không bật mode enforce `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1` cho Om/app release hiện tại.
+- Nếu sau này Founder quyết định decommission hoặc redirect `ap`, việc đó phải thuộc scope riêng của Ap Dalat/infra, không phải Team 3 Om/app release gate.
 
 ---
 

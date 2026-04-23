@@ -27,8 +27,8 @@ Phần còn lại để đóng release tổng nằm ở:
 
 1. Team 2: `DONE` cho public surface/re-smoke gate; browser smoke ngoài sandbox trên canonical thật `34/34 passed`.
 2. Team 1: tổng hợp báo cáo cuối theo `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND`.
-3. Team 3: giữ evidence runtime/noindex/publish rule và không mở payment UI ở release hiện tại.
-4. Team D / Team Email SMTP: nếu payment activation được đưa vào scope live, phải đóng đủ proof bindings/provider/D1/inbox trước khi claim.
+3. Team 3: `DONE_CLOSED` cho Om/app runtime scope hiện tại.
+4. Team D / Team Email SMTP: nếu payment activation được đưa vào scope live Phase 2, phải đóng đủ proof bindings/provider/D1/inbox trước khi claim.
 
 ---
 
@@ -55,7 +55,7 @@ Kết quả:
 - App login `x-robots-tag: noindex, nofollow`: `PASS`
 - Member reviewed gate `/vi/member/operations -> /vi/member/application-status`: `PASS`
 - App support API lane `/api/support`: `PASS` (không còn 502)
-- `ap.omdalat.com` canonical cleanup: `FAIL` khi bật enforce (`CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1`)
+- `ap.omdalat.com` canonical cleanup: `OUT_OF_SCOPE_FOR_OM_APP_RELEASE` vì `ap.omdalat.com` là website editorial độc lập ngoài repo này
 
 ### DNS + redirect
 
@@ -76,7 +76,8 @@ Kết quả:
 - `https://app.omdalat.com/vi/member/login` trả `HTTP/2 200`.
 - Header `x-robots-tag: noindex, nofollow` vẫn đúng.
 - `ap.omdalat.com` hiện trả `HTTP/2 200` từ `server: Vercel`.
-- `dig +short ap.omdalat.com` trả `76.76.21.21`, nên chưa đi vào runtime Cloudflare mới.
+- `dig +short ap.omdalat.com` trả `76.76.21.21`.
+- Theo `docs/OMDALAT_APP_RUNTIME_SCOPE_AND_RESPONSIBILITIES_2026.md`, đây là website editorial độc lập ngoài phạm vi build/deploy repo này, nên không còn là blocker Team 3 cho Om/app release hiện tại.
 
 ### Email
 
@@ -162,11 +163,11 @@ Kết luận external:
 
 ### Team 3 status
 
-Status: `ACTIVE_NEAR_COMPLETE`
+Status: `DONE_CLOSED`
 
-Team 1 nhận trạng thái Team 3: `97%`. Phần còn lại không chặn live bước đầu, nhưng phải được giữ trong backlog release hardening.
+Team 1 đóng Team 3 lúc `2026-04-23 20:21 +07` cho scope Om/app runtime hiện tại.
 
-Team 3 cần giữ evidence cuối cho:
+Team 3 evidence cuối:
 
 - runtime map,
 - `www.app` redirect,
@@ -175,7 +176,7 @@ Team 3 cần giữ evidence cuối cho:
 - payment Phase 2 release note,
 - publish rule song ngữ nếu có content indexable do Team 3 sở hữu.
 
-Việc còn lại Team 3 (không phải blocker P0 hiện tại):
+Kết quả build/runtime:
 
 - Dependency linking `@cloudflare/next-on-pages` đã được xử lý.
   - `pnpm --filter @omdalat/web exec next-on-pages --version` => `1.13.16`
@@ -183,13 +184,12 @@ Việc còn lại Team 3 (không phải blocker P0 hiện tại):
 - Build local đã pass lại:
   - `pnpm --filter @omdalat/web build:cf` => `PASS`
   - `pnpm --filter @omdalat/app build:cf` => `PASS`
-  - Team 3 đã bỏ ép `CI=1` trong `scripts/build-cf.mjs` để tránh kích hoạt lỗi `SIGSEGV` build worker trên môi trường local.
-- Team 3 giữ quyết định smoke production mặc định là runtime mode; strict outbox chỉ bật khi có gate rõ và runtime ổn định.
-- Dọn canonical host dài hạn cho `ap.omdalat.com` vẫn mở:
-  - middleware app và web đã thêm redirect canonical cho `ap.omdalat.com` và `www.ap.omdalat.com` nếu host này đi vào runtime Cloudflare,
-  - Team 3 đã deploy web+app mới nhất lên Pages,
-  - nhưng DNS `ap.omdalat.com` vẫn đang trỏ Vercel (`76.76.21.21`), nên cần đổi DNS/binding hoặc decommission bên ngoài repo để hết drift.
-- Tiếp tục giữ payment ở `PHASE_2_NOT_IN_SCOPE` cho đến khi có mandate mới.
+  - `scripts/build-cf.mjs` hiện retry cả lane `next build` và `next-on-pages`.
+  - `apps/app/package.json` build script đã ép `NEXT_DISABLE_BUILD_WORKER=1 NEXT_PRIVATE_BUILD_WORKER=0` để giảm lỗi `SIGSEGV` local.
+- `npm run cf:runtime-map:check` => `PASS` ở runtime-only mode.
+- Team 3 giữ quyết định smoke production mặc định là runtime mode; strict outbox chỉ bật khi có gate riêng.
+- `ap.omdalat.com` không còn là blocker Team 3 vì nằm ngoài scope Om/app release hiện tại.
+- Payment tiếp tục giữ `PHASE_2_NOT_IN_SCOPE` cho đến khi có mandate mới.
 
 ---
 
@@ -262,7 +262,7 @@ Team 1 phải:
 
 1. gom báo cáo Team 2 + Team 3 vào báo cáo tổng song ngữ 10 mục,
 2. cập nhật release checklist cuối,
-3. chốt Go/No-Go release tổng trên phần còn lại của Team 3/Team 1,
+3. chốt Go/No-Go release tổng trên phần còn lại của Team 1,
 4. không nhắc lại `www.app.omdalat.com` như blocker.
 
 ---
@@ -271,9 +271,9 @@ Team 1 phải:
 
 Ước tính sau kiểm tra này:
 
-- Team 1: `98%`
+- Team 1: `99%`
 - Team 2: `100%`
-- Team 3: `97%`
-- Toàn hệ: `99%`
+- Team 3: `100%`
+- Toàn hệ: `99.8%`
 
-Phần còn lại chủ yếu là Team 1 tổng hợp release gate cuối và Team 3 hardening ngoài blocker P0: `ap.omdalat.com` còn trỏ Vercel, strict outbox chưa claim, payment production activation vẫn `LOCK_RETAINED_WITH_REASON`. Không còn blocker Team 2, DNS `www.app`, email runtime smoke hoặc payment Phase 2 cho live bước đầu.
+Phần còn lại chủ yếu là Team 1 tổng hợp release gate cuối. Không còn blocker Team 2 hoặc Team 3 cho Om/app live bước đầu. `ap.omdalat.com` là site editorial độc lập ngoài repo; strict outbox chưa claim; payment production activation vẫn `LOCK_RETAINED_WITH_REASON` và thuộc Phase 2.

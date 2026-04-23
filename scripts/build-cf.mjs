@@ -154,11 +154,17 @@ async function main() {
   });
 
   if (shouldExecuteViaNode(nextOnPagesBin)) {
-    await run("node", [nextOnPagesBin], appCwd, buildEnv);
+    await runWithRetries("node", [nextOnPagesBin], appCwd, buildEnv, {
+      attempts: 3,
+      delayMs: 1500
+    });
     return;
   }
 
-  await run(nextOnPagesBin, [], appCwd, buildEnv);
+  await runWithRetries(nextOnPagesBin, [], appCwd, buildEnv, {
+    attempts: 3,
+    delayMs: 1500
+  });
 }
 
 const entrypoint = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : null;
