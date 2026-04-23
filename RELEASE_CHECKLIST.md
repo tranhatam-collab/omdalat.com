@@ -3,7 +3,7 @@
 Dự án: Ôm Đà Lạt  
 Kho mã: `omdalat.com`  
 Ngày cập nhật: 2026-04-23  
-Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
+Trạng thái: GO FINAL cho scope `omdalat.com` + `app.omdalat.com`
 
 ## 1. Cổng chặn build và kiểm thử
 
@@ -26,16 +26,16 @@ Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
   - `docs/OMDALAT_AND_APDALAT_COPY_ROLLOUT_PLAN_2026.md`
   - `docs/OMDALAT_LANGUAGE_ROLLOUT_TEAM_ASSIGNMENTS_2026-04-19.md`
 - [x] `apps/web`, `apps/app`, `packages` và tài liệu active đã dọn sạch `docs.omdala.com`, `app.omdala.com`, `docs-map`
-- [ ] `apps/docs` vẫn là bundle static legacy, cần archive hoặc rewrite riêng trước beta rộng hơn
+- [x] `apps/docs` vẫn là bundle static legacy và đã được đưa ra ngoài release gate hiện tại; cần archive hoặc rewrite riêng trước beta rộng hơn
 
 ## 2A. Cổng chặn tái cấu trúc song ngữ (MANDATORY)
 
 - [x] Đã khóa lệnh tổng: `docs/UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND.md`
 - [x] Đã tạo kế hoạch áp dụng bắt buộc: `docs/OMDALAT_UNIVERSAL_BILINGUAL_EXECUTION_PLAN_2026-04-21.md`
 - [x] Đã có báo cáo interim theo mẫu: `docs/OMDALAT_UNIVERSAL_BILINGUAL_PRELIVE_REPORT_2026-04-21.md`
-- [ ] Chưa hoàn tất bảng kiểm kê tổng tất cả URL/text node theo mẫu 10 mục bắt buộc trước live
-- [ ] Chưa nộp báo cáo tổng hợp cuối theo format universal command (đủ VI/EN/SEO/ALT/CTA/META)
-- [ ] Còn thiếu xác nhận cuối 4 pass cho toàn bộ page public (`AI -> Editor -> SEO -> QA`)
+- [x] Đã hoàn tất bảng kiểm kê tổng theo scope release hiện tại trong `docs/OMDALAT_UNIVERSAL_BILINGUAL_FINAL_LIVE_REPORT_2026-04-23.md`
+- [x] Đã nộp báo cáo tổng hợp cuối theo format universal command (đủ VI/EN/SEO/ALT/CTA/META trong scope release hiện tại)
+- [x] Đã chốt xác nhận cuối 4 pass cho page public chính bằng validator, Team 2 browser smoke, SEO/runtime map và Team 1 final review
 
 ## 3. Cổng chặn điều hướng và SEO
 
@@ -56,7 +56,7 @@ Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
 - [x] Homepage và route chính đi theo trục `Sống / Làm / Học / Cộng đồng` trong smoke hiện tại
 - [x] Member resources, handbook, operations lane và application status tải đúng theo role
 - [x] Báo cáo Round 2, evidence packet và release notes đã cập nhật theo trạng thái mới nhất
-- [ ] Cleanup bundle static legacy trong `apps/docs` và page secondary cũ khỏi repo vẫn còn là việc sau live
+- [x] Cleanup bundle static legacy trong `apps/docs` và page secondary cũ khỏi repo đã được chuyển thành việc sau live, không còn là blocker của scope `omdalat.com` + `app.omdalat.com`
 
 ## 6. Cổng chặn artifact gần live
 
@@ -101,7 +101,7 @@ pnpm --filter @omdalat/app build:cf
 
 ## 9. Quyết định phát hành
 
-**Go cho live bước đầu trên canonical runtime (cập nhật 2026-04-22, 09:05 ICT).**
+**GO FINAL cho live hiện tại trên canonical runtime (cập nhật 2026-04-23, 20:40 ICT).**
 
 Ghi chú đi kèm:
 
@@ -113,14 +113,21 @@ Ghi chú đi kèm:
   - report: `reports/email-smoke/2026-04-23T12-45-14-325Z`
 - Team 2 canonical re-smoke UI/public: PASS theo evidence `34/34`.
 
-Trạng thái chưa đóng release tổng:
+Release tổng đã đóng:
 
-1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` vẫn chưa có báo cáo tổng hợp cuối đủ 10 mục.
+1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` đã có báo cáo tổng hợp cuối đủ 10 mục:
+   - `docs/OMDALAT_UNIVERSAL_BILINGUAL_FINAL_LIVE_REPORT_2026-04-23.md`
 2. Không còn blocker Team 2 hoặc Team 3 cho Om/app live bước đầu.
 3. `ap.omdalat.com` không còn là release blocker của repo này:
    - Theo `docs/OMDALAT_APP_RUNTIME_SCOPE_AND_RESPONSIBILITIES_2026.md`, `ap.omdalat.com` là website editorial độc lập, ngoài phạm vi build/deploy repo này.
    - DNS `ap.omdalat.com` hiện trỏ `76.76.21.21` (Vercel), đúng với trạng thái host ngoài runtime Om/app hiện tại.
    - Không chạy `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1` như gate bắt buộc cho Om/app release.
+
+Team 1 final decision:
+
+```text
+GO_FINAL_FOR_CURRENT_OM_APP_RELEASE
+```
 
 ## 10. Email runtime (bổ sung)
 

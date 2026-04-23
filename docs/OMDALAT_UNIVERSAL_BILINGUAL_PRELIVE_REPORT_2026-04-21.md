@@ -1,8 +1,14 @@
 # OMDALAT UNIVERSAL BILINGUAL PRE-LIVE REPORT — 2026-04-21
 
 Version: 0.1.0 (interim)  
-Status: IN PROGRESS  
+Status: SUPERSEDED_BY_FINAL_REPORT
 Owner: Team 1
+
+Final report:
+
+```text
+docs/OMDALAT_UNIVERSAL_BILINGUAL_FINAL_LIVE_REPORT_2026-04-23.md
+```
 
 ---
 

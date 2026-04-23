@@ -1,7 +1,7 @@
 # OMDALAT TEAM 1 CHECK — TEAM 2 + TEAM 3 STATUS — 2026-04-23
 
 Version: v1.0.0  
-Status: ACTIVE  
+Status: DONE_CLOSED
 Owner: Team 1  
 Scope: kiểm tra báo cáo Team 2, Team 3 và nhiệm vụ còn lại trước khi đóng release tổng
 
@@ -23,12 +23,12 @@ Payment form + mẫu email thanh toán trong pay repo đã xanh ở lớp repo/s
 
 Payment activation external vẫn chưa được claim live và đang giữ trạng thái `LOCK_RETAINED_WITH_REASON`.
 
-Phần còn lại để đóng release tổng nằm ở:
+Release tổng đã đóng ở scope Om/app hiện tại:
 
-1. Team 2: `DONE` cho public surface/re-smoke gate; browser smoke ngoài sandbox trên canonical thật `34/34 passed`.
-2. Team 1: tổng hợp báo cáo cuối theo `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND`.
+1. Team 2: `DONE_CLOSED` cho public surface/re-smoke gate; browser smoke ngoài sandbox trên canonical thật `34/34 passed`.
+2. Team 1: `DONE_CLOSED` sau khi nộp báo cáo cuối theo `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND`.
 3. Team 3: `DONE_CLOSED` cho Om/app runtime scope hiện tại.
-4. Team D / Team Email SMTP: nếu payment activation được đưa vào scope live Phase 2, phải đóng đủ proof bindings/provider/D1/inbox trước khi claim.
+4. Team D / Team Email SMTP: không còn là blocker release hiện tại; nếu payment activation được đưa vào scope live Phase 2, phải đóng đủ proof bindings/provider/D1/inbox trước khi claim.
 
 ---
 
@@ -254,16 +254,28 @@ Không nhắc lại Team 2 như blocker release tổng, trừ khi có thay đổ
 
 ---
 
-## 3) Team 1 next action
+## 3) Team 1 final action
 
-Status: `ACTIVE`
+Status: `DONE_CLOSED`
 
-Team 1 phải:
+Team 1 đã:
 
 1. gom báo cáo Team 2 + Team 3 vào báo cáo tổng song ngữ 10 mục,
 2. cập nhật release checklist cuối,
-3. chốt Go/No-Go release tổng trên phần còn lại của Team 1,
+3. chốt Go final release tổng trên phần còn lại của Team 1,
 4. không nhắc lại `www.app.omdalat.com` như blocker.
+
+Final report:
+
+```text
+docs/OMDALAT_UNIVERSAL_BILINGUAL_FINAL_LIVE_REPORT_2026-04-23.md
+```
+
+Final decision:
+
+```text
+GO_FINAL_FOR_CURRENT_OM_APP_RELEASE
+```
 
 ---
 
@@ -271,9 +283,9 @@ Team 1 phải:
 
 Ước tính sau kiểm tra này:
 
-- Team 1: `99%`
+- Team 1: `100%`
 - Team 2: `100%`
 - Team 3: `100%`
-- Toàn hệ: `99.8%`
+- Toàn hệ: `100%` cho scope `omdalat.com` + `app.omdalat.com` hiện tại
 
-Phần còn lại chủ yếu là Team 1 tổng hợp release gate cuối. Không còn blocker Team 2 hoặc Team 3 cho Om/app live bước đầu. `ap.omdalat.com` là site editorial độc lập ngoài repo; strict outbox chưa claim; payment production activation vẫn `LOCK_RETAINED_WITH_REASON` và thuộc Phase 2.
+Không còn blocker Team 1, Team 2 hoặc Team 3 cho Om/app live bước đầu. `ap.omdalat.com` là site editorial độc lập ngoài repo; strict outbox chưa claim; payment production activation vẫn `LOCK_RETAINED_WITH_REASON` và thuộc Phase 2.
