@@ -9,14 +9,14 @@ Scope: live email smoke, payment readiness, team reminder priority
 
 ## 0) Kết luận nhanh
 
-Email lane **chưa thể coi là pass mới trong phiên này** vì local workspace thiếu link dependency `@playwright/test` trong `apps/web/node_modules`.
+Email lane **đã có pass mới trong phiên này** sau khi Team 3 xử lý được blocker dependency.
 
-Payment lane **chưa có bằng chứng triển khai active** trong code/runtime hiện tại. Repo chưa có script test payment, chưa có route/endpoint checkout active, và chưa có Stripe/payment integration file trong vùng code active đã rà.
+Payment lane đã được Team 3 khóa rõ là `PHASE_2_NOT_IN_SCOPE` cho release hiện tại.
 
 Để live đồng bộ, Team 3 cần ưu tiên đóng hai việc:
 
-1. sửa dependency linking để chạy lại live email smoke,
-2. hoặc implement/khóa rõ payment lane: `done`, `not in scope`, hoặc `phase 2`, có evidence và release note.
+1. giữ email smoke live ở trạng thái `DONE` với evidence mới nhất,
+2. giữ release note payment Phase 2 để không ai hiểu nhầm đây là lane đã live.
 
 ---
 
@@ -30,9 +30,9 @@ SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=
 
 ### Kết quả trong phiên này
 
-Status: `BLOCKED_LOCAL_DEPENDENCY`
+Status: `DONE`
 
-Report mới:
+Report blocker cũ:
 
 ```text
 reports/email-smoke/2026-04-23T05-06-44-898Z
@@ -43,6 +43,22 @@ Lỗi:
 ```text
 Cannot find module 'apps/web/node_modules/@playwright/test/index.js'
 ```
+
+Report pass mới:
+
+```text
+reports/email-smoke/2026-04-23T05-34-46-072Z/summary.json
+reports/email-smoke/2026-04-23T05-35-37-961Z/summary.json
+```
+
+Kết quả pass mới:
+
+- `success=true`
+- `runtimeTarget=live`
+- `assertionMode=runtime`
+- `webOrigin=https://omdalat.com`
+- `appOrigin=https://app.omdalat.com`
+- `5/5 flow pass`: contact, support, join, magic link, email verification
 
 ### Live runtime spot check
 
@@ -76,13 +92,15 @@ Kết quả pass trước:
 
 ### Việc Team 3 cần làm ngay
 
+Email lane hiện đã `DONE`. Chỉ cần rerun lại nếu có thay đổi runtime/email sau mốc pass mới.
+
 ```bash
 pnpm install --offline
 test -e apps/web/node_modules/@playwright/test/index.js
 SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e
 ```
 
-Team 3 chỉ được báo email lane `DONE` khi có report mới sau `2026-04-23T05-06-44-898Z` với:
+Team 3 chỉ giữ email lane `DONE` khi report mới sau `2026-04-23T05-06-44-898Z` có:
 
 - `success=true`
 - `5/5 flow pass`
@@ -95,7 +113,7 @@ Team 3 chỉ được báo email lane `DONE` khi có report mới sau `2026-04-2
 
 ### Kết quả rà code active
 
-Status: `MISSING_ACTIVE_PAYMENT_LANE`
+Status: `PHASE_2_NOT_IN_SCOPE`
 
 Hiện chưa thấy:
 
@@ -112,18 +130,19 @@ Các dấu hiệu hiện có chỉ ở mức tài liệu/schema:
 
 ### Quyết định cần chốt
 
-Team 3 phải chốt một trong hai hướng:
+Team 3 đã chốt:
 
-1. **Payment là Phase 2 / not in scope cho live hiện tại**  
-   Khi đó phải ghi rõ trong release note và không gọi đây là blocker live hiện tại.
+```text
+Payment = Phase 2 / not in scope cho release hiện tại
+```
 
-2. **Payment là bắt buộc cho live đồng bộ**  
-   Khi đó Team 3 phải implement tối thiểu:
-   - route tạo checkout session,
-   - webhook hoặc callback xử lý trạng thái,
-   - test mode keys/secrets,
-   - smoke test live hoặc staging,
-   - release evidence.
+Release note:
+
+```text
+docs/TEAM3_RELEASE_NOTE_EMAIL_PAYMENT_2026-04-23.md
+```
+
+Vì vậy payment **không còn là blocker live hiện tại**, nhưng cũng **không được ghi là checkout/payment đã live**.
 
 ### Lệnh Team 3 cần bổ sung nếu payment là scope live
 
@@ -137,6 +156,8 @@ Nếu script chưa tồn tại, Team 3 phải tạo script tương đương và 
 reports/payment-smoke/YYYY-MM-DDTHH-mm-ss/
 ```
 
+Ghi chú: lệnh trên chỉ áp dụng cho Phase 2 hoặc khi Founder đưa payment trở lại scope live.
+
 ---
 
 ## 3) Nhắc team theo mức ưu tiên
@@ -145,20 +166,19 @@ reports/payment-smoke/YYYY-MM-DDTHH-mm-ss/
 
 Email:
 
-- sửa local dependency linking,
-- rerun `mail:smoke:e2e` live,
-- nộp report mới `5/5`.
+- giữ report live smoke mới `5/5` trong evidence,
+- rerun lại nếu runtime/email thay đổi.
 
 Payment:
 
-- xác nhận scope release,
-- nếu in-scope thì implement/test,
-- nếu out-of-scope thì ghi rõ `Phase 2` trong release note.
+- đã xác nhận `Phase 2 / not in scope`,
+- giữ trạng thái này trong release note,
+- không thêm CTA/payment UI public ở release hiện tại.
 
 ### Team 1 — P0
 
 - không chốt release tổng là `DONE` nếu email chưa có smoke mới hoặc chưa có quyết định chấp nhận evidence pass gần nhất,
-- không để payment bị hiểu nhầm là đã xong nếu thực tế chưa có lane active.
+- không để payment bị hiểu nhầm là đã live nếu thực tế đang là Phase 2.
 
 ### Team 2 — P1
 
@@ -172,16 +192,16 @@ Payment:
 Email:
 
 - Runtime live vẫn đang phản hồi đúng ở các endpoint cơ bản.
-- Smoke E2E mới nhất trong phiên này: **NO-GO do local dependency blocker**.
-- Evidence pass gần nhất vẫn dùng được để tham chiếu, nhưng cần rerun sau khi sửa dependency nếu muốn đóng release tổng.
+- Smoke E2E mới nhất trong phiên này: **GO**.
+- Evidence pass mới nhất: `reports/email-smoke/2026-04-23T05-35-37-961Z/summary.json`.
 
 Payment:
 
-- **NO-GO nếu payment là scope bắt buộc của live đồng bộ.**
-- **Không phải blocker nếu Team 3/Founder khóa payment là Phase 2.**
+- **Không phải blocker cho live hiện tại** vì Team 3 đã khóa `PHASE_2_NOT_IN_SCOPE`.
+- **NO-GO trong Phase 2** nếu sau này đưa payment vào scope mà chưa có checkout/payment smoke evidence.
 
 ---
 
 ## 5) Câu nhắc gửi team
 
-Team 3 cần đóng ngay email + payment lane trước khi Team 1 chốt release tổng. Email phải rerun live smoke `5/5` sau khi sửa dependency link. Payment hiện chưa có lane active; team phải chốt rõ là Phase 2 hoặc implement đủ checkout/test/report nếu coi là scope live.
+Team 3 đã đóng lại email live smoke `5/5` và khóa payment là `PHASE_2_NOT_IN_SCOPE`. Không còn nhắc payment như blocker live hiện tại, nhưng phải giữ rõ rằng checkout/payment chưa được live.

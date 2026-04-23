@@ -67,7 +67,7 @@ Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
   - Web: `https://1bd018f2.omdalat-web-ezk.pages.dev`
   - App: `https://d86d73c0.omdalat-app-2ol.pages.dev`
 - [x] Hạ tầng Cloudflare Pages đã deploy thành công vào project `omdalat-web` và `omdalat-app`
-- [ ] Domain custom của app chưa bind vào `omdalat-app` trong account hiện tại (hiện chỉ có `omdalat-app-2ol.pages.dev`)
+- [x] Domain custom của app đã bind đúng vào `omdalat-app`, gồm `app.omdalat.com` và `www.app.omdalat.com`
 
 ### Lệnh deploy Cloudflare Pages
 
@@ -110,14 +110,13 @@ Ghi chú đi kèm:
 - `POST https://app.omdalat.com/api/support` trả `200`.
 - Smoke live trên cặp canonical cuối đã pass `5/5`:
   - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-  - report: `reports/email-smoke/2026-04-22T02-03-56-746Z`
+  - report: `reports/email-smoke/2026-04-23T05-35-37-961Z`
 - Team 2 canonical re-smoke UI/public: PASS theo evidence `34/34`.
 
 Trạng thái chưa đóng release tổng:
 
 1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` vẫn chưa có báo cáo tổng hợp cuối đủ 10 mục.
-2. `www.app.omdalat.com` vẫn chưa resolve DNS.
-3. Local workspace build cần được chuẩn hóa lại dependency linking trước vòng dev kế tiếp.
+2. Local workspace build cần được chuẩn hóa lại dependency linking trước vòng dev kế tiếp.
 
 ## 10. Email runtime (bổ sung)
 
@@ -128,6 +127,13 @@ Trạng thái chưa đóng release tổng:
 - [x] Smoke live `5/5` đã đạt trên runtime live (không dùng `next dev` local).
   - Lần chạy pass mới nhất:
     - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-    - Report: `reports/email-smoke/2026-04-22T02-03-56-746Z`
+    - Report: `reports/email-smoke/2026-04-23T05-35-37-961Z`
     - Kết quả: `success=true`, `5/5 flow` (mode `runtime`).
   - Trạng thái email lane: `done`.
+
+## 11. Payment scope (bổ sung)
+
+- [x] Payment được chốt `Phase 2 / not in scope` cho release hiện tại.
+- [x] Không khai báo checkout/payment lane là active trong cutover này.
+- [x] Ghi chú phát hành Team 3 đã khóa rõ trạng thái:
+  - `docs/TEAM3_RELEASE_NOTE_EMAIL_PAYMENT_2026-04-23.md`
