@@ -13,13 +13,18 @@ Team 3 đã xử lý xong blocker `www.app.omdalat.com`.
 
 Email live smoke đã có report mới `5/5`.
 
+Mail sender/relay external cho `omdalat.com` đã có proof xanh ở lớp Mailcow + SendGrid provider acceptance.
+
 Payment đã được Team 3 khóa là `PHASE_2_NOT_IN_SCOPE`, nên không còn là blocker cho live hiện tại.
+
+Payment activation external vẫn chưa được claim live và đang giữ trạng thái `LOCK_RETAINED_WITH_REASON`.
 
 Phần còn lại để đóng release tổng nằm ở:
 
 1. Team 2: báo cáo song ngữ cuối, alt text, metadata, inventory theo mẫu 10 mục.
 2. Team 1: tổng hợp báo cáo cuối theo `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND`.
 3. Team 3: giữ evidence runtime/noindex/publish rule và không mở payment UI ở release hiện tại.
+4. Team D / Team Email SMTP: nếu payment activation được đưa vào scope live, phải đóng đủ proof bindings/provider/D1/inbox trước khi claim.
 
 ---
 
@@ -89,6 +94,28 @@ Kết luận:
 - Không có checkout/payment lane active trong release hiện tại.
 - Không được ghi payment là đã live.
 - Không còn coi payment là blocker cho release hiện tại.
+
+External mail/payment proof:
+
+```text
+docs/OMDALAT_EXTERNAL_MAIL_PAYMENT_ACTIVATION_STATUS_2026-04-23.md
+```
+
+Team 1 đã đọc proof external từ:
+
+```text
+/Users/tranhatam/Documents/Devnewproject/iai-platform-worktree/docs/iai-mail-platform/OMDALAT_COM_TEAM_EMAIL_SMTP_MAILBOX_INBOUND_PROOF_2026-04-23.md
+```
+
+Kết luận external:
+
+- Mail sender/relay: `PASS_PROVIDER_ACCEPTANCE`
+- `pay@omdalat.com` và `billing@omdalat.com`: active aliases tới `support@omdalat.com`
+- `support@omdalat.com` và `noreply@omdalat.com`: mailbox thật
+- 8/8 outbound smoke tới hai Gmail được SendGrid nhận `250 Ok`
+- Payment activation: `LOCK_RETAINED_WITH_REASON`
+- `BCC`: `OFF`
+- Không claim payment live cho tới khi đủ `MAIL_API_*`, `PAY_EMAIL_ADAPTER_INTERNAL_KEY`, provider ref, D1/canonical row và inbox proof thật.
 
 ### Team 3 status
 

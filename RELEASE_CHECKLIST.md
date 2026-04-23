@@ -137,3 +137,15 @@ Trạng thái chưa đóng release tổng:
 - [x] Không khai báo checkout/payment lane là active trong cutover này.
 - [x] Ghi chú phát hành Team 3 đã khóa rõ trạng thái:
   - `docs/TEAM3_RELEASE_NOTE_EMAIL_PAYMENT_2026-04-23.md`
+
+## 12. External mail/payment activation (bổ sung)
+
+- [x] Mail sender/relay external cho `omdalat.com` đã có proof xanh ở lớp Mailcow + SendGrid provider acceptance.
+  - Proof: `docs/OMDALAT_EXTERNAL_MAIL_PAYMENT_ACTIVATION_STATUS_2026-04-23.md`
+- [x] `pay@omdalat.com` và `billing@omdalat.com` là alias active tới `support@omdalat.com`.
+- [x] `support@omdalat.com` và `noreply@omdalat.com` là mailbox thật.
+- [x] 8/8 outbound smoke từ `pay`, `billing`, `support`, `noreply` tới hai Gmail đã được provider nhận `250 Ok`.
+- [ ] Payment activation external chưa được claim live.
+  - Trạng thái: `LOCK_RETAINED_WITH_REASON`
+  - Còn thiếu: `MAIL_API_*`, `PAY_EMAIL_ADAPTER_INTERNAL_KEY`, `/v1/send` accepted proof, payment provider ref, mail `messageId`, D1/canonical row, inbox proof thật từ hai Gmail.
+  - `BCC`: `OFF`

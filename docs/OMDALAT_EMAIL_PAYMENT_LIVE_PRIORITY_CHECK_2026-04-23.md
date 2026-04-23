@@ -11,12 +11,17 @@ Scope: live email smoke, payment readiness, team reminder priority
 
 Email lane **đã có pass mới trong phiên này** sau khi Team 3 xử lý được blocker dependency.
 
+Mail sender/relay external cho `omdalat.com` cũng đã có proof xanh ở lớp Mailcow + SendGrid provider acceptance.
+
 Payment lane đã được Team 3 khóa rõ là `PHASE_2_NOT_IN_SCOPE` cho release hiện tại.
+
+Payment activation external vẫn là `LOCK_RETAINED_WITH_REASON` và **chưa được claim live**.
 
 Để live đồng bộ, Team 3 cần ưu tiên đóng hai việc:
 
 1. giữ email smoke live ở trạng thái `DONE` với evidence mới nhất,
 2. giữ release note payment Phase 2 để không ai hiểu nhầm đây là lane đã live.
+3. nếu đưa payment activation trở lại scope live, phải đóng đủ proof external trước khi Team 1 đổi trạng thái.
 
 ---
 
@@ -144,6 +149,40 @@ docs/TEAM3_RELEASE_NOTE_EMAIL_PAYMENT_2026-04-23.md
 
 Vì vậy payment **không còn là blocker live hiện tại**, nhưng cũng **không được ghi là checkout/payment đã live**.
 
+### External payment activation status
+
+Status: `LOCK_RETAINED_WITH_REASON`
+
+Proof mail external:
+
+```text
+docs/OMDALAT_EXTERNAL_MAIL_PAYMENT_ACTIVATION_STATUS_2026-04-23.md
+```
+
+Mail sender/relay đã xanh:
+
+- `pay@omdalat.com` active alias -> `support@omdalat.com`
+- `billing@omdalat.com` active alias -> `support@omdalat.com`
+- `support@omdalat.com` là mailbox thật
+- `noreply@omdalat.com` là mailbox thật
+- 8/8 outbound smoke được SendGrid nhận `250 Ok`
+- Mailcow queue rỗng
+
+Nhưng payment live chưa được claim vì còn thiếu:
+
+- `MAIL_API_BASE_URL`
+- `MAIL_API_KEY`
+- `MAIL_API_WORKSPACE_ID`
+- `PAY_EMAIL_ADAPTER_INTERNAL_KEY`
+- `/v1/send` accepted proof
+- payment provider ref
+- mail `messageId`
+- D1/canonical evidence row
+- inbox proof thật từ hai Gmail
+- pay gate unlock khỏi `LOCK_RETAINED_WITH_REASON`
+
+`BCC` vẫn `OFF`.
+
 ### Lệnh Team 3 cần bổ sung nếu payment là scope live
 
 ```bash
@@ -173,7 +212,8 @@ Payment:
 
 - đã xác nhận `Phase 2 / not in scope`,
 - giữ trạng thái này trong release note,
-- không thêm CTA/payment UI public ở release hiện tại.
+- không thêm CTA/payment UI public ở release hiện tại,
+- không claim payment live cho tới khi external activation proof đầy đủ.
 
 ### Team 1 — P0
 
@@ -199,9 +239,10 @@ Payment:
 
 - **Không phải blocker cho live hiện tại** vì Team 3 đã khóa `PHASE_2_NOT_IN_SCOPE`.
 - **NO-GO trong Phase 2** nếu sau này đưa payment vào scope mà chưa có checkout/payment smoke evidence.
+- **NO-GO cho payment activation external** cho tới khi đủ bindings, provider ref, D1 row và inbox proof.
 
 ---
 
 ## 5) Câu nhắc gửi team
 
-Team 3 đã đóng lại email live smoke `5/5` và khóa payment là `PHASE_2_NOT_IN_SCOPE`. Không còn nhắc payment như blocker live hiện tại, nhưng phải giữ rõ rằng checkout/payment chưa được live.
+Team 3 đã đóng lại email live smoke `5/5`, Team Email SMTP đã có proof mail sender/relay xanh, và payment vẫn phải giữ rõ là chưa live. Không còn nhắc payment như blocker live web hiện tại nếu nó ở Phase 2, nhưng tuyệt đối không claim payment live cho tới khi đủ proof external.
