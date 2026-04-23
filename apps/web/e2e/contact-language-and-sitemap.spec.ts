@@ -56,11 +56,13 @@ test.describe("Contact language and sitemap lock", () => {
   test("homepage keeps Vietnamese-only locked labels on /vi", async ({ page }) => {
     await page.goto("/vi");
 
+    const sectionKickers = page.locator(".runtime-home-section-head .runtime-kicker");
+
     await expect(page.getByText("Ôm Đà Lạt / Om Dalat")).toHaveCount(0);
     await expect(page.getByText("Life / Work / Learning / Community")).toHaveCount(0);
     await expect(page.getByText("Fit")).toHaveCount(0);
-    await expect(page.getByText("Sống / Làm / Học / Cộng đồng")).toBeVisible();
-    await expect(page.getByText("Phù hợp")).toBeVisible();
+    await expect(sectionKickers.filter({ hasText: "Sống / Làm / Học / Cộng đồng" })).toHaveCount(1);
+    await expect(sectionKickers.filter({ hasText: "Phù hợp" })).toHaveCount(1);
   });
 
   test("homepage image alt and loading attributes follow current locale", async ({ page }) => {
