@@ -163,3 +163,21 @@ GO_FINAL_FOR_CURRENT_OM_APP_RELEASE
   - Trạng thái: `LOCK_RETAINED_WITH_REASON`
   - Còn thiếu: `MAIL_API_*`, `PAY_EMAIL_ADAPTER_INTERNAL_KEY`, `/v1/send` accepted proof, payment provider ref, mail `messageId`, D1/canonical row, inbox proof thật từ hai Gmail.
   - `BCC`: `OFF`
+
+## 13. Acceptance fixes sau review (bổ sung)
+
+- [x] Contact form tách VI/EN hoàn toàn, không còn label/button/status trộn ngôn ngữ.
+- [x] `/en/contact` có metadata, canonical, Open Graph và Twitter data theo tiếng Anh.
+- [x] Contact docs CTA giữ locale, không trỏ về route thiếu tiền tố ngôn ngữ.
+- [x] Homepage image alt text đã tách VI/EN.
+- [x] Ảnh homepage có `width`, `height`, loading/fetch priority đúng vai trò.
+- [x] Sitemap có `/vi/life`, `/en/life`, `/vi/docs`, `/en/docs`.
+- [x] Sitemap dùng `vi-VN` thay vì `vi` cho alternate hreflang.
+- [x] Tài liệu legacy đã có non-canonical archive notice để tránh triển khai nhầm luật cũ.
+- [x] Scope `app.omdalat.com` đã được chốt là app/member runtime trong cùng hệ `*.omdalat.com`.
+- [x] Browser gate hiện tại đã chạy thật và pass `108/108`.
+
+Evidence:
+
+- `docs/OMDALAT_ACCEPTANCE_FIXES_2026-04-23.md`
+- `apps/web/e2e/contact-language-and-sitemap.spec.ts`
