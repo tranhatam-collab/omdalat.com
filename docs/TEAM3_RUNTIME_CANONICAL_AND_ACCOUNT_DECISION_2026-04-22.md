@@ -57,8 +57,35 @@ Decision: keep production smoke default at **runtime mode** (current behavior), 
 This prevents accidental strict-production runs.
 
 ### Live evidence
-- Runtime smoke pass report: `reports/email-smoke/2026-04-21T18-22-11-808Z/summary.json`
-- Strict smoke (with explicit allow) fails at outbox assertion in current production wiring: `reports/email-smoke/2026-04-21T18-22-24-510Z/summary.json`
+- Runtime smoke pass report mới nhất: `reports/email-smoke/2026-04-23T12-38-33-939Z/summary.json`
+- Strict live smoke hiện chưa ổn định cho gate production trong phiên này:
+  - `reports/email-smoke/2026-04-23T12-36-03-585Z/` (`Timed out waiting for web runtime: fetch failed`)
+  - `reports/email-smoke/2026-04-23T12-37-20-020Z/` (`Timed out waiting for web runtime: fetch failed`)
+
+Operational decision hiện tại: giữ runtime mode làm gate chính; strict outbox để trạng thái optional/manual.
+
+---
+
+## 4) `ap.omdalat.com` long-term canonical cleanup
+
+Status: `IN_PROGRESS`
+
+- Team 3 đã thêm canonical redirect guard vào app middleware và web middleware cho:
+  - `ap.omdalat.com`
+  - `www.ap.omdalat.com`
+- Team 3 đã deploy runtime mới:
+  - web: `https://b4016c45.omdalat-web-ezk.pages.dev`
+  - app: `https://88c8b10d.omdalat-app-2ol.pages.dev`
+- Tuy nhiên `ap` vẫn chưa canonical sạch vì DNS hiện tại đang trỏ Vercel:
+  - `dig +short ap.omdalat.com` -> `76.76.21.21`
+  - `curl -I https://ap.omdalat.com/` -> `HTTP/2 200` + `server: Vercel`
+- Kết luận: redirect đã có trong runtime Cloudflare nhưng chưa có hiệu lực cho `ap` cho đến khi đổi DNS/binding hoặc decommission host ở hạ tầng ngoài repo.
+
+Runtime check đã bổ sung cảnh báo:
+
+- `npm run cf:runtime-map:check` có mục `ap host canonical cleanup`
+- Có thể bật mode enforce bằng: `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1`
+- Enforce check hiện tại: `FAIL` do `ap` chưa đi vào runtime Cloudflare.
 
 ---
 

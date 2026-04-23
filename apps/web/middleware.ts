@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const LOCALES = new Set(["vi", "en"]);
+const LEGACY_APP_HOSTS = new Set(["ap.omdalat.com", "www.ap.omdalat.com"]);
+const APP_CANONICAL_HOST = "app.omdalat.com";
 
 const LEGACY_ROUTE_MAP: Record<string, string> = {
   "what-is-omdalat": "/about",
@@ -30,6 +32,21 @@ function redirectTo(request: NextRequest, location: string) {
   const url = request.nextUrl.clone();
   url.pathname = location;
   url.search = "";
+  return NextResponse.redirect(url, 308);
+}
+
+function getRequestHost(request: NextRequest) {
+  return (
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim().toLowerCase() ??
+    request.headers.get("host")?.split(",")[0]?.trim().toLowerCase() ??
+    ""
+  );
+}
+
+function redirectLegacyAppHost(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  url.hostname = APP_CANONICAL_HOST;
+  url.protocol = "https:";
   return NextResponse.redirect(url, 308);
 }
 
@@ -67,6 +84,11 @@ function rewriteWithLocaleHeaders(
 }
 
 export function middleware(request: NextRequest) {
+  const requestHost = getRequestHost(request);
+  if (LEGACY_APP_HOSTS.has(requestHost)) {
+    return redirectLegacyAppHost(request);
+  }
+
   const rewrittenFlag = request.headers.get("x-omdalat-rewritten");
   const rewrittenLocale = request.headers.get("x-omdalat-locale");
   const rewrittenPathname = request.headers.get("x-omdalat-pathname");

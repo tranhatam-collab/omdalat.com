@@ -2,7 +2,7 @@
 
 Dự án: Ôm Đà Lạt  
 Kho mã: `omdalat.com`  
-Ngày cập nhật: 2026-04-22  
+Ngày cập nhật: 2026-04-23  
 Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
 
 ## 1. Cổng chặn build và kiểm thử
@@ -64,8 +64,8 @@ Trạng thái: Đã rà soát lại theo evidence live runtime mới nhất
 - [x] `pnpm --filter @omdalat/app build:cf` pass
 - [x] Đã chốt lệnh deploy thật cho Cloudflare Pages
 - [x] Đã deploy bản mới nhất sau language lock:
-  - Web: `https://1bd018f2.omdalat-web-ezk.pages.dev`
-  - App: `https://d86d73c0.omdalat-app-2ol.pages.dev`
+  - Web: `https://b4016c45.omdalat-web-ezk.pages.dev`
+  - App: `https://88c8b10d.omdalat-app-2ol.pages.dev`
 - [x] Hạ tầng Cloudflare Pages đã deploy thành công vào project `omdalat-web` và `omdalat-app`
 - [x] Domain custom của app đã bind đúng vào `omdalat-app`, gồm `app.omdalat.com` và `www.app.omdalat.com`
 
@@ -110,13 +110,15 @@ Ghi chú đi kèm:
 - `POST https://app.omdalat.com/api/support` trả `200`.
 - Smoke live trên cặp canonical cuối đã pass `5/5`:
   - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-  - report: `reports/email-smoke/2026-04-23T05-35-37-961Z`
+  - report: `reports/email-smoke/2026-04-23T12-45-14-325Z`
 - Team 2 canonical re-smoke UI/public: PASS theo evidence `34/34`.
 
 Trạng thái chưa đóng release tổng:
 
 1. Gate `UNIVERSAL_BILINGUAL_LANGUAGE_REBUILD_COMMAND` vẫn chưa có báo cáo tổng hợp cuối đủ 10 mục.
-2. Local workspace build cần được chuẩn hóa lại dependency linking trước vòng dev kế tiếp.
+2. `ap.omdalat.com` chưa canonical sạch trong runtime live hiện tại:
+   - `CF_RUNTIME_REQUIRE_AP_CANONICAL_REDIRECT=1 npm run cf:runtime-map:check` đang fail ở check `ap host canonical cleanup`.
+   - DNS `ap.omdalat.com` hiện trỏ `76.76.21.21` (Vercel), nên redirect mới ở Cloudflare runtime chưa có hiệu lực.
 
 ## 10. Email runtime (bổ sung)
 
@@ -127,9 +129,12 @@ Trạng thái chưa đóng release tổng:
 - [x] Smoke live `5/5` đã đạt trên runtime live (không dùng `next dev` local).
   - Lần chạy pass mới nhất:
     - `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-    - Report: `reports/email-smoke/2026-04-23T05-35-37-961Z`
+    - Report: `reports/email-smoke/2026-04-23T12-45-14-325Z`
     - Kết quả: `success=true`, `5/5 flow` (mode `runtime`).
   - Trạng thái email lane: `done`.
+  - Quyết định gate:
+    - giữ runtime smoke mặc định,
+    - strict outbox (`SMOKE_REQUIRE_OUTBOX=1`) chỉ chạy khi có gate riêng.
 
 ## 11. Payment scope (bổ sung)
 

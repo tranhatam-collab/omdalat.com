@@ -15,6 +15,8 @@ Mail sender/relay external cho `omdalat.com` cũng đã có proof xanh ở lớp
 
 Payment lane đã được Team 3 khóa rõ là `PHASE_2_NOT_IN_SCOPE` cho release hiện tại.
 
+Payment form + mẫu email thanh toán trong pay repo đã xanh ở lớp repo/smoke, nhưng đây chỉ là readiness ở tầng code và template.
+
 Payment activation external vẫn là `LOCK_RETAINED_WITH_REASON` và **chưa được claim live**.
 
 Để live đồng bộ, Team 3 cần ưu tiên đóng hai việc:
@@ -54,6 +56,11 @@ Report pass mới:
 ```text
 reports/email-smoke/2026-04-23T05-34-46-072Z/summary.json
 reports/email-smoke/2026-04-23T05-35-37-961Z/summary.json
+reports/email-smoke/2026-04-23T09-36-14-324Z/summary.json
+reports/email-smoke/2026-04-23T11-55-16-301Z/summary.json
+reports/email-smoke/2026-04-23T11-58-09-241Z/summary.json
+reports/email-smoke/2026-04-23T12-38-33-939Z/summary.json
+reports/email-smoke/2026-04-23T12-45-14-325Z/summary.json
 ```
 
 Kết quả pass mới:
@@ -64,6 +71,19 @@ Kết quả pass mới:
 - `webOrigin=https://omdalat.com`
 - `appOrigin=https://app.omdalat.com`
 - `5/5 flow pass`: contact, support, join, magic link, email verification
+- `emailsCaptured=null`, vì smoke hiện đang chạy ở runtime assertion mode
+
+Attempt lỗi sau pass mới nhất:
+
+- `reports/email-smoke/2026-04-23T11-55-25-678Z/`: thiếu `SMOKE_WEB_ORIGIN` và `SMOKE_APP_ORIGIN` khi chạy live target.
+- `reports/email-smoke/2026-04-23T11-55-53-081Z/`: timeout khi chờ web runtime.
+- `reports/email-smoke/2026-04-23T11-57-00-759Z/`: timeout khi chờ web runtime.
+- `reports/email-smoke/2026-04-23T12-36-03-585Z/`: timeout khi chờ web runtime ở strict live mode.
+- `reports/email-smoke/2026-04-23T12-37-20-020Z/`: timeout khi chờ web runtime ở script `mail:smoke:e2e:live`.
+- `reports/email-smoke/2026-04-23T12-41-00-324Z/`: timeout khi chờ web runtime.
+- `reports/email-smoke/2026-04-23T12-42-43-515Z/`: timeout khi chờ web runtime.
+- `reports/email-smoke/2026-04-23T12-48-00-293Z/`: strict live mode fail `Timed out waiting for contact emails`.
+- Các attempt lỗi runtime/strict không thay evidence pass `2026-04-23T12-45-14-325Z`.
 
 ### Live runtime spot check
 
@@ -98,6 +118,13 @@ Kết quả pass trước:
 ### Việc Team 3 cần làm ngay
 
 Email lane hiện đã `DONE`. Chỉ cần rerun lại nếu có thay đổi runtime/email sau mốc pass mới.
+
+Strict outbox smoke chưa được claim. Hiện giữ runtime mode làm gate mặc định vì strict/live còn timeout không ổn định trong nhiều attempt.
+
+Script chuẩn hiện tại:
+
+- Runtime live: `npm run mail:smoke:e2e:live`
+- Strict live: `npm run mail:smoke:e2e:live-strict`
 
 ```bash
 pnpm install --offline
@@ -152,6 +179,17 @@ Vì vậy payment **không còn là blocker live hiện tại**, nhưng cũng **
 ### External payment activation status
 
 Status: `LOCK_RETAINED_WITH_REASON`
+
+### Pay repo-side readiness
+
+Status: `REPO_SMOKE_READY_NOT_LIVE`
+
+Team 1 ghi nhận theo báo cáo mới nhất lúc `2026-04-23 19:48 +07`:
+
+- form + mẫu email thanh toán trong pay repo đã xanh ở lớp repo/smoke,
+- payment email templates song ngữ đã được chuẩn hóa ở tầng code,
+- đây không phải bằng chứng payment production đã live,
+- không mở payment gate chỉ dựa trên repo-side smoke.
 
 Proof mail external:
 
@@ -233,11 +271,13 @@ Email:
 
 - Runtime live vẫn đang phản hồi đúng ở các endpoint cơ bản.
 - Smoke E2E mới nhất trong phiên này: **GO**.
-- Evidence pass mới nhất: `reports/email-smoke/2026-04-23T05-35-37-961Z/summary.json`.
+- Evidence pass mới nhất: `reports/email-smoke/2026-04-23T12-45-14-325Z/summary.json`.
 
 Payment:
 
 - **Không phải blocker cho live hiện tại** vì Team 3 đã khóa `PHASE_2_NOT_IN_SCOPE`.
+- **Repo-side payment form/email smoke: GO ở mức code/template readiness.**
+- **Production payment activation: NO-GO.**
 - **NO-GO trong Phase 2** nếu sau này đưa payment vào scope mà chưa có checkout/payment smoke evidence.
 - **NO-GO cho payment activation external** cho tới khi đủ bindings, provider ref, D1 row và inbox proof.
 

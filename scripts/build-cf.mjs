@@ -24,6 +24,39 @@ function run(command, args, cwd, extraEnv = {}) {
   });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function runWithRetries(command, args, cwd, extraEnv, options = {}) {
+  const attempts = Number(options.attempts ?? 1);
+  const delayMs = Number(options.delayMs ?? 0);
+
+  let lastError = null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      await run(command, args, cwd, extraEnv);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt >= attempts) {
+        break;
+      }
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(
+        `[build-cf] Attempt ${attempt}/${attempts} failed for ${command} ${args.join(" ")}; retrying in ${delayMs}ms. ${message}`
+      );
+      if (delayMs > 0) {
+        await sleep(delayMs);
+      }
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+}
+
 export function resolveRepoRoot(appCwd) {
   return path.resolve(appCwd, "..", "..");
 }
@@ -65,10 +98,18 @@ export function resolveNextBin(appCwd, repoRoot) {
 export function resolveNextOnPagesBin(appCwd, repoRoot) {
   return (
     findFirstExisting([
-      path.join(appCwd, "node_modules", ".bin", "next-on-pages"),
-      path.join(repoRoot, "node_modules", ".bin", "next-on-pages"),
+      path.join(appCwd, "node_modules", "@cloudflare", "next-on-pages", "bin", "index.js"),
+      path.join(repoRoot, "node_modules", "@cloudflare", "next-on-pages", "bin", "index.js"),
       path.join(appCwd, "node_modules", "@cloudflare", "next-on-pages", "dist", "index.js"),
-      path.join(repoRoot, "node_modules", "@cloudflare", "next-on-pages", "dist", "index.js")
+      path.join(repoRoot, "node_modules", "@cloudflare", "next-on-pages", "dist", "index.js"),
+      path.join(appCwd, "node_modules", ".bin", "next-on-pages"),
+      path.join(repoRoot, "node_modules", ".bin", "next-on-pages")
+    ]) ??
+    findPackageBinaryInPnpmStore(repoRoot, "@cloudflare+next-on-pages@", [
+      "@cloudflare",
+      "next-on-pages",
+      "bin",
+      "index.js"
     ]) ??
     findPackageBinaryInPnpmStore(repoRoot, "@cloudflare+next-on-pages@", [
       "@cloudflare",
@@ -77,6 +118,18 @@ export function resolveNextOnPagesBin(appCwd, repoRoot) {
       "index.js"
     ])
   );
+}
+
+function resolveBuildEnv() {
+  return {
+    NEXT_DISABLE_BUILD_WORKER: "1",
+    NEXT_PRIVATE_BUILD_WORKER: "0",
+    CI: "0"
+  };
+}
+
+function shouldExecuteViaNode(filePath) {
+  return /\.(?:[cm]?js)$/i.test(filePath);
 }
 
 async function main() {
@@ -93,13 +146,19 @@ async function main() {
     throw new Error(`Unable to resolve @cloudflare/next-on-pages binary for ${appCwd}`);
   }
 
-  await run("node", [nextBin, "build"], appCwd, {
-    NEXT_DISABLE_BUILD_WORKER: "1"
+  const buildEnv = resolveBuildEnv();
+
+  await runWithRetries("node", [nextBin, "build"], appCwd, buildEnv, {
+    attempts: 3,
+    delayMs: 1500
   });
 
-  await run("node", [nextOnPagesBin], appCwd, {
-    NEXT_DISABLE_BUILD_WORKER: "1"
-  });
+  if (shouldExecuteViaNode(nextOnPagesBin)) {
+    await run("node", [nextOnPagesBin], appCwd, buildEnv);
+    return;
+  }
+
+  await run(nextOnPagesBin, [], appCwd, buildEnv);
 }
 
 const entrypoint = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : null;
