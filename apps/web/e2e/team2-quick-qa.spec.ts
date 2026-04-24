@@ -72,6 +72,15 @@ test("mobile quick qa: homepage/footer/overflow/contextual cta", async ({ browse
   await page.goto("/vi");
   await assertHomepageClean(page);
   await assertFooterBridge(page, "Ấp Đà Lạt");
+  const header = page.locator(".runtime-header");
+
+  await expect(page.locator(".runtime-mobile-menu")).toBeVisible();
+  await expect(header.getByRole("link", { name: "Trang chủ" })).toHaveCount(0);
+
+  await page.locator(".runtime-mobile-menu-toggle").click();
+  await expect(page.locator(".runtime-mobile-menu-panel")).toBeVisible();
+  await expect(header.locator(".runtime-mobile-menu-panel").getByRole("link", { name: "Trang chủ" })).toBeVisible();
+  await expect(header.locator(".runtime-mobile-menu-panel").getByRole("link", { name: "Bắt đầu từ đây" })).toBeVisible();
 
   const horizontalOverflow = await page.evaluate(() => {
     const doc = document.documentElement;
