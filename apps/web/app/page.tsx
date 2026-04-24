@@ -533,7 +533,7 @@ export default async function HomePage() {
 
         <section className="runtime-home-section">
           <div className="runtime-home-section-head">
-            <p className="runtime-kicker">FAQ</p>
+            <p className="runtime-kicker">{locale === "vi" ? "Giải đáp nhanh" : "FAQ"}</p>
             <h2>{locale === "vi" ? "Câu hỏi thường gặp" : "FAQ"}</h2>
           </div>
 
