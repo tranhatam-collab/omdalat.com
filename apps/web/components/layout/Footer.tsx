@@ -31,8 +31,8 @@ export async function Footer() {
         <p className="runtime-footer-title">{locale === "vi" ? "Ôm Đà Lạt" : "Om Dalat"}</p>
         <p>
           {locale === "vi"
-            ? "Một nơi để ở lại, làm việc, học từ đời sống và đi cùng người khác theo một nhịp rõ ràng hơn."
-            : "A place to stay, work, learn from life, and move with others in a clearer rhythm."}
+            ? "Ôm Đà Lạt là một hệ sống thực địa tại Đà Lạt. Nơi con người có thể ở lại, làm việc và xây một nhịp sống có thể đi đường dài."
+            : "Om Dalat is a real-life living system in Dalat. A place where people can stay, work, and build a life that lasts."}
         </p>
         <p>
           <a href={localizePath("/community", locale)}>

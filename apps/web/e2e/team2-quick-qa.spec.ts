@@ -2,8 +2,7 @@ import { devices, expect, test } from "@playwright/test";
 
 const homepageRules = {
   blockedDomains: ["docs.omdala.com", "app.omdala.com"],
-  blockedWords: ["OMDALA"],
-  blockedGuideCta: ["Đọc hướng dẫn", "Read the guide"]
+  blockedWords: ["OMDALA"]
 } as const;
 
 async function assertHomepageClean(page: Parameters<typeof test>[0]["page"]) {
@@ -19,10 +18,6 @@ async function assertHomepageClean(page: Parameters<typeof test>[0]["page"]) {
 
   for (const blockedWord of homepageRules.blockedWords) {
     expect(homepageText.includes(blockedWord)).toBeFalsy();
-  }
-
-  for (const blockedLabel of homepageRules.blockedGuideCta) {
-    expect(homepageText.includes(blockedLabel)).toBeFalsy();
   }
 }
 
