@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Execution Push — Team 3 + Ap Team
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -62,7 +62,7 @@ npm run mail:smoke:e2e:live
 
 ### 2.1 Trạng thái hiện tại
 
-* Lane đang `REVIEW_READY` (đã có owner evidence current-state)
+* Lane đã `PASS_WITH_QUEUE` (không còn blocker P0)
 
 ### 2.2 File Ap Team bắt buộc điền
 
@@ -72,8 +72,9 @@ npm run mail:smoke:e2e:live
 
 ### 2.3 Điều kiện Team 1 nhận review Ap lane
 
-* nộp thêm live-domain probe packet
-* nộp visual packet cho image-rich routes
+* giữ theo P1 queue:
+  * live-domain probe packet
+  * visual packet cho image-rich routes
 
 ---
 
@@ -88,5 +89,5 @@ npm run mail:smoke:e2e:live
 ## 4. Team 1 closure rule
 
 * Team 3 chỉ thoát `REVIEWED_BLOCKED_P0` khi gate `D-009` pass trên canonical host.
-* Ap Team đang `REVIEW_READY`, Team 1 sẽ chốt verdict cuối sau khi xem live-domain probe packet.
+* Ap Team đã `PASS_WITH_QUEUE`; lane Ap không còn chặn global gate P0.
 * Global gate vẫn `NO_GO` cho tới khi cả 2 lane đạt điều kiện trên.

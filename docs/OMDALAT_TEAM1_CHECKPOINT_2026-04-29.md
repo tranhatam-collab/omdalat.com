@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Checkpoint
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -58,11 +58,11 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### 1.3 Ap Team — Ap editorial
 
-* Status: `REVIEW_READY`
-* Progress: `~88%` (theo packet owner lane)
-* Lý do còn block:
-  * chờ Team 1 verdict cuối
-  * live-domain probe bổ sung chưa nộp
+* Status: `PASS_WITH_QUEUE`
+* Progress: `100%` cho P0 cycle hiện tại
+* Ghi chú:
+  * report/matrix/evidence packet đã được Team 1 chấp nhận
+  * phần live-domain probe + visual evidence chuyển sang P1 queue
 
 ---
 
@@ -78,7 +78,7 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 ### 2.2 P0 blocked
 
 * Team 3: canonical parity ở `app.omdalat.com`.
-* Ap Team: không còn blocked do thiếu submission; còn chờ verdict Team 1.
+* Ap Team: không còn blocked P0.
 
 ### 2.3 P1 queue
 
@@ -105,9 +105,9 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### Ap Team
 
-1. Chuẩn bị live-domain probe packet (`canonical/hreflang/robots/sitemap` trên host live).
+1. Tiếp tục P1 queue với live-domain probe packet (`canonical/hreflang/robots/sitemap` trên host live).
 2. Bổ sung visual evidence packet cho các route image-rich.
-3. Chờ Team 1 verdict cuối và xử lý ngay nếu có revision.
+3. Không chặn Team 1 global gate ở P0.
 
 ---
 
@@ -117,4 +117,3 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 * Team 1 closure lock for Team 2: `D-007` đã đạt điều kiện, closure result khóa tại `D-008`
 * Điều kiện để Team 1 chuyển sang `GO`:
   * Team 3 thoát `REVIEWED_BLOCKED_P0`
-  * Ap Team có verdict cuối (`PASS_WITH_QUEUE` hoặc `PASS`)

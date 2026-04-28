@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Decision Log
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -240,6 +240,25 @@ Impact:
 * Ap lane không còn blocker do thiếu nộp.
 * Team 1 thực hiện verdict cuối ở vòng review kế tiếp (`PASS_WITH_QUEUE` hoặc `REVIEWED_BLOCKED_P0` nếu phát hiện gap mới).
 
+### D-011
+
+Date: 2026-04-29  
+Type: Ap Lane Verdict  
+Status: LOCKED
+
+Decision:
+
+Team 1 chốt lane Ap editorial ở mức `PASS_WITH_QUEUE` cho cycle hiện tại.
+
+Reason:
+
+Ap Team đã nộp đủ report + matrix + evidence packet current-state, và check nội bộ route/sitemap/robots pass (`node scripts/check-content-routes.mjs`).
+
+Impact:
+
+* Ap lane không còn là blocker P0 cho global gate.
+* Các phần live-domain probe và visual evidence chuyển về hàng P1 queue.
+
 ---
 
 ## 2. Khu vực cập nhật review outcome
@@ -275,12 +294,11 @@ Next Team 1 action:
 
 Status:
 
-* `REVIEW_READY`
+* `PASS_WITH_QUEUE`
 
 Next Team 1 action:
 
-* review report/matrix/evidence packet Ap Team đã nộp
-* chốt verdict cuối cho lane Ap: `PASS_WITH_QUEUE` hoặc `REVIEWED_BLOCKED_P0`
+* theo dõi queue P1 của Ap (live-domain probe + visual evidence), không dùng làm blocker P0
 
 ---
 

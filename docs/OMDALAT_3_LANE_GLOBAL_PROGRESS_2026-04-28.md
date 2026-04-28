@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Global Progress
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE SNAPSHOT
 
@@ -48,10 +48,10 @@ File này cho một cái nhìn nhanh:
 ### 1.3 Ap Editorial (Ap Team)
 
 * Submission: `RECEIVED`
-* Review: `REVIEW_READY`
-* Evidence: `RECEIVED_READY_FOR_TEAM1_REVIEW`
-* Current-state progress: `88%` (theo packet Ap Team đã nộp)
-* Block chính: còn chờ Team 1 review verdict và live-domain probe bổ sung
+* Review: `PASS_WITH_QUEUE`
+* Evidence: `READY_WITH_QUEUE`
+* Current-state progress: `100%` cho P0 cycle hiện tại
+* Block chính: `NONE` ở P0; còn P1 queue (live-domain probe + visual evidence)
 * Team 1 support: baseline prefill đã được thay bằng evidence current-state của owner Ap Team
 
 ---
@@ -59,9 +59,9 @@ File này cho một cái nhìn nhanh:
 ## 2. Chỉ số tổng (cycle hiện tại)
 
 * Lanes đã nộp report: `3/3` (`100%`)
-* Lanes đã được Team 1 review verdict cuối: `2/3` (~`66.7%`)
+* Lanes đã được Team 1 review verdict cuối: `3/3` (`100%`)
 * Lanes đã thoát trạng thái blocked P0: `2/3` (~`66.7%`)
-* Trung bình progress toàn bộ 3 lane: ~`90%` (`(100 + 82 + 88) / 3`)
+* Trung bình progress toàn bộ 3 lane: ~`94%` (`(100 + 82 + 100) / 3`)
 
 Operational note:
 
@@ -78,7 +78,7 @@ Current global gate:
 Reason:
 
 * Team 3 còn `REVIEWED_BLOCKED_P0`
-* Ap Team đã nộp nhưng chưa có Team 1 verdict cuối
+* Ap Team đã chốt `PASS_WITH_QUEUE` và không còn blocker P0
 
 ---
 
@@ -86,7 +86,6 @@ Reason:
 
 * Team 2: nộp đủ metadata text-level + alt audit + Om evidence packet
 * Team 3: đóng canonical parity cho `app.omdalat.com` và nộp fresh runtime-map pass theo gate mới
-* Ap Team: qua Team 1 verdict cuối (PASS_WITH_QUEUE hoặc REVIEWED_BLOCKED_P0 nếu phát hiện gap)
 * Team 1 review xong cả 3 lane và chốt decision log không còn blocker P0
 
 ---

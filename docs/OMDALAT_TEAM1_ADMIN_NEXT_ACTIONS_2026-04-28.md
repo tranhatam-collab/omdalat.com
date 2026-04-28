@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Admin Next Actions
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE NOTICE
 
@@ -46,7 +46,7 @@ Quick command:
 
 * Team 2: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
 * Team 3: `REVIEWED_BLOCKED_P0` (`~18%` còn lại) vì canonical parity fail ở localized member routes.
-* Ap Team: `REVIEW_READY` (`~12%` còn lại) chờ Team 1 verdict cuối.
+* Ap Team: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
 
 ---
 
@@ -86,7 +86,7 @@ File chính:
 
 * Chuẩn bị live-domain probe packet cho các route editorial chính.
 * Bổ sung visual evidence cho image-rich routes (cards, hero, gallery).
-* Sẵn sàng nhận verdict Team 1 và xử lý revision ngay trong lane Ap.
+* Giữ đồng bộ role boundary Om/App/Ap trong các vòng content mở rộng tiếp theo.
 
 File chính:
 

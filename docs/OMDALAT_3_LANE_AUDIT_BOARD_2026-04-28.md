@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Audit Board
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -185,7 +185,7 @@ Report file:
 ### 4.3 P0 blocked
 
 * `NONE` ở lớp intake submission.
-* `REVIEW_PENDING` cho Team 1 verdict cuối (pass/blocked theo tiêu chí lane).
+* `NONE` ở lớp review P0 cycle hiện tại.
 
 ### 4.4 P1 queue
 
@@ -195,9 +195,9 @@ Report file:
 
 ### 4.5 Team 1 kết luận hiện tại
 
-Ap editorial đã có submission current-state đầy đủ và đang chờ Team 1 chốt verdict cuối. Lane này đang ở trạng thái:
+Ap editorial đã được Team 1 chốt verdict cho cycle hiện tại. Lane này đang ở trạng thái:
 
-`review ready with queue candidates`
+`PASS_WITH_QUEUE`
 
 ---
 
@@ -227,7 +227,7 @@ Ap editorial đã có submission current-state đầy đủ và đang chờ Team
 ## 6. Điều Team 1 yêu cầu ngay
 
 * Team 3 chốt canonical parity cho `app.omdalat.com` (localized register/operations), sau đó nộp fresh runtime-map pass + evidence packet update.
-* Ap Team chuẩn bị thêm live-domain probe packet để Team 1 ra verdict cuối nhanh hơn.
+* Ap Team tiếp tục P1 queue: live-domain probe packet + visual evidence packet.
 
 Không team nào được tự đổi trạng thái `DONE` trong board này nếu chưa attach evidence phù hợp.
 

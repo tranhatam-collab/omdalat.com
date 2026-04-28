@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Submission Tracker
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -108,11 +108,11 @@ Submission status:
 
 Review status:
 
-* `REVIEW_READY`
+* `PASS_WITH_QUEUE`
 
 Evidence status:
 
-* `RECEIVED_READY_FOR_TEAM1_REVIEW`
+* `READY_WITH_QUEUE`
 
 Team 1 note:
 
@@ -122,7 +122,10 @@ Team 1 note:
   * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
 * Team 1 đã xác nhận nhanh bằng command nội bộ:
   * `node scripts/check-content-routes.mjs` -> `PASS`
-* Lane Ap hiện chuyển từ `PENDING_REPORT` sang `REVIEW_READY`; chờ Team 1 verdict cuối.
+* Team 1 chốt verdict lane Ap: `PASS_WITH_QUEUE` cho P0 intake/review cycle hiện tại.
+* Queue còn lại của Ap:
+  * live-domain probe packet
+  * visual evidence packet cho image-rich routes
 
 ---
 

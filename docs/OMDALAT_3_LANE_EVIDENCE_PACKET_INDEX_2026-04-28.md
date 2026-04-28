@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Evidence Packet Index
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -144,8 +144,8 @@ Current Ap Team submission (2026-04-29):
 
 Gap còn mở:
 
-* Team 1 verdict cuối cho lane Ap
-* live-domain probe packet bổ sung (nếu Team 1 yêu cầu)
+* live-domain probe packet bổ sung (P1 queue)
+* visual evidence packet cho image-rich routes (P1 queue)
 
 ---
 

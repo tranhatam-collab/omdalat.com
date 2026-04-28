@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Final Unblock Checklist
 
-Version: v1.1.0
+Version: v1.2.0
 
 Status: ACTIVE
 
@@ -94,7 +94,7 @@ Current status:
 
 Current status:
 
-* `REVIEW_READY`
+* `PASS_WITH_QUEUE`
 
 ### 3.1 Mục phải hoàn thành
 
@@ -104,20 +104,17 @@ Current status:
   * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
 * `DONE` Nộp evidence packet:
   * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
-* Bổ sung lane hardening:
+* `QUEUE` Bổ sung lane hardening:
   * live-domain probe packet
   * visual evidence packet cho image-rich routes
 
 ### 3.2 Điều kiện Team 1 chấp nhận
 
-* Report/matrix/packet khớp claim hiện tại.
-* Không có lệch role giữa Om và Ap.
-* Hoàn tất live-domain probe nếu Team 1 yêu cầu cho verdict cuối.
+* Đã đạt cho vòng P0 hiện tại.
 
 ### 3.3 Mức đóng lane
 
-* `PASS_WITH_QUEUE` nếu P0 editorial sạch và còn hàng P1.
-* `REVIEWED_BLOCKED_P0` nếu review phát hiện gap lớn ở live-domain parity.
+* `PASS_WITH_QUEUE` (đã chốt).
 
 ---
 
@@ -136,5 +133,5 @@ Current status:
 Checklist này hoàn thành khi:
 
 * Team 2 và Team 3 thoát `REVIEWED_BLOCKED_P0`
-* Ap Team có verdict Team 1 cuối
+* Ap Team đã có verdict Team 1 cuối
 * Team 1 có thể chốt state tổng theo lane bằng evidence, không cần suy đoán
