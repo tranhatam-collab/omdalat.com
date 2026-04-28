@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Audit Board
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -79,10 +79,12 @@ Report file:
 
 ### 2.3 P0 blocked
 
-* `BLOCKED` Team 2 đã nộp report + matrix + evidence packet và Team 1 đã review, nhưng chưa thể đóng P0.
-* `BLOCKED` Alt text audit lane Om public vẫn còn `PENDING_AUDIT` ở nhiều dòng route.
-* `BLOCKED` Team 1 live probe ngày `2026-04-29` ghi nhận route gap trên canonical (`/vi/contact`, `/en/contact`, `/vi/about` trả `404`), cần Team 2 + Team 3 xác minh runtime mapping/deploy parity.
-* `BLOCKED` Metadata matrix mới có extract cho một phần route, chưa đủ coverage cho toàn bộ route P0.
+* `NONE` (đã thoát P0 blocked)
+* Team 2 closure state hiện tại: `PASS_WITH_QUEUE`
+* Route gap canonical đã đóng sau deploy `f633122e`:
+  * `/vi/contact` -> `200`
+  * `/en/contact` -> `200`
+  * `/vi/about` -> `200`
 
 ### 2.4 P1 queue
 
@@ -92,9 +94,9 @@ Report file:
 
 ### 2.5 Team 1 kết luận hiện tại
 
-Om public không còn ở trạng thái xây nền. Lane này đang ở trạng thái:
+Om public lane đã đạt trạng thái:
 
-`reviewed, P0 blocked pending text-level metadata extract, alt audit, and evidence packet completion`
+`PASS_WITH_QUEUE` (P0 complete, còn queue hardening)
 
 ---
 
@@ -133,10 +135,11 @@ Report file:
 
 ### 3.3 P0 blocked
 
-* `BLOCKED` Team 3 đã nộp report + matrix và đã phân loại blocker `code/toolchain/infra`, nhưng runtime hiện đang drift.
-* `BLOCKED` Live probes mới cho thấy lane member/app chưa ổn định: `404` ở route onboarding/gate, `502` ở `/api/support`, `405` ở `/api/contact`.
-* `BLOCKED` Mail smoke live hiện fail theo evidence mới do runtime/API lane chưa đạt.
-* `BLOCKED` Chưa có evidence packet mới gom riêng cho metadata/noindex/access surfaces của lane app/member runtime.
+* `BLOCKED` Team 3 đã nộp report + matrix + packet, nhưng canonical parity trên `app.omdalat.com` chưa đạt.
+* `BLOCKED` Gate tăng cường `D-009` fail:
+  * `GET https://app.omdalat.com/vi/member/register` -> `404`
+  * `GET https://app.omdalat.com/vi/member/operations` -> `404`
+* `BLOCKED` Shadow runtime mới đã pass (`d6b35718`) nhưng canonical host chưa theo artifact mới.
 
 ### 3.4 P1 queue
 
@@ -148,7 +151,7 @@ Report file:
 
 App member runtime không còn ở giai đoạn ý tưởng. Lane này đang ở trạng thái:
 
-`reviewed, implementation present but runtime drifted, P0 blocked until runtime mapping/API/smoke are stable`
+`reviewed, implementation present, P0 blocked on canonical parity until app localized routes pass on canonical host`
 
 ---
 
@@ -175,14 +178,14 @@ Report file:
 * `DONE` Bộ chuẩn universal đã được kích hoạt cho `ap.omdalat.com` trong docs.
 * `DONE` Role boundary với Om đã được khóa: Ap là lớp editorial độc lập.
 * `DONE` Các file nền đã hiện diện trong repo docs: language codex, SEO master plan, robots/sitemap policy, image policy, QA checklist, release protocol.
+* `DONE` Ap Team đã nộp current-state report + matrix + evidence packet theo format Team 1.
+* `DONE` Check nội bộ Ap route/sitemap/robots:
+  * `node scripts/check-content-routes.mjs` -> `PASS`
 
 ### 4.3 P0 blocked
 
-* `BLOCKED` Chưa có report audit lane Ap theo format mới.
-* `BLOCKED` Chưa có route inventory current-state cho toàn bộ bề mặt editorial.
-* `BLOCKED` Chưa có evidence packet current-state cho bilingual metadata, alt text, sitemap, canonical, image system, QA smoke.
-* `BLOCKED` Chưa có board current live/build status sau khi kích hoạt bộ chuẩn universal.
-* `BLOCKED` Team 1 đã prefill baseline docs cho lane Ap, nhưng chưa có xác nhận và evidence thật từ owner Ap Team.
+* `NONE` ở lớp intake submission.
+* `REVIEW_PENDING` cho Team 1 verdict cuối (pass/blocked theo tiêu chí lane).
 
 ### 4.4 P1 queue
 
@@ -192,9 +195,9 @@ Report file:
 
 ### 4.5 Team 1 kết luận hiện tại
 
-Ap editorial đã có đầy đủ khung chuẩn ở lớp tài liệu, nhưng chưa có report audit vận hành theo format mới. Lane này đang ở trạng thái:
+Ap editorial đã có submission current-state đầy đủ và đang chờ Team 1 chốt verdict cuối. Lane này đang ở trạng thái:
 
-`standards activated, waiting for first full audit report`
+`review ready with queue candidates`
 
 ---
 
@@ -209,10 +212,8 @@ Ap editorial đã có đầy đủ khung chuẩn ở lớp tài liệu, nhưng c
 
 ### 5.2 P0 blocked toàn cục
 
-* Team 2 report đã review và còn mở blocker alt audit + route gap trên canonical.
-* Team 3 report đã review và còn mở blocker runtime drift + API lane + smoke fail.
-* Thiếu report standardized mới từ Ap Team.
-* Thiếu một lớp evidence packet mới gom theo 3 lane sau activation 2026-04-28.
+* Team 3 report đã review và còn mở blocker canonical parity ở `app.omdalat.com`.
+* Thiếu evidence pass mới của Team 3 sau khi canonical host bắt kịp artifact mới.
 
 ### 5.3 P1 queue toàn cục
 
@@ -225,9 +226,8 @@ Ap editorial đã có đầy đủ khung chuẩn ở lớp tài liệu, nhưng c
 
 ## 6. Điều Team 1 yêu cầu ngay
 
-* Team 2 nộp text-level extract cho `title/meta/canonical/hreflang` + alt text audit + evidence packet Om public để Team 1 chốt review.
-* Team 3 chốt runtime mapping chuẩn, phục hồi các route/API đang drift, sau đó nộp fresh smoke pass + evidence packet metadata/noindex/access.
-* Ap Team nộp report lane Ap editorial theo format mới.
+* Team 3 chốt canonical parity cho `app.omdalat.com` (localized register/operations), sau đó nộp fresh runtime-map pass + evidence packet update.
+* Ap Team chuẩn bị thêm live-domain probe packet để Team 1 ra verdict cuối nhanh hơn.
 
 Không team nào được tự đổi trạng thái `DONE` trong board này nếu chưa attach evidence phù hợp.
 

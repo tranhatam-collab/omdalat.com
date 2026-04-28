@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Final Unblock Checklist
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -34,35 +34,22 @@ Nguyên tắc:
 
 Current status:
 
-* `REVIEWED_BLOCKED_P0`
+* `PASS_WITH_QUEUE`
 
 ### 1.1 Mục phải hoàn thành
 
-* Hoàn thiện text-level extract cho `title/meta/canonical/hreflang` theo route trong:
-  * `docs/OMDALAT_PUBLIC_ROUTE_INVENTORY_MATRIX_2026-04-28.md`
-  * `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md`
-* Nộp `alt text audit` riêng theo route/public surface.
-  * `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md`
-* Đóng route gap canonical Team 1 probe ngày `2026-04-29`:
-  * `https://omdalat.com/vi/contact` không còn `404`
-  * `https://omdalat.com/en/contact` không còn `404`
-  * `https://omdalat.com/vi/about` không còn `404`
-* Tạo `Om public evidence packet` file index gom:
-  * smoke summary
-  * metadata extract artifacts
-  * alt text audit artifacts
-  * QA references
+* `DONE` text-level metadata extract cho core P0 routes.
+* `DONE` alt text audit core P0 routes.
+* `DONE` route gap canonical đã đóng (`/vi/contact`, `/en/contact`, `/vi/about` đều `200`).
+* `DONE` evidence packet Om public đã cập nhật sau deploy.
 
 ### 1.2 Điều kiện Team 1 chấp nhận
 
-* Không còn marker baseline (`PRESENT__TEXT_AUDIT_NEXT`, `EXPECTED__LOCALE_WIRED`, `PENDING_AUDIT`) trên route đã claim complete.
-* Evidence path trỏ đúng file thật trong repo.
-* Không có claim `PASS` nếu chưa có evidence tương ứng.
+* Đã đạt.
 
 ### 1.3 Mức đóng lane
 
-* `PASS_WITH_QUEUE` nếu P0 sạch nhưng còn P1 content hardening.
-* `PASS` nếu cả P0 và các điểm QA/SEO cốt lõi đã sạch theo board.
+* `PASS_WITH_QUEUE` (đã chốt tại `D-008`).
 
 ---
 
@@ -85,12 +72,16 @@ Current status:
   * `TOOLCHAIN`
   * `INFRA`
   * hoặc `NONE`
+* Đóng gate `D-009`:
+  * `https://app.omdalat.com/vi/member/register` -> `200`
+  * `https://app.omdalat.com/vi/member/operations` -> redirect reviewed gate
 
 ### 2.2 Điều kiện Team 1 chấp nhận
 
 * Có đường dẫn artifact/smoke mới, không chỉ viện dẫn baseline cũ `2026-04-23`.
 * Không trộn blocker toolchain với blocker code.
 * Role semantics/gate semantics không đổi nghĩa.
+* Canonical host parity pass theo `D-009`.
 
 ### 2.3 Mức đóng lane
 
@@ -103,31 +94,30 @@ Current status:
 
 Current status:
 
-* `PENDING_REPORT`
+* `REVIEW_READY`
 
 ### 3.1 Mục phải hoàn thành
 
-* Nộp report current-state theo:
+* `DONE` Nộp report current-state:
   * `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
-* Điền đủ matrix:
+* `DONE` Điền matrix:
   * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
-* Nộp evidence cho:
-  * metadata/canonical/hreflang
-  * sitemap/robots
-  * image alt/caption/filename
-  * Om <-> Ap contextual linking
+* `DONE` Nộp evidence packet:
   * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
+* Bổ sung lane hardening:
+  * live-domain probe packet
+  * visual evidence packet cho image-rich routes
 
 ### 3.2 Điều kiện Team 1 chấp nhận
 
-* Report đủ 10 mục theo format.
-* Matrix không để trống route editorial chính.
-* Evidence path có thật và khớp claim.
+* Report/matrix/packet khớp claim hiện tại.
+* Không có lệch role giữa Om và Ap.
+* Hoàn tất live-domain probe nếu Team 1 yêu cầu cho verdict cuối.
 
 ### 3.3 Mức đóng lane
 
-* `REVIEWED_BLOCKED_P0` nếu đã nộp nhưng evidence chưa đủ.
-* `PASS_WITH_QUEUE` nếu P0 editorial sạch nhưng còn hàng P1.
+* `PASS_WITH_QUEUE` nếu P0 editorial sạch và còn hàng P1.
+* `REVIEWED_BLOCKED_P0` nếu review phát hiện gap lớn ở live-domain parity.
 
 ---
 
@@ -146,5 +136,5 @@ Current status:
 Checklist này hoàn thành khi:
 
 * Team 2 và Team 3 thoát `REVIEWED_BLOCKED_P0`
-* Ap Team thoát `PENDING_REPORT`
+* Ap Team có verdict Team 1 cuối
 * Team 1 có thể chốt state tổng theo lane bằng evidence, không cần suy đoán

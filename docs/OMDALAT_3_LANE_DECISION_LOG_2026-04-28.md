@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Decision Log
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -171,6 +171,75 @@ Impact:
 * Team 2 closure chỉ mở lại sau khi nộp evidence pass cho contact route trên canonical.
 * Team 3 phải phối hợp nếu nguyên nhân nằm ở runtime mapping/deploy parity.
 
+### D-008
+
+Date: 2026-04-29  
+Type: Team 2 Closure Result  
+Status: LOCKED
+
+Decision:
+
+Team 1 chốt lane Om public ở mức `PASS_WITH_QUEUE` sau khi route canonical đã phục hồi và matrix core P0 đã cập nhật đủ bằng chứng.
+
+Evidence checkpoint:
+
+* deploy: `https://f633122e.omdalat-web-ezk.pages.dev`
+* canonical probes:
+  * `https://omdalat.com/vi/contact` -> `200`
+  * `https://omdalat.com/en/contact` -> `200`
+  * `https://omdalat.com/vi/about` -> `200`
+
+Reason:
+
+Điều kiện khóa tại `D-007` đã đạt; P0 lane Om public đã sạch. Các việc còn lại thuộc hardening queue P1.
+
+Impact:
+
+* Team 2 không còn là blocker P0 cho global gate.
+* Team 1 tập trung closure vào Team 3 + Ap Team.
+* Team 2 tiếp tục P1 queue song song, không chặn release gate P0.
+
+### D-009
+
+Date: 2026-04-29  
+Type: Runtime Gate Tightening  
+Status: LOCKED
+
+Decision:
+
+Team 1 nâng `cf:runtime-map:check` để bắt buộc kiểm tra trực tiếp trên canonical app host:
+
+* `https://app.omdalat.com/vi/member/register` phải `200`
+* `https://app.omdalat.com/vi/member/operations` phải redirect đúng reviewed gate
+
+Reason:
+
+Gate cũ có thể pass dù canonical app host vẫn fail localized member routes, gây PASS giả cho Team 3.
+
+Impact:
+
+* Team 3 chỉ được thoát `REVIEWED_BLOCKED_P0` khi hai route localized trên canonical host pass đúng.
+* Build/deploy pass ở shadow runtime không đủ để closure nếu canonical parity chưa đạt.
+
+### D-010
+
+Date: 2026-04-29  
+Type: Ap Lane Intake  
+Status: LOCKED
+
+Decision:
+
+Team 1 chấp nhận intake submission của Ap Team và chuyển lane từ `PENDING_REPORT` sang `REVIEW_READY`.
+
+Reason:
+
+Ap Team đã nộp đủ bộ report + matrix + evidence packet current-state và đã có check nội bộ pass (`check-content-routes`).
+
+Impact:
+
+* Ap lane không còn blocker do thiếu nộp.
+* Team 1 thực hiện verdict cuối ở vòng review kế tiếp (`PASS_WITH_QUEUE` hoặc `REVIEWED_BLOCKED_P0` nếu phát hiện gap mới).
+
 ---
 
 ## 2. Khu vực cập nhật review outcome
@@ -179,13 +248,11 @@ Impact:
 
 Status:
 
-* `REVIEWED_BLOCKED_P0`
+* `PASS_WITH_QUEUE`
 
 Next Team 1 action:
 
-* chờ Team 2 hoàn thiện alt text audit và mở rộng metadata extract cho full route P0
-* chờ Team 2 + Team 3 xác minh và đóng route gap canonical (`/vi/contact`, `/en/contact`, `/vi/about`)
-* sau khi probe canonical pass lại, Team 1 chốt verdict lane Om public
+* theo dõi Team 2 queue P1 (alt/caption expansion + regression hardening), không dùng làm blocker P0
 
 ### R-TEAM3-APP-RUNTIME
 
@@ -195,25 +262,25 @@ Status:
 
 Next Team 1 action:
 
-* xác nhận runtime drift evidence mới của Team 3:
+* xác nhận runtime evidence mới sau gate tăng cường `D-009`:
   * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
   * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
-* chờ Team 3 chốt runtime canonical parity để `app.omdalat.com` có đủ:
-  * `/vi/member/register`
-  * `/vi/member/operations`
-  * `/api/support`
-* chờ Team 3 rerun smoke live pass lại sau khi runtime parity được khôi phục
+* Team 3 phải đóng canonical parity trên `app.omdalat.com` cho:
+  * `/vi/member/register` (`200`)
+  * `/vi/member/operations` (redirect reviewed gate)
+* giữ lại support/contact lane ở trạng thái `PASS` (đã kiểm lại `200`)
 * sau khi đủ evidence pass, Team 1 chốt lại verdict lane App member runtime
 
 ### R-AP-EDITORIAL
 
 Status:
 
-* `PENDING_REPORT`
+* `REVIEW_READY`
 
 Next Team 1 action:
 
-* chờ report Ap Team theo file starter
+* review report/matrix/evidence packet Ap Team đã nộp
+* chốt verdict cuối cho lane Ap: `PASS_WITH_QUEUE` hoặc `REVIEWED_BLOCKED_P0`
 
 ---
 

@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Checkpoint
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -30,37 +30,39 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### 1.1 Team 2 — Om public
 
-* Status: `REVIEWED_BLOCKED_P0`
-* Progress: `~92%` (còn `~8%`)
-* Lý do còn block:
-  * alt audit còn `PENDING_AUDIT`
-  * metadata text-level chưa phủ full route P0
-  * Team 1 probe canonical `2026-04-29` thấy route gap:
-    * `/vi/contact` -> `404`
-    * `/en/contact` -> `404`
-    * `/vi/about` -> `404`
+* Status: `PASS_WITH_QUEUE`
+* Progress: `100%` cho P0
+* Ghi chú:
+  * route gap canonical đã đóng sau deploy `f633122e`:
+    * `/vi/contact` -> `200`
+    * `/en/contact` -> `200`
+    * `/vi/about` -> `200`
+  * phần còn lại chỉ là P1 hardening queue
 
 ### 1.2 Team 3 — App member runtime
 
 * Status: `REVIEWED_BLOCKED_P0`
-* Progress: `~60%` (còn `~40%`)
+* Progress: `~82%` (còn `~18%`)
 * Lý do còn block:
-  * runtime drift (`404/502/405`)
-  * smoke live fail ở batch mới
-  * chưa có fresh pass packet sau khi chốt parity
-* Team 1 probe mới (`00:24 ICT, 2026-04-29`) vẫn fail:
+  * canonical parity trên `app.omdalat.com` chưa đạt
+  * checker gate mới `D-009` đang fail localized routes
+  * chưa có fresh pass packet sau khi canonical host bắt kịp artifact mới
+* Team 1 probe mới (`2026-04-29`) xác nhận:
   * `/vi/member/register` -> `404`
   * `/vi/member/operations` -> `404`
-  * `/api/support` -> `502`
-  * `/api/contact` -> `405`
+  * `/api/support` -> `200`
+  * `/api/contact` -> `200`
+* Shadow runtime đã pass:
+  * deploy: `https://d6b35718.omdalat-app-2ol.pages.dev`
+  * `/vi/member/register` -> `200`
 
 ### 1.3 Ap Team — Ap editorial
 
-* Status: `PENDING_REPORT`
-* Progress: `N/A` (baseline Team 1 prefill khoảng `35%`, chưa phải submission owner)
+* Status: `REVIEW_READY`
+* Progress: `~88%` (theo packet owner lane)
 * Lý do còn block:
-  * chưa nộp current-state report chính thức
-  * chưa điền matrix/evidence packet bằng dữ liệu runtime thật
+  * chờ Team 1 verdict cuối
+  * live-domain probe bổ sung chưa nộp
 
 ---
 
@@ -75,9 +77,8 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### 2.2 P0 blocked
 
-* Team 2: route gap canonical + alt audit/metadata coverage chưa đủ.
-* Team 3: runtime/API drift + smoke fail batch mới.
-* Ap Team: chưa có submission current-state.
+* Team 3: canonical parity ở `app.omdalat.com`.
+* Ap Team: không còn blocked do thiếu submission; còn chờ verdict Team 1.
 
 ### 2.3 P1 queue
 
@@ -91,9 +92,9 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### Team 2
 
-1. Điền nốt `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md` để không còn `PENDING_AUDIT` ở route P0.
-2. Mở rộng `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md` cho full route P0.
-3. Re-check 3 route canonical đang lỗi `404` và nộp bằng chứng mới.
+1. Không còn blocker P0; tiếp tục hardening P1.
+2. Mở rộng alt/caption audit cho secondary surfaces.
+3. Bổ sung regression check blacklist VI/EN theo queue.
 
 ### Team 3
 
@@ -104,20 +105,16 @@ Team 1 dùng file này để nhắc việc tiếp theo theo nhịp ngắn, khôn
 
 ### Ap Team
 
-1. Chuyển report từ baseline sang current-state thật:
-   * `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
-2. Điền matrix route/metadata/image:
-   * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
-3. Nộp evidence packet:
-   * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
+1. Chuẩn bị live-domain probe packet (`canonical/hreflang/robots/sitemap` trên host live).
+2. Bổ sung visual evidence packet cho các route image-rich.
+3. Chờ Team 1 verdict cuối và xử lý ngay nếu có revision.
 
 ---
 
 ## 4. Global gate
 
 * Current gate: `NO_GO_FOR_FULL_3_LANE_CLOSURE`
-* Team 1 closure lock for Team 2: `D-007` (không cho `PASS_WITH_QUEUE` khi contact canonical còn `404`)
+* Team 1 closure lock for Team 2: `D-007` đã đạt điều kiện, closure result khóa tại `D-008`
 * Điều kiện để Team 1 chuyển sang `GO`:
-  * Team 2 thoát `REVIEWED_BLOCKED_P0`
   * Team 3 thoát `REVIEWED_BLOCKED_P0`
-  * Ap Team thoát `PENDING_REPORT`
+  * Ap Team có verdict cuối (`PASS_WITH_QUEUE` hoặc `PASS`)

@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Admin Next Actions
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE NOTICE
 
@@ -44,23 +44,18 @@ Quick command:
 
 ## 1. Team 1 review snapshot
 
-* Team 2: `REVIEWED_BLOCKED_P0` (`~8%` còn lại) vì còn alt audit pending và route gap canonical.
-* Team 3: `REVIEWED_BLOCKED_P0` (`~40%` còn lại) vì runtime drift (`404/502/405`) và smoke fail.
-* Ap Team: `PENDING_REPORT` (`~65%` còn lại từ baseline prefill) vì chưa nộp current-state evidence thật.
+* Team 2: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
+* Team 3: `REVIEWED_BLOCKED_P0` (`~18%` còn lại) vì canonical parity fail ở localized member routes.
+* Ap Team: `REVIEW_READY` (`~12%` còn lại) chờ Team 1 verdict cuối.
 
 ---
 
 ## 2. Việc Team 2 cần làm ngay
 
-* Hoàn thiện alt audit: không còn `PENDING_AUDIT` ở các route P0 trong:
-  * `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md`
-* Bổ sung metadata text-level cho full route P0 trong:
-  * `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md`
-* Phối hợp Team 3 xác minh route gap canonical Team 1 vừa probe:
-  * `curl -I https://omdalat.com/vi/contact`
-  * `curl -I https://omdalat.com/en/contact`
-  * `curl -I https://omdalat.com/vi/about`
-* Cập nhật lại evidence packet Om public sau khi route gap được đóng.
+* Không còn nhiệm vụ blocker P0.
+* Tiếp tục P1 queue:
+  * mở rộng alt/caption audit cho secondary public surfaces
+  * tăng regression check cho bilingual copy
 
 File chính:
 
@@ -71,16 +66,14 @@ File chính:
 
 ## 3. Việc Team 3 cần làm ngay
 
-* Chốt runtime parity cho host canonical để các lane sau không còn drift:
-  * `/vi/member/register`
-  * `/vi/member/operations`
-  * `/api/support`
-  * `/api/contact`
+* Chốt runtime parity cho host canonical:
+  * `/vi/member/register` phải `200`
+  * `/vi/member/operations` phải redirect reviewed gate
 * Rerun:
   * `npm run cf:runtime-map:check`
   * `npm run mail:smoke:e2e:live`
 * Cập nhật `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md` bằng artifact/smoke mới nếu pass.
-* Phối hợp Team 2 xác minh route gap Om public nếu nguyên nhân nằm ở mapping/deploy parity.
+* Ghi rõ mapping quyết định cuối giữa account canonical và shadow runtime nếu có chuyển domain/project.
 
 File chính:
 
@@ -91,11 +84,9 @@ File chính:
 
 ## 4. Việc Ap Team cần làm ngay
 
-* Nộp report current-state lane editorial theo format chuẩn.
-* Điền route+metadata matrix cho các route editorial chính.
-* Nộp evidence cho `sitemap/robots/canonical/hreflang` và image system.
-* Xác nhận/hoàn thiện baseline prefill Team 1 đã tạo trong report, matrix, evidence packet.
-* Nộp thêm quick progress `% còn lại` ở cuối report để Team 1 tổng hợp global progress theo cùng công thức.
+* Chuẩn bị live-domain probe packet cho các route editorial chính.
+* Bổ sung visual evidence cho image-rich routes (cards, hero, gallery).
+* Sẵn sàng nhận verdict Team 1 và xử lý revision ngay trong lane Ap.
 
 File chính:
 

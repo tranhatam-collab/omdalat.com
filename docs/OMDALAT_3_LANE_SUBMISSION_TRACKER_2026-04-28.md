@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Submission Tracker
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -46,19 +46,21 @@ Submission status:
 
 Review status:
 
-* `REVIEWED_BLOCKED_P0`
+* `PASS_WITH_QUEUE`
 
 Evidence status:
 
-* `PARTIAL_WITH_ROUTE_GAP`
+* `READY_WITH_QUEUE`
 
 Team 1 note:
 
-* Team 2 đã nộp report canonical + file alias theo naming tracker, đã có metadata matrix và alt audit file riêng.
-* Team 1 review outcome: lane chưa thể đóng P0 vì alt audit vẫn còn `PENDING_AUDIT` và nhiều route trong matrix chưa đủ text-level extract.
-* Team 1 live probe ngày `2026-04-29` ghi nhận thêm route gap trên canonical (`/vi/contact`, `/en/contact`, `/vi/about` trả `404`), nên cần Team 2 + Team 3 phối hợp xác minh runtime mapping trước khi claim done lane Om public.
-* Closure policy đã khóa tại `D-007`: không chấp nhận `PASS_WITH_QUEUE` khi contact route canonical còn `404`.
-* Tiến độ Team 2 current-state: giữ ở khoảng `92%` cho tới khi đóng route gap và hoàn thiện alt audit chi tiết.
+* Team 2 đã nộp report canonical + metadata matrix + alt audit + evidence packet đủ cho core P0 route set.
+* Team 1 xác nhận route gap canonical đã đóng sau deploy `f633122e`:
+  * `/vi/contact` -> `200`
+  * `/en/contact` -> `200`
+  * `/vi/about` -> `200`
+* Closure rule `D-007` đã được thỏa điều kiện, lane Om public được chuyển sang `PASS_WITH_QUEUE`.
+* Tiến độ Team 2 current-state: `100%` cho P0 closure; phần còn lại chuyển về P1 queue.
 
 ---
 
@@ -78,18 +80,19 @@ Review status:
 
 Evidence status:
 
-* `RECEIVED_BLOCKED_RUNTIME_DRIFT`
+* `RECEIVED_BLOCKED_CANONICAL_PARITY`
 
 Team 1 note:
 
-* Team 3 đã cập nhật report + matrix theo live probes ngày `2026-04-28`, không còn giữ trạng thái `partial-ready`.
-* Team 1 review outcome: lane đang `BLOCKED` bởi runtime drift (route/API `404/502/405`) và toolchain dataless blocker, chưa đủ điều kiện đóng P0.
-* Team 1 probe bổ sung lúc `00:24 ICT, 2026-04-29` xác nhận drift vẫn còn:
-  * `GET https://app.omdalat.com/vi/member/register` -> `404`
-  * `GET https://app.omdalat.com/vi/member/operations` -> `404`
-  * `POST https://app.omdalat.com/api/support` (payload hợp lệ) -> `502`
-  * `POST https://omdalat.com/api/contact` -> `405`
-* Tiến độ Team 3 current-state: khoảng `60%`, còn lại khoảng `40%` để đóng P0.
+* Team 3 đã nộp report + matrix + packet current-state và đã có build/deploy mới lên shadow runtime (`d6b35718`).
+* Team 1 recheck ngày `2026-04-29`:
+  * `pnpm --filter @omdalat/app build:cf` -> `PASS`
+  * deploy shadow app runtime -> `https://d6b35718.omdalat-app-2ol.pages.dev`
+  * tại shadow runtime: `/vi/member/register` -> `200`, `/vi/member/login` -> `200`
+* Blocker còn mở là canonical parity:
+  * canonical `app.omdalat.com` vẫn trả `404` cho `/vi/member/register` và `/vi/member/operations`
+  * `POST /api/support` và `POST /api/contact` hiện đã `200`
+* Tiến độ Team 3 current-state: khoảng `82%`, còn lại khoảng `18%` để đóng P0.
 
 ---
 
@@ -101,20 +104,25 @@ Report path:
 
 Submission status:
 
-* `PENDING`
+* `RECEIVED`
 
 Review status:
 
-* `NOT_REVIEWED`
+* `REVIEW_READY`
 
 Evidence status:
 
-* `PENDING`
+* `RECEIVED_READY_FOR_TEAM1_REVIEW`
 
 Team 1 note:
 
-* Team 1 đã prefill baseline cho report/matrix/evidence packet của lane Ap để rút thời gian nộp.
-* Chờ Ap Team xác nhận và điền current-state evidence thật để chuyển trạng thái từ `PENDING` sang `RECEIVED`.
+* Ap Team đã nộp đủ bộ current-state:
+  * `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
+  * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
+  * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
+* Team 1 đã xác nhận nhanh bằng command nội bộ:
+  * `node scripts/check-content-routes.mjs` -> `PASS`
+* Lane Ap hiện chuyển từ `PENDING_REPORT` sang `REVIEW_READY`; chờ Team 1 verdict cuối.
 
 ---
 

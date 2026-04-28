@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Evidence Packet Index
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -55,12 +55,9 @@ Current Team 2 submission (2026-04-28):
 
 Gap còn mở:
 
-* alt text audit riêng cho lane Om public vẫn còn nhiều dòng `PENDING_AUDIT`
-* metadata matrix chưa phủ full route P0 ở mức text-level extract
-* Team 1 probe canonical `2026-04-29` ghi nhận route gap:
-  * `https://omdalat.com/vi/contact` -> `404`
-  * `https://omdalat.com/en/contact` -> `404`
-  * `https://omdalat.com/vi/about` -> `404`
+* không còn gap P0 trong core route set
+* queue còn lại:
+  * mở rộng alt/caption audit cho secondary public surfaces ngoài core route set
 
 ---
 
@@ -96,12 +93,21 @@ Current Team 3 submission (2026-04-28):
   * `CI=1 CLOUDFLARE_ACCOUNT_ID=f3f9... wrangler pages project list --json`
 * consolidated drift evidence:
   * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
+* Team 1 recheck mới:
+  * `pnpm --filter @omdalat/app build:cf` -> `PASS`
+  * deploy shadow runtime: `https://d6b35718.omdalat-app-2ol.pages.dev`
+  * gate tăng cường (`D-009`) fail trên canonical host:
+    * `https://app.omdalat.com/vi/member/register` -> `404`
+    * `https://app.omdalat.com/vi/member/operations` -> `404`
+  * support/contact lane đã phục hồi:
+    * `POST https://app.omdalat.com/api/support` -> `200`
+    * `POST https://omdalat.com/api/contact` -> `200`
 
 Gap còn mở:
 
-* runtime parity cho `app.omdalat.com` (dang thieu register/operations/support lane)
-* mail lane (`/api/contact`, `/api/support`) chua dat smoke contract
-* fresh artifact + smoke pass packet sau khi chot runtime mapping
+* runtime parity cho `app.omdalat.com` (dang thieu localized register/operations lane)
+* fresh runtime-map pass theo gate `D-009`
+* fresh smoke packet sau khi canonical host bắt kịp artifact mới
 
 Decision note:
 
@@ -124,6 +130,22 @@ Expected attachments:
 * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
 * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
 * report lane Ap editorial
+
+Current Ap Team submission (2026-04-29):
+
+* report:
+  * `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
+* matrix:
+  * `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
+* evidence packet:
+  * `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
+* route/sitemap/robots check:
+  * `node scripts/check-content-routes.mjs` -> `PASS`
+
+Gap còn mở:
+
+* Team 1 verdict cuối cho lane Ap
+* live-domain probe packet bổ sung (nếu Team 1 yêu cầu)
 
 ---
 

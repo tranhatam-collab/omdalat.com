@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Global Progress
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE SNAPSHOT
 
@@ -32,40 +32,40 @@ File này cho một cái nhìn nhanh:
 ### 1.1 Om Public (Team 2)
 
 * Submission: `RECEIVED`
-* Review: `REVIEWED_BLOCKED_P0`
-* Evidence: `PARTIAL_WITH_ROUTE_GAP`
-* Current-state progress (theo report Team 2): `92%`
-* Block chính: thiếu alt audit hoàn chỉnh + còn route gap trên canonical (`/vi/contact`, `/en/contact`, `/vi/about` trả `404` theo Team 1 probe 2026-04-29)
+* Review: `PASS_WITH_QUEUE`
+* Evidence: `READY_WITH_QUEUE`
+* Current-state progress (theo report Team 2): `100%` cho P0
+* Block chính: `NONE` ở P0; còn P1 hardening queue
 
 ### 1.2 App Member Runtime (Team 3)
 
 * Submission: `RECEIVED`
 * Review: `REVIEWED_BLOCKED_P0`
-* Evidence: `RECEIVED_BLOCKED_RUNTIME_DRIFT`
-* Current-state progress (theo report Team 3): `60%`
-* Block chính: runtime drift (`register/operations/support/contact` lanes fail) + toolchain `dataless` blocker cho local build artifact
+* Evidence: `RECEIVED_BLOCKED_CANONICAL_PARITY`
+* Current-state progress (theo report Team 3 + Team 1 recheck): `82%`
+* Block chính: canonical parity của `app.omdalat.com` vẫn fail localized routes (`/vi/member/register`, `/vi/member/operations`) dù shadow runtime đã pass
 
 ### 1.3 Ap Editorial (Ap Team)
 
-* Submission: `PENDING`
-* Review: `NOT_REVIEWED`
-* Evidence: `PENDING`
-* Current-state progress: `N/A` (chưa có report current-state)
-* Block chính: chưa nộp report + matrix + evidence packet đầu tiên theo chuẩn mới
-* Team 1 support: baseline prefill đã được tạo, chờ Ap Team xác nhận và điền evidence thật
+* Submission: `RECEIVED`
+* Review: `REVIEW_READY`
+* Evidence: `RECEIVED_READY_FOR_TEAM1_REVIEW`
+* Current-state progress: `88%` (theo packet Ap Team đã nộp)
+* Block chính: còn chờ Team 1 review verdict và live-domain probe bổ sung
+* Team 1 support: baseline prefill đã được thay bằng evidence current-state của owner Ap Team
 
 ---
 
 ## 2. Chỉ số tổng (cycle hiện tại)
 
-* Lanes đã nộp report: `2/3` (~`66.7%`)
-* Lanes đã được Team 1 review: `2/3` (~`66.7%`)
-* Lanes đã thoát trạng thái blocked P0: `0/3` (`0%`)
-* Trung bình progress của lanes đã nộp: ~`76%` (`(92 + 60) / 2`)
+* Lanes đã nộp report: `3/3` (`100%`)
+* Lanes đã được Team 1 review verdict cuối: `2/3` (~`66.7%`)
+* Lanes đã thoát trạng thái blocked P0: `2/3` (~`66.7%`)
+* Trung bình progress toàn bộ 3 lane: ~`90%` (`(100 + 82 + 88) / 3`)
 
 Operational note:
 
-* Chỉ số trung bình `76%` phản ánh 2 lane đã nộp (Team 2 + Team 3), không phản ánh lane Ap đang `PENDING_REPORT`.
+* Gate còn `NO_GO` vì Team 3 vẫn blocked canonical parity, không phải vì thiếu submission.
 
 ---
 
@@ -77,17 +77,16 @@ Current global gate:
 
 Reason:
 
-* Team 2 còn `REVIEWED_BLOCKED_P0`
 * Team 3 còn `REVIEWED_BLOCKED_P0`
-* Ap Team còn `PENDING_REPORT`
+* Ap Team đã nộp nhưng chưa có Team 1 verdict cuối
 
 ---
 
 ## 4. Điều kiện chuyển sang GO
 
 * Team 2: nộp đủ metadata text-level + alt audit + Om evidence packet
-* Team 3: nộp fresh artifact + fresh smoke + runtime evidence packet mới
-* Ap Team: nộp report + matrix + evidence packet current-state đầu tiên
+* Team 3: đóng canonical parity cho `app.omdalat.com` và nộp fresh runtime-map pass theo gate mới
+* Ap Team: qua Team 1 verdict cuối (PASS_WITH_QUEUE hoặc REVIEWED_BLOCKED_P0 nếu phát hiện gap)
 * Team 1 review xong cả 3 lane và chốt decision log không còn blocker P0
 
 ---

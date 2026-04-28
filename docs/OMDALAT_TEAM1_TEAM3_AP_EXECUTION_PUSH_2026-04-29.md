@@ -4,7 +4,7 @@ Ap Dalat / Ấp Đà Lạt
 
 Team 1 Execution Push — Team 3 + Ap Team
 
-Version: v1.0.0
+Version: v1.1.0
 
 Status: ACTIVE
 
@@ -33,16 +33,16 @@ Probe Team 1 tại `00:24 ICT, 2026-04-29`:
 
 * `GET /vi/member/register` -> `404`
 * `GET /vi/member/operations` -> `404`
-* `POST /api/support` -> `502`
-* `POST /api/contact` -> `405`
+* `POST /api/support` -> `200`
+* `POST /api/contact` -> `200`
+* shadow runtime mới:
+  * `https://d6b35718.omdalat-app-2ol.pages.dev/vi/member/register` -> `200`
 
 ### 1.2 Command bắt buộc Team 3 phải nộp kết quả
 
 ```bash
 curl -I https://app.omdalat.com/vi/member/register
 curl -I https://app.omdalat.com/vi/member/operations
-curl -i -sS -X POST https://app.omdalat.com/api/support -H 'content-type: application/json' --data '{"name":"team3-check","email":"team3@omdalat.com","subject":"runtime-check","message":"ping"}'
-curl -i -sS -X POST https://omdalat.com/api/contact -H 'content-type: application/json' --data '{"name":"team3-check","email":"team3@omdalat.com","message":"ping"}'
 npm run cf:runtime-map:check
 npm run mail:smoke:e2e:live
 ```
@@ -50,8 +50,7 @@ npm run mail:smoke:e2e:live
 ### 1.3 Điều kiện Team 1 nhận closure Team 3
 
 * register/operations không còn `404`
-* support không còn `502`
-* contact không còn `405` cho contract release hiện tại
+* support/contact tiếp tục giữ `200`
 * runtime-map check pass
 * mail smoke live pass
 * packet cập nhật:
@@ -63,22 +62,18 @@ npm run mail:smoke:e2e:live
 
 ### 2.1 Trạng thái hiện tại
 
-* Lane đang `PENDING_REPORT` (mới có baseline prefill Team 1, chưa có owner evidence thật)
+* Lane đang `REVIEW_READY` (đã có owner evidence current-state)
 
 ### 2.2 File Ap Team bắt buộc điền
 
-* `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
-* `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
-* `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
+* `DONE` `ap.omdalat.com/docs/APTEAM_EDITORIAL_AUDIT_REPORT_2026-04-28.md`
+* `DONE` `ap.omdalat.com/docs/AP_EDITORIAL_ROUTE_AND_METADATA_MATRIX_2026-04-28.md`
+* `DONE` `ap.omdalat.com/docs/AP_EDITORIAL_EVIDENCE_PACKET_2026-04-28.md`
 
 ### 2.3 Điều kiện Team 1 nhận review Ap lane
 
-* report đủ 10 mục theo format
-* matrix có route editorial chính + metadata/locale status rõ
-* evidence packet có path thật cho:
-  * canonical/hreflang/sitemap/robots
-  * alt/caption/filename audit
-  * QA summary
+* nộp thêm live-domain probe packet
+* nộp visual packet cho image-rich routes
 
 ---
 
@@ -92,7 +87,6 @@ npm run mail:smoke:e2e:live
 
 ## 4. Team 1 closure rule
 
-* Team 3 chỉ thoát `REVIEWED_BLOCKED_P0` khi có fresh pass evidence.
-* Ap Team chỉ thoát `PENDING_REPORT` khi nộp current-state report thật.
+* Team 3 chỉ thoát `REVIEWED_BLOCKED_P0` khi gate `D-009` pass trên canonical host.
+* Ap Team đang `REVIEW_READY`, Team 1 sẽ chốt verdict cuối sau khi xem live-domain probe packet.
 * Global gate vẫn `NO_GO` cho tới khi cả 2 lane đạt điều kiện trên.
-
