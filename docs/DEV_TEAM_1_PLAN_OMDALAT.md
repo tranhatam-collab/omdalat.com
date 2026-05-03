@@ -145,6 +145,7 @@ Trong sprint hiện tại, Team 1 cũng trực tiếp chạm vào:
 Team 1 kích hoạt file kế hoạch tổng:
 
 - `docs/OMDALAT_CONTENT_OPERATING_SYSTEM_AND_100_SEO_ROADMAP_2026-05-03.md`
+- `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
 
 Phạm vi đã áp dụng:
 
@@ -154,13 +155,26 @@ Phạm vi đã áp dụng:
 - 3 bài nền đầu tiên đã được đưa vào content seed và public runtime
 - article detail có link nội bộ bắt buộc sang `/work`, `/stay`, `/join`, và 2 bài liên quan
 - article body giữ layout đọc dài với max-width 720px
+- homepage và article visual phải bám đời sống thật tại Đà Lạt, không dùng hướng du lịch hóa hoặc nghỉ dưỡng hóa
+- seed ảnh bài viết đã tách thành nguồn riêng: `data/seed/article-images.seed.json`
+- gate kiểm tra source/license/alt/caption/crop cho bài published đã tích hợp vào `scripts/validate-content-seed.mjs`
+- 3 bài nền đầu tiên hiện dùng ảnh work-context đã duyệt trong seed: bàn làm việc/quán nhỏ/trao đổi quanh laptop. Đây là lớp runtime tạm đạt chuẩn vai trò; khi có bộ ảnh owned tại Đà Lạt, chỉ thay seed và giữ nguyên gate.
 
 Quy tắc cho các team:
 
 - Content không được nộp bài rời rạc, phải nằm trong roadmap/pillar.
 - SEO không được mở slug mới ngoài roadmap nếu chưa cập nhật plan.
 - DEV không được render song ngữ lẫn nhau trong cùng một visible page khi site đang dùng route `/vi` và `/en`.
+- DEV và Content không được chọn ảnh chỉ vì đẹp; ảnh phải đúng Đà Lạt thật, đúng intent của block hoặc bài, và không làm sai kỳ vọng về sống/làm/ở lại.
 - Ap Team giữ `ap.omdalat.com` là editorial site độc lập; Om chỉ bridge đúng ngữ cảnh.
+- Team 1 giữ quyền review cuối với mọi thay đổi ảnh public/editorial nếu ảnh mới có nguy cơ làm lệch vai trò trang.
+
+Checklist điều phối ảnh bắt buộc:
+
+- route nào dùng ảnh nào phải có log `used_routes`
+- ảnh public phải có `alt_vi`, `alt_en`, `caption_vi`, `caption_en`
+- ảnh phải pass desktop crop và mobile crop trước khi đưa vào release gate
+- không thay ảnh vì "đẹp hơn" nếu làm lệch ngữ cảnh bài
 
 ---
 
