@@ -26,7 +26,7 @@ const INDEXABLE_ROUTES = [
 ] as const;
 
 const PUBLIC_LOCALES = getPublicLocaleDescriptors();
-const LAST_MODIFIED = new Date("2026-04-19T09:30:00+07:00");
+const LAST_MODIFIED = new Date("2026-05-03T09:00:00+07:00");
 
 function toLocalizedPath(route: string, locale: PublicOmdalatLocale) {
   if (route === "/") {

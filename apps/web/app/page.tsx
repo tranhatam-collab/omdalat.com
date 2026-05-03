@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { localizePath } from "../../../packages/core";
+import { localizePath, siteConfig } from "../../../packages/core";
+import { getArticlesBySlugs } from "../lib/content-seed";
 import { getRequestLocale } from "../lib/locale";
 import { buildCurrentLocalePageMetadata } from "../lib/metadata";
 import { buildOrganizationSchema, buildWebSiteSchema } from "../lib/schema";
+import { getArticleVisuals } from "../lib/visuals";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildCurrentLocalePageMetadata({
@@ -236,6 +238,12 @@ const faq = [
   }
 ] as const;
 
+const foundationArticleSlugs = [
+  "tu-da-lat-lam-viec-voi-the-gioi",
+  "lam-viec-o-da-lat-co-thuc-te-khong",
+  "tu-mot-ky-nang-den-thu-nhap-o-da-lat"
+] as const;
+
 export default async function HomePage() {
   const locale = await getRequestLocale();
   const organizationSchema = buildOrganizationSchema();
@@ -243,6 +251,7 @@ export default async function HomePage() {
   const heroPrimary = heroMoments[0];
   const heroSecondary = heroMoments.slice(1);
   const responsiveImageStyle = { width: "100%", maxWidth: "100%", display: "block" } as const;
+  const foundationArticles = getArticlesBySlugs(locale, foundationArticleSlugs);
 
   return (
     <>
@@ -368,6 +377,65 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <section className="runtime-home-section" aria-label={locale === "vi" ? "Làm việc từ Đà Lạt" : "Working from Dalat"}>
+          <div className="runtime-home-split">
+            <div className="runtime-home-section-head">
+              <p className="runtime-kicker">{locale === "vi" ? "Làm việc từ Đà Lạt" : "Working from Dalat"}</p>
+              <h2>{locale === "vi" ? "Từ Đà Lạt, vẫn có thể làm việc với thế giới" : "Working with the world from Dalat"}</h2>
+            </div>
+
+            <section className="runtime-panel runtime-home-work-panel">
+              <p>
+                {locale === "vi"
+                  ? "Từ Đà Lạt, vẫn có thể làm việc với thế giới. Không phải bằng cách chạy theo, mà bằng cách giữ một nhịp làm việc rõ."
+                  : "From Dalat, it is still possible to work with the world. Not by chasing everything, but by keeping a clear working rhythm."}
+              </p>
+              <div className="runtime-actions">
+                <a className="runtime-button primary" href={localizePath("/work", locale)}>
+                  {locale === "vi" ? "Xem công việc" : "Explore work"}
+                </a>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section className="runtime-home-section" aria-label={locale === "vi" ? "Bài nền đang mở" : "Foundational articles"}>
+          <div className="runtime-home-section-head">
+            <p className="runtime-kicker">{locale === "vi" ? "Bài nền" : "Foundation"}</p>
+            <h2>{locale === "vi" ? "Bài nền đang mở" : "Foundational articles now open"}</h2>
+            <p>
+              {locale === "vi"
+                ? "Ba bài đầu tiên giúp người đọc đi từ tò mò sang hiểu đúng: có thể làm gì, bắt đầu từ đâu, và làm sao để ở lại bằng công việc thật."
+                : "The first three articles help readers move from curiosity into clarity: what can be done, where to begin, and how real work can support staying."}
+            </p>
+          </div>
+
+          <div className="runtime-home-article-grid">
+            {foundationArticles.map((article) => {
+              const visual = getArticleVisuals(article, 1)[0];
+
+              return (
+                <a className="runtime-link-card runtime-home-article-card" href={localizePath(article.href, locale)} key={article.id}>
+                  <img
+                    src={visual.src}
+                    alt={locale === "vi" ? visual.alt.vi : visual.alt.en}
+                    width={visual.width}
+                    height={visual.height}
+                    loading="lazy"
+                    fetchPriority="auto"
+                    decoding="async"
+                    style={responsiveImageStyle}
+                  />
+                  <span className="runtime-home-article-pill">{article.pillar}</span>
+                  <strong>{article.title}</strong>
+                  <span>{article.excerpt}</span>
+                  <span className="runtime-home-article-cta">{locale === "vi" ? "Đọc bài" : "Read article"}</span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
         <section className="runtime-home-section">
           <div className="runtime-home-section-head">
             <p className="runtime-kicker">{locale === "vi" ? "Phù hợp" : "Fit"}</p>
@@ -473,7 +541,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="runtime-actions">
-            <a className="runtime-button secondary" href={localizePath("/community", locale)}>
+            <a className="runtime-button secondary" href={siteConfig.apOrigin}>
               {locale === "vi" ? "Mở Ấp Đà Lạt" : "Explore Ap Dalat"}
             </a>
           </div>

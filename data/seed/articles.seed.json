@@ -1,54 +1,69 @@
 [
   {
     "id": "article-001",
-    "slug": "song-o-da-lat-la-gi",
+    "slug": "tu-da-lat-lam-viec-voi-the-gioi",
     "order": 1,
-    "pillar_key": "song",
-    "pillar_vi": "Sống ở Đà Lạt",
-    "pillar_en": "Living in Dalat",
-    "title_vi": "Sống ở Đà Lạt là gì",
-    "title_en": "What living in Dalat means",
-    "excerpt_vi": "Một bài mở nền để hiểu đúng nhịp sống, mức phù hợp và điều kiện để ở lại đủ lâu.",
-    "excerpt_en": "A foundation for understanding rhythm, fit, and the conditions for staying long enough.",
-    "content_vi": "Sống ở Đà Lạt không chỉ là đổi địa điểm. Đó là đổi nhịp: chậm hơn, thật hơn, và đòi hỏi bạn tự giữ kỷ luật thay vì dựa vào áp lực bên ngoài. Người ở lại lâu thường hợp với khí hậu, chịu được sự lặng, và biết mình đến đây để sống kiểu gì chứ không chỉ để trốn một nơi khác.",
-    "content_en": "Living in Dalat is not just a change of location. It is a change of rhythm: slower, more honest, and more dependent on self-discipline than outside pressure. People who stay well usually fit the climate, can live with quiet, and know what kind of life they are building instead of simply escaping another city.",
-    "tags": ["da-lat", "song", "nhip-song"],
+    "pillar_key": "work",
+    "pillar_vi": "Làm việc từ Đà Lạt",
+    "pillar_en": "Working from Dalat",
+    "title_vi": "Từ Đà Lạt, vẫn có thể làm việc với thế giới",
+    "title_en": "Working with the world from Dalat",
+    "excerpt_vi": "Đà Lạt không tạo ra công việc thay bạn, nhưng có thể cho bạn một nhịp sống đủ rõ để làm việc tốt hơn.",
+    "excerpt_en": "Dalat does not create work for you, but it can give you a clearer rhythm for doing better work.",
+    "content_vi": "Đà Lạt không phải là một nơi để chạy trốn. Nếu chỉ đến đây để tránh áp lực, áp lực sẽ theo bạn tới cùng. Nhưng nếu đến đây để sắp xếp lại cách sống và cách làm việc, Đà Lạt có thể trở thành một điểm bắt đầu khác: không lớn hơn, không ồn hơn, nhưng rõ hơn.\n\nThế giới đang thay đổi nhanh hơn cách chúng ta nhận ra. Công nghệ, công việc từ xa và những công cụ mới đang làm thay đổi cách con người kiếm sống. Điều từng cần một văn phòng lớn, giờ có thể bắt đầu từ một góc nhỏ.\n\nĐà Lạt không tạo ra tiền cho bạn. Nhưng Đà Lạt có thể cho bạn một nhịp sống giúp bạn làm việc tốt hơn: một buổi sáng có sương, một buổi chiều xuống nhanh, một khoảng yên đủ dài để tập trung.\n\nMột người có thể làm việc từ Đà Lạt nếu họ có một kỹ năng rõ ràng, một công việc cụ thể và một nhịp làm việc có thể lặp lại mỗi ngày. Công việc không nằm ở nơi bạn sống, mà ở giá trị bạn tạo ra.\n\nKhông cần bắt đầu lớn. Chỉ cần bắt đầu đúng: một kỹ năng, một công việc, một nhịp làm việc, và một nơi đủ yên để bạn giữ được điều đó.",
+    "content_en": "Dalat is not a place to escape. If you come here only to avoid pressure, it will follow you. But if you come to reorganize how you live and work, Dalat can become a different kind of beginning: not bigger, not louder, but clearer.\n\nThe world is changing faster than we notice. Technology, remote work, and new tools are reshaping how people earn a living. What once required a large office can now begin in a small corner.\n\nDalat does not create money for you. But it can give you a rhythm that helps you work better: a misty morning, an early evening, and long quiet hours to focus.\n\nA person can work from Dalat with a clear skill, a specific job, and a working rhythm that can be repeated each day. Work is not defined by where you live, but by the value you create.\n\nYou do not need to start big. You need to start in the right way: one skill, one job, one working rhythm, and a place quiet enough to sustain it.",
+    "tags": [
+      "lam-viec-tu-da-lat",
+      "cong-viec-tu-xa",
+      "ky-nang",
+      "thu-nhap"
+    ],
     "access_level": "guest",
     "status": "published"
   },
   {
     "id": "article-002",
-    "slug": "chi-phi-song-da-lat-2026",
+    "slug": "lam-viec-o-da-lat-co-thuc-te-khong",
     "order": 2,
-    "pillar_key": "song",
-    "pillar_vi": "Sống ở Đà Lạt",
-    "pillar_en": "Living in Dalat",
-    "title_vi": "Chi phí sống ở Đà Lạt 2026",
-    "title_en": "Cost of living in Dalat 2026",
-    "excerpt_vi": "Bài này nói rõ các khoản sống thật, không tô hồng và không ước lượng mơ hồ.",
-    "excerpt_en": "A clear look at real living costs without polish or vague assumptions.",
-    "content_vi": "Chi phí ở Đà Lạt không chỉ nằm ở tiền thuê chỗ ở. Điều quyết định là tổng nhịp chi tiêu: chỗ ở, ăn uống, di chuyển, góc làm việc, dự phòng mùa mưa và phần ngân sách để không phải hoảng khi nhịp sống chậm hơn dự kiến. Ai tính được tổng nhịp này sớm sẽ bền hơn rất nhiều.",
-    "content_en": "The cost of living in Dalat is not only about rent. The real question is the full spending rhythm: accommodation, food, transport, a workable setup, rainy-season buffer, and enough margin so you do not panic when life moves more slowly than expected. People who map that rhythm early tend to last much longer.",
-    "tags": ["da-lat", "song", "chi-phi"],
+    "pillar_key": "work",
+    "pillar_vi": "Làm việc từ Đà Lạt",
+    "pillar_en": "Working from Dalat",
+    "title_vi": "Làm việc ở Đà Lạt có thực tế không",
+    "title_en": "Is working in Dalat realistic",
+    "excerpt_vi": "Làm việc ở Đà Lạt là thực tế khi bạn có kỹ năng rõ, nguồn việc cụ thể và khả năng tự giữ nhịp.",
+    "excerpt_en": "Working in Dalat becomes realistic with a clear skill, a defined source of work, and the ability to keep your own rhythm.",
+    "content_vi": "Làm việc ở Đà Lạt không phải là một giấc mơ. Nhưng nó cũng không tự xảy ra.\n\nNhiều người đến Đà Lạt với cảm giác nhẹ hơn, chậm hơn, dễ thở hơn. Nhưng chỉ sau một thời gian ngắn, họ nhận ra rằng công việc không tự đến, thu nhập không tự ổn định, và cảm giác yên không thay thế được kỷ luật.\n\nLàm việc ở Đà Lạt là thực tế nếu bạn có ba điều: một kỹ năng rõ ràng, một nguồn việc cụ thể, và khả năng tự quản lý thời gian của mình.\n\nKhông có một thị trường lớn ngay tại đây. Điều đó có nghĩa là bạn phải kết nối ra ngoài. Nhưng chính điều đó cũng giúp bạn làm việc với thế giới mà không bị giới hạn bởi địa điểm.\n\nCâu hỏi không phải là Đà Lạt có việc hay không. Câu hỏi là bạn có thể tạo ra công việc từ nơi mình đang ở hay không.",
+    "content_en": "Working in Dalat is not a dream. But it does not happen on its own either.\n\nMany people come to Dalat expecting a lighter and calmer life. After a short time, they realize that work does not arrive by itself, income does not stabilize automatically, and calmness cannot replace discipline.\n\nWorking in Dalat becomes real when you have three things: a clear skill, a defined source of work, and the ability to manage your own time.\n\nThere is no large local market here. That means you need to connect outward. But that also allows you to work with the world without being limited by location.\n\nThe question is not whether Dalat has jobs. The question is whether you can create work from where you are.",
+    "tags": [
+      "lam-viec-o-da-lat",
+      "ky-luat",
+      "thu-nhap",
+      "cong-viec-tu-xa"
+    ],
     "access_level": "guest",
     "status": "published"
   },
   {
     "id": "article-003",
-    "slug": "o-dau-khi-moi-den-da-lat",
+    "slug": "tu-mot-ky-nang-den-thu-nhap-o-da-lat",
     "order": 3,
-    "pillar_key": "song",
-    "pillar_vi": "Sống ở Đà Lạt",
-    "pillar_en": "Living in Dalat",
-    "title_vi": "Ở đâu khi mới đến Đà Lạt",
-    "title_en": "Where to stay when you first arrive in Dalat",
-    "excerpt_vi": "Khung hướng dẫn cho người mới đến, để chọn nơi ở không bị vội và không bị lệch.",
-    "excerpt_en": "A guide for first arrivals so the first stay is deliberate and grounded.",
-    "content_vi": "Bài này sẽ giới thiệu các dạng nơi ở cơ bản, mức phù hợp và điểm cần cân nhắc trước khi ở lại.",
-    "content_en": "This draft introduces stay options, fit, and what to check before settling in.",
-    "tags": ["da-lat", "song", "noi-o"],
+    "pillar_key": "work",
+    "pillar_vi": "Kỹ năng và thu nhập",
+    "pillar_en": "Skills and income",
+    "title_vi": "Từ một kỹ năng nhỏ đến thu nhập tại Đà Lạt",
+    "title_en": "From one small skill to income in Dalat",
+    "excerpt_vi": "Một kỹ năng nhỏ, nếu được lặp lại đủ lâu và đặt vào đúng việc, có thể trở thành điểm bắt đầu của thu nhập.",
+    "excerpt_en": "One small skill, repeated long enough and placed into real work, can become the beginning of income.",
+    "content_vi": "Một người không cần biết quá nhiều để bắt đầu. Nhưng cần biết rõ một điều mình có thể làm.\n\nTại Đà Lạt, khoảng cách giữa một kỹ năng và thu nhập không nằm ở nơi bạn sống, mà nằm ở cách bạn sử dụng kỹ năng đó.\n\nMột người biết viết có thể viết nội dung. Một người biết chỉnh ảnh có thể làm việc cho người khác. Một người biết sắp xếp dữ liệu có thể hỗ trợ công việc từ xa. Một người biết hai ngôn ngữ có thể dịch.\n\nVấn đề không phải là thiếu cơ hội. Vấn đề thường là chưa đi đủ sâu để biến một kỹ năng thành công việc.\n\nKhi một kỹ năng được lặp lại đủ lâu, nó bắt đầu tạo ra thu nhập. Khi thu nhập ổn định, nó tạo ra một nhịp sống. Và khi nhịp sống đủ rõ, bạn có thể ở lại.",
+    "content_en": "You do not need to know many things to start. But you need to clearly know one thing you can do.\n\nIn Dalat, the distance between a skill and income is not about where you live, but how you use that skill.\n\nA person who can write can create content. A person who can edit images can do work for others. A person who can organize data can support remote work. A person who speaks two languages can translate.\n\nThe problem is not the lack of opportunities. The problem is often not going deep enough to turn a skill into work.\n\nWhen a skill is repeated long enough, it begins to generate income. When income stabilizes, it creates a rhythm. And when that rhythm becomes clear, you can stay.",
+    "tags": [
+      "ky-nang",
+      "thu-nhap",
+      "lam-viec-tu-da-lat",
+      "portfolio"
+    ],
     "access_level": "guest",
-    "status": "draft"
+    "status": "published"
   },
   {
     "id": "article-004",
@@ -63,7 +78,11 @@
     "excerpt_en": "A filter piece that helps readers see fit more honestly.",
     "content_vi": "Bản nháp này sẽ nói rõ các dấu hiệu cho thấy Đà Lạt chưa phải lựa chọn phù hợp vào thời điểm hiện tại.",
     "content_en": "This draft clarifies the signs that Dalat may not be the right fit right now.",
-    "tags": ["da-lat", "song", "phu-hop"],
+    "tags": [
+      "da-lat",
+      "song",
+      "phu-hop"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -80,7 +99,11 @@
     "excerpt_en": "See a real day to understand rhythm, not just the surface image.",
     "content_vi": "Bài này sẽ mô tả nhịp sáng, trưa, chiều và tối của một ngày ở lại Đà Lạt.",
     "content_en": "This draft maps the morning, midday, afternoon, and evening rhythm of a Dalat day.",
-    "tags": ["da-lat", "song", "nhip-song"],
+    "tags": [
+      "da-lat",
+      "song",
+      "nhip-song"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -97,7 +120,11 @@
     "excerpt_en": "A draft showing weather as part of how the city is lived, not just background.",
     "content_vi": "Bài này sẽ nối khí hậu, nhịp sinh hoạt và khả năng duy trì một đời sống ổn định.",
     "content_en": "This draft links climate, daily habits, and the ability to maintain stable routines.",
-    "tags": ["da-lat", "song", "thoi-tiet"],
+    "tags": [
+      "da-lat",
+      "song",
+      "thoi-tiet"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -114,7 +141,11 @@
     "excerpt_en": "A comparison piece that helps readers see what they are really looking for.",
     "content_vi": "Bản nháp này giúp phân biệt giữa ý muốn đổi cảnh và quyết định ở lại dài hạn.",
     "content_en": "This draft separates a change of scenery from a long-term decision to stay.",
-    "tags": ["da-lat", "song", "quyet-dinh"],
+    "tags": [
+      "da-lat",
+      "song",
+      "quyet-dinh"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -131,7 +162,11 @@
     "excerpt_en": "A warning frame for the mistakes that can break rhythm early.",
     "content_vi": "Bài này sẽ chỉ ra những sai lầm thường gặp khi người mới cố ở lại mà chưa hiểu hệ.",
     "content_en": "This draft lists common mistakes people make when staying before understanding the system.",
-    "tags": ["da-lat", "song", "sai-lam"],
+    "tags": [
+      "da-lat",
+      "song",
+      "sai-lam"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -148,7 +183,11 @@
     "excerpt_en": "A draft about stability rather than short-lived inspiration.",
     "content_vi": "Bài này sẽ mở ra những điều cần có để một người có thể ở dài hơn một chuyến đi.",
     "content_en": "This draft covers what is needed to stay longer than a trip.",
-    "tags": ["da-lat", "song", "o-lau-dai"],
+    "tags": [
+      "da-lat",
+      "song",
+      "o-lau-dai"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -165,26 +204,34 @@
     "excerpt_en": "A practical draft for solo living with steady rhythm and human connection.",
     "content_vi": "Bài này sẽ tập trung vào an toàn, nhịp sinh hoạt và cách không bị cô lập khi ở một mình.",
     "content_en": "This draft focuses on safety, rhythm, and avoiding isolation while living alone.",
-    "tags": ["da-lat", "song", "solo"],
+    "tags": [
+      "da-lat",
+      "song",
+      "solo"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
   {
     "id": "article-011",
-    "slug": "lam-viec-o-da-lat-co-thuc-te-khong",
+    "slug": "nhung-cong-viec-co-the-lam-tu-da-lat",
     "order": 11,
     "pillar_key": "work",
-    "pillar_vi": "Làm việc ở Đà Lạt",
-    "pillar_en": "Working in Dalat",
-    "title_vi": "Làm việc ở Đà Lạt có thực tế không",
-    "title_en": "Is working in Dalat practical",
-    "excerpt_vi": "Bài nền để phân biệt giữa cảm giác đẹp và khả năng làm việc thật mỗi ngày.",
-    "excerpt_en": "A foundation for separating a pleasant feeling from real day-to-day workability.",
-    "content_vi": "Làm việc ở Đà Lạt có thể rất thực tế nếu bạn không nhầm không khí dễ chịu với năng lực vận hành. Điều quan trọng là điện, mạng, chỗ ngồi, thời gian di chuyển, mức tập trung và cộng đồng đủ nghiêm túc để giữ nhịp công việc đều. Nếu thiếu những yếu tố đó, một nơi đẹp vẫn có thể làm công việc rơi khỏi quỹ đạo.",
-    "content_en": "Working in Dalat can be very practical if you do not confuse a pleasant atmosphere with operating capacity. What matters is power, internet, seating, travel time, focus, and a community serious enough to protect output. Without those conditions, a beautiful place can still pull work off course.",
-    "tags": ["da-lat", "work", "thuc-te"],
+    "pillar_vi": "Làm việc từ Đà Lạt",
+    "pillar_en": "Working from Dalat",
+    "title_vi": "Những công việc có thể làm từ Đà Lạt",
+    "title_en": "Work you can do from Dalat",
+    "excerpt_vi": "Một danh sách thực tế về các loại việc có thể bắt đầu từ Đà Lạt khi bạn có kỹ năng và nhịp làm việc rõ.",
+    "excerpt_en": "A grounded list of work that can begin from Dalat when your skill and working rhythm are clear.",
+    "content_vi": "Có những công việc có thể bắt đầu từ một bàn làm việc nhỏ ở Đà Lạt. Điều quan trọng không phải là tên việc nghe mới hay cũ, mà là việc đó có tạo ra giá trị thật hay không.\n\nBài này đang được biên tập cho đợt xuất bản tiếp theo của hệ nội dung Ôm Đà Lạt.",
+    "content_en": "Some kinds of work can begin from a small desk in Dalat. What matters is not whether the work sounds new or old, but whether it creates real value.\n\nThis article is being edited for the next publishing wave of Om Dalat.",
+    "tags": [
+      "cong-viec",
+      "lam-viec-tu-da-lat",
+      "thu-nhap"
+    ],
     "access_level": "guest",
-    "status": "published"
+    "status": "draft"
   },
   {
     "id": "article-012",
@@ -199,7 +246,11 @@
     "excerpt_en": "A guide for remote workers who want a steadier environment without losing momentum.",
     "content_vi": "Làm việc từ xa ở Đà Lạt hợp với người biết tự dựng nhịp cho mình. Bạn cần giờ làm rõ, chỗ ngồi ổn định, giới hạn đủ chắc giữa nghỉ và làm, cùng một cộng đồng hiểu rằng sự yên tĩnh là để giữ năng lượng làm việc chứ không phải để trôi dạt. Khi những điều đó được giữ đúng, nhịp chậm có thể trở thành lợi thế thật.",
     "content_en": "Remote work in Dalat suits people who can build their own rhythm. You need defined working hours, a stable setup, firm boundaries between rest and work, and a community that understands quiet as a way to preserve energy rather than drift. When those conditions hold, a slower pace becomes a real advantage.",
-    "tags": ["da-lat", "work", "remote"],
+    "tags": [
+      "da-lat",
+      "work",
+      "remote"
+    ],
     "access_level": "guest",
     "status": "published"
   },
@@ -216,7 +267,11 @@
     "excerpt_en": "A draft filtering the kinds of work that fit local life and rhythm.",
     "content_vi": "Bản nháp này sẽ chia nhóm công việc theo độ phù hợp với điều kiện sống ở Đà Lạt.",
     "content_en": "This draft groups work types by how well they match Dalat conditions.",
-    "tags": ["da-lat", "work", "phu-hop"],
+    "tags": [
+      "da-lat",
+      "work",
+      "phu-hop"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -233,7 +288,11 @@
     "excerpt_en": "A draft for independent workers who need a more structured operating rhythm.",
     "content_vi": "Bài này sẽ nói về thói quen, môi trường và cách giữ đầu việc đều khi làm việc tự do.",
     "content_en": "This draft covers habits, environment, and how to keep freelance work steady.",
-    "tags": ["da-lat", "work", "freelance"],
+    "tags": [
+      "da-lat",
+      "work",
+      "freelance"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -250,7 +309,11 @@
     "excerpt_en": "An honest draft about creating income instead of vague storytelling.",
     "content_vi": "Bài này sẽ nói rõ những nguồn thu nhập có thể phù hợp với người ở lại Đà Lạt.",
     "content_en": "This draft clarifies income sources that may fit a Dalat stay.",
-    "tags": ["da-lat", "work", "thu-nhap"],
+    "tags": [
+      "da-lat",
+      "work",
+      "thu-nhap"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -267,7 +330,11 @@
     "excerpt_en": "A draft for people who need focus and a compact working setup.",
     "content_vi": "Bản nháp này sẽ mô tả cách làm việc hiệu quả khi không gian giới hạn.",
     "content_en": "This draft explains how to work effectively with limited space.",
-    "tags": ["da-lat", "work", "khong-gian"],
+    "tags": [
+      "da-lat",
+      "work",
+      "khong-gian"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -284,7 +351,11 @@
     "excerpt_en": "A draft on meeting the right people and keeping useful connections alive.",
     "content_vi": "Bản nháp này sẽ nói về những kết nối thật sự hữu ích cho người làm việc ở Đà Lạt.",
     "content_en": "This draft focuses on useful relationships for people working in Dalat.",
-    "tags": ["da-lat", "work", "network"],
+    "tags": [
+      "da-lat",
+      "work",
+      "network"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -301,7 +372,11 @@
     "excerpt_en": "A foundational draft for people who want to start without an established setup.",
     "content_vi": "Bài này sẽ giới thiệu cách bắt đầu từ mức tối thiểu mà vẫn giữ được kỷ luật.",
     "content_en": "This draft shows how to start from a minimal setup while keeping discipline.",
-    "tags": ["da-lat", "work", "bat-dau"],
+    "tags": [
+      "da-lat",
+      "work",
+      "bat-dau"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -318,7 +393,11 @@
     "excerpt_en": "A draft focused on a clear work rhythm that does not dissolve into drift.",
     "content_vi": "Bản nháp này sẽ nói về lịch làm việc, nhịp nghỉ và cách giữ nhịp làm việc đều.",
     "content_en": "This draft covers schedules, rest rhythm, and keeping output steady.",
-    "tags": ["da-lat", "work", "thoi-gian"],
+    "tags": [
+      "da-lat",
+      "work",
+      "thoi-gian"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -335,7 +414,11 @@
     "excerpt_en": "A draft about burnout when the place is beautiful but the work rhythm is unclear.",
     "content_vi": "Bài này sẽ chỉ ra dấu hiệu burnout và cách giữ đầu việc không trôi khỏi nhịp sống.",
     "content_en": "This draft identifies burnout signals and how to keep work from drifting.",
-    "tags": ["da-lat", "work", "burnout"],
+    "tags": [
+      "da-lat",
+      "work",
+      "burnout"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -352,7 +435,11 @@
     "excerpt_en": "A piece on the difference between intentional slowness and directionless drift.",
     "content_vi": "Sống chậm chỉ có giá trị khi nó đi cùng sự tỉnh táo và kỷ luật. Một nhịp chậm tốt giúp bạn quan sát kỹ hơn, làm ít việc hơn nhưng đúng việc hơn, và giữ đủ khoảng trống để không tự đẩy mình tới kiệt sức. Nếu thiếu cấu trúc, cái gọi là chậm sẽ rất nhanh biến thành trì hoãn.",
     "content_en": "Slower living only has value when it comes with clarity and discipline. A healthy slower pace lets you observe more carefully, do fewer things but do the right ones, and keep enough space so you do not drive yourself into exhaustion. Without structure, what looks like slowness quickly turns into delay.",
-    "tags": ["da-lat", "xay-cuoc-doi", "nhip-song"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "nhip-song"
+    ],
     "access_level": "guest",
     "status": "published"
   },
@@ -369,7 +456,11 @@
     "excerpt_en": "A guide to re-checking your pace instead of following outside pressure blindly.",
     "content_vi": "Không phải lúc nào nhanh hơn cũng tốt hơn. Một nhịp đi đều, đủ rõ và có thể lặp lại mới là thứ giúp bạn sống lâu với quyết định của mình. Ở Đà Lạt, điều này càng lộ rõ: nếu bạn ép mình sống theo tốc độ cũ, bạn sẽ sớm thấy mọi thứ lệch khỏi sức chịu và mục tiêu ban đầu.",
     "content_en": "Faster is not always better. A pace that is steady, clear, and repeatable is what allows you to live with your decisions for the long run. In Dalat this becomes even clearer: if you force yourself to live at your old speed, you quickly feel everything pulling away from your energy and original purpose.",
-    "tags": ["da-lat", "xay-cuoc-doi", "toc-do"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "toc-do"
+    ],
     "access_level": "guest",
     "status": "published"
   },
@@ -386,7 +477,11 @@
     "excerpt_en": "A practical action frame for the first week in town.",
     "content_vi": "Bài này sẽ liệt kê các việc nên làm để sớm ổn định nhịp sống và làm việc.",
     "content_en": "This draft lists what to do first to stabilize rhythm and work.",
-    "tags": ["da-lat", "xay-cuoc-doi", "bat-dau"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "bat-dau"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -403,7 +498,11 @@
     "excerpt_en": "A draft about truth, responsibility, and not living by image.",
     "content_vi": "Bản nháp này nhấn vào tính thật trong cách ở lại, làm việc và tham gia cộng đồng.",
     "content_en": "This draft emphasizes honesty in staying, working, and joining community life.",
-    "tags": ["da-lat", "xay-cuoc-doi", "thuc"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "thuc"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -420,7 +519,11 @@
     "excerpt_en": "A gentle filter helping readers see whether this is truly a fit.",
     "content_vi": "Bài này sẽ nói thẳng rằng hệ sống này cần một mức tự quản lý và cam kết nhất định.",
     "content_en": "This draft states plainly that the system requires self-management and commitment.",
-    "tags": ["da-lat", "xay-cuoc-doi", "phu-hop"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "phu-hop"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -437,7 +540,11 @@
     "excerpt_en": "A direct look at the hard parts so readers do not enter on illusion.",
     "content_vi": "Bản nháp này sẽ kể những điểm khó thật sự: nhịp, kỷ luật, trách nhiệm và chi phí.",
     "content_en": "This draft covers the real hard parts: rhythm, discipline, responsibility, and cost.",
-    "tags": ["da-lat", "xay-cuoc-doi", "kho-khan"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "kho-khan"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -454,7 +561,11 @@
     "excerpt_en": "A foundation draft for starting with what actually matters.",
     "content_vi": "Bản nháp này sẽ nói về nền sống, công việc và cộng đồng như ba điểm xuất phát.",
     "content_en": "This draft treats living, work, and community as the three starting points.",
-    "tags": ["da-lat", "xay-cuoc-doi", "nen"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "nen"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -471,7 +582,11 @@
     "excerpt_en": "A draft about finding your own rhythm instead of letting the environment drift you.",
     "content_vi": "Bài này sẽ mở ra cách nhận diện một nhịp sống phù hợp với chính mình.",
     "content_en": "This draft helps readers recognize a rhythm that genuinely fits them.",
-    "tags": ["da-lat", "xay-cuoc-doi", "nhip"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "nhip"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -488,7 +603,11 @@
     "excerpt_en": "A frame for understanding long-term living through real commitment.",
     "content_vi": "Bản nháp này sẽ nói về sự bền, sự đều và cách giữ một đời sống có thể đi xa.",
     "content_en": "This draft covers endurance, consistency, and how to keep life going long term.",
-    "tags": ["da-lat", "xay-cuoc-doi", "dai-han"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "dai-han"
+    ],
     "access_level": "guest",
     "status": "draft"
   },
@@ -505,7 +624,11 @@
     "excerpt_en": "A closing draft for deciding when to stay and when to move on.",
     "content_vi": "Bản nháp này giúp người đọc dừng lại, nhìn rõ trạng thái của mình và chọn hướng đi phù hợp.",
     "content_en": "This draft helps readers pause, assess their state, and choose the right direction.",
-    "tags": ["da-lat", "xay-cuoc-doi", "quyet-dinh"],
+    "tags": [
+      "da-lat",
+      "xay-cuoc-doi",
+      "quyet-dinh"
+    ],
     "access_level": "guest",
     "status": "draft"
   }

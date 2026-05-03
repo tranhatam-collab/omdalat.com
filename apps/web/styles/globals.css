@@ -269,7 +269,7 @@ a {
 .runtime-kicker {
   margin: 0 0 0.75rem;
   font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--omdalat-green-700);
 }
@@ -354,6 +354,16 @@ a {
   background: rgba(255, 255, 255, 0.72);
   padding: 0.8rem 0.9rem;
   color: var(--omdalat-text);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.runtime-link-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(30, 122, 91, 0.25);
+  box-shadow: 0 16px 34px rgba(15, 61, 46, 0.1);
 }
 
 .runtime-docs-list {
@@ -427,6 +437,29 @@ a {
   gap: 1rem;
 }
 
+.runtime-article-card {
+  display: grid;
+  gap: 0.75rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.runtime-article-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.runtime-article-card strong,
+.runtime-article-card span {
+  padding-inline: 0.9rem;
+}
+
+.runtime-article-card span:last-child {
+  padding-bottom: 0.9rem;
+  color: var(--omdalat-green-700);
+}
+
 .runtime-article-lead {
   max-width: 60ch;
 }
@@ -448,7 +481,9 @@ a {
 
 .runtime-article-body {
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem;
+  max-width: 720px;
+  line-height: 1.82;
 }
 
 .runtime-article-body p {
@@ -519,6 +554,70 @@ a {
   border-radius: 8px;
   background: var(--omdalat-surface-strong);
   border: 1px solid var(--omdalat-line);
+}
+
+.runtime-visual-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 1rem;
+  margin: 1.15rem 0 0.35rem;
+}
+
+.runtime-visual-card {
+  position: relative;
+  min-height: 15rem;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--omdalat-line);
+  background: #0d1512;
+  box-shadow: 0 18px 42px rgba(15, 61, 46, 0.12);
+}
+
+.runtime-visual-card img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition:
+    transform 700ms ease,
+    filter 300ms ease;
+}
+
+.runtime-visual-card-featured {
+  grid-row: span 2;
+  min-height: 24rem;
+}
+
+.runtime-visual-card-featured img {
+  aspect-ratio: 4 / 5;
+}
+
+.runtime-visual-card:hover img {
+  transform: scale(1.055);
+  filter: saturate(1.05);
+}
+
+.runtime-visual-card figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 0.2rem;
+  padding: 2.4rem 0.9rem 0.85rem;
+  color: #f5fbf7;
+  background: linear-gradient(180deg, transparent, rgba(13, 21, 18, 0.82));
+}
+
+.runtime-visual-card figcaption span,
+.runtime-visual-card figcaption small {
+  line-height: 1.45;
+}
+
+.runtime-visual-card figcaption small {
+  color: rgba(245, 251, 247, 0.78);
 }
 
 .runtime-home-hero {
@@ -676,7 +775,7 @@ a {
   margin: 0;
   color: var(--omdalat-green-700);
   font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -728,7 +827,7 @@ a {
   margin: 0;
   color: var(--omdalat-green-700);
   font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -744,6 +843,35 @@ a {
   gap: 0.55rem;
   align-content: start;
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.runtime-home-work-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.runtime-home-article-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.runtime-home-article-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.runtime-home-article-card strong,
+.runtime-home-article-card span {
+  padding-inline: 0.9rem;
+}
+
+.runtime-home-article-card .runtime-home-article-pill {
+  padding-top: 0.85rem;
+}
+
+.runtime-home-article-card .runtime-home-article-cta {
+  padding-bottom: 0.9rem;
 }
 
 .runtime-home-article-pill {
@@ -886,6 +1014,7 @@ a {
   .runtime-signal-grid,
   .runtime-link-grid,
   .runtime-help-grid,
+  .runtime-visual-strip,
   .runtime-home-pillar-grid {
     grid-template-columns: 1fr;
   }
@@ -896,7 +1025,9 @@ a {
   }
 
   .runtime-home-hero-primary img,
-  .runtime-home-hero-secondary img {
+  .runtime-home-hero-secondary img,
+  .runtime-visual-card,
+  .runtime-visual-card-featured {
     min-height: 18rem;
   }
 
@@ -917,5 +1048,16 @@ a {
     display: block;
     align-self: flex-start;
     margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .runtime-home-hero-primary img,
+  .runtime-link-card,
+  .runtime-visual-card img,
+  .runtime-home-pillar,
+  .runtime-home-gallery figure {
+    animation: none;
+    transition: none;
   }
 }
