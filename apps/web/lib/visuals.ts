@@ -1,4 +1,4 @@
-import type { ContentPillarKey } from "../../../packages/types";
+import type { ArticleImageSeedRecord, ContentPillarKey } from "../../../packages/types";
 
 export type RuntimeVisual = {
   key: string;
@@ -207,9 +207,46 @@ export function getVisualsForContext(context: string, count = 2) {
   return uniqueVisuals([...visualContexts[visualContext], ...allVisuals]).slice(0, clampImageCount(count));
 }
 
-export function getArticleVisuals(article: { slug: string; pillarKey: ContentPillarKey; content: string }, count?: number) {
+function seedImageToRuntimeVisual(articleSlug: string, image: ArticleImageSeedRecord): RuntimeVisual | null {
+  if (image.desktop_crop_status !== "approved" || image.mobile_crop_status !== "approved") {
+    return null;
+  }
+
+  return {
+    key: `seed-${articleSlug}-${image.image_id}`,
+    src: image.src,
+    width: image.width,
+    height: image.height,
+    alt: {
+      vi: image.alt_vi,
+      en: image.alt_en
+    },
+    caption: {
+      vi: image.caption_vi,
+      en: image.caption_en
+    },
+    credit: image.photographer_or_owner,
+    sourcePage: image.source
+  };
+}
+
+export function getArticleVisuals(
+  article: {
+    slug: string;
+    pillarKey: ContentPillarKey;
+    content: string;
+    heroImage?: ArticleImageSeedRecord | null;
+  },
+  count?: number
+) {
   const minimumCount = article.content.length > 700 || article.content.split(/\n{2,}/).filter(Boolean).length >= 4 ? 3 : 2;
   const resolvedCount = clampImageCount(count ?? minimumCount);
+  const seedHeroVisual = article.heroImage ? seedImageToRuntimeVisual(article.slug, article.heroImage) : null;
+
+  if (seedHeroVisual) {
+    return [seedHeroVisual].slice(0, resolvedCount);
+  }
+
   const exactVisuals = articleVisualsBySlug[article.slug] ?? [];
   const pillarVisuals = articleVisualsByPillar[article.pillarKey] ?? visualContexts.detail;
 
