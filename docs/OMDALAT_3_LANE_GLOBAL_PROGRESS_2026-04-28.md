@@ -4,11 +4,11 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Global Progress
 
-Version: v1.2.0
+Version: v1.3.0
 
-Status: ACTIVE SNAPSHOT
+Status: TEAM1_FINALIZED
 
-Date updated: 2026-04-29
+Date updated: 2026-05-04
 
 Owner: Team 1
 
@@ -40,10 +40,10 @@ File này cho một cái nhìn nhanh:
 ### 1.2 App Member Runtime (Team 3)
 
 * Submission: `RECEIVED`
-* Review: `REVIEWED_BLOCKED_P0`
-* Evidence: `RECEIVED_BLOCKED_CANONICAL_PARITY`
-* Current-state progress (theo report Team 3 + Team 1 recheck): `82%`
-* Block chính: canonical parity của `app.omdalat.com` vẫn fail localized routes (`/vi/member/register`, `/vi/member/operations`) dù shadow runtime đã pass
+* Review: `PASS_WITH_QUEUE`
+* Evidence: `READY_WITH_QUEUE`
+* Current-state progress (theo report Team 3 + Team 1 recheck): `95%`
+* Block chính: `NONE` o P0; con P1 hardening (strict outbox + split-account cleanup)
 
 ### 1.3 Ap Editorial (Ap Team)
 
@@ -60,33 +60,39 @@ File này cho một cái nhìn nhanh:
 
 * Lanes đã nộp report: `3/3` (`100%`)
 * Lanes đã được Team 1 review verdict cuối: `3/3` (`100%`)
-* Lanes đã thoát trạng thái blocked P0: `2/3` (~`66.7%`)
-* Trung bình progress toàn bộ 3 lane: ~`94%` (`(100 + 82 + 100) / 3`)
+* Lanes đã thoát trạng thái blocked P0: `3/3` (`100%`)
+* Trung bình progress toàn bộ 3 lane: ~`98.3%` (`(100 + 95 + 100) / 3`)
 
 Operational note:
 
-* Gate còn `NO_GO` vì Team 3 vẫn blocked canonical parity, không phải vì thiếu submission.
+* Tat ca lane da qua blocker P0; phan con lai la queue hardening.
+
+Team 1 completion note (2026-05-04):
+
+* Team 1 da dong scope cycle hien tai.
+* Final closure report: `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
+* Tu diem nay, cac queue con lai la lane hardening theo owner tung team.
 
 ---
 
 ## 3. Live readiness cho cycle này
 
-Current global gate:
+Current global gate (cycle hien tai):
 
-* `NO-GO_FOR_FULL_3_LANE_CLOSURE`
+* `GO_FOR_FULL_3_LANE_CLOSURE`
 
 Reason:
 
-* Team 3 còn `REVIEWED_BLOCKED_P0`
-* Ap Team đã chốt `PASS_WITH_QUEUE` và không còn blocker P0
+* Team 2 / Team 3 / Ap Team deu o `PASS_WITH_QUEUE`
+* Khong con blocker P0, con queue hardening theo tung lane
 
 ---
 
 ## 4. Điều kiện chuyển sang GO
 
-* Team 2: nộp đủ metadata text-level + alt audit + Om evidence packet
-* Team 3: đóng canonical parity cho `app.omdalat.com` và nộp fresh runtime-map pass theo gate mới
-* Team 1 review xong cả 3 lane và chốt decision log không còn blocker P0
+* Team 2: tiep tuc queue hardening (khong blocker P0)
+* Team 3: tiep tuc queue hardening (strict outbox / split-account cleanup)
+* Ap Team: tiep tuc queue hardening (live-domain probe/visual packet)
 
 ---
 

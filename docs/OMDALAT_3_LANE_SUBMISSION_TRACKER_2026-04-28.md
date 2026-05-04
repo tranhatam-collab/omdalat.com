@@ -4,11 +4,11 @@ Ap Dalat / Ấp Đà Lạt
 
 3-Lane Submission Tracker
 
-Version: v1.2.0
+Version: v1.3.0
 
 Status: ACTIVE
 
-Date updated: 2026-04-29
+Date updated: 2026-05-04
 
 Owner: Team 1
 
@@ -61,6 +61,7 @@ Team 1 note:
   * `/vi/about` -> `200`
 * Closure rule `D-007` đã được thỏa điều kiện, lane Om public được chuyển sang `PASS_WITH_QUEUE`.
 * Tiến độ Team 2 current-state: `100%` cho P0 closure; phần còn lại chuyển về P1 queue.
+* Team 1 áp dụng thêm `Image Reality` requirement từ `D-012` cho mọi report lane.
 
 ---
 
@@ -76,23 +77,25 @@ Submission status:
 
 Review status:
 
-* `REVIEWED_BLOCKED_P0`
+* `PASS_WITH_QUEUE`
 
 Evidence status:
 
-* `RECEIVED_BLOCKED_CANONICAL_PARITY`
+* `READY_WITH_QUEUE`
 
 Team 1 note:
 
-* Team 3 đã nộp report + matrix + packet current-state và đã có build/deploy mới lên shadow runtime (`d6b35718`).
-* Team 1 recheck ngày `2026-04-29`:
+* Team 3 da nop fresh artifact + fresh smoke packet tren canonical runtime.
+* Team 1 recheck ngay `2026-04-29`:
   * `pnpm --filter @omdalat/app build:cf` -> `PASS`
-  * deploy shadow app runtime -> `https://d6b35718.omdalat-app-2ol.pages.dev`
-  * tại shadow runtime: `/vi/member/register` -> `200`, `/vi/member/login` -> `200`
-* Blocker còn mở là canonical parity:
-  * canonical `app.omdalat.com` vẫn trả `404` cho `/vi/member/register` và `/vi/member/operations`
-  * `POST /api/support` và `POST /api/contact` hiện đã `200`
-* Tiến độ Team 3 current-state: khoảng `82%`, còn lại khoảng `18%` để đóng P0.
+  * deploy canonical app runtime -> `https://cb980b6b.omdalat-app.pages.dev`
+  * `npm run cf:runtime-map:check` -> `PASS` (bao gom localized reviewed gate + support lane)
+* `SMOKE_RUNTIME_TARGET=live ... npm run mail:smoke:e2e` -> `PASS`
+* Khong con blocker P0 cho Team 3.
+* Tiến độ Team 3 current-state: `95%`; con P1 hardening/cleanup (`~5%`).
+* `D-012` đang theo dõi image reality evidence khi lane có ảnh công khai mới.
+* Ghi chú bổ sung (2026-05-04): strict outbox retry đã chạy với `SMOKE_REQUIRE_OUTBOX=1` + `SMOKE_ALLOW_LIVE_OUTBOX=1` nhưng vẫn timeout chờ web runtime, nên giữ strict ở hardening lane.
+* Ghi chú governance (2026-05-04): khi Team 3 cham vao CMS/article seed, packet phai kem validator/content-contract evidence theo `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`.
 
 ---
 
@@ -126,6 +129,7 @@ Team 1 note:
 * Queue còn lại của Ap:
   * live-domain probe packet
   * visual evidence packet cho image-rich routes
+* `D-012` áp dụng cho evidence image của surface Ap như hardening yêu cầu tiếp theo.
 
 ---
 
@@ -134,3 +138,8 @@ Team 1 note:
 * Không đổi `PENDING` thành `RECEIVED` nếu file chưa có nội dung current-state thật.
 * Không đổi `EVIDENCE PENDING` thành `READY` nếu chưa có path rõ cho build, smoke, QA, metadata, hoặc audit matrix phù hợp với lane đó.
 * Khi review xong, Team 1 phải cập nhật lại audit board chính.
+
+Team 1 completion note (2026-05-04):
+
+* Cycle review/coordination scope da dong.
+* Bao cao dong cycle: `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
