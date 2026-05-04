@@ -145,6 +145,7 @@ Trong sprint hiện tại, Team 1 cũng trực tiếp chạm vào:
 Team 1 kích hoạt file kế hoạch tổng:
 
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
 - `docs/OMDALAT_CONTENT_OPERATING_SYSTEM_AND_100_SEO_ROADMAP_2026-05-03.md`
 - `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
 
@@ -172,6 +173,7 @@ Quy tắc cho các team:
 - DEV và Content không được chọn ảnh chỉ vì đẹp; ảnh phải đúng Đà Lạt thật, đúng intent của block hoặc bài, và không làm sai kỳ vọng về sống/làm/ở lại.
 - Ap Team giữ `ap.omdalat.com` là editorial site độc lập; Om chỉ bridge đúng ngữ cảnh.
 - Team 1 giữ quyền review cuối với mọi thay đổi ảnh public/editorial nếu ảnh mới có nguy cơ làm lệch vai trò trang.
+- Team 1 phải phát mọi thay đổi SOP/content/image có tác động liên team qua `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md` hoặc notice kế tiếp cùng format.
 
 Checklist điều phối ảnh bắt buộc:
 
@@ -179,6 +181,13 @@ Checklist điều phối ảnh bắt buộc:
 - ảnh public phải có `alt_vi`, `alt_en`, `caption_vi`, `caption_en`
 - ảnh phải pass desktop crop và mobile crop trước khi đưa vào release gate
 - không thay ảnh vì "đẹp hơn" nếu làm lệch ngữ cảnh bài
+
+Handoff update cho team:
+
+- Team 2 đọc mục 4 trong `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- Team 3 đọc mục 5 trong `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- Ap Team đọc mục 6 trong `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- QA / DevOps đọc mục 7 và evidence trong mục 9
 
 ---
 
@@ -209,6 +218,7 @@ File bắt buộc đọc tiếp theo:
 
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
+- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
 Vai trò Team 1 từ nhịp này:
 
@@ -233,3 +243,16 @@ File quyết toán để theo dõi:
 * `docs/OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_AUDIT_BOARD_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_GLOBAL_PROGRESS_2026-04-28.md`
+
+## 11. Sprint 0 Execution Packet (2026-05-04)
+
+Team 1 xác nhận packet thực thi Sprint 0 đã sẵn để các team chạy ngay:
+
+* `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
+* `data/seed/articles.seed.json`
+* `data/seed/articles.seed.launch-v2.json`
+* `data/seed/article-images.seed.json`
+
+Gate chạy trước staging:
+
+* `npm run validate:content-seed`

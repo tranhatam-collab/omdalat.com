@@ -81,12 +81,33 @@ Ap Dalat phải giữ được câu chuyện, nhưng vẫn phải đi ra product
 
 ⸻
 
+8. Cập nhật bổ sung ngày 2026-05-04 — Content SOP và Image Reality
+
+Notice cần đọc:
+
+* `../../docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+* `../../docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+* `../../docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+
+Ap Team cần hiểu đúng:
+
+* Content SOP của Om không biến Ap thành site join/system.
+* Ap vẫn là editorial độc lập.
+* Image Reality Standard áp dụng cho Ap ở lớp ảnh, alt, caption, source/license, crop và kỳ vọng người đọc.
+* Ảnh Ap không được du lịch hóa, nghỉ dưỡng hóa hoặc dùng chỉ vì đẹp.
+* Bridge từ Ap về Om chỉ dùng khi intent phù hợp.
+
+Report tiếp theo của Ap Team phải có dòng: `Content SOP / Image Reality impact`.
+
+⸻
+
 8. Team 1 change notice (2026-05-04)
 
 Ap Team áp dụng ngay theo:
 
 * `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 * `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
+* `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
 Điểm bắt buộc:
 

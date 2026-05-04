@@ -149,6 +149,7 @@ Team 3 phải áp dụng trực tiếp:
 - `docs/OMDALAT_AND_APDALAT_SEO_COPY_REWRITE_RULES_2026.md` cho title/meta/H1/intro ở route member/public do Team 3 sở hữu
 - `docs/OMDALAT_AND_APDALAT_UI_MICROCOPY_SYSTEM_2026.md` cho gate screens, dashboard labels, trạng thái và notifications
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md` cho CMS/article schema, validator, locale content và sprint handoff
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md` cho thay đổi contract mới từ vòng Codex hiện tại
 - `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md` cho image seed, source/license log, alt/caption và crop status
 
 Checklist merge bổ sung:
@@ -176,6 +177,13 @@ CMS/data layer phải bảo đảm:
 
 Team 3 không tự đổi wording để vừa schema. Nếu payload không đạt SOP, trả lại Content/Team 1 sửa trước khi nhập CMS.
 
+Mọi report tiếp theo của Team 3 phải có dòng xác nhận:
+
+- đã đọc `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- validator/CMS contract không cho publish batch sai SOP
+- `locales.vi` / `locales.en` là schema đích cho CMS v2
+- ảnh batch mới bị chặn nếu không phải `WebP` hoặc `AVIF`
+
 ---
 
 ## 9. Team 1 change notice áp dụng ngay (2026-05-04)
@@ -184,6 +192,7 @@ Team 3 phải nhận baseline mới từ:
 
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
+- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
 Yêu cầu bắt buộc:
 
@@ -191,7 +200,7 @@ Yêu cầu bắt buộc:
 - không đổi payment lane ra ngoài `PHASE_2_NOT_IN_SCOPE` nếu chưa có release directive mới.
 - không claim `DONE` lane Team 3 khi chưa qua vòng review mới của Team 1.
 
-## 9. Closure trạng thái Team 3 và điều phối Team 1 (2026-05-04)
+## 10. Closure trạng thái Team 3 và điều phối Team 1 (2026-05-04)
 
 Team 3 tự chốt cycle hiện tại ở trạng thái:
 
@@ -216,3 +225,18 @@ Thông tin cho Team 2:
 
 * Team 2 lane Om public đang ở `PASS_WITH_QUEUE` theo `D-008`.
 * P0 team2 đã đóng, team2 vẫn giữ hardening queue P1.
+
+## 11. Sprint 0 Execution kickoff (2026-05-04)
+
+Team 3 chuyển từ planning sang execution cho 3 bài mở nền.
+
+Deliverables đã sẵn:
+
+* runtime seed: `data/seed/articles.seed.json` (3 bài launch publish + meta/internal links + locales + featured_image)
+* launch schema V2: `data/seed/articles.seed.launch-v2.json`
+* image records: `data/seed/article-images.seed.json` (3 hero launch chuẩn `webp` + slug naming)
+* execution guide: `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
+
+Gate đã chạy:
+
+* `npm run validate:content-seed` -> `PASS`

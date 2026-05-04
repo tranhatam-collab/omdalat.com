@@ -139,6 +139,7 @@ Team 2 phải áp dụng trực tiếp:
 - `docs/OMDALAT_AND_APDALAT_UI_MICROCOPY_SYSTEM_2026.md`
 - `docs/OMDALAT_AND_APDALAT_SEO_COPY_REWRITE_RULES_2026.md` (cho H1/intro public pages)
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md` (cho article UI, CTA contextual, internal link và tách locale)
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md` (thông báo thay đổi SOP từ vòng Codex hiện tại)
 - `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md` (cho ảnh public, article cover, card, bridge)
 
 Checklist merge bổ sung:
@@ -165,6 +166,13 @@ Khi render bài viết, Team 2 phải bảo toàn:
 
 Nếu UI cần rút ngắn chữ để tránh vỡ layout, Team 2 gửi lại Team 1 duyệt wording thay vì tự viết lại.
 
+Mọi report tiếp theo của Team 2 phải có dòng xác nhận:
+
+- đã đọc `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- article UI không trộn VI/EN
+- ảnh/card/article cover không làm sai ngữ cảnh bài
+- internal link và CTA đi đúng payload đã duyệt
+
 ---
 
 ## 9. Team 1 change notice áp dụng ngay (2026-05-04)
@@ -173,6 +181,7 @@ Team 2 phải nhận baseline mới từ:
 
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
+- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
 Yêu cầu bắt buộc:
 
@@ -206,3 +215,45 @@ File điều phối:
 * `docs/OMDALAT_3_LANE_DECISION_LOG_2026-04-28.md` (`D-008`, `D-015`)
 * `docs/OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_AUDIT_BOARD_2026-04-28.md`
+
+Lưu ý QA vận hành mới (2026-05-04):
+
+* Rerun local smoke/lock suite:
+  * `PREVIEW_BASE_URL=https://omdalat.com pnpm --filter @omdalat/web exec playwright test e2e/team2-quick-qa.spec.ts e2e/public-intro-h1-cta-lock.spec.ts --config=playwright.preview.config.ts`
+  * hiện tại bị fail do quyền launch Chromium trên host, không phải bug logic nội dung.
+* Khi có runner cho phép chromium IPC, Team 2 cần cung cấp kết quả bổ sung cho `RUN_ID` của suite này.
+
+## 11. Sprint 0 Launch 3 Bài (Execution từ SOP)
+
+- Date start: 2026-05-04
+- Scope: 3 bài mở nền, giao ngay cho Team Content/Dev để Team 2 test UI không đợi full 30 bài.
+- Handoff payload bắt buộc:
+  - `data/seed/articles.seed.launch-v2.json`
+  - `data/seed/article-images.seed.json`
+- Team 2 đọc trước khi dev:
+  - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+  - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+  - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
+- Luồng team2 khi nhận file:
+  1. Nạp `articles.seed.launch-v2.json` vào local seed context và sync runtime page (không sửa VI/EN).
+  2. Chạy `pnpm run validate:content-seed` + `pnpm --filter @omdalat/web run validate:web-locales` + `pnpm --filter @omdalat/web run validate:i18n-data`.
+  3. Xác nhận UI:
+     - article layout rộng tối đa `720px`
+     - đoạn 4-6 dòng/đoạn theo mắt đọc
+     - locale `/vi` và `/en` tách sạch
+     - CTA bridge lấy theo `contextual_cta` (đã map sang component runtime).
+- Đã cập nhật runtime để phục vụ Sprint 0:
+  - `apps/web/lib/content-seed.ts` đọc `meta_title_*`, `meta_description_*`, `contextual_cta`.
+  - `apps/web/app/articles/[slug]/page.tsx` dùng seed-driven metadata + contextual bridge CTA.
+
+## 12. Team 3 packet handoff confirmed (2026-05-04)
+
+Team 2 nhận payload từ Team 3 ở cả 2 lớp:
+
+* runtime seed tương thích hiện tại: `data/seed/articles.seed.json`
+* launch payload V2 để QA schema/content: `data/seed/articles.seed.launch-v2.json`
+* image reality records cho 3 bài launch: `data/seed/article-images.seed.json`
+
+Lệnh bắt buộc trước khi QA giao Team 1:
+
+* `npm run validate:content-seed`
