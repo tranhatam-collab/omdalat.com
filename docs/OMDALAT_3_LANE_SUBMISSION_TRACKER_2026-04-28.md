@@ -28,6 +28,7 @@ Supporting files:
 * `docs/OMDALAT_TEAM1_3_LANE_REVIEW_PROTOCOL_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_DECISION_LOG_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_EVIDENCE_PACKET_INDEX_2026-04-28.md`
+* `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 
 ---
 
@@ -77,11 +78,11 @@ Submission status:
 
 Review status:
 
-* `PASS_WITH_QUEUE`
+* `DONE_CLOSED`
 
 Evidence status:
 
-* `READY_WITH_QUEUE`
+* `READY_CLOSED`
 
 Team 1 note:
 
@@ -92,10 +93,11 @@ Team 1 note:
   * `npm run cf:runtime-map:check` -> `PASS` (bao gom localized reviewed gate + support lane)
 * `SMOKE_RUNTIME_TARGET=live ... npm run mail:smoke:e2e` -> `PASS`
 * Khong con blocker P0 cho Team 3.
-* Tiến độ Team 3 current-state: `95%`; con P1 hardening/cleanup (`~5%`).
+* Tiến độ Team 3 current-state: `100%` cho cycle hien tai.
 * `D-012` đang theo dõi image reality evidence khi lane có ảnh công khai mới.
-* Ghi chú bổ sung (2026-05-04): strict outbox retry đã chạy với `SMOKE_REQUIRE_OUTBOX=1` + `SMOKE_ALLOW_LIVE_OUTBOX=1` nhưng vẫn timeout chờ web runtime, nên giữ strict ở hardening lane.
+* Ghi chú bổ sung (2026-05-04): strict outbox retry đã chạy với `SMOKE_REQUIRE_OUTBOX=1` + `SMOKE_ALLOW_LIVE_OUTBOX=1` nhưng vẫn timeout chờ web runtime; muc nay da chuyen backlog hardening theo `D-013`.
 * Ghi chú governance (2026-05-04): khi Team 3 cham vao CMS/article seed, packet phai kem validator/content-contract evidence theo `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`.
+* Team 1 closure: lane Team 3 da duoc dong o `DONE_CLOSED` cho cycle hien tai theo `D-014`.
 
 ---
 

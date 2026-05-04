@@ -83,3 +83,11 @@ Từ thời điểm này:
 4. Team 2: owner của Om public hardening queue.
 
 Team 1 chỉ mở lại khi có yêu cầu cycle mới hoặc founder directive mới.
+
+---
+
+## 7. Broadcast cho các team
+
+Thông báo thay đổi chính thức đã phát hành tại:
+
+* `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`

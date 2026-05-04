@@ -32,6 +32,7 @@ Companion files:
 * `docs/OMDALAT_3_LANE_GLOBAL_PROGRESS_2026-04-28.md`
 * `docs/OMDALAT_TEAM1_CHECKPOINT_2026-04-29.md`
 * `docs/OMDALAT_TEAM1_TEAM3_AP_EXECUTION_PUSH_2026-04-29.md`
+* `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 * `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md`
 * `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md`
 * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
@@ -45,7 +46,7 @@ Quick command:
 ## 1. Team 1 review snapshot
 
 * Team 2: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
-* Team 3: `PASS_WITH_QUEUE` (P0 complete, con queue hardening `~5%`).
+* Team 3: `DONE_CLOSED` (cycle hien tai da dong, `100%`).
 * Ap Team: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
 * Team 1: `DONE` cho cycle hien tai.
 
@@ -67,11 +68,11 @@ File chính:
 
 ## 3. Việc Team 3 cần làm ngay
 
-* Khong con blocker P0.
-* Tiep tuc hardening queue:
-  * quyet dinh strict outbox (`SMOKE_REQUIRE_OUTBOX=1`) co bat buoc hay giu hardening mode
-  * cleanup split-account dai han de giam drift
-  * duy tri monitor runtime-map + mail smoke theo nhip
+* Cycle Team 3 hien tai da `DONE_CLOSED`.
+* Cac muc tiep theo la hardening backlog hau cycle:
+  * strict outbox retry tren runner on dinh
+  * cleanup split-account/decommission shadow project
+  * validator/content-contract evidence cho batch CMS/article moi theo SOP
 
 File chính:
 
