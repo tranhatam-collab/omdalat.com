@@ -109,6 +109,16 @@ Ap Team áp dụng ngay theo:
 * `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 * `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
+## 9. Quy tắc phải đọc trước mỗi sprint handoff
+
+Ap Team đồng bộ baseline mới trước khi xử lý thay đổi nội dung/phối cảnh liên quan Om bridge:
+
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+- `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
+- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+
 Điểm bắt buộc:
 
 * bridge link về Om phải dùng đúng slug launch hiện tại

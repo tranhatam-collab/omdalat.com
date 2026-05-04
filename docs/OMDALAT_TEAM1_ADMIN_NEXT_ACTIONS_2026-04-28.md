@@ -34,6 +34,8 @@ Companion files:
 * `docs/OMDALAT_TEAM1_TEAM3_AP_EXECUTION_PUSH_2026-04-29.md`
 * `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 * `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+* `docs/TEAM2_OM_PUBLIC_AUDIT_REPORT_2026-04-28.md`
+* `docs/SPRINT0_ACCEPTANCE_PACKET_TEMPLATE_2026-05-05.md`
 * `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md`
 * `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md`
 * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
@@ -64,6 +66,7 @@ File chính:
 
 * `docs/TEAM2_OM_PUBLIC_AUDIT_REPORT_2026-04-28.md`
 * `docs/OMDALAT_PUBLIC_ROUTE_INVENTORY_MATRIX_2026-04-28.md`
+* `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
 
 ---
 
@@ -109,3 +112,12 @@ File chính:
 * Team 1 da chot hoan thanh cycle dieu phoi hien tai.
 * Bao cao dong cycle: `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 * Tu nhip nay, Team 1 chi mo lai khi co cycle moi hoac founder directive moi.
+
+## 7. Sprint 0 execution note
+
+* Sprint 0 dang o mode thuc thi cho 3 bai launch.
+* Packet nghiem thu bat buoc truoc GO staging:
+  * `docs/SPRINT0_ACCEPTANCE_PACKET_TEMPLATE_2026-05-05.md`
+  * `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+  * `data/seed/articles.seed.sprint0-launch.json`
+  * `data/seed/article-images.seed.json`

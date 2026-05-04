@@ -182,6 +182,9 @@ Team 2 phải nhận baseline mới từ:
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 - `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
 
 Yêu cầu bắt buộc:
 
@@ -228,14 +231,14 @@ Lưu ý QA vận hành mới (2026-05-04):
 - Date start: 2026-05-04
 - Scope: 3 bài mở nền, giao ngay cho Team Content/Dev để Team 2 test UI không đợi full 30 bài.
 - Handoff payload bắt buộc:
-  - `data/seed/articles.seed.launch-v2.json`
+  - `data/seed/articles.seed.sprint0-launch.json`
   - `data/seed/article-images.seed.json`
 - Team 2 đọc trước khi dev:
   - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
   - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
   - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - Luồng team2 khi nhận file:
-  1. Nạp `articles.seed.launch-v2.json` vào local seed context và sync runtime page (không sửa VI/EN).
+  1. Nạp `articles.seed.sprint0-launch.json` vào local seed context và sync runtime page (không sửa VI/EN).
   2. Chạy `pnpm run validate:content-seed` + `pnpm --filter @omdalat/web run validate:web-locales` + `pnpm --filter @omdalat/web run validate:i18n-data`.
   3. Xác nhận UI:
      - article layout rộng tối đa `720px`
@@ -251,9 +254,32 @@ Lưu ý QA vận hành mới (2026-05-04):
 Team 2 nhận payload từ Team 3 ở cả 2 lớp:
 
 * runtime seed tương thích hiện tại: `data/seed/articles.seed.json`
-* launch payload V2 để QA schema/content: `data/seed/articles.seed.launch-v2.json`
+* launch payload sprint 3 bài để QA schema/content: `data/seed/articles.seed.sprint0-launch.json`
 * image reality records cho 3 bài launch: `data/seed/article-images.seed.json`
 
 Lệnh bắt buộc trước khi QA giao Team 1:
 
 * `npm run validate:content-seed`
+* `pnpm --filter @omdalat/web run validate:web-locales`
+* `pnpm --filter @omdalat/web run validate:i18n-data`
+
+## 13. Cập nhật thực thi ngay (2026-05-04)
+
+- Team 2 đã hoàn tất bước Sprint 0 runtime:
+  - map seed payload `meta_title_*`, `meta_description_*`, `contextual_cta`
+  - giữ ngữ cảnh locale `/vi` và `/en` nguyên bản theo payload
+  - sửa typing cục bộ cho e2e để tsc ổn định
+- `tổng quan gates`:
+  - `validate:content-seed` PASS
+  - `validate:web-locales` PASS
+  - `validate:i18n-data` PASS
+  - `tsc --noEmit` PASS
+- `smoke preview`: chưa complete do môi trường sandbox Chromium (Permission denied - bootstrap_check_in).  
+  Đã thông báo để rerun trên runner có quyền IPC.
+
+### % còn lại theo Team 2 sprint này
+
+- P0/Sprint0: `~85%` (còn 2 lần rerun preview smoke xác nhận thủ công)
+- P1 hardening vẫn giữ nguyên theo plan `TEAM2_EXECUTION_COMPLIANCE`:
+  - hardening image secondary/alt
+  - linguistic leakage automation ở locale secondary paths

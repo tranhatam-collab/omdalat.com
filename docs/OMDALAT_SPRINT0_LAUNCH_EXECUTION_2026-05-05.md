@@ -89,14 +89,52 @@ Không mở thêm scope ngoài 3 bài trong Sprint 0.
 
 ## 4. Baseline payload hiện đã sẵn sàng
 
-Team 1 xác nhận payload 3 bài launch đã có trong seed hiện tại, có thể dùng ngay để Team 2 bắt đầu render mà không cần chờ thêm:
+Team 1 xác nhận payload 3 bài launch đã có trong seed file launch chuyên dụng, có thể dùng ngay để Team 2 render mà không cần chờ thêm:
 
-1. `data/seed/articles.seed.json`
+1. `data/seed/articles.seed.sprint0-launch.json`
 2. `data/seed/article-images.seed.json`
+
+### Copy-ready handoff cho Team 2 (đã tạo)
+
+- File có thể ném thẳng vào local dev để render nhanh 3 bài mở nền:
+  - `data/seed/articles.seed.sprint0-launch.json`
+- Cách dùng:
+
+```bash
+cp data/seed/articles.seed.sprint0-launch.json data/seed/articles.seed.json
+pnpm validate:content-seed
+pnpm --filter @omdalat/web validate:web-locales
+pnpm --filter @omdalat/web validate:i18n-data
+```
+
+Lưu ý: khi đẩy xong local UI, Team 2 có thể revert/restore bản seed runtime chuẩn để tránh ảnh hưởng luồng 30 bài.
+
+## 5. Kết quả Team 2 thực thi (đã cập nhật)
+
+- `apps/web/lib/content-seed.ts` đã map `meta_title_*`, `meta_description_*`, `contextual_cta` theo payload V2.
+- `apps/web/app/articles/[slug]/page.tsx` dùng CTA contextual từ seed runtime.
+- `apps/web/e2e/team2-quick-qa.spec.ts` đã fix typing để tsc ổn định.
+- `pnpm validate:content-seed` ✅
+- `pnpm --filter @omdalat/web run validate:web-locales` ✅
+- `pnpm --filter @omdalat/web run validate:i18n-data` ✅
+- `pnpm --filter @omdalat/web exec tsc --noEmit` ✅
+
+### Lưu ý QA môi trường
+
+- Bị chặn khi chạy preview E2E toàn bộ due quyền Chromium sandbox trên máy hiện tại:
+  - lỗi `Permission denied (1100)` khi `bootstrap_check_in`.
+  - `Target page, context or browser has been closed`.
+- Khi có runner/browser quyền IPC tốt, cần rerun:
+  - `PREVIEW_BASE_URL=https://omdalat.com pnpm --filter @omdalat/web exec playwright test e2e/team2-quick-qa.spec.ts e2e/public-intro-h1-cta-lock.spec.ts --config=playwright.preview.config.ts`
+  - `PREVIEW_BASE_URL=https://omdalat.com pnpm --filter @omdalat/web exec playwright test e2e/smoke-locales.spec.ts --config=playwright.preview.config.ts`
+
+### % còn lại
+
+- P0 Sprint 0 hiện tại: `~85%` (đang chờ 2 lần rerun e2e trên môi trường có quyền launch Chromium).
 
 ---
 
-## 5. Lệnh bắt đầu ngày mai
+## 6. Lệnh bắt đầu ngày mai
 
 ```bash
 pnpm validate:content-seed
@@ -105,3 +143,17 @@ pnpm --filter @omdalat/web validate:i18n-data
 ```
 
 Sau khi pass local, Team 2 và QA tiếp tục smoke theo checklist lane.
+
+---
+
+## 7. Acceptance packet (bat buoc truoc GO staging)
+
+Template nop bang chung:
+
+* `docs/SPRINT0_ACCEPTANCE_PACKET_TEMPLATE_2026-05-05.md`
+
+Rule:
+
+* Team 2 phai dien day du runtime/UI checks
+* QA/SEO phai dien canonical/hreflang/metadata + SOP eye-check
+* Team 3 xac nhan payload contract (`locales`, `featured_image`, image log)

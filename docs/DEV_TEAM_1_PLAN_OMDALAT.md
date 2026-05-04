@@ -244,13 +244,23 @@ File quyết toán để theo dõi:
 * `docs/OMDALAT_3_LANE_AUDIT_BOARD_2026-04-28.md`
 * `docs/OMDALAT_3_LANE_GLOBAL_PROGRESS_2026-04-28.md`
 
+## 8. bắt buộc đọc baseline Sprint 0 mới (2026-05-04)
+
+Team 1 yêu cầu toàn bộ Team 2/3/Ap đọc bắt buộc trước mọi sprint handoff mới:
+
+- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
+- `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+
 ## 11. Sprint 0 Execution Packet (2026-05-04)
 
 Team 1 xác nhận packet thực thi Sprint 0 đã sẵn để các team chạy ngay:
 
 * `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
 * `data/seed/articles.seed.json`
-* `data/seed/articles.seed.launch-v2.json`
+* `data/seed/articles.seed.sprint0-launch.json`
 * `data/seed/article-images.seed.json`
 
 Gate chạy trước staging:

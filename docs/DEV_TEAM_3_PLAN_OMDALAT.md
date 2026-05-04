@@ -193,6 +193,9 @@ Team 3 phải nhận baseline mới từ:
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 - `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
 
 Yêu cầu bắt buộc:
 
@@ -233,7 +236,7 @@ Team 3 chuyển từ planning sang execution cho 3 bài mở nền.
 Deliverables đã sẵn:
 
 * runtime seed: `data/seed/articles.seed.json` (3 bài launch publish + meta/internal links + locales + featured_image)
-* launch schema V2: `data/seed/articles.seed.launch-v2.json`
+* launch payload Sprint 0: `data/seed/articles.seed.sprint0-launch.json`
 * image records: `data/seed/article-images.seed.json` (3 hero launch chuẩn `webp` + slug naming)
 * execution guide: `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
 
