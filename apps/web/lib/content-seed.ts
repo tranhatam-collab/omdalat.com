@@ -1,5 +1,6 @@
 import type { OmdalatLocale } from "../../../packages/core";
 import type {
+  ArticleImageSeedRecord,
   ArticleSeedRecord,
   ContentAccessLevel,
   ContentPillarKey,
@@ -8,12 +9,15 @@ import type {
   MemberResourceSeedRecord
 } from "../../../packages/types";
 import articleSeedData from "../../../data/seed/articles.seed.json";
+import articleImageSeedData from "../../../data/seed/article-images.seed.json";
 import handbookSeedData from "../../../data/seed/handbook-sections.seed.json";
 import memberResourceSeedData from "../../../data/seed/member-resources.seed.json";
 
 const articles = [...(articleSeedData as ArticleSeedRecord[])].sort((first, second) => first.order - second.order);
+const articleImages = [...(articleImageSeedData as ArticleImageSeedRecord[])];
 const handbookSections = [...(handbookSeedData as HandbookSectionSeedRecord[])].sort((first, second) => first.order - second.order);
 const memberResources = [...(memberResourceSeedData as MemberResourceSeedRecord[])].sort((first, second) => first.order - second.order);
+const articleImageBySlug = new Map(articleImages.map((image) => [image.article_slug, image] as const));
 
 const CONTENT_ACCESS_LEVELS = ["guest", "registered", "reviewed", "internal", "admin"] as const satisfies readonly ContentAccessLevel[];
 const CONTENT_PILLARS = ["song", "work", "xay-cuoc-doi"] as const satisfies readonly ContentPillarKey[];
@@ -26,6 +30,13 @@ type ContentOpsBlocker =
 
 function byLocale<T extends { vi: string; en: string }>(locale: OmdalatLocale, value: T) {
   return locale === "vi" ? value.vi : value.en;
+}
+
+function normalizePillarKey(value: string): ContentPillarKey {
+  if (value === "life") return "song";
+  if (value === "earning") return "xay-cuoc-doi";
+  if (value === "song" || value === "work" || value === "xay-cuoc-doi") return value;
+  return "work";
 }
 
 function makeCounter<Key extends string>(keys: readonly Key[]) {
@@ -51,7 +62,7 @@ function countByAccessLevel(records: Array<{ access_level: ContentAccessLevel }>
 function countByPillar(records: Array<{ pillar_key: ContentPillarKey }>) {
   const counter = makeCounter(CONTENT_PILLARS);
   records.forEach((record) => {
-    counter[record.pillar_key] += 1;
+    counter[normalizePillarKey(record.pillar_key)] += 1;
   });
   return counter;
 }
@@ -61,6 +72,9 @@ function getPublishedArticles() {
 }
 
 function mapArticleForLocale(locale: OmdalatLocale, article: ArticleSeedRecord) {
+  const heroImage = articleImageBySlug.get(article.slug) ?? null;
+  const normalizedPillarKey = normalizePillarKey(article.pillar_key);
+
   return {
     id: article.id,
     slug: article.slug,
@@ -70,10 +84,11 @@ function mapArticleForLocale(locale: OmdalatLocale, article: ArticleSeedRecord) 
     excerpt: byLocale(locale, { vi: article.excerpt_vi, en: article.excerpt_en }),
     content: byLocale(locale, { vi: article.content_vi, en: article.content_en }),
     pillar: byLocale(locale, { vi: article.pillar_vi, en: article.pillar_en }),
-    pillarKey: article.pillar_key,
+    pillarKey: normalizedPillarKey,
     tags: article.tags,
     accessLevel: article.access_level,
-    status: article.status
+    status: article.status,
+    heroImage
   };
 }
 
@@ -117,10 +132,12 @@ export function getRelatedPublishedArticles(locale: OmdalatLocale, slug: string,
   }
 
   const samePillar = publishedArticles.filter(
-    (article) => article.slug !== slug && article.pillar_key === currentArticle.pillar_key
+    (article) =>
+      article.slug !== slug && normalizePillarKey(article.pillar_key) === normalizePillarKey(currentArticle.pillar_key)
   );
   const otherPillars = publishedArticles.filter(
-    (article) => article.slug !== slug && article.pillar_key !== currentArticle.pillar_key
+    (article) =>
+      article.slug !== slug && normalizePillarKey(article.pillar_key) !== normalizePillarKey(currentArticle.pillar_key)
   );
 
   return [...samePillar, ...otherPillars].slice(0, limit).map((article) => mapArticleForLocale(locale, article));

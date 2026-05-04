@@ -22,41 +22,80 @@ const ARTICLES_INDEX_LABEL = {
   en: "Articles"
 } as const;
 
-const ARTICLE_NEXT_LINKS = [
-  {
-    href: "/work",
-    vi: {
-      title: "Xem công việc",
-      body: "Đi tiếp sang lớp công việc, kỹ năng và cơ hội đang mở."
+const ARTICLE_NEXT_LINKS_BY_PILLAR = {
+  song: [
+    {
+      href: "/life",
+      vi: {
+        title: "Đọc trục sống",
+        body: "Đi tiếp sang phần nhịp sống, điều kiện ở lại và ổn định dài hạn."
+      },
+      en: {
+        title: "Read the life track",
+        body: "Continue into rhythm, fit, and long-term stability."
+      }
     },
-    en: {
-      title: "Explore work",
-      body: "Continue into the layer of work, skills, and open opportunities."
+    {
+      href: "/stay",
+      vi: {
+        title: "Tìm nơi ở",
+        body: "Xem các lựa chọn ở lại và điều kiện để giữ nhịp đều."
+      },
+      en: {
+        title: "Find a place to stay",
+        body: "See stay options and conditions for a steady rhythm."
+      }
     }
-  },
-  {
-    href: "/stay",
-    vi: {
-      title: "Tìm nơi ở",
-      body: "Đọc phần nơi ở để hiểu điều kiện, nhịp sống và cách bắt đầu."
+  ],
+  work: [
+    {
+      href: "/work",
+      vi: {
+        title: "Xem công việc",
+        body: "Đi tiếp sang cụm công việc, kỹ năng và cơ hội đang mở."
+      },
+      en: {
+        title: "Explore work",
+        body: "Continue into work, skills, and open opportunities."
+      }
     },
-    en: {
-      title: "Find a place to stay",
-      body: "Read the stay layer to understand fit, rhythm, and how to begin."
+    {
+      href: "/articles",
+      vi: {
+        title: "Xem thêm bài cùng cụm",
+        body: "Đọc thêm các bài liên quan để giữ mạch tìm hiểu trước khi tham gia."
+      },
+      en: {
+        title: "Read related articles",
+        body: "Keep the thread with related pieces before joining."
+      }
     }
-  },
-  {
-    href: "/join",
-    vi: {
-      title: "Xem cách tham gia",
-      body: "Khi nhu cầu đã rõ hơn, hãy xem bước gửi hồ sơ và thời gian thử."
+  ],
+  "xay-cuoc-doi": [
+    {
+      href: "/community",
+      vi: {
+        title: "Xem trục cộng đồng",
+        body: "Đi tiếp sang cách sống cùng người khác và giữ kỷ luật chung."
+      },
+      en: {
+        title: "Explore community",
+        body: "Continue into shared living and collective discipline."
+      }
     },
-    en: {
-      title: "See how to join",
-      body: "When the need is clearer, see the application and trial steps."
+    {
+      href: "/learning",
+      vi: {
+        title: "Xem trục học",
+        body: "Đọc lớp học từ trải nghiệm và nhịp làm việc thực tế."
+      },
+      en: {
+        title: "Explore learning",
+        body: "Read the layer of learning through lived work."
+      }
     }
-  }
-] as const;
+  ]
+} as const;
 
 const JOIN_COPY = {
   vi: {
@@ -70,6 +109,34 @@ const JOIN_COPY = {
     cta: "See how to join"
   }
 } as const;
+
+const TAG_LABELS = {
+  "lam-viec-tu-xa": { vi: "Làm việc từ xa", en: "Remote work" },
+  remote: { vi: "Làm việc từ xa", en: "Remote work" },
+  freelance: { vi: "Làm việc tự do", en: "Freelance work" },
+  "lam-viec-tu-do": { vi: "Làm việc tự do", en: "Freelance work" },
+  work: { vi: "Làm việc", en: "Work" },
+  system: { vi: "Hệ vận hành", en: "Operating system" },
+  va: { vi: "Trợ lý từ xa", en: "Remote assistant" },
+  "tro-ly-tu-xa": { vi: "Trợ lý từ xa", en: "Remote assistant" }
+} as const;
+
+function normalizePillarKey(value: string) {
+  if (value === "life") return "song";
+  if (value === "earning") return "xay-cuoc-doi";
+  if (value === "song" || value === "work" || value === "xay-cuoc-doi") return value;
+  return "work";
+}
+
+function displayTag(tag: string, locale: string) {
+  const normalized = tag.toLowerCase();
+  const direct = TAG_LABELS[normalized as keyof typeof TAG_LABELS];
+  if (direct) {
+    return locale === "vi" ? direct.vi : direct.en;
+  }
+
+  return tag.replaceAll("-", " ");
+}
 
 function splitParagraphs(content: string) {
   return content
@@ -139,6 +206,8 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
     images: articleVisuals.map((image) => image.src)
   });
   const joinHref = buildOmToAppUrl("/member/register?next=%2Fmember%2Fwelcome", locale, `article_${article.slug}`);
+  const contextualKey = normalizePillarKey(article.pillarKey) as keyof typeof ARTICLE_NEXT_LINKS_BY_PILLAR;
+  const contextualLinks = ARTICLE_NEXT_LINKS_BY_PILLAR[contextualKey];
 
   return (
     <>
@@ -167,7 +236,7 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
         <div className="runtime-article-meta">
           {article.tags.map((tag) => (
             <span className="runtime-article-tag" key={tag}>
-              {tag}
+              {displayTag(tag, locale)}
             </span>
           ))}
         </div>
@@ -176,6 +245,7 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
           images={articleVisuals}
           locale={locale}
           label={locale === "vi" ? `Hình minh họa cho ${article.title}` : `Article visuals for ${article.title}`}
+          altOverride={article.title}
           priority
         />
 
@@ -188,7 +258,7 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
         <section className="runtime-panel runtime-article-links">
           <p className="runtime-kicker">{locale === "vi" ? "Đi tiếp từ bài này" : "Keep going from here"}</p>
           <div className="runtime-docs-list">
-            {ARTICLE_NEXT_LINKS.map((nextLink) => {
+            {contextualLinks.map((nextLink) => {
               const copy = locale === "vi" ? nextLink.vi : nextLink.en;
 
               return (

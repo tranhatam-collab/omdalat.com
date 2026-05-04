@@ -17,6 +17,12 @@ export type RuntimeVisual = {
   sourcePage: string;
 };
 
+export type RuntimeVisualSources = {
+  fallback: string;
+  webp?: string;
+  avif?: string;
+};
+
 export type VisualContextKey =
   | "life"
   | "work"
@@ -254,3 +260,37 @@ export function getArticleVisuals(
 }
 
 export const defaultRuntimeOgImage = runtimeVisuals.mist;
+
+function withFormat(src: string, format: "avif" | "webp") {
+  try {
+    const parsed = new URL(src);
+    const host = parsed.hostname.toLowerCase();
+
+    if (host.includes("images.unsplash.com")) {
+      parsed.searchParams.set("fm", format);
+      return parsed.toString();
+    }
+
+    if (host.includes("images.pexels.com")) {
+      parsed.searchParams.set("fm", format);
+      parsed.searchParams.set("auto", "compress");
+      parsed.searchParams.set("cs", "tinysrgb");
+      return parsed.toString();
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export function getRuntimeVisualSources(src: string): RuntimeVisualSources {
+  const avif = withFormat(src, "avif") ?? undefined;
+  const webp = withFormat(src, "webp") ?? undefined;
+
+  return {
+    fallback: src,
+    webp,
+    avif
+  };
+}

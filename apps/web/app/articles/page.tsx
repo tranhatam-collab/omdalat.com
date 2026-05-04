@@ -3,6 +3,7 @@ import { localizePath } from "../../../../packages/core";
 import { getAllArticles } from "../../lib/content-seed";
 import { getRequestLocale } from "../../lib/locale";
 import { buildCurrentLocalePageMetadata } from "../../lib/metadata";
+import { getArticleVisuals, getRuntimeVisualSources } from "../../lib/visuals";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildCurrentLocalePageMetadata({
@@ -34,13 +35,30 @@ export default async function ArticlesPage() {
 
       {articles.length > 0 ? (
         <div className="runtime-card-grid" style={{ marginTop: "1rem" }}>
-          {articles.map((article) => (
-            <a className="runtime-link-card" href={localizePath(article.href, locale)} id={article.slug} key={article.id}>
-              <strong>{article.title}</strong>
-              <span>{article.excerpt}</span>
-              <span>{article.pillar}</span>
-            </a>
-          ))}
+          {articles.map((article) => {
+            const image = getArticleVisuals(article, 1)[0];
+            const sources = getRuntimeVisualSources(image.src);
+
+            return (
+              <a className="runtime-link-card runtime-article-card" href={localizePath(article.href, locale)} id={article.slug} key={article.id}>
+                <picture>
+                  {sources.avif ? <source srcSet={sources.avif} type="image/avif" /> : null}
+                  {sources.webp ? <source srcSet={sources.webp} type="image/webp" /> : null}
+                  <img
+                    src={sources.fallback}
+                    alt={article.title}
+                    width={image.width}
+                    height={image.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <strong>{article.title}</strong>
+                <span>{article.excerpt}</span>
+                <span>{article.pillar}</span>
+              </a>
+            );
+          })}
         </div>
       ) : (
         <p className="runtime-status runtime-status--info" style={{ marginTop: "1rem" }}>
