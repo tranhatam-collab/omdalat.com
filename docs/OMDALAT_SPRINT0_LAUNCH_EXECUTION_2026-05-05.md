@@ -92,7 +92,12 @@ Không mở thêm scope ngoài 3 bài trong Sprint 0.
 Team 1 xác nhận payload 3 bài launch đã có trong seed file launch chuyên dụng, có thể dùng ngay để Team 2 render mà không cần chờ thêm:
 
 1. `data/seed/articles.seed.sprint0-launch.json`
-2. `data/seed/article-images.seed.json`
+2. `data/seed/articles.seed.launch-v2.json`
+3. `data/seed/article-images.seed.json`
+
+Action plan chi tiết cho owner/deadline/gate:
+
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
 
 ### Copy-ready handoff cho Team 2 (đã tạo)
 
@@ -134,7 +139,31 @@ Lưu ý: khi đẩy xong local UI, Team 2 có thể revert/restore bản seed ru
 
 ---
 
-## 6. Lệnh bắt đầu ngày mai
+## 6. Codex evidence update (2026-05-04)
+
+Additional local verification completed:
+
+- `pnpm validate:content-seed` -> `PASS`
+- `pnpm --filter @omdalat/web validate:web-locales` -> `PASS`
+- `pnpm --filter @omdalat/web validate:i18n-data` -> `PASS`
+- `pnpm --filter @omdalat/web exec tsc --noEmit` -> `PASS`
+- `npm run cf:runtime-map:check` -> `PASS`
+
+Local dev route smoke:
+
+- 6/6 routes returned `200` on `http://127.0.0.1:3210`
+- VI and EN H1 rendered from the correct locale payload for all 3 articles
+
+Build note:
+
+- `pnpm --filter @omdalat/web build` reached successful compile/type/page generation.
+- It was stopped at `Collecting build traces` after a long local stall, so Team 2/QA must rerun build on a clean runner before production approval.
+
+No production deploy was performed in this update.
+
+---
+
+## 7. Lệnh bắt đầu ngày mai
 
 ```bash
 pnpm validate:content-seed
@@ -157,3 +186,19 @@ Rule:
 * Team 2 phai dien day du runtime/UI checks
 * QA/SEO phai dien canonical/hreflang/metadata + SOP eye-check
 * Team 3 xac nhan payload contract (`locales`, `featured_image`, image log)
+
+---
+
+## 8. HUMAN_TEXT protocol gate (bat buoc)
+
+Ap dung:
+
+* `docs/HUMAN_TEXT_CHARACTER_AND_RESPONSE_PROTOCOL.md`
+* `docs/OMDALAT_HUMAN_TEXT_GATE_URL_INVENTORY_2026-05-05.md`
+
+Trang Sprint 0 chi duoc claim `WEB_READY` khi pass them:
+
+* `CHARACTER_HYGIENE_GATE`
+* `H_STANDARD_GATE`
+* `SEO_TEXT_GATE`
+* `TRUE_STATE_GATE`
