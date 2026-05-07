@@ -33,7 +33,11 @@ Thông báo này chốt các thay đổi vừa được Team 1 áp dụng vào r
 3. Contextual internal link ở bài detail chuyển sang silo theo pillar thay vì một cụm link cố định.
 4. Ảnh bài viết ưu tiên AVIF/WebP + fallback; alt/caption bám locale đang đứng.
 5. Validator content seed đã khóa vocabulary gate cho bản tiếng Việt publish.
-6. Team 1 cycle coordination đã đóng ở mức `TEAM1_SCOPE_DONE`; 3 lane giữ `PASS_WITH_QUEUE`.
+6. Team 1 cycle coordination đã đóng ở mức `TEAM1_SCOPE_DONE`.
+7. Current lane state after closure:
+   - Team 2: `PASS_WITH_QUEUE`
+   - Team 3: `DONE_CLOSED`
+   - Ap Team: `PASS_WITH_QUEUE`
 
 ---
 
