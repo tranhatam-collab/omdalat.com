@@ -57,36 +57,24 @@ Current status:
 
 Current status:
 
-* `REVIEWED_BLOCKED_P0`
+* `DONE_CLOSED` (nằm ở trạng thái D-014)
 
 ### 2.1 Mục phải hoàn thành
 
-* Nộp fresh artifact + fresh smoke batch sau activation `2026-04-28`.
-* Nộp evidence packet mới cho:
-  * metadata/noindex surfaces
-  * access matrix verification
-  * runtime smoke summary mới
+* `DONE` Fresh artifact + smoke batch đã được nộp và chốt tại `D-014`.
+* `DONE` Evidence packet runtime đã chốt:
   * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
-* Ghi rõ kết luận blocker sau fresh run:
-  * `CODE`
-  * `TOOLCHAIN`
-  * `INFRA`
-  * hoặc `NONE`
-* Đóng gate `D-009`:
+* `DONE` `D-009` đã được giải quyết trong cycle closure:
   * `https://app.omdalat.com/vi/member/register` -> `200`
-  * `https://app.omdalat.com/vi/member/operations` -> redirect reviewed gate
+  * `https://app.omdalat.com/vi/member/operations` -> reviewed gate
 
 ### 2.2 Điều kiện Team 1 chấp nhận
 
-* Có đường dẫn artifact/smoke mới, không chỉ viện dẫn baseline cũ `2026-04-23`.
-* Không trộn blocker toolchain với blocker code.
-* Role semantics/gate semantics không đổi nghĩa.
-* Canonical host parity pass theo `D-009`.
+* `DONE` Đã đạt cho cycle hiện tại.
 
 ### 2.3 Mức đóng lane
 
-* `PASS_WITH_QUEUE` nếu P0 runtime evidence sạch, còn P1 persistence deepening.
-* `PASS` nếu cả runtime evidence và surface evidence đạt chuẩn khóa.
+* `DONE_CLOSED` cho cycle hiện tại.
 
 ---
 

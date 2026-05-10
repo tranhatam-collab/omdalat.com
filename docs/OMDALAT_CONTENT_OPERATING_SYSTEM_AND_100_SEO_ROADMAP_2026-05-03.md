@@ -67,6 +67,26 @@ CTA:
 
 Link target: `siteConfig.apOrigin`, mặc định `https://ap.omdalat.com`.
 
+### 1.4 Quy tắc ảnh homepage
+
+Homepage phải dùng ảnh sát với đời sống thật tại Đà Lạt.
+
+Chuẩn khóa áp dụng: `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`.
+
+Bắt buộc:
+
+- ảnh phải cho thấy Đà Lạt như một nơi có thể sống và làm việc thật
+- ưu tiên khu dân cư, đường dốc, chợ, hiên nhà, cửa sổ, bàn làm việc, góc sống, đường đi hằng ngày
+- màu giữ tự nhiên, không đẩy thành ảnh postcard du lịch
+- block work dùng ảnh gợi nhịp làm việc thật
+- block bridge sang Ấp Đà Lạt dùng ảnh gợi con người, nơi chốn, nhịp sống, không dùng ảnh mang cảm giác CTA tham gia hệ
+
+Không dùng:
+
+- ảnh nghỉ dưỡng sang trọng làm sai kỳ vọng
+- ảnh chỉ đẹp để ngắm nhưng không liên quan block
+- ảnh mơ hồ quá mức, không nhận ra lớp sống thật của Đà Lạt
+
 ---
 
 ## 2. Bài Đầu Tiên Đã Kích Hoạt Trong Seed
@@ -133,6 +153,43 @@ Rendering rules:
 - Line height must stay airy enough for long reading.
 - Do not write social-style one-line paragraphs unless the article intentionally needs a short beat.
 - Every article must link to `/work`, `/stay`, `/join`, and at least two related articles.
+
+### 3.1 Quy tắc ảnh cho bài viết
+
+Mỗi bài public của Om phải có hình ảnh đúng vai trò bài, không chỉ đúng địa danh.
+
+Tài liệu khóa áp dụng: `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`.
+
+Quy tắc:
+
+- ảnh phải sát thực tế Đà Lạt
+- ảnh phải sát ngữ cảnh bài
+- ảnh phải có dấu hiệu đời sống hoặc lao động thật khi nội dung nói về ở lại, làm việc, thu nhập, kỷ luật
+- alt text và caption phải mô tả đúng chủ thể thật trong ảnh
+
+Tránh:
+
+- ảnh bưu thiếp du lịch
+- ảnh quá sang hoặc quá nghỉ dưỡng
+- ảnh chỉ có hoa, sương, hồ nếu bài đang nói về công việc, thu nhập, kỷ luật hoặc ở lâu
+- ảnh không có liên hệ rõ với H1, excerpt và intent của bài
+
+### 3.2 Chuẩn ảnh cho 3 bài đầu
+
+`tu-da-lat-lam-viec-voi-the-gioi`
+
+- ưu tiên bàn làm việc cạnh cửa sổ, căn phòng nhỏ có dấu hiệu đang làm việc, ánh sáng sớm hoặc chiều
+- tránh phong cảnh đồi thông rộng, ảnh du lịch sương mù quá mơ hồ, ảnh pose ngoài trời
+
+`lam-viec-o-da-lat-co-thuc-te-khong`
+
+- ưu tiên quán nhỏ yên có người làm việc thật, góc bàn đủ sáng, ổ điện, ly cà phê, sổ tay, máy tính
+- tránh coworking quá corporate, cafe du lịch quá đẹp, ảnh laptop generic
+
+`tu-mot-ky-nang-den-thu-nhap-o-da-lat`
+
+- ưu tiên người viết, chỉnh ảnh, dựng video, sắp dữ liệu; bàn làm việc giản dị; màn hình có công việc thật
+- tránh ảnh tiền, biểu đồ tài chính, ảnh AI hoặc công nghệ quá trừu tượng, ảnh thành công kiểu marketing
 
 ---
 
@@ -320,6 +377,8 @@ Before each publishing wave:
 3. `/vi` and `/en` homepage must show the first three foundation articles.
 4. Each article must have locale-specific title, excerpt, Open Graph image, canonical and related links.
 5. No visible Vietnamese page should rely on casual English terms when a clear Vietnamese phrase is available.
+6. Homepage và article images phải dùng ảnh thật Đà Lạt, đúng ngữ cảnh của block hoặc bài viết.
+7. Mỗi bài phải pass `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`, gồm bộ lọc tinh thần, cấu trúc bài, metadata, internal link và chuẩn visual.
 
 ---
 
@@ -329,3 +388,15 @@ Before each publishing wave:
 
 Nó là bản đồ nhận thức để người đọc đi từ tò mò, đến hiểu, đến tin, đến tham gia, đến làm, đến ở lại, rồi tạo giá trị.
 
+---
+
+## 10. Dẫn chiếu bắt buộc
+
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+- `docs/OMDALAT_30_ARTICLES_EDITORIAL_MASTER_2026.md`
+- `docs/OMDALAT_CONTENT_SEO_30_ARTICLES_2026.md`
+- `docs/OMDALAT_IMAGE_SOURCE_SHORTLIST_2026.md`
+- `docs/DEV_TEAM_1_PLAN_OMDALAT.md`
+- `docs/OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md`
+- `docs/OMDALAT_AND_APDALAT_FULL_DEPLOY_CHECKLIST_2026.md`

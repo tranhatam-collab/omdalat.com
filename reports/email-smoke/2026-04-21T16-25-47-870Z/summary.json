@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-04-21T16:25:47.870Z",
+  "finishedAt": "2026-04-21T16:25:55.486Z",
+  "success": false,
+  "runtimeTarget": "live",
+  "assertionMode": "runtime",
+  "origins": {
+    "mailApiUrl": "https://omdalat.com/api/mail-smoke",
+    "webOrigin": "https://omdalat.com",
+    "appOrigin": "https://app.omdalat.com"
+  },
+  "totals": {
+    "emailsCaptured": null
+  },
+  "flows": [
+    {
+      "flow": "contact",
+      "ok": true,
+      "status": 200,
+      "emittedEmails": null
+    },
+    {
+      "flow": "support",
+      "ok": false,
+      "status": 502,
+      "emittedEmails": null
+    },
+    {
+      "flow": "join",
+      "ok": true,
+      "url": "https://omdalat.com/vi/member/verify?next=%2Fmember%2Fwelcome&sent=1",
+      "emittedEmails": null
+    },
+    {
+      "flow": "magic_link",
+      "ok": true,
+      "emittedEmails": null
+    },
+    {
+      "flow": "email_verification",
+      "ok": true,
+      "url": "https://omdalat.com/vi/member/welcome",
+      "emittedEmails": null
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "locale": "vi",
+    "siteTitle": "Ấp Đà Lạt",
+    "homeTitle": "Ấp Đà Lạt | Những con người, nơi chốn và nhịp sống Đà Lạt",
+    "homeDescription": "Hiểu Đà Lạt như một nơi để ở lại, làm việc và giữ một nhịp sống có thể đi đường dài.",
+    "footerNote": "Ấp Đà Lạt kể về con người, nơi chốn và nhịp sống làm nên Đà Lạt hôm nay.",
+    "bridge": {
+      "title": "Khi việc đọc không còn là đủ",
+      "body": "Nếu bạn không chỉ muốn đọc về Đà Lạt, mà đang tìm một nơi để ở lại, làm việc và tham gia sâu hơn, hãy đi tới Ôm Đà Lạt.",
+      "cta": "Tới Ôm Đà Lạt"
+    },
+    "home": {
+      "hero": {
+        "eyebrow": "Ấp Đà Lạt",
+        "title": "Những con người, nơi chốn và nhịp sống làm nên Đà Lạt hôm nay.",
+        "body": "Đà Lạt không chỉ để ghé qua. Đây còn là một nơi để ở lại, làm việc và sống đủ lâu để nhận ra điều gì thật sự giữ người ta ở lại.",
+        "primaryCta": {
+          "label": "Đọc câu chuyện",
+          "href": "cau-chuyen/index.html"
+        },
+        "secondaryCta": {
+          "label": "Xem nơi chốn",
+          "href": "noi-chon/index.html"
+        }
+      },
+      "intro": {
+        "title": "Không chỉ là nơi để đến",
+        "body": "Có những nơi đẹp để đi qua. Cũng có những nơi đủ sâu để người ta muốn ở lại lâu hơn một mùa. Đà Lạt thuộc về nhóm thứ hai, không chỉ vì khí hậu hay ký ức, mà vì nơi này vẫn giữ được khoảng thở giữa đời sống và công việc."
+      },
+      "lensesTitle": "Ba cách để nhìn Đà Lạt hôm nay",
+      "peopleTitle": "Con người của Đà Lạt hôm nay",
+      "peopleIntro": "Đà Lạt không chỉ được kể bằng phong cảnh. Nó được kể bằng những người đang sống ở đây, làm việc ở đây và chọn ở lại theo cách riêng của mình.",
+      "placesTitle": "Những nơi chốn để sống và làm việc",
+      "placesIntro": "Một nơi tốt không chỉ đẹp trong ảnh. Nó phải có ánh sáng, nhịp, khoảng thở và khả năng đi cùng công việc thật.",
+      "rhythmsTitle": "Nhịp sống không vội",
+      "rhythmsIntro": "Đà Lạt có một nhịp riêng. Không quá chậm để ngừng tạo ra giá trị, nhưng cũng không quá nhanh để đánh mất mình.",
+      "workTitle": "Làm việc từ một nơi nhỏ",
+      "workBody": "Từ Đà Lạt, nhiều người vẫn đang viết, dạy, thiết kế, làm media, mở studio nhỏ và giữ công việc ở gần một đời sống có mưa, bếp, cây và người thân.",
+      "imagesTitle": "Bộ ảnh và ghi chép thị giác",
+      "imagesBody": "Có những điều ở Đà Lạt nên được đọc bằng chữ. Cũng có những điều chỉ hiện ra rõ hơn qua ánh sáng, bề mặt, hiên nhà, bàn gỗ, khu vườn và khoảng không của một ngày lạnh.",
+      "lenses": [
+        {
+          "key": "people",
+          "body": "Những người ở lại, làm nghề, dạy, chăm vườn, mở quán nhỏ và giữ nhịp riêng của mình.",
+          "cta": "Đi tiếp"
+        },
+        {
+          "key": "places",
+          "body": "Những góc nhà, hiên nhỏ, triền dốc và không gian đủ thật để sống và làm việc lâu dài.",
+          "cta": "Đi tiếp"
+        },
+        {
+          "key": "rhythms",
+          "body": "Buổi sáng, mưa, chiều xuống và những khoảng nghỉ làm nên một đời sống không vội.",
+          "cta": "Đi tiếp"
+        }
+      ]
+    },
+    "ui": {
+      "readMore": "Đọc tiếp",
+      "workCta": "Xem cách người ta làm việc ở đây",
+      "imagesCta": "Xem bộ ảnh",
+      "relatedTitle": "Đọc tiếp",
+      "relatedIntro": "Những bài viết gần cùng nhịp để đi tiếp.",
+      "loadErrorTitle": "Chưa tải được nội dung",
+      "loadErrorMessage": "Nội dung locale chưa sẵn sàng hoặc đường dẫn hiện tại chưa đọc được file JSON."
+    }
+  },
+  {
+    "locale": "en",
+    "siteTitle": "Ap Dalat",
+    "homeTitle": "Ap Dalat | People, Places and Rhythms of Dalat",
+    "homeDescription": "Read Dalat as a living place through its people, places, work, and daily rhythms.",
+    "footerNote": "Ap Dalat tells the story of the people, places, and rhythms shaping Dalat today.",
+    "bridge": {
+      "title": "When reading is no longer enough",
+      "body": "If you are not only reading about Dalat, but looking for a place to stay, work, and join more deeply, continue to Om Dalat.",
+      "cta": "Go to Om Dalat"
+    },
+    "home": {
+      "hero": {
+        "eyebrow": "Ap Dalat",
+        "title": "People, places, and rhythms shaping Dalat today.",
+        "body": "Dalat is not only a place to pass through. It can also be a place to stay, work, and live long enough to notice what truly holds people here.",
+        "primaryCta": {
+          "label": "Read the story",
+          "href": "stories/index.html"
+        },
+        "secondaryCta": {
+          "label": "See places",
+          "href": "places/index.html"
+        }
+      },
+      "intro": {
+        "title": "Not only a place to visit",
+        "body": "Some places are beautiful to pass through. Others hold enough depth to make people want to stay longer than a season. Dalat belongs to the second kind."
+      },
+      "lensesTitle": "Three ways of seeing Dalat today",
+      "peopleTitle": "People shaping Dalat today",
+      "peopleIntro": "Dalat is not told only through its landscape. It is also told through the people who live here, work here, and choose to stay in their own way.",
+      "placesTitle": "Places to live and work",
+      "placesIntro": "A good place is not only beautiful in an image. It also needs light, breathing room, and the ability to support real work.",
+      "rhythmsTitle": "A rhythm that does not rush",
+      "rhythmsIntro": "Dalat has its own rhythm. Not too slow to stop creating value, and not too fast to lose itself.",
+      "workTitle": "Working from a small place",
+      "workBody": "From Dalat, people are already writing, teaching, designing, making media, opening small studios, and keeping work close to a daily life shaped by rain, kitchens, trees, and family.",
+      "imagesTitle": "Photo essays and visual notes",
+      "imagesBody": "Some parts of Dalat are best understood through words. Others arrive more clearly through light, surfaces, porches, gardens, and the quiet space of a cold day.",
+      "lenses": [
+        {
+          "key": "people",
+          "body": "People who stay, teach, grow things, open small spaces, and keep a rhythm of their own.",
+          "cta": "Continue"
+        },
+        {
+          "key": "places",
+          "body": "Small homes, porches, slopes, and spaces real enough for living and working over time.",
+          "cta": "Continue"
+        },
+        {
+          "key": "rhythms",
+          "body": "Morning air, rain, dusk, and pauses that shape a life not built on hurry.",
+          "cta": "Continue"
+        }
+      ]
+    },
+    "ui": {
+      "readMore": "Read more",
+      "workCta": "See how work happens here",
+      "imagesCta": "See the photo essays",
+      "relatedTitle": "Read next",
+      "relatedIntro": "More pieces in a similar rhythm.",
+      "loadErrorTitle": "Unable to load content",
+      "loadErrorMessage": "The locale content is not ready yet or the current path could not read the JSON file."
+    }
+  }
+]

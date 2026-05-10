@@ -1,0 +1,46 @@
+[
+  {
+    "key": "about",
+    "eyebrow_vi": "Về Ấp Đà Lạt",
+    "eyebrow_en": "About Ap Dalat",
+    "title_vi": "Một lớp kể chuyện và bản sắc sống cho Đà Lạt hôm nay",
+    "title_en": "An editorial and place-identity layer for Dalat today",
+    "meta_title_vi": "Về Ấp Đà Lạt",
+    "meta_title_en": "About Ap Dalat",
+    "meta_description_vi": "Trang giải thích vai trò của Ấp Đà Lạt như một lớp bản sắc sống và editorial về Đà Lạt hôm nay.",
+    "meta_description_en": "A page explaining Ap Dalat as an editorial and place-identity layer for Dalat today.",
+    "body_vi": [
+      "Ấp Đà Lạt không phải một trang du lịch, cũng không phải một bề mặt chuyển đổi cho lưu trú. Đây là lớp identity và editorial của hệ, nơi Đà Lạt được đọc qua con người, nơi chốn, nhịp sống, công việc và những điều đủ thật để đi cùng thời gian.",
+      "Ôm Đà Lạt là lớp tiếp theo: ở lại, tham gia, học, làm và bước sâu hơn vào hệ thực tế. Hai bề mặt này liên quan chặt chẽ, nhưng không được trùng vai.",
+      "Tên “Ấp” trong thương hiệu không phải một chi tiết trang trí. Nó gợi một cấu trúc sống có ký ức, có gần gũi, có công việc thật, có trao đổi tương hỗ và một nhịp sống không vô danh."
+    ],
+    "body_en": [
+      "Ap Dalat is not a travel site and not a booking surface. It is the identity and editorial layer of the system, reading Dalat through people, places, rhythms, work, and what remains meaningful over time.",
+      "Om Dalat is the next layer: staying, participating, learning, working, and entering the practical system more deeply. The two surfaces are linked, but they do not play the same role.",
+      "The word “Ap” is not decorative in this brand. It points to a social structure of memory, closeness, real work, reciprocity, and a life that is not anonymous."
+    ],
+    "link_label_vi": "",
+    "link_label_en": ""
+  },
+  {
+    "key": "om",
+    "eyebrow_vi": "Ôm Ấp Đà Lạt",
+    "eyebrow_en": "Om Ap Dalat",
+    "title_vi": "Khi một câu chuyện trở thành nhu cầu ở lại",
+    "title_en": "When a story becomes a desire to stay",
+    "meta_title_vi": "Ôm Ấp Đà Lạt",
+    "meta_title_en": "Om Ap Dalat",
+    "meta_description_vi": "Trang cầu nối giải thích khi nào người đọc nên đi tiếp sang omdalat.com.",
+    "meta_description_en": "A bridge page explaining when readers should continue to omdalat.com.",
+    "body_vi": [
+      "Ấp Đà Lạt giúp người đọc hiểu Đà Lạt như một vùng sống. Nhưng sẽ có lúc sự hiểu ấy chuyển thành câu hỏi thực tế hơn: ở đâu, làm thế nào, tham gia cùng ai, và bắt đầu từ lớp nào.",
+      "Đó là lúc Ôm Đà Lạt xuất hiện như lớp đi tiếp. Không thay thế Ấp, mà nối identity sang participation."
+    ],
+    "body_en": [
+      "Ap Dalat helps readers understand Dalat as a living place. But there comes a point when that understanding turns into more practical questions: where to stay, how to take part, who to learn from, and what the next layer looks like.",
+      "That is where Om Dalat appears. It does not replace Ap Dalat. It connects identity to participation."
+    ],
+    "link_label_vi": "Đi tới omdalat.com",
+    "link_label_en": "Continue to omdalat.com"
+  }
+]

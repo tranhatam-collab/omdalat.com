@@ -1,0 +1,6 @@
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[name="code"]')[22m
+
+    at main (/Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:396:56)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:461:1

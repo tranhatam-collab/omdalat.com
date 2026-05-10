@@ -12,6 +12,7 @@ import type { LocalizedText } from "./i18n-copy";
 import { pickLocalized } from "./i18n-copy";
 import { getRequestLocale } from "./locale";
 import { absoluteUrl } from "./canonical";
+import { defaultRuntimeOgImage, type RuntimeVisual } from "./visuals";
 
 type MetadataInput = {
   title: LocalizedText | string;
@@ -19,6 +20,7 @@ type MetadataInput = {
   path: string;
   noindex?: boolean;
   locale?: OmdalatLocale;
+  image?: RuntimeVisual | string;
 };
 
 function resolveMetadataLocale(locale?: OmdalatLocale) {
@@ -30,13 +32,19 @@ function resolveCanonicalLocale(locale?: OmdalatLocale) {
   return isSupportedLocale(resolvedLocale) ? resolvedLocale : resolveLocaleFallback(resolvedLocale);
 }
 
-export function buildPageMetadata({ title, description, path, noindex = false, locale }: MetadataInput): Metadata {
+export function buildPageMetadata({ title, description, path, noindex = false, locale, image }: MetadataInput): Metadata {
   const resolvedLocale = resolveMetadataLocale(locale);
   const canonicalLocale = resolveCanonicalLocale(resolvedLocale);
   const localeDescriptor = getLocaleDescriptor(resolvedLocale);
   const resolvedTitle = pickLocalized(resolvedLocale, title);
   const resolvedDescription = pickLocalized(resolvedLocale, description);
   const canonicalPath = localizePath(path, canonicalLocale);
+  const metadataImage = typeof image === "string" ? defaultRuntimeOgImage : image ?? defaultRuntimeOgImage;
+  const metadataImageUrl = typeof image === "string" ? image : metadataImage.src;
+  const metadataImageAlt =
+    typeof image === "string"
+      ? pickLocalized(resolvedLocale, { vi: "Ôm Đà Lạt", en: "Om Dalat" })
+      : pickLocalized(resolvedLocale, metadataImage.alt);
   const alternates = Object.fromEntries(
     getPublicLocaleDescriptors().map((descriptor) => [
       descriptor.hreflang,
@@ -68,13 +76,10 @@ export function buildPageMetadata({ title, description, path, noindex = false, l
         .map((descriptor) => descriptor.ogLocale),
       images: [
         {
-          url: absoluteUrl("/og/omdalat-runtime.svg"),
-          width: 1200,
-          height: 630,
-          alt: pickLocalized(resolvedLocale, {
-            vi: "Ôm Đà Lạt",
-            en: "Om Dalat"
-          })
+          url: absoluteUrl(metadataImageUrl),
+          width: typeof image === "string" ? 1200 : metadataImage.width,
+          height: typeof image === "string" ? 630 : metadataImage.height,
+          alt: metadataImageAlt
         }
       ]
     },
@@ -82,7 +87,7 @@ export function buildPageMetadata({ title, description, path, noindex = false, l
       card: "summary_large_image",
       title: resolvedTitle,
       description: resolvedDescription,
-      images: [absoluteUrl("/og/omdalat-runtime.svg")]
+      images: [absoluteUrl(metadataImageUrl)]
     },
     icons: {
       icon: "/icons/icon.svg"

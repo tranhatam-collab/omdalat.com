@@ -1,0 +1,110 @@
+[
+  {
+    "title_vi": "Trại Mát buổi sáng",
+    "title_en": "Morning in Trai Mat",
+    "slug_vi": "trai-mat-buoi-sang",
+    "slug_en": "trai-mat-buoi-sang",
+    "place_type": "vng-ven",
+    "area_vi": "Trại Mát",
+    "area_en": "Trai Mat",
+    "excerpt_vi": "Một vùng sáng sớm cho thấy Đà Lạt không chỉ có trung tâm, mà còn có những nhịp sống đi ra từ đất, sương và giờ làm việc rất sớm.",
+    "excerpt_en": "A morning landscape showing that Dalat is not only its center, but also the rhythms shaped by land, mist, and early work.",
+    "standfirst_vi": "Vùng ven • Trại Mát",
+    "standfirst_en": "Edge zone • Trai Mat",
+    "content_vi": "Trại Mát buổi sáng không cần cố gắng để trở nên đáng nhớ. Ánh sáng lên chậm, không khí có độ ẩm, những mảng nhà kính phản chiếu một thứ nhịp làm việc đã bắt đầu từ trước khi nhiều người trong trung tâm thức dậy.\n\nỞ đây, chất lượng sống không nằm ở tiện nghi dồn dập. Nó nằm ở sự rõ ràng của bối cảnh: bạn biết mình ở gần đất hơn, gần lao động hơn, gần một Đà Lạt ít trang trí hơn.\n\nVì thế, Trại Mát là một ví dụ tốt cho cách Ấp Đà Lạt muốn kể về nơi chốn: không phải bằng checklist, mà bằng fit, cảm giác, nhịp và công việc thật.",
+    "content_en": "Trai Mat in the morning does not need to perform to be memorable. Light rises slowly, the air holds moisture, and greenhouse surfaces reflect a work rhythm that began before much of the city center woke up.\n\nThe quality of life here is not about dense convenience. It is about clarity of context: closer to land, closer to labor, and closer to a Dalat that feels less decorated.\n\nThat makes Trai Mat a good example of how Ap Dalat reads place: not by checklist, but by fit, atmosphere, rhythm, and real work.",
+    "hero_image": "farms",
+    "gallery_ids": ["farms", "slopesWide", "valley"],
+    "tag_ids": [
+      "noi-chon"
+    ],
+    "related_story_ids": [],
+    "related_people_ids": [],
+    "seo": {
+      "meta_title_vi": "Trại Mát buổi sáng",
+      "meta_title_en": "Morning in Trai Mat",
+      "meta_description_vi": "Một vùng sáng sớm cho thấy Đà Lạt không chỉ có trung tâm, mà còn có những nhịp sống đi ra từ đất, sương và giờ làm việc rất sớm.",
+      "meta_description_en": "A morning landscape showing that Dalat is not only its center, but also the rhythms shaped by land, mist, and early work.",
+      "og_image": "farms"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  },
+  {
+    "title_vi": "Hiên nhà nhỏ bên dốc",
+    "title_en": "A Small Porch on a Slope",
+    "slug_vi": "hien-nha-nho-ben-doc",
+    "slug_en": "hien-nha-nho-ben-doc",
+    "place_type": "nh-nh",
+    "area_vi": "Vùng nhà dốc",
+    "area_en": "Hillside housing",
+    "excerpt_vi": "Một nơi không cần rộng để trở thành chỗ ở và chỗ làm có chiều sâu.",
+    "excerpt_en": "A place that does not need size to become both a home and a working corner with depth.",
+    "standfirst_vi": "Nhà nhỏ • Vùng nhà dốc",
+    "standfirst_en": "Small home • Hillside housing",
+    "content_vi": "Nhiều hiên nhà ở Đà Lạt không lớn, nhưng rất giỏi giữ người. Chúng tạo ra một vùng đệm giữa thời tiết và đời sống, giữa bên trong và bên ngoài, giữa làm việc và nghỉ ngắn.\n\nTrong một thành phố nhiều dốc, hiên nhà còn là cách ngôi nhà trò chuyện với địa hình. Nó cho phép ánh sáng đi vào chậm hơn, mưa chạm gần hơn, và một bàn làm việc nhìn ra ngoài mà không phải biến cả đời sống thành sân khấu.\n\nMột nơi chốn như vậy nói rõ hơn bất kỳ slogan nào về điều mà Đà Lạt còn giữ được: sự gần gũi có công năng.",
+    "content_en": "Many porches in Dalat are not large, but they hold people well. They create a threshold between weather and life, inside and outside, work and pause.\n\nIn a city of slopes, a porch is also how a house speaks with terrain. It lets light enter more slowly, rain come close, and a worktable face outward without turning daily life into a stage.\n\nA place like this says more clearly than any slogan what Dalat still holds: closeness with practical use.",
+    "hero_image": "slope",
+    "gallery_ids": ["slope", "rooftops", "hero"],
+    "tag_ids": [
+      "noi-chon"
+    ],
+    "related_story_ids": [],
+    "related_people_ids": [],
+    "seo": {
+      "meta_title_vi": "Hiên nhà nhỏ bên dốc",
+      "meta_title_en": "A Small Porch on a Slope",
+      "meta_description_vi": "Một nơi không cần rộng để trở thành chỗ ở và chỗ làm có chiều sâu.",
+      "meta_description_en": "A place that does not need size to become both a home and a working corner with depth.",
+      "og_image": "slope"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  },
+  {
+    "title_vi": "Một studio nhỏ trên dốc",
+    "title_en": "A Small Studio on a Slope",
+    "slug_vi": "mot-studio-nho-tren-doc",
+    "slug_en": "mot-studio-nho-tren-doc",
+    "place_type": "studio-nh",
+    "area_vi": "Sườn dốc dân cư",
+    "area_en": "Hillside neighborhood",
+    "excerpt_vi": "Một không gian làm việc gọn, nhiều ánh sáng tự nhiên và đủ riêng tư để giữ mạch sáng tạo.",
+    "excerpt_en": "A compact work space with natural light and enough privacy to sustain creative focus.",
+    "standfirst_vi": "Studio nhỏ • Sườn dốc dân cư",
+    "standfirst_en": "Small studio • Hillside neighborhood",
+    "content_vi": "Studio nhỏ trên dốc thường không có diện tích dư dả, nhưng lại có một lợi thế quan trọng: ánh sáng và tầm nhìn mở. Khi được bố trí đúng, không gian này tạo ra cảm giác làm việc tập trung mà không tách khỏi bối cảnh sống.\n\nThay vì theo kiểu văn phòng tiêu chuẩn, studio kiểu này dựa nhiều vào vật liệu thật và cách sử dụng linh hoạt: một bàn lớn cho công việc chính, góc lưu trữ gọn, và khoảng trống đủ để chuyển từ làm việc cá nhân sang cộng tác nhỏ.\n\nNó phù hợp với người cần chất lượng tập trung hơn là sự hào nhoáng. Đây cũng là một lát cắt rõ về Đà Lạt hôm nay: quy mô nhỏ, nhưng khả năng làm nghề nghiêm túc thì không nhỏ.",
+    "content_en": "A small studio on a slope rarely has extra space, but it has a major advantage: light and open outlook. When arranged well, it supports concentrated work without disconnecting from daily context.\n\nInstead of a standard office model, this kind of studio relies on real materials and flexible use: one main table, compact storage, and enough room to shift between solo work and small collaboration.\n\nIt suits people who value quality of focus over display. It also reflects Dalat today: small in scale, but still fully capable of serious craft.",
+    "hero_image": "slopesWide",
+    "gallery_ids": ["slopesWide", "view", "panorama"],
+    "tag_ids": [
+      "noi-chon"
+    ],
+    "related_story_ids": [],
+    "related_people_ids": [],
+    "seo": {
+      "meta_title_vi": "Một studio nhỏ trên dốc",
+      "meta_title_en": "A Small Studio on a Slope",
+      "meta_description_vi": "Một không gian làm việc gọn, nhiều ánh sáng tự nhiên và đủ riêng tư để giữ mạch sáng tạo.",
+      "meta_description_en": "A compact work space with natural light and enough privacy to sustain creative focus.",
+      "og_image": "slopesWide"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  }
+]

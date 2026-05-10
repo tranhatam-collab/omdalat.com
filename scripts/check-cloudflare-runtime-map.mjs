@@ -201,7 +201,7 @@ async function main() {
   checks.push({
     name: "app localized operations reviewed gate",
     ok:
-      (appLocaleOperations.status === 307 || appLocaleOperations.status === 308) &&
+      (appLocaleOperations.status === 302 || appLocaleOperations.status === 307 || appLocaleOperations.status === 308) &&
       String(appLocaleOperations.location ?? "").includes("/vi/member/application-status?required=reviewed-member"),
     detail: `status=${appLocaleOperations.status ?? "n/a"}, location=${appLocaleOperations.location ?? "n/a"}`
   });

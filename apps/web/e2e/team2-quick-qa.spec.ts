@@ -1,11 +1,11 @@
-import { devices, expect, test } from "@playwright/test";
+import { devices, expect, type Page, test } from "@playwright/test";
 
 const homepageRules = {
   blockedDomains: ["docs.omdala.com", "app.omdala.com"],
   blockedWords: ["OMDALA"]
 } as const;
 
-async function assertHomepageClean(page: Parameters<typeof test>[0]["page"]) {
+async function assertHomepageClean(page: Page) {
   const homepage = page.locator("article.runtime-homepage");
   await expect(homepage).toBeVisible();
 
@@ -22,7 +22,7 @@ async function assertHomepageClean(page: Parameters<typeof test>[0]["page"]) {
 }
 
 async function assertFooterBridge(
-  page: Parameters<typeof test>[0]["page"],
+  page: Page,
   expectedLabel: "Ấp Đà Lạt" | "Ap Dalat"
 ) {
   const footer = page.locator("footer");
@@ -30,7 +30,7 @@ async function assertFooterBridge(
   await expect(footer.getByRole("link", { name: expectedLabel, exact: true })).toBeVisible();
 }
 
-async function assertContextualCta(page: Parameters<typeof test>[0]["page"]) {
+async function assertContextualCta(page: Page) {
   const helpSection = page.locator(".runtime-help-section").first();
   await expect(helpSection).toBeVisible();
 

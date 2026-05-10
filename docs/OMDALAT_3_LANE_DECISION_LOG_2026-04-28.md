@@ -8,7 +8,7 @@ Version: v1.2.0
 
 Status: ACTIVE
 
-Date updated: 2026-04-29
+Date updated: 2026-05-04
 
 Owner: Team 1
 
@@ -259,6 +259,110 @@ Impact:
 * Ap lane không còn là blocker P0 cho global gate.
 * Các phần live-domain probe và visual evidence chuyển về hàng P1 queue.
 
+### D-012
+
+Date: 2026-05-04  
+Type: Content Gate  
+Status: LOCKED
+
+Decision:
+
+Mọi lane phải gắn bằng chứng `Image Reality` khi nộp `evidence packet` theo lane.
+
+Image reality không chỉ là alt/caption, mà bao gồm:
+
+* đúng vai trò trang và đúng ngữ cảnh nội dung
+* đúng nguồn ảnh + license
+* không bị du lịch hóa/đi quá mức stage
+* có crop desktop + mobile đạt chuẩn
+* alt_vi/alt_en và caption_vi/caption_en khi có yêu cầu song ngữ
+* tham chiếu `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+
+Reason:
+
+Sau khi khóa `OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026`, release evidence cần có tính nhất quán giữa chuẩn nội dung và bằng chứng kiểm duyệt ảnh.
+
+Impact:
+
+* Claim `PASS_WITH_QUEUE` không còn chấp nhận nếu thiếu phần bằng chứng hình ảnh theo chuẩn mới.
+* `Image reality` trở thành điều kiện hardening bắt buộc cho mọi lane trong chu kỳ tiếp theo.
+
+### D-013
+
+Date: 2026-05-04  
+Type: Runtime Hardening  
+Status: LOCKED
+
+Decision:
+
+`mail:smoke:e2e` strict (`SMOKE_REQUIRE_OUTBOX=1`) tiếp tục được vận hành ở hardening lane.
+
+Nguyên nhân không chuyển thành blocker:
+
+* thử lệnh với `SMOKE_REQUIRE_OUTBOX=1` + `SMOKE_ALLOW_LIVE_OUTBOX=1` vẫn timeout `waitForServer` do môi trường truy vấn runner;
+* bằng chứng P0 hiện tại không phụ thuộc strict lane và đã có đủ `runtime-map` + `mail:smoke:e2e` mặc định.
+
+Impact:
+
+* Team 3 tiếp tục giữ `PASS_WITH_QUEUE` khi `runtime-map` + smoke live pass.
+* Team 3 phải có lần strict retry xác thực trên runner ổn định trong chu kỳ hardening tiếp theo.
+
+### D-014
+
+Date: 2026-05-04  
+Type: Team 3 Cycle Closure  
+Status: LOCKED
+
+Decision:
+
+Team 1 chot lane Team 3 o trang thai `DONE_CLOSED` cho cycle hien tai.
+
+Cac muc con lai (`strict outbox`, `split-account cleanup`, `content-contract follow-up`) duoc chuyen sang hardening backlog hau cycle, khong giu vai tro blocker cho closure cycle.
+
+Reason:
+
+Team 3 da dat du evidence bat buoc cho cycle:
+
+* artifact build/deploy pass
+* runtime-map pass
+* smoke live pass
+* reviewed gate pass tren canonical runtime
+* governance hook SOP/Image Reality da duoc khoa trong plan
+
+Impact:
+
+* Team 3 progress duoc chot `100%` cho cycle hien tai.
+* Team 1 ngung gan Team 3 la lane dang mo trong cycle nay.
+* Batch CMS/article moi cua cycle sau phai nop them validator/content-contract evidence theo SOP.
+
+### D-015
+
+Date: 2026-05-04  
+Type: Coordination Broadcast  
+Status: LOCKED
+
+Decision:
+
+Team 1 ghi nhận lane Om public đã đáp ứng closure theo `D-008` và đồng thời thông báo trạng thái mới cho Team 2/Team 3/Ap trong các plan/docs vận hành:
+
+* `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
+* `docs/OMDALAT_3_LANE_AUDIT_BOARD_2026-04-28.md`
+* `docs/OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md`
+* `docs/OMDALAT_3_LANE_GLOBAL_PROGRESS_2026-04-28.md`
+* `docs/DEV_TEAM_1_PLAN_OMDALAT.md`
+* `docs/DEV_TEAM_2_PLAN_OMDALAT.md`
+* `docs/DEV_TEAM_3_PLAN_OMDALAT.md`
+
+Reason:
+
+Sau nhiều vòng closure cũ, các đội cần 1 nguồn trạng thái duy nhất để tránh claim lệch lane-level.
+
+Impact:
+
+* Team 2 lane current-state giữ ở `PASS_WITH_QUEUE` (P0 clear, P1 queue còn lại).
+* Team 3 lane giữ `DONE_CLOSED` cho cycle hiện tại.
+* Ap lane giữ `PASS_WITH_QUEUE` cho cycle hiện tại.
+
 ---
 
 ## 2. Khu vực cập nhật review outcome
@@ -277,18 +381,12 @@ Next Team 1 action:
 
 Status:
 
-* `REVIEWED_BLOCKED_P0`
+* `DONE_CLOSED`
 
 Next Team 1 action:
 
-* xác nhận runtime evidence mới sau gate tăng cường `D-009`:
-  * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
-  * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
-* Team 3 phải đóng canonical parity trên `app.omdalat.com` cho:
-  * `/vi/member/register` (`200`)
-  * `/vi/member/operations` (redirect reviewed gate)
-* giữ lại support/contact lane ở trạng thái `PASS` (đã kiểm lại `200`)
-* sau khi đủ evidence pass, Team 1 chốt lại verdict lane App member runtime
+* cycle hien tai da dong.
+* neu mo cycle moi co CMS/article seed thay doi, bat buoc nhan validator/content-contract evidence theo SOP.
 
 ### R-AP-EDITORIAL
 

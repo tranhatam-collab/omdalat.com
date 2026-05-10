@@ -39,6 +39,9 @@ Companion files:
 * `docs/OMDALAT_OM_PUBLIC_METADATA_MATRIX_2026-04-28.md`
 * `docs/OMDALAT_OM_PUBLIC_ALT_TEXT_AUDIT_2026-04-28.md`
 * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
+* `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+* `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+* `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
 
 Quick command:
 
@@ -52,6 +55,13 @@ Quick command:
 * Team 3: `DONE_CLOSED` (cycle hien tai da dong, `100%`).
 * Ap Team: `PASS_WITH_QUEUE` (P0 complete, tiếp tục queue hardening).
 * Team 1: `DONE` cho cycle hien tai.
+
+Brandpro overlay now active:
+
+* Gate 0 public law da duoc ap dung cho `omdalat.com`.
+* Public naming hierarchy: `Ôm Đà Lạt / Om Dalat`.
+* Public/app domains: `omdalat.com` + `app.omdalat.com`.
+* Neu sprint docs xung dot voi Brandpro Gate 0, uu tien theo Brandpro lock va source conflict matrix.
 
 ---
 
@@ -118,6 +128,17 @@ File chính:
 * Sprint 0 dang o mode thuc thi cho 3 bai launch.
 * Packet nghiem thu bat buoc truoc GO staging:
   * `docs/SPRINT0_ACCEPTANCE_PACKET_TEMPLATE_2026-05-05.md`
+  * `docs/SPRINT0_ACCEPTANCE_PACKET_CURRENT_STATE_2026-05-07.md`
+  * `docs/SPRINT0_ARTICLE_METADATA_ROUTE_PROOF_2026-05-07.md`
+  * `docs/SPRINT0_VISUAL_AND_STAGING_EVIDENCE_MATRIX_2026-05-07.md`
+  * `pnpm validate:sprint0-launch`
+  * `pnpm sprint0:acceptance:check`
+* Team 1 / Team 3 da prefill current-state packet; Team 2 + QA/SEO bo sung visual/staging proof va signoff cuoi.
+* Blocker ky thuat local da giam: `tsc --noEmit` da pass sau khi regenerate `.next` types; phan con lai la `Collecting build traces` timeout + visual/staging proof.
   * `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
   * `data/seed/articles.seed.sprint0-launch.json`
   * `data/seed/article-images.seed.json`
+* Brand semantics cho Sprint 0 phai theo:
+  * `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+  * `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+  * `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`

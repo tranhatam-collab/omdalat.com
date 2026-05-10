@@ -26,7 +26,7 @@ Global verdict: `TEAM1_SCOPE_DONE`
 2. Khóa rule review 3-lane và evidence packet index.
 3. Chốt lane verdict:
    - Team 2: `PASS_WITH_QUEUE`
-   - Team 3: `PASS_WITH_QUEUE`
+   - Team 3: `DONE_CLOSED`
    - Ap Team: `PASS_WITH_QUEUE`
 4. Đóng các blocker P0 trước đó ở Om public route canonical.
 5. Kích hoạt SOP content system toàn hệ:
@@ -71,6 +71,12 @@ Global verdict: `TEAM1_SCOPE_DONE`
 2. Mọi nội dung mới phải qua SOP + image reality gate trước khi claim publish.
 3. Payment lane giữ nguyên trạng thái release hiện tại (`PHASE_2_NOT_IN_SCOPE`) cho web live cycle này.
 
+Notice bổ sung sau completion:
+
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+
+Notice này không mở lại blocker Team 1. Nó chỉ ghi rõ thay đổi SOP/content/image mà các team phải áp dụng cho mọi batch nội dung tiếp theo.
+
 ---
 
 ## 6. Chuyển giao trách nhiệm
@@ -83,6 +89,14 @@ Từ thời điểm này:
 4. Team 2: owner của Om public hardening queue.
 
 Team 1 chỉ mở lại khi có yêu cầu cycle mới hoặc founder directive mới.
+
+## 7. Yêu cầu report sau notice SOP
+
+Mọi report tiếp theo của Team 2, Team 3 và Ap Team phải có dòng:
+
+`Content SOP impact`
+
+Dòng này phải ghi rõ task có chạm bài viết, metadata, image, CMS content, internal link hoặc deploy content hay không. Nếu có, team phải trỏ về `docs/OMDALAT_CONTENT_SYSTEM_SOP.md` và `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`.
 
 ---
 

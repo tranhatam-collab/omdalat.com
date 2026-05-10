@@ -4,17 +4,17 @@ Team 3 Report
 
 Lane: App Member Runtime
 
-Version: v1.2.0
+Version: v1.4.0
 
-Status: SUBMITTED_BLOCKED_CANONICAL_PARITY
+Status: DONE_CLOSED
 
-Date updated: 2026-04-29
+Date updated: 2026-05-04
 
 Owner: Team 3
 
 Reviewer: Team 1
 
-Scope: member runtime routes, reviewed unlock gate, support/contact API lanes, canonical parity, smoke evidence
+Scope: member runtime routes, reviewed unlock gate, support/contact API lanes, canonical parity, smoke evidence, CMS/content contract alignment
 
 ---
 
@@ -26,116 +26,99 @@ Scope: member runtime routes, reviewed unlock gate, support/contact API lanes, c
 
 ## 2. Scope đã kiểm
 
-* Team 3 đã cập nhật current-state bằng live probes mới ngày `2026-04-28`.
-* Kết quả: lane đang `BLOCKED` bởi runtime drift giữa account/project/deployment, không còn là trạng thái "partial ready".
-* Đây là blocker hạ tầng + deploy/runtime parity; không phải đổi semantics role/gate.
-* Phạm vi kiểm gồm:
-  * member entry routes (`/member/login`, `/member/register`)
-  * reviewed gate route (`/member/operations`, `/member/application-status`)
-  * mail APIs liên quan smoke (`/api/support`, `/api/contact`)
-  * runtime mapping giữa `931...` và `f3f9...`
-  * local build/toolchain path cho `build:cf`
+* Team 3 da chot lai runtime parity tren host canonical `app.omdalat.com`.
+* Build, deploy, reviewed gate, support lane, DNS canonical va smoke runtime da co evidence moi ngay `2026-04-29`.
+* Khong doi semantics role/gate; chi sua runtime mapping, reviewed unlock path, va deploy path.
+* Theo `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`, Team 3 giu trach nhiem contract du lieu: locale split, schema gate, access level, featured image, validator va publish eligibility.
 
 ## 3. P0 done
 
-* `DONE` Bộ chuẩn governance + report framework của Team 3 vẫn hợp lệ và đang dùng:
-  * [TEAM3_UNIVERSAL_COMPLIANCE_EXECUTION_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/TEAM3_UNIVERSAL_COMPLIANCE_EXECUTION_2026-04-28.md)
-  * [TEAM3_GATE_REPORT_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/TEAM3_GATE_REPORT_2026-04-28.md)
-* `DONE` Matrix lane Team 3 đã chuyển sang trạng thái phản ánh live reality:
-  * [APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md)
-* `DONE` Build artifact mới đã tạo thành công:
-  * `pnpm --filter @omdalat/app build:cf` -> `PASS`
-* `DONE` Deploy mới lên shadow runtime:
-  * `https://d6b35718.omdalat-app-2ol.pages.dev`
-* `DONE` Shadow runtime xác nhận lane onboarding có thật:
-  * `GET /vi/member/register` -> `200`
-  * `GET /vi/member/login` -> `200`
-* `DONE` Support/contact API lane đã phục hồi trên canonical hosts:
-  * `POST https://app.omdalat.com/api/support` -> `200`
-  * `POST https://omdalat.com/api/contact` -> `200`
-* `DONE` Live smoke mới nhất:
+* `DONE` Build artifact moi:
+  * `pnpm --filter @omdalat/app build:cf` -> `PASS` (local retry hook da absorb Next worker SIGSEGV transient)
+* `DONE` Deploy app vao canonical account/project:
+  * `https://cb980b6b.omdalat-app.pages.dev` (account `931...`, project `omdalat-app`)
+* `DONE` Runtime map gate pass:
+  * `npm run cf:runtime-map:check` -> `PASS`
+* `DONE` Reviewed unlock tren app host:
+  * `GET https://app.omdalat.com/vi/member/operations` -> `302` den `.../vi/member/application-status?required=reviewed-member...`
+* `DONE` Mail runtime smoke pass:
   * `SMOKE_RUNTIME_TARGET=live ... npm run mail:smoke:e2e` -> `success=true`
+  * latest summary: `reports/email-smoke/2026-04-28T18-28-38-812Z/summary.json`
+* `DONE` Drift probes old-checkpoint da pass lai tren live:
+  * `GET https://app.omdalat.com/vi/member/register` -> `200`
+  * `GET https://app.omdalat.com/vi/member/operations` -> `302` den reviewed gate
+  * `POST https://app.omdalat.com/api/support` -> `{"ok":true,...}`
+  * `POST https://omdalat.com/api/contact` -> `{"ok":true,...}`
+* `DONE` Domain canonical runtime:
+  * `app.omdalat.com` + `www.app.omdalat.com` deu tro ve runtime app canonical va redirect dung.
+* `DONE` Governance hook cho Team 3 da duoc khoa trong plan:
+  * `docs/DEV_TEAM_3_PLAN_OMDALAT.md` da noi `OMDALAT_CONTENT_SYSTEM_SOP.md` + `OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md` vao lane CMS/data contract cua Team 3.
 
 ## 4. P0 blocked
 
-* `[INFRA]` Canonical parity của `app.omdalat.com` chưa đạt cho localized onboarding/gate routes:
-  * `GET https://app.omdalat.com/vi/member/register` -> `404`
-  * `GET https://app.omdalat.com/vi/member/operations` -> `404`
-* `[code]` Chưa có bằng chứng regression code ở route register; cùng commit đang trả `200` trên shadow runtime.
-* `[toolchain]` Local build lane hiện `PASS`; toolchain không còn là blocker chính trong vòng này.
-* `[RUNTIME_MAP]` gate tăng cường `D-009` đang fail:
-  * `app localized register route` fail (`404`)
-  * `app localized operations reviewed gate` fail (`404`)
-* `[INFRA]` Shadow runtime đã đúng nhưng canonical domain chưa theo artifact mới; cần quyết định mapping/deploy vào đúng account đang giữ `app.omdalat.com`.
+* [code] none
+* [toolchain] none
 
 ## 5. P1 queue
 
-* thống nhất một runtime chuẩn duy nhất cho `app.omdalat.com` có đủ:
-  * `/vi/member/register`
-  * `/vi/member/operations` gate
-  * `/api/support`
-* khôi phục contact/support mail lane (`200 + {"ok":true}`) và rerun smoke live
-* quyết định dứt điểm strict outbox:
-  * bật `SMOKE_REQUIRE_OUTBOX=1` với outbox route live thật
-  * hoặc giữ runtime mode và ghi rõ release note
+* strict outbox policy:
+  * `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com SMOKE_REQUIRE_OUTBOX=1 SMOKE_ALLOW_LIVE_OUTBOX=1 npm run mail:smoke:e2e` van timeout o buoc wait web runtime (`Timed out waiting for web runtime: fetch failed`)
+  * giu strict o hardening lane, khong la release blocker cua cycle da dong
+* split-account cleanup:
+  * shadow project con ton tai, theo doi decommission/rename sau cutover
+* content contract follow-up:
+  * can co evidence validator/seed gate cho schema `locales`, `pillar_key`, `status`, `access_level`, `featured_image`
+  * can bao dam batch media moi theo `WebP`/`AVIF`, file name bam slug, co source/license log va alt/caption VI/EN khi Team 3 nhan payload tu Content/CMS
 
 ## 6. Files / routes / modules liên quan
 
+* code:
+  * `apps/app/lib/member-session.ts`
+  * `apps/app/app/member/operations/page.tsx`
+  * `scripts/check-cloudflare-runtime-map.mjs`
+  * `scripts/team3_live_deploy_and_smoke.sh`
 * docs:
-  * [TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md)
-  * [APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md)
-  * [OMDALAT_3_LANE_EVIDENCE_PACKET_INDEX_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_3_LANE_EVIDENCE_PACKET_INDEX_2026-04-28.md)
-  * [OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md)
-* primary runtime checks:
-  * `/vi/member/login`
-  * `/vi/member/register`
-  * `/vi/member/application-status`
-  * `/vi/member/operations`
-  * `/api/health`
-  * `/api/support`
-  * `/api/contact`
+  * `docs/TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md`
+  * `docs/APP_MEMBER_RUNTIME_EVIDENCE_PACKET_2026-04-28.md`
+  * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
+  * `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+  * `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
 
 ## 7. Commands đã chạy
 
 * `pnpm --filter @omdalat/app build:cf`
-* `CLOUDFLARE_ACCOUNT_ID=93112... wrangler pages deploy apps/app/.vercel/output/static --project-name omdalat-app --branch main`
+* `wrangler pages deploy apps/app/.vercel/output/static --project-name omdalat-app --branch main --commit-dirty=true`
 * `npm run cf:runtime-map:check`
 * `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-* `curl -I https://app.omdalat.com/vi/member/register`
-* `curl -I https://app.omdalat.com/vi/member/operations`
-* `curl -sS -X POST https://app.omdalat.com/api/support ...`
-* `curl -sS -X POST https://omdalat.com/api/contact ...`
-* `CLOUDFLARE_ACCOUNT_ID=f3f9... wrangler pages project list --json`
-* `CLOUDFLARE_ACCOUNT_ID=93112... wrangler pages project list --json`
+* `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com SMOKE_REQUIRE_OUTBOX=1 SMOKE_ALLOW_LIVE_OUTBOX=1 npm run mail:smoke:e2e`
 * `CLOUDFLARE_ACCOUNT_ID=93112... wrangler pages deployment list --project-name omdalat-app --json`
+* `dig +short www.app.omdalat.com`
+* `rg -n "OMDALAT_CONTENT_SYSTEM_SOP|OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026|WebP|AVIF" docs/DEV_TEAM_3_PLAN_OMDALAT.md`
 
 ## 8. Evidence
 
-* current report:
-  * [TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md)
-* matrix:
-  * [APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md)
-* runtime-map fail (gate D-009):
-  * `npm run cf:runtime-map:check` output ngày `2026-04-29`
-* smoke mới:
-  * [summary.json](/Users/tranhatam/Documents/Devnewproject/omdalat.com/reports/email-smoke/2026-04-28T17-59-16-886Z/summary.json)
-* shadow runtime deploy:
-  * `https://d6b35718.omdalat-app-2ol.pages.dev`
+* runtime map pass: command output ngay `2026-04-29`
+* smoke live pass:
+  * `reports/email-smoke/2026-04-28T18-28-38-812Z/summary.json`
+* strict smoke fail (non-gating hardening):
+  * `reports/email-smoke/2026-05-03T17-20-26-871Z/error.txt`
+* canonical app deployment:
+  * `https://cb980b6b.omdalat-app.pages.dev`
+* governance evidence:
+  * `docs/DEV_TEAM_3_PLAN_OMDALAT.md` co muc `Content SOP 2026-05-04`
+  * Team 3 plan da khoa rule `locales`, `pillar_key`, `status`, `access_level`, `featured_image`
 
 ## 9. Quyết định cần Team 1 chốt
 
-* Chot runtime canonical so huu lane member cho `app.omdalat.com` (khong split drift account/project).
-* Chot cach xu ly mail lane trong release hien tai:
-  * fix now va giu trong P0
-  * hoac ha scope ro rang thanh non-release gate
-* Chot strict outbox la mandatory hay hardening mode co dieu kien.
+* Da chot o decision log:
+  * `D-013`: strict outbox la hardening lane, khong la blocker cycle da dong
+  * `D-014`: Team 3 dong cycle o trang thai `DONE_CLOSED`; cac muc con lai chuyen backlog hau cycle
 
 ## 10. Việc tiếp theo + phần trăm còn lại
 
 * viec tiep theo:
-  * chot runtime mapping canonical cho `app.omdalat.com` de host nay nhan artifact moi
-  * rerun `npm run cf:runtime-map:check` (gate D-009)
-  * rerun `SMOKE_RUNTIME_TARGET=live ... npm run mail:smoke:e2e`
-  * cap nhat evidence packet voi pass report moi
+  * giu monitor smoke runtime theo nhip
+  * khi Team 3 dong vao CMS/article seed, nop them bang chung validator theo `OMDALAT_CONTENT_SYSTEM_SOP.md`
+  * theo doi decommission split-account theo ke hoach infra
 * phan tram con lai:
-  * `18%` con lai de dong P0 Team 3; phan lon la canonical parity
+  * `0%` cho cycle hien tai (`DONE_CLOSED`)

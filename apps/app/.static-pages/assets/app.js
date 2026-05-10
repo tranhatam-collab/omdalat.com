@@ -1,0 +1,2 @@
+
+const label=document.querySelector('[data-session-label]');const current=localStorage.getItem('omdalat-role')||'guest';if(label)label.textContent=current+' session';document.querySelectorAll('[data-role]').forEach((button)=>{if(button.dataset.role===current)button.classList.add('is-active');button.addEventListener('click',()=>{localStorage.setItem('omdalat-role',button.dataset.role);document.querySelectorAll('[data-role]').forEach((item)=>item.classList.remove('is-active'));button.classList.add('is-active');if(label)label.textContent=button.dataset.role+' session';});});

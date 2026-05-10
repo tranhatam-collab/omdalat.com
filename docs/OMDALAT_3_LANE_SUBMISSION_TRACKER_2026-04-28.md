@@ -60,6 +60,8 @@ Team 1 note:
   * `/vi/contact` -> `200`
   * `/en/contact` -> `200`
   * `/vi/about` -> `200`
+* Handoff payload nhanh Sprint 0 cho Team 2 đã sẵn:
+  * `data/seed/articles.seed.sprint0-launch.json` (có `contextual_cta`, `locales.vi`, `locales.en`, `meta_title`, `meta_description`)
 * Closure rule `D-007` đã được thỏa điều kiện, lane Om public được chuyển sang `PASS_WITH_QUEUE`.
 * Tiến độ Team 2 current-state: `100%` cho P0 closure; phần còn lại chuyển về P1 queue.
 * Team 1 áp dụng thêm `Image Reality` requirement từ `D-012` cho mọi report lane.

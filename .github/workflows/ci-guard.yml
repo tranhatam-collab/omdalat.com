@@ -1,0 +1,85 @@
+name: CI Guard
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+  workflow_dispatch:
+    inputs:
+      run_e2e:
+        description: "Run optional smoke e2e tests"
+        required: false
+        default: "false"
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 18 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-typecheck:
+    name: Validate i18n data and typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.6.5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate i18n data
+        run: pnpm run validate:i18n-data
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+  smoke-e2e-optional:
+    name: Optional smoke e2e (vi/en)
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'schedule' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.run_e2e == 'true') ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'e2e-smoke'))
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.6.5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browser
+        run: pnpm --filter @omdalat/web exec playwright install --with-deps chromium
+
+      - name: Run smoke e2e tests
+        run: pnpm --filter @omdalat/web test:e2e

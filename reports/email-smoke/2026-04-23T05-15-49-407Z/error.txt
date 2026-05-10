@@ -1,0 +1,4 @@
+Error: Unable to load Playwright chromium runtime. Install workspace dependencies and rerun smoke.
+    at loadChromium (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:100:9)
+    at async main (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:273:22)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:527:1

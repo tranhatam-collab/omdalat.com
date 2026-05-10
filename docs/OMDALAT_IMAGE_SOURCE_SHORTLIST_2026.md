@@ -4,6 +4,8 @@ Status: current public shortlist for `omdalat.com`
 
 Locked standard: `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
 
+Content SOP: `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+
 Purpose:
 
 - use real Da Lat imagery
@@ -53,6 +55,8 @@ Source page: [Van Tien Le on Unsplash](https://unsplash.com/photos/a-large-white
 - each image must include `alt_vi`, `alt_en`, `caption_vi`, `caption_en`
 - each image must include source and license log before publish
 - one image should not be reused across unrelated intents (work vs stay vs income vs editorial bridge) without explicit review
+- new article batches must publish processed `WebP` or `AVIF` assets, not raw JPG/PNG source files
+- article image file names must follow the article slug, for example `lam-viec-o-da-lat-co-thuc-te-khong-01.webp`
 
 ## Foundation Article Runtime Images
 
@@ -72,6 +76,8 @@ These three images are approved for the first three foundation articles because 
 
 Runtime rule: when an article has an approved `heroImage` seed, the web runtime must use that approved image only for the article visual set. It must not append scenic fallback images behind it.
 
+Technical migration rule: these external images are approved as source references and temporary runtime assets. Before a production content batch is declared complete under the SOP, the selected images must be cropped, compressed, converted to `WebP` or `AVIF`, named by slug, and logged in the CMS/image seed.
+
 ## Avoid
 
 - tourism postcard imagery
@@ -81,11 +87,12 @@ Runtime rule: when an article has an approved `heroImage` seed, the web runtime 
 
 ## License Note
 
-All current shortlist items above are from Unsplash pages marked free to use under the Unsplash License at the time of selection on April 17, 2026.
+The hero rotation and gallery shortlist items are from Unsplash pages marked free to use under the Unsplash License at the time of selection on April 17, 2026. The first three foundation article runtime images are from Pexels and must keep their source/license log before production use.
 
 ## Cross Reference
 
 - `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
 - `docs/OMDALAT_CONTENT_OPERATING_SYSTEM_AND_100_SEO_ROADMAP_2026-05-03.md`
 - `docs/OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md`
 - `docs/OMDALAT_AND_APDALAT_FULL_DEPLOY_CHECKLIST_2026.md`

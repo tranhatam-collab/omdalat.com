@@ -18,6 +18,12 @@
     "format": "node ./scripts/check-workspace.mjs format",
     "validate:web-locales": "node ./scripts/validate-web-locales.mjs",
     "validate:i18n-data": "node ./scripts/validate-i18n-data.mjs",
-    "validate:content-seed": "node ./scripts/validate-content-seed.mjs"
+    "validate:content-seed": "node ./scripts/validate-content-seed.mjs",
+    "validate:sprint0-launch": "node ./scripts/validate-sprint0-launch.mjs",
+    "sprint0:evidence:scaffold": "node ./scripts/scaffold-sprint0-evidence.mjs",
+    "sprint0:acceptance:check": "node ./scripts/check-sprint0-acceptance.mjs",
+    "sprint0:evidence:report": "node ./scripts/report-sprint0-missing-evidence.mjs",
+    "team3:report:check": "node ./scripts/team3-gate-report-check.mjs",
+    "team1:lane:check": "node ./scripts/team1-lane-progress-check.mjs"
   }
 }

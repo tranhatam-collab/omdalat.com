@@ -1,0 +1,778 @@
+{
+  "locales": {
+    "vi": {
+      "siteTitle": "Ấp Đà Lạt",
+      "homeTitle": "Ấp Đà Lạt | Những con người, nơi chốn và nhịp sống Đà Lạt",
+      "homeDescription": "Hiểu Đà Lạt như một nơi để ở lại, làm việc và giữ một nhịp sống có thể đi đường dài.",
+      "nav": [
+        {
+          "key": "home",
+          "label": "Trang chủ",
+          "href": "index.html"
+        },
+        {
+          "key": "people",
+          "label": "Con người",
+          "href": "con-nguoi/index.html"
+        },
+        {
+          "key": "places",
+          "label": "Nơi chốn",
+          "href": "noi-chon/index.html"
+        },
+        {
+          "key": "rhythms",
+          "label": "Nhịp sống",
+          "href": "nhip-song/index.html"
+        },
+        {
+          "key": "work",
+          "label": "Làm việc",
+          "href": "lam-viec/index.html"
+        },
+        {
+          "key": "stories",
+          "label": "Câu chuyện",
+          "href": "cau-chuyen/index.html"
+        },
+        {
+          "key": "images",
+          "label": "Hình ảnh",
+          "href": "hinh-anh/index.html"
+        },
+        {
+          "key": "about",
+          "label": "Về Ấp",
+          "href": "ve-ap-da-lat/index.html"
+        }
+      ],
+      "utilityLinks": [
+        {
+          "label": "Tìm kiếm",
+          "href": "tim-kiem/index.html"
+        }
+      ],
+      "footerNote": "Ấp Đà Lạt kể về con người, nơi chốn và nhịp sống làm nên Đà Lạt hôm nay.",
+      "footerLinks": [
+        {
+          "label": "Con người",
+          "href": "con-nguoi/index.html"
+        },
+        {
+          "label": "Nơi chốn",
+          "href": "noi-chon/index.html"
+        },
+        {
+          "label": "Nhịp sống",
+          "href": "nhip-song/index.html"
+        },
+        {
+          "label": "Làm việc",
+          "href": "lam-viec/index.html"
+        },
+        {
+          "label": "Câu chuyện",
+          "href": "cau-chuyen/index.html"
+        },
+        {
+          "label": "Hình ảnh",
+          "href": "hinh-anh/index.html"
+        },
+        {
+          "label": "Về Ấp Đà Lạt",
+          "href": "ve-ap-da-lat/index.html"
+        },
+        {
+          "label": "Chủ đề",
+          "href": "chu-de/index.html"
+        },
+        {
+          "label": "FAQ",
+          "href": "faq/index.html"
+        },
+        {
+          "label": "Liên hệ",
+          "href": "lien-he/index.html"
+        }
+      ],
+      "bridge": {
+        "title": "Khi việc đọc không còn là đủ",
+        "body": "Nếu bạn không chỉ muốn đọc về Đà Lạt, mà đang tìm một nơi để ở lại, làm việc và tham gia sâu hơn, hãy đi tới Ôm Đà Lạt.",
+        "cta": "Tới Ôm Đà Lạt"
+      },
+      "home": {
+        "hero": {
+          "eyebrow": "Ấp Đà Lạt",
+          "title": "Những con người, nơi chốn và nhịp sống làm nên Đà Lạt hôm nay.",
+          "body": "Đà Lạt không chỉ để ghé qua. Đây còn là một nơi để ở lại, làm việc và sống đủ lâu để nhận ra điều gì thật sự giữ người ta ở lại.",
+          "primaryCta": {
+            "label": "Đọc câu chuyện",
+            "href": "cau-chuyen/index.html"
+          },
+          "secondaryCta": {
+            "label": "Xem nơi chốn",
+            "href": "noi-chon/index.html"
+          }
+        },
+        "intro": {
+          "title": "Không chỉ là nơi để đến",
+          "body": "Có những nơi đẹp để đi qua. Cũng có những nơi đủ sâu để người ta muốn ở lại lâu hơn một mùa. Đà Lạt thuộc về nhóm thứ hai, không chỉ vì khí hậu hay ký ức, mà vì nơi này vẫn giữ được khoảng thở giữa đời sống và công việc."
+        },
+        "lensesTitle": "Ba cách để nhìn Đà Lạt hôm nay",
+        "peopleTitle": "Con người của Đà Lạt hôm nay",
+        "peopleIntro": "Đà Lạt không chỉ được kể bằng phong cảnh. Nó được kể bằng những người đang sống ở đây, làm việc ở đây và chọn ở lại theo cách riêng của mình.",
+        "placesTitle": "Những nơi chốn để sống và làm việc",
+        "placesIntro": "Một nơi tốt không chỉ đẹp trong ảnh. Nó phải có ánh sáng, nhịp, khoảng thở và khả năng đi cùng công việc thật.",
+        "rhythmsTitle": "Nhịp sống không vội",
+        "rhythmsIntro": "Đà Lạt có một nhịp riêng. Không quá chậm để ngừng tạo ra giá trị, nhưng cũng không quá nhanh để đánh mất mình.",
+        "workTitle": "Làm việc từ một nơi nhỏ",
+        "workBody": "Từ Đà Lạt, nhiều người vẫn đang viết, dạy, thiết kế, làm media, mở studio nhỏ và giữ công việc ở gần một đời sống có mưa, bếp, cây và người thân.",
+        "imagesTitle": "Bộ ảnh và ghi chép thị giác",
+        "imagesBody": "Có những điều ở Đà Lạt nên được đọc bằng chữ. Cũng có những điều chỉ hiện ra rõ hơn qua ánh sáng, bề mặt, hiên nhà, bàn gỗ, khu vườn và khoảng không của một ngày lạnh.",
+        "lenses": [
+          {
+            "key": "people",
+            "body": "Những người ở lại, làm nghề, dạy, chăm vườn, mở quán nhỏ và giữ nhịp riêng của mình.",
+            "cta": "Đi tiếp"
+          },
+          {
+            "key": "places",
+            "body": "Những góc nhà, hiên nhỏ, triền dốc và không gian đủ thật để sống và làm việc lâu dài.",
+            "cta": "Đi tiếp"
+          },
+          {
+            "key": "rhythms",
+            "body": "Buổi sáng, mưa, chiều xuống và những khoảng nghỉ làm nên một đời sống không vội.",
+            "cta": "Đi tiếp"
+          }
+        ]
+      },
+      "ui": {
+        "readMore": "Đọc tiếp",
+        "workCta": "Xem cách người ta làm việc ở đây",
+        "imagesCta": "Xem bộ ảnh",
+        "relatedTitle": "Đọc tiếp",
+        "relatedIntro": "Những bài viết gần cùng nhịp để đi tiếp.",
+        "loadErrorTitle": "Chưa tải được nội dung",
+        "loadErrorMessage": "Nội dung locale chưa sẵn sàng hoặc đường dẫn hiện tại chưa đọc được file JSON."
+      }
+    }
+  },
+  "sections": {
+    "people": {
+      "key": "people",
+      "image": "slopesWide",
+      "vi": {
+        "title": "Con người",
+        "thesis": "Đà Lạt không chỉ được kể bằng cảnh quan, mà còn qua những người đang sống, làm việc và giữ lại phần thật của nơi này."
+      }
+    },
+    "places": {
+      "key": "places",
+      "image": "slope",
+      "vi": {
+        "title": "Nơi chốn",
+        "thesis": "Một nơi chốn tốt không chỉ đẹp để nhìn, mà còn đủ thật để sống và làm việc lâu dài."
+      }
+    },
+    "rhythms": {
+      "key": "rhythms",
+      "image": "view",
+      "vi": {
+        "title": "Nhịp sống",
+        "thesis": "Nhịp sống Đà Lạt không nằm ở sự chậm rãi đơn thuần, mà ở cách nơi này giữ được khoảng thở giữa công việc và đời sống."
+      }
+    },
+    "work": {
+      "key": "work",
+      "image": "farms",
+      "vi": {
+        "title": "Làm việc",
+        "thesis": "Làm việc từ Đà Lạt không chỉ là mang laptop lên núi, mà là tìm ra một nhịp làm việc có thể đi cùng đời sống thật."
+      }
+    },
+    "stories": {
+      "key": "stories",
+      "image": "hero",
+      "vi": {
+        "title": "Câu chuyện",
+        "thesis": "Có những điều về Đà Lạt chỉ hiện ra khi được kể đủ chậm, đủ gần và đủ thật."
+      }
+    },
+    "images": {
+      "key": "images",
+      "image": "rooftops",
+      "vi": {
+        "title": "Hình ảnh",
+        "thesis": "Có những điều ở Đà Lạt được hiểu rõ hơn qua ánh sáng, bề mặt, khoảng không và những chi tiết rất nhỏ của đời sống."
+      }
+    }
+  },
+  "stories": [
+    {
+      "slug": "da-lat-khong-chi-de-ghe-qua",
+      "section": "stories",
+      "image": "hero",
+      "gallery": [
+        "valley",
+        "slope",
+        "rooftops"
+      ],
+      "vi": {
+        "title": "Đà Lạt Không Chỉ Để Ghé Qua",
+        "excerpt": "Một bài mở nền cho cách nhìn Đà Lạt như một vùng sống, không phải một trạm dừng du lịch.",
+        "standfirst": "Đà Lạt không chỉ được cảm nhận qua cảnh quan, mà qua cách người ta ở, làm việc, đi chợ, tránh mưa và giữ khoảng thở cho mình.",
+        "body": [
+          "Có những thành phố được tiêu thụ rất nhanh. Người ta đến, chụp, rời đi, và mang theo một vài hình ảnh dễ nhớ. Đà Lạt dễ bị kéo vào lối nhìn đó, vì nó quá thuận cho ký ức và quá dễ bị giản lược thành khí hậu, cà phê và vài lớp sương.",
+          "Nhưng nếu ở lại lâu hơn, điều giữ người ta không nằm ở postcard. Nó nằm ở hiên nhà tránh mưa đầu ngày, ở nhịp đi bộ lên dốc, ở giờ làm việc có thể đi cùng bếp núc và chợ sớm, ở cảm giác một ngày không bị bẻ gãy bởi tiếng ồn liên tục.",
+          "Ấp Đà Lạt tồn tại để đọc lớp sống ấy. Không phải để bán một hình ảnh đẹp hơn của Đà Lạt, mà để làm rõ vì sao nơi này có thể trở thành một mô hình sống tốt hơn cho những người cần vừa làm việc thật vừa giữ được đời sống thật."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-tu-da-lat-khong-chi-la-mang-laptop-len-nui",
+      "section": "work",
+      "image": "farms",
+      "gallery": [
+        "slope",
+        "slopesWide",
+        "view"
+      ],
+      "vi": {
+        "title": "Làm Việc Từ Đà Lạt Không Chỉ Là Mang Laptop Lên Núi",
+        "excerpt": "Một bài về nhịp làm việc thực tế từ Đà Lạt, vượt qua các cliché digital nomad.",
+        "standfirst": "Làm việc từ Đà Lạt bền hay không phụ thuộc vào nhịp sống, không gian, kết nối con người và khả năng giữ công việc ở trong đời sống thay vì tách khỏi nó.",
+        "body": [
+          "Hình ảnh dễ nhất của 'working from Dalat' là một chiếc laptop đặt cạnh cửa sổ và một cốc cà phê đẹp. Nhưng đó chỉ là lớp bề mặt. Công việc chỉ đứng được ở đây khi nó đi cùng những điều rất đời thường: nhà đủ ở, mạng ổn định, chỗ ngồi không quá phô diễn, và nhịp ngày không làm bạn bị đứt mạch liên tục.",
+          "Điểm mạnh của Đà Lạt không nằm ở việc biến mọi người thành digital nomad. Điểm mạnh của nó là cho phép nhiều kiểu lao động trí óc, sáng tạo, giáo dục, nghiên cứu và dịch vụ nhỏ tồn tại trong một bối cảnh ít ồn hơn, ít bị ép chạy nhanh hơn.",
+          "Khi người ta làm việc tốt từ Đà Lạt, họ thường không sống như khách vãng lai. Họ học khu vực, học thời tiết, học cách đi chợ, học giờ mưa, học chỗ làm yên và học cách đặt công việc vào một đời sống có độ bền."
+        ]
+      }
+    },
+    {
+      "slug": "mot-ngay-da-lat-bat-dau-nhu-the-nao",
+      "section": "rhythms",
+      "image": "valley",
+      "gallery": [
+        "valley",
+        "view",
+        "hero"
+      ],
+      "vi": {
+        "title": "Một Ngày Đà Lạt Bắt Đầu Như Thế Nào",
+        "excerpt": "Một bài ngắn về buổi sáng, nhiệt độ, chuyển động và độ chậm vừa đủ của Đà Lạt.",
+        "standfirst": "Buổi sáng ở Đà Lạt không cố tạo ấn tượng. Nó mở ra bằng lạnh, ánh sáng dịu, một chút ẩm và cảm giác mọi việc có thể bắt đầu mà không cần ồn ào.",
+        "body": [
+          "Ngày ở Đà Lạt thường mở bằng một cảm giác rất khác với những đô thị nóng và đặc tiếng máy. Không khí buổi sáng khiến nhịp khởi động chậm hơn một chút, nhưng cũng rõ hơn một chút. Cà phê, bếp, hiên nhà, áo khoác, mặt đường còn ướt - mọi thứ kéo ngày đi vào quỹ đạo bằng những tín hiệu nhỏ.",
+          "Điểm đáng chú ý là buổi sáng ở đây không đẩy con người vào trạng thái tiêu thụ. Nó mời người ta sắp lại nhịp. Đó là một lợi thế lớn cho những ai cần tập trung, cần viết, cần đọc, cần nghĩ trước khi họp, trước khi trả lời, trước khi lao vào lịch.",
+          "Nhịp bắt đầu ấy không phải lúc nào cũng hợp với tất cả mọi người. Nhưng với ai cần một kiểu ngày có biên độ thở, Đà Lạt buổi sáng thường là lời giải thích tốt nhất cho việc vì sao họ muốn ở lại lâu hơn."
+        ]
+      }
+    },
+    {
+      "slug": "mua-o-da-lat-lam-cham-moi-thu-ra-sao",
+      "section": "rhythms",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slopesWide",
+        "valley"
+      ],
+      "vi": {
+        "title": "Mưa Ở Đà Lạt Làm Chậm Mọi Thứ Ra Sao",
+        "excerpt": "Một ghi chép về mưa như một nhịp điều chỉnh ngày làm việc, chứ không chỉ là thời tiết.",
+        "standfirst": "Mưa ở Đà Lạt không chỉ làm đường ướt. Nó sắp lại tốc độ, âm thanh và cách một ngày lao động được mở ra.",
+        "body": [
+          "Ở nhiều nơi, mưa chỉ là một bất tiện. Ở Đà Lạt, mưa thường là tín hiệu để cả thành phố đổi nhịp. Người ta đi chậm hơn, nói nhỏ hơn, chọn chỗ ngồi kỹ hơn và dời một vài cuộc hẹn để giữ mạch tập trung.",
+          "Với những người làm việc trí óc, điều này không hoàn toàn tiêu cực. Mưa tạo ra một lớp âm nền đều, làm giảm nhiễu và giúp nhiều công việc cần chiều sâu được kéo dài liền mạch hơn.",
+          "Dĩ nhiên, mưa cũng có cái giá của nó: di chuyển khó hơn, lịch trình dễ trễ, không gian làm việc ngoài nhà gần như biến mất. Nhưng chính sự đánh đổi đó nhắc người ta rằng nhịp sống tốt không phải là nhịp luôn nhanh, mà là nhịp có thể thích nghi."
+        ]
+      }
+    },
+    {
+      "slug": "mot-quan-yen-khong-de-tron-ma-de-lam-viec",
+      "section": "work",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "view",
+        "rooftops"
+      ],
+      "vi": {
+        "title": "Một Quán Yên Không Dùng Để Trốn, Mà Để Làm Việc",
+        "excerpt": "Không gian làm việc tốt ở Đà Lạt không cần hào nhoáng, chỉ cần đủ yên và đủ thật để giữ tập trung.",
+        "standfirst": "Một quán yên đúng nghĩa không bán cảm giác trốn chạy. Nó giúp công việc diễn ra đều, có nhịp và không tách khỏi đời sống.",
+        "body": [
+          "Nhiều người tìm một quán ở Đà Lạt với kỳ vọng 'chữa lành'. Nhưng quán phù hợp cho làm việc dài hạn thường không đi theo ngôn ngữ đó. Nó cần ánh sáng ổn, bàn ghế đủ dùng, âm thanh không áp đảo, và một nhịp vận hành tôn trọng người ngồi lâu.",
+          "Một nơi như vậy cho phép công việc diễn ra mà không phải dựng cảnh. Bạn có thể viết, chỉnh tài liệu, họp ngắn, rồi quay về đời sống thường ngày mà không thấy mình vừa đóng vai ai khác.",
+          "Giá trị của quán yên vì thế không nằm ở thiết kế để chụp ảnh. Nó nằm ở khả năng giữ cho lao động trí óc được đều đặn, tử tế và bền theo tuần."
+        ]
+      }
+    },
+    {
+      "slug": "nhung-hien-nha-giu-nguoi-o-lai",
+      "section": "stories",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "valley",
+        "hero"
+      ],
+      "vi": {
+        "title": "Những Hiên Nhà Giữ Người Ở Lại",
+        "excerpt": "Một bài về những khoảng đệm nhỏ giữa mưa, công việc và đời sống ở Đà Lạt.",
+        "standfirst": "Hiên nhà ở Đà Lạt không chỉ là chi tiết kiến trúc. Nó là nơi một ngày được giảm tốc vừa đủ để người ta làm việc và sống cùng nhau dễ hơn.",
+        "body": [
+          "Ở Đà Lạt, hiên nhà là một bề mặt sống thật: nơi treo áo mưa, đặt chậu cây, ngồi nghỉ giữa hai cuộc gọi, và nhìn thời tiết đổi trong vài phút. Nó là phần nhỏ nhưng quyết định chất lượng của nhiều căn nhà.",
+          "Với người làm việc từ xa, hiên nhà còn là nhịp chuyển giữa tập trung và hồi phục. Chỉ cần vài bước ra ngoài, nghe mưa hoặc gió, rồi quay lại bàn làm việc, một ngày bớt gãy và ít căng hơn đáng kể.",
+          "Có lẽ vì thế mà nhiều người ở lại Đà Lạt lâu hơn dự tính. Không phải vì một lời hứa lớn, mà vì những cấu trúc nhỏ như hiên nhà vẫn còn giữ được đời sống ở mức người."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-tre-o-lai-da-lat-de-lam-gi",
+      "section": "stories",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "view",
+        "slope"
+      ],
+      "vi": {
+        "title": "Người Trẻ Ở Lại Đà Lạt Để Làm Gì",
+        "excerpt": "Không phải ai ở lại cũng để nghỉ. Nhiều người ở lại để làm nghề và xây một nhịp sống bền hơn.",
+        "standfirst": "Câu hỏi quan trọng không phải là 'đến Đà Lạt để trốn gì', mà là 'ở lại để làm gì' và 'mô hình sống nào có thể giữ được qua nhiều năm'.",
+        "body": [
+          "Một phần người trẻ đến Đà Lạt sau giai đoạn làm việc dày ở các đô thị lớn. Họ không tìm một kỳ nghỉ kéo dài. Họ tìm điều kiện để làm nghề mà không bị bào mòn liên tục bởi tốc độ và tiếng ồn.",
+          "Ở lại lâu buộc họ trả lời câu hỏi thực tế: thu nhập nào đủ bền, không gian nào hợp làm việc, cộng đồng nào có thể học cùng, và chi phí nào có thể kiểm soát trong nhiều mùa du lịch khác nhau.",
+          "Những người đi đường dài thường không nói nhiều về lifestyle. Họ nói về nghề, lịch, kỷ luật, sức khỏe và quan hệ gần. Đó là dấu hiệu cho thấy Đà Lạt đang được đọc như một vùng sống, không chỉ một địa điểm cảm hứng."
+        ]
+      }
+    },
+    {
+      "slug": "da-lat-ve-dem-khong-on-nhung-khong-trong",
+      "section": "rhythms",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "rooftops",
+        "panorama"
+      ],
+      "vi": {
+        "title": "Đà Lạt Về Đêm Không Ồn Nhưng Không Trống",
+        "excerpt": "Một bài về nhịp tối ở Đà Lạt: đủ yên để nghỉ, nhưng vẫn có đời sống diễn ra đều đặn.",
+        "standfirst": "Ban đêm ở Đà Lạt không chạy theo cường độ cao. Nó giữ một mức sáng vừa đủ để thành phố tiếp tục thở mà không làm người ta kiệt sức.",
+        "body": [
+          "Nhiều người mới đến dễ nhầm sự yên tĩnh của đêm Đà Lạt với sự thiếu sinh khí. Thực ra đời sống vẫn diễn ra: bếp còn sáng, vài quán còn mở nhẹ, xe chạy thưa, và các khu dân cư giữ nhịp riêng của họ.",
+          "Đêm ít ồn tạo ra lợi thế cho nhóm cần phục hồi sau ngày làm việc dày. Giấc ngủ sâu hơn, đầu óc có khoảng lùi, và sáng hôm sau bắt đầu với ít dư chấn hơn.",
+          "Tất nhiên, nhịp này không hợp với mọi nhu cầu giải trí. Nhưng với những ai chọn ở lại để làm việc và sống bền, một thành phố biết giảm âm vào buổi tối là một giá trị rất lớn."
+        ]
+      }
+    },
+    {
+      "slug": "song-cham-o-da-lat-khong-co-nghia-la-song-luoi",
+      "section": "rhythms",
+      "image": "view",
+      "gallery": [
+        "view",
+        "valley",
+        "farms"
+      ],
+      "vi": {
+        "title": "Sống Chậm Ở Đà Lạt Không Có Nghĩa Là Sống Lười",
+        "excerpt": "Một phản biện về hiểu lầm phổ biến: chậm là thiếu năng suất.",
+        "standfirst": "Ở Đà Lạt, chậm thường là cách sắp nhịp để làm việc sâu hơn, đều hơn, thay vì chạy nhanh rồi đuối.",
+        "body": [
+          "Khái niệm sống chậm dễ bị dùng sai như một khẩu hiệu lãng mạn. Trong thực tế lao động, chậm không đồng nghĩa với trì hoãn. Nó thường là cách giảm nhiễu để làm đúng việc trong khung thời gian đủ rõ.",
+          "Nhiều người làm nghề tự do ở Đà Lạt vẫn giữ lịch dày: họp với khách quốc tế, sản xuất nội dung, dạy học, vận hành studio nhỏ. Khác biệt nằm ở cách họ phân bổ năng lượng: ít đứt đoạn hơn, ít chạy theo phản xạ hơn.",
+          "Nếu nhìn theo tuần hoặc theo quý, mô hình này có thể bền hơn kiểu tăng tốc liên tục. Chậm, trong nghĩa tốt, là một chiến lược chất lượng chứ không phải một cái cớ."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-voi-the-gioi-tu-mot-noi-yen-hon",
+      "section": "work",
+      "image": "valley",
+      "gallery": [
+        "valley",
+        "slopesWide",
+        "hero"
+      ],
+      "vi": {
+        "title": "Làm Việc Với Thế Giới Từ Một Nơi Yên Hơn",
+        "excerpt": "Đà Lạt không cắt người ta khỏi cơ hội toàn cầu. Nó đổi bối cảnh làm việc theo hướng bền hơn.",
+        "standfirst": "Nhiều công việc hiện nay không phụ thuộc vào việc phải ở thành phố lớn. Điều quyết định là chất lượng đầu ra, kỷ luật và hệ cộng tác.",
+        "body": [
+          "Từ Đà Lạt, một người vẫn có thể làm việc với khách hàng và đội nhóm ở nhiều múi giờ. Họp online, giao sản phẩm, theo sprint, xử lý phản hồi - tất cả vẫn diễn ra, miễn là hạ tầng và kỷ luật cá nhân đủ chắc.",
+          "Điểm khác nằm ở phần đời sống đi kèm công việc. Khi bối cảnh yên hơn, nhiều người giữ được sức bền tốt hơn: ít kiệt quệ, ít đứt mạch tập trung, và có không gian để học thêm hoặc mở rộng nghề.",
+          "Đây không phải công thức cho tất cả mọi người. Nhưng với nhóm lao động tri thức cần đường dài, làm việc với thế giới từ một nơi yên hơn là một lựa chọn có cơ sở, không phải một mơ mộng."
+        ]
+      }
+    },
+    {
+      "slug": "mot-can-nha-nho-nhin-ra-thung-lung",
+      "section": "stories",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "valley",
+        "rooftops"
+      ],
+      "vi": {
+        "title": "Một Căn Nhà Nhỏ Nhìn Ra Thung Lũng",
+        "excerpt": "Một căn nhà nhỏ có thể giữ người ở lại nếu nó giúp công việc và đời sống đi cùng nhau.",
+        "standfirst": "Không gian sống ở Đà Lạt không cần lớn để trở nên đáng ở. Điều quan trọng hơn là ánh sáng, nhịp sử dụng và cảm giác một ngày có thể trôi qua mà không bị bẻ gãy.",
+        "body": [
+          "Căn nhà nhỏ nằm trên một triền dốc, nhìn xuống thung lũng với mái tôn và vườn rau xen nhau. Buổi sáng, ánh sáng vào chậm qua cửa sổ gỗ, đủ để bắt đầu một ngày làm việc mà không cần vội.",
+          "Điều đáng nói không phải cảnh nhìn ra ngoài, mà là cách nơi này được dùng. Bàn làm việc đặt gần bếp, góc đọc gần hiên, và khoảng trống giữa các vật dụng vẫn đủ để người ta di chuyển nhẹ nhàng trong một ngày dài.",
+          "Nhiều người rời thành phố lớn không phải vì ghét nhịp nhanh, mà vì muốn tìm lại một nhịp có thể đi đường dài. Một căn nhà nhỏ như vậy không hứa hẹn điều lớn lao. Nó chỉ tạo điều kiện để sống đều, làm đều, và ở lại đủ lâu để biết mình có hợp nơi này hay không."
+        ]
+      }
+    },
+    {
+      "slug": "nhung-nguoi-o-lai-khong-vi-khi-hau",
+      "section": "stories",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "farms",
+        "view"
+      ],
+      "vi": {
+        "title": "Những Người Ở Lại Không Vì Khí Hậu",
+        "excerpt": "Khi lớp tò mò qua đi, lý do ở lại thường nằm ở công việc, cộng đồng nhỏ và một nhịp sống có thể giữ lâu.",
+        "standfirst": "Khí hậu có thể là điểm bắt đầu của một quyết định. Nhưng để ở lại lâu, người ta cần nhiều thứ cụ thể hơn thế.",
+        "body": [
+          "Đà Lạt thường được nói đến như một nơi mát hơn và chậm hơn. Điều đó đúng ở bề mặt. Nhưng những người đã ở lại qua vài mùa mưa hiếm khi nhắc khí hậu như lý do chính.",
+          "Họ nói về công việc có thể duy trì, về chi phí sống vừa sức hơn trong từng giai đoạn, về mạng lưới nhỏ nhưng đáng tin, và về cảm giác một ngày vẫn còn khoảng trống để thở sau khi hoàn thành việc.",
+          "Ở lại vì khí hậu thì dễ đổi ý khi gặp tháng lạnh dài hoặc tuần mưa dày. Ở lại vì một hệ sống phù hợp thì khác: người ta điều chỉnh, học cách làm việc tốt hơn trong điều kiện thật, và dần coi nơi này là một phần của đường dài thay vì một chặng nghỉ."
+        ]
+      }
+    },
+    {
+      "slug": "nhip-chieu-xuong-o-da-lat",
+      "section": "rhythms",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "rooftops",
+        "valley"
+      ],
+      "vi": {
+        "title": "Nhịp Chiều Xuống Ở Đà Lạt",
+        "excerpt": "Cuối ngày ở Đà Lạt không đóng lại đột ngột. Nó hạ nhịp dần để công việc và đời sống kịp gặp nhau.",
+        "standfirst": "Chiều xuống là lúc thành phố đổi tông: ánh sáng mỏng hơn, tốc độ chậm lại, và mọi việc được sắp xếp theo một nhịp bền hơn.",
+        "body": [
+          "Khoảng cuối chiều ở Đà Lạt không ồn lên rồi tắt đột ngột như nhiều đô thị lớn. Từ quán nhỏ đến hiên nhà, mọi thứ giảm tốc theo từng lớp. Đủ để người ta kết lại công việc mà không bị kéo giật.",
+          "Nhịp này quan trọng với những người làm việc trí óc. Nó giúp chuyển từ màn hình sang đời sống một cách tự nhiên hơn: đi chợ, nấu ăn, gọi một cuộc điện ngắn, hoặc chỉ ngồi yên vài phút nhìn trời chuyển màu.",
+          "Chiều xuống vì thế không chỉ là một khoảnh khắc đẹp. Nó là một cơ chế giữ cân bằng, khiến ngày làm việc có điểm kết mềm và ngày mai có chỗ để bắt đầu lại."
+        ]
+      }
+    },
+    {
+      "slug": "mot-ngay-lam-viec-trong-studio-nho-tren-doc",
+      "section": "work",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slope",
+        "slopesWide"
+      ],
+      "vi": {
+        "title": "Một Ngày Làm Việc Trong Studio Nhỏ Trên Dốc",
+        "excerpt": "Một studio nhỏ không giảm chuẩn nghề nếu quy trình rõ và nhịp làm việc đủ kỷ luật.",
+        "standfirst": "Quy mô nhỏ buộc mọi thứ phải rõ hơn: mục tiêu trong ngày, thời gian tập trung, và cách cộng tác từ xa.",
+        "body": [
+          "Studio nằm trên một con dốc hẹp, đủ chỗ cho ba người làm việc cùng lúc. Không có nhiều thứ thừa: một bàn lớn, hai bàn phụ, tủ thiết bị, bảng lịch sprint và góc họp online.",
+          "Ngày làm việc ở đây bắt đầu bằng checklist ngắn, sau đó là khối tập trung dài trước khi mở họp. Cách làm này giúp giảm đứt mạch và giữ chất lượng đầu ra ổn định, dù đội nhóm phân tán ở nhiều nơi.",
+          "Điểm quan trọng nhất không phải diện tích studio, mà là kỷ luật vận hành. Khi quy trình rõ, một không gian nhỏ vẫn có thể tạo ra công việc lớn và giữ được nhịp sống bền cho những người ở bên trong."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-o-da-lat-can-mot-ky-luat-mem",
+      "section": "work",
+      "image": "farms",
+      "gallery": [
+        "farms",
+        "view",
+        "valley"
+      ],
+      "vi": {
+        "title": "Làm Việc Ở Đà Lạt Cần Một Kỷ Luật Mềm",
+        "excerpt": "Đà Lạt giúp người ta chậm lại, nhưng để làm việc đường dài vẫn cần một kỷ luật đủ rõ và đủ linh hoạt.",
+        "standfirst": "Kỷ luật mềm không phải buông lỏng. Đó là cách giữ nhịp làm việc ổn định trong một đời sống có thời tiết, gia đình và những khoảng chuyển động bất ngờ.",
+        "body": [
+          "Nhiều người tới Đà Lạt với kỳ vọng rằng mọi thứ sẽ tự nhiên nhẹ hơn. Điều đó đúng một phần. Nhưng nếu không có kỷ luật, sự nhẹ ấy dễ trượt thành phân tán và chậm tiến độ.",
+          "Kỷ luật mềm bắt đầu từ vài nguyên tắc nhỏ: khung giờ tập trung cố định, danh sách việc rõ theo ngày, giới hạn họp, và thời điểm tắt công việc để bảo toàn năng lượng.",
+          "Điểm hay của cách này là nó đủ linh hoạt để đi cùng đời sống thật. Trời mưa dài, gia đình cần việc, hay lịch di chuyển thay đổi - người ta vẫn giữ được trục công việc mà không tự đẩy mình vào kiệt sức."
+        ]
+      }
+    }
+  ],
+  "people": [
+    {
+      "slug": "nguoi-tre-o-lai-da-lat",
+      "image": "view",
+      "gallery": [
+        "view",
+        "valley",
+        "slope"
+      ],
+      "vi": {
+        "name": "Người trẻ ở lại Đà Lạt",
+        "role": "Chân dung chuyển từ yêu thích sang gắn bó",
+        "excerpt": "Không ở lại vì lãng mạn. Ở lại vì tìm được một nhịp sống có thể đi đường dài cùng công việc.",
+        "story": [
+          "Một thế hệ người trẻ đến với Đà Lạt không chỉ để nghỉ. Họ đến sau vài năm làm việc ở những thành phố lớn, mang theo sự mệt mỏi vì nhịp sống quá dày và câu hỏi rất thực tế: liệu có nơi nào vẫn cho mình làm việc nghiêm túc mà không bào mòn đời sống mỗi ngày?",
+          "Những người ở lại được thường không coi Đà Lạt là nơi để trốn. Họ học cách sống cùng thời tiết, cùng độ dốc, cùng khoảng cách, cùng sự ít lựa chọn hơn nhưng rõ hơn. Họ chọn nhà nhỏ hơn, nhịp đều hơn, giao tiếp ít phô trương hơn.",
+          "Ở lại, vì thế, không phải một quyết định cảm xúc đơn thuần. Nó là quá trình học cách phù hợp với một nơi còn giữ được nhịp người."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-lam-viec-online-tu-da-lat",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slopesWide",
+        "farms"
+      ],
+      "vi": {
+        "name": "Một người làm việc online từ Đà Lạt",
+        "role": "Công việc toàn cầu, đời sống địa phương",
+        "excerpt": "Điều khó không phải là mạng hay cuộc gọi. Điều khó là xây được một nhịp làm việc không lạc khỏi đời sống thật.",
+        "story": [
+          "Làm việc online từ Đà Lạt thường bị nhìn như một lựa chọn thuận tiện. Thực ra nó đòi hỏi nhiều kỷ luật không nhìn thấy: chỗ ngồi phù hợp, thời gian rõ, ranh giới mềm nhưng chắc giữa việc và nghỉ, và sự hiểu biết đủ sâu về nơi mình đang sống.",
+          "Điểm đáng quý ở đây là công việc toàn cầu không nhất thiết phải kéo theo một đời sống vô địa phương. Một người vẫn có thể đi chợ, biết hàng xóm, quen giờ mưa, biết khi nào thành phố im hẳn, và vẫn giữ được nhịp làm việc chuyên nghiệp.",
+          "Chính sự song hành đó mới làm cho Đà Lạt có giá trị hơn một backdrop đẹp."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-mo-quan-nho-va-giu-nhip-song-khac",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "slope",
+        "view"
+      ],
+      "vi": {
+        "name": "Người mở quán nhỏ và giữ một nhịp sống khác",
+        "role": "Chân dung nghề nhỏ đi đường dài",
+        "excerpt": "Không chạy theo lưu lượng ngắn hạn, họ chọn nhịp vận hành vừa sức và bền theo mùa.",
+        "story": [
+          "Mở một quán nhỏ ở Đà Lạt nghe có vẻ lãng mạn cho đến khi bước vào vận hành thật: chi phí tăng, khách thất thường theo mùa, và áp lực phải làm mới liên tục để không bị chìm giữa nhiều lựa chọn.",
+          "Những người đi được đường dài thường không chọn tốc độ tối đa. Họ chọn nhịp vừa đủ: mở cửa đúng giờ, giữ chất lượng ổn định, xây quan hệ gần với khách quen, và để công việc đi cùng đời sống gia đình.",
+          "Điều đáng quý ở đây là một mô hình nhỏ nhưng có phẩm giá. Không quá ồn, không phô diễn, nhưng tạo ra sinh kế thật và một điểm tựa cho cộng đồng xung quanh."
+        ]
+      }
+    }
+  ],
+  "places": [
+    {
+      "slug": "trai-mat-buoi-sang",
+      "image": "farms",
+      "gallery": [
+        "farms",
+        "slopesWide",
+        "valley"
+      ],
+      "vi": {
+        "title": "Trại Mát buổi sáng",
+        "type": "Vùng ven",
+        "area": "Trại Mát",
+        "excerpt": "Một vùng sáng sớm cho thấy Đà Lạt không chỉ có trung tâm, mà còn có những nhịp sống đi ra từ đất, sương và giờ làm việc rất sớm.",
+        "body": [
+          "Trại Mát buổi sáng không cần cố gắng để trở nên đáng nhớ. Ánh sáng lên chậm, không khí có độ ẩm, những mảng nhà kính phản chiếu một thứ nhịp làm việc đã bắt đầu từ trước khi nhiều người trong trung tâm thức dậy.",
+          "Ở đây, chất lượng sống không nằm ở tiện nghi dồn dập. Nó nằm ở sự rõ ràng của bối cảnh: bạn biết mình ở gần đất hơn, gần lao động hơn, gần một Đà Lạt ít trang trí hơn.",
+          "Vì thế, Trại Mát là một ví dụ tốt cho cách Ấp Đà Lạt muốn kể về nơi chốn: không phải bằng checklist, mà bằng fit, cảm giác, nhịp và công việc thật."
+        ]
+      }
+    },
+    {
+      "slug": "hien-nha-nho-ben-doc",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "rooftops",
+        "hero"
+      ],
+      "vi": {
+        "title": "Hiên nhà nhỏ bên dốc",
+        "type": "Nhà nhỏ",
+        "area": "Vùng nhà dốc",
+        "excerpt": "Một nơi không cần rộng để trở thành chỗ ở và chỗ làm có chiều sâu.",
+        "body": [
+          "Nhiều hiên nhà ở Đà Lạt không lớn, nhưng rất giỏi giữ người. Chúng tạo ra một vùng đệm giữa thời tiết và đời sống, giữa bên trong và bên ngoài, giữa làm việc và nghỉ ngắn.",
+          "Trong một thành phố nhiều dốc, hiên nhà còn là cách ngôi nhà trò chuyện với địa hình. Nó cho phép ánh sáng đi vào chậm hơn, mưa chạm gần hơn, và một bàn làm việc nhìn ra ngoài mà không phải biến cả đời sống thành sân khấu.",
+          "Một nơi chốn như vậy nói rõ hơn bất kỳ slogan nào về điều mà Đà Lạt còn giữ được: sự gần gũi có công năng."
+        ]
+      }
+    },
+    {
+      "slug": "mot-studio-nho-tren-doc",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "view",
+        "panorama"
+      ],
+      "vi": {
+        "title": "Một studio nhỏ trên dốc",
+        "type": "Studio nhỏ",
+        "area": "Sườn dốc dân cư",
+        "excerpt": "Một không gian làm việc gọn, nhiều ánh sáng tự nhiên và đủ riêng tư để giữ mạch sáng tạo.",
+        "body": [
+          "Studio nhỏ trên dốc thường không có diện tích dư dả, nhưng lại có một lợi thế quan trọng: ánh sáng và tầm nhìn mở. Khi được bố trí đúng, không gian này tạo ra cảm giác làm việc tập trung mà không tách khỏi bối cảnh sống.",
+          "Thay vì theo kiểu văn phòng tiêu chuẩn, studio kiểu này dựa nhiều vào vật liệu thật và cách sử dụng linh hoạt: một bàn lớn cho công việc chính, góc lưu trữ gọn, và khoảng trống đủ để chuyển từ làm việc cá nhân sang cộng tác nhỏ.",
+          "Nó phù hợp với người cần chất lượng tập trung hơn là sự hào nhoáng. Đây cũng là một lát cắt rõ về Đà Lạt hôm nay: quy mô nhỏ, nhưng khả năng làm nghề nghiêm túc thì không nhỏ."
+        ]
+      }
+    }
+  ],
+  "imageEssays": [
+    {
+      "slug": "anh-sang-mua-som",
+      "image": "hero",
+      "gallery": [
+        "hero",
+        "valley",
+        "slope",
+        "view",
+        "slopesWide"
+      ],
+      "vi": {
+        "title": "Ánh sáng của một buổi mưa sớm",
+        "intro": "Một chuỗi ảnh nhỏ về bề mặt, hiên nhà, mái kính và khoảng không khi ngày ở Đà Lạt bắt đầu trong mưa.",
+        "captions": [
+          "Ánh sáng lạnh đi qua lớp mái kính và làm công việc bắt đầu chậm hơn.",
+          "Một mặt dốc ướt phản lại nhịp ngày còn chưa đầy tiếng người.",
+          "Khoảng hiên đủ nhỏ để ở gần mưa, nhưng đủ kín để giữ sự yên."
+        ]
+      }
+    },
+    {
+      "slug": "mua-tren-mai-nha-kinh",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "farms",
+        "slopesWide",
+        "panorama",
+        "valley"
+      ],
+      "vi": {
+        "title": "Mưa trên mái nhà kính",
+        "intro": "Một photo essay về âm thanh mưa, phản chiếu trên mái kính và nhịp lao động không dừng hẳn trong ngày lạnh.",
+        "captions": [
+          "Mưa gõ liên tục lên mái kính, giữ một âm nền đều suốt buổi sáng.",
+          "Những khoảng phản chiếu trên mặt kính cho thấy công việc vẫn tiếp tục sau màn mưa.",
+          "Cuối ngày, ánh sáng mỏng đi qua lớp ẩm và để lại một thành phố chậm hơn."
+        ]
+      }
+    }
+  ],
+  "staticPages": {
+    "about": {
+      "eyebrow": "Về Ấp Đà Lạt",
+      "title": "Một lớp kể chuyện và bản sắc sống cho Đà Lạt hôm nay",
+      "metaTitle": "Về Ấp Đà Lạt",
+      "metaDescription": "Trang giải thích vai trò của Ấp Đà Lạt như một lớp bản sắc sống và editorial về Đà Lạt hôm nay.",
+      "body": [
+        "Ấp Đà Lạt không phải một trang du lịch, cũng không phải một bề mặt chuyển đổi cho lưu trú. Đây là lớp identity và editorial của hệ, nơi Đà Lạt được đọc qua con người, nơi chốn, nhịp sống, công việc và những điều đủ thật để đi cùng thời gian.",
+        "Ôm Đà Lạt là lớp tiếp theo: ở lại, tham gia, học, làm và bước sâu hơn vào hệ thực tế. Hai bề mặt này liên quan chặt chẽ, nhưng không được trùng vai.",
+        "Tên “Ấp” trong thương hiệu không phải một chi tiết trang trí. Nó gợi một cấu trúc sống có ký ức, có gần gũi, có công việc thật, có trao đổi tương hỗ và một nhịp sống không vô danh."
+      ]
+    },
+    "om": {
+      "eyebrow": "Ôm Ấp Đà Lạt",
+      "title": "Khi một câu chuyện trở thành nhu cầu ở lại",
+      "metaTitle": "Ôm Ấp Đà Lạt",
+      "metaDescription": "Trang cầu nối giải thích khi nào người đọc nên đi tiếp sang omdalat.com.",
+      "body": [
+        "Ấp Đà Lạt giúp người đọc hiểu Đà Lạt như một vùng sống. Nhưng sẽ có lúc sự hiểu ấy chuyển thành câu hỏi thực tế hơn: ở đâu, làm thế nào, tham gia cùng ai, và bắt đầu từ lớp nào.",
+        "Đó là lúc Ôm Đà Lạt xuất hiện như lớp đi tiếp. Không thay thế Ấp, mà nối identity sang participation."
+      ],
+      "linkLabel": "Đi tới omdalat.com"
+    }
+  },
+  "supportPages": {
+    "contact": {
+      "vi": {
+        "title": "Liên hệ",
+        "description": "Một nơi nhẹ và rõ để gửi story suggestion, partnership note, hoặc góp ý biên tập cho Ấp Đà Lạt.",
+        "body": [
+          {
+            "heading": "Gửi đề xuất câu chuyện",
+            "text": "Nếu bạn có một con người, nơi chốn, nhịp sống, hoặc bộ ảnh thật sự hợp tinh thần Ấp Đà Lạt, hãy gửi một mô tả ngắn, bối cảnh, và lý do vì sao nó nên được kể."
+          },
+          {
+            "heading": "Góp ý biên tập",
+            "text": "Nếu một chi tiết trong bài chưa đúng, hoặc cần được làm rõ hơn, team editorial muốn nhận góp ý sớm và cụ thể."
+          },
+          {
+            "heading": "Địa chỉ gợi ý",
+            "text": "Email demo cho prototype: hello@ap.omdalat.com. Khi CMS thật được bật, phần này nên nối vào editorial inbox có trạng thái xử lý."
+          }
+        ]
+      }
+    },
+    "topics": {
+      "vi": {
+        "title": "Chủ đề",
+        "description": "Lớp điều hướng nhẹ cho các cụm như buổi sáng, mưa, hiên nhà, Trại Mát, góc làm việc và vùng ven.",
+        "body": [
+          {
+            "heading": "Các cụm nên mở sau",
+            "text": "Buổi sáng, mưa, góc làm việc, Trại Mát, hiên nhà, nhà nhỏ, vùng ven, nhà kính."
+          },
+          {
+            "heading": "Vai trò của topic pages",
+            "text": "Topic pages chỉ nên mở khi đã có đủ độ dày. Chúng giúp nối stories, places, people, và photo essays thành một bề mặt đọc sâu hơn."
+          },
+          {
+            "heading": "Rule quan trọng",
+            "text": "Tags không được biến thành một hệ category thứ hai. Chủ đề là lớp discovery có chọn lọc, không phải kho archive loãng."
+          }
+        ]
+      }
+    },
+    "search": {
+      "vi": {
+        "title": "Tìm kiếm",
+        "description": "Bản prototype cho lớp tìm kiếm theo người, nơi chốn, nhịp sống, làm việc và hình ảnh.",
+        "body": [
+          {
+            "heading": "Search layer sau relaunch đầu",
+            "text": "Tìm theo title, category, people, place, và keyword cụm. Không ưu tiên archive theo ngày."
+          },
+          {
+            "heading": "Những truy vấn nên hoạt động tốt",
+            "text": "người, nơi chốn, Trại Mát, mưa, góc làm việc, làm việc từ Đà Lạt, nhịp sống."
+          }
+        ]
+      }
+    },
+    "faq": {
+      "vi": {
+        "title": "FAQ",
+        "description": "Những câu hỏi nền để hiểu Ấp Đà Lạt, vai trò của site này, và mối liên hệ với Ôm Đà Lạt.",
+        "body": [
+          {
+            "heading": "Ấp Đà Lạt là gì?",
+            "text": "Ấp Đà Lạt là lớp editorial và bản sắc sống của hệ. Đây là nơi Đà Lạt được đọc qua con người, nơi chốn, nhịp sống, công việc, hình ảnh và câu chuyện."
+          },
+          {
+            "heading": "Khác gì với Ôm Đà Lạt?",
+            "text": "Ấp Đà Lạt giúp người đọc hiểu và cảm được Đà Lạt. Ôm Đà Lạt là lớp đi tiếp để ở lại, làm, học, tham gia và bước vào hệ sống thực tế hơn."
+          },
+          {
+            "heading": "Vì sao site này không viết như blog du lịch?",
+            "text": "Vì mục tiêu của Ấp Đà Lạt không phải kích thích một chuyến ghé qua. Nó tồn tại để xây trust và chiều sâu quanh Đà Lạt như một vùng sống thật."
+          }
+        ]
+      }
+    }
+  }
+}

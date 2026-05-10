@@ -1,0 +1,11 @@
+browserType.launch: Executable doesn't exist at /Users/tranhatam/Library/Caches/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-mac-arm64/chrome-headless-shell
+╔═════════════════════════════════════════════════════════════════════════╗
+║ Looks like Playwright Test or Playwright was just installed or updated. ║
+║ Please run the following command to download new browsers:              ║
+║                                                                         ║
+║     npx playwright install                                              ║
+║                                                                         ║
+║ <3 Playwright Team                                                      ║
+╚═════════════════════════════════════════════════════════════════════════╝
+    at main (/Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:306:30)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:473:1

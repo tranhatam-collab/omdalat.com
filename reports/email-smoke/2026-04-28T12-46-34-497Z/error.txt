@@ -1,0 +1,5 @@
+Error: Unable to clear smoke outbox: 405
+    at clearOutbox (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:276:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async main (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:403:7)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:696:1

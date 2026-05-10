@@ -1,5 +1,12 @@
 # Team 3 Release Note — Email + Payment (2026-04-23)
 
+Status note 2026-04-28:
+
+- File này giữ nguyên như release note lịch sử của round 2026-04-23.
+- Chuẩn vận hành Team 3 hiện tại dùng thêm:
+  - `docs/TEAM3_UNIVERSAL_COMPLIANCE_EXECUTION_2026-04-28.md`
+  - `docs/TEAM3_GATE_REPORT_2026-04-28.md`
+
 ## 1) Email lane
 
 Status: `DONE`

@@ -20,6 +20,8 @@ It must not ship as:
 
 Primary source of truth:
 
+- [OMDALAT_UNIVERSAL_STANDARDS_ACTIVATION_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_UNIVERSAL_STANDARDS_ACTIVATION_2026-04-28.md)
+- [OMDALAT_AND_APDALAT_TEAM_UPDATE_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_AND_APDALAT_TEAM_UPDATE_2026-04-28.md)
 - [OMDALAT_PUBLIC_MEMBER_GLOBAL_SYSTEM_MASTER_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_PUBLIC_MEMBER_GLOBAL_SYSTEM_MASTER_2026.md)
 - [OMDALAT_MASTER_REBUILD_INDEX_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_MASTER_REBUILD_INDEX_2026.md)
 - [OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md)
@@ -32,6 +34,8 @@ Primary source of truth:
 - [OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md)
 - [OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md)
 - [OMDALAT_LEGACY_DOCS_NON_CANONICAL_INDEX_2026-04-23.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_LEGACY_DOCS_NON_CANONICAL_INDEX_2026-04-23.md)
+- [OMDALAT_CONTENT_SYSTEM_SOP.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CONTENT_SYSTEM_SOP.md)
+- [OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md)
 
 If any older plan conflicts with the files above, the older plan is outdated.
 
@@ -120,16 +124,20 @@ Then lock:
 7. [OMDALAT_MEMBERSHIP_GATING_FLOW_SPEC_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_MEMBERSHIP_GATING_FLOW_SPEC_2026.md)
 8. [OMDALAT_HOMEPAGE_REWRITE_MASTER_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_HOMEPAGE_REWRITE_MASTER_2026.md)
 9. [OMDALAT_30_ARTICLES_EDITORIAL_MASTER_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_30_ARTICLES_EDITORIAL_MASTER_2026.md)
-10. [OMDALAT_SEO_MASTER_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_SEO_MASTER_PLAN_2026.md)
-11. [OMDALAT_GLOBAL_I18N_AND_HREFLANG_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_GLOBAL_I18N_AND_HREFLANG_PLAN_2026.md)
-12. [OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md)
-13. [OMDALAT_APP_MEMBER_DASHBOARD_SPEC_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_APP_MEMBER_DASHBOARD_SPEC_2026.md)
-14. [OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md)
-15. [OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md)
-16. [OMDALAT_BETA_RELEASE_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_BETA_RELEASE_PLAN_2026.md)
+10. [OMDALAT_CONTENT_SYSTEM_SOP.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CONTENT_SYSTEM_SOP.md)
+11. [OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md)
+12. [OMDALAT_SEO_MASTER_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_SEO_MASTER_PLAN_2026.md)
+13. [OMDALAT_GLOBAL_I18N_AND_HREFLANG_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_GLOBAL_I18N_AND_HREFLANG_PLAN_2026.md)
+14. [OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CMS_AND_DATA_MODEL_SPEC_2026.md)
+15. [OMDALAT_APP_MEMBER_DASHBOARD_SPEC_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_APP_MEMBER_DASHBOARD_SPEC_2026.md)
+16. [OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_DEV_IMPLEMENTATION_BACKLOG_2026.md)
+17. [OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_QA_ACCEPTANCE_CHECKLIST_2026.md)
+18. [OMDALAT_BETA_RELEASE_PLAN_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_BETA_RELEASE_PLAN_2026.md)
 
 Companion references:
 
+- [OMDALAT_TEAM2_EXECUTION_COMPLIANCE_LOCK_2026-04-28.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_TEAM2_EXECUTION_COMPLIANCE_LOCK_2026-04-28.md)
+- [OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md)
 - [OMDALAT_IMAGE_SOURCE_SHORTLIST_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_IMAGE_SOURCE_SHORTLIST_2026.md)
 - [OMDALAT_INVESTOR_DECK_ACCESS_STRATEGY_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_INVESTOR_DECK_ACCESS_STRATEGY_2026.md)
 - [OMDALAT_OPERATIONS_HANDBOOK_ACCESS_STRATEGY_2026.md](/Users/tranhatam/Documents/Devnewproject/omdalat.com/docs/OMDALAT_OPERATIONS_HANDBOOK_ACCESS_STRATEGY_2026.md)

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Om Dalat</title>
+  <desc id="desc">A real-life system for living, working, learning, and building long-term value in Da Lat.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#132a24" />
+      <stop offset="50%" stop-color="#335449" />
+      <stop offset="100%" stop-color="#8b5a4a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="920" cy="120" r="180" fill="#f6f8f3" opacity="0.08" />
+  <circle cx="180" cy="520" r="220" fill="#f6f8f3" opacity="0.08" />
+  <text x="90" y="220" fill="#f6f8f3" font-family="Georgia, serif" font-size="86">OM DALAT</text>
+  <text x="90" y="320" fill="#f6f8f3" font-family="Arial, sans-serif" font-size="40">Live. Work. Learn. Build long-term value in Da Lat.</text>
+  <text x="90" y="400" fill="#d8ddd7" font-family="Arial, sans-serif" font-size="28">A real-life living system</text>
+</svg>

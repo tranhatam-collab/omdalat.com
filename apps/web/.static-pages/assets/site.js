@@ -1,0 +1,4 @@
+
+document.querySelectorAll('[data-static-form]').forEach((form)=>form.addEventListener('submit',(event)=>{event.preventDefault();const status=form.querySelector('.form-status');if(status)status.textContent='Draft saved locally for team review.';}));
+document.querySelectorAll('[data-filter]').forEach((button)=>button.addEventListener('click',()=>{const filter=button.dataset.filter;document.querySelectorAll('[data-pillar]').forEach((card)=>{card.hidden=filter!=='all'&&card.dataset.pillar!==filter;});}));
+const observer='IntersectionObserver'in window?new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting)entry.target.classList.add('is-visible')}),{threshold:.15}):null;document.querySelectorAll('.reveal').forEach((node)=>observer?observer.observe(node):node.classList.add('is-visible'));

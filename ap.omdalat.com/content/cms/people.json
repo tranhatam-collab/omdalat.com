@@ -1,0 +1,107 @@
+[
+  {
+    "name_vi": "Người trẻ ở lại Đà Lạt",
+    "name_en": "Young People Choosing to Stay in Dalat",
+    "slug_vi": "nguoi-tre-o-lai-da-lat",
+    "slug_en": "nguoi-tre-o-lai-da-lat",
+    "role_vi": "Chân dung chuyển từ yêu thích sang gắn bó",
+    "role_en": "A profile of moving from affection into belonging",
+    "excerpt_vi": "Không ở lại vì lãng mạn. Ở lại vì tìm được một nhịp sống có thể đi đường dài cùng công việc.",
+    "excerpt_en": "Not staying for romance, but for a rhythm of life that can hold real work over time.",
+    "standfirst_vi": "Chân dung chuyển từ yêu thích sang gắn bó",
+    "standfirst_en": "A profile of moving from affection into belonging",
+    "content_vi": "Một thế hệ người trẻ đến với Đà Lạt không chỉ để nghỉ. Họ đến sau vài năm làm việc ở những thành phố lớn, mang theo sự mệt mỏi vì nhịp sống quá dày và câu hỏi rất thực tế: liệu có nơi nào vẫn cho mình làm việc nghiêm túc mà không bào mòn đời sống mỗi ngày?\n\nNhững người ở lại được thường không coi Đà Lạt là nơi để trốn. Họ học cách sống cùng thời tiết, cùng độ dốc, cùng khoảng cách, cùng sự ít lựa chọn hơn nhưng rõ hơn. Họ chọn nhà nhỏ hơn, nhịp đều hơn, giao tiếp ít phô trương hơn.\n\nỞ lại, vì thế, không phải một quyết định cảm xúc đơn thuần. Nó là quá trình học cách phù hợp với một nơi còn giữ được nhịp người.",
+    "content_en": "A younger generation arrives in Dalat for more than rest. Many come after years in larger cities, carrying fatigue from a crowded tempo and a practical question: can there be a place where serious work still fits inside daily life?\n\nThe people who manage to stay usually do not treat Dalat as an escape. They learn weather, slopes, distance, and fewer but clearer choices. They choose smaller homes, steadier routines, and less performative social life.\n\nStaying, then, is not only emotional. It is a process of learning how to fit into a place that still keeps a human rhythm.",
+    "hero_image": "view",
+    "gallery_ids": ["view", "valley", "slope"],
+    "tag_ids": [
+      "con-nguoi"
+    ],
+    "related_story_ids": [],
+    "related_place_ids": [],
+    "seo": {
+      "meta_title_vi": "Người trẻ ở lại Đà Lạt",
+      "meta_title_en": "Young People Choosing to Stay in Dalat",
+      "meta_description_vi": "Không ở lại vì lãng mạn. Ở lại vì tìm được một nhịp sống có thể đi đường dài cùng công việc.",
+      "meta_description_en": "Not staying for romance, but for a rhythm of life that can hold real work over time.",
+      "og_image": "view"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  },
+  {
+    "name_vi": "Một người làm việc online từ Đà Lạt",
+    "name_en": "Someone Working Online from Dalat",
+    "slug_vi": "nguoi-lam-viec-online-tu-da-lat",
+    "slug_en": "nguoi-lam-viec-online-tu-da-lat",
+    "role_vi": "Công việc toàn cầu, đời sống địa phương",
+    "role_en": "Global work, local life",
+    "excerpt_vi": "Điều khó không phải là mạng hay cuộc gọi. Điều khó là xây được một nhịp làm việc không lạc khỏi đời sống thật.",
+    "excerpt_en": "The hard part is not the internet or the calls. It is building a work rhythm that does not drift away from real life.",
+    "standfirst_vi": "Công việc toàn cầu, đời sống địa phương",
+    "standfirst_en": "Global work, local life",
+    "content_vi": "Làm việc online từ Đà Lạt thường bị nhìn như một lựa chọn thuận tiện. Thực ra nó đòi hỏi nhiều kỷ luật không nhìn thấy: chỗ ngồi phù hợp, thời gian rõ, ranh giới mềm nhưng chắc giữa việc và nghỉ, và sự hiểu biết đủ sâu về nơi mình đang sống.\n\nĐiểm đáng quý ở đây là công việc toàn cầu không nhất thiết phải kéo theo một đời sống vô địa phương. Một người vẫn có thể đi chợ, biết hàng xóm, quen giờ mưa, biết khi nào thành phố im hẳn, và vẫn giữ được nhịp làm việc chuyên nghiệp.\n\nChính sự song hành đó mới làm cho Đà Lạt có giá trị hơn một backdrop đẹp.",
+    "content_en": "Working online from Dalat is often framed as convenience. In reality, it asks for invisible discipline: a workable seat, clear time, soft but firm boundaries between work and rest, and a deep enough understanding of the place you are living in.\n\nWhat matters here is that global work does not have to erase local life. A person can still shop in the market, know their neighbors, learn the rain hours, and keep professional standards.\n\nThat coexistence is what makes Dalat more valuable than a beautiful backdrop.",
+    "hero_image": "rooftops",
+    "gallery_ids": ["rooftops", "slopesWide", "farms"],
+    "tag_ids": [
+      "con-nguoi"
+    ],
+    "related_story_ids": [],
+    "related_place_ids": [],
+    "seo": {
+      "meta_title_vi": "Một người làm việc online từ Đà Lạt",
+      "meta_title_en": "Someone Working Online from Dalat",
+      "meta_description_vi": "Điều khó không phải là mạng hay cuộc gọi. Điều khó là xây được một nhịp làm việc không lạc khỏi đời sống thật.",
+      "meta_description_en": "The hard part is not the internet or the calls. It is building a work rhythm that does not drift away from real life.",
+      "og_image": "rooftops"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  },
+  {
+    "name_vi": "Người mở quán nhỏ và giữ một nhịp sống khác",
+    "name_en": "A Small Cafe Owner Keeping a Different Rhythm",
+    "slug_vi": "nguoi-mo-quan-nho-va-giu-nhip-song-khac",
+    "slug_en": "nguoi-mo-quan-nho-va-giu-nhip-song-khac",
+    "role_vi": "Chân dung nghề nhỏ đi đường dài",
+    "role_en": "A profile of small-scale work that lasts",
+    "excerpt_vi": "Không chạy theo lưu lượng ngắn hạn, họ chọn nhịp vận hành vừa sức và bền theo mùa.",
+    "excerpt_en": "Instead of chasing short-term volume, they choose an operating rhythm that is sustainable across seasons.",
+    "standfirst_vi": "Chân dung nghề nhỏ đi đường dài",
+    "standfirst_en": "A profile of small-scale work that lasts",
+    "content_vi": "Mở một quán nhỏ ở Đà Lạt nghe có vẻ lãng mạn cho đến khi bước vào vận hành thật: chi phí tăng, khách thất thường theo mùa, và áp lực phải làm mới liên tục để không bị chìm giữa nhiều lựa chọn.\n\nNhững người đi được đường dài thường không chọn tốc độ tối đa. Họ chọn nhịp vừa đủ: mở cửa đúng giờ, giữ chất lượng ổn định, xây quan hệ gần với khách quen, và để công việc đi cùng đời sống gia đình.\n\nĐiều đáng quý ở đây là một mô hình nhỏ nhưng có phẩm giá. Không quá ồn, không phô diễn, nhưng tạo ra sinh kế thật và một điểm tựa cho cộng đồng xung quanh.",
+    "content_en": "Opening a small cafe in Dalat sounds romantic until operations begin: rising costs, seasonal demand, and pressure to keep reinventing just to stay visible.\n\nPeople who last usually avoid maximum speed. They choose a workable tempo: opening on time, keeping quality consistent, building trust with regulars, and letting work stay connected to family life.\n\nWhat matters is dignity in a small model. Not loud, not performative, but capable of producing real livelihood and a local anchor for people nearby.",
+    "hero_image": "panorama",
+    "gallery_ids": ["panorama", "slope", "view"],
+    "tag_ids": [
+      "con-nguoi"
+    ],
+    "related_story_ids": [],
+    "related_place_ids": [],
+    "seo": {
+      "meta_title_vi": "Người mở quán nhỏ và giữ một nhịp sống khác",
+      "meta_title_en": "A Small Cafe Owner Keeping a Different Rhythm",
+      "meta_description_vi": "Không chạy theo lưu lượng ngắn hạn, họ chọn nhịp vận hành vừa sức và bền theo mùa.",
+      "meta_description_en": "Instead of chasing short-term volume, they choose an operating rhythm that is sustainable across seasons.",
+      "og_image": "panorama"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  }
+]

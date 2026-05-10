@@ -1,0 +1,21 @@
+{
+  "site_name_vi": "Ấp Đà Lạt",
+  "site_name_en": "Ap Dalat",
+  "brand_phrase_vi": "Ôm Ấp Đà Lạt",
+  "brand_phrase_en": "Om Ap Dalat",
+  "site_url": "https://ap.omdalat.com",
+  "default_locale": "vi",
+  "supported_locales": [
+    "vi",
+    "en"
+  ],
+  "omdalat_url": "https://omdalat.com",
+  "default_meta_title_vi": "Ấp Đà Lạt | Những con người, nơi chốn và nhịp sống Đà Lạt",
+  "default_meta_title_en": "Ap Dalat | People, Places and Rhythms of Dalat",
+  "default_meta_description_vi": "Hiểu Đà Lạt như một nơi để ở lại, làm việc và giữ một nhịp sống có thể đi đường dài.",
+  "default_meta_description_en": "Read Dalat as a living place through its people, places, work, and daily rhythms.",
+  "default_og_image": "images/ready/og/dalat-city-panorama-2020.jpg",
+  "organization_schema_name": "Ap Dalat",
+  "organization_schema_alt_name": "Ấp Đà Lạt",
+  "status": "active"
+}

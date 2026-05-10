@@ -1,0 +1,222 @@
+[
+  {
+    "locale": "vi",
+    "header_items": [
+      {
+        "label": "Trang chủ",
+        "url": "index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Con người",
+        "url": "con-nguoi/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Nơi chốn",
+        "url": "noi-chon/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Nhịp sống",
+        "url": "nhip-song/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Làm việc",
+        "url": "lam-viec/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Câu chuyện",
+        "url": "cau-chuyen/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Hình ảnh",
+        "url": "hinh-anh/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Về Ấp",
+        "url": "ve-ap-da-lat/index.html",
+        "target": "_self"
+      }
+    ],
+    "footer_groups": [
+      {
+        "group_label": "Khám phá",
+        "items": [
+          {
+            "label": "Con người",
+            "url": "con-nguoi/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Nơi chốn",
+            "url": "noi-chon/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Nhịp sống",
+            "url": "nhip-song/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Làm việc",
+            "url": "lam-viec/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Câu chuyện",
+            "url": "cau-chuyen/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Hình ảnh",
+            "url": "hinh-anh/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Về Ấp Đà Lạt",
+            "url": "ve-ap-da-lat/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Chủ đề",
+            "url": "chu-de/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "FAQ",
+            "url": "faq/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Liên hệ",
+            "url": "lien-he/index.html",
+            "target": "_self"
+          }
+        ]
+      }
+    ],
+    "utility_items": [
+      {
+        "label": "Tìm kiếm",
+        "url": "tim-kiem/index.html",
+        "target": "_self"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "locale": "en",
+    "header_items": [
+      {
+        "label": "Home",
+        "url": "index.html",
+        "target": "_self"
+      },
+      {
+        "label": "People",
+        "url": "people/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Places",
+        "url": "places/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Rhythms",
+        "url": "rhythms/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Work",
+        "url": "work/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Stories",
+        "url": "stories/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "Images",
+        "url": "images/index.html",
+        "target": "_self"
+      },
+      {
+        "label": "About",
+        "url": "about/index.html",
+        "target": "_self"
+      }
+    ],
+    "footer_groups": [
+      {
+        "group_label": "Explore",
+        "items": [
+          {
+            "label": "People",
+            "url": "people/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Places",
+            "url": "places/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Rhythms",
+            "url": "rhythms/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Work",
+            "url": "work/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Stories",
+            "url": "stories/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Images",
+            "url": "images/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "About",
+            "url": "about/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Topics",
+            "url": "topics/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "FAQ",
+            "url": "faq/index.html",
+            "target": "_self"
+          },
+          {
+            "label": "Contact",
+            "url": "contact/index.html",
+            "target": "_self"
+          }
+        ]
+      }
+    ],
+    "utility_items": [
+      {
+        "label": "Search",
+        "url": "search/index.html",
+        "target": "_self"
+      }
+    ],
+    "status": "active"
+  }
+]

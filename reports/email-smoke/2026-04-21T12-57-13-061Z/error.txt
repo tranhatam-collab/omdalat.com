@@ -1,0 +1,4 @@
+TypeError: Cannot read properties of undefined (reading 'launch')
+    at main (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:288:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:432:1

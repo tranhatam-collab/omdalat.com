@@ -1,0 +1,20 @@
+{
+  "name": "ap.omdalat.com",
+  "version": "1.0.0",
+  "description": "Prototype editorial build for `ap.omdalat.com`.",
+  "scripts": {
+    "qa:visual:plan:full-site": "bash scripts/team1-regression-full-site.sh --plan",
+    "qa:visual:full-site": "bash scripts/team1-regression-full-site.sh",
+    "qa:visual:baseline:refresh": "bash scripts/team1-regression-full-site.sh --refresh-baseline",
+    "qa:visual:calibrate:round2": "node scripts/calibrate-visual-diff-thresholds.mjs --runs-root=reports/visual-qa --baseline-dir=reports/visual-baseline/full-site --rules-file=scripts/visual-diff-threshold-rules.json --modes=full-site --min-samples=10 --min-coverage=0.9 --max-growth-factor=1.25 --buffer=0.002 --output=reports/visual-qa/threshold-calibration-round2.json --apply"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "type": "commonjs",
+  "devDependencies": {
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0"
+  }
+}

@@ -2,7 +2,7 @@
 
 Om Dalat / Ôm Đà Lạt
 
-Status: DONE_CLOSED
+Status: ARCHIVED_BASELINE
 Owner: Team 3
 Reviewer: Team 1
 Scope: app runtime, Cloudflare runtime map, member guard, email smoke, payment scope
@@ -14,6 +14,13 @@ Scope: app runtime, Cloudflare runtime map, member guard, email smoke, payment s
 Team 3 đã hoàn thành scope Om/app cho live bước đầu.
 
 Team 3 không còn là blocker release hiện tại.
+
+Ghi chú cập nhật 2026-04-28:
+
+- File này là baseline closure của vòng 2026-04-23.
+- Từ vòng kích hoạt universal standards mới, Team 3 vận hành theo:
+  - `docs/TEAM3_UNIVERSAL_COMPLIANCE_EXECUTION_2026-04-28.md`
+  - `docs/TEAM3_GATE_REPORT_2026-04-28.md`
 
 ---
 

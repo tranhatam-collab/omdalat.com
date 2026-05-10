@@ -1,0 +1,39 @@
+> @omdalat/web@ dev /Users/tranhatam/Documents/Devnewproject/omdalat.com/apps/web
+> next dev --hostname 127.0.0.1 --port 4211
+   ▲ Next.js 15.2.2
+   - Local:        http://127.0.0.1:4211
+   - Network:      http://127.0.0.1:4211
+   - Experiments (use with caution):
+     ✓ externalDir
+ ✓ Starting...
+ ✓ Ready in 2.1s
+ ✓ Compiled /middleware in 99ms
+ ✓ Compiled (112 modules)
+(node:85354) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ○ Compiling /member/register ...
+ ⨯ node:crypto
+Module build failed: UnhandledSchemeError: Reading from "node:crypto" is not handled by plugins (Unhandled scheme).
+Webpack supports "data:" and "file:" URIs by default.
+You may need an additional plugin to handle "node:" URIs.
+Import trace for requested module:
+node:crypto
+./app/member/actions.ts
+./app/member/register/page.tsx
+../../node_modules/.pnpm/next@15.2.2_@playwright+test@1.58.2_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fmember%2Fregister%2Fpage&page=%2Fmember%2Fregister%2Fpage&appPaths=%2Fmember%2Fregister%2Fpage&pagePath=private-next-app-dir%2Fmember%2Fregister%2Fpage.tsx&appDir=%2FUsers%2Ftranhatam%2FDocuments%2FDevnewproject%2Fomdalat.com%2Fapps%2Fweb%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ftranhatam%2FDocuments%2FDevnewproject%2Fomdalat.com%2Fapps%2Fweb&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!./app/member/register/page.tsx?__next_edge_ssr_entry__
+ ⨯ node:crypto
+Module build failed: UnhandledSchemeError: Reading from "node:crypto" is not handled by plugins (Unhandled scheme).
+Webpack supports "data:" and "file:" URIs by default.
+You may need an additional plugin to handle "node:" URIs.
+Import trace for requested module:
+node:crypto
+./app/member/actions.ts
+./app/member/register/page.tsx
+../../node_modules/.pnpm/next@15.2.2_@playwright+test@1.58.2_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fmember%2Fregister%2Fpage&page=%2Fmember%2Fregister%2Fpage&appPaths=%2Fmember%2Fregister%2Fpage&pagePath=private-next-app-dir%2Fmember%2Fregister%2Fpage.tsx&appDir=%2FUsers%2Ftranhatam%2FDocuments%2FDevnewproject%2Fomdalat.com%2Fapps%2Fweb%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ftranhatam%2FDocuments%2FDevnewproject%2Fomdalat.com%2Fapps%2Fweb&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!./app/member/register/page.tsx?__next_edge_ssr_entry__
+ ✓ Compiled /_error in 1552ms (598 modules)
+ GET /member/register 500 in 11265ms
+ GET /member/register 500 in 149ms
+ GET /member/register 500 in 16ms
+ GET /member/register 500 in 7ms
+Failed to proxy http://localhost:4211/member/register [Error: socket hang up] { code: 'ECONNRESET' }
+[Error: socket hang up] { code: 'ECONNRESET' }

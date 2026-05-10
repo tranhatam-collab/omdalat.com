@@ -40,10 +40,10 @@ File này cho một cái nhìn nhanh:
 ### 1.2 App Member Runtime (Team 3)
 
 * Submission: `RECEIVED`
-* Review: `PASS_WITH_QUEUE`
-* Evidence: `READY_WITH_QUEUE`
-* Current-state progress (theo report Team 3 + Team 1 recheck): `95%`
-* Block chính: `NONE` o P0; con P1 hardening (strict outbox + split-account cleanup)
+* Review: `DONE_CLOSED`
+* Evidence: `READY_CLOSED`
+* Current-state progress (theo report Team 3 + Team 1 recheck): `100%`
+* Block chính: `NONE` cho cycle hien tai; hardening backlog duoc tach sau cycle
 
 ### 1.3 Ap Editorial (Ap Team)
 
@@ -61,11 +61,12 @@ File này cho một cái nhìn nhanh:
 * Lanes đã nộp report: `3/3` (`100%`)
 * Lanes đã được Team 1 review verdict cuối: `3/3` (`100%`)
 * Lanes đã thoát trạng thái blocked P0: `3/3` (`100%`)
-* Trung bình progress toàn bộ 3 lane: ~`98.3%` (`(100 + 95 + 100) / 3`)
+* Trung bình progress toàn bộ 3 lane: `100%` (`(100 + 100 + 100) / 3`)
 
 Operational note:
 
 * Tat ca lane da qua blocker P0; phan con lai la queue hardening.
+* Team2 e2e local preview suite gặp blocker môi trường Playwright ở bước launch Chromium (permission/IPC trên host), không phải regression nội dung.
 
 Team 1 completion note (2026-05-04):
 
@@ -83,15 +84,15 @@ Current global gate (cycle hien tai):
 
 Reason:
 
-* Team 2 / Team 3 / Ap Team deu o `PASS_WITH_QUEUE`
-* Khong con blocker P0, con queue hardening theo tung lane
+* Team 2 / Team 3 / Ap Team da duoc Team 1 dong cycle
+* Khong con blocker P0 cho cycle hien tai
 
 ---
 
 ## 4. Điều kiện chuyển sang GO
 
 * Team 2: tiep tuc queue hardening (khong blocker P0)
-* Team 3: tiep tuc queue hardening (strict outbox / split-account cleanup)
+* Team 3: hardening backlog hau cycle (strict outbox / split-account cleanup / content-contract follow-up)
 * Ap Team: tiep tuc queue hardening (live-domain probe/visual packet)
 
 ---

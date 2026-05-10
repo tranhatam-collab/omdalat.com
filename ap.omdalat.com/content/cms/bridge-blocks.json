@@ -1,0 +1,24 @@
+[
+  {
+    "block_id": "bridge-standard-vi-en",
+    "name": "Standard Editorial Bridge",
+    "placement_type": "article_end",
+    "copy_vi": "Nếu bạn không chỉ muốn đọc về Đà Lạt, mà đang tìm một nơi để ở lại, làm việc và tham gia sâu hơn, hãy đi tới Ôm Đà Lạt.",
+    "copy_en": "If you are not only reading about Dalat, but looking for a place to stay, work, and join more deeply, continue to Om Dalat.",
+    "cta_label_vi": "Tới Ôm Đà Lạt",
+    "cta_label_en": "Go to Om Dalat",
+    "cta_url": "https://omdalat.com",
+    "status": "active"
+  },
+  {
+    "block_id": "bridge-work-vi-en",
+    "name": "Work Context Bridge",
+    "placement_type": "article_end",
+    "copy_vi": "Nếu bạn đang nghĩ nghiêm túc hơn về việc làm việc từ Đà Lạt, Ôm Đà Lạt là nơi đi tiếp cho lớp thực tế hơn.",
+    "copy_en": "If you are thinking more seriously about working from Dalat, Om Dalat is the next practical layer.",
+    "cta_label_vi": "Đi tiếp với Ôm Đà Lạt",
+    "cta_label_en": "Continue with Om Dalat",
+    "cta_url": "https://omdalat.com",
+    "status": "active"
+  }
+]

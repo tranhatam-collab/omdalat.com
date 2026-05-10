@@ -1,0 +1,150 @@
+[
+  {
+    "key": "contact",
+    "vi": {
+      "title": "Liên hệ",
+      "description": "Một nơi nhẹ và rõ để gửi story suggestion, partnership note, hoặc góp ý biên tập cho Ấp Đà Lạt.",
+      "body": [
+        {
+          "heading": "Gửi đề xuất câu chuyện",
+          "text": "Nếu bạn có một con người, nơi chốn, nhịp sống, hoặc bộ ảnh thật sự hợp tinh thần Ấp Đà Lạt, hãy gửi một mô tả ngắn, bối cảnh, và lý do vì sao nó nên được kể."
+        },
+        {
+          "heading": "Góp ý biên tập",
+          "text": "Nếu một chi tiết trong bài chưa đúng, hoặc cần được làm rõ hơn, team editorial muốn nhận góp ý sớm và cụ thể."
+        },
+        {
+          "heading": "Địa chỉ gợi ý",
+          "text": "Email demo cho prototype: hello@ap.omdalat.com. Khi CMS thật được bật, phần này nên nối vào editorial inbox có trạng thái xử lý."
+        }
+      ]
+    },
+    "en": {
+      "title": "Contact",
+      "description": "A clear place to send story suggestions, partnership notes, or editorial corrections for Ap Dalat.",
+      "body": [
+        {
+          "heading": "Send a story suggestion",
+          "text": "If you know a person, place, rhythm, or image sequence that truly fits Ap Dalat, send a short note with context and why it should be told."
+        },
+        {
+          "heading": "Editorial corrections",
+          "text": "If a detail in a piece needs correction or clearer context, the editorial team should be able to receive that feedback early and cleanly."
+        },
+        {
+          "heading": "Suggested address",
+          "text": "Demo email for this prototype: hello@ap.omdalat.com. Once the real CMS is active, this should connect to an editorial inbox with workflow states."
+        }
+      ]
+    }
+  },
+  {
+    "key": "topics",
+    "vi": {
+      "title": "Chủ đề",
+      "description": "Lớp điều hướng nhẹ cho các cụm như buổi sáng, mưa, hiên nhà, Trại Mát, góc làm việc và vùng ven.",
+      "body": [
+        {
+          "heading": "Các cụm nên mở sau",
+          "text": "Buổi sáng, mưa, góc làm việc, Trại Mát, hiên nhà, nhà nhỏ, vùng ven, nhà kính."
+        },
+        {
+          "heading": "Vai trò của topic pages",
+          "text": "Topic pages chỉ nên mở khi đã có đủ độ dày. Chúng giúp nối stories, places, people, và photo essays thành một bề mặt đọc sâu hơn."
+        },
+        {
+          "heading": "Rule quan trọng",
+          "text": "Tags không được biến thành một hệ category thứ hai. Chủ đề là lớp discovery có chọn lọc, không phải kho archive loãng."
+        }
+      ]
+    },
+    "en": {
+      "title": "Topics",
+      "description": "A light discovery layer for clusters such as mornings, rain, porches, Trai Mat, work corners, and edge zones.",
+      "body": [
+        {
+          "heading": "Suggested early topics",
+          "text": "Morning, rain, work corners, Trai Mat, porches, small homes, edge zones, greenhouse landscapes."
+        },
+        {
+          "heading": "What topic pages are for",
+          "text": "Topic pages should open only when enough depth exists. They connect stories, places, people, and photo essays into a richer reading path."
+        },
+        {
+          "heading": "Important rule",
+          "text": "Tags must not become a second category system. Topics are a curated discovery layer, not a thin archive."
+        }
+      ]
+    }
+  },
+  {
+    "key": "search",
+    "vi": {
+      "title": "Tìm kiếm",
+      "description": "Bản prototype cho lớp tìm kiếm theo người, nơi chốn, nhịp sống, làm việc và hình ảnh.",
+      "body": [
+        {
+          "heading": "Search layer sau relaunch đầu",
+          "text": "Tìm theo title, category, people, place, và keyword cụm. Không ưu tiên archive theo ngày."
+        },
+        {
+          "heading": "Những truy vấn nên hoạt động tốt",
+          "text": "người, nơi chốn, Trại Mát, mưa, góc làm việc, làm việc từ Đà Lạt, nhịp sống."
+        }
+      ]
+    },
+    "en": {
+      "title": "Search",
+      "description": "A prototype placeholder for the future search layer across people, places, rhythms, work, and images.",
+      "body": [
+        {
+          "heading": "Search after the first relaunch",
+          "text": "Search should prioritize title, category, people, place, and cluster keywords, not shallow date archives."
+        },
+        {
+          "heading": "Queries that should work well",
+          "text": "people, places, Trai Mat, rain, work corner, working from Dalat, daily rhythms."
+        }
+      ]
+    }
+  },
+  {
+    "key": "faq",
+    "vi": {
+      "title": "FAQ",
+      "description": "Những câu hỏi nền để hiểu Ấp Đà Lạt, vai trò của site này, và mối liên hệ với Ôm Đà Lạt.",
+      "body": [
+        {
+          "heading": "Ấp Đà Lạt là gì?",
+          "text": "Ấp Đà Lạt là lớp editorial và bản sắc sống của hệ. Đây là nơi Đà Lạt được đọc qua con người, nơi chốn, nhịp sống, công việc, hình ảnh và câu chuyện."
+        },
+        {
+          "heading": "Khác gì với Ôm Đà Lạt?",
+          "text": "Ấp Đà Lạt giúp người đọc hiểu và cảm được Đà Lạt. Ôm Đà Lạt là lớp đi tiếp để ở lại, làm, học, tham gia và bước vào hệ sống thực tế hơn."
+        },
+        {
+          "heading": "Vì sao site này không viết như blog du lịch?",
+          "text": "Vì mục tiêu của Ấp Đà Lạt không phải kích thích một chuyến ghé qua. Nó tồn tại để xây trust và chiều sâu quanh Đà Lạt như một vùng sống thật."
+        }
+      ]
+    },
+    "en": {
+      "title": "FAQ",
+      "description": "Core questions about Ap Dalat, what this site does, and how it relates to Om Dalat.",
+      "body": [
+        {
+          "heading": "What is Ap Dalat?",
+          "text": "Ap Dalat is the editorial and place-identity layer of the system, reading Dalat through people, places, rhythms, work, images, and stories."
+        },
+        {
+          "heading": "How is it different from Om Dalat?",
+          "text": "Ap Dalat helps readers understand and feel Dalat. Om Dalat is the next layer for staying, working, learning, joining, and entering the practical system."
+        },
+        {
+          "heading": "Why does this site avoid travel-blog language?",
+          "text": "Because its purpose is not to sell a short visit. It exists to build trust and depth around Dalat as a living place."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,778 @@
+{
+  "locales": {
+    "en": {
+      "siteTitle": "Ap Dalat",
+      "homeTitle": "Ap Dalat | People, Places and Rhythms of Dalat",
+      "homeDescription": "Read Dalat as a living place through its people, places, work, and daily rhythms.",
+      "nav": [
+        {
+          "key": "home",
+          "label": "Home",
+          "href": "index.html"
+        },
+        {
+          "key": "people",
+          "label": "People",
+          "href": "people/index.html"
+        },
+        {
+          "key": "places",
+          "label": "Places",
+          "href": "places/index.html"
+        },
+        {
+          "key": "rhythms",
+          "label": "Rhythms",
+          "href": "rhythms/index.html"
+        },
+        {
+          "key": "work",
+          "label": "Work",
+          "href": "work/index.html"
+        },
+        {
+          "key": "stories",
+          "label": "Stories",
+          "href": "stories/index.html"
+        },
+        {
+          "key": "images",
+          "label": "Images",
+          "href": "images/index.html"
+        },
+        {
+          "key": "about",
+          "label": "About",
+          "href": "about/index.html"
+        }
+      ],
+      "utilityLinks": [
+        {
+          "label": "Search",
+          "href": "search/index.html"
+        }
+      ],
+      "footerNote": "Ap Dalat tells the story of the people, places, and rhythms shaping Dalat today.",
+      "footerLinks": [
+        {
+          "label": "People",
+          "href": "people/index.html"
+        },
+        {
+          "label": "Places",
+          "href": "places/index.html"
+        },
+        {
+          "label": "Rhythms",
+          "href": "rhythms/index.html"
+        },
+        {
+          "label": "Work",
+          "href": "work/index.html"
+        },
+        {
+          "label": "Stories",
+          "href": "stories/index.html"
+        },
+        {
+          "label": "Images",
+          "href": "images/index.html"
+        },
+        {
+          "label": "About",
+          "href": "about/index.html"
+        },
+        {
+          "label": "Topics",
+          "href": "topics/index.html"
+        },
+        {
+          "label": "FAQ",
+          "href": "faq/index.html"
+        },
+        {
+          "label": "Contact",
+          "href": "contact/index.html"
+        }
+      ],
+      "bridge": {
+        "title": "When reading is no longer enough",
+        "body": "If you are not only reading about Dalat, but looking for a place to stay, work, and join more deeply, continue to Om Dalat.",
+        "cta": "Go to Om Dalat"
+      },
+      "home": {
+        "hero": {
+          "eyebrow": "Ap Dalat",
+          "title": "People, places, and rhythms shaping Dalat today.",
+          "body": "Dalat is not only a place to pass through. It can also be a place to stay, work, and live long enough to notice what truly holds people here.",
+          "primaryCta": {
+            "label": "Read the story",
+            "href": "stories/index.html"
+          },
+          "secondaryCta": {
+            "label": "See places",
+            "href": "places/index.html"
+          }
+        },
+        "intro": {
+          "title": "Not only a place to visit",
+          "body": "Some places are beautiful to pass through. Others hold enough depth to make people want to stay longer than a season. Dalat belongs to the second kind."
+        },
+        "lensesTitle": "Three ways of seeing Dalat today",
+        "peopleTitle": "People shaping Dalat today",
+        "peopleIntro": "Dalat is not told only through its landscape. It is also told through the people who live here, work here, and choose to stay in their own way.",
+        "placesTitle": "Places to live and work",
+        "placesIntro": "A good place is not only beautiful in an image. It also needs light, breathing room, and the ability to support real work.",
+        "rhythmsTitle": "A rhythm that does not rush",
+        "rhythmsIntro": "Dalat has its own rhythm. Not too slow to stop creating value, and not too fast to lose itself.",
+        "workTitle": "Working from a small place",
+        "workBody": "From Dalat, people are already writing, teaching, designing, making media, opening small studios, and keeping work close to a daily life shaped by rain, kitchens, trees, and family.",
+        "imagesTitle": "Photo essays and visual notes",
+        "imagesBody": "Some parts of Dalat are best understood through words. Others arrive more clearly through light, surfaces, porches, gardens, and the quiet space of a cold day.",
+        "lenses": [
+          {
+            "key": "people",
+            "body": "People who stay, teach, grow things, open small spaces, and keep a rhythm of their own.",
+            "cta": "Continue"
+          },
+          {
+            "key": "places",
+            "body": "Small homes, porches, slopes, and spaces real enough for living and working over time.",
+            "cta": "Continue"
+          },
+          {
+            "key": "rhythms",
+            "body": "Morning air, rain, dusk, and pauses that shape a life not built on hurry.",
+            "cta": "Continue"
+          }
+        ]
+      },
+      "ui": {
+        "readMore": "Read more",
+        "workCta": "See how work happens here",
+        "imagesCta": "See the photo essays",
+        "relatedTitle": "Read next",
+        "relatedIntro": "More pieces in a similar rhythm.",
+        "loadErrorTitle": "Unable to load content",
+        "loadErrorMessage": "The locale content is not ready yet or the current path could not read the JSON file."
+      }
+    }
+  },
+  "sections": {
+    "people": {
+      "key": "people",
+      "image": "slopesWide",
+      "en": {
+        "title": "People",
+        "thesis": "Dalat is told not only through its landscape, but through the people who live, work, and keep what is still true about it."
+      }
+    },
+    "places": {
+      "key": "places",
+      "image": "slope",
+      "en": {
+        "title": "Places",
+        "thesis": "A good place is not only beautiful to look at, but real enough to support living and working over time."
+      }
+    },
+    "rhythms": {
+      "key": "rhythms",
+      "image": "view",
+      "en": {
+        "title": "Rhythms",
+        "thesis": "The rhythm of Dalat is not simply slowness, but the breathing space it still keeps between work and everyday life."
+      }
+    },
+    "work": {
+      "key": "work",
+      "image": "farms",
+      "en": {
+        "title": "Work",
+        "thesis": "Working from Dalat is not just bringing a laptop uphill, but finding a rhythm of work that can live alongside real life."
+      }
+    },
+    "stories": {
+      "key": "stories",
+      "image": "hero",
+      "en": {
+        "title": "Stories",
+        "thesis": "Some truths about Dalat only appear when they are told slowly enough, closely enough, and truthfully enough."
+      }
+    },
+    "images": {
+      "key": "images",
+      "image": "rooftops",
+      "en": {
+        "title": "Images",
+        "thesis": "Some parts of Dalat become clearer through light, surfaces, open space, and the very small details of daily life."
+      }
+    }
+  },
+  "stories": [
+    {
+      "slug": "da-lat-khong-chi-de-ghe-qua",
+      "section": "stories",
+      "image": "hero",
+      "gallery": [
+        "valley",
+        "slope",
+        "rooftops"
+      ],
+      "en": {
+        "title": "Dalat Is Not Only a Place to Pass Through",
+        "excerpt": "An opening essay for reading Dalat as a living place rather than a tourism stop.",
+        "standfirst": "Dalat is not only felt through landscape, but through the way people live, work, shop, wait out the rain, and keep some breathing room for themselves.",
+        "body": [
+          "Some cities are consumed quickly. People arrive, photograph them, leave, and carry home a few memorable images. Dalat is vulnerable to that kind of reading because it lends itself too easily to memory and to reduction.",
+          "But when you stay longer, what holds you is rarely a postcard. It is the porch where you wait out early rain, the slope you walk every day, the way work can still sit close to kitchens, markets, and family life, and the feeling that a day is not constantly broken by noise.",
+          "Ap Dalat exists to read that living layer. Not to sell a prettier version of Dalat, but to make clear why this place can become a better model for people who want real work without losing real life."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-tu-da-lat-khong-chi-la-mang-laptop-len-nui",
+      "section": "work",
+      "image": "farms",
+      "gallery": [
+        "slope",
+        "slopesWide",
+        "view"
+      ],
+      "en": {
+        "title": "Working from Dalat Is Not Just Bringing a Laptop Uphill",
+        "excerpt": "A grounded look at work rhythms in Dalat beyond digital-nomad cliches.",
+        "standfirst": "Sustainable work from Dalat depends on rhythm, space, human connection, and the ability to keep work inside life rather than apart from it.",
+        "body": [
+          "The easiest image of working from Dalat is a laptop by a window with a good cup of coffee. That is only the surface. Work becomes durable here when it is supported by ordinary things: housing that works, stable internet, quiet places that are not staged, and a daily rhythm that does not keep snapping your attention.",
+          "Dalat's strength is not that it turns everyone into a digital nomad. Its strength is that it gives many forms of intellectual, creative, educational, research, and small-service work a quieter setting in which to continue.",
+          "People who work well from Dalat usually stop living like visitors. They learn districts, weather, market timing, rain hours, and how to set work inside a life with some durability."
+        ]
+      }
+    },
+    {
+      "slug": "mot-ngay-da-lat-bat-dau-nhu-the-nao",
+      "section": "rhythms",
+      "image": "valley",
+      "gallery": [
+        "valley",
+        "view",
+        "hero"
+      ],
+      "en": {
+        "title": "How a Day Begins in Dalat",
+        "excerpt": "A short essay on mornings, temperature, movement, and the measured pace of Dalat.",
+        "standfirst": "Morning in Dalat does not try to impress. It opens with cold air, soft light, a little moisture, and the sense that a day can begin without noise.",
+        "body": [
+          "A day in Dalat often begins very differently from hotter cities built on machine noise. Morning air slows the start slightly, but it also clarifies it. Coffee, kitchens, porches, jackets, and damp roads ease the day into motion through small signals.",
+          "What matters is that mornings here do not push people immediately into consumption. They invite a different tempo. That matters for anyone who needs to focus, write, read, think, or prepare before a day fills up.",
+          "That opening rhythm will not fit everyone. But for people who need more breathing room at the start of a day, Dalat mornings often explain why staying longer begins to feel possible."
+        ]
+      }
+    },
+    {
+      "slug": "mua-o-da-lat-lam-cham-moi-thu-ra-sao",
+      "section": "rhythms",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slopesWide",
+        "valley"
+      ],
+      "en": {
+        "title": "How Rain in Dalat Slows Everything Down",
+        "excerpt": "A note on rain as a rhythm that reshapes a working day, not only as weather.",
+        "standfirst": "Rain in Dalat does more than wet the streets. It resets pace, sound, and the way a working day unfolds.",
+        "body": [
+          "In many cities, rain is mostly inconvenience. In Dalat, it often becomes a signal for the whole day to shift tempo. People move more slowly, speak more quietly, choose their seats more carefully, and postpone a few meetings to protect focus.",
+          "For people doing knowledge work, this is not entirely a loss. Rain creates a steady background and lowers noise, which can make deeper tasks easier to sustain for longer stretches.",
+          "There is still a tradeoff: moving around becomes harder, schedules slip, and outdoor work corners disappear. But that tradeoff reminds people that a good rhythm is not always a fast one, but a rhythm that can adapt."
+        ]
+      }
+    },
+    {
+      "slug": "mot-quan-yen-khong-de-tron-ma-de-lam-viec",
+      "section": "work",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "view",
+        "rooftops"
+      ],
+      "en": {
+        "title": "A Quiet Cafe Not for Escaping, but for Working",
+        "excerpt": "A good work space in Dalat does not need spectacle. It needs enough calm and enough reality to sustain focus.",
+        "standfirst": "A truly quiet cafe does not sell escape. It allows work to happen steadily without pulling it away from daily life.",
+        "body": [
+          "Many people look for a cafe in Dalat with a promise of healing. Spaces that actually support long-term work usually do something simpler: stable light, usable tables and chairs, sound that does not dominate, and a rhythm of service that respects people who stay for hours.",
+          "A place like this lets work happen without performance. You can write, edit, run short calls, and return to ordinary life without feeling you had to play a role.",
+          "Its value is not visual polish for social media. Its value is helping knowledge work remain steady, humane, and sustainable across weeks."
+        ]
+      }
+    },
+    {
+      "slug": "nhung-hien-nha-giu-nguoi-o-lai",
+      "section": "stories",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "valley",
+        "hero"
+      ],
+      "en": {
+        "title": "Porches That Make People Stay",
+        "excerpt": "A story about small thresholds between rain, work, and daily life in Dalat.",
+        "standfirst": "In Dalat, a porch is more than architecture. It is where a day slows down just enough for work and life to stay in balance.",
+        "body": [
+          "In Dalat, porches are practical living surfaces: where raincoats hang, plants sit, short breaks happen between calls, and weather can be watched changing in minutes. Small as they are, they shape the quality of many homes.",
+          "For people working remotely, a porch also becomes a transition rhythm between focus and recovery. A few steps outside, then back to the desk, can keep a day from breaking apart.",
+          "That may be one reason people stay longer than planned. Not because of a grand promise, but because small structures like porches still hold life at a human scale."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-tre-o-lai-da-lat-de-lam-gi",
+      "section": "stories",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "view",
+        "slope"
+      ],
+      "en": {
+        "title": "Why Young People Stay in Dalat",
+        "excerpt": "Many do not stay for rest. They stay to work, build craft, and shape a more sustainable rhythm of life.",
+        "standfirst": "The better question is not what people escape from, but what they choose to build by staying and working over time.",
+        "body": [
+          "Many younger people come to Dalat after dense years in larger cities. They are not looking for an extended holiday. They are looking for conditions that allow serious work without constant burnout.",
+          "Staying longer forces practical decisions: what income can hold, which spaces support work, what communities are worth learning with, and what costs can be managed across high and low seasons.",
+          "People who last rarely speak in lifestyle slogans. They speak in terms of craft, schedule, discipline, health, and close relationships. That is how Dalat becomes a living place, not only an inspiring backdrop."
+        ]
+      }
+    },
+    {
+      "slug": "da-lat-ve-dem-khong-on-nhung-khong-trong",
+      "section": "rhythms",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "rooftops",
+        "panorama"
+      ],
+      "en": {
+        "title": "Dalat at Night: Quiet, Not Empty",
+        "excerpt": "A look at evening rhythm in Dalat: calm enough for rest, but still alive in small ways.",
+        "standfirst": "Dalat nights do not run at high intensity. They hold a quieter level of light and motion that lets a city keep breathing without exhausting people.",
+        "body": [
+          "Newcomers often mistake Dalat's quieter evenings for a lack of life. In reality, life continues: kitchens stay lit, a few cafes run lightly, traffic thins, and neighborhoods keep their own steady rhythms.",
+          "Lower noise at night gives a real advantage to people recovering from dense workdays. Sleep quality improves, mental load drops, and mornings begin with less residue.",
+          "This pace will not match every entertainment need. But for people staying to work and live over the long term, a city that knows how to lower its volume at night is a serious asset."
+        ]
+      }
+    },
+    {
+      "slug": "song-cham-o-da-lat-khong-co-nghia-la-song-luoi",
+      "section": "rhythms",
+      "image": "view",
+      "gallery": [
+        "view",
+        "valley",
+        "farms"
+      ],
+      "en": {
+        "title": "Slow Living in Dalat Is Not Laziness",
+        "excerpt": "A response to a common misunderstanding: slow does not mean unproductive.",
+        "standfirst": "In Dalat, slower often means better rhythm: deeper focus, steadier output, and less wasted energy.",
+        "body": [
+          "Slow living is often used as a romantic slogan. In real work, slow does not mean delay. It usually means reducing noise so the right work can be done in a clear, repeatable cadence.",
+          "Many freelancers in Dalat still run demanding weeks: international calls, content production, teaching, and small studio operations. The difference is energy design: fewer abrupt breaks and less reactive switching.",
+          "Across a quarter, this rhythm can outperform constant acceleration. Slow, at its best, is a quality strategy, not an excuse."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-voi-the-gioi-tu-mot-noi-yen-hon",
+      "section": "work",
+      "image": "valley",
+      "gallery": [
+        "valley",
+        "slopesWide",
+        "hero"
+      ],
+      "en": {
+        "title": "Working with the World from a Quieter Place",
+        "excerpt": "Dalat does not disconnect people from global opportunities. It changes the context in which work is sustained.",
+        "standfirst": "Many modern jobs no longer require living in a major city. What matters is output quality, discipline, and collaboration reliability.",
+        "body": [
+          "From Dalat, people can still work with clients and teams across time zones. Calls, sprint cycles, delivery schedules, and feedback loops continue as long as infrastructure and personal discipline are strong.",
+          "The difference is the life surrounding the work. In a quieter context, many people preserve energy better: less burnout, fewer attention fractures, and more room to learn and grow their craft.",
+          "This is not universal advice. But for long-horizon knowledge work, collaborating with the world from a quieter place is a grounded option, not a fantasy."
+        ]
+      }
+    },
+    {
+      "slug": "mot-can-nha-nho-nhin-ra-thung-lung",
+      "section": "stories",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "valley",
+        "rooftops"
+      ],
+      "en": {
+        "title": "A Small House Looking Over the Valley",
+        "excerpt": "A small house can hold people for longer when work and daily life can move together in the same rhythm.",
+        "standfirst": "A place in Dalat does not need to be large to be worth staying in. What matters more is light, daily use, and whether a day can unfold without being constantly broken.",
+        "body": [
+          "The house sits on a slope and looks over a valley of tin roofs and garden lines. In the morning, light enters slowly through wooden windows, enough to begin work without rushing into the day.",
+          "What matters here is not only the view. It is the way the place is used: a desk close to the kitchen, a reading corner near the porch, and enough open space for a day to move gently from task to task.",
+          "Many people leave larger cities not because they reject speed completely, but because they need a rhythm that can last. A small house like this does not promise transformation. It simply gives conditions for steady work, steady living, and enough time to see whether staying is real."
+        ]
+      }
+    },
+    {
+      "slug": "nhung-nguoi-o-lai-khong-vi-khi-hau",
+      "section": "stories",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "farms",
+        "view"
+      ],
+      "en": {
+        "title": "People Who Stay for More Than Weather",
+        "excerpt": "After first curiosity fades, the reasons people stay are often work, small communities, and a rhythm that can be sustained.",
+        "standfirst": "Weather may start a decision, but staying for years requires things that are far more concrete.",
+        "body": [
+          "Dalat is often described as cooler and slower. That is true on the surface. But people who have stayed through several rainy seasons rarely name weather as their central reason.",
+          "They talk about work that can be maintained, living costs that remain workable across different phases, small but reliable networks, and the feeling that a day still has room to breathe after real tasks are done.",
+          "If weather is the only reason, decisions change quickly when cold weeks or long rain arrive. Staying for a fitting life system is different: people adapt, improve how they work in real conditions, and gradually treat this place as part of a long path rather than a short break."
+        ]
+      }
+    },
+    {
+      "slug": "nhip-chieu-xuong-o-da-lat",
+      "section": "rhythms",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "rooftops",
+        "valley"
+      ],
+      "en": {
+        "title": "The Rhythm of Dalat at Dusk",
+        "excerpt": "Evening in Dalat does not end abruptly; it slows in stages so work and life can meet again.",
+        "standfirst": "Dusk is when the city changes tone: thinner light, slower pace, and tasks arranged into a more durable rhythm.",
+        "body": [
+          "Late afternoon in Dalat does not surge and collapse the way many large cities do. From small cafes to front porches, pace drops in layers, giving people room to close work without abrupt interruption.",
+          "This matters for knowledge workers. It allows a cleaner transition from screens back to life: a market stop, a simple meal, a short call, or just a few quiet minutes watching the light change.",
+          "Dusk is therefore more than atmosphere. It is a balancing mechanism, giving workdays a softer landing and leaving enough space to begin again tomorrow."
+        ]
+      }
+    },
+    {
+      "slug": "mot-ngay-lam-viec-trong-studio-nho-tren-doc",
+      "section": "work",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slope",
+        "slopesWide"
+      ],
+      "en": {
+        "title": "A Working Day in a Small Studio on the Slope",
+        "excerpt": "A small studio does not reduce professional standards when workflow is clear and discipline is maintained.",
+        "standfirst": "A smaller setup forces clarity: daily goals, focused blocks, and remote collaboration methods.",
+        "body": [
+          "The studio sits on a narrow slope and fits three people working at once. Nothing excessive: one main table, two side desks, equipment storage, a sprint board, and a corner for online calls.",
+          "Work begins with a short checklist, then moves into a long focus block before meetings open. This structure reduces context switching and keeps output quality steady, even with collaborators spread across locations.",
+          "The key is not studio size but operating discipline. When process is clear, a compact space can still produce meaningful work while preserving a sustainable pace for the people inside it."
+        ]
+      }
+    },
+    {
+      "slug": "lam-viec-o-da-lat-can-mot-ky-luat-mem",
+      "section": "work",
+      "image": "farms",
+      "gallery": [
+        "farms",
+        "view",
+        "valley"
+      ],
+      "en": {
+        "title": "Working in Dalat Needs a Gentle Discipline",
+        "excerpt": "Dalat helps people slow down, but long-term work still needs discipline that is clear without being rigid.",
+        "standfirst": "Gentle discipline is not loose discipline. It is a way to keep work steady inside a life shaped by weather, family, and shifting daily conditions.",
+        "body": [
+          "Many people come to Dalat expecting everything to feel lighter by default. That is partly true. But without discipline, that lightness can quickly become distraction and delayed delivery.",
+          "Gentle discipline starts with small rules: fixed focus windows, clear daily task lists, meeting limits, and a defined time to close work and protect energy.",
+          "Its strength is flexibility inside real life. During long rain, family demands, or shifting schedules, people can still keep a stable work axis without pushing themselves into burnout."
+        ]
+      }
+    }
+  ],
+  "people": [
+    {
+      "slug": "nguoi-tre-o-lai-da-lat",
+      "image": "view",
+      "gallery": [
+        "view",
+        "valley",
+        "slope"
+      ],
+      "en": {
+        "name": "Young People Choosing to Stay in Dalat",
+        "role": "A profile of moving from affection into belonging",
+        "excerpt": "Not staying for romance, but for a rhythm of life that can hold real work over time.",
+        "story": [
+          "A younger generation arrives in Dalat for more than rest. Many come after years in larger cities, carrying fatigue from a crowded tempo and a practical question: can there be a place where serious work still fits inside daily life?",
+          "The people who manage to stay usually do not treat Dalat as an escape. They learn weather, slopes, distance, and fewer but clearer choices. They choose smaller homes, steadier routines, and less performative social life.",
+          "Staying, then, is not only emotional. It is a process of learning how to fit into a place that still keeps a human rhythm."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-lam-viec-online-tu-da-lat",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "slopesWide",
+        "farms"
+      ],
+      "en": {
+        "name": "Someone Working Online from Dalat",
+        "role": "Global work, local life",
+        "excerpt": "The hard part is not the internet or the calls. It is building a work rhythm that does not drift away from real life.",
+        "story": [
+          "Working online from Dalat is often framed as convenience. In reality, it asks for invisible discipline: a workable seat, clear time, soft but firm boundaries between work and rest, and a deep enough understanding of the place you are living in.",
+          "What matters here is that global work does not have to erase local life. A person can still shop in the market, know their neighbors, learn the rain hours, and keep professional standards.",
+          "That coexistence is what makes Dalat more valuable than a beautiful backdrop."
+        ]
+      }
+    },
+    {
+      "slug": "nguoi-mo-quan-nho-va-giu-nhip-song-khac",
+      "image": "panorama",
+      "gallery": [
+        "panorama",
+        "slope",
+        "view"
+      ],
+      "en": {
+        "name": "A Small Cafe Owner Keeping a Different Rhythm",
+        "role": "A profile of small-scale work that lasts",
+        "excerpt": "Instead of chasing short-term volume, they choose an operating rhythm that is sustainable across seasons.",
+        "story": [
+          "Opening a small cafe in Dalat sounds romantic until operations begin: rising costs, seasonal demand, and pressure to keep reinventing just to stay visible.",
+          "People who last usually avoid maximum speed. They choose a workable tempo: opening on time, keeping quality consistent, building trust with regulars, and letting work stay connected to family life.",
+          "What matters is dignity in a small model. Not loud, not performative, but capable of producing real livelihood and a local anchor for people nearby."
+        ]
+      }
+    }
+  ],
+  "places": [
+    {
+      "slug": "trai-mat-buoi-sang",
+      "image": "farms",
+      "gallery": [
+        "farms",
+        "slopesWide",
+        "valley"
+      ],
+      "en": {
+        "title": "Morning in Trai Mat",
+        "type": "Edge zone",
+        "area": "Trai Mat",
+        "excerpt": "A morning landscape showing that Dalat is not only its center, but also the rhythms shaped by land, mist, and early work.",
+        "body": [
+          "Trai Mat in the morning does not need to perform to be memorable. Light rises slowly, the air holds moisture, and greenhouse surfaces reflect a work rhythm that began before much of the city center woke up.",
+          "The quality of life here is not about dense convenience. It is about clarity of context: closer to land, closer to labor, and closer to a Dalat that feels less decorated.",
+          "That makes Trai Mat a good example of how Ap Dalat reads place: not by checklist, but by fit, atmosphere, rhythm, and real work."
+        ]
+      }
+    },
+    {
+      "slug": "hien-nha-nho-ben-doc",
+      "image": "slope",
+      "gallery": [
+        "slope",
+        "rooftops",
+        "hero"
+      ],
+      "en": {
+        "title": "A Small Porch on a Slope",
+        "type": "Small home",
+        "area": "Hillside housing",
+        "excerpt": "A place that does not need size to become both a home and a working corner with depth.",
+        "body": [
+          "Many porches in Dalat are not large, but they hold people well. They create a threshold between weather and life, inside and outside, work and pause.",
+          "In a city of slopes, a porch is also how a house speaks with terrain. It lets light enter more slowly, rain come close, and a worktable face outward without turning daily life into a stage.",
+          "A place like this says more clearly than any slogan what Dalat still holds: closeness with practical use."
+        ]
+      }
+    },
+    {
+      "slug": "mot-studio-nho-tren-doc",
+      "image": "slopesWide",
+      "gallery": [
+        "slopesWide",
+        "view",
+        "panorama"
+      ],
+      "en": {
+        "title": "A Small Studio on a Slope",
+        "type": "Small studio",
+        "area": "Hillside neighborhood",
+        "excerpt": "A compact work space with natural light and enough privacy to sustain creative focus.",
+        "body": [
+          "A small studio on a slope rarely has extra space, but it has a major advantage: light and open outlook. When arranged well, it supports concentrated work without disconnecting from daily context.",
+          "Instead of a standard office model, this kind of studio relies on real materials and flexible use: one main table, compact storage, and enough room to shift between solo work and small collaboration.",
+          "It suits people who value quality of focus over display. It also reflects Dalat today: small in scale, but still fully capable of serious craft."
+        ]
+      }
+    }
+  ],
+  "imageEssays": [
+    {
+      "slug": "anh-sang-mua-som",
+      "image": "hero",
+      "gallery": [
+        "hero",
+        "valley",
+        "slope",
+        "view",
+        "slopesWide"
+      ],
+      "en": {
+        "title": "Light on an Early Rainy Morning",
+        "intro": "A small image sequence about surfaces, porches, glass roofs, and open air when a Dalat day begins in rain.",
+        "captions": [
+          "Cold light passes through greenhouse roofs and slows the start of work.",
+          "A wet slope reflects a day still short on voices.",
+          "A porch small enough to stay close to rain, but sheltered enough to keep quiet."
+        ]
+      }
+    },
+    {
+      "slug": "mua-tren-mai-nha-kinh",
+      "image": "rooftops",
+      "gallery": [
+        "rooftops",
+        "farms",
+        "slopesWide",
+        "panorama",
+        "valley"
+      ],
+      "en": {
+        "title": "Rain on Greenhouse Roofs",
+        "intro": "A photo essay about rain as sound, reflection on greenhouse roofs, and work rhythms that do not fully stop on cold days.",
+        "captions": [
+          "Rain keeps striking the roof in a steady pattern through the morning.",
+          "Reflections across glass show that work continues beneath the rain.",
+          "By late day, thinner light moves through moisture and leaves the city slower."
+        ]
+      }
+    }
+  ],
+  "staticPages": {
+    "about": {
+      "eyebrow": "About Ap Dalat",
+      "title": "An editorial and place-identity layer for Dalat today",
+      "metaTitle": "About Ap Dalat",
+      "metaDescription": "A page explaining Ap Dalat as an editorial and place-identity layer for Dalat today.",
+      "body": [
+        "Ap Dalat is not a travel site and not a booking surface. It is the identity and editorial layer of the system, reading Dalat through people, places, rhythms, work, and what remains meaningful over time.",
+        "Om Dalat is the next layer: staying, participating, learning, working, and entering the practical system more deeply. The two surfaces are linked, but they do not play the same role.",
+        "The word “Ap” is not decorative in this brand. It points to a social structure of memory, closeness, real work, reciprocity, and a life that is not anonymous."
+      ]
+    },
+    "om": {
+      "eyebrow": "Om Ap Dalat",
+      "title": "When a story becomes a desire to stay",
+      "metaTitle": "Om Ap Dalat",
+      "metaDescription": "A bridge page explaining when readers should continue to omdalat.com.",
+      "body": [
+        "Ap Dalat helps readers understand Dalat as a living place. But there comes a point when that understanding turns into more practical questions: where to stay, how to take part, who to learn from, and what the next layer looks like.",
+        "That is where Om Dalat appears. It does not replace Ap Dalat. It connects identity to participation."
+      ],
+      "linkLabel": "Continue to omdalat.com"
+    }
+  },
+  "supportPages": {
+    "contact": {
+      "en": {
+        "title": "Contact",
+        "description": "A clear place to send story suggestions, partnership notes, or editorial corrections for Ap Dalat.",
+        "body": [
+          {
+            "heading": "Send a story suggestion",
+            "text": "If you know a person, place, rhythm, or image sequence that truly fits Ap Dalat, send a short note with context and why it should be told."
+          },
+          {
+            "heading": "Editorial corrections",
+            "text": "If a detail in a piece needs correction or clearer context, the editorial team should be able to receive that feedback early and cleanly."
+          },
+          {
+            "heading": "Suggested address",
+            "text": "Demo email for this prototype: hello@ap.omdalat.com. Once the real CMS is active, this should connect to an editorial inbox with workflow states."
+          }
+        ]
+      }
+    },
+    "topics": {
+      "en": {
+        "title": "Topics",
+        "description": "A light discovery layer for clusters such as mornings, rain, porches, Trai Mat, work corners, and edge zones.",
+        "body": [
+          {
+            "heading": "Suggested early topics",
+            "text": "Morning, rain, work corners, Trai Mat, porches, small homes, edge zones, greenhouse landscapes."
+          },
+          {
+            "heading": "What topic pages are for",
+            "text": "Topic pages should open only when enough depth exists. They connect stories, places, people, and photo essays into a richer reading path."
+          },
+          {
+            "heading": "Important rule",
+            "text": "Tags must not become a second category system. Topics are a curated discovery layer, not a thin archive."
+          }
+        ]
+      }
+    },
+    "search": {
+      "en": {
+        "title": "Search",
+        "description": "A prototype placeholder for the future search layer across people, places, rhythms, work, and images.",
+        "body": [
+          {
+            "heading": "Search after the first relaunch",
+            "text": "Search should prioritize title, category, people, place, and cluster keywords, not shallow date archives."
+          },
+          {
+            "heading": "Queries that should work well",
+            "text": "people, places, Trai Mat, rain, work corner, working from Dalat, daily rhythms."
+          }
+        ]
+      }
+    },
+    "faq": {
+      "en": {
+        "title": "FAQ",
+        "description": "Core questions about Ap Dalat, what this site does, and how it relates to Om Dalat.",
+        "body": [
+          {
+            "heading": "What is Ap Dalat?",
+            "text": "Ap Dalat is the editorial and place-identity layer of the system, reading Dalat through people, places, rhythms, work, images, and stories."
+          },
+          {
+            "heading": "How is it different from Om Dalat?",
+            "text": "Ap Dalat helps readers understand and feel Dalat. Om Dalat is the next layer for staying, working, learning, joining, and entering the practical system."
+          },
+          {
+            "heading": "Why does this site avoid travel-blog language?",
+            "text": "Because its purpose is not to sell a short visit. It exists to build trust and depth around Dalat as a living place."
+          }
+        ]
+      }
+    }
+  }
+}

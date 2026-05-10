@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { existsSync, readdirSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
@@ -30,7 +31,7 @@ function sleep(ms) {
   });
 }
 
-async function runWithRetries(command, args, cwd, extraEnv, options = {}) {
+export async function runWithRetries(command, args, cwd, extraEnv, options = {}) {
   const attempts = Number(options.attempts ?? 1);
   const delayMs = Number(options.delayMs ?? 0);
 
@@ -85,14 +86,81 @@ export function findPackageBinaryInPnpmStore(repoRoot, prefix, relativePath) {
   return null;
 }
 
+function resolvePackageRootFromBin(binPath) {
+  return path.resolve(binPath, "..", "..", "..");
+}
+
+function isHealthyNextInstallation(binPath) {
+  const packageRoot = resolvePackageRootFromBin(binPath);
+  const requiredFiles = [
+    path.join(packageRoot, "dist", "build", "output", "log.js"),
+    path.join(packageRoot, "dist", "telemetry", "flush-and-exit.js")
+  ];
+
+  if (!requiredFiles.every((filePath) => existsSync(filePath))) {
+    return false;
+  }
+
+  const requireHookPath = path.join(packageRoot, "dist", "server", "require-hook.js");
+  if (!existsSync(requireHookPath)) {
+    return false;
+  }
+
+  try {
+    const requireFromNext = createRequire(requireHookPath);
+    [
+      "styled-jsx/package.json",
+      "postcss/package.json",
+      "react/package.json",
+      "react-dom/package.json"
+    ].forEach((dependencyId) => {
+      requireFromNext.resolve(dependencyId);
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function collectPackageBinaryCandidates(repoRoot, prefix, relativePath) {
+  const pnpmDir = path.join(repoRoot, "node_modules", ".pnpm");
+  if (!existsSync(pnpmDir)) {
+    return [];
+  }
+
+  return readdirSync(pnpmDir)
+    .filter((entry) => entry.startsWith(prefix))
+    .sort((left, right) => right.localeCompare(left, undefined, { numeric: true, sensitivity: "base" }))
+    .map((entry) => path.join(pnpmDir, entry, "node_modules", ...relativePath))
+    .filter((candidate) => existsSync(candidate));
+}
+
 export function resolveNextBin(appCwd, repoRoot) {
-  return (
-    findFirstExisting([
-      path.join(appCwd, "node_modules", "next", "dist", "bin", "next"),
-      path.join(repoRoot, "node_modules", "next", "dist", "bin", "next")
-    ]) ??
-    findPackageBinaryInPnpmStore(repoRoot, "next@", ["next", "dist", "bin", "next"])
+  const localCandidates = [
+    path.join(appCwd, "node_modules", "next", "dist", "bin", "next"),
+    path.join(repoRoot, "node_modules", "next", "dist", "bin", "next")
+  ].filter((candidate, index, list) => existsSync(candidate) && list.indexOf(candidate) === index);
+  const localHealthyCandidate = localCandidates.find((candidate) => isHealthyNextInstallation(candidate));
+
+  if (localHealthyCandidate) {
+    return localHealthyCandidate;
+  }
+
+  if (localCandidates[0]) {
+    return localCandidates[0];
+  }
+
+  const candidates = collectPackageBinaryCandidates(repoRoot, "next@", ["next", "dist", "bin", "next"]).filter(
+    (candidate, index, list) => existsSync(candidate) && list.indexOf(candidate) === index
   );
+
+  const healthyCandidate = candidates.find((candidate) => isHealthyNextInstallation(candidate));
+
+  if (healthyCandidate) {
+    return healthyCandidate;
+  }
+
+  return candidates[0] ?? null;
 }
 
 export function resolveNextOnPagesBin(appCwd, repoRoot) {
@@ -120,7 +188,7 @@ export function resolveNextOnPagesBin(appCwd, repoRoot) {
   );
 }
 
-function resolveBuildEnv() {
+export function resolveBuildEnv() {
   return {
     NEXT_DISABLE_BUILD_WORKER: "1",
     NEXT_PRIVATE_BUILD_WORKER: "0",
@@ -148,23 +216,29 @@ async function main() {
 
   const buildEnv = resolveBuildEnv();
 
+  console.log(`[build-cf] next build using: ${nextBin}`);
   await runWithRetries("node", [nextBin, "build"], appCwd, buildEnv, {
     attempts: 3,
     delayMs: 1500
   });
+  console.log("[build-cf] next build completed");
 
   if (shouldExecuteViaNode(nextOnPagesBin)) {
+    console.log(`[build-cf] next-on-pages using node: ${nextOnPagesBin}`);
     await runWithRetries("node", [nextOnPagesBin], appCwd, buildEnv, {
       attempts: 3,
       delayMs: 1500
     });
+    console.log("[build-cf] next-on-pages completed");
     return;
   }
 
+  console.log(`[build-cf] next-on-pages using binary: ${nextOnPagesBin}`);
   await runWithRetries(nextOnPagesBin, [], appCwd, buildEnv, {
     attempts: 3,
     delayMs: 1500
   });
+  console.log("[build-cf] next-on-pages completed");
 }
 
 const entrypoint = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : null;

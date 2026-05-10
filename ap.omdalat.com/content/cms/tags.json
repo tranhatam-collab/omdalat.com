@@ -1,0 +1,83 @@
+[
+  {
+    "name_vi": "Buổi sáng",
+    "name_en": "Morning",
+    "slug": "buoi-sang",
+    "tag_group": "rhythm",
+    "description_vi": "Nhịp sáng ở Đà Lạt.",
+    "description_en": "Morning rhythm in Dalat.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Mưa",
+    "name_en": "Rain",
+    "slug": "mua",
+    "tag_group": "rhythm",
+    "description_vi": "Nhịp mưa và đời sống.",
+    "description_en": "Rain rhythm and daily life.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Nhịp sống",
+    "name_en": "Rhythms",
+    "slug": "rhythms",
+    "tag_group": "rhythm",
+    "description_vi": "Nhịp sống hàng ngày của Đà Lạt.",
+    "description_en": "Daily rhythms in Dalat.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Work",
+    "name_en": "Work",
+    "slug": "work",
+    "tag_group": "work",
+    "description_vi": "Lớp nội dung về công việc.",
+    "description_en": "Work-oriented content layer.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Stories",
+    "name_en": "Stories",
+    "slug": "stories",
+    "tag_group": "format",
+    "description_vi": "Lớp kể chuyện editorial.",
+    "description_en": "Editorial story layer.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Làm việc",
+    "name_en": "Work",
+    "slug": "lam-viec",
+    "tag_group": "work",
+    "description_vi": "Công việc diễn ra ở Đà Lạt.",
+    "description_en": "How work happens in Dalat.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Nơi chốn",
+    "name_en": "Places",
+    "slug": "noi-chon",
+    "tag_group": "place",
+    "description_vi": "Nơi sống và nơi làm việc.",
+    "description_en": "Places to live and work.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Con người",
+    "name_en": "People",
+    "slug": "con-nguoi",
+    "tag_group": "person",
+    "description_vi": "Những người làm nên Đà Lạt hôm nay.",
+    "description_en": "People shaping Dalat today.",
+    "status": "active"
+  },
+  {
+    "name_vi": "Photo essay",
+    "name_en": "Photo essay",
+    "slug": "photo-essay",
+    "tag_group": "format",
+    "description_vi": "Chuỗi kể chuyện bằng hình ảnh.",
+    "description_en": "Visual storytelling format.",
+    "status": "active"
+  }
+]

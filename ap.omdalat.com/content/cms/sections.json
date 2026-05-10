@@ -1,0 +1,50 @@
+[
+  {
+    "key": "people",
+    "image": "slopesWide",
+    "title_vi": "Con người",
+    "title_en": "People",
+    "thesis_vi": "Đà Lạt không chỉ được kể bằng cảnh quan, mà còn qua những người đang sống, làm việc và giữ lại phần thật của nơi này.",
+    "thesis_en": "Dalat is told not only through its landscape, but through the people who live, work, and keep what is still true about it."
+  },
+  {
+    "key": "places",
+    "image": "slope",
+    "title_vi": "Nơi chốn",
+    "title_en": "Places",
+    "thesis_vi": "Một nơi chốn tốt không chỉ đẹp để nhìn, mà còn đủ thật để sống và làm việc lâu dài.",
+    "thesis_en": "A good place is not only beautiful to look at, but real enough to support living and working over time."
+  },
+  {
+    "key": "rhythms",
+    "image": "view",
+    "title_vi": "Nhịp sống",
+    "title_en": "Rhythms",
+    "thesis_vi": "Nhịp sống Đà Lạt không nằm ở sự chậm rãi đơn thuần, mà ở cách nơi này giữ được khoảng thở giữa công việc và đời sống.",
+    "thesis_en": "The rhythm of Dalat is not simply slowness, but the breathing space it still keeps between work and everyday life."
+  },
+  {
+    "key": "work",
+    "image": "farms",
+    "title_vi": "Làm việc",
+    "title_en": "Work",
+    "thesis_vi": "Làm việc từ Đà Lạt không chỉ là mang laptop lên núi, mà là tìm ra một nhịp làm việc có thể đi cùng đời sống thật.",
+    "thesis_en": "Working from Dalat is not just bringing a laptop uphill, but finding a rhythm of work that can live alongside real life."
+  },
+  {
+    "key": "stories",
+    "image": "hero",
+    "title_vi": "Câu chuyện",
+    "title_en": "Stories",
+    "thesis_vi": "Có những điều về Đà Lạt chỉ hiện ra khi được kể đủ chậm, đủ gần và đủ thật.",
+    "thesis_en": "Some truths about Dalat only appear when they are told slowly enough, closely enough, and truthfully enough."
+  },
+  {
+    "key": "images",
+    "image": "rooftops",
+    "title_vi": "Hình ảnh",
+    "title_en": "Images",
+    "thesis_vi": "Có những điều ở Đà Lạt được hiểu rõ hơn qua ánh sáng, bề mặt, khoảng không và những chi tiết rất nhỏ của đời sống.",
+    "thesis_en": "Some parts of Dalat become clearer through light, surfaces, open space, and the very small details of daily life."
+  }
+]

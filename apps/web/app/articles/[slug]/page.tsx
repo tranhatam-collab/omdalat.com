@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { buildOmToAppUrl, localizePath } from "../../../../../packages/core";
+import { localizePath } from "../../../../../packages/core";
 import { buildBreadcrumbSchema } from "../../../lib/breadcrumb";
 import {
   getPublishedArticleBySlug,
@@ -97,19 +97,6 @@ const ARTICLE_NEXT_LINKS_BY_PILLAR = {
   ]
 } as const;
 
-const JOIN_COPY = {
-  vi: {
-    title: "Muốn đi từ đọc sang trải nghiệm thật?",
-    body: "Khi nhu cầu đã rõ hơn, bạn có thể đi tiếp sang phần tham gia để xem nhịp phù hợp, cách đăng ký và các bước vào hệ.",
-    cta: "Xem cách tham gia"
-  },
-  en: {
-    title: "Want to move from reading into lived experience?",
-    body: "Once the need is clearer, continue into the joining flow to see the rhythm, fit, and next steps inside the system.",
-    cta: "See how to join"
-  }
-} as const;
-
 const TAG_LABELS = {
   "lam-viec-tu-xa": { vi: "Làm việc từ xa", en: "Remote work" },
   remote: { vi: "Làm việc từ xa", en: "Remote work" },
@@ -145,6 +132,21 @@ function splitParagraphs(content: string) {
     .filter(Boolean);
 }
 
+function mergeUniqueLinks(
+  ...groups: Array<Array<{ href: string; title: string; body: string }>>
+) {
+  const seen = new Set<string>();
+
+  return groups.flat().filter((link) => {
+    if (seen.has(link.href)) {
+      return false;
+    }
+
+    seen.add(link.href);
+    return true;
+  });
+}
+
 export function generateStaticParams() {
   return getPublishedArticleSlugs().map((slug) => ({ slug }));
 }
@@ -171,8 +173,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   }
 
   return buildPageMetadata({
-    title: article.title,
-    description: article.excerpt,
+    title: article.metaTitle ?? article.title,
+    description: article.metaDescription ?? article.excerpt,
     path: article.href,
     locale,
     image: getArticleVisuals(article, 1)[0]
@@ -190,6 +192,7 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
 
   const relatedArticles = getRelatedPublishedArticles(locale, article.slug, 2);
   const articleVisuals = getArticleVisuals(article);
+  const contextualCta = article.contextualCta;
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: locale === "vi" ? "Ôm Đà Lạt" : "Om Dalat", path: "/" },
     { name: ARTICLES_INDEX_LABEL[locale], path: "/articles" },
@@ -205,9 +208,32 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
     articleBody: article.content,
     images: articleVisuals.map((image) => image.src)
   });
-  const joinHref = buildOmToAppUrl("/member/register?next=%2Fmember%2Fwelcome", locale, `article_${article.slug}`);
   const contextualKey = normalizePillarKey(article.pillarKey) as keyof typeof ARTICLE_NEXT_LINKS_BY_PILLAR;
-  const contextualLinks = ARTICLE_NEXT_LINKS_BY_PILLAR[contextualKey];
+  const payloadLinks = article.internalLinks.filter((link) => link.type !== "cta").slice(0, 3);
+  const fallbackContextualLinks = ARTICLE_NEXT_LINKS_BY_PILLAR[contextualKey].slice(0, 1).map((nextLink) => {
+    const copy = locale === "vi" ? nextLink.vi : nextLink.en;
+
+    return {
+      href: nextLink.href,
+      title: copy.title,
+      body: copy.body
+    };
+  });
+  const fallbackRelatedLinks = relatedArticles.map((relatedArticle) => ({
+    href: relatedArticle.href,
+    title: relatedArticle.title,
+    body: relatedArticle.excerpt
+  }));
+  const contextualLinks = mergeUniqueLinks(payloadLinks, fallbackContextualLinks, fallbackRelatedLinks).slice(0, 3);
+  const payloadCta = article.internalLinks.find((link) => link.type === "cta") ?? null;
+  const finalCta = payloadCta
+    ? {
+        route: payloadCta.href,
+        title: payloadCta.title,
+        body: payloadCta.body,
+        cta: contextualCta.cta
+      }
+    : contextualCta;
 
   return (
     <>
@@ -259,31 +285,23 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
           <p className="runtime-kicker">{locale === "vi" ? "Đi tiếp từ bài này" : "Keep going from here"}</p>
           <div className="runtime-docs-list">
             {contextualLinks.map((nextLink) => {
-              const copy = locale === "vi" ? nextLink.vi : nextLink.en;
-
               return (
                 <a className="runtime-link-card" href={localizePath(nextLink.href, locale)} key={nextLink.href}>
-                  <strong>{copy.title}</strong>
-                  <span>{copy.body}</span>
+                  <strong>{nextLink.title}</strong>
+                  <span>{nextLink.body}</span>
                 </a>
               );
             })}
-            {relatedArticles.map((relatedArticle) => (
-              <a className="runtime-link-card" href={localizePath(relatedArticle.href, locale)} key={relatedArticle.id}>
-                <strong>{relatedArticle.title}</strong>
-                <span>{relatedArticle.excerpt}</span>
-              </a>
-            ))}
           </div>
         </section>
 
         <section className="runtime-panel runtime-article-bridge">
           <p className="runtime-kicker">{locale === "vi" ? "Đi tiếp" : "Next step"}</p>
-          <h2>{JOIN_COPY[locale].title}</h2>
-          <p>{JOIN_COPY[locale].body}</p>
+          <h2>{finalCta.title}</h2>
+          <p>{finalCta.body}</p>
           <div className="runtime-actions">
-            <a className="runtime-button primary" href={joinHref}>
-              {JOIN_COPY[locale].cta}
+            <a className="runtime-button primary" href={localizePath(finalCta.route, locale)}>
+              {finalCta.cta}
             </a>
           </div>
         </section>

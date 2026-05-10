@@ -1,0 +1,9 @@
+locator.click: Error: strict mode violation: locator('button[type="submit"]') resolved to 2 elements:
+    1) <button type="submit" class="runtime-button secondary">Đăng xuất</button> aka getByRole('button', { name: 'Đăng xuất' })
+    2) <button type="submit" class="runtime-button primary">Xác thực</button> aka getByRole('button', { name: 'Xác thực' })
+
+Call log:
+[2m  - waiting for locator('button[type="submit"]')[22m
+
+    at main (/Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:403:55)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:465:1

@@ -1,9 +1,11 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const seedDir = path.join(repoRoot, "data", "seed");
+const webPublicDir = path.join(repoRoot, "apps", "web", "public");
 
 const CONTENT_STATUSES = new Set(["draft", "published"]);
 const CONTENT_ACCESS_LEVELS = new Set(["guest", "registered", "reviewed", "internal", "admin"]);
@@ -133,6 +135,12 @@ function ensurePublishedCopy(value, label, errors) {
   }
 }
 
+function ensureMaxLength(value, maxLength, label, errors) {
+  if (typeof value === "string" && value.length > maxLength) {
+    errors.push(`${label} must be ${maxLength} characters or fewer. Found ${value.length}.`);
+  }
+}
+
 function ensureVietnameseVocabulary(value, label, errors) {
   if (typeof value !== "string") {
     return;
@@ -141,6 +149,75 @@ function ensureVietnameseVocabulary(value, label, errors) {
   VIETNAMESE_VOCAB_RULES.forEach((rule) => {
     if (rule.pattern.test(value)) {
       errors.push(`${label} contains "${rule.pattern.source}". Use "${rule.preferred}" in Vietnamese copy.`);
+    }
+  });
+}
+
+function validateArticleLocales(record, basePath, errors) {
+  if (record.locales === undefined) {
+    return;
+  }
+
+  if (!isObject(record.locales)) {
+    errors.push(`${basePath}.locales must be an object when provided.`);
+    return;
+  }
+
+  ["vi", "en"].forEach((locale) => {
+    const payload = record.locales[locale];
+    const localePath = `${basePath}.locales.${locale}`;
+
+    if (!isObject(payload)) {
+      errors.push(`${localePath} must be an object.`);
+      return;
+    }
+
+    ensureNonEmptyString(payload.title, `${localePath}.title`, errors);
+    ensureNonEmptyString(payload.excerpt, `${localePath}.excerpt`, errors);
+    ensureNonEmptyString(payload.content, `${localePath}.content`, errors);
+    ensureNonEmptyString(payload.meta_title, `${localePath}.meta_title`, errors);
+    ensureNonEmptyString(payload.meta_description, `${localePath}.meta_description`, errors);
+    ensureMaxLength(payload.meta_title, 60, `${localePath}.meta_title`, errors);
+    ensureMaxLength(payload.meta_description, 155, `${localePath}.meta_description`, errors);
+  });
+}
+
+function validateArticleInternalLinks(record, basePath, errors) {
+  if (record.internal_links === undefined) {
+    return;
+  }
+
+  if (!Array.isArray(record.internal_links)) {
+    errors.push(`${basePath}.internal_links must be an array when provided.`);
+    return;
+  }
+
+  if (record.internal_links.length > 3) {
+    errors.push(`${basePath}.internal_links must contain no more than 3 links, including the final CTA.`);
+  }
+
+  const allowedTypes = new Set(["pillar", "related", "cta"]);
+  record.internal_links.forEach((link, linkIndex) => {
+    const linkPath = `${basePath}.internal_links[${linkIndex}]`;
+
+    if (!isObject(link)) {
+      errors.push(`${linkPath} must be an object.`);
+      return;
+    }
+
+    ensureNonEmptyString(link.href, `${linkPath}.href`, errors);
+    ensureNonEmptyString(link.type, `${linkPath}.type`, errors);
+    ensureNonEmptyString(link.title_vi, `${linkPath}.title_vi`, errors);
+    ensureNonEmptyString(link.title_en, `${linkPath}.title_en`, errors);
+    ensureNonEmptyString(link.body_vi, `${linkPath}.body_vi`, errors);
+    ensureNonEmptyString(link.body_en, `${linkPath}.body_en`, errors);
+
+    if (!allowedTypes.has(link.type)) {
+      errors.push(`${linkPath}.type must be one of: pillar, related, cta.`);
+    }
+
+    if (typeof link.href === "string" && !link.href.startsWith("/")) {
+      errors.push(`${linkPath}.href must be root-relative.`);
     }
   });
 }
@@ -170,6 +247,8 @@ function validateArticles(records, errors) {
     ensureNonEmptyString(record.content_en, `${basePath}.content_en`, errors);
     ensureStringArray(record.tags, `${basePath}.tags`, errors);
     ensureStatus(record.status, `${basePath}.status`, errors);
+    validateArticleLocales(record, basePath, errors);
+    validateArticleInternalLinks(record, basePath, errors);
 
     if (!Number.isInteger(record.order) || record.order < 1 || record.order > 30) {
       errors.push(`${basePath}.order must be an integer between 1 and 30.`);
@@ -191,6 +270,16 @@ function validateArticles(records, errors) {
       ensureVietnameseVocabulary(record.title_vi, `${basePath}.title_vi`, errors);
       ensureVietnameseVocabulary(record.excerpt_vi, `${basePath}.excerpt_vi`, errors);
       ensureVietnameseVocabulary(record.content_vi, `${basePath}.content_vi`, errors);
+
+      if (record.locales) {
+        ensurePublishedCopy(record.locales.vi.excerpt, `${basePath}.locales.vi.excerpt`, errors);
+        ensurePublishedCopy(record.locales.vi.content, `${basePath}.locales.vi.content`, errors);
+        ensurePublishedCopy(record.locales.en.excerpt, `${basePath}.locales.en.excerpt`, errors);
+        ensurePublishedCopy(record.locales.en.content, `${basePath}.locales.en.content`, errors);
+        ensureVietnameseVocabulary(record.locales.vi.title, `${basePath}.locales.vi.title`, errors);
+        ensureVietnameseVocabulary(record.locales.vi.excerpt, `${basePath}.locales.vi.excerpt`, errors);
+        ensureVietnameseVocabulary(record.locales.vi.content, `${basePath}.locales.vi.content`, errors);
+      }
     }
   });
 }
@@ -234,8 +323,15 @@ function validateArticleImages(records, articleRecords, errors) {
       errors.push(`${basePath}.approved_at must use YYYY-MM-DD format.`);
     }
 
-    if (typeof record.src === "string" && !/^https?:\/\//.test(record.src)) {
-      errors.push(`${basePath}.src must be an absolute http(s) URL.`);
+    if (typeof record.src === "string" && !/^https?:\/\//.test(record.src) && !record.src.startsWith("/images/")) {
+      errors.push(`${basePath}.src must be an absolute http(s) URL or a local /images/ path.`);
+    }
+
+    if (typeof record.src === "string" && record.src.startsWith("/images/")) {
+      const localImagePath = path.join(webPublicDir, record.src.replace(/^\/+/, ""));
+      if (!existsSync(localImagePath)) {
+        errors.push(`${basePath}.src points to missing local image "${record.src}".`);
+      }
     }
 
     if (typeof record.source === "string" && !/^https?:\/\//.test(record.source)) {

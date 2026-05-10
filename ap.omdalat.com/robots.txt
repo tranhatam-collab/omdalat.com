@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /content/
+Disallow: /docs/
+Disallow: /images/excluded/
+Disallow: /tim-kiem/
+Disallow: /en/search/
+
+Sitemap: https://ap.omdalat.com/sitemap.xml
+Sitemap: https://ap.omdalat.com/sitemap-pages.xml
+Sitemap: https://ap.omdalat.com/sitemap-stories.xml
+Sitemap: https://ap.omdalat.com/sitemap-images.xml
+Sitemap: https://ap.omdalat.com/sitemap-vi.xml
+Sitemap: https://ap.omdalat.com/sitemap-en.xml

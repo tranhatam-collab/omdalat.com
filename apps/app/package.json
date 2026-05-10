@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_DISABLE_BUILD_WORKER=1 NEXT_PRIVATE_BUILD_WORKER=0 next build",
+    "build": "node ../../scripts/run-next-build.mjs",
     "build:cf": "node ../../scripts/clean-vercel-output.mjs && node ../../scripts/build-cf.mjs",
     "start": "next start",
     "lint": "next lint",

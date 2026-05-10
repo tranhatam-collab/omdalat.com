@@ -12,6 +12,33 @@ Owner: Team 1
 
 ---
 
+## 0A. Brandpro Gate 0 Overlay (2026-05-08)
+
+Sprint 0 khong duoc chay tren semantics cu.
+
+Source priority cho Sprint 0:
+
+1. `docs/README_DEV_HANDOFF_OMDALAT.md`
+2. `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+3. `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+4. `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+5. file nay va cac sprint/content docs con lai
+
+Brand law active:
+
+- display brand: `Ôm Đà Lạt / Om Dalat`
+- public frame: independent real-life living system in Dalat
+- public domain: `https://omdalat.com`
+- app domain: `https://app.omdalat.com`
+
+Hard stop:
+
+- khong claim Sprint 0 pass neu route/article/CTA/metadata con public framing `OMDALA city node`
+- khong dan huong ve `docs.omdala.com` hoac `app.omdala.com`
+- khong de article launch bi du lich hoa, retreat hoa, homestay hoa, hoac generic digital nomad framing
+
+---
+
 ## 0. Mục tiêu Sprint 0
 
 Chỉ tập trung vào 3 bài mở nền đã khóa trong seed runtime:
@@ -98,6 +125,9 @@ Team 1 xác nhận payload 3 bài launch đã có trong seed file launch chuyên
 Action plan chi tiết cho owner/deadline/gate:
 
 - `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
+- staging metadata/route proof:
+  - `docs/SPRINT0_ARTICLE_METADATA_ROUTE_PROOF_2026-05-07.md`
+  - `docs/SPRINT0_VISUAL_AND_STAGING_EVIDENCE_MATRIX_2026-05-07.md`
 
 ### Copy-ready handoff cho Team 2 (đã tạo)
 
@@ -108,6 +138,8 @@ Action plan chi tiết cho owner/deadline/gate:
 ```bash
 cp data/seed/articles.seed.sprint0-launch.json data/seed/articles.seed.json
 pnpm validate:content-seed
+pnpm validate:sprint0-launch
+pnpm sprint0:acceptance:check
 pnpm --filter @omdalat/web validate:web-locales
 pnpm --filter @omdalat/web validate:i18n-data
 ```
@@ -120,6 +152,8 @@ Lưu ý: khi đẩy xong local UI, Team 2 có thể revert/restore bản seed ru
 - `apps/web/app/articles/[slug]/page.tsx` dùng CTA contextual từ seed runtime.
 - `apps/web/e2e/team2-quick-qa.spec.ts` đã fix typing để tsc ổn định.
 - `pnpm validate:content-seed` ✅
+- `pnpm validate:sprint0-launch` ✅
+- `pnpm sprint0:acceptance:check` ✅
 - `pnpm --filter @omdalat/web run validate:web-locales` ✅
 - `pnpm --filter @omdalat/web run validate:i18n-data` ✅
 - `pnpm --filter @omdalat/web exec tsc --noEmit` ✅
@@ -135,7 +169,7 @@ Lưu ý: khi đẩy xong local UI, Team 2 có thể revert/restore bản seed ru
 
 ### % còn lại
 
-- P0 Sprint 0 hiện tại: `~85%` (đang chờ 2 lần rerun e2e trên môi trường có quyền launch Chromium).
+- P0 Sprint 0 hiện tại: `~90%` (đang chờ visual/staging proof + rerun e2e trên môi trường có quyền launch Chromium).
 
 ---
 
@@ -144,9 +178,11 @@ Lưu ý: khi đẩy xong local UI, Team 2 có thể revert/restore bản seed ru
 Additional local verification completed:
 
 - `pnpm validate:content-seed` -> `PASS`
+- `pnpm validate:sprint0-launch` -> `PASS`
+- `pnpm sprint0:acceptance:check` -> `PENDING` (visual/staging proof chua du)
 - `pnpm --filter @omdalat/web validate:web-locales` -> `PASS`
 - `pnpm --filter @omdalat/web validate:i18n-data` -> `PASS`
-- `pnpm --filter @omdalat/web exec tsc --noEmit` -> `PASS`
+- `pnpm --filter @omdalat/web exec tsc --noEmit` -> `PASS` sau khi regenerate `.next` types tu build sach
 - `npm run cf:runtime-map:check` -> `PASS`
 
 Local dev route smoke:
@@ -156,8 +192,14 @@ Local dev route smoke:
 
 Build note:
 
-- `pnpm --filter @omdalat/web build` reached successful compile/type/page generation.
-- It was stopped at `Collecting build traces` after a long local stall, so Team 2/QA must rerun build on a clean runner before production approval.
+* `pnpm --filter @omdalat/web build` da qua:
+  * successful compile
+  * validity of types
+  * page data
+  * static page generation
+  * finalizing page optimization
+* blocker local hien tai chi con o buoc `Collecting build traces` voi `ETIMEDOUT: connection timed out, read`
+* Team 2/QA phai rerun build tren clean runner truoc production approval.
 
 No production deploy was performed in this update.
 
@@ -167,6 +209,8 @@ No production deploy was performed in this update.
 
 ```bash
 pnpm validate:content-seed
+pnpm validate:sprint0-launch
+pnpm sprint0:acceptance:check
 pnpm --filter @omdalat/web validate:web-locales
 pnpm --filter @omdalat/web validate:i18n-data
 ```
@@ -180,12 +224,28 @@ Sau khi pass local, Team 2 và QA tiếp tục smoke theo checklist lane.
 Template nop bang chung:
 
 * `docs/SPRINT0_ACCEPTANCE_PACKET_TEMPLATE_2026-05-05.md`
+* prefill current-state:
+  * `docs/SPRINT0_ACCEPTANCE_PACKET_CURRENT_STATE_2026-05-07.md`
 
 Rule:
 
 * Team 2 phai dien day du runtime/UI checks
 * QA/SEO phai dien canonical/hreflang/metadata + SOP eye-check
 * Team 3 xac nhan payload contract (`locales`, `featured_image`, image log)
+
+Current-state note:
+
+* Team 1 / Team 3 da prefill packet bang cac gate da pass o local/runtime.
+* Team 2 + QA/SEO chi can bo sung visual proof, staging proof va signoff cuoi.
+* Route-by-route evidence matrix da san de nop mot dinh dang chung:
+  * `docs/SPRINT0_VISUAL_AND_STAGING_EVIDENCE_MATRIX_2026-05-07.md`
+* `pnpm sprint0:acceptance:check` hien tai report:
+  * `visual_pending=6/6`
+  * `staging_pending=6/6`
+  * `packet_signoff_pending=YES`
+  * `packet_deploy_blocked=YES`
+  * `packet_build_trace_blocked=YES`
+* Automation `team-3-continuous-execution` chi duoc tat khi checker chuyen sang `READY_TO_CLOSE` va signoff/deploy blocker da duoc go.
 
 ---
 

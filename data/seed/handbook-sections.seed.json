@@ -1,0 +1,58 @@
+[
+  {
+    "id": "handbook-section-001",
+    "slug": "public-principles",
+    "order": 1,
+    "section_key": "public-principles",
+    "title_vi": "Nguyên tắc công khai",
+    "title_en": "Public principles",
+    "summary_vi": "Phần công khai chỉ nói phần nền tảng để người mới hiểu đúng.",
+    "summary_en": "The public layer only explains the foundation so newcomers understand correctly.",
+    "content_vi": "Phần này mô tả những nguyên tắc công khai cần được giữ nhất quán trên homepage, article và FAQ.",
+    "content_en": "This section defines the public principles that must stay consistent across homepage, articles, and FAQ.",
+    "access_level": "guest",
+    "status": "published"
+  },
+  {
+    "id": "handbook-section-002",
+    "slug": "member-onboarding",
+    "order": 2,
+    "section_key": "member-onboarding",
+    "title_vi": "Onboarding thành viên",
+    "title_en": "Member onboarding",
+    "summary_vi": "Các bước cho người mới sau khi đã tạo tài khoản cơ bản.",
+    "summary_en": "The steps for new users after basic account creation.",
+    "content_vi": "Phần này mô tả các bước onboarding, thời gian chờ review và cách mở thêm tài nguyên.",
+    "content_en": "This section outlines onboarding steps, review timing, and how more resources unlock.",
+    "access_level": "registered",
+    "status": "published"
+  },
+  {
+    "id": "handbook-section-003",
+    "slug": "reviewed-member-operations",
+    "order": 3,
+    "section_key": "reviewed-member-operations",
+    "title_vi": "Vận hành cho thành viên đã review",
+    "title_en": "Operations for reviewed members",
+    "summary_vi": "Nội dung sâu hơn về cách tham gia, hoạt động và trách nhiệm.",
+    "summary_en": "Deeper guidance on participation, activities, and responsibility.",
+    "content_vi": "Phần này mở cho thành viên đã review để hiểu nhịp hoạt động, đầu việc và trách nhiệm trong hệ.",
+    "content_en": "This section is open to reviewed members so they can understand the operating rhythm and responsibilities.",
+    "access_level": "reviewed",
+    "status": "published"
+  },
+  {
+    "id": "handbook-section-004",
+    "slug": "internal-sop-index",
+    "order": 4,
+    "section_key": "internal-sop-index",
+    "title_vi": "Mục lục SOP nội bộ",
+    "title_en": "Internal SOP index",
+    "summary_vi": "Chỉ cho team nội bộ và operator lõi.",
+    "summary_en": "For internal team members and core operators only.",
+    "content_vi": "Phần này gom các SOP, quy trình và tài liệu xử lý sự cố không public.",
+    "content_en": "This section groups SOPs, procedures, and non-public incident handling documents.",
+    "access_level": "internal",
+    "status": "draft"
+  }
+]

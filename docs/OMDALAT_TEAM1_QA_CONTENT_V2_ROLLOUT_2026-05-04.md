@@ -95,3 +95,36 @@ npm run cf:runtime-map:check
 ## 5) Coordination rule
 
 Team 1 remains release coordinator. Team 2, Team 3, and Ap Team must report against this rollout baseline before any new GO claim.
+
+## 6) Content SOP completion update
+
+Additional active notice:
+
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
+
+This notice records the Codex completion round for the Content SOP and explains the exact impact for Team 1, Team 2, Team 3, Content/SEO, QA/DevOps and Ap Team.
+
+Effective immediately:
+
+1. `docs/OMDALAT_CONTENT_SYSTEM_SOP.md` is a Level A gate for every public article batch.
+2. Batch content cannot be called done if it fails the 4 Không / 4 Có filter.
+3. New article images must publish as `WebP` or `AVIF`, named by slug.
+4. CMS v2 should move toward `locales.vi` and `locales.en`.
+5. Reports must state whether the change was docs-only or runtime/content-seed affecting.
+
+Next reports from all teams must include a short "Content SOP impact" line.
+
+## 7) Sprint 0 execution packet
+
+Sprint 0 is now the first runtime/content-seed batch under the SOP gate.
+
+Active files:
+
+1. `data/seed/articles.seed.json` — current 30-record runtime seed.
+2. `data/seed/articles.seed.sprint0-launch.json` — isolated 3-article runtime snapshot for quick Team 2 UI testing.
+3. `data/seed/articles.seed.launch-v2.json` — V2 CMS/schema handoff payload.
+4. `data/seed/article-images.seed.json` — image records with local WebP source, license, alt/caption.
+5. `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md` — detailed owner/deadline/gate plan.
+
+Team 1 does not approve production until Team 2, Team 3, QA/SEO all attach fresh evidence for this Sprint 0 packet.

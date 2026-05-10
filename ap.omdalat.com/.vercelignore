@@ -1,0 +1,15 @@
+.DS_Store
+.git
+.vercel
+node_modules
+npm-debug.log*
+
+reports
+docs
+scripts
+
+images/originals
+images/excluded
+
+content/cms
+tmp-test.html

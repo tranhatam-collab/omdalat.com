@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Linh Pham",
+    "role": { "vi": "Host cộng đồng", "en": "Community host" },
+    "zone": { "vi": "Phường 1", "en": "Ward 1" },
+    "verified": true,
+    "focus": {
+      "vi": "Host nhóm nhỏ theo hướng ấm áp, chăm sóc khách và các nghi thức giới thiệu lần đầu.",
+      "en": "Warm small-group hosting, guest care, and first-introduction rituals."
+    },
+    "trust": {
+      "vi": "Đã xác minh qua các phiên host lặp lại, tham chiếu từ khách và quá trình theo dõi minh bạch.",
+      "en": "Verified through repeat hosting, guest references, and visible follow-through."
+    },
+    "availability": {
+      "vi": "Sẵn sàng vào các tối từ Thứ Ba đến Thứ Năm",
+      "en": "Available Tuesday to Thursday evenings"
+    }
+  },
+  {
+    "name": "Quoc Nguyen",
+    "role": { "vi": "Điều phối địa điểm", "en": "Place steward" },
+    "zone": { "vi": "Phường 3", "en": "Ward 3" },
+    "verified": true,
+    "focus": {
+      "vi": "Chuyển không gian dân cư ít sử dụng thành hoạt động city-layer đáng tin cậy.",
+      "en": "Turning underused residential space into trusted city-layer activity."
+    },
+    "trust": {
+      "vi": "Đã xác minh bằng lịch sử địa điểm, tham chiếu địa phương và đối tác quay lại thường xuyên.",
+      "en": "Verified by venue history, local references, and recurring partner use."
+    },
+    "availability": {
+      "vi": "Mở cho các phiên cuối tuần và khảo sát địa điểm buổi sáng",
+      "en": "Open for weekend sessions and morning site walks"
+    }
+  },
+  {
+    "name": "Mai Tran",
+    "role": { "vi": "Host học tập", "en": "Learning host" },
+    "zone": { "vi": "Trại Mát", "en": "Trai Mat" },
+    "verified": true,
+    "focus": {
+      "vi": "Vòng tròn chuyên gia, bếp cộng đồng và thu thập bằng chứng có phản tư.",
+      "en": "Expert circles, community kitchens, and reflective proof collection."
+    },
+    "trust": {
+      "vi": "Đã xác minh qua điều phối sự kiện và kết quả người tham gia được ghi nhận.",
+      "en": "Verified through event stewardship and documented participant outcomes."
+    },
+    "availability": {
+      "vi": "Sẵn sàng vào chiều Thứ Sáu và một số bữa tối Chủ Nhật",
+      "en": "Available Friday afternoons and selected Sunday dinners"
+    }
+  }
+]

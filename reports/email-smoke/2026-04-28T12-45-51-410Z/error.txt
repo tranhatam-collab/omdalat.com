@@ -1,0 +1,4 @@
+Error: Unable to load register page: 404
+    at main (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:457:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:696:1

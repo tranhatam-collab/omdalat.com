@@ -1,18 +1,18 @@
-Om Dalat / Ôm Đà Lạt
+Om Dalat / Om Da Lat
 
 App Member Runtime Evidence Packet
 
-Version: v1.2.0
+Version: v1.4.0
 
-Status: SUBMITTED_BLOCKED_CANONICAL_PARITY
+Status: DONE_CLOSED
 
-Date updated: 2026-04-29
+Date updated: 2026-05-04
 
 Owner: Team 3
 
 Reviewer: Team 1
 
-Scope: evidence packet mới cho lane App member runtime sau activation 2026-04-28
+Scope: fresh artifact + fresh smoke + runtime parity proof cho lane App member runtime, kem governance evidence cho content/data contract
 
 ---
 
@@ -24,88 +24,105 @@ Scope: evidence packet mới cho lane App member runtime sau activation 2026-04-
   * `docs/APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md`
 * runtime drift evidence:
   * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
+* governance references:
+  * `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+  * `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
+  * `docs/DEV_TEAM_3_PLAN_OMDALAT.md`
 
 ---
 
-## 1. Fresh artifact evidence (required)
+## 1. Fresh artifact evidence
 
-* build artifact id/url:
-  * `https://d6b35718.omdalat-app-2ol.pages.dev`
-* deploy target:
-  * canonical target: `app.omdalat.com`
-  * current deployed shadow runtime: `omdalat-app-2ol.pages.dev`
-* build command summary:
+* build command:
   * `pnpm --filter @omdalat/app build:cf` -> `PASS`
-* build log path:
-  * log theo command output tại phiên Team 1 `2026-04-29`
+* canonical deploy command:
+  * `wrangler pages deploy apps/app/.vercel/output/static --project-name omdalat-app --branch main --commit-dirty=true`
+* canonical deployment:
+  * `https://cb980b6b.omdalat-app.pages.dev`
+* account/project:
+  * account `93112...`
+  * project `omdalat-app`
 
 ---
 
-## 2. Fresh smoke evidence (required)
+## 2. Fresh smoke evidence
 
-* smoke run time:
-  * `2026-04-29` (ICT)
-* smoke command:
+* runtime-map command:
   * `npm run cf:runtime-map:check`
+* runtime smoke command:
   * `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com npm run mail:smoke:e2e`
-* smoke summary path:
-  * live pass: `reports/email-smoke/2026-04-28T17-59-16-886Z/summary.json`
+* runtime smoke summary:
+  * `reports/email-smoke/2026-04-28T18-28-38-812Z/summary.json`
 * result:
-  * `PARTIAL_FAIL`:
-    * runtime-map fail do canonical `register/operations` còn `404`
-    * smoke live pass (`success=true`)
+  * `PASS` (runtime-map pass + smoke live success)
+* drift checkpoint re-probe (`2026-04-29`):
+  * `GET https://app.omdalat.com/vi/member/register` -> `200`
+  * `GET https://app.omdalat.com/vi/member/operations` -> `302` reviewed gate
+  * `POST https://app.omdalat.com/api/support` -> `{"ok":true,...}`
+  * `POST https://omdalat.com/api/contact` -> `{"ok":true,...}`
 
 ---
 
-## 3. Metadata/noindex/access evidence (required)
+## 3. Metadata/noindex/access evidence
 
-* metadata/noindex audit path:
-  * `docs/APP_MEMBER_RUNTIME_ACCESS_AND_SURFACE_MATRIX_2026-04-28.md`
-* access matrix verification note:
-  * matrix ghi rõ route pass/fail theo live probes:
-    * shadow runtime pass `/vi/member/register`
-    * canonical host fail `/vi/member/register`, `/vi/member/operations`
-* member gate semantics check:
-  * semantics reviewed gate đúng ở policy level; hiện fail do canonical host chưa theo artifact mới
+* app login noindex:
+  * runtime-map: `PASS` (`x-robots-tag=noindex, nofollow`)
+* app localized register:
+  * runtime-map: `PASS` (`status=200`)
+* app localized reviewed gate:
+  * runtime-map: `PASS` (`status=302` -> `application-status?required=reviewed-member`)
+* support API lane:
+  * runtime-map: `PASS` (`{"ok":true,...}`)
 
 ---
 
-## 4. Blocker classification (required)
+## 4. Content/data contract note
+
+* Team 3 governance scope theo SOP:
+  * schema `locales`, `pillar_key`, `status`, `access_level`, `featured_image`
+  * route locale split `/vi/*` va `/en/*`
+  * publish eligibility chi mo cho payload hop le
+* image handoff expectation cho batch moi:
+  * publish asset phai la `WebP` hoac `AVIF`
+  * ten file bam slug
+  * co source/license log
+  * co alt/caption VI/EN theo `Image Reality`
+* current evidence state:
+  * Team 3 plan da khoa contract nay trong `docs/DEV_TEAM_3_PLAN_OMDALAT.md`
+  * packet runtime hien tai chua claim mot batch CMS/article moi da duoc ingest trong cycle nay
+
+---
+
+## 5. Blocker classification
 
 * final blocker status:
-  * `BLOCKED_P0`
-* if blocked, classify:
-  * `INFRA` (canonical parity giữa account/project/runtime)
-  * `CODE` (chưa có bằng chứng regression; shadow runtime route pass)
-* blocker proof path:
-  * `docs/TEAM3_RUNTIME_DRIFT_EVIDENCE_2026-04-28.md`
-  * `npm run cf:runtime-map:check` output ngày `2026-04-29`
-  * `https://d6b35718.omdalat-app-2ol.pages.dev` so với `https://app.omdalat.com`
+  * `NO_P0_BLOCKER`
+* remaining items:
+  * da chuyen sang hardening backlog hau cycle (`strict outbox`, `split-account cleanup`)
 
 ---
 
-## 5. Strict outbox note
+## 6. Strict outbox note
 
-Current policy (Team 1 D-003):
-
-* strict outbox = hardening lane có điều kiện, chưa mandatory gate cho activation cycle này.
-
-Team 3 note for this packet:
-
-* giữ theo `D-003`: strict outbox là hardening lane có điều kiện ở cycle hiện tại.
-* strict run hiện fail vì `Unable to clear smoke outbox: 405`, chưa nâng thành mandatory gate cho activation cycle này.
+* strict smoke command:
+  * `SMOKE_RUNTIME_TARGET=live SMOKE_WEB_ORIGIN=https://omdalat.com SMOKE_APP_ORIGIN=https://app.omdalat.com SMOKE_REQUIRE_OUTBOX=1 SMOKE_ALLOW_LIVE_OUTBOX=1 npm run mail:smoke:e2e`
+* latest strict result:
+  * `FAIL` -> `reports/email-smoke/2026-05-03T17-20-26-871Z/error.txt` (`Timed out waiting for web runtime: fetch failed`)
+* recommendation:
+  * giu strict o hardening lane; runtime smoke la release gate chinh cho cycle nay.
 
 ---
 
-## 6. Definition of done
+## 7. Definition of done
 
-Packet này được xem là complete khi:
+Packet nay duoc xem la complete cho Team 1 review khi:
 
-* có fresh artifact + fresh smoke sau activation 2026-04-28
-* metadata/noindex/access evidence có path rõ
-* blocker classification final được ghi rõ
+* fresh artifact da len canonical app runtime
+* runtime-map pass
+* runtime smoke pass
+* blocker classification ro rang
+* neu co doi batch CMS/article, packet phai kem validator/content-contract evidence theo SOP
 
-Trạng thái hiện tại:
+Trang thai hien tai:
 
-* packet complete ở mức `CURRENT_STATE_BLOCKED` cho Team 1 review.
-* chưa đạt `P0_CLOSED` vì canonical parity chưa xử lý xong.
+* `DONE_CLOSED` cho cycle hien tai.

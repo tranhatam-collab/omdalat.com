@@ -17,6 +17,30 @@ CMS, Member System, Backend, Ops Tools, content/data contracts
 
 ---
 
+## 0. Source Priority Update (Brandpro Gate 0 - 2026-05-08)
+
+Team 3 phải áp dụng source theo thứ tự:
+
+1. `docs/README_DEV_HANDOFF_OMDALAT.md`
+2. `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+3. `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+4. `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+5. `docs/OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md`
+6. Các app/CMS/runtime/sprint docs còn lại nếu không xung đột
+
+Operational law đang active:
+
+- public/app direction là `omdalat.com` và `app.omdalat.com`
+- public meaning là independent real-life living system in Dalat
+- legacy `app.omdala.com` hoặc `docs.omdala.com` chỉ được xem là historical/internal context
+
+Hard stop cho Team 3:
+
+- không encode legacy OMDALA public framing vào CMS labels, app metadata, dashboard copy, support flow, seed data, schema
+- không claim deploy/runtime done nếu evidence mới chưa khớp Brandpro law và Sprint 0 gate
+
+---
+
 ## 1. Nhiệm vụ chính
 
 Team 3 chịu trách nhiệm lớp dữ liệu, member system, backend contract và ops tooling của Om Dalat.
@@ -196,12 +220,18 @@ Team 3 phải nhận baseline mới từ:
 - `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
 - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
+- `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+- `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+- `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+- `docs/OMDALAT_BRANDPRO_PHASE1_FORENSICS_KICKOFF_2026-05-08.md`
 
 Yêu cầu bắt buộc:
 
 - giữ tương thích runtime cho pillar alias `life` và `earning` trong nhịp chuyển đổi seed hiện tại.
 - không đổi payment lane ra ngoài `PHASE_2_NOT_IN_SCOPE` nếu chưa có release directive mới.
 - không claim `DONE` lane Team 3 khi chưa qua vòng review mới của Team 1.
+- treat old OMDALA app/docs references as blocked for new public/app implementation unless Team 1 revalidates.
 
 ## 10. Closure trạng thái Team 3 và điều phối Team 1 (2026-05-04)
 
@@ -236,10 +266,29 @@ Team 3 chuyển từ planning sang execution cho 3 bài mở nền.
 Deliverables đã sẵn:
 
 * runtime seed: `data/seed/articles.seed.json` (3 bài launch publish + meta/internal links + locales + featured_image)
-* launch payload Sprint 0: `data/seed/articles.seed.sprint0-launch.json`
+* launch-only runtime snapshot: `data/seed/articles.seed.sprint0-launch.json`
+* launch schema V2: `data/seed/articles.seed.launch-v2.json`
 * image records: `data/seed/article-images.seed.json` (3 hero launch chuẩn `webp` + slug naming)
-* execution guide: `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
+* execution guide: `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
+* legacy brief vẫn tham chiếu được: `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
 
 Gate đã chạy:
 
 * `npm run validate:content-seed` -> `PASS`
+* `pnpm validate:sprint0-launch` -> `PASS`
+* `pnpm sprint0:acceptance:check` -> `PENDING`
+
+Current Sprint 0 closure state:
+
+* `visual_pending=6/6`
+* `staging_pending=6/6`
+* `packet_signoff_pending=YES`
+* `packet_deploy_blocked=YES`
+* `packet_build_trace_blocked=YES`
+
+Automation rule:
+
+* heartbeat `team-3-continuous-execution` chi duoc tat khi:
+  * `pnpm sprint0:acceptance:check` -> `READY_TO_CLOSE`
+  * Team 2 + QA + SEO da ky signoff trong packet
+  * fresh deploy blocker khong con o trang thai `WRANGLER_AUTH` nua

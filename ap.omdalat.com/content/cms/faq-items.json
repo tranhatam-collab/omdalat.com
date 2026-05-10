@@ -1,0 +1,38 @@
+[
+  {
+    "question_vi": "Ấp Đà Lạt là gì?",
+    "question_en": "What is Ap Dalat?",
+    "answer_vi": "Ấp Đà Lạt là lớp editorial và bản sắc sống của hệ. Đây là nơi Đà Lạt được đọc qua con người, nơi chốn, nhịp sống, công việc, hình ảnh và câu chuyện.",
+    "answer_en": "Ap Dalat is the editorial and place-identity layer of the system, reading Dalat through people, places, rhythms, work, images, and stories.",
+    "locale_visibility": [
+      "vi",
+      "en"
+    ],
+    "page_assignment": "faq",
+    "status": "published"
+  },
+  {
+    "question_vi": "Khác gì với Ôm Đà Lạt?",
+    "question_en": "How is it different from Om Dalat?",
+    "answer_vi": "Ấp Đà Lạt giúp người đọc hiểu và cảm được Đà Lạt. Ôm Đà Lạt là lớp đi tiếp để ở lại, làm, học, tham gia và bước vào hệ sống thực tế hơn.",
+    "answer_en": "Ap Dalat helps readers understand and feel Dalat. Om Dalat is the next layer for staying, working, learning, joining, and entering the practical system.",
+    "locale_visibility": [
+      "vi",
+      "en"
+    ],
+    "page_assignment": "faq",
+    "status": "published"
+  },
+  {
+    "question_vi": "Vì sao site này không viết như blog du lịch?",
+    "question_en": "Why does this site avoid travel-blog language?",
+    "answer_vi": "Vì mục tiêu của Ấp Đà Lạt không phải kích thích một chuyến ghé qua. Nó tồn tại để xây trust và chiều sâu quanh Đà Lạt như một vùng sống thật.",
+    "answer_en": "Because its purpose is not to sell a short visit. It exists to build trust and depth around Dalat as a living place.",
+    "locale_visibility": [
+      "vi",
+      "en"
+    ],
+    "page_assignment": "faq",
+    "status": "published"
+  }
+]

@@ -1,0 +1,82 @@
+> dev
+> next dev --hostname 127.0.0.1 --port 4211
+   ▲ Next.js 15.2.2
+   - Local:        http://127.0.0.1:4211
+   - Network:      http://127.0.0.1:4211
+   - Experiments (use with caution):
+     ✓ externalDir
+ ✓ Starting...
+ ✓ Ready in 6.4s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1261ms (101 modules)
+ ○ Compiling /api/mail-smoke/outbox ...
+ ✓ Compiled /api/mail-smoke/outbox in 6.1s (550 modules)
+ DELETE /api/mail-smoke/outbox 200 in 6328ms
+ GET /api/mail-smoke/outbox 200 in 11ms
+ ○ Compiling /api/contact ...
+ ✓ Compiled /api/contact in 1839ms (562 modules)
+ ✓ Compiled /api/mail-smoke/emails in 262ms (565 modules)
+ POST /api/mail-smoke/emails 202 in 403ms
+ POST /api/mail-smoke/emails 202 in 404ms
+ POST /api/contact 200 in 2432ms
+ GET /api/mail-smoke/outbox 200 in 237ms
+ GET /api/mail-smoke/outbox 200 in 22ms
+ GET /api/mail-smoke/outbox 200 in 19ms
+ GET /api/mail-smoke/outbox 200 in 84ms
+ GET /api/mail-smoke/outbox 200 in 8ms
+ GET /api/mail-smoke/outbox 200 in 15ms
+ GET /api/mail-smoke/outbox 200 in 37ms
+ GET /api/mail-smoke/outbox 200 in 34ms
+ GET /api/mail-smoke/outbox 200 in 14ms
+ GET /api/mail-smoke/outbox 200 in 12ms
+ GET /api/mail-smoke/outbox 200 in 62ms
+ GET /api/mail-smoke/outbox 200 in 8ms
+ GET /api/mail-smoke/outbox 200 in 40ms
+ GET /api/mail-smoke/outbox 200 in 11ms
+ GET /api/mail-smoke/outbox 200 in 36ms
+ GET /api/mail-smoke/outbox 200 in 6ms
+ GET /api/mail-smoke/outbox 200 in 8ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 14ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 42ms
+ GET /api/mail-smoke/outbox 200 in 18ms
+ GET /api/mail-smoke/outbox 200 in 37ms
+ GET /api/mail-smoke/outbox 200 in 9ms
+ GET /api/mail-smoke/outbox 200 in 35ms
+ GET /api/mail-smoke/outbox 200 in 33ms
+ GET /api/mail-smoke/outbox 200 in 7ms
+ GET /api/mail-smoke/outbox 200 in 4ms
+ GET /api/mail-smoke/outbox 200 in 7ms
+ GET /api/mail-smoke/outbox 200 in 34ms
+ GET /api/mail-smoke/outbox 200 in 6ms
+ GET /api/mail-smoke/outbox 200 in 15ms
+ GET /api/mail-smoke/outbox 200 in 19ms
+ GET /api/mail-smoke/outbox 200 in 127ms
+ GET /api/mail-smoke/outbox 200 in 47ms
+ GET /api/mail-smoke/outbox 200 in 49ms
+ GET /api/mail-smoke/outbox 200 in 26ms
+ GET /api/mail-smoke/outbox 200 in 32ms
+ GET /api/mail-smoke/outbox 200 in 15ms
+ GET /api/mail-smoke/outbox 200 in 37ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 4ms
+ GET /api/mail-smoke/outbox 200 in 19ms
+ GET /api/mail-smoke/outbox 200 in 9ms
+ GET /api/mail-smoke/outbox 200 in 9ms
+ GET /api/mail-smoke/outbox 200 in 14ms
+ GET /api/mail-smoke/outbox 200 in 14ms
+ GET /api/mail-smoke/outbox 200 in 6ms
+ GET /api/mail-smoke/outbox 200 in 18ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 8ms
+ GET /api/mail-smoke/outbox 200 in 4ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 4ms
+ GET /api/mail-smoke/outbox 200 in 5ms
+ GET /api/mail-smoke/outbox 200 in 14ms
+ GET /api/mail-smoke/outbox 200 in 16ms
+ GET /api/mail-smoke/outbox 200 in 7ms
+ GET /api/mail-smoke/outbox 200 in 7ms
+ GET /api/mail-smoke/outbox 200 in 5ms

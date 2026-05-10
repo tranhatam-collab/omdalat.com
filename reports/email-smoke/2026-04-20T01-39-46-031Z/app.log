@@ -1,0 +1,7 @@
+   ▲ Next.js 15.2.2
+   - Local:        http://127.0.0.1:4212
+   - Network:      http://127.0.0.1:4212
+ ✓ Starting...
+[Error: > Couldn't find any `pages` or `app` directory. Please create one under the project root]
+[?25h
+process_exit code=0 signal=null

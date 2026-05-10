@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Om Dalat App</title>
+    <meta
+      name="description"
+      content="Member and operations workspace for Om Dalat, including dashboard flows, handbook access, and application review."
+    />
+    <meta name="theme-color" content="#1f2b26" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">omdalat.com/app</p>
+          <h1>Member and operations workspace for Om Dalat.</h1>
+          <p class="lede">
+            This surface handles member dashboard flows, handbook access,
+            review actions, and day-to-day operating work inside the same
+            Om Dalat system.
+          </p>
+          <p class="snapshot" id="snapshot-text">Loading operator snapshot...</p>
+          <div class="hero-actions">
+            <a class="button primary" href="/docs/getting-started">Open guide</a>
+            <a class="button secondary" href="/vi/member">Open member area</a>
+            <a class="button secondary" href="/vi/dashboard">Open dashboard</a>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <article class="signal-card">
+            <p class="panel-label">Operator notes</p>
+            <div class="note-list" id="ops-notes"></div>
+          </article>
+        </aside>
+      </header>
+
+      <section class="summary-grid" id="summary-grid"></section>
+
+      <section class="workspace-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Priority queue</p>
+              <h2>Applications and tasks that need movement</h2>
+            </div>
+            <div class="filter-row" id="request-filters"></div>
+          </div>
+          <div class="stack-list" id="request-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Next timeline</p>
+              <h2>Upcoming activity and due moments</h2>
+            </div>
+          </div>
+          <div class="timeline-list" id="timeline-list"></div>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Live spaces</p>
+              <h2>Places and surfaces in the active loop</h2>
+            </div>
+          </div>
+          <div class="node-grid" id="node-grid"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Operator roster</p>
+              <h2>People carrying the current rhythm</h2>
+            </div>
+          </div>
+          <div class="stack-list" id="host-roster"></div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-label">Activity feed</p>
+              <h2>Signals that show the system is moving</h2>
+            </div>
+          </div>
+          <div class="proof-grid" id="proof-feed"></div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

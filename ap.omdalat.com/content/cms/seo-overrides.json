@@ -1,0 +1,24 @@
+[
+  {
+    "page_key": "home",
+    "locale": "vi",
+    "meta_title": "Ấp Đà Lạt | Những con người, nơi chốn và nhịp sống Đà Lạt",
+    "meta_description": "Hiểu Đà Lạt như một nơi để ở lại, làm việc và giữ một nhịp sống có thể đi đường dài.",
+    "canonical_url": "https://ap.omdalat.com/",
+    "og_image": "images/ready/og/dalat-city-panorama-2020.jpg",
+    "noindex": false,
+    "schema_type": "WebPage",
+    "status": "active"
+  },
+  {
+    "page_key": "home",
+    "locale": "en",
+    "meta_title": "Ap Dalat | People, Places and Rhythms of Dalat",
+    "meta_description": "Read Dalat as a living place through its people, places, work, and daily rhythms.",
+    "canonical_url": "https://ap.omdalat.com/en/",
+    "og_image": "images/ready/og/dalat-city-panorama-2020.jpg",
+    "noindex": false,
+    "schema_type": "WebPage",
+    "status": "active"
+  }
+]

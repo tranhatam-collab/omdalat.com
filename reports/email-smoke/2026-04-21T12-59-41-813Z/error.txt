@@ -1,0 +1,3 @@
+Error: Unable to extract verification code from member cookie.
+    at main (file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:385:15)
+    at async file:///Users/tranhatam/Documents/Devnewproject/omdalat.com/scripts/mail-smoke-e2e.mjs:453:1

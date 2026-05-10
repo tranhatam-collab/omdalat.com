@@ -17,6 +17,31 @@ Design, Frontend, Public Web, responsive implementation, member UI shell support
 
 ---
 
+## 0. Source Priority Update (Brandpro Gate 0 - 2026-05-08)
+
+Team 2 phải áp dụng source theo thứ tự:
+
+1. `docs/README_DEV_HANDOFF_OMDALAT.md`
+2. `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+3. `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+4. `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+5. `docs/OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md`
+6. Các UI/content/sprint docs còn lại nếu không xung đột
+
+Public law đang active:
+
+- dùng `Ôm Đà Lạt / Om Dalat` làm brand signal
+- giữ `omdalat.com` và `app.omdalat.com` là hướng public/app đúng
+- không đưa `OMDALA city node`, `global system`, `docs.omdala.com`, `app.omdala.com` vào public UI
+
+Hard stop cho Team 2:
+
+- không tự diễn giải Brandpro law
+- không sửa hero/nav/footer/article/member CTA theo legacy source nếu Team 1 chưa revalidate
+- không dùng public wording đẩy Om Dalat về homestay, retreat, du lịch, travel blog
+
+---
+
 ## 1. Nhiệm vụ chính
 
 Team 2 chịu trách nhiệm lớp thiết kế và frontend public của Om Dalat.
@@ -182,9 +207,13 @@ Team 2 phải nhận baseline mới từ:
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 - `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
 - `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
 - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+- `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+- `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
 
 Yêu cầu bắt buộc:
 
@@ -193,6 +222,7 @@ Yêu cầu bắt buộc:
   - `/vi/articles/lam-viec-o-da-lat-co-thuc-te-khong`
   - `/vi/articles/tu-mot-ky-nang-den-thu-nhap-o-da-lat`
 - không claim `DONE` ở lane Team 2 khi chưa qua vòng review mới của Team 1.
+- screenshot/evidence Sprint 0 chỉ có giá trị sau khi semantics đã theo Brandpro Gate 0.
 
 ## 10. Cập nhật trạng thái Team 2 (2026-05-04)
 
@@ -231,14 +261,16 @@ Lưu ý QA vận hành mới (2026-05-04):
 - Date start: 2026-05-04
 - Scope: 3 bài mở nền, giao ngay cho Team Content/Dev để Team 2 test UI không đợi full 30 bài.
 - Handoff payload bắt buộc:
+  - `data/seed/articles.seed.json` (runtime hiện tại, 30 record)
   - `data/seed/articles.seed.sprint0-launch.json`
+  - `data/seed/articles.seed.launch-v2.json`
   - `data/seed/article-images.seed.json`
 - Team 2 đọc trước khi dev:
   - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
   - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
   - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - Luồng team2 khi nhận file:
-  1. Nạp `articles.seed.sprint0-launch.json` vào local seed context và sync runtime page (không sửa VI/EN).
+  1. Dùng `articles.seed.json` nếu test runtime chuẩn, hoặc tạm copy `articles.seed.sprint0-launch.json` sang `articles.seed.json` nếu cần isolate 3 bài launch; `articles.seed.launch-v2.json` chỉ dùng để QA schema/CMS.
   2. Chạy `pnpm run validate:content-seed` + `pnpm --filter @omdalat/web run validate:web-locales` + `pnpm --filter @omdalat/web run validate:i18n-data`.
   3. Xác nhận UI:
      - article layout rộng tối đa `720px`
@@ -254,7 +286,8 @@ Lưu ý QA vận hành mới (2026-05-04):
 Team 2 nhận payload từ Team 3 ở cả 2 lớp:
 
 * runtime seed tương thích hiện tại: `data/seed/articles.seed.json`
-* launch payload sprint 3 bài để QA schema/content: `data/seed/articles.seed.sprint0-launch.json`
+* launch-only runtime snapshot 3 bài: `data/seed/articles.seed.sprint0-launch.json`
+* launch V2 payload để QA schema/CMS: `data/seed/articles.seed.launch-v2.json`
 * image reality records cho 3 bài launch: `data/seed/article-images.seed.json`
 
 Lệnh bắt buộc trước khi QA giao Team 1:

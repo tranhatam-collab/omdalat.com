@@ -1,0 +1,4 @@
+.vercel
+node_modules
+reports/visual-qa
+reports/visual-baseline

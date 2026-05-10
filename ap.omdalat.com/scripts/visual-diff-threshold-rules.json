@@ -1,0 +1,55 @@
+{
+  "defaultMaxDiff": 0.025,
+  "rules": [
+    {
+      "name": "landing-core",
+      "maxDiff": 0.01,
+      "exact": [
+        "mobile-home.png",
+        "desktop-home.png",
+        "mobile-con-nguoi.png",
+        "desktop-con-nguoi.png",
+        "mobile-noi-chon.png",
+        "desktop-noi-chon.png",
+        "mobile-nhip-song.png",
+        "desktop-nhip-song.png",
+        "mobile-lam-viec.png",
+        "desktop-lam-viec.png",
+        "mobile-cau-chuyen.png",
+        "desktop-cau-chuyen.png",
+        "mobile-hinh-anh.png",
+        "desktop-hinh-anh.png",
+        "mobile-en.png",
+        "desktop-en.png",
+        "mobile-en__people.png",
+        "desktop-en__people.png",
+        "mobile-en__places.png",
+        "desktop-en__places.png",
+        "mobile-en__rhythms.png",
+        "desktop-en__rhythms.png",
+        "mobile-en__work.png",
+        "desktop-en__work.png",
+        "mobile-en__stories.png",
+        "desktop-en__stories.png",
+        "mobile-en__images.png",
+        "desktop-en__images.png"
+      ]
+    },
+    {
+      "name": "pillar-detail",
+      "maxDiff": 0.012,
+      "regex": [
+        "^(mobile|desktop)-(cau-chuyen__da-lat-khong-chi-de-ghe-qua|en__stories__da-lat-khong-chi-de-ghe-qua)\\.png$",
+        "^(mobile|desktop)-(lam-viec__lam-viec-tu-da-lat-khong-chi-la-mang-laptop-len-nui|en__work__lam-viec-tu-da-lat-khong-chi-la-mang-laptop-len-nui)\\.png$",
+        "^(mobile|desktop)-(nhip-song__mot-ngay-da-lat-bat-dau-nhu-the-nao|en__rhythms__mot-ngay-da-lat-bat-dau-nhu-the-nao)\\.png$"
+      ]
+    },
+    {
+      "name": "support-pages",
+      "maxDiff": 0.018,
+      "regex": [
+        "^(mobile|desktop)-(lien-he|chu-de|tim-kiem|faq|en__contact|en__topics|en__search|en__faq)\\.png$"
+      ]
+    }
+  ]
+}

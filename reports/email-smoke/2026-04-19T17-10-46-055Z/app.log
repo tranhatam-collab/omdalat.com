@@ -1,0 +1,8 @@
+> @omdalat/app@ dev /Users/tranhatam/Documents/Devnewproject/omdalat.com/apps/app
+> next dev --hostname 127.0.0.1 --port 4212
+   ▲ Next.js 15.2.2
+   - Local:        http://127.0.0.1:4212
+   - Network:      http://127.0.0.1:4212
+   - Experiments (use with caution):
+     ✓ externalDir
+ ✓ Starting...

@@ -20,6 +20,33 @@ Foundation, Content, SEO, Product Logic, execution control, current sprint publi
 
 ---
 
+## 0. Source Priority Update (Brandpro Gate 0 - 2026-05-08)
+
+Tu nhịp này, Team 1 phải đọc và áp dụng source theo thứ tự:
+
+1. `docs/README_DEV_HANDOFF_OMDALAT.md`
+2. `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+3. `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+4. `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+5. `docs/OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md`
+6. Các plan, sprint docs, SEO/docs/app docs còn lại nếu không xung đột với các file trên
+
+Luật public đang active:
+
+- display brand VI: `Ôm Đà Lạt`
+- display brand EN: `Om Dalat`
+- public domain: `https://omdalat.com`
+- app domain: `https://app.omdalat.com`
+- public frame: independent real-life living system in Dalat
+
+Hard stop cho Team 1:
+
+- không tái kích hoạt public framing `OMDALAT = city node of OMDALA`
+- không dẫn public/app về `docs.omdala.com` hoặc `app.omdala.com`
+- không cho public copy rơi về tourism / retreat / homestay / digital nomad lifestyle
+
+---
+
 ## 1. Nhiệm vụ chính
 
 Team 1 là trung tâm giữ logic nền của toàn hệ.
@@ -218,7 +245,12 @@ File bắt buộc đọc tiếp theo:
 
 - `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
+- `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
+- `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
+- `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+- `docs/OMDALAT_BRANDPRO_PHASE1_FORENSICS_KICKOFF_2026-05-08.md`
 - `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
 
 Vai trò Team 1 từ nhịp này:
 
@@ -249,6 +281,7 @@ File quyết toán để theo dõi:
 Team 1 yêu cầu toàn bộ Team 2/3/Ap đọc bắt buộc trước mọi sprint handoff mới:
 
 - `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
+- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
 - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
 - `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
 - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
@@ -259,8 +292,10 @@ Team 1 yêu cầu toàn bộ Team 2/3/Ap đọc bắt buộc trước mọi spri
 Team 1 xác nhận packet thực thi Sprint 0 đã sẵn để các team chạy ngay:
 
 * `docs/SPRINT0_LAUNCH_3_FOUNDATION_ARTICLES_2026-05-04.md`
+* `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
 * `data/seed/articles.seed.json`
 * `data/seed/articles.seed.sprint0-launch.json`
+* `data/seed/articles.seed.launch-v2.json`
 * `data/seed/article-images.seed.json`
 
 Gate chạy trước staging:

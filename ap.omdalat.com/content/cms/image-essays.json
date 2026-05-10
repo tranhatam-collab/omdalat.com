@@ -1,0 +1,100 @@
+[
+  {
+    "title_vi": "Ánh sáng của một buổi mưa sớm",
+    "title_en": "Light on an Early Rainy Morning",
+    "slug_vi": "anh-sang-mua-som",
+    "slug_en": "anh-sang-mua-som",
+    "theme_vi": "Ánh sáng của một buổi mưa sớm",
+    "theme_en": "Light on an Early Rainy Morning",
+    "intro_vi": "Một chuỗi ảnh nhỏ về bề mặt, hiên nhà, mái kính và khoảng không khi ngày ở Đà Lạt bắt đầu trong mưa.",
+    "intro_en": "A small image sequence about surfaces, porches, glass roofs, and open air when a Dalat day begins in rain.",
+    "closing_line_vi": "Khoảng hiên đủ nhỏ để ở gần mưa, nhưng đủ kín để giữ sự yên.",
+    "closing_line_en": "A porch small enough to stay close to rain, but sheltered enough to keep quiet.",
+    "hero_image": "hero",
+    "image_asset_ids": [
+      "hero",
+      "valley",
+      "slope",
+      "view",
+      "slopesWide"
+    ],
+    "captions_vi": [
+      "Ánh sáng lạnh đi qua lớp mái kính và làm công việc bắt đầu chậm hơn.",
+      "Một mặt dốc ướt phản lại nhịp ngày còn chưa đầy tiếng người.",
+      "Khoảng hiên đủ nhỏ để ở gần mưa, nhưng đủ kín để giữ sự yên."
+    ],
+    "captions_en": [
+      "Cold light passes through greenhouse roofs and slows the start of work.",
+      "A wet slope reflects a day still short on voices.",
+      "A porch small enough to stay close to rain, but sheltered enough to keep quiet."
+    ],
+    "tag_ids": [
+      "photo-essay"
+    ],
+    "related_story_ids": [],
+    "related_place_ids": [],
+    "seo": {
+      "meta_title_vi": "Ánh sáng của một buổi mưa sớm",
+      "meta_title_en": "Light on an Early Rainy Morning",
+      "meta_description_vi": "Một chuỗi ảnh nhỏ về bề mặt, hiên nhà, mái kính và khoảng không khi ngày ở Đà Lạt bắt đầu trong mưa.",
+      "meta_description_en": "A small image sequence about surfaces, porches, glass roofs, and open air when a Dalat day begins in rain.",
+      "og_image": "hero"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  },
+  {
+    "title_vi": "Mưa trên mái nhà kính",
+    "title_en": "Rain on Greenhouse Roofs",
+    "slug_vi": "mua-tren-mai-nha-kinh",
+    "slug_en": "mua-tren-mai-nha-kinh",
+    "theme_vi": "Mưa trên mái nhà kính",
+    "theme_en": "Rain on Greenhouse Roofs",
+    "intro_vi": "Một photo essay về âm thanh mưa, phản chiếu trên mái kính và nhịp lao động không dừng hẳn trong ngày lạnh.",
+    "intro_en": "A photo essay about rain as sound, reflection on greenhouse roofs, and work rhythms that do not fully stop on cold days.",
+    "closing_line_vi": "Cuối ngày, ánh sáng mỏng đi qua lớp ẩm và để lại một thành phố chậm hơn.",
+    "closing_line_en": "By late day, thinner light moves through moisture and leaves the city slower.",
+    "hero_image": "rooftops",
+    "image_asset_ids": [
+      "rooftops",
+      "farms",
+      "slopesWide",
+      "panorama",
+      "valley"
+    ],
+    "captions_vi": [
+      "Mưa gõ liên tục lên mái kính, giữ một âm nền đều suốt buổi sáng.",
+      "Những khoảng phản chiếu trên mặt kính cho thấy công việc vẫn tiếp tục sau màn mưa.",
+      "Cuối ngày, ánh sáng mỏng đi qua lớp ẩm và để lại một thành phố chậm hơn."
+    ],
+    "captions_en": [
+      "Rain keeps striking the roof in a steady pattern through the morning.",
+      "Reflections across glass show that work continues beneath the rain.",
+      "By late day, thinner light moves through moisture and leaves the city slower."
+    ],
+    "tag_ids": [
+      "photo-essay"
+    ],
+    "related_story_ids": [],
+    "related_place_ids": [],
+    "seo": {
+      "meta_title_vi": "Mưa trên mái nhà kính",
+      "meta_title_en": "Rain on Greenhouse Roofs",
+      "meta_description_vi": "Một photo essay về âm thanh mưa, phản chiếu trên mái kính và nhịp lao động không dừng hẳn trong ngày lạnh.",
+      "meta_description_en": "A photo essay about rain as sound, reflection on greenhouse roofs, and work rhythms that do not fully stop on cold days.",
+      "og_image": "rooftops"
+    },
+    "bridge_to_omdalat": {
+      "enabled": false,
+      "bridge_block_id": ""
+    },
+    "status": "Released",
+    "published_at": "2026-04-19",
+    "updated_at": "2026-04-19T00:00:00.000Z"
+  }
+]
