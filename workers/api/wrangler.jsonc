@@ -1,0 +1,186 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "account_id": "f3f9e76222dcb488d5e303e29e8ba192",
+  "name": "omdalat-platforms-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "APP_NAME": "omdalat-platforms",
+    "APP_ENV": "production",
+    "SESSION_COOKIE": "omd_session",
+    "COOKIE_DOMAIN": ".omdalat.com",
+    "GATEWAY_PRICE_VND": "100000",
+    "GATEWAY_SUCCESS_URL": "https://app.omdalat.com/member/dashboard",
+    "PAY_IAI_ONE_BASE_URL": "https://pay.iai.one",
+    "PAY_IAI_ONE_TENANT_CODE": "omdalat",
+    "PAY_IAI_ONE_SITE_CODE": "omdalat",
+    "PAY_IAI_ONE_PROVIDER": "payos",
+    "PAY_IAI_ONE_CALLBACK_BASE_URL": "https://api.omdalat.com",
+    "EMAIL_PROVIDER": "mail_iai_one",
+    "MAIL_API_BASE_URL": "https://mail.iai.one/v1",
+    "EMAIL_FROM": "Ôm Đà Lạt Payment <pay@omdalat.com>",
+    "EMAIL_FROM_AUTOREPLY": "Ôm Đà Lạt System <noreply@omdalat.com>",
+    "SUPPORT_EMAIL": "support@omdalat.com",
+    "BILLING_EMAIL": "billing@omdalat.com",
+    "CONTACT_EMAIL": "support@omdalat.com",
+    "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+  },
+  // Required secrets for omdalat.com → pay.iai.one payment authority:
+  // - TURNSTILE_SECRET_KEY (optional, for form protection)
+  // - PAYMENT_WEBHOOK_SECRET (for webhook validation)
+  // - PAY_IAI_ONE_API_KEY (for pay.iai.one API calls)
+  // - MAIL_API_KEY (for mail.iai.one authentication)
+  "routes": [
+    {
+      "pattern": "api.omdalat.com",
+      "custom_domain": true
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "omdalat-core",
+      "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+      "migrations_dir": "workers/api/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "ASSETS",
+      "bucket_name": "omdalat-assets"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "AUTOMATION_QUEUE",
+        "queue": "omdalat-automation"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "omdalat-automation",
+        "max_batch_size": 10,
+        "max_batch_timeout": 30
+      }
+    ]
+  },
+  "env": {
+    "production": {
+      "routes": [
+        {
+          "pattern": "api.omdalat.com",
+          "custom_domain": true
+        }
+      ],
+      "vars": {
+        "APP_NAME": "omdalat-platforms",
+        "APP_ENV": "production",
+        "SESSION_COOKIE": "omd_session",
+        "COOKIE_DOMAIN": ".omdalat.com",
+        "GATEWAY_PRICE_VND": "100000",
+        "GATEWAY_SUCCESS_URL": "https://app.omdalat.com/member/dashboard",
+        "PAY_IAI_ONE_BASE_URL": "https://pay.iai.one",
+        "PAY_IAI_ONE_TENANT_CODE": "omdalat",
+        "PAY_IAI_ONE_SITE_CODE": "omdalat",
+        "PAY_IAI_ONE_PROVIDER": "payos",
+        "PAY_IAI_ONE_CALLBACK_BASE_URL": "https://api.omdalat.com",
+        "EMAIL_PROVIDER": "mail_iai_one",
+        "MAIL_API_BASE_URL": "https://mail.iai.one/v1",
+        "EMAIL_FROM": "Ôm Đà Lạt Payment <pay@omdalat.com>",
+        "EMAIL_FROM_AUTOREPLY": "Ôm Đà Lạt System <noreply@omdalat.com>",
+        "SUPPORT_EMAIL": "support@omdalat.com",
+        "BILLING_EMAIL": "billing@omdalat.com",
+        "CONTACT_EMAIL": "support@omdalat.com",
+        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "omdalat-core",
+          "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+          "migrations_dir": "workers/api/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "ASSETS",
+          "bucket_name": "omdalat-assets"
+        }
+      ],
+      "queues": {
+        "producers": [
+          {
+            "binding": "AUTOMATION_QUEUE",
+            "queue": "omdalat-automation"
+          }
+        ],
+        "consumers": [
+          {
+            "queue": "omdalat-automation",
+            "max_batch_size": 10,
+            "max_batch_timeout": 30
+          }
+        ]
+      }
+    },
+    "sandbox": {
+      "routes": [],
+      "vars": {
+        "APP_NAME": "omdalat-platforms",
+        "APP_ENV": "sandbox",
+        "SESSION_COOKIE": "omd_session",
+        "COOKIE_DOMAIN": ".omdalat.com",
+        "GATEWAY_PRICE_VND": "100000",
+        "GATEWAY_SUCCESS_URL": "https://app.omdalat.com/member/dashboard",
+        "PAY_IAI_ONE_BASE_URL": "https://pay.iai.one",
+        "PAY_IAI_ONE_TENANT_CODE": "omdalat",
+        "PAY_IAI_ONE_SITE_CODE": "omdalat",
+        "PAY_IAI_ONE_PROVIDER": "payos",
+        "PAY_IAI_ONE_CALLBACK_BASE_URL": "https://api.omdalat.com",
+        "EMAIL_PROVIDER": "mail_iai_one",
+        "MAIL_API_BASE_URL": "https://mail.iai.one/v1",
+        "EMAIL_FROM": "Ôm Đà Lạt Payment <pay@omdalat.com>",
+        "EMAIL_FROM_AUTOREPLY": "Ôm Đà Lạt System <noreply@omdalat.com>",
+        "SUPPORT_EMAIL": "support@omdalat.com",
+        "BILLING_EMAIL": "billing@omdalat.com",
+        "CONTACT_EMAIL": "support@omdalat.com",
+        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "omdalat-core",
+          "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+          "migrations_dir": "workers/api/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "ASSETS",
+          "bucket_name": "omdalat-assets"
+        }
+      ],
+      "queues": {
+        "producers": [
+          {
+            "binding": "AUTOMATION_QUEUE",
+            "queue": "omdalat-automation"
+          }
+        ],
+        "consumers": [
+          {
+            "queue": "omdalat-automation",
+            "max_batch_size": 10,
+            "max_batch_timeout": 30
+          }
+        ]
+      }
+    }
+  }
+}
