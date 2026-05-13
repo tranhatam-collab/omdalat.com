@@ -46,7 +46,7 @@
       "binding": "DB",
       "database_name": "omdalat-core",
       "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
-      "migrations_dir": "workers/api/migrations"
+      "migrations_dir": "migrations"
     }
   ],
   "r2_buckets": [
@@ -104,7 +104,7 @@
           "binding": "DB",
           "database_name": "omdalat-core",
           "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
-          "migrations_dir": "workers/api/migrations"
+          "migrations_dir": "migrations"
         }
       ],
       "r2_buckets": [
@@ -157,7 +157,7 @@
           "binding": "DB",
           "database_name": "omdalat-core",
           "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
-          "migrations_dir": "workers/api/migrations"
+          "migrations_dir": "migrations"
         }
       ],
       "r2_buckets": [
