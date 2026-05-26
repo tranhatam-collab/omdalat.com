@@ -274,6 +274,103 @@
     }
   }
 
+  function injectJsonLd(schema) {
+    const existing = document.querySelector('script[type="application/ld+json"]');
+    if (existing) {
+      existing.remove();
+    }
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
+
+  function buildBreadcrumbSchema(items) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": items.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.name,
+        "item": publicUrl(item.path)
+      }))
+    };
+  }
+
+  function buildOrganizationSchema() {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": locale === "vi" ? "Ấp Đà Lạt" : "Ap Dalat",
+      "alternateName": locale === "vi" ? "Ap Dalat" : "Ấp Đà Lạt",
+      "url": "https://ap.omdalat.com/",
+      "description": locale === "vi" 
+        ? "Hiểu Đà Lạt như một nơi để ở lại, làm việc và giữ một nhịp sống có thể đi đường dài."
+        : "Read Dalat as a living place through its people, places, work, and daily rhythms."
+    };
+  }
+
+  function buildWebSiteSchema() {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": locale === "vi" ? "Ấp Đà Lạt" : "Ap Dalat",
+      "url": "https://ap.omdalat.com/",
+      "inLanguage": locale === "vi" ? "vi-VN" : "en"
+    };
+  }
+
+  function buildWebPageSchema(url, name, description) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": publicUrl(url),
+      "name": name,
+      "description": description,
+      "inLanguage": locale === "vi" ? "vi-VN" : "en"
+    };
+  }
+
+  function buildArticleSchema(url, headline, description, image, datePublished, section) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": headline,
+      "description": description,
+      "image": absoluteUrl(image),
+      "url": publicUrl(url),
+      "datePublished": datePublished || "2026-04-21",
+      "dateModified": "2026-04-21",
+      "inLanguage": locale === "vi" ? "vi-VN" : "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": publicUrl(url)
+      },
+      "author": {
+        "@type": "Organization",
+        "name": locale === "vi" ? "Ấp Đà Lạt" : "Ap Dalat"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": locale === "vi" ? "Ấp Đà Lạt" : "Ap Dalat",
+        "url": "https://ap.omdalat.com/"
+      },
+      "articleSection": section
+    };
+  }
+
+  function buildCollectionPageSchema(url, name, description) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "url": publicUrl(url),
+      "name": name,
+      "description": description,
+      "inLanguage": locale === "vi" ? "vi-VN" : "en"
+    };
+  }
+
   function makeLink(item, className) {
     const link = el("a", className || "");
     link.href = resolvePage(item.href);
@@ -383,6 +480,18 @@
         "x-default": "/",
       },
     });
+    
+    // Inject JSON-LD schemas for homepage
+    const schemas = [
+      buildOrganizationSchema(),
+      buildWebSiteSchema(),
+      buildWebPageSchema(locale === "vi" ? "/" : "en/", dict.homeTitle, dict.homeDescription),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
     const wrapper = el("div", "page-shell");
     wrapper.appendChild(renderHeader("home"));
 
@@ -507,6 +616,17 @@
         "x-default": sectionHref(section, "", "vi"),
       },
     });
+    
+    // Inject JSON-LD schemas for category pages
+    const schemas = [
+      buildWebPageSchema(sectionHref(section, "", locale), sectionData[locale].title, sectionData[locale].thesis),
+      buildCollectionPageSchema(sectionHref(section, "", locale), sectionData[locale].title, sectionData[locale].thesis),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: sectionData[locale].title, path: sectionHref(section, "", locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
 
     const wrapper = el("div", "page-shell");
     wrapper.appendChild(renderHeader(section));
@@ -557,6 +677,18 @@
       },
       type: "article",
     });
+    
+    // Inject JSON-LD schemas for article pages
+    const schemas = [
+      buildArticleSchema(storyPath(story, locale), text.title, text.excerpt, data.images[story.image].og, "2026-04-21", story.section),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: data.sections[story.section][locale].title, path: sectionHref(story.section, "", locale) },
+        { name: text.title, path: storyPath(story, locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
     const wrapper = el("div", "page-shell");
     wrapper.appendChild(renderHeader(story.section));
     const article = el("article", "article-page");
@@ -630,6 +762,18 @@
       },
       type: "article",
     });
+    
+    // Inject JSON-LD schemas for place pages
+    const schemas = [
+      buildArticleSchema(placePath(slug, locale), text.title, text.excerpt, data.images[place.image].og, "2026-04-21", "places"),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: data.sections.places[locale].title, path: sectionHref("places", "", locale) },
+        { name: text.title, path: placePath(slug, locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
     const wrapper = el("div", "page-shell");
     wrapper.appendChild(renderHeader("places"));
     const article = el("article", "article-page");
@@ -650,6 +794,18 @@
   }
 
   function renderImageEssay() {
+    
+    // Inject JSON-LD schemas for image essay pages
+    const schemas = [
+      buildArticleSchema(essayPath(slug, locale), text.title, text.intro, data.images[essay.image].og, "2026-04-21", "images"),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: data.sections.images[locale].title, path: sectionHref("images", "", locale) },
+        { name: text.title, path: essayPath(slug, locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
     const essay = data.imageEssays.find((item) => item.slug === slug);
     const text = essay[locale];
     setMeta(`${text.title} | ${dict.siteTitle}`, text.intro, {
@@ -677,6 +833,17 @@
       const caption = el("figcaption", "essay-gallery__caption", text.captions[index] || imageText(key, "caption"));
       item.append(image, caption);
       gallery.appendChild(item);
+    
+    // Inject JSON-LD schemas for about page
+    const schemas = [
+      buildWebPageSchema(staticPagePath("about", locale), content.metaTitle, content.metaDescription),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: content.title, path: staticPagePath("about", locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
     });
     article.appendChild(gallery);
     wrapper.appendChild(article);
@@ -696,6 +863,17 @@
         canonical: staticPagePath("about", locale),
         alternates: {
           "vi-VN": staticPagePath("about", "vi"),
+    
+    // Inject JSON-LD schemas for Om Ap Dalat page
+    const schemas = [
+      buildWebPageSchema(staticPagePath("om", locale), content.metaTitle, content.metaDescription),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: content.title, path: staticPagePath("om", locale) }
+      ])
+    ];
+    injectJsonLd(schemas);
+    
           en: staticPagePath("about", "en"),
           "x-default": staticPagePath("about", "vi"),
         },
@@ -715,6 +893,39 @@
   }
 
   function renderOmPage() {
+    
+    // Inject JSON-LD schemas for support pages
+    const schemas = [
+      buildWebPageSchema(supportPath(supportKey, locale), content.title, content.description),
+      buildBreadcrumbSchema([
+        { name: locale === "vi" ? "Trang chủ" : "Home", path: locale === "vi" ? "/" : "en/" },
+        { name: content.title, path: supportPath(supportKey, locale) }
+      ])
+    ];
+    
+    // Add FAQPage schema for FAQ page
+    if (supportKey === "faq") {
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": locale === "vi" ? "Ấp Đà Lạt là gì?" : "What is Ap Dalat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": locale === "vi" 
+                ? "Ấp Đà Lạt là một lớp editorial và bản sắc sống về Đà Lạt hôm nay."
+                : "Ap Dalat is an editorial and place-identity layer about Dalat today."
+            }
+          }
+        ]
+      };
+      schemas.push(faqSchema);
+    }
+    
+    injectJsonLd(schemas);
+    
     const wrapper = el("div", "page-shell");
     wrapper.appendChild(renderHeader("about"));
     const content = data.staticPages.om;
