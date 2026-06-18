@@ -362,7 +362,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
         <div class="program-card">
           <h3><a href="/${locale === 'en' ? 'en/' : ''}programs/technology-creation">${isEn ? 'Technology Creation Residency' : 'Sáng Tạo Công Nghệ Cùng AI'}</a></h3>
           <p class="duration">${isEn ? '2 weeks' : '2 tuần'}</p>
-          <p class="desc">${isEn ? 'Build real products with AI. For developers, creators, and builders who want to make websites, apps, and AI workflows.' : 'Xây dựng sản phẩm thật với AI. Dành cho developer, creator và builder muốn xây website, app và AI workflow.'}</p>
+          <p class="desc">${isEn ? 'Build real products with AI. For developers, creators, and builders who want to make websites, apps, and AI systems.' : 'Xây dựng sản phẩm thật với AI. Dành cho developer, creator và builder muốn xây website, app và AI system.'}</p>
           <a href="/${locale === 'en' ? 'en/' : ''}programs/technology-creation" class="cta-button">${isEn ? 'Explore Program' : 'Tìm hiểu chương trình'}</a>
         </div>
       </div>
@@ -488,10 +488,10 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
       descriptionEn: 'A 2-week technology building sprint at Lily. Not a coding course, not for certificates. Each participant must create a working product or system.',
       durationVi: '2 tuần (cohort giới hạn số lượng)',
       durationEn: '2 weeks (limited cohort size)',
-      targetVi: 'Developer, creator, builder, người muốn xây website, app, AI workflow và sản phẩm số',
-      targetEn: 'Developers, creators, builders, people who want to build websites, apps, AI workflows, and digital products',
-      outcomeVi: 'MVP hoặc prototype có thể kiểm chứng: website, ứng dụng, AI workflow, AI agent, hệ thống nội dung. Chương trình không bảo đảm sản phẩm đạt thương mại hoặc tạo doanh thu.',
-      outcomeEn: 'A verifiable MVP or prototype: website, app, AI workflow, AI agent, content system. The program does not guarantee commercial viability or revenue generation.'
+      targetVi: 'Developer, creator, builder, người muốn xây website, app, AI system và sản phẩm số',
+      targetEn: 'Developers, creators, builders, people who want to build websites, apps, AI systems, and digital products',
+      outcomeVi: 'MVP hoặc prototype có thể kiểm chứng: website, ứng dụng, AI system, AI agent, hệ thống nội dung. Chương trình không bảo đảm sản phẩm đạt thương mại hoặc tạo doanh thu.',
+      outcomeEn: 'A verifiable MVP or prototype: website, app, AI system, AI agent, content system. The program does not guarantee commercial viability or revenue generation.'
     }
   };
 
@@ -978,7 +978,7 @@ Hệ thống nội dung.
 
 Ứng dụng nội bộ.
 
-AI workflow.
+AI system.
 
 Agent hỗ trợ công việc.
 
@@ -1059,7 +1059,7 @@ Content system.
 
 Internal app.
 
-AI workflow.
+AI system.
 
 Work support agent.
 
@@ -1323,7 +1323,7 @@ website
 
 app
 
-AI workflow
+AI system
 
 AI agent
 
@@ -1350,7 +1350,7 @@ website
 
 app
 
-AI workflow
+AI system
 
 AI agent
 
@@ -1525,16 +1525,16 @@ International residents do not need big promises. They need transparency, clear 
       program: 'living-working'
     },
     'lily-la-node-van-hanh-that': {
-      titleVi: 'Lily là một node vận hành thật trong Om Dalat',
-      titleEn: 'Lily is a real operating node inside Om Dalat',
-      contentVi: `Lily không chỉ là một website mới trong hệ Om Dalat. Lily là một node vận hành thật. Điều này có nghĩa là Lily phải có mặt public, có workspace nội bộ, có hồ sơ phòng, có hồ sơ cư dân, có chương trình, có task, có review, có compliance và có nhật ký vận hành.
+      titleVi: 'Lily là một nơi hoạt động thật trong Om Dalat',
+      titleEn: 'Lily is a real operating place inside Om Dalat',
+      contentVi: `Lily không chỉ là một website mới trong hệ Om Dalat. Lily là một nơi hoạt động thật. Điều này có nghĩa là Lily phải có mặt public, có workspace nội bộ, có hồ sơ phòng, có hồ sơ cư dân, có chương trình, có task, có review, có compliance và có nhật ký vận hành.
 
 lily.omdalat.com là mặt public. Nơi này giải thích Lily là gì, ai phù hợp, ở theo tuần/tháng ra sao, workspace vận hành thế nào, chương trình học và làm gồm những gì, người nước ngoài cần biết gì, và cách gửi hồ sơ.
 
 app.omdalat.com/lily mới là nơi vận hành thật. Ở đó, hồ sơ được review, phòng được gán, chương trình được mở, task được giao, cư dân được theo dõi, hỗ trợ pháp lý được ghi chú và các quyết định được audit.
 
 Cuối cùng, Lily phải được đo bằng output thật. Có bao nhiêu phòng được xác minh. Có bao nhiêu cư dân phù hợp. Có bao nhiêu chương trình chạy được. Có bao nhiêu task hoàn thành. Có bao nhiêu người rời Lily với năng lực rõ hơn. Đó mới là bằng chứng, không phải những câu mô tả hay.`,
-      contentEn: `Lily is not just a new website inside Om Dalat. Lily is a real operating node. This means Lily must have a public layer, an internal workspace, room records, resident records, programs, tasks, reviews, compliance, and operational logs.
+      contentEn: `Lily is not just a new website inside Om Dalat. Lily is a real operating place. This means Lily must have a public layer, an internal workspace, room records, resident records, programs, tasks, reviews, compliance, and operational logs.
 
 lily.omdalat.com is the public layer. It explains what Lily is, who it is for, how weekly/monthly stays work, how the workspace operates, what learning and work programs include, what international residents need to know, and how to apply.
 
@@ -1763,10 +1763,10 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
       program: 'living-working'
     },
     'lily-la-node-van-hanh-that': {
-      titleVi: 'Lily là một node vận hành thật trong Om Dalat',
-      titleEn: 'Lily is a real operating node inside Om Dalat',
-      excerptVi: 'Lily có public layer, workspace nội bộ, task, review, compliance, audit...',
-      excerptEn: 'Lily has public layer, internal workspace, tasks, reviews, compliance, audit...',
+      titleVi: 'Lily là một nơi hoạt động thật trong Om Dalat',
+      titleEn: 'Lily is a real operating place inside Om Dalat',
+      excerptVi: 'Lily có trang public, không gian làm việc nội bộ, công việc, đánh giá, giấy phép đầy đủ...',
+      excerptEn: 'Lily has public page, internal workspace, tasks, reviews, full legal permits...',
       program: 'living-working'
     }
   };
@@ -2343,60 +2343,74 @@ function generateBrandPortalHTML(locale: string, url: URL): string {
 
   const t = {
     vi: {
-      title: 'Om Dalat Brand System Portal',
+      title: 'Om Dalat — Hệ thương hiệu địa phương',
       heroH1: 'Xây dựng thương hiệu địa phương từ Đà Lạt ra thế giới',
-      heroSub: 'Một hệ thống giúp người dân, hộ kinh doanh, nhà vườn, quán nhỏ, homestay, farm và công ty địa phương có một thương hiệu số rõ ràng, song ngữ và có thể phát triển dài hạn.',
+      heroSub: 'Giúp người dân, hộ kinh doanh, nhà vườn, quán nhỏ, homestay, farm và công ty địa phương có một thương hiệu số rõ ràng, song ngữ và phát triển dài hạn.',
       problemTitle: 'Vấn đề',
       problemP1: 'Phần lớn thương hiệu địa phương hiện chỉ tồn tại trên Facebook, Google Maps hoặc các nền tảng trung gian.',
       problemP2: 'Điều đó giúp được tìm thấy. Nhưng không giúp sở hữu một hiện diện số lâu dài.',
-      modelTitle: 'Mô hình 4 lớp',
-      layer1: 'Lớp 1: Om Dalat Core — Hệ vận hành thành viên, dashboard, inquiry, workflow.',
-      layer2: 'Lớp 2: Ấp Đà Lạt — Truyền thông địa phương, câu chuyện, văn hóa. Không bán hàng.',
-      layer3: 'Lớp 3: Brand Portal — Nơi tạo thương hiệu. Intake, verification, strategy, publishing.',
-      layer4: 'Lớp 4: Brand Sites — lily.omdalat.com, tamfarm.omdalat.com... Nơi thương hiệu tồn tại.',
+      modelTitle: 'Cách hoạt động',
+      step1Title: 'Gửi thông tin',
+      step2Title: 'Dựng hồ sơ',
+      step3Title: 'Xem và duyệt',
+      step4Title: 'Có trang riêng',
+      layer1: 'Bạn gửi thông tin nơi của mình — homestay, farm, quán, xưởng, công ty.',
+      layer2: 'Chúng tôi dựng hồ sơ thương hiệu — ảnh thật, câu chuyện, thông tin rõ ràng, song ngữ.',
+      layer3: 'Bạn xem trước và duyệt — chỉ xuất bản khi bạn đồng ý và đủ điều kiện pháp lý.',
+      layer4: 'Bạn có trang riêng — lily.omdalat.com hoặc tên miền riêng. Khách tìm thấy và liên hệ trực tiếp.',
+      nowTitle: 'Bây giờ',
+      soonTitle: 'Sắp tới',
+      laterTitle: 'Về sau',
       whoTitle: 'Ai có thể tham gia',
       whoList: ['Nhà vườn', 'Farm', 'Homestay', 'Café', 'Quán ăn', 'Sản phẩm địa phương', 'Xưởng nghề', 'Doanh nghiệp', 'Nghệ nhân', 'Hợp tác xã'],
       caseTitle: 'Thương hiệu đang xây',
-      lilyStatus: 'Đã xuất bản',
-      tamfarmStatus: 'Đang xây',
-      roadmapTitle: 'Lộ trình',
-      phase1: 'Giai đoạn 1: Đà Lạt & Lạc Dương — 50 thương hiệu',
-      phase2: 'Giai đoạn 2: Toàn tỉnh Lâm Đồng — 500 thương hiệu',
-      phase3: 'Giai đoạn 3: Quốc tế hóa — 5.000 thương hiệu',
+      lilyStatus: 'Đang hoạt động',
+      tamfarmStatus: 'Đang chuẩn bị',
+      roadmapTitle: 'Hướng đi',
+      phase1: 'Bây giờ: Đà Lạt & Lạc Dương — 50 thương hiệu địa phương',
+      phase2: 'Sắp tới: Toàn tỉnh Lâm Đồng — 500 thương hiệu',
+      phase3: 'Về sau: Mở rộng quốc tế — 5.000 thương hiệu',
       langTitle: 'Ngôn ngữ',
-      langLive: 'Đang hoạt động: Vietnamese, English',
-      langPlan: 'Kế hoạch: Korean, Japanese, Chinese, Russian',
-      ctaTitle: 'Gửi thương hiệu của bạn',
+      langLive: 'Đang hỗ trợ: Tiếng Việt, Tiếng Anh',
+      langPlan: 'Sắp có: Tiếng Hàn, Tiếng Nhật, Tiếng Trung, Tiếng Nga',
+      ctaTitle: 'Gửi thông tin nơi của bạn',
       ctaLabel: 'Bắt đầu',
-      footer: 'Om Dalat Brand System Portal'
+      footer: 'Om Dalat — Hệ thương hiệu địa phương'
     },
     en: {
-      title: 'Om Dalat Brand System Portal',
+      title: 'Om Dalat — Local Brand System',
       heroH1: 'Building local brands from Dalat to the world',
-      heroSub: 'A system helping local people, household businesses, farms, cafés, homestays, and companies build clear, bilingual, long-term digital brands.',
+      heroSub: 'Helping local people, household businesses, farms, cafés, homestays, and companies build clear, bilingual, long-term digital brands.',
       problemTitle: 'The Problem',
       problemP1: 'Most local brands today only exist through Facebook, Google Maps, or third-party platforms.',
       problemP2: 'That helps them get discovered. It does not help them own a long-term digital presence.',
-      modelTitle: '4-Layer Model',
-      layer1: 'Layer 1: Om Dalat Core — Member system, dashboard, inquiry, workflow.',
-      layer2: 'Layer 2: Ap Dalat — Local editorial, stories, culture. No commerce.',
-      layer3: 'Layer 3: Brand Portal — Where brands are created. Intake, verification, strategy, publishing.',
-      layer4: 'Layer 4: Brand Sites — lily.omdalat.com, tamfarm.omdalat.com... Where brands live.',
+      modelTitle: 'How It Works',
+      step1Title: 'Share Your Place',
+      step2Title: 'Build Profile',
+      step3Title: 'Preview & Approve',
+      step4Title: 'Get Your Page',
+      layer1: 'You share information about your place — homestay, farm, café, workshop, or company.',
+      layer2: 'We build your brand profile — real photos, your story, clear bilingual information.',
+      layer3: 'You preview and approve — only published when you agree and meet legal requirements.',
+      layer4: 'You get your own page — lily.omdalat.com or your own domain. Customers find and contact you directly.',
+      nowTitle: 'Now',
+      soonTitle: 'Soon',
+      laterTitle: 'Later',
       whoTitle: 'Who Can Join',
       whoList: ['Farmers', 'Farms', 'Homestays', 'Cafés', 'Restaurants', 'Local Products', 'Craft Workshops', 'Companies', 'Artisans', 'Cooperatives'],
       caseTitle: 'Brands in Progress',
-      lilyStatus: 'Published',
-      tamfarmStatus: 'In Progress',
-      roadmapTitle: 'Roadmap',
-      phase1: 'Phase 1: Dalat & Lac Duong — 50 brands',
-      phase2: 'Phase 2: All of Lam Dong Province — 500 brands',
-      phase3: 'Phase 3: International expansion — 5,000 brands',
+      lilyStatus: 'Active',
+      tamfarmStatus: 'Preparing',
+      roadmapTitle: 'Our Direction',
+      phase1: 'Now: Dalat & Lac Duong — 50 local brands',
+      phase2: 'Soon: All of Lam Dong Province — 500 brands',
+      phase3: 'Later: International expansion — 5,000 brands',
       langTitle: 'Languages',
-      langLive: 'Live: Vietnamese, English',
-      langPlan: 'Planned: Korean, Japanese, Chinese, Russian',
-      ctaTitle: 'Submit Your Brand',
+      langLive: 'Supported: Vietnamese, English',
+      langPlan: 'Coming soon: Korean, Japanese, Chinese, Russian',
+      ctaTitle: 'Share Your Place',
       ctaLabel: 'Get Started',
-      footer: 'Om Dalat Brand System Portal'
+      footer: 'Om Dalat — Local Brand System'
     }
   };
 
@@ -2495,10 +2509,10 @@ function generateBrandPortalHTML(locale: string, url: URL): string {
     <div class="container">
       <h2>${c.modelTitle}</h2>
       <div class="grid">
-        <div class="card"><h3>Layer 1</h3><p>${c.layer1}</p></div>
-        <div class="card"><h3>Layer 2</h3><p>${c.layer2}</p></div>
-        <div class="card"><h3>Layer 3</h3><p>${c.layer3}</p></div>
-        <div class="card"><h3>Layer 4</h3><p>${c.layer4}</p></div>
+        <div class="card"><h3>${c.step1Title}</h3><p>${c.layer1}</p></div>
+        <div class="card"><h3>${c.step2Title}</h3><p>${c.layer2}</p></div>
+        <div class="card"><h3>${c.step3Title}</h3><p>${c.layer3}</p></div>
+        <div class="card"><h3>${c.step4Title}</h3><p>${c.layer4}</p></div>
       </div>
     </div>
   </section>
@@ -2517,12 +2531,12 @@ function generateBrandPortalHTML(locale: string, url: URL): string {
       <h2>${c.caseTitle}</h2>
       <div class="case-list">
         <div class="case-card">
-          <strong>Lily</strong>
+          <strong>Lily — Living & Working Garden</strong>
           <span class="status">${c.lilyStatus}</span>
         </div>
         <div class="case-card">
-          <strong>Tam Farm</strong>
-          <span class="status draft">${c.tamfarmStatus}</span>
+          <strong>${isEn ? 'More brands coming' : 'Thương hiệu khác sắp có'}</strong>
+          <span class="status draft">${isEn ? 'In preparation' : 'Đang chuẩn bị'}</span>
         </div>
       </div>
     </div>
@@ -2532,9 +2546,9 @@ function generateBrandPortalHTML(locale: string, url: URL): string {
     <div class="container">
       <h2>${c.roadmapTitle}</h2>
       <div class="grid">
-        <div class="card"><h3>Phase 1</h3><p>${c.phase1}</p></div>
-        <div class="card"><h3>Phase 2</h3><p>${c.phase2}</p></div>
-        <div class="card"><h3>Phase 3</h3><p>${c.phase3}</p></div>
+        <div class="card"><h3>${c.nowTitle}</h3><p>${c.phase1}</p></div>
+        <div class="card"><h3>${c.soonTitle}</h3><p>${c.phase2}</p></div>
+        <div class="card"><h3>${c.laterTitle}</h3><p>${c.phase3}</p></div>
       </div>
     </div>
   </section>
