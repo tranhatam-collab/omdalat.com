@@ -8,12 +8,23 @@ export const handleBrandSite = async (
     const url = new URL(request.url);
     const host = request.headers.get('Host') || url.hostname;
 
-    // Extract slug from query parameter for testing (e.g., ?slug=lily)
-    // For brand.omdalat.com, extract from path (e.g., /lily)
+    // Extract slug from subdomain (e.g., lily.omdalat.com -> lily)
+    // Fallback to path (brand.omdalat.com/lily) or query (?slug=lily)
     let slug = url.searchParams.get('slug');
-    
+
     if (!slug) {
-      // Extract from path
+      // Extract from subdomain: anything before .omdalat.com
+      const hostParts = host.split('.');
+      if (hostParts.length >= 3 && hostParts.slice(-2).join('.') === 'omdalat.com') {
+        const subdomain = hostParts[0];
+        if (subdomain && subdomain !== 'brand' && subdomain !== 'api' && subdomain !== 'www') {
+          slug = subdomain;
+        }
+      }
+    }
+
+    if (!slug) {
+      // Extract from path (brand.omdalat.com/lily)
       const pathParts = url.pathname.split('/').filter(Boolean);
       slug = pathParts[0] || 'lily';
     }
@@ -73,10 +84,10 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
 
     const contentBlocks = contentBlocksResult.results || [];
 
-    // Determine locale from URL path or query parameter (for testing)
+    // Determine locale from URL path or query parameter
     const pathParts = url.pathname.split('/').filter(Boolean);
     const queryLocale = url.searchParams.get('locale');
-    const locale = (pathParts[0] === 'en' || queryLocale === 'en') ? 'en' : 'vi';
+    const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
 
     // Build HTML response
     const html = generateBrandSiteHTML(brand, contentBlocks, locale, url);
