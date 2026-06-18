@@ -93,6 +93,40 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     const queryLocale = url.searchParams.get('locale');
     const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
 
+    // Check for Lily program routes — must be before general Lily V2 routes
+    if (pathParts[0] === 'programs' && brand.slug === 'lily' && brand.publication_status === 'published') {
+      const program = pathParts[1]; // startup-with-ai or technology-creation
+      if (program) {
+        const html = generateLilyProgramPage(brand, program, locale, url);
+        if (html) {
+          return new Response(html, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'public, max-age=300'
+            }
+          });
+        }
+      }
+    }
+
+    // Check for Lily article routes
+    if (pathParts[0] === 'articles' && brand.slug === 'lily' && brand.publication_status === 'published') {
+      const article = pathParts[1]; // article slug
+      if (article) {
+        const html = generateLilyArticlePage(brand, article, locale, url);
+        if (html) {
+          return new Response(html, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'public, max-age=300'
+            }
+          });
+        }
+      }
+    }
+
     // Check for specific Lily V2 routes — ONLY if brand is published
     const page = pathParts.find(p => p !== 'en' && p !== 'vi');
     
@@ -157,8 +191,8 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
     'programs': {
       titleVi: 'Chương trình',
       titleEn: 'Programs',
-      contentVi: 'Lily có các chương trình: Work From Garden, AI & Online Work Starter, Brand Factory Contributor, và International Builder Residency.',
-      contentEn: 'Lily offers programs: Work From Garden, AI & Online Work Starter, Brand Factory Contributor, and International Builder Residency.'
+      contentVi: 'Lily có hai chương trình chính: Khởi Nghiệp Cùng AI (tạo công việc, thu nhập, hệ thống làm việc) và Sáng Tạo Công Nghệ Cùng AI (xây dựng sản phẩm thật với AI).',
+      contentEn: 'Lily offers two main programs: Startup With AI (create work, income, and work systems) and Technology Creation (build real products with AI).'
     },
     'jobs': {
       titleVi: 'Việc làm online',
@@ -281,6 +315,1053 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
     <div class="container">
       <h2>${isEn ? 'More Information' : 'Thông tin thêm'}</h2>
       <p>${isEn ? 'This page is part of Lily Living & Working Garden V2. We are transitioning from a daily homestay model to a weekly/monthly stay model focused on remote work, digital learning, and real project participation.' : 'Trang này là một phần của Lily Living & Working Garden V2. Chúng tôi đang chuyển đổi từ mô hình homestay theo ngày sang mô hình ở lại theo tuần/tháng, tập trung vào làm việc từ xa, học kỹ năng số và tham gia dự án thật.'}</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 ${brandName} - ${isEn ? 'Part of' : 'Thuộc hệ'} Ôm Đà Lạt</p>
+      <p><a href="https://omdalat.com" style="color: #999;">omdalat.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>`;
+}
+
+function generateLilyProgramPage(brand: any, program: string, locale: string, url: URL): string | null {
+  const isEn = locale === 'en';
+  const brandName = isEn ? brand.name_en : brand.name_vi;
+  
+  const programs: Record<string, { titleVi: string; titleEn: string; descriptionVi: string; descriptionEn: string; durationVi: string; durationEn: string; targetVi: string; targetEn: string; outcomeVi: string; outcomeEn: string }> = {
+    'startup-with-ai': {
+      titleVi: 'Khởi Nghiệp Cùng AI',
+      titleEn: 'Startup With AI Residency',
+      descriptionVi: 'Chương trình thực hành dành cho người muốn tạo công việc, tạo thu nhập, tạo dịch vụ, tạo thương hiệu cá nhân và tạo hệ thống làm việc với AI.',
+      descriptionEn: 'A practical program for people who want to create work, income, services, personal brands, and work systems with AI.',
+      durationVi: '2 tuần',
+      durationEn: '2 weeks',
+      targetVi: 'Freelancer, người kinh doanh nhỏ, người muốn chuyển đổi nghề nghiệp, người muốn xây hệ thống tạo giá trị',
+      targetEn: 'Freelancers, small business owners, career changers, value system builders',
+      outcomeVi: 'Tạo công việc đầu tiên, tạo thu nhập online, xây dựng thương hiệu cá nhân, thiết lập hệ thống làm việc',
+      outcomeEn: 'Create first job, online income, personal brand, work system'
+    },
+    'technology-creation': {
+      titleVi: 'Sáng Tạo Công Nghệ Cùng AI',
+      titleEn: 'Technology Creation Residency',
+      descriptionVi: 'Chương trình thực hành công nghệ kéo dài 2 tuần. Người tham gia không học để lấy chứng chỉ, mà học để tạo ra sản phẩm thật.',
+      descriptionEn: 'A 2-week practical technology program. Participants do not learn for certificates, but to create real products.',
+      durationVi: '2 tuần',
+      durationEn: '2 weeks',
+      targetVi: 'Developer, creator, builder, người muốn xây website, app, AI workflow và sản phẩm số',
+      targetEn: 'Developers, creators, builders, people who want to build websites, apps, AI workflows, and digital products',
+      outcomeVi: 'Website, ứng dụng, AI workflow, AI agent, hệ thống nội dung, thương hiệu số, startup MVP',
+      outcomeEn: 'Website, app, AI workflow, AI agent, content system, digital brand, startup MVP'
+    }
+  };
+
+  const programData = programs[program];
+  if (!programData) {
+    return null;
+  }
+
+  const title = isEn ? programData.titleEn : programData.titleVi;
+  const description = isEn ? programData.descriptionEn : programData.descriptionVi;
+  const duration = isEn ? programData.durationEn : programData.durationVi;
+  const target = isEn ? programData.targetEn : programData.targetVi;
+  const outcome = isEn ? programData.outcomeEn : programData.outcomeVi;
+  const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}/programs/${program}`;
+
+  return `<!DOCTYPE html>
+<html lang="${locale}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="robots" content="index, follow">
+  <title>${title} - ${brandName}</title>
+  <meta name="description" content="${description}">
+  <link rel="canonical" href="${pageUrl}">
+  ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/programs/' + program + '">' : ''}
+  ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/programs/' + program + '">'}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${title} - ${brandName}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:site_name" content="Om Dalat">
+  <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
+  <meta property="og:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title} - ${brandName}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); color: white; padding: 100px 0; text-align: center; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+    .section { padding: 80px 0; }
+    .section h2 { font-size: 2.2rem; margin-bottom: 2rem; color: #1a5c43; }
+    .section p { margin-bottom: 1.5rem; max-width: 800px; line-height: 1.8; }
+    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
+    .nav a { color: #333; text-decoration: none; }
+    .nav a:hover { color: #1a5c43; }
+    .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
+    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a.active { background: #1a5c43; color: white; }
+    .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
+    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 40px 0; }
+    .info-card { background: #f9f9f9; padding: 30px; border-radius: 8px; text-align: center; }
+    .info-card h3 { color: #1a5c43; margin-bottom: 10px; }
+    .info-card p { color: #666; font-size: 0.95rem; }
+    footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+    .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; margin-top: 20px; font-size: 1.1rem; }
+    .cta-button:hover { background: #0f3d2e; }
+    .secondary-button { display: inline-block; background: white; color: #1a5c43; padding: 15px 30px; text-decoration: none; border-radius: 4px; margin-top: 20px; margin-left: 10px; font-size: 1.1rem; border: 2px solid #1a5c43; }
+    .secondary-button:hover { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <ul>
+        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}training">${isEn ? 'Training' : 'Đào tạo'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}international">${isEn ? 'International' : 'Quốc tế'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+        <li class="lang-switcher">
+          <a href="/programs/${program}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
+          <a href="/en/programs/${program}" class="${isEn ? 'active' : ''}">English</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      <h1>${title}</h1>
+      <p>${description}</p>
+      <div>
+        <a href="/${locale === 'en' ? 'en/' : ''}apply" class="cta-button">${isEn ? 'Apply to Join' : 'Gửi hồ sơ tham gia'}</a>
+        <a href="/${locale === 'en' ? 'en/' : ''}" class="secondary-button">${isEn ? 'Back to Home' : 'Về trang chủ'}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'Program Details' : 'Thông tin chương trình'}</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>${isEn ? 'Duration' : 'Thời lượng'}</h3>
+          <p>${duration}</p>
+        </div>
+        <div class="info-card">
+          <h3>${isEn ? 'Location' : 'Địa điểm'}</h3>
+          <p>Lily Living & Working Garden<br>Lạc Dương – Đà Lạt</p>
+        </div>
+        <div class="info-card">
+          <h3>${isEn ? 'Format' : 'Hình thức'}</h3>
+          <p>${isEn ? 'Residency Program' : 'Chương trình lưu trú thực hành'}</p>
+        </div>
+        <div class="info-card">
+          <h3>${isEn ? 'Language' : 'Ngôn ngữ'}</h3>
+          <p>${isEn ? 'Vietnamese / English' : 'Tiếng Việt / Tiếng Anh'}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'Who This Is For' : 'Dành cho ai'}</h2>
+      <p>${target}</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'What You Will Build' : 'Bạn sẽ xây dựng gì'}</h2>
+      <p>${outcome}</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'Our Programs' : 'Chương trình của chúng tôi'}</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><a href="/${locale === 'en' ? 'en/' : ''}programs/startup-with-ai" style="color: #1a5c43; text-decoration: none;">${isEn ? 'Startup With AI' : 'Khởi Nghiệp Cùng AI'}</a></h3>
+          <p>${isEn ? 'Create work, income, and systems with AI' : 'Tạo công việc, thu nhập và hệ thống với AI'}</p>
+        </div>
+        <div class="info-card">
+          <h3><a href="/${locale === 'en' ? 'en/' : ''}programs/technology-creation" style="color: #1a5c43; text-decoration: none;">${isEn ? 'Technology Creation' : 'Sáng Tạo Công Nghệ'}</a></h3>
+          <p>${isEn ? 'Build real products with AI' : 'Xây dựng sản phẩm thật với AI'}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'How It Works' : 'Cách vận hành'}</h2>
+      <p>${isEn ? 'Each 2-week cohort focuses on practical building. Participants live at Lily, work daily, and complete a real product by the end of the program.' : 'Mỗi cohort 2 tuần tập trung vào xây dựng thực hành. Người tham gia ở lại tại Lily, làm việc hàng ngày và hoàn thành một sản phẩm thật vào cuối chương trình.'}</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 ${brandName} - ${isEn ? 'Part of' : 'Thuộc hệ'} Ôm Đà Lạt</p>
+      <p><a href="https://omdalat.com" style="color: #999;">omdalat.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>`;
+}
+
+function generateLilyArticlePage(brand: any, article: string, locale: string, url: URL): string | null {
+  const isEn = locale === 'en';
+  const brandName = isEn ? brand.name_en : brand.name_vi;
+  
+  const articles: Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string; program: string }> = {
+    'khoi-nghiep-cung-ai-khong-bat-dau-tu-cong-nghe': {
+      titleVi: 'Khởi Nghiệp Cùng AI Không Bắt Đầu Từ Công Nghệ',
+      titleEn: 'Startup With AI Does Not Start With Technology',
+      contentVi: `Có một điều thú vị đang diễn ra trên khắp thế giới.
+
+Rất nhiều người đang nói về trí tuệ nhân tạo.
+
+Rất nhiều người đang học cách dùng AI.
+
+Rất nhiều người đang mua khóa học AI.
+
+Nhưng số người thật sự tạo được công việc, tạo được thu nhập hoặc xây được một hệ thống có giá trị từ AI lại không nhiều như chúng ta tưởng.
+
+Vấn đề thường không nằm ở công cụ.
+
+Vấn đề nằm ở cách chúng ta nhìn về công việc và cuộc sống.
+
+Có người dành hàng tháng để học công cụ mới nhưng vẫn không biết mình sẽ làm gì với nó.
+
+Có người liên tục chạy theo xu hướng mới nhưng chưa từng hoàn thành một dự án thực tế.
+
+Có người dùng AI mỗi ngày nhưng chỉ để tiết kiệm vài phút công việc nhỏ.
+
+Trong khi đó, ở một nơi khác, có những người đang dùng cùng những công cụ ấy để xây website, phát triển thương hiệu, tạo nội dung, bán sản phẩm, hỗ trợ khách hàng hoặc tạo ra những công việc hoàn toàn mới.
+
+Sự khác biệt không nằm ở AI.
+
+Sự khác biệt nằm ở cách họ xây dựng một hệ thống làm việc cho chính mình.
+
+Đó cũng là lý do chương trình Khởi Nghiệp Cùng AI tại Lily được hình thành.
+
+Đây không phải một lớp học online.
+
+Đây không phải nơi ngồi nghe lý thuyết về công nghệ.
+
+Đây cũng không phải nơi hứa hẹn làm giàu nhanh.
+
+Đây là một chương trình thực hành diễn ra trong một không gian sống và làm việc tại Lạc Dương, gần Đà Lạt.
+
+Người tham gia sẽ ở lại theo tuần hoặc theo tháng.
+
+Mỗi ngày đều có nhịp làm việc.
+
+Mỗi tuần đều có mục tiêu.
+
+Mỗi người đều phải tạo ra đầu ra cụ thể.
+
+Có thể đó là một website đầu tiên.
+
+Có thể đó là một thương hiệu cá nhân.
+
+Có thể đó là một dịch vụ nhỏ.
+
+Có thể đó là một hệ thống nội dung.
+
+Có thể đó là một công việc online đầu tiên.
+
+Chúng tôi không quan tâm bạn bắt đầu ở đâu.
+
+Điều quan trọng hơn là sau một khoảng thời gian đủ dài, bạn đã tạo được điều gì.
+
+AI có thể giúp bạn làm nhanh hơn.
+
+Nhưng AI không thể thay bạn suy nghĩ.
+
+AI có thể hỗ trợ công việc.
+
+Nhưng AI không thể thay bạn chịu trách nhiệm cho cuộc đời mình.
+
+Khởi nghiệp cùng AI không phải là học một công cụ.
+
+Khởi nghiệp cùng AI là học cách tạo ra giá trị trong một thế giới đang thay đổi.
+
+Nếu bạn đang tìm một nơi để bắt đầu lại một cách thực tế hơn, chậm hơn nhưng rõ ràng hơn, Lily có thể là một điểm dừng phù hợp.
+
+Không phải để trốn khỏi cuộc sống.
+
+Mà để xây lại cách mình làm việc với cuộc sống.`,
+      contentEn: `Something interesting is happening around the world.
+
+Many people are talking about artificial intelligence.
+
+Many people are learning how to use AI.
+
+Many people are buying AI courses.
+
+But the number of people who actually create work, generate income, or build valuable systems with AI is not as high as we imagine.
+
+The problem is usually not with the tools.
+
+The problem is how we view work and life.
+
+Some people spend months learning new tools but still don't know what they'll do with them.
+
+Some people constantly chase new trends but have never completed a real project.
+
+Some people use AI every day but only to save a few minutes on small tasks.
+
+Meanwhile, elsewhere, there are people using those same tools to build websites, develop brands, create content, sell products, support customers, or create entirely new jobs.
+
+The difference is not in AI.
+
+The difference is in how they build a work system for themselves.
+
+That's why the Startup With AI program at Lily was created.
+
+This is not an online class.
+
+This is not a place to sit and listen to technology theory.
+
+This is also not a place promising quick wealth.
+
+This is a practical program happening in a living and working space in Lac Duong, near Da Lat.
+
+Participants will stay by the week or by the month.
+
+Every day has a work rhythm.
+
+Every week has goals.
+
+Each person must create specific outputs.
+
+It could be a first website.
+
+It could be a personal brand.
+
+It could be a small service.
+
+It could be a content system.
+
+It could be a first online job.
+
+We don't care where you start.
+
+What matters more is what you've created after a long enough time.
+
+AI can help you do things faster.
+
+But AI cannot think for you.
+
+AI can support work.
+
+But AI cannot take responsibility for your life.
+
+Starting a business with AI is not learning a tool.
+
+Starting a business with AI is learning to create value in a changing world.
+
+If you're looking for a place to start again in a more practical, slower but clearer way, Lily might be a suitable stop.
+
+Not to escape from life.
+
+But to rebuild how you work with life.`,
+      program: 'startup-with-ai'
+    },
+    'vi-sao-nhieu-nguoi-hoc-ai-nhung-van-khong-tao-duoc-thu-nhap': {
+      titleVi: 'Vì Sao Nhiều Người Học AI Nhưng Vẫn Không Tạo Được Thu Nhập',
+      titleEn: 'Why Many People Learn AI But Still Don\'t Create Income',
+      contentVi: `Khoảng cách giữa học và làm.
+
+Hội chứng sưu tầm công cụ.
+
+Thiếu dự án thật.
+
+Thiếu môi trường thực hành.
+
+Đó là những lý do chính khiến nhiều người học AI nhưng không tạo được thu nhập.`,
+      contentEn: `The gap between learning and doing.
+
+The tool collection syndrome.
+
+Lack of real projects.
+
+Lack of practice environment.
+
+These are the main reasons why many people learn AI but don't create income.`,
+      program: 'startup-with-ai'
+    },
+    'tu-mot-ky-nang-nho-den-cong-viec-dau-tien-voi-ai': {
+      titleVi: 'Từ Một Kỹ Năng Nhỏ Đến Công Việc Đầu Tiên Với AI',
+      titleEn: 'From A Small Skill To First Job With AI',
+      contentVi: `Viết nội dung.
+
+SEO.
+
+Nghiên cứu.
+
+Trợ lý từ xa.
+
+Quản trị website.
+
+Brand Factory.
+
+Case study thực tế.`,
+      contentEn: `Content writing.
+
+SEO.
+
+Research.
+
+Virtual assistant.
+
+Website administration.
+
+Brand Factory.
+
+Real case study.`,
+      program: 'startup-with-ai'
+    },
+    'mot-tuan-song-va-lam-viec-tai-lily-dien-ra-nhu-the-nao': {
+      titleVi: 'Một Tuần Sống Và Làm Việc Tại Lily Diễn Ra Như Thế Nào',
+      titleEn: 'How A Week Living And Working At Lily Happens',
+      contentVi: `Lịch một ngày.
+
+Lịch một tuần.
+
+Làm việc trong vườn.
+
+Workshop.
+
+Review.
+
+Dự án.`,
+      contentEn: `Daily schedule.
+
+Weekly schedule.
+
+Working in the garden.
+
+Workshop.
+
+Review.
+
+Project.`,
+      program: 'startup-with-ai'
+    },
+    'neu-bat-dau-lai-tu-dau-nam-2026-toi-se-hoc-ai-nhu-the-nao': {
+      titleVi: 'Nếu Bắt Đầu Lại Từ Đầu Năm 2026, Tôi Sẽ Học AI Như Thế Nào',
+      titleEn: 'If I Started Again From Early 2026, How Would I Learn AI',
+      contentVi: `Không mua 20 khóa học.
+
+Không chạy theo trend.
+
+Chọn một kỹ năng.
+
+Làm dự án thật.
+
+Ở trong môi trường có nhịp làm việc.
+
+Xây portfolio.
+
+Tạo thu nhập đầu tiên.`,
+      contentEn: `Don't buy 20 courses.
+
+Don't chase trends.
+
+Choose one skill.
+
+Do real projects.
+
+Live in an environment with work rhythm.
+
+Build portfolio.
+
+Create first income.`,
+      program: 'startup-with-ai'
+    },
+    'chung-ta-khong-thieu-y-tuong-chung-ta-thieu-nhung-nguoi-bien-y-tuong-thanh-san-pham': {
+      titleVi: 'Chúng Ta Không Thiếu Ý Tưởng. Chúng Ta Thiếu Những Người Biến Ý Tưởng Thành Sản Phẩm.',
+      titleEn: 'We Don\'t Lack Ideas. We Lack People Who Turn Ideas Into Products.',
+      contentVi: `Mỗi ngày đều có người nghĩ ra một ý tưởng mới.
+
+Một website mới.
+
+Một ứng dụng mới.
+
+Một cộng đồng mới.
+
+Một dịch vụ mới.
+
+Một dự án mới.
+
+Thế nhưng phần lớn những ý tưởng đó không bao giờ đi xa hơn một cuộc trò chuyện.
+
+Không phải vì ý tưởng không tốt.
+
+Không phải vì công nghệ quá khó.
+
+Mà bởi vì khoảng cách từ một ý tưởng đến một sản phẩm thực tế luôn lớn hơn những gì chúng ta tưởng tượng.
+
+Ngày trước, khoảng cách ấy có thể kéo dài nhiều năm.
+
+Cần đội ngũ kỹ thuật.
+
+Cần vốn đầu tư.
+
+Cần hạ tầng.
+
+Cần rất nhiều nguồn lực.
+
+Ngày nay, điều đó đang thay đổi nhanh chóng.
+
+Một người với máy tính cá nhân, kết nối Internet và khả năng học hỏi có thể tạo ra những sản phẩm mà trước đây chỉ doanh nghiệp lớn mới làm được.
+
+Website.
+
+Hệ thống nội dung.
+
+Ứng dụng nội bộ.
+
+AI workflow.
+
+Agent hỗ trợ công việc.
+
+Công cụ tự động hóa.
+
+Thậm chí cả những nền tảng phục vụ hàng nghìn người dùng.
+
+Nhưng công nghệ không phải là điểm bắt đầu.
+
+Điểm bắt đầu là khả năng nhìn thấy một vấn đề thật.
+
+Sau đó kiên nhẫn xây một giải pháp thật.
+
+Chương trình Sáng Tạo Công Nghệ Cùng AI tại Lily không được tạo ra để dạy mọi người chạy theo công nghệ mới nhất.
+
+Chúng tôi quan tâm nhiều hơn tới một câu hỏi khác:
+
+Làm sao để một người bình thường có thể biến một ý tưởng thành một sản phẩm có ích cho cuộc sống?
+
+Trong hai tuần, người tham gia sẽ không chỉ học.
+
+Mỗi người phải xây.
+
+Phải thử.
+
+Phải sai.
+
+Phải sửa.
+
+Và phải hoàn thành.
+
+Kết quả cuối cùng không phải là một tờ chứng nhận.
+
+Kết quả cuối cùng là một sản phẩm đầu tiên có thể hoạt động.
+
+Có thể nhỏ.
+
+Nhưng là thật.
+
+Đó là nơi hành trình công nghệ nên bắt đầu.`,
+      contentEn: `Every day, someone comes up with a new idea.
+
+A new website.
+
+A new app.
+
+A new community.
+
+A new service.
+
+A new project.
+
+But most of those ideas never go beyond a conversation.
+
+Not because the idea isn't good.
+
+Not because the technology is too hard.
+
+But because the distance from an idea to a real product is always greater than we imagine.
+
+In the past, that distance could take many years.
+
+Needed a technical team.
+
+Needed capital investment.
+
+Needed infrastructure.
+
+Needed many resources.
+
+Today, that is changing rapidly.
+
+One person with a personal computer, Internet connection, and learning ability can create products that only large enterprises could do before.
+
+Website.
+
+Content system.
+
+Internal app.
+
+AI workflow.
+
+Work support agent.
+
+Automation tool.
+
+Even platforms serving thousands of users.
+
+But technology is not the starting point.
+
+The starting point is the ability to see a real problem.
+
+Then patiently build a real solution.
+
+The Technology Creation with AI program at Lily was not created to teach everyone to chase the latest technology.
+
+We care more about another question:
+
+How can an ordinary person turn an idea into a product useful for life?
+
+In two weeks, participants will not just learn.
+
+Each person must build.
+
+Must try.
+
+Must fail.
+
+Must fix.
+
+And must complete.
+
+The final result is not a certificate.
+
+The final result is a first product that can work.
+
+Maybe small.
+
+But real.
+
+That's where the technology journey should start.`,
+      program: 'technology-creation'
+    },
+    'ai-khong-thay-the-nha-sang-tao-ai-trao-them-suc-manh-cho-nha-sang-tao': {
+      titleVi: 'AI Không Thay Thế Nhà Sáng Tạo. AI Trao Thêm Sức Mạnh Cho Nhà Sáng Tạo.',
+      titleEn: 'AI Does Not Replace Creators. AI Gives More Power To Creators.',
+      contentVi: `Nỗi sợ lớn nhất của nhiều người hiện nay là công nghệ sẽ thay thế họ.
+
+Điều đó có thể đúng với những công việc lặp lại.
+
+Nhưng lại không đúng với những người biết tạo ra giá trị.
+
+AI không có giấc mơ.
+
+AI không có tầm nhìn.
+
+AI không có trách nhiệm.
+
+AI không có khả năng quyết định điều gì nên được xây dựng.
+
+Những điều đó vẫn thuộc về con người.
+
+Điều AI làm được là giúp một người sáng tạo đi nhanh hơn.
+
+Một người viết có thể xuất bản nhiều hơn.
+
+Một người thiết kế có thể thử nghiệm nhiều hơn.
+
+Một người kinh doanh có thể kiểm chứng ý tưởng nhanh hơn.
+
+Một người lập trình có thể tạo ra hệ thống nhanh hơn.
+
+Trong chương trình Sáng Tạo Công Nghệ Cùng AI, người tham gia sẽ học cách sử dụng AI như một cộng sự.
+
+Không phải để phụ thuộc.
+
+Mà để mở rộng khả năng sáng tạo của chính mình.
+
+Mỗi người sẽ chọn một dự án.
+
+Một sản phẩm.
+
+Một hệ thống.
+
+Một công cụ.
+
+Và dùng AI để rút ngắn khoảng cách từ ý tưởng tới hiện thực.
+
+Công nghệ chỉ thật sự có giá trị khi nó giúp con người tạo ra nhiều giá trị hơn cho cuộc sống.
+
+Đó là triết lý cốt lõi của chương trình này.`,
+      contentEn: `The biggest fear of many people today is that technology will replace them.
+
+That may be true for repetitive jobs.
+
+But not true for those who know how to create value.
+
+AI has no dreams.
+
+AI has no vision.
+
+AI has no responsibility.
+
+AI has no ability to decide what should be built.
+
+Those things still belong to humans.
+
+What AI can do is help a creator go faster.
+
+A writer can publish more.
+
+A designer can experiment more.
+
+A business person can validate ideas faster.
+
+A programmer can create systems faster.
+
+In the Technology Creation with AI program, participants will learn to use AI as a collaborator.
+
+Not to depend on.
+
+But to expand their own creative ability.
+
+Each person will choose a project.
+
+A product.
+
+A system.
+
+A tool.
+
+And use AI to shorten the distance from idea to reality.
+
+Technology is only truly valuable when it helps humans create more value for life.
+
+That is the core philosophy of this program.`,
+      program: 'technology-creation'
+    },
+    'tu-da-lat-chung-ta-co-the-xay-dung-san-pham-cho-toan-the-gioi-khong': {
+      titleVi: 'Từ Đà Lạt, Chúng Ta Có Thể Xây Dựng Sản Phẩm Cho Toàn Thế Giới Không?',
+      titleEn: 'From Da Lat, Can We Build Products For The World?',
+      contentVi: `Câu trả lời là có.
+
+Nhưng không theo cách nhiều người vẫn nghĩ.
+
+Không phải bằng những văn phòng lớn.
+
+Không phải bằng những chiến dịch hào nhoáng.
+
+Không phải bằng những khẩu hiệu công nghệ.
+
+Mà bằng những nhóm nhỏ biết tạo ra sản phẩm giải quyết vấn đề thật.
+
+Một website hữu ích.
+
+Một ứng dụng đơn giản.
+
+Một hệ thống quản lý.
+
+Một cộng đồng vận hành tốt.
+
+Một công cụ hỗ trợ công việc.
+
+Một AI Agent giải quyết được một nhiệm vụ cụ thể.
+
+Tất cả đều có thể bắt đầu từ một khu vườn nhỏ.
+
+Từ một căn phòng làm việc.
+
+Từ một nhóm người cùng học và cùng xây dựng.
+
+Đó là lý do Lily chọn mô hình Living & Working Garden.
+
+Con người không chỉ học công nghệ.
+
+Con người sống cùng công nghệ.
+
+Làm việc cùng công nghệ.
+
+Và từng bước tạo ra những sản phẩm có thể phục vụ người khác.
+
+Thế giới ngày càng kết nối.
+
+Địa điểm không còn là rào cản lớn nhất.
+
+Điều quan trọng là khả năng tạo ra giá trị.
+
+Đà Lạt hoàn toàn có thể trở thành nơi khởi đầu của những sản phẩm phục vụ toàn cầu.
+
+Nhưng điều đó chỉ xảy ra khi chúng ta bắt đầu xây dựng.`,
+      contentEn: `The answer is yes.
+
+But not in the way many people think.
+
+Not with large offices.
+
+Not with flashy campaigns.
+
+Not with technology slogans.
+
+But with small groups that know how to create products that solve real problems.
+
+A useful website.
+
+A simple app.
+
+A management system.
+
+A well-operating community.
+
+A work support tool.
+
+An AI Agent that can solve a specific task.
+
+All can start from a small garden.
+
+From a workspace.
+
+From a group of people learning and building together.
+
+That's why Lily chose the Living & Working Garden model.
+
+People don't just learn technology.
+
+People live with technology.
+
+Work with technology.
+
+And step by step create products that can serve others.
+
+The world is increasingly connected.
+
+Location is no longer the biggest barrier.
+
+What matters is the ability to create value.
+
+Da Lat can completely become the starting place for products serving the globe.
+
+But that only happens when we start building.`,
+      program: 'technology-creation'
+    },
+    'hai-tuan-tai-lily-se-dien-ra-nhu-the-nao': {
+      titleVi: 'Hai Tuần Tại Lily Sẽ Diễn Ra Như Thế Nào?',
+      titleEn: 'How Two Weeks At Lily Will Happen?',
+      contentVi: `Ngày 1–2: xác định ý tưởng
+
+Ngày 3–4: nghiên cứu người dùng
+
+Ngày 5–7: thiết kế giải pháp
+
+Ngày 8–10: build sản phẩm
+
+Ngày 11–12: kiểm thử
+
+Ngày 13: hoàn thiện
+
+Ngày 14: demo day
+
+Kết quả:
+
+website
+
+app
+
+AI workflow
+
+AI agent
+
+hệ thống nội dung
+
+thương hiệu số`,
+      contentEn: `Day 1–2: define idea
+
+Day 3–4: user research
+
+Day 5–7: design solution
+
+Day 8–10: build product
+
+Day 11–12: testing
+
+Day 13: refinement
+
+Day 14: demo day
+
+Results:
+
+website
+
+app
+
+AI workflow
+
+AI agent
+
+content system
+
+digital brand`,
+      program: 'technology-creation'
+    },
+    'neu-chi-co-hai-tuan-de-bat-dau-mot-du-an-cong-nghe-toi-se-lam-gi': {
+      titleVi: 'Nếu Chỉ Có Hai Tuần Để Bắt Đầu Một Dự Án Công Nghệ, Tôi Sẽ Làm Gì?',
+      titleEn: 'If I Only Have Two Weeks To Start A Technology Project, What Will I Do?',
+      contentVi: `Bỏ bớt học lan man.
+
+Chọn một vấn đề.
+
+Chọn một người dùng.
+
+Chọn một giải pháp.
+
+Xây MVP.
+
+Đưa cho người thật dùng thử.
+
+Nhận phản hồi.
+
+Tiếp tục cải tiến.
+
+Kết thúc bằng lời mời:
+
+Hai tuần không đủ để xây một công ty.
+
+Nhưng hai tuần đủ để bắt đầu một sản phẩm.
+
+Và đôi khi, một sản phẩm nhỏ là điểm khởi đầu cho những điều lớn hơn rất nhiều.`,
+      contentEn: `Cut down scattered learning.
+
+Choose a problem.
+
+Choose a user.
+
+Choose a solution.
+
+Build MVP.
+
+Give to real users to try.
+
+Get feedback.
+
+Continue improving.
+
+End with invitation:
+
+Two weeks is not enough to build a company.
+
+But two weeks is enough to start a product.
+
+And sometimes, a small product is the starting point for much bigger things.`,
+      program: 'technology-creation'
+    }
+  };
+
+  const articleData = articles[article];
+  if (!articleData) {
+    return null;
+  }
+
+  const title = isEn ? articleData.titleEn : articleData.titleVi;
+  const content = isEn ? articleData.contentEn : articleData.contentVi;
+  const program = articleData.program;
+  const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}/articles/${article}`;
+
+  return `<!DOCTYPE html>
+<html lang="${locale}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="robots" content="index, follow">
+  <title>${title} - ${brandName}</title>
+  <meta name="description" content="${content.substring(0, 150)}...">
+  <link rel="canonical" href="${pageUrl}">
+  ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/articles/' + article + '">' : ''}
+  ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/articles/' + article + '">'}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="${title} - ${brandName}">
+  <meta property="og:description" content="${content.substring(0, 150)}...">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:site_name" content="Om Dalat">
+  <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
+  <meta property="og:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title} - ${brandName}">
+  <meta name="twitter:description" content="${content.substring(0, 150)}...">
+  <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); color: white; padding: 60px 0; text-align: center; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .article { padding: 60px 0; }
+    .article p { margin-bottom: 1.5rem; }
+    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
+    .nav a { color: #333; text-decoration: none; }
+    .nav a:hover { color: #1a5c43; }
+    .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
+    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a.active { background: #1a5c43; color: white; }
+    .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
+    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+    .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin: 10px 5px; }
+    .cta-button:hover { background: #0f3d2e; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <ul>
+        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs/${program}">${isEn ? 'Program' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+        <li class="lang-switcher">
+          <a href="/articles/${article}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
+          <a href="/en/articles/${article}" class="${isEn ? 'active' : ''}">English</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      <h1>${title}</h1>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="container">
+      ${content.split('\n\n').map(para => `<p>${para}</p>`).join('')}
+      
+      <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid #eee;">
+        <a href="/${locale === 'en' ? 'en/' : ''}programs/${program}" class="cta-button">${isEn ? 'Explore the Program' : 'Tìm hiểu chương trình'}</a>
+        <a href="/${locale === 'en' ? 'en/' : ''}apply" class="cta-button">${isEn ? 'Apply to Join' : 'Gửi hồ sơ tham gia'}</a>
+      </div>
     </div>
   </div>
 
