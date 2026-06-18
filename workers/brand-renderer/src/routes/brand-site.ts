@@ -225,6 +225,11 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
     .nav a { color: #333; text-decoration: none; }
     .nav a:hover { color: #1a5c43; }
+    .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
+    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a.active { background: #1a5c43; color: white; }
+    .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
+    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
   </style>
 </head>
 <body>
@@ -239,6 +244,10 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
         <li><a href="#reviews">${isEn ? 'Reviews' : 'Đánh giá'}</a></li>
         <li><a href="#location">${isEn ? 'Location' : 'Vị trí'}</a></li>
         <li><a href="#contact">${isEn ? 'Contact' : 'Liên hệ'}</a></li>
+        <li class="lang-switcher">
+          <a href="/" class="${isEn ? '' : 'active'}" aria-label="${isEn ? 'Switch to Vietnamese' : 'Đang xem tiếng Việt'}">Tiếng Việt</a>
+          <a href="/en" class="${isEn ? 'active' : ''}" aria-label="${isEn ? 'Currently viewing English' : 'Chuyển sang tiếng Anh'}">English</a>
+        </li>
       </ul>
     </div>
   </nav>
