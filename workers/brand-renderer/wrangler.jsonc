@@ -18,6 +18,10 @@
     {
       "pattern": "brand.omdalat.com",
       "custom_domain": true
+    },
+    {
+      "pattern": "*.omdalat.com/*",
+      "zone_name": "omdalat.com"
     }
   ],
   "d1_databases": [
@@ -40,6 +44,10 @@
         {
           "pattern": "brand.omdalat.com",
           "custom_domain": true
+        },
+        {
+          "pattern": "*.omdalat.com/*",
+          "zone_name": "omdalat.com"
         }
       ],
       "vars": {
