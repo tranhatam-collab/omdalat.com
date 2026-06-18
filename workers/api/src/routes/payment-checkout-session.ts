@@ -14,7 +14,7 @@ export const handlePaymentCheckoutSession = async (
 
   try {
     const body = await request.json();
-    const { plan_code, email } = body;
+    const { plan_code, email, idempotency_key, vat_company_name, vat_tax_id, vat_address } = body;
 
     // Validate input
     const validation = validateCheckoutRequest({ plan_code, email });
@@ -30,6 +30,31 @@ export const handlePaymentCheckoutSession = async (
       );
     }
 
+    // Idempotency: return existing session if idempotency_key was already used
+    if (idempotency_key) {
+      const existing = await env.DB.prepare(
+        `SELECT id, status, checkout_url, expires_at FROM payment_sessions
+         WHERE idempotency_key = ?`
+      ).bind(idempotency_key).first();
+
+      if (existing) {
+        await logAudit(env, null, 'payment.checkout.idempotent', 'payment_session', existing.id, {
+          plan_code,
+          idempotency_key
+        });
+        return new Response(
+          JSON.stringify({
+            session_id: existing.id,
+            checkout_url: existing.checkout_url,
+            expires_at: existing.expires_at,
+            status: existing.status,
+            idempotent: true
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
     // Create session in omdalat.com database
     const sessionId = generateId('paysess');
     const expiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // 30 min
@@ -37,8 +62,8 @@ export const handlePaymentCheckoutSession = async (
     // Store session in D1
     const insertResult = await env.DB.prepare(
       `INSERT INTO payment_sessions
-       (id, plan_code, amount_vnd, currency, status, provider, expires_at, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+       (id, plan_code, amount_vnd, currency, status, provider, idempotency_key, expires_at, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     ).bind(
       sessionId,
       plan_code,
@@ -46,6 +71,7 @@ export const handlePaymentCheckoutSession = async (
       'VND',
       'pending',
       'payos',
+      idempotency_key || null,
       expiresAt,
       new Date().toISOString(),
       new Date().toISOString()

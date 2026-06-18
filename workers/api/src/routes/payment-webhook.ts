@@ -16,7 +16,7 @@ export const handlePaymentWebhook = async (
     const signature = request.headers.get('X-Signature') || '';
 
     // Verify webhook signature
-    const isValid = verifyWebhookSignature(body, signature, env.PAYMENT_WEBHOOK_SECRET);
+    const isValid = await verifyWebhookSignature(body, signature, env.PAYMENT_WEBHOOK_SECRET);
     if (!isValid) {
       console.warn('Invalid webhook signature');
       return new Response(
@@ -27,6 +27,22 @@ export const handlePaymentWebhook = async (
 
     const payload = JSON.parse(body);
     const webhookId = generateId('webhook');
+    const eventId = payload.transaction_id || payload.id || null;
+
+    // Idempotency: check if this event was already processed
+    if (eventId) {
+      const existing = await env.DB.prepare(
+        `SELECT id FROM payment_webhooks
+         WHERE event_id = ? AND status = 'processed'`
+      ).bind(eventId).first();
+      if (existing) {
+        console.warn(`Duplicate webhook event ${eventId} — already processed`);
+        return new Response(
+          JSON.stringify({ received: true, duplicate: true }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    }
 
     // Store webhook record
     await env.DB.prepare(
@@ -37,7 +53,7 @@ export const handlePaymentWebhook = async (
       webhookId,
       payload.provider || 'payos',
       payload.event_type || 'payment.completed',
-      payload.transaction_id || payload.id || null,
+      eventId,
       body,
       'pending',
       new Date().toISOString()
@@ -50,47 +66,56 @@ export const handlePaymentWebhook = async (
     ) {
       const { session_id, transaction_id, amount, currency } = payload;
 
-      // Update session status
       if (session_id) {
-        await env.DB.prepare(
-          `UPDATE payment_sessions
-           SET status = ?, provider_session_id = ?, updated_at = ?
-           WHERE id = ?`
-        ).bind(
-          'completed',
-          transaction_id,
-          new Date().toISOString(),
-          session_id
-        ).run();
+        // Check if order already exists for this session (idempotency)
+        const existingOrder = await env.DB.prepare(
+          `SELECT id FROM payment_orders WHERE session_id = ? AND status = 'paid'`
+        ).bind(session_id).first();
 
-        // Create order record
-        const orderId = generateId('order');
-        await env.DB.prepare(
-          `INSERT INTO payment_orders
-           (id, session_id, plan_code, amount_vnd, currency, status, provider, provider_transaction_id, created_at, updated_at)
-           SELECT ?, ?, plan_code, ?, ?, ?, ?, ?, ?, ?
-           FROM payment_sessions WHERE id = ?`
-        ).bind(
-          orderId,
-          session_id,
-          amount || 100000,
-          currency || 'VND',
-          'paid',
-          payload.provider || 'payos',
-          transaction_id,
-          new Date().toISOString(),
-          new Date().toISOString(),
-          session_id
-        ).run();
+        if (!existingOrder) {
+          // Update session status
+          await env.DB.prepare(
+            `UPDATE payment_sessions
+             SET status = ?, provider_session_id = ?, updated_at = ?
+             WHERE id = ?`
+          ).bind(
+            'completed',
+            transaction_id,
+            new Date().toISOString(),
+            session_id
+          ).run();
 
-        // Queue email notification
-        await env.AUTOMATION_QUEUE.send({
-          type: 'payment.completed',
-          session_id,
-          order_id: orderId,
-          amount,
-          timestamp: new Date().toISOString()
-        });
+          // Create order record
+          const orderId = generateId('order');
+          await env.DB.prepare(
+            `INSERT INTO payment_orders
+             (id, session_id, plan_code, amount_vnd, currency, status, provider, provider_transaction_id, created_at, updated_at)
+             SELECT ?, ?, plan_code, ?, ?, ?, ?, ?, ?, ?
+             FROM payment_sessions WHERE id = ?`
+          ).bind(
+            orderId,
+            session_id,
+            amount || 100000,
+            currency || 'VND',
+            'paid',
+            payload.provider || 'payos',
+            transaction_id,
+            new Date().toISOString(),
+            new Date().toISOString(),
+            session_id
+          ).run();
+
+          // Queue email notification
+          await env.AUTOMATION_QUEUE.send({
+            type: 'payment.completed',
+            session_id,
+            order_id: orderId,
+            amount,
+            timestamp: new Date().toISOString()
+          });
+        } else {
+          console.warn(`Order already exists for session ${session_id} — skipping`);
+        }
       }
 
       // Mark webhook as processed

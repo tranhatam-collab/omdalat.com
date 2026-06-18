@@ -1,38 +1,39 @@
 /**
  * Verify webhook signature using HMAC-SHA256
+ * Production-ready implementation using Web Crypto API
  */
-export const verifyWebhookSignature = (
+export const verifyWebhookSignature = async (
   body: string,
   signature: string,
   secret: string
-): boolean => {
+): Promise<boolean> => {
   try {
-    // Note: In a real implementation, use crypto.subtle for HMAC-SHA256
-    // For now, this is a placeholder that validates structure
-    // Full implementation requires Web Crypto API
-
-    // Basic check: signature should not be empty
     if (!signature || !secret) {
       return false;
     }
 
-    // TODO: Implement actual HMAC-SHA256 verification using crypto.subtle
-    // const encoder = new TextEncoder();
-    // const key = await crypto.subtle.importKey(
-    //   'raw',
-    //   encoder.encode(secret),
-    //   { name: 'HMAC', hash: 'SHA-256' },
-    //   false,
-    //   ['sign']
-    // );
-    // const computed = await crypto.subtle.sign('HMAC', key, encoder.encode(body));
-    // const computedHex = Array.from(new Uint8Array(computed))
-    //   .map(b => b.toString(16).padStart(2, '0'))
-    //   .join('');
-    // return computedHex === signature;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign']
+    );
+    const computed = await crypto.subtle.sign('HMAC', key, encoder.encode(body));
+    const computedHex = Array.from(new Uint8Array(computed))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
 
-    // Placeholder: accept if signature format looks valid
-    return signature.length > 0;
+    // Constant-time comparison to prevent timing attacks
+    if (computedHex.length !== signature.length) {
+      return false;
+    }
+    let result = 0;
+    for (let i = 0; i < computedHex.length; i++) {
+      result |= computedHex.charCodeAt(i) ^ signature.charCodeAt(i);
+    }
+    return result === 0;
   } catch (error) {
     console.error('Signature verification error:', error);
     return false;
