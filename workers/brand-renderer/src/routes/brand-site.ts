@@ -1407,6 +1407,139 @@ But two weeks is enough to start a product.
 
 And sometimes, a small product is the starting point for much bigger things.`,
       program: 'technology-creation'
+    },
+    'song-o-lily-khong-phai-nghi-duong': {
+      titleVi: 'Sống ở Lily không phải là nghỉ dưỡng',
+      titleEn: 'Living at Lily is not a retreat',
+      contentVi: `Lily không được xây để làm một nơi người ta đến vài ngày, chụp vài tấm ảnh rồi rời đi. Nếu chỉ nhìn Lily như một homestay đẹp ở vùng ven Đà Lạt, chúng ta sẽ làm sai toàn bộ tinh thần của nơi này. Lily V2 phải được hiểu như một không gian sống và làm việc dài hơn, nơi một người có đủ thời gian để ở lại, quan sát, làm việc, học một kỹ năng mới và xem mình có thể tạo ra giá trị gì từ chính nhịp sống của mình.
+
+Điều quan trọng nhất của Lily không phải là phòng đẹp, sân vườn đẹp hay một góc café dễ chụp ảnh. Những điều đó có giá trị, nhưng chỉ là bề mặt. Điều quan trọng hơn là nơi này có thể giúp con người sống ổn hơn, làm việc rõ hơn và bước vào một nhịp sinh hoạt có kỷ luật hơn hay không.
+
+Trong mô hình V2, Lily không bán phòng theo ngày. Lily mở ra các chu kỳ ở lại theo tuần và theo tháng. Sự khác biệt này rất lớn. Ở theo ngày thường hướng tới trải nghiệm ngắn. Ở theo tuần hoặc tháng buộc người tham gia phải đối diện với đời sống thật: thời gian, công việc, ăn uống, nghỉ ngơi, kỷ luật, trách nhiệm và cách mình sống cùng người khác.
+
+Nếu một nơi chỉ làm con người cảm thấy dễ chịu trong vài ngày, đó có thể là một nơi nghỉ. Nếu một nơi giúp con người ở lại đủ lâu để nhìn rõ chính mình hơn, làm việc tốt hơn và sống có trách nhiệm hơn, đó mới là không gian sống thật.`,
+      contentEn: `Lily is not being built as a place where people come for a few days, take a few photos, and leave. Lily V2 must be understood as a longer living and working environment, where a person has enough time to stay, observe, work, learn a new skill, and create value from their own rhythm.
+
+The most important part of Lily is not a beautiful room, garden, or café corner. What matters more is whether this place can help people live more steadily, work with more clarity, and enter a more disciplined rhythm.
+
+In the V2 model, Lily does not sell rooms by the day. Lily opens weekly and monthly stay cycles. Weekly or monthly stays require participants to face real life: time, work, meals, rest, discipline, responsibility, and shared living.
+
+If a place only makes people feel comfortable for a few days, it may be a place to rest. If a place helps people stay long enough to see themselves clearly, work better, and live responsibly, then it becomes a real living space.`,
+      program: 'living-working'
+    },
+    'mot-khong-gian-lam-viec-that': {
+      titleVi: 'Một không gian làm việc thật cần những gì',
+      titleEn: 'What a real workspace requires',
+      contentVi: `Không gian làm việc tại Lily không được dựng lên như một góc trang trí. Một chiếc laptop đặt cạnh ly cà phê chưa tạo thành workspace. Workspace thật phải giúp một người ngồi xuống, tập trung, hoàn thành công việc và lặp lại điều đó nhiều ngày liên tục.
+
+Workspace là một thành phần vận hành, không phải một chi tiết thẩm mỹ. DEV và Content phải mô tả rõ bàn làm việc nằm ở đâu, có bao nhiêu chỗ ngồi, Wi-Fi có ổn định không, ổ điện ở vị trí nào, ánh sáng ra sao, có khu gọi video riêng hay không, khi trời mưa thì làm việc ở đâu.
+
+Một workspace thật không chỉ cần vật dụng. Nó cần quy tắc. Nếu mọi người có thể gọi điện lớn tiếng bất cứ lúc nào, nơi đó sẽ nhanh chóng mất nhịp. Nếu không có lịch làm việc, lịch họp, lịch yên tĩnh và cách xử lý xung đột, workspace sẽ trở thành một quán café lộn xộn.
+
+Khi workspace được xây đúng, Lily không chỉ là nơi ở. Lily trở thành một nơi có thể tạo công việc. Không phải bằng lời hứa, mà bằng cấu trúc: nơi ngồi, giờ làm, đầu việc, review, portfolio và trách nhiệm.`,
+      contentEn: `The workspace at Lily must not be built as a decorative corner. A real workspace must help a person sit down, focus, complete work, and repeat that for many days in a row.
+
+The workspace is an operational component, not an aesthetic detail. DEV and Content must describe desks, seats, Wi-Fi, outlets, light, video-call areas, and backup work areas when it rains.
+
+A real workspace needs more than furniture. It needs rules. Without work schedules, meeting rules, quiet hours, and conflict handling, the workspace becomes a chaotic café.
+
+When the workspace is built properly, Lily becomes more than a place to stay. It becomes a place that can create work through structure: seats, work hours, tasks, reviews, portfolios, and responsibility.`,
+      program: 'living-working'
+    },
+    'o-theo-tuan-theo-thang-la-mot-cam-ket': {
+      titleVi: 'Ở theo tuần, theo tháng là một cam kết',
+      titleEn: 'Weekly and monthly stays are a commitment',
+      contentVi: `Khi Lily chọn không bán theo ngày, đó không chỉ là một quyết định về giá. Đó là một quyết định về bản chất. Một nơi bán theo ngày thường phải tối ưu cho check-in, check-out, đánh giá nhanh và trải nghiệm ngắn. Lily V2 cần tối ưu cho nhịp sống, sự phù hợp, công việc, học tập và khả năng ở lại đủ lâu để tạo ra điều gì đó.
+
+Ở theo tuần là một ngưỡng tối thiểu. Bảy ngày đủ để một người biết nơi này có hợp với mình không. Họ có thể cảm nhận thời tiết, đường đi, bữa ăn, giấc ngủ, tiếng ồn, Internet, không gian làm việc và cách sống cùng những người khác.
+
+Ở theo tháng là một cam kết sâu hơn. Người ở lại một tháng không còn là khách ghé qua. Họ trở thành một phần tạm thời của nhịp chung. Họ dùng phòng, bếp, workspace, lịch sinh hoạt, task, review và có trách nhiệm với không gian.
+
+Weekly và monthly stay giúp Lily tránh trở thành homestay du lịch ngắn hạn. Nó giúp người tham gia hiểu đây là môi trường có lựa chọn. Không phải ai cũng phù hợp. Và chính việc lựa chọn kỹ mới giữ được chất lượng của một không gian sống và làm việc thật.`,
+      contentEn: `When Lily chooses not to sell by the day, it is not only a pricing decision. It is a decision about identity. Lily V2 must optimize for rhythm, fit, work, learning, and the ability to stay long enough to create something.
+
+A weekly stay is the minimum threshold. Seven days are enough for a person to understand weather, road access, meals, sleep, noise, internet, workspace, and shared living.
+
+A monthly stay is a deeper commitment. Someone staying for a month becomes a temporary part of the shared rhythm, using the room, kitchen, workspace, calendar, tasks, reviews, and responsibility.
+
+Weekly and monthly stays help Lily avoid becoming a short-term tourist homestay. Careful selection protects the quality of a real living and working space.`,
+      program: 'living-working'
+    },
+    'khu-vuon-khong-phai-phong-nen': {
+      titleVi: 'Khu vườn không phải phông nền',
+      titleEn: 'The garden is not a background',
+      contentVi: `Trong nhiều mô hình lưu trú, khu vườn thường được dùng như phông nền. Nhưng với Lily V2, khu vườn không được phép chỉ là phông nền. Khu vườn phải là một phần của nhịp sống.
+
+Một khu vườn thật có thời tiết, đất, nước, côn trùng, lá rụng, cây khô, việc cần làm và những ngày không đẹp như ảnh. Garden life phải bao gồm cả chăm sóc, quan sát, dọn dẹp, giữ lối đi, bảo vệ cây và hiểu rằng con người không sống tách khỏi nơi mình đang ở.
+
+Khu vườn tại Lily có thể là nơi uống trà buổi sáng, nơi đọc sách, nơi ngồi làm việc nhẹ, nơi tổ chức workshop nhỏ, nơi cư dân học cách sống chậm lại mà không lười đi. Nhưng để làm được điều đó, khu vườn cần quy tắc.
+
+Khu vườn không phải thứ để bán. Khu vườn là thứ để giữ. Nếu Lily giữ được điều này, website sẽ không chỉ đẹp. Nó sẽ đáng tin.`,
+      contentEn: `In many accommodation models, the garden is used as a background. But in Lily V2, the garden must not be only a background. The garden must be part of the living rhythm.
+
+A real garden has weather, soil, water, insects, fallen leaves, dry plants, tasks to do, and days that do not look good in photos. Garden life must include care, observation, cleaning, paths, plants, and responsibility.
+
+The garden at Lily can be a place for morning tea, reading, light work, small workshops, and learning how to slow down without becoming lazy. But for that to work, the garden needs rules.
+
+The garden is not something to sell. The garden is something to keep. If Lily can preserve this, the website will not only look good. It will be trustworthy.`,
+      program: 'living-working'
+    },
+    'hoc-va-lam-o-lily-can-output': {
+      titleVi: 'Học và làm ở Lily phải có đầu ra',
+      titleEn: 'Learning and working at Lily must produce output',
+      contentVi: `Lily có thể mở đào tạo, nhưng không được trở thành nơi học cho vui. Lily có thể mở việc online, nhưng không được hứa việc làm chắc chắn. Điều đúng nhất là Lily xây một hệ thống học và làm có đầu ra rõ ràng.
+
+Mỗi chương trình học phải có mục tiêu, thời lượng, bài tập, output và tiêu chí đánh giá. Digital Foundation phải giúp người học có hồ sơ cá nhân, email, file quản lý công việc, lịch làm việc và hiểu biết cơ bản về cách làm việc online.
+
+Job system của Lily phải phân biệt rõ paid task, unpaid training, volunteer contribution và contribution credit. Không được nhập nhằng. Một người làm việc có trả phí phải có điều khoản. Một người tham gia bài tập phải biết đó là bài tập.
+
+Proof of work là trung tâm. Sau một tuần, người tham gia nên có ít nhất một output nhỏ. Sau một tháng, họ nên có portfolio rõ hơn. Không phải mọi người đều có thu nhập ngay, nhưng mọi người cần rời chương trình với bằng chứng rõ hơn về năng lực.`,
+      contentEn: `Lily can offer training, but it must not become a place to study for entertainment. Lily can open online work, but it must not promise guaranteed employment. The correct path is to build a learning and work system with clear output.
+
+Every learning program must have a goal, duration, assignments, output, and evaluation criteria. Digital Foundation must help learners create a profile, email, work files, schedule, and a basic understanding of online work.
+
+Lily's job system must clearly separate paid tasks, unpaid training, volunteer contribution, and contribution credit. It must not be ambiguous.
+
+Proof of work is central. After one week, participants should have at least one small output. After one month, they should have a clearer portfolio. Not everyone will earn income immediately, but everyone should leave with clearer proof of ability.`,
+      program: 'living-working'
+    },
+    'nguoi-nuoc-ngoai-o-lily': {
+      titleVi: 'Người nước ngoài ở Lily cần được hỗ trợ đúng cách',
+      titleEn: 'International residents at Lily need the right kind of support',
+      contentVi: `Lily có thể mở cửa cho người nước ngoài ở lại theo tuần hoặc tháng, nhưng đây là phần phải được viết và vận hành rất cẩn trọng. Người nước ngoài không chỉ cần phòng ở. Họ cần thông tin rõ về thời gian lưu trú, địa chỉ, khai báo tạm trú, bảo hiểm, liên hệ khẩn cấp, quy tắc nhà, giới hạn công việc và các thủ tục liên quan tới visa hoặc giấy phép lao động nếu có tham gia dự án tại Việt Nam.
+
+Website không được dùng ngôn ngữ cam kết. Không viết: chúng tôi bảo lãnh visa. Không viết: đảm bảo work permit. Không viết: đến Lily là có việc làm. Ngôn ngữ đúng là: Lily hỗ trợ thông tin, chuẩn bị hồ sơ cơ bản, phối hợp khai báo lưu trú và kết nối đối tác tư vấn phù hợp khi cần.
+
+Cần tách bốn lane: Stay Only, Learning/Observation, Remote Work for Overseas Party và Local Project Work. Người chỉ ở lại có một quy trình khác. Người học hoặc quan sát có một quy trình khác. Người làm việc từ xa cho công ty nước ngoài có một trách nhiệm khác. Người tham gia dự án tại Việt Nam phải đi qua legal review riêng.
+
+Người nước ngoài không cần những lời hứa lớn. Họ cần sự minh bạch, quy trình rõ, thông tin đúng và một nơi sống có trách nhiệm. Lily phải xây điều đó trước khi mở rộng truyền thông quốc tế.`,
+      contentEn: `Lily can welcome international residents for weekly or monthly stays, but this must be written and operated carefully. Foreign residents need clear information about stay duration, address, temporary residence declaration, insurance, emergency contacts, house rules, work limits, and legal procedures.
+
+The website must not use guarantee language. Do not write: we sponsor your visa, guaranteed work permit, or come to Lily and get a job. The correct language is: Lily provides information support, basic document preparation, temporary residence coordination, and referrals to suitable advisors.
+
+Four lanes must be separated: Stay Only, Learning/Observation, Remote Work for Overseas Party, and Local Project Work. Someone joining a project in Vietnam must go through separate legal review.
+
+International residents do not need big promises. They need transparency, clear process, accurate information, and a responsible place to live. Lily must build that before expanding international communication.`,
+      program: 'living-working'
+    },
+    'lily-la-node-van-hanh-that': {
+      titleVi: 'Lily là một node vận hành thật trong Om Dalat',
+      titleEn: 'Lily is a real operating node inside Om Dalat',
+      contentVi: `Lily không chỉ là một website mới trong hệ Om Dalat. Lily là một node vận hành thật. Điều này có nghĩa là Lily phải có mặt public, có workspace nội bộ, có hồ sơ phòng, có hồ sơ cư dân, có chương trình, có task, có review, có compliance và có nhật ký vận hành.
+
+lily.omdalat.com là mặt public. Nơi này giải thích Lily là gì, ai phù hợp, ở theo tuần/tháng ra sao, workspace vận hành thế nào, chương trình học và làm gồm những gì, người nước ngoài cần biết gì, và cách gửi hồ sơ.
+
+app.omdalat.com/lily mới là nơi vận hành thật. Ở đó, hồ sơ được review, phòng được gán, chương trình được mở, task được giao, cư dân được theo dõi, hỗ trợ pháp lý được ghi chú và các quyết định được audit.
+
+Cuối cùng, Lily phải được đo bằng output thật. Có bao nhiêu phòng được xác minh. Có bao nhiêu cư dân phù hợp. Có bao nhiêu chương trình chạy được. Có bao nhiêu task hoàn thành. Có bao nhiêu người rời Lily với năng lực rõ hơn. Đó mới là bằng chứng, không phải những câu mô tả hay.`,
+      contentEn: `Lily is not just a new website inside Om Dalat. Lily is a real operating node. This means Lily must have a public layer, an internal workspace, room records, resident records, programs, tasks, reviews, compliance, and operational logs.
+
+lily.omdalat.com is the public layer. It explains what Lily is, who it is for, how weekly/monthly stays work, how the workspace operates, what learning and work programs include, what international residents need to know, and how to apply.
+
+app.omdalat.com/lily is where real operations happen. Applications are reviewed, rooms are assigned, programs are opened, tasks are assigned, residents are tracked, legal support notes are recorded, and decisions are audited.
+
+In the end, Lily must be measured by real output: verified rooms, suitable residents, running programs, completed tasks, and people leaving Lily with clearer ability. That is the evidence, not beautiful descriptions.`,
+      program: 'living-working'
     }
   };
 
@@ -1584,6 +1717,55 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
       excerptVi: 'Hai tuần không đủ để xây một công ty. Nhưng hai tuần đủ để bắt đầu một sản phẩm...',
       excerptEn: 'Two weeks is not enough to build a company. But two weeks is enough to start a product...',
       program: 'technology-creation'
+    },
+    'song-o-lily-khong-phai-nghi-duong': {
+      titleVi: 'Sống ở Lily không phải là nghỉ dưỡng',
+      titleEn: 'Living at Lily is not a retreat',
+      excerptVi: 'Lily V2 không phải homestay. Đây là không gian sống và làm việc thật với nhịp tuần/tháng...',
+      excerptEn: 'Lily V2 is not a homestay. It is a real living and working space with weekly/monthly rhythm...',
+      program: 'living-working'
+    },
+    'mot-khong-gian-lam-viec-that': {
+      titleVi: 'Một không gian làm việc thật cần những gì',
+      titleEn: 'What a real workspace requires',
+      excerptVi: 'Workspace không phải góc trang trí. Cần bàn, ghế, Wi-Fi, quy tắc, lịch làm việc...',
+      excerptEn: 'Workspace is not a decorative corner. Needs desks, Wi-Fi, rules, work schedules...',
+      program: 'living-working'
+    },
+    'o-theo-tuan-theo-thang-la-mot-cam-ket': {
+      titleVi: 'Ở theo tuần, theo tháng là một cam kết',
+      titleEn: 'Weekly and monthly stays are a commitment',
+      excerptVi: 'Vì sao Lily không bán theo ngày. Lưu trú dài hơn cần review, kỷ luật, trách nhiệm...',
+      excerptEn: 'Why Lily does not sell daily stays. Longer stays require review, discipline, responsibility...',
+      program: 'living-working'
+    },
+    'khu-vuon-khong-phai-phong-nen': {
+      titleVi: 'Khu vườn không phải phông nền',
+      titleEn: 'The garden is not a background',
+      excerptVi: 'Khu vườn phải là một phần của nhịp sống, không chỉ phông nền cho ảnh...',
+      excerptEn: 'The garden must be part of the living rhythm, not just a photo background...',
+      program: 'living-working'
+    },
+    'hoc-va-lam-o-lily-can-output': {
+      titleVi: 'Học và làm ở Lily phải có đầu ra',
+      titleEn: 'Learning and working at Lily must produce output',
+      excerptVi: 'Không học cho vui, không hứa việc chắc chắn. Cần proof of work rõ ràng...',
+      excerptEn: 'No studying for fun, no guaranteed jobs. Needs clear proof of work...',
+      program: 'living-working'
+    },
+    'nguoi-nuoc-ngoai-o-lily': {
+      titleVi: 'Người nước ngoài ở Lily cần được hỗ trợ đúng cách',
+      titleEn: 'International residents at Lily need the right kind of support',
+      excerptVi: 'Visa-safe language, tách bốn lane: Stay, Learn, Remote Work, Local Project...',
+      excerptEn: 'Visa-safe language, four lanes: Stay, Learn, Remote Work, Local Project...',
+      program: 'living-working'
+    },
+    'lily-la-node-van-hanh-that': {
+      titleVi: 'Lily là một node vận hành thật trong Om Dalat',
+      titleEn: 'Lily is a real operating node inside Om Dalat',
+      excerptVi: 'Lily có public layer, workspace nội bộ, task, review, compliance, audit...',
+      excerptEn: 'Lily has public layer, internal workspace, tasks, reviews, compliance, audit...',
+      program: 'living-working'
     }
   };
 
@@ -1592,6 +1774,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
   // Group articles by program
   const startupArticles = Object.entries(articles).filter(([, a]) => a.program === 'startup-with-ai');
   const techArticles = Object.entries(articles).filter(([, a]) => a.program === 'technology-creation');
+  const livingArticles = Object.entries(articles).filter(([, a]) => a.program === 'living-working');
 
   const renderArticleCard = (slug: string, article: any) => {
     const title = isEn ? article.titleEn : article.titleVi;
@@ -1607,6 +1790,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
 
   const startupSection = startupArticles.map(([slug, a]) => renderArticleCard(slug, a)).join('');
   const techSection = techArticles.map(([slug, a]) => renderArticleCard(slug, a)).join('');
+  const livingSection = livingArticles.map(([slug, a]) => renderArticleCard(slug, a)).join('');
 
   return `<!DOCTYPE html>
 <html lang="${locale}">
@@ -1706,6 +1890,15 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
       </div>
       <div style="text-align: center; margin-top: 20px;">
         <a href="/${locale === 'en' ? 'en/' : ''}programs/technology-creation" class="cta-button">${isEn ? 'Explore the Program' : 'Tìm hiểu chương trình'}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'Living & Working Garden' : 'Sống và Làm Việc'}</h2>
+      <div class="articles-grid">
+        ${livingSection}
       </div>
     </div>
   </div>
