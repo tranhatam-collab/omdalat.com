@@ -1,0 +1,50 @@
+{
+  "id": "place-vuonhong3",
+  "type": "place",
+  "title_vi": "Vườn Hồng 3",
+  "title_en": "Vuon Hong 3",
+  "slug": "vuonhong3",
+  "category": "noi-chon",
+  "status": "draft",
+  "locale": "vi",
+  "created_at": "2026-06-17T00:00:00Z",
+  "updated_at": "2026-06-17T00:00:00Z",
+  "content": {
+    "hero": {
+      "title_vi": "Vườn Hồng 3",
+      "title_en": "Vuon Hong 3",
+      "subtitle_vi": "Một nơi chốn giữa vùng cao Lạc Dương",
+      "subtitle_en": "A place in the Lac Duong highlands"
+    },
+    "story": {
+      "body_vi": "Vườn Hồng 3 nằm ở vùng cao Lạc Dương, nơi khí hậu mát quanh năm và nhịp sống gắn với vườn. Đây là một nơi chốn thật mà Ôm Đà Lạt đang ghi lại một cách chậm rãi: con người, không gian và cách họ giữ đất, làm vườn và sống với thiên nhiên.",
+      "body_en": "Vuon Hong 3 is located in the Lac Duong highlands, where the climate is cool year-round and life is connected to the garden. This is a real place that Om Dalat is recording slowly: the people, the space, and how they care for the land, tend the garden, and live with nature."
+    },
+    "location": {
+      "coordinates": {
+        "lat": 12.0985412,
+        "lng": 108.5428796
+      },
+      "address_vi": "{{ADDRESS_VI}}",
+      "address_en": "{{ADDRESS_EN}}",
+      "administrative_area": "Lạc Dương, Lâm Đồng"
+    },
+    "brand_link": {
+      "subdomain": "vuonhong3.omdalat.com",
+      "cta_vi": "Xem hồ sơ thương hiệu",
+      "cta_en": "View brand profile"
+    }
+  },
+  "metadata": {
+    "maps_url": "https://maps.app.goo.gl/t6oJQBvEt8JTH4Lc9",
+    "google_place_id": "{{PLACE_ID}}",
+    "brand_ref": "brnd_vuonhong3",
+    "ap_place_ref": "place-vuonhong3"
+  },
+  "seo": {
+    "title_vi": "Vườn Hồng 3 - Nơi chốn ở Lạc Dương - Ấp Đà Lạt",
+    "title_en": "Vuon Hong 3 - A Place in Lac Duong - Ap Dalat",
+    "description_vi": "Vườn Hồng 3 là một nơi chốn thật giữa vùng cao Lạc Dương, trong hệ thống Ấp Đà Lạt.",
+    "description_en": "Vuon Hong 3 is a real place in the Lac Duong highlands, within the Ap Dalat system."
+  }
+}

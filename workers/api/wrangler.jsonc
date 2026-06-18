@@ -28,7 +28,7 @@
     "SUPPORT_EMAIL": "support@omdalat.com",
     "BILLING_EMAIL": "billing@omdalat.com",
     "CONTACT_EMAIL": "support@omdalat.com",
-    "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+    "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev,https://lily.omdalat.com"
   },
   // Required secrets for omdalat.com → pay.iai.one payment authority:
   // - TURNSTILE_SECRET_KEY (optional, for form protection)
@@ -61,13 +61,6 @@
         "binding": "AUTOMATION_QUEUE",
         "queue": "omdalat-automation"
       }
-    ],
-    "consumers": [
-      {
-        "queue": "omdalat-automation",
-        "max_batch_size": 10,
-        "max_batch_timeout": 30
-      }
     ]
   },
   "env": {
@@ -97,7 +90,7 @@
         "SUPPORT_EMAIL": "support@omdalat.com",
         "BILLING_EMAIL": "billing@omdalat.com",
         "CONTACT_EMAIL": "support@omdalat.com",
-        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev,https://lily.omdalat.com"
       },
       "d1_databases": [
         {
@@ -118,13 +111,6 @@
           {
             "binding": "AUTOMATION_QUEUE",
             "queue": "omdalat-automation"
-          }
-        ],
-        "consumers": [
-          {
-            "queue": "omdalat-automation",
-            "max_batch_size": 10,
-            "max_batch_timeout": 30
           }
         ]
       }
@@ -150,7 +136,7 @@
         "SUPPORT_EMAIL": "support@omdalat.com",
         "BILLING_EMAIL": "billing@omdalat.com",
         "CONTACT_EMAIL": "support@omdalat.com",
-        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev"
+        "CORS_ORIGINS": "https://omdalat.com,https://www.omdalat.com,https://app.omdalat.com,https://www.app.omdalat.com,https://ap.omdalat.com,https://www.ap.omdalat.com,https://omdalat-web.pages.dev,https://omdalat-app.pages.dev,https://omdalat-docs.pages.dev,https://lily.omdalat.com"
       },
       "d1_databases": [
         {

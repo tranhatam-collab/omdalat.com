@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f0f4f8"/>
+  <rect x="200" y="150" width="400" height="300" fill="#e0e0e0" rx="8"/>
+  <text x="400" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" fill="#999" text-anchor="middle">Photo Placeholder</text>
+  <text x="400" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#bbb" text-anchor="middle">Replace with actual Lily photo</text>
+</svg>

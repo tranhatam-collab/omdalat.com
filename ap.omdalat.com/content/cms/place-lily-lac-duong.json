@@ -1,8 +1,8 @@
 {
   "id": "place-lily-lac-duong",
   "type": "place",
-  "title_vi": "Lily ở Lạc Dương: một hồ sơ nơi chốn đang được mở ra",
-  "title_en": "Lily in Lac Duong: a place profile being opened",
+  "title_vi": "Homestay Lily Lạc Dương Đà Lạt: một hồ sơ thương hiệu đa dòng",
+  "title_en": "Homestay Lily Lac Duong Dalat: a multi-line brand profile",
   "slug": "lily-lac-duong",
   "category": "noi-chon",
   "status": "draft",
@@ -11,23 +11,42 @@
   "updated_at": "2026-06-17T00:00:00Z",
   "content": {
     "hero": {
-      "title_vi": "Lily ở Lạc Dương: một hồ sơ nơi chốn đang được mở ra",
-      "title_en": "Lily in Lac Duong: a place profile being opened",
-      "subtitle_vi": "Một hồ sơ thương hiệu địa phương đang được xác minh trong hệ Ấp Đà Lạt",
-      "subtitle_en": "A local brand profile under verification within the Ap Dalat system"
+      "title_vi": "Homestay Lily Lạc Dương Đà Lạt: một hồ sơ thương hiệu đa dòng",
+      "title_en": "Homestay Lily Lac Duong Dalat: a multi-line brand profile",
+      "subtitle_vi": "Một hồ sơ thương hiệu địa phương với homestay, café và các dòng kinh doanh khác đang được xác minh trong hệ Ấp Đà Lạt",
+      "subtitle_en": "A local brand profile with homestay, café, and other business lines under verification within the Ap Dalat system"
     },
     "story": {
-      "body_vi": "Lily được ghi nhận như một nơi chốn đang được xác minh trong hệ Ấp Đà Lạt. Điều quan trọng ở đây không phải là giới thiệu một điểm lưu trú theo cách quen thuộc, mà là hiểu một không gian nhỏ tại Lạc Dương có thể đứng trong đời sống địa phương ra sao: ai giữ nơi này, điều kiện ở lại như thế nào, nhịp sinh hoạt có gì, và nơi này có thể kết nối với Ôm Đà Lạt ở mức nào. Hồ sơ này chỉ được mở rộng khi có đủ thông tin từ chủ sở hữu, hình ảnh có quyền sử dụng và trạng thái xác minh từ đội vận hành.",
-      "body_en": "Lily is recorded as a place profile under verification within the Ap Dalat system. The purpose here is not to introduce a stay in the usual way, but to understand how a small place in Lac Duong stands within local life: who keeps it, what the staying conditions are, what rhythm exists there, and how it may connect with Om Dalat. This profile will only be expanded when owner information, image rights, and operational verification are complete."
+      "body_vi": "Lily được ghi nhận như một thương hiệu địa phương đa dòng tại Lạc Dương, bao gồm Homestay Lily (lưu trú) và Lily Café (quán cà phê). Điều quan trọng ở đây không phải là giới thiệu một điểm đến theo cách quen thuộc, mà là hiểu một thương hiệu địa phương có thể đứng trong đời sống địa phương ra sao: ai giữ nơi này, điều kiện hoạt động như thế nào, nhịp sinh hoạt có gì, và nơi này có thể kết nối với Ôm Đà Lạt ở mức nào. Hồ sơ này chỉ được mở rộng khi có đủ thông tin từ chủ sở hữu, hình ảnh có quyền sử dụng và trạng thái xác minh từ đội vận hành.",
+      "body_en": "Lily is recorded as a multi-line local brand in Lac Duong, including Homestay Lily (accommodation) and Lily Café (coffee shop). The purpose here is not to introduce a destination in the usual way, but to understand how a local brand stands within local life: who keeps it, what the operating conditions are, what rhythm exists there, and how it may connect with Om Dalat. This profile will only be expanded when owner information, image rights, and operational verification are complete."
+    },
+    "business_lines": {
+      "description_vi": "Lily hoạt động theo mô hình đa dòng kinh doanh, với Homestay Lily và Lily Café là hai dòng chính trong giai đoạn 1.",
+      "description_en": "Lily operates with a multi-line business model, with Homestay Lily and Lily Café as the two main lines in phase 1.",
+      "lines": [
+        {
+          "key": "homestay",
+          "label_vi": "Homestay Lily",
+          "label_en": "Homestay Lily",
+          "status": "phase_1_public_after_compliance"
+        },
+        {
+          "key": "cafe",
+          "label_vi": "Lily Café",
+          "label_en": "Lily Café",
+          "status": "phase_1_public_after_owner_confirmation"
+        }
+      ]
     },
     "location": {
       "coordinates": {
         "lat": 12.15,
         "lng": 108.45
       },
-      "address_vi": "{{ADDRESS_VI}}",
-      "address_en": "{{ADDRESS_EN}}",
-      "administrative_area": "Lạc Dương, Lâm Đồng"
+      "address_vi": "Lạc Dương, Lâm Đồng, Việt Nam — owner verification required",
+      "address_en": "Lac Duong, Lam Dong, Vietnam — owner verification required",
+      "administrative_area": "Lạc Dương, Lâm Đồng",
+      "address_status": "owner_verification_required"
     },
     "brand_link": {
       "subdomain": "lily.omdalat.com",
@@ -36,15 +55,17 @@
     }
   },
   "metadata": {
-    "maps_url": "https://maps.app.goo.gl/eGxrWtJUQ62g2Vsy8?g_st=ic",
-    "google_place_id": "{{PLACE_ID}}",
+    "maps_url": "FOUNDER_PROVIDED_GOOGLE_MAPS_LINK",
+    "google_place_id": "TO_BE_RESOLVED_BY_MAPS_AGENT",
     "brand_ref": "brnd_lily",
-    "ap_place_ref": "place-lily-lac-duong"
+    "ap_place_ref": "place-lily-lac-duong",
+    "brand_type": "hybrid_local_brand",
+    "phase": "phase_1_homestay_cafe"
   },
   "seo": {
-    "title_vi": "Lily ở Lạc Dương - Hồ sơ nơi chốn - Ấp Đà Lạt",
-    "title_en": "Lily in Lac Duong - Place Profile - Ap Dalat",
-    "description_vi": "Lily là một hồ sơ thương hiệu địa phương đang được xác minh trong hệ Ấp Đà Lạt, hướng tới cách ở lại rõ ràng, gần đời sống và có trách nhiệm tại Lạc Dương.",
-    "description_en": "Lily is a local brand profile being verified within the Ap Dalat system, oriented toward responsible staying, local life, and clearer expectations in Lac Duong."
+    "title_vi": "Homestay Lily Lạc Dương Đà Lạt | Lily Café Lâm Đồng",
+    "title_en": "Homestay Lily Lac Duong Dalat | Lily Café Lam Dong",
+    "description_vi": "Homestay Lily Lạc Dương Đà Lạt là một điểm lưu trú có café, vườn và nhịp sống gần Đà Lạt, được xây dựng thành thương hiệu địa phương trong hệ Ôm Đà Lạt.",
+    "description_en": "Homestay Lily Lac Duong Dalat is a local stay with a café, garden, and a rhythm near Dalat, built as a local brand within the Om Dalat system."
   }
 }

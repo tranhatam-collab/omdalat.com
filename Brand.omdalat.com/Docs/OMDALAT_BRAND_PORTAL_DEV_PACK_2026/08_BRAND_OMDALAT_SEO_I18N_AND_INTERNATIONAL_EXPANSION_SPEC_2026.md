@@ -1,0 +1,3 @@
+# 08_BRAND_OMDALAT_SEO_I18N_AND_INTERNATIONAL_EXPANSION_SPEC_2026.md
+
+DEV PACK placeholder generated for Om Dalat Brand Portal.

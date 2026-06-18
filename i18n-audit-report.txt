@@ -1,0 +1,319 @@
+apps/web/app/stay/page.tsx:8:      vi: "Ở lại tại Ôm Đà Lạt",
+apps/web/app/stay/page.tsx:12:      vi: "Loại chỗ ở, giá dự kiến, điều kiện và mức phù hợp để ở lại theo cách có thể duy trì.",
+apps/web/app/stay/page.tsx:22:      eyebrow={{ vi: "Ở lại", en: "Stay" }}
+apps/web/app/stay/page.tsx:23:      title={{ vi: "Ở lại theo cách có thể duy trì", en: "Stay in a way that can be sustained" }}
+apps/web/app/stay/page.tsx:25:        vi: "Ở lại không chỉ là thuê một chỗ ngủ. Đó là chọn một nền sống bạn có thể đi cùng trong nhiều tuần hoặc nhiều tháng.",
+apps/web/app/stay/page.tsx:30:          heading: { vi: "Loại chỗ ở", en: "Stay types" },
+apps/web/app/stay/page.tsx:32:            { vi: "Phòng ở chung cho người cần chi phí thấp và nhịp sống chung.", en: "Dorms for people who need lower cost and shared rhythm." },
+apps/web/app/stay/page.tsx:33:            { vi: "Phòng riêng cho người cần riêng tư và tập trung dài hơn.", en: "Private rooms for people who need privacy and longer focus." }
+apps/web/app/stay/page.tsx:37:          heading: { vi: "Điều kiện và mức phù hợp", en: "Conditions and fit" },
+apps/web/app/stay/page.tsx:39:            { vi: "Giữ không gian, đúng giờ và không làm ảnh hưởng người khác.", en: "Keep the space clean, respect time, and avoid disrupting others." },
+apps/web/app/stay/page.tsx:40:            { vi: "Ở lâu chỉ có ý nghĩa khi bạn có thể tự quản lý mình trong nhịp sống chung.", en: "A longer stay matters only when you can manage yourself inside a shared rhythm." }
+apps/web/app/contact/ContactForm.tsx:44:  vi: {
+apps/web/app/contact/page.tsx:17:      vi: "Liên hệ Ôm Đà Lạt",
+apps/web/app/contact/page.tsx:21:      vi: "Kênh liên hệ chính thức của Ôm Đà Lạt cho hỗ trợ, hợp tác, tham gia và các câu hỏi vận hành.",
+apps/web/app/privacy/page.tsx:7:      vi: "Quyền riêng tư Ôm Đà Lạt",
+apps/web/app/privacy/page.tsx:11:      vi: "Cam kết về quyền riêng tư và cách dữ liệu được xử lý trong hệ Ôm Đà Lạt.",
+apps/web/app/privacy/page.tsx:21:      eyebrow={{ vi: "Quyền riêng tư", en: "Privacy" }}
+apps/web/app/privacy/page.tsx:22:      title={{ vi: "Cam kết dữ liệu và quyền riêng tư", en: "Data and privacy commitments" }}
+apps/web/app/privacy/page.tsx:24:        vi: "Ôm Đà Lạt giảm thiểu dữ liệu công khai và chỉ xử lý dữ liệu phục vụ vận hành có mục đích rõ ràng. Đơn vị quản lý vận hành website omdalat.com: CÔNG TY TNHH THÁI LÂM (ĐÀ LẠT), địa chỉ 42 Cao Bá Quát, Phường Lang Biang - Đà Lạt, Tỉnh Lâm Đồng, Việt Nam. Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc. Liên hệ công khai: hello@omdalat.com và join@omdalat.com.",
+apps/web/app/privacy/page.tsx:29:          heading: { vi: "Tổ chức và liên hệ", en: "Organization and contact" },
+apps/web/app/privacy/page.tsx:32:              vi: "Đơn vị quản lý vận hành tại Việt Nam: CÔNG TNHH THÁI LÂM (ĐÀ LẠT), địa chỉ như trên.",
+apps/web/app/privacy/page.tsx:36:              vi: "Tài trợ công nghệ và thiết kế ứng dụng (không thay thế vai trò vận hành tại Việt Nam): Angel Edu Tam Foundation Inc.",
+apps/web/app/privacy/page.tsx:40:              vi: "Các điều khoản sử dụng chi tiết nằm tại trang Điều khoản trên cùng website này.",
+apps/web/app/privacy/page.tsx:46:          heading: { vi: "Thu thập dữ liệu", en: "Data collection" },
+apps/web/app/privacy/page.tsx:49:              vi: "Chỉ thu thập dữ liệu cần thiết cho ghép nối, độ tin cậy và vận hành.",
+apps/web/app/privacy/page.tsx:53:              vi: "Không thu thập tràn lan ngoài ngữ cảnh hoạt động địa phương.",
+apps/web/app/privacy/page.tsx:59:          heading: { vi: "Sử dụng dữ liệu", en: "Data usage" },
+apps/web/app/privacy/page.tsx:62:              vi: "Dữ liệu được dùng để cải thiện chất lượng kết nối và độ an toàn trong vận hành.",
+apps/web/app/privacy/page.tsx:66:              vi: "Các thay đổi chính sách sẽ được cập nhật minh bạch tại trang này.",
+apps/web/app/join/page.tsx:11:      vi: "Tham gia Ôm Đà Lạt",
+apps/web/app/join/page.tsx:15:      vi: "Đọc kỹ, gửi hồ sơ cơ bản và bắt đầu thời gian thử nếu có độ phù hợp.",
+apps/web/app/communities/[slug]/page.tsx:45:      eyebrow={{ vi: "Chi tiết cộng đồng", en: "Community detail" }}
+apps/web/app/communities/[slug]/page.tsx:50:      backLabel={{ vi: "Cộng đồng", en: "Communities" }}
+apps/web/app/communities/[slug]/page.tsx:52:        { label: { vi: "Khu vực", en: "Zone" }, value: community.zone },
+apps/web/app/communities/[slug]/page.tsx:53:        { label: { vi: "Nhịp độ", en: "Cadence" }, value: community.cadence },
+apps/web/app/communities/[slug]/page.tsx:54:        { label: { vi: "Trọng tâm", en: "Focus" }, value: community.focus }
+apps/web/app/communities/[slug]/page.tsx:56:      signals={[community.signal, { vi: "Trang này giúp bạn hiểu nhịp hoạt động và trọng tâm của cộng đồng.", en: "This page helps you understand the community's rhythm and focus." }]}
+apps/web/app/learning/page.tsx:8:      vi: "Học tại Ôm Đà Lạt",
+apps/web/app/learning/page.tsx:12:      vi: "Học từ trải nghiệm, từ công việc và từ cách sống cùng người khác trong đời sống thật ở Đà Lạt.",
+apps/web/app/learning/page.tsx:22:      eyebrow={{ vi: "Học", en: "Learning" }}
+apps/web/app/learning/page.tsx:23:      title={{ vi: "Học bằng cách tham gia vào đời sống thật", en: "Learn by entering real life" }}
+apps/web/app/learning/page.tsx:25:        vi: "Ở đây, học không đứng ngoài công việc và đời sống. Học là quan sát, làm, sửa và lặp lại cho tới khi có điều làm ra rõ ràng.",
+apps/web/app/learning/page.tsx:30:          heading: { vi: "Học từ trải nghiệm", en: "Learning from experience" },
+apps/web/app/learning/page.tsx:32:            { vi: "Điều bạn học được phải gắn với việc đang diễn ra quanh bạn.", en: "What you learn should be tied to what is actually happening around you." },
+apps/web/app/learning/page.tsx:33:            { vi: "Không lý thuyết hóa quá mức những điều vốn cần được trải qua.", en: "Do not over-theorize things that need to be lived through." }
+apps/web/app/learning/page.tsx:37:          heading: { vi: "Học qua điều làm ra", en: "Learning through output" },
+apps/web/app/learning/page.tsx:39:            { vi: "Bài viết, dự án nhỏ, quy trình hoặc phần việc rõ ràng đều có thể là điều bạn làm ra.", en: "Articles, small projects, processes, or clearly defined tasks can all be output." },
+apps/web/app/learning/page.tsx:40:            { vi: "Điều làm ra giúp việc học trở nên có thể nhìn thấy và sửa được.", en: "Output makes learning visible and correctable." }
+apps/web/app/places/[slug]/page.tsx:45:      eyebrow={{ vi: "Chi tiết địa điểm", en: "Place detail" }}
+apps/web/app/places/[slug]/page.tsx:50:      backLabel={{ vi: "Địa điểm", en: "Places" }}
+apps/web/app/places/[slug]/page.tsx:52:        { label: { vi: "Khu vực", en: "Area" }, value: place.area },
+apps/web/app/places/[slug]/page.tsx:53:        { label: { vi: "Loại hình", en: "Type" }, value: place.type },
+apps/web/app/places/[slug]/page.tsx:54:        { label: { vi: "Chế độ", en: "Mode" }, value: place.mode },
+apps/web/app/places/[slug]/page.tsx:55:        { label: { vi: "Nhịp độ", en: "Cadence" }, value: place.cadence }
+apps/web/app/places/[slug]/page.tsx:57:      signals={[place.signal, { vi: `${place.hostCount} host đang liên kết với địa điểm này`, en: `${place.hostCount} hosts currently linked to this place` }]}
+apps/web/app/page 3.tsx:20:    vi: {
+apps/web/app/page 3.tsx:31:    vi: {
+apps/web/app/page 3.tsx:42:    vi: {
+apps/web/app/page 3.tsx:53:    vi: {
+apps/web/app/page 3.tsx:65:  vi: [
+apps/web/app/page 3.tsx:82:  vi: [
+apps/web/app/page 3.tsx:100:    vi: "Nhịp sáng ở Đà Lạt",
+apps/web/app/page 3.tsx:106:    vi: "Không gian đủ yên để làm việc",
+apps/web/app/page 3.tsx:112:    vi: "Khoảng thở giữa nhịp sống",
+apps/web/app/page 3.tsx:118:  vi: [
+apps/web/app/page 3.tsx:132:    vi: {
+apps/web/app/page 3.tsx:142:    vi: {
+apps/web/app/page 3.tsx:152:    vi: {
+apps/web/app/member/node-model/page.tsx:40:      eyebrow={{ vi: "Mở rộng", en: "Expansion" }}
+apps/web/app/member/node-model/page.tsx:41:      title={{ vi: "Mô hình mở rộng theo điểm", en: "Distributed expansion model" }}
+apps/web/app/member/node-model/page.tsx:43:        vi: "Đây là cách hệ có thể mở rộng theo từng điểm vận hành mà vẫn giữ được quy tắc, con người phụ trách và nhịp sống chung.",
+apps/web/app/member/node-model/page.tsx:47:        { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" }, variant: "primary" },
+apps/web/app/member/node-model/page.tsx:48:        { href: localizePath("/member/investor-overview", locale), label: { vi: "Xem tổng quan", en: "View overview" } }
+apps/web/app/member/resources/page.tsx:42:      eyebrow={{ vi: "Tài nguyên", en: "Resources" }}
+apps/web/app/member/resources/page.tsx:43:      title={{ vi: "Tài nguyên dành cho thành viên", en: "Resources for members" }}
+apps/web/app/member/resources/page.tsx:45:        vi: "Đây là lớp tài liệu đầu tiên sau khi đăng ký. Bạn chỉ thấy những gì đã được mở công khai cho cấp truy cập hiện tại.",
+apps/web/app/member/resources/page.tsx:49:        { href: localizePath("/member/handbook", locale), label: { vi: "Sổ tay", en: "Handbook" }, variant: "primary" },
+apps/web/app/member/resources/page.tsx:50:        { href: localizePath("/member/application-status", locale), label: { vi: "Trạng thái hồ sơ", en: "Application status" } }
+apps/web/app/member/investor-overview/page.tsx:40:      eyebrow={{ vi: "Đầu tư", en: "Investor" }}
+apps/web/app/member/investor-overview/page.tsx:41:      title={{ vi: "Tổng quan dành cho thành viên", en: "Member-facing investor overview" }}
+apps/web/app/member/investor-overview/page.tsx:43:        vi: "Trang này không mở toàn bộ data room. Nó chỉ cho bạn thấy khung phát triển của hệ, cách nhìn ở mức tổng quan và lớp tài liệu nào có thể mở sau khi hồ sơ phù hợp hơn.",
+apps/web/app/member/investor-overview/page.tsx:47:        { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" }, variant: "primary" },
+apps/web/app/member/investor-overview/page.tsx:48:        { href: localizePath("/member/application-status", locale), label: { vi: "Xem trạng thái", en: "View status" } }
+apps/web/app/member/welcome/page.tsx:20:      eyebrow={{ vi: "Bắt đầu", en: "Welcome" }}
+apps/web/app/member/welcome/page.tsx:21:      title={{ vi: "Chào mừng bạn vào khu thành viên", en: "Welcome to the member area" }}
+apps/web/app/member/welcome/page.tsx:23:        vi: "Đây là bước vào đầu tiên: hiểu bạn đang ở đâu trong luồng thành viên, cần làm gì trước, và khi nào tài liệu sâu hơn mới mở.",
+apps/web/app/member/welcome/page.tsx:27:        { href: localizePath("/member/profile", locale), label: { vi: "Điền hồ sơ", en: "Fill profile" }, variant: "primary" },
+apps/web/app/member/welcome/page.tsx:28:        { href: localizePath("/member/application-status", locale), label: { vi: "Xem trạng thái", en: "Check status" } }
+apps/web/app/member/operations/page.tsx:41:      vi: "Lớp bài public đầu tiên vẫn chưa có bài nào được publish.",
+apps/web/app/member/operations/page.tsx:45:      vi: "Lớp tài nguyên mở cho registered member vẫn chưa có nội dung published.",
+apps/web/app/member/operations/page.tsx:49:      vi: "Lớp reviewed vẫn đang chờ biên tập và chưa nên mở rộng quyền.",
+apps/web/app/member/operations/page.tsx:54:    { accessLevel: "guest", label: { vi: "Guest", en: "Guest" } },
+apps/web/app/member/operations/page.tsx:55:    { accessLevel: "registered", label: { vi: "Registered", en: "Registered" } },
+apps/web/app/member/operations/page.tsx:56:    { accessLevel: "reviewed", label: { vi: "Reviewed", en: "Reviewed" } },
+apps/web/app/member/operations/page.tsx:57:    { accessLevel: "internal", label: { vi: "Internal", en: "Internal" } }
+apps/web/app/member/operations/page.tsx:60:    { pillarKey: "song", label: { vi: "Sống ở Đà Lạt", en: "Living in Dalat" } },
+apps/web/app/member/operations/page.tsx:61:    { pillarKey: "work", label: { vi: "Làm việc ở Đà Lạt", en: "Working in Dalat" } },
+apps/web/app/member/operations/page.tsx:62:    { pillarKey: "xay-cuoc-doi", label: { vi: "Xây cuộc đời", en: "Building a life" } }
+apps/web/app/member/operations/page.tsx:90:      eyebrow={{ vi: "Vận hành", en: "Operations" }}
+apps/web/app/member/operations/page.tsx:91:      title={{ vi: "Snapshot vận hành nội dung", en: "Content operations snapshot" }}
+apps/web/app/member/operations/page.tsx:93:        vi: "Trang này cho bạn thấy lớp public đã mở tới đâu, lớp member nào đã sẵn sàng, và phần nào vẫn nên ở hàng biên tập.",
+apps/web/app/member/operations/page.tsx:97:        { href: localizePath("/member/handbook", locale), label: { vi: "Mở sổ tay", en: "Open handbook" }, variant: "primary" },
+apps/web/app/member/operations/page.tsx:98:        { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" } }
+apps/web/app/member/handbook/page.tsx:50:      eyebrow={{ vi: "Sổ tay", en: "Handbook" }}
+apps/web/app/member/handbook/page.tsx:51:      title={{ vi: "Sổ tay dành cho thành viên", en: "Member handbook" }}
+apps/web/app/member/handbook/page.tsx:53:        vi: "Trang này mở ra những phần sổ tay đã được mở cho cấp hiện tại của bạn. Mỗi lớp được mở theo đúng tiến trình tham gia.",
+apps/web/app/member/handbook/page.tsx:57:        { href: localizePath("/member/resources", locale), label: { vi: "Tài nguyên", en: "Resources" }, variant: "primary" },
+apps/web/app/member/handbook/page.tsx:58:        { href: localizePath("/member/application-status", locale), label: { vi: "Trạng thái hồ sơ", en: "Application status" } }
+apps/web/app/member/programs/page.tsx:40:      eyebrow={{ vi: "Lộ trình", en: "Paths" }}
+apps/web/app/member/programs/page.tsx:41:      title={{ vi: "Các hướng có thể mở cho thành viên", en: "Participation paths that may open later" }}
+apps/web/app/member/programs/page.tsx:43:        vi: "Đây là lớp tổng quan để biết hệ đang có những hướng nào, điều gì phù hợp với hồ sơ của bạn và phần nào chỉ mở sau bước review tiếp theo.",
+apps/web/app/member/programs/page.tsx:47:        { href: localizePath("/member/resources", locale), label: { vi: "Tài nguyên", en: "Resources" }, variant: "primary" },
+apps/web/app/member/programs/page.tsx:48:        { href: localizePath("/member/application-status", locale), label: { vi: "Xem trạng thái", en: "View status" } }
+apps/web/app/member/profile/page.tsx:55:      eyebrow={{ vi: "Hồ sơ", en: "Profile" }}
+apps/web/app/member/profile/page.tsx:56:      title={{ vi: "Hoàn tất hồ sơ thành viên", en: "Complete your member profile" }}
+apps/web/app/member/profile/page.tsx:58:        vi: "Hồ sơ giúp hệ thống hiểu bạn đang ở đâu, bạn cần gì, và mức mở rộng nào phù hợp.",
+apps/web/app/member/profile/page.tsx:62:        { href: localizePath("/member/application-status", locale), label: { vi: "Xem trạng thái", en: "Check status" }, variant: "primary" },
+apps/web/app/member/profile/page.tsx:63:        { href: localizePath("/member/resources", locale), label: { vi: "Tài nguyên", en: "Resources" } }
+apps/web/app/member/application-status/page 2.tsx:70:      eyebrow={{ vi: "Trạng thái", en: "Status" }}
+apps/web/app/member/application-status/page 2.tsx:71:      title={{ vi: "Tình trạng hồ sơ của bạn", en: "Your application status" }}
+apps/web/app/member/application-status/page 2.tsx:73:        vi: "Trang này giúp bạn biết hồ sơ đang ở trạng thái nào và cần làm gì tiếp theo.",
+apps/web/app/member/application-status/page 2.tsx:77:        { href: localizePath("/member/profile", locale), label: { vi: "Cập nhật hồ sơ", en: "Update profile" }, variant: "primary" },
+apps/web/app/member/application-status/page 2.tsx:78:        { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" } }
+apps/web/app/member/application-status/page.tsx:175:      eyebrow={{ vi: "Trạng thái", en: "Status" }}
+apps/web/app/member/application-status/page.tsx:176:      title={{ vi: "Tình trạng hồ sơ của bạn", en: "Your application status" }}
+apps/web/app/member/application-status/page.tsx:178:        vi: "Trang này cho bạn biết hồ sơ đang ở đâu, review queue đang ở trạng thái nào, và khi nào quyền reviewed được mở.",
+apps/web/app/member/application-status/page.tsx:182:        { href: localizePath("/member/profile", locale), label: { vi: "Cập nhật hồ sơ", en: "Update profile" }, variant: "primary" },
+apps/web/app/member/application-status/page.tsx:183:        { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" } }
+apps/web/app/member/page.tsx:16:  { href: "/member/welcome", vi: "Bắt đầu", en: "Start here" },
+apps/web/app/member/page.tsx:17:  { href: "/member/profile", vi: "Hồ sơ", en: "Profile" },
+apps/web/app/member/page.tsx:18:  { href: "/member/application-status", vi: "Trạng thái hồ sơ", en: "Application status" },
+apps/web/app/member/page.tsx:19:  { href: "/member/resources", vi: "Tài nguyên đã mở", en: "Available resources" }
+apps/web/app/member/page.tsx:28:      eyebrow={{ vi: "Khu thành viên", en: "Member area" }}
+apps/web/app/member/page.tsx:29:      title={{ vi: "Trang bắt đầu của thành viên", en: "Member starting point" }}
+apps/web/app/member/page.tsx:31:        vi: "Đây là lớp riêng cho người đã đăng ký. Từ đây, bạn đi theo đúng luồng: xác thực, hoàn tất hồ sơ, chờ review và mở thêm tài liệu khi đủ điều kiện.",
+apps/web/app/member/page.tsx:35:        { href: localizePath("/member/welcome", locale), label: { vi: "Bắt đầu", en: "Start here" }, variant: "primary" },
+apps/web/app/member/page.tsx:36:        { href: localizePath("/member/profile", locale), label: { vi: "Hoàn tất hồ sơ", en: "Complete profile" } },
+apps/web/app/member/page.tsx:37:        { href: localizePath("/member/application-status", locale), label: { vi: "Xem trạng thái", en: "Check status" } }
+apps/web/app/member/page.tsx:40:        vi: "Một số nội dung chỉ mở sau khi hồ sơ cơ bản đã được hoàn tất và xác nhận.",
+apps/web/app/member/page.tsx:68:              <strong>{pickLocalized(locale, { vi: item.vi, en: item.en })}</strong>
+apps/web/app/articles/page.tsx:11:      vi: "Bài viết Ôm Đà Lạt",
+apps/web/app/articles/page.tsx:15:      vi: "Bài viết công khai về sống, làm việc và xây cuộc đời tại Đà Lạt.",
+apps/web/app/articles/[slug]/page.tsx:21:  vi: "Bài viết",
+apps/web/app/articles/[slug]/page.tsx:29:      vi: {
+apps/web/app/articles/[slug]/page.tsx:40:      vi: {
+apps/web/app/articles/[slug]/page.tsx:53:      vi: {
+apps/web/app/articles/[slug]/page.tsx:64:      vi: {
+apps/web/app/articles/[slug]/page.tsx:77:      vi: {
+apps/web/app/articles/[slug]/page.tsx:88:      vi: {
+apps/web/app/articles/[slug]/page.tsx:101:  "lam-viec-tu-xa": { vi: "Làm việc từ xa", en: "Remote work" },
+apps/web/app/articles/[slug]/page.tsx:102:  remote: { vi: "Làm việc từ xa", en: "Remote work" },
+apps/web/app/articles/[slug]/page.tsx:103:  freelance: { vi: "Làm việc tự do", en: "Freelance work" },
+apps/web/app/articles/[slug]/page.tsx:104:  "lam-viec-tu-do": { vi: "Làm việc tự do", en: "Freelance work" },
+apps/web/app/articles/[slug]/page.tsx:105:  work: { vi: "Làm việc", en: "Work" },
+apps/web/app/articles/[slug]/page.tsx:106:  system: { vi: "Hệ vận hành", en: "Operating system" },
+apps/web/app/articles/[slug]/page.tsx:107:  va: { vi: "Trợ lý từ xa", en: "Remote assistant" },
+apps/web/app/articles/[slug]/page.tsx:108:  "tro-ly-tu-xa": { vi: "Trợ lý từ xa", en: "Remote assistant" }
+apps/web/app/articles/[slug]/page.tsx:162:        vi: "Bài viết không còn khả dụng",
+apps/web/app/articles/[slug]/page.tsx:166:        vi: "Bài viết này hiện không mở công khai.",
+apps/web/app/proofs/[slug]/page.tsx:45:      eyebrow={{ vi: "Chi tiết bằng chứng", en: "Proof detail" }}
+apps/web/app/proofs/[slug]/page.tsx:50:      backLabel={{ vi: "Bằng chứng", en: "Proofs" }}
+apps/web/app/proofs/[slug]/page.tsx:52:        { label: { vi: "Loại", en: "Kind" }, value: proof.kind },
+apps/web/app/proofs/[slug]/page.tsx:53:        { label: { vi: "Ghi nhận", en: "Recorded" }, value: proof.date },
+apps/web/app/proofs/[slug]/page.tsx:54:        { label: { vi: "Kết quả", en: "Outcome" }, value: proof.outcome }
+apps/web/app/proofs/[slug]/page.tsx:56:      signals={[proof.evidence, { vi: "Trang này ghi rõ kết quả, loại bằng chứng và thời điểm ghi nhận.", en: "This page records the outcome, proof type, and date of record." }]}
+apps/web/app/terms/page.tsx:7:      vi: "Điều khoản Ôm Đà Lạt",
+apps/web/app/terms/page.tsx:11:      vi: "Điều khoản và kỳ vọng sử dụng cho hệ Ôm Đà Lạt.",
+apps/web/app/terms/page.tsx:21:      eyebrow={{ vi: "Điều khoản", en: "Terms" }}
+apps/web/app/terms/page.tsx:22:      title={{ vi: "Nguyên tắc sử dụng Ôm Đà Lạt", en: "Om Dalat usage principles" }}
+apps/web/app/terms/page.tsx:24:        vi: "Mục tiêu của điều khoản là giữ hệ vận hành địa phương an toàn, tin cậy và có trách nhiệm. Website omdalat.com do CÔNG TY TNHH THÁI LÂM (ĐÀ LẠT) quản lý vận hành tại địa chỉ 42 Cao Bá Quát, Phường Lang Biang - Đà Lạt, Tỉnh Lâm Đồng, Việt Nam. Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc. Liên hệ công khai: hello@omdalat.com và join@omdalat.com.",
+apps/web/app/terms/page.tsx:29:          heading: { vi: "Pháp nhân và tài trợ", en: "Legal roles and sponsorship" },
+apps/web/app/terms/page.tsx:32:              vi: "Đơn vị quản lý vận hành: CÔNG TNHH THÁI LÂM (ĐÀ LẠT), Việt Nam.",
+apps/web/app/terms/page.tsx:36:              vi: "Tài trợ công nghệ và thiết kế ứng dụng: Angel Edu Tam Foundation Inc (hỗ trợ miễn phí trong khuôn khổ tài trợ, không thay thế trách nhiệm vận hành tại Việt Nam).",
+apps/web/app/terms/page.tsx:40:              vi: "Chính sách quyền riêng tư chi tiết nằm tại trang Quyền riêng tư trên cùng website.",
+apps/web/app/terms/page.tsx:46:          heading: { vi: "Nguyên tắc chung", en: "General principles" },
+apps/web/app/terms/page.tsx:49:              vi: "Tôn trọng bối cảnh địa phương và an toàn cộng đồng.",
+apps/web/app/terms/page.tsx:53:              vi: "Không cung cấp thông tin sai lệch hoặc bằng chứng giả mạo.",
+apps/web/app/terms/page.tsx:59:          heading: { vi: "Thực thi", en: "Enforcement" },
+apps/web/app/terms/page.tsx:62:              vi: "Nội dung vi phạm có thể bị gắn cờ, giới hạn hoặc gỡ khỏi hệ thống.",
+apps/web/app/terms/page.tsx:66:              vi: "Các thay đổi lớn về điều khoản sẽ được thông báo rõ trước khi áp dụng.",
+apps/web/app/about/page.tsx:8:      vi: "Giới thiệu Ôm Đà Lạt",
+apps/web/app/about/page.tsx:12:      vi: "Ôm Đà Lạt là một hệ sống thực địa tại Đà Lạt cho sống, làm, học và xây giá trị dài hạn.",
+apps/web/app/about/page.tsx:22:      eyebrow={{ vi: "Giới thiệu", en: "About" }}
+apps/web/app/about/page.tsx:23:      title={{ vi: "Ôm Đà Lạt là gì?", en: "What is Om Dalat?" }}
+apps/web/app/about/page.tsx:25:        vi: "Ôm Đà Lạt là một hệ sống thực địa tại Đà Lạt, nơi con người có thể ở lại, làm việc, học từ trải nghiệm và xây giá trị dài hạn.",
+apps/web/app/about/page.tsx:30:          heading: { vi: "Bản chất", en: "What it is" },
+apps/web/app/about/page.tsx:32:            { vi: "Không phải homestay, không phải retreat, không phải khóa học.", en: "It is not a homestay, a retreat, or a course." },
+apps/web/app/about/page.tsx:33:            { vi: "Đây là một nơi để ở lại đủ lâu, sống đủ thật và làm đủ đều.", en: "It is a place to stay long enough, live honestly enough, and work steadily enough." }
+apps/web/app/about/page.tsx:37:          heading: { vi: "Điều hệ giữ", en: "What the system holds" },
+apps/web/app/about/page.tsx:39:            { vi: "Một nền sống đủ ổn định để con người không phải phân tán vào những thứ ngắn hạn.", en: "A stable enough living base so people do not keep scattering into short-term noise." },
+apps/web/app/about/page.tsx:40:            { vi: "Một cộng đồng có trách nhiệm, nơi việc ở cùng nhau vẫn còn dùng được trong đời sống thật.", en: "A responsible community where living with others still has practical value." }
+apps/web/app/life/page.tsx:8:      vi: "Sống tại Ôm Đà Lạt",
+apps/web/app/life/page.tsx:12:      vi: "Nơi ở, nhịp sống, sức khỏe và cách giữ một nền sống đủ ổn định để ở lại lâu hơn.",
+apps/web/app/life/page.tsx:22:      eyebrow={{ vi: "Sống", en: "Life" }}
+apps/web/app/life/page.tsx:23:      title={{ vi: "Một nền sống đủ vững để ở lại", en: "A living base steady enough to stay" }}
+apps/web/app/life/page.tsx:25:        vi: "Phần sống không phải chuyện trang trí. Nó là nền để công việc, học tập và cộng đồng không bị đứt đoạn.",
+apps/web/app/life/page.tsx:30:          heading: { vi: "Nơi ở", en: "Living space" },
+apps/web/app/life/page.tsx:32:            { vi: "Chỗ ở phải đủ rõ ràng, yên và dùng được mỗi ngày.", en: "A living space needs to be clear, quiet, and usable every day." },
+apps/web/app/life/page.tsx:33:            { vi: "Ở lâu quan trọng hơn cảm giác đẹp trong vài ngày đầu.", en: "Staying well matters more than looking beautiful in the first few days." }
+apps/web/app/life/page.tsx:37:          heading: { vi: "Nhịp sống", en: "Rhythm" },
+apps/web/app/life/page.tsx:39:            { vi: "Nhịp đều giúp con người làm việc và giữ đầu óc sáng lâu hơn.", en: "A steady rhythm helps people work and keep a clearer mind for longer." },
+apps/web/app/life/page.tsx:40:            { vi: "Không gian chung chỉ bền khi mọi người giữ giờ giấc và trách nhiệm.", en: "Shared life lasts only when people keep time and responsibility." }
+apps/web/app/docs/work-guide/page.tsx:8:      vi: "Hướng dẫn làm việc",
+apps/web/app/docs/work-guide/page.tsx:12:      vi: "Công việc phù hợp, cách bắt đầu và cách giữ nhịp làm việc đủ thực để ở lại lâu hơn.",
+apps/web/app/docs/work-guide/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/work-guide/page.tsx:23:      title={{ vi: "Hướng dẫn làm việc", en: "Work guide" }}
+apps/web/app/docs/work-guide/page.tsx:25:        vi: "Điều quan trọng không phải làm việc ở nơi đẹp. Điều quan trọng là bạn có thể giữ việc đều và sống được cùng nhịp đó.",
+apps/web/app/docs/work-guide/page.tsx:30:          heading: { vi: "Điều có thể làm", en: "What can be done" },
+apps/web/app/docs/work-guide/page.tsx:32:            { vi: "Làm việc từ xa, công việc tự do, dự án nhỏ và một số đầu việc nội bộ.", en: "Remote work, freelance, small projects, and some internal work streams." },
+apps/web/app/docs/work-guide/page.tsx:33:            { vi: "Công việc phải đi cùng khả năng tự quản lý và nhịp đều.", en: "Work needs to come with self-management and steady rhythm." }
+apps/web/app/docs/work-guide/page.tsx:37:          heading: { vi: "Cách bắt đầu", en: "How to start" },
+apps/web/app/docs/work-guide/page.tsx:39:            { vi: "Nói rõ bạn đang có kỹ năng gì và muốn đi theo nhịp làm nào.", en: "Explain clearly what skills you have and what work rhythm you want." },
+apps/web/app/docs/work-guide/page.tsx:40:            { vi: "Bắt đầu từ phần việc nhỏ nhưng giữ đều trước khi mở rộng.", en: "Start from a smaller task and keep it steady before expanding." }
+apps/web/app/docs/stay-guide/page.tsx:8:      vi: "Hướng dẫn ở lại",
+apps/web/app/docs/stay-guide/page.tsx:12:      vi: "Loại chỗ ở, điều kiện cơ bản và cách ở đủ lâu để vào nếp tại Đà Lạt.",
+apps/web/app/docs/stay-guide/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/stay-guide/page.tsx:23:      title={{ vi: "Hướng dẫn ở lại", en: "Stay guide" }}
+apps/web/app/docs/stay-guide/page.tsx:25:        vi: "Ở lại chỉ có ý nghĩa khi bạn có thể vào được nhịp sống thực sự. Chỗ ở chỉ là bề mặt đầu tiên.",
+apps/web/app/docs/stay-guide/page.tsx:30:          heading: { vi: "Loại chỗ ở", en: "Stay types" },
+apps/web/app/docs/stay-guide/page.tsx:32:            { vi: "Phòng ở chung cho người cần chi phí thấp và chấp nhận nhịp chung.", en: "Dorms for people who need lower cost and accept shared rhythm." },
+apps/web/app/docs/stay-guide/page.tsx:33:            { vi: "Phòng riêng cho người cần riêng tư hơn để tập trung và làm việc.", en: "Private rooms for people who need more privacy to focus and work." }
+apps/web/app/docs/stay-guide/page.tsx:37:          heading: { vi: "Điều kiện cơ bản", en: "Basic conditions" },
+apps/web/app/docs/stay-guide/page.tsx:39:            { vi: "Giữ không gian sạch, tôn trọng giờ giấc và nói rõ thời gian ở dự kiến.", en: "Keep the space clean, respect time, and explain your expected stay length." },
+apps/web/app/docs/stay-guide/page.tsx:40:            { vi: "Ở lâu đòi hỏi khả năng tự quản lý chứ không chỉ cảm hứng ngắn hạn.", en: "A longer stay asks for self-management, not short-term enthusiasm." }
+apps/web/app/docs/faq/page.tsx:8:      vi: "Câu hỏi thường gặp của Ôm Đà Lạt",
+apps/web/app/docs/faq/page.tsx:12:      vi: "Những câu hỏi ngắn dành cho người mới trước khi đăng ký và đi sâu vào khu thành viên.",
+apps/web/app/docs/faq/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/faq/page.tsx:23:      title={{ vi: "Câu hỏi thường gặp cho người mới", en: "FAQ for newcomers" }}
+apps/web/app/docs/faq/page.tsx:25:        vi: "Nếu bạn còn đang dò đường, hãy bắt đầu từ các câu hỏi ngắn này trước khi mở sâu hơn.",
+apps/web/app/docs/faq/page.tsx:30:          heading: { vi: "Tôi có cần đăng ký ngay không?", en: "Do I need to register right away?" },
+apps/web/app/docs/faq/page.tsx:32:            { vi: "Không. Hãy đọc đủ để hiểu mình có hợp hay không trước.", en: "No. Read enough first to understand whether it fits you." }
+apps/web/app/docs/faq/page.tsx:36:          heading: { vi: "Khi nào mới nên vào khu thành viên?", en: "When should I enter the member area?" },
+apps/web/app/docs/faq/page.tsx:38:            { vi: "Khi bạn đã hiểu rõ bản chất của hệ và muốn đi tiếp một cách nghiêm túc hơn.", en: "When you understand the system clearly and want to continue more seriously." }
+apps/web/app/docs/faq/page.tsx:42:          heading: { vi: "Mọi tài liệu có mở công khai không?", en: "Are all materials public?" },
+apps/web/app/docs/faq/page.tsx:44:            { vi: "Không. Public chỉ giữ phần nền, còn các phần sâu hơn mở theo từng lớp truy cập.", en: "No. Public only carries the foundation, while deeper materials open by access layer." }
+apps/web/app/docs/community-rules/page.tsx:8:      vi: "Quy tắc cộng đồng Ôm Đà Lạt",
+apps/web/app/docs/community-rules/page.tsx:12:      vi: "Những nguyên tắc nền để giữ nhịp sống chung, công việc chung và sự tôn trọng trong cộng đồng.",
+apps/web/app/docs/community-rules/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/community-rules/page.tsx:23:      title={{ vi: "Quy tắc cộng đồng", en: "Community rules" }}
+apps/web/app/docs/community-rules/page.tsx:25:        vi: "Cộng đồng không tự tốt lên chỉ bằng ý định tốt. Nó cần quy tắc rõ và sự tự quản lý đủ thật.",
+apps/web/app/docs/community-rules/page.tsx:30:          heading: { vi: "Điều phải giữ", en: "What must be kept" },
+apps/web/app/docs/community-rules/page.tsx:32:            { vi: "Tôn trọng, đúng giờ và không làm ảnh hưởng người khác.", en: "Respect, time discipline, and not disrupting others." },
+apps/web/app/docs/community-rules/page.tsx:33:            { vi: "Không gây độc hại, không kéo nhau vào căng thẳng vô ích, không ép người khác sống theo nhịp của mình.", en: "No toxic behavior, no drama, and no forcing others into your rhythm." }
+apps/web/app/docs/community-rules/page.tsx:37:          heading: { vi: "Điều cần nhớ", en: "What to remember" },
+apps/web/app/docs/community-rules/page.tsx:39:            { vi: "Cộng đồng chỉ bền khi mọi người có đóng góp thực.", en: "Community lasts only when people contribute in real ways." },
+apps/web/app/docs/community-rules/page.tsx:40:            { vi: "Ở cùng nhau là một phần của việc học và làm, không phải phần trang trí.", en: "Living together is part of learning and work, not decoration." }
+apps/web/app/docs/how-it-works/page.tsx:8:      vi: "Cách hệ vận hành",
+apps/web/app/docs/how-it-works/page.tsx:12:      vi: "Luồng từ phần công khai sang khu thành viên, bước xem xét và thời gian thử.",
+apps/web/app/docs/how-it-works/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/how-it-works/page.tsx:23:      title={{ vi: "Cách hệ vận hành", en: "How the system works" }}
+apps/web/app/docs/how-it-works/page.tsx:25:        vi: "Hệ đi từ phần công khai để hiểu đúng sang khu thành viên để hiểu sâu hơn, rồi mới tới bước xem xét và vận hành sâu.",
+apps/web/app/docs/how-it-works/page.tsx:30:          heading: { vi: "Công khai", en: "Public" },
+apps/web/app/docs/how-it-works/page.tsx:32:            { vi: "Homepage, các trang trục chính và bài viết giúp người mới hiểu bản chất của hệ.", en: "Homepage, core pages, and articles help newcomers understand the system." },
+apps/web/app/docs/how-it-works/page.tsx:33:            { vi: "Phần công khai không mở các tài liệu nhạy cảm hoặc quá sâu.", en: "Public does not expose sensitive or deeper materials." }
+apps/web/app/docs/how-it-works/page.tsx:37:          heading: { vi: "Thành viên", en: "Member" },
+apps/web/app/docs/how-it-works/page.tsx:39:            { vi: "Sau khi đăng ký cơ bản, bạn thấy hồ sơ, tài nguyên và các bước tiếp theo.", en: "After basic registration, you see your profile, resources, and next steps." },
+apps/web/app/docs/how-it-works/page.tsx:40:            { vi: "Một số phần chỉ mở sau khi đã được xem xét hoặc có vai trò nội bộ.", en: "Some sections open only after review or internal role assignment." }
+apps/web/app/docs/getting-started/page.tsx:8:      vi: "Bắt đầu với Ôm Đà Lạt",
+apps/web/app/docs/getting-started/page.tsx:12:      vi: "Những điều nên đọc trước khi quyết định ở lại, tham gia hoặc mở hồ sơ thành viên.",
+apps/web/app/docs/getting-started/page.tsx:22:      eyebrow={{ vi: "Hướng dẫn", en: "Guides" }}
+apps/web/app/docs/getting-started/page.tsx:23:      title={{ vi: "Bắt đầu từ đây", en: "Start here" }}
+apps/web/app/docs/getting-started/page.tsx:25:        vi: "Hãy hiểu rõ mình đang tìm gì trước khi đi tiếp. Đây là nơi để ở lại, không phải để ghé qua cho vui.",
+apps/web/app/docs/getting-started/page.tsx:30:          heading: { vi: "Đọc trước", en: "Read first" },
+apps/web/app/docs/getting-started/page.tsx:32:            { vi: "Giới thiệu hệ sống, nhịp vận hành và mức phù hợp.", en: "Read the living system overview, operating rhythm, and fit." },
+apps/web/app/docs/getting-started/page.tsx:33:            { vi: "Tự hỏi bạn muốn ở lại, làm việc, học hay chỉ đang đổi cảnh tạm thời.", en: "Ask whether you want to stay, work, learn, or are only changing scenery temporarily." }
+apps/web/app/docs/getting-started/page.tsx:37:          heading: { vi: "Chưa cần mở sâu", en: "No need to go deeper yet" },
+apps/web/app/docs/getting-started/page.tsx:39:            { vi: "Các tài liệu chi tiết hơn chỉ mở sau khi bạn tạo hồ sơ cơ bản.", en: "Deeper materials open only after you create a basic profile." },
+apps/web/app/docs/getting-started/page.tsx:40:            { vi: "Phần công khai chỉ cần đủ để bạn hiểu đúng trước.", en: "The public layer only needs to be enough for clear understanding first." }
+apps/web/app/docs/page.tsx:13:      vi: "Hướng dẫn Ôm Đà Lạt",
+apps/web/app/docs/page.tsx:17:      vi: "Điểm bắt đầu để hiểu hệ, cách tham gia và các quy tắc nền của Ôm Đà Lạt.",
+apps/web/app/work/page.tsx:8:      vi: "Làm việc tại Ôm Đà Lạt",
+apps/web/app/work/page.tsx:12:      vi: "Công việc thật, dự án thật và cách giữ thu nhập đủ thực để ở lại dài hơn tại Đà Lạt.",
+apps/web/app/work/page.tsx:22:      eyebrow={{ vi: "Làm", en: "Work" }}
+apps/web/app/work/page.tsx:23:      title={{ vi: "Công việc thật trong một nhịp sống thật", en: "Real work inside a real rhythm of life" }}
+apps/web/app/work/page.tsx:25:        vi: "Ôm Đà Lạt không tô hồng việc sống ở nơi đẹp. Điều quan trọng là bạn có thể làm gì, làm đều đến đâu và giữ thu nhập ra sao.",
+apps/web/app/work/page.tsx:30:          heading: { vi: "Điều có thể làm", en: "What can be done" },
+apps/web/app/work/page.tsx:32:            { vi: "Làm việc từ xa, công việc tự do, dự án nhỏ và công việc nội bộ theo nhu cầu.", en: "Remote work, freelance, small projects, and internal work as needed." },
+apps/web/app/work/page.tsx:33:            { vi: "Không phải mọi kiểu việc đều hợp với nhịp sống ở Đà Lạt.", en: "Not every type of work fits the rhythm of life in Dalat." }
+apps/web/app/work/page.tsx:37:          heading: { vi: "Điều phải giữ", en: "What must be kept" },
+apps/web/app/work/page.tsx:39:            { vi: "Nhịp làm đều, mốc thời gian rõ và khả năng tự quản lý cơ bản.", en: "Steady output, clear deadlines, and basic self-management." },
+apps/web/app/work/page.tsx:40:            { vi: "Ít hứa hẹn hơn, nhiều việc làm ra hơn.", en: "Less promise, more actual work." }
+apps/web/app/community/page.tsx:8:      vi: "Cộng đồng tại Ôm Đà Lạt",
+apps/web/app/community/page.tsx:12:      vi: "Sống chung, chia sẻ, giữ kỷ luật và xây một cộng đồng có trách nhiệm tại Đà Lạt.",
+apps/web/app/community/page.tsx:22:      eyebrow={{ vi: "Cộng đồng", en: "Community" }}
+apps/web/app/community/page.tsx:23:      title={{ vi: "Cộng đồng chỉ bền khi mọi người giữ phần của mình", en: "Community lasts only when people keep their part" }}
+apps/web/app/community/page.tsx:25:        vi: "Không đông cho vui. Không gắn kết giả. Cộng đồng ở đây được giữ bằng trách nhiệm, nhịp sống và sự tôn trọng.",
+apps/web/app/community/page.tsx:30:          heading: { vi: "Nguyên tắc", en: "Principles" },
+apps/web/app/community/page.tsx:32:            { vi: "Không gây độc hại, không kéo nhau vào ồn ào vô ích, không làm hỏng nhịp sống chung.", en: "No toxic behavior, no drama, and no breaking the shared rhythm." },
+apps/web/app/community/page.tsx:33:            { vi: "Tôn trọng người khác và chịu trách nhiệm với phần của mình.", en: "Respect others and take responsibility for your part." }
+apps/web/app/community/page.tsx:37:          heading: { vi: "Hoạt động nền", en: "Foundational activities" },
+apps/web/app/community/page.tsx:39:            { vi: "Ăn chung, làm việc cùng, chia sẻ vào cuối tuần và nhìn lại định kỳ.", en: "Shared meals, working together, weekend sharing, and regular review." },
+apps/web/app/community/page.tsx:40:            { vi: "Nhịp sinh hoạt giúp con người biết mình thuộc về đâu trong hệ.", en: "The shared rhythm helps people know where they stand in the system." }
+apps/web/app/page.tsx:12:      vi: "Ôm Đà Lạt | Sống, làm và ở lại tại Đà Lạt",
+apps/web/app/page.tsx:16:      vi: "Ôm Đà Lạt là một hệ sống thực địa tại Đà Lạt, nơi bạn có thể ở lại, làm việc, học từ trải nghiệm và xây một nhịp sống có thể đi đường dài.",
+apps/web/app/page.tsx:29:      vi: "Toàn cảnh Đà Lạt trong sương sớm",
+apps/web/app/page.tsx:32:    vi: "Đà Lạt trong sương sớm",
+apps/web/app/page.tsx:40:      vi: "Mặt hồ và rừng thông ở Đà Lạt",
+apps/web/app/page.tsx:43:    vi: "Mặt hồ và rừng thông",
+apps/web/app/page.tsx:51:      vi: "Con đường đất vùng ven Đà Lạt",
+apps/web/app/page.tsx:54:    vi: "Đường rừng vùng ven",
+apps/web/app/page.tsx:63:    vi: {
+apps/web/app/page.tsx:75:    vi: {
+apps/web/app/page.tsx:87:    vi: {
+apps/web/app/page.tsx:99:    vi: {
+apps/web/app/page.tsx:111:  vi: [
+apps/web/app/page.tsx:131:      vi: "Ga Đà Lạt",
+apps/web/app/page.tsx:134:    vi: "Một nhịp sống chậm hơn",
+apps/web/app/page.tsx:142:      vi: "Thác Datanla",
+apps/web/app/page.tsx:145:    vi: "Một góc đủ để ở lại",
+apps/web/app/page.tsx:153:      vi: "Quầy trái cây ở chợ Đà Lạt",
+apps/web/app/page.tsx:156:    vi: "Đời sống thường ngày",
+apps/web/app/page.tsx:164:      vi: "Mặt trước chợ Đà Lạt",
+apps/web/app/page.tsx:167:    vi: "Một nơi để ở lại",
+apps/web/app/page.tsx:175:    vi: {
+apps/web/app/page.tsx:186:    vi: {
+apps/web/app/page.tsx:197:    vi: {
+apps/web/app/page.tsx:210:    vi: {
+apps/web/app/page.tsx:220:    vi: {
+apps/web/app/page.tsx:230:    vi: {

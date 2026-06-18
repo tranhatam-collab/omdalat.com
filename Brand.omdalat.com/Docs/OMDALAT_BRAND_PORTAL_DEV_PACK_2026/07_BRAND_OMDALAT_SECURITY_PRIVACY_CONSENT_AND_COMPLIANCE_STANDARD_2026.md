@@ -1,0 +1,3 @@
+# 07_BRAND_OMDALAT_SECURITY_PRIVACY_CONSENT_AND_COMPLIANCE_STANDARD_2026.md
+
+DEV PACK placeholder generated for Om Dalat Brand Portal.

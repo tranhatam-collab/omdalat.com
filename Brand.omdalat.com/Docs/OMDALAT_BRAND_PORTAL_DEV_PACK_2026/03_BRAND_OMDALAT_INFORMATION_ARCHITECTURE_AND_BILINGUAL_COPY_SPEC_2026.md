@@ -1,0 +1,3 @@
+# 03_BRAND_OMDALAT_INFORMATION_ARCHITECTURE_AND_BILINGUAL_COPY_SPEC_2026.md
+
+DEV PACK placeholder generated for Om Dalat Brand Portal.

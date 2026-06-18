@@ -1,0 +1,3 @@
+# 06_BRAND_OMDALAT_BRAND_FACTORY_AGENT_ORCHESTRATION_SPEC_2026.md
+
+DEV PACK placeholder generated for Om Dalat Brand Portal.

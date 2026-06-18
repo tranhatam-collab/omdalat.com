@@ -24,8 +24,8 @@ INSERT INTO brands (id, place_id, owner_id, name_vi, name_en, slug, subdomain,
                     created_at, updated_at)
 VALUES ('brnd_lily', 'plc_lily', 'own_lily',
         'Lily', 'Lily', 'lily',
-        'lily.omdalat.com', 'stay',
-        1, 1, 0, 0, 'private_preview', 'lily-lac-duong',
+        'lily.omdalat.com', 'hybrid_local_brand',
+        1, 1, 1, 0, 'private_preview', 'lily-lac-duong',
         '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
 
 -- Insert compliance checklist
@@ -38,15 +38,15 @@ VALUES ('cmp_lily', 'brnd_lily', 'unknown', 'unknown',
 INSERT INTO content_blocks (id, brand_id, locale, block_type, payload, status, translation_status, created_at, updated_at)
 VALUES
   ('cb_lily_hero_vi', 'brnd_lily', 'vi', 'hero',
-   '{"title": "Lily", "subtitle": "Một điểm ở lại nhỏ tại Lạc Dương, đang được xây dựng thành hồ sơ thương hiệu địa phương trong hệ Ôm Đà Lạt."}',
+   '{"title": "Homestay Lily Lạc Dương Đà Lạt", "subtitle": "Một điểm lưu trú có café, vườn và nhịp sống gần Đà Lạt, được xây dựng thành thương hiệu địa phương trong hệ Ôm Đà Lạt."}',
    'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_story_vi', 'brnd_lily', 'vi', 'story',
-   '{"content": "Lily là một không gian lưu trú nhỏ tại khu vực Lạc Dương, Lâm Đồng. Trước khi được đưa vào hệ thương hiệu địa phương của Ôm Đà Lạt, các thông tin về chủ sở hữu, điều kiện ở lại, hình ảnh, pháp lý và khả năng đón khách cần được xác minh đầy đủ. Trang này ở trạng thái preview cho đến khi mọi thông tin cần thiết được xác nhận."}',
+   '{"content": "Lily là một không gian lưu trú nhỏ tại khu vực Lạc Dương, Lâm Đồng với homestay và café. Trước khi được đưa vào hệ thương hiệu địa phương của Ôm Đà Lạt, các thông tin về chủ sở hữu, điều kiện ở lại, hình ảnh, pháp lý và khả năng đón khách cần được xác minh đầy đủ. Trang này ở trạng thái preview cho đến khi mọi thông tin cần thiết được xác nhận."}',
    'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_what_vi', 'brnd_lily', 'vi', 'what',
-   '{"content": "Lily là một điểm ở lại nhỏ tại Lạc Dương, được đưa vào hệ Ôm Đà Lạt như một hồ sơ thương hiệu đang xác minh, hướng tới cách ở lại có trách nhiệm, gần đời sống địa phương và đủ rõ để người phù hợp hiểu trước khi ghé."}',
+   '{"content": "Lily là một điểm ở lại nhỏ tại Lạc Dương với homestay và café, được đưa vào hệ Ôm Đà Lạt như một hồ sơ thương hiệu đang xác minh, hướng tới cách ở lại có trách nhiệm, gần đời sống địa phương và đủ rõ để người phù hợp hiểu trước khi ghé."}',
    'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_why_vi', 'brnd_lily', 'vi', 'why',
@@ -61,40 +61,48 @@ VALUES
    '{"content": "Lily nằm tại khu vực Lạc Dương, Lâm Đồng, một vùng cao với khí hậu mát quanh năm và nhịp sống gắn với nông nghiệp và thiên nhiên."}',
    'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
+  ('cb_lily_business_vi', 'brnd_lily', 'vi', 'business',
+   '{"content": "Lily hoạt động theo mô hình đa dạng: Homestay Lily (lưu trú), Lily Café (quán cà phê), và các dòng kinh doanh khác đang trong lộ trình phát triển."}',
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
   ('cb_lily_contact_vi', 'brnd_lily', 'vi', 'contact',
    '{"email": "contact@lily.omdalat.com", "phone": "{{OWNER_CONTACT}}", "address": "{{ADDRESS_VI}}"}',
    'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
 
--- Insert initial content blocks (English - adaptation, marked as in_progress)
+-- Insert initial content blocks (English - adaptation, marked as published for testing)
 INSERT INTO content_blocks (id, brand_id, locale, block_type, payload, status, translation_status, created_at, updated_at)
 VALUES
   ('cb_lily_hero_en', 'brnd_lily', 'en', 'hero',
-   '{"title": "Lily", "subtitle": "A small place to stay in Lac Duong, being built as a local brand profile within the Om Dalat system."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   '{"title": "Homestay Lily Lac Duong Dalat", "subtitle": "A local stay with a café, garden, and a rhythm near Dalat, built as a local brand within the Om Dalat system."}',
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_story_en', 'brnd_lily', 'en', 'story',
-   '{"content": "Lily is a small stay space in the Lac Duong area of Lam Dong. Before being included in the Om Dalat local brand system, its ownership, staying conditions, images, legal status, and hosting capacity must be fully verified. This page remains in preview until the required information is confirmed."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   '{"content": "Lily is a small stay space in the Lac Duong area of Lam Dong with homestay and café. Before being included in the Om Dalat local brand system, its ownership, staying conditions, images, legal status, and hosting capacity must be fully verified. This page remains in preview until the required information is confirmed."}',
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_what_en', 'brnd_lily', 'en', 'what',
-   '{"content": "Lily is a small place to stay in Lac Duong, being prepared within the Om Dalat system as a verified local brand profile, oriented toward responsible staying, local life, and clearer expectations before visiting."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   '{"content": "Lily is a small place to stay in Lac Duong with homestay and café, being prepared within the Om Dalat system as a verified local brand profile, oriented toward responsible staying, local life, and clearer expectations before visiting."}',
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_why_en', 'brnd_lily', 'en', 'why',
    '{"content": "A place to stay needs more than rooms. It needs rhythm, clarity, living conditions, respect for shared space, and the ability to help visitors understand whether they fit. If Lily passes verification, it can become a staying point within the Om Dalat network: not noisy, not over-touristic, but closer to real life in Lac Duong."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_space_en', 'brnd_lily', 'en', 'space',
    '{"content": "Lily is not presented as a place to pass through quickly. This page is created so readers can understand the space, the people, the conditions for staying, and the real rhythm before sending an inquiry."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_location_en', 'brnd_lily', 'en', 'location',
    '{"content": "Lily is located in the Lac Duong area of Lam Dong, a highland region with cool year-round climate and a rhythm connected to agriculture and nature."}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
+  ('cb_lily_business_en', 'brnd_lily', 'en', 'business',
+   '{"content": "Lily operates with a diverse model: Homestay Lily (accommodation), Lily Café (coffee shop), and other business lines in development roadmap."}',
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
 
   ('cb_lily_contact_en', 'brnd_lily', 'en', 'contact',
    '{"email": "contact@lily.omdalat.com", "phone": "{{OWNER_CONTACT}}", "address": "{{ADDRESS_EN}}"}',
-   'draft', 'in_progress', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
+   'published', 'ready', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
 
 -- Insert image metadata (placeholder until real images are shot and verified)
 INSERT INTO media_assets (id, brand_id, asset_type, file_url, alt_text_vi, alt_text_en,
@@ -119,3 +127,31 @@ VALUES
    'Đường vào và khu vực xung quanh Lily tại Lạc Dương.',
    'Access road and surrounding area of Lily in Lac Duong.',
    'pending', 0, 'location', 'pending', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
+
+-- Insert business lines for Lily (multi-line brand)
+INSERT INTO business_lines (id, brand_id, line_key, label_vi, label_en, status, phase, created_at, updated_at)
+VALUES
+  ('bl_lily_homestay', 'brnd_lily', 'homestay',
+   'Homestay Lily', 'Homestay Lily',
+   'phase_1_public_after_compliance', 'phase_1_homestay_cafe',
+   '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
+  ('bl_lily_cafe', 'brnd_lily', 'cafe',
+   'Lily Café', 'Lily Café',
+   'phase_1_public_after_owner_confirmation', 'phase_1_homestay_cafe',
+   '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
+  ('bl_lily_real_estate', 'brnd_lily', 'real_estate',
+   'Bất động sản Lily', 'Lily Real Estate',
+   'roadmap_private_noindex', NULL,
+   '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
+  ('bl_lily_food_restaurant', 'brnd_lily', 'food_restaurant',
+   'Nhà hàng và quán ăn Lily', 'Lily Food & Restaurant',
+   'roadmap_private_noindex', NULL,
+   '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z'),
+
+  ('bl_lily_local_experiences', 'brnd_lily', 'local_experiences',
+   'Trải nghiệm địa phương Lily', 'Lily Local Experiences',
+   'roadmap_private_noindex', NULL,
+   '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');

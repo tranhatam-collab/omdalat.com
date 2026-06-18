@@ -1,0 +1,3 @@
+# 04_BRAND_OMDALAT_INTAKE_VERIFICATION_AND_APPROVAL_WORKFLOW_2026.md
+
+DEV PACK placeholder generated for Om Dalat Brand Portal.

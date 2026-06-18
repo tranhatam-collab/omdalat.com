@@ -25,5 +25,9 @@
     "sprint0:evidence:report": "node ./scripts/report-sprint0-missing-evidence.mjs",
     "team3:report:check": "node ./scripts/team3-gate-report-check.mjs",
     "team1:lane:check": "node ./scripts/team1-lane-progress-check.mjs"
+  },
+  "devDependencies": {
+    "styled-jsx": "5",
+    "typescript": "5.8.2"
   }
 }

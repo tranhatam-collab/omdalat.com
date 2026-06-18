@@ -256,6 +256,8 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     </div>
   </nav>
 
+  ${heroBlock.image ? `<div style="width:100%; height:400px; background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="${heroBlock.image}" alt="${isEn ? 'Featured image: ' : 'Hình ảnh minh họa: '}${heroBlock.title}" style="width:100%; height:100%; object-fit:cover;" loading="eager"/></div>` : ''}
+
   <section class="hero">
     <div class="container">
       <h1>${heroBlock.title}</h1>
@@ -304,6 +306,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <div class="grid">
         ${highlightsBlock.items ? highlightsBlock.items.map((item: any) => `
           <div class="card" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            ${item.image ? `<div style="width:100%; height:200px; margin-bottom:16px; border-radius:4px; overflow:hidden; background:#eee;"><img src="${item.image}" alt="${isEn ? 'Featured image: ' : 'Hình ảnh minh họa: '}${item.title}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/></div>` : ''}
             <h3>${item.title}</h3>
             <p>${item.text || ''}</p>
           </div>
@@ -330,6 +333,22 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <h2>${isEn ? 'Location' : 'Vị trí'}</h2>
       <div class="card">
         <p>${locationBlock.content || ''}</p>
+      </div>
+    </div>
+  </section>
+  ` : ''}
+
+  ${highlightsBlock && highlightsBlock.images ? `
+  <section class="section" id="gallery" style="background: #f8fafc;">
+    <div class="container">
+      <h2>${isEn ? 'Photo Gallery' : 'Thư viện ảnh'}</h2>
+      <p style="text-align:center; color:#666; margin-bottom:2rem;">${isEn ? 'A glimpse into life at Lily Homestay.' : 'Những khoảnh khắc tại Homestay Lily.'}</p>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        ${highlightsBlock.images.map((img: any) => `
+          <div style="border-radius:8px; overflow:hidden; background:#eee; aspect-ratio:4/3;">
+            <img src="${img.url}" alt="${img.alt || (isEn ? 'Lily Homestay photo' : 'Hình ảnh Lily Homestay')}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/>
+          </div>
+        `).join('')}
       </div>
     </div>
   </section>
