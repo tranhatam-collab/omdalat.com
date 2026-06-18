@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-18  
 **Auditor:** Devin  
-**Status:** ✅ PASSED
+**Status:** ⚠️ PARTIAL — INQUIRY BLOCKED
 
 ---
 
@@ -63,13 +63,13 @@ curl -sI https://lily.omdalat.com/images/hero/hero-01.jpg
 
 | Meta Tag | VI | EN |
 |----------|----|----|
-| title | ✅ "Homestay Lily Lạc Dương Đà Lạt — Ôm Đà Lạt" | ✅ "Homestay Lily Lac Duong Dalat — Om Dalat" |
+| title | ✅ "Homestay Lily Lạc Dương Đà Lạt" | ✅ "Homestay Lily Lac Duong Dalat" |
 | description | ✅ | ✅ |
 | canonical | ✅ `https://lily.omdalat.com` | ✅ `https://lily.omdalat.com/en` |
 | hreflang | ✅ vi + en | ✅ en + vi |
 | og:title | ✅ | ✅ |
 | og:description | ✅ | ✅ |
-| og:image | ✅ `.../hero/hero-01.jpg` | ✅ `.../hero/hero-01.jpg` |
+| og:image | ✅ `.../images/og/og-lily.jpg` | ✅ `.../images/og/og-lily.jpg` |
 | og:locale | ✅ vi_VN | ✅ en_US |
 | twitter:card | ✅ summary_large_image | ✅ summary_large_image |
 | JSON-LD | ✅ Organization + WebSite + WebPage | ✅ |
@@ -119,9 +119,25 @@ curl -sI https://lily.omdalat.com/images/hero/hero-01.jpg
 
 ---
 
-## 9. Remaining Items (Non-blocking)
+## 9. BLOCKER: Inquiry Form (P0)
 
-- [ ] Replace placeholder SVG with real photos in DB (done for hero + highlights)
+| Check | Result |
+|-------|--------|
+| Form action | ✅ Updated to `https://api.omdalat.com/api/omdalat/brands/brnd_lily/inquiry` |
+| API endpoint | ❌ HTTP 500, error code 1101 (Cloudflare runtime error) |
+| Database insert | ❌ Not reaching D1 due to runtime error |
+| Queue notification | ⚠️ Temporarily disabled (was causing 1101) |
+
+**Root cause:** Cloudflare Workers runtime error 1101, likely binding or infrastructure issue with `api.omdalat.com`. Investigation needed.
+
+**Workaround:** Contact form currently non-functional. Users should use direct contact (WA/Zalo: +84919 851 311, email: contact@lily.omdalat.com).
+
+---
+
+## 10. Remaining Items (Non-blocking)
+
+- [ ] Fix API runtime error 1101 on `api.omdalat.com`
+- [ ] Re-enable queue notification after runtime fix
 - [ ] Brand admin login fix (1101 runtime error — needs bcrypt replacement)
 - [ ] Lily admin account creation for Chú Diện
 - [ ] Google indexing verification (7 days)
@@ -130,15 +146,20 @@ curl -sI https://lily.omdalat.com/images/hero/hero-01.jpg
 
 ## VERDICT
 
-**lily.omdalat.com is GO-LIVE READY.**
+**lily.omdalat.com is NOT GO-LIVE READY due to inquiry form blocker.**
 
-All critical checks pass:
+Passing checks:
 - ✅ Domain live and SSL
 - ✅ Bilingual content 100%
 - ✅ 20 real photos served from R2
-- ✅ SEO meta complete
+- ✅ SEO meta complete (og:image fixed)
 - ✅ Language switcher working
 - ✅ Contact info verified
 - ✅ Security gates enforced
 
-**Signed off: 2026-06-18**
+Blocking checks:
+- ❌ Inquiry form — API returns 1101 runtime error
+
+**Status:** PARTIAL — PUBLIC READ-ONLY READY, INQUIRY BLOCKED
+
+**Signed off: 2026-06-18 (partial)**

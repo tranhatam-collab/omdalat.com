@@ -149,7 +149,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   const highlightsBlock = getBlock('highlights');
 
   const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}`;
-  const ogImage = 'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg';
+  const ogImage = heroBlock.image || `https://${brand.subdomain}/images/og/og-lily.jpg`;
 
   const organizationSchema = JSON.stringify({
     "@context": "https://schema.org",
@@ -189,13 +189,13 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0f3d2e">
   <meta name="robots" content="index, follow">
-  <title>${heroBlock.title} - Ôm Đà Lạt</title>
+  <title>${heroBlock.title}</title>
   <meta name="description" content="${heroBlock.subtitle}">
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en">'}
   <meta property="og:type" content="website">
-  <meta property="og:title" content="${heroBlock.title} - Ôm Đà Lạt">
+  <meta property="og:title" content="${heroBlock.title}">
   <meta property="og:description" content="${heroBlock.subtitle}">
   <meta property="og:url" content="${pageUrl}">
   <meta property="og:site_name" content="Om Dalat">
@@ -204,7 +204,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   ${isEn ? '<meta property="og:locale:alternate" content="vi_VN">' : ''}
   <meta property="og:image" content="${ogImage}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${heroBlock.title} - Ôm Đà Lạt">
+  <meta name="twitter:title" content="${heroBlock.title}">
   <meta name="twitter:description" content="${heroBlock.subtitle}">
   <meta name="twitter:image" content="${ogImage}">
   <script type="application/ld+json">${organizationSchema}</script>
@@ -422,7 +422,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
         <p><strong>${isEn ? 'Phone' : 'Điện thoại'}:</strong> WA/Zalo: +84919 851 311</p>
         <p><strong>Email:</strong> <a href="mailto:contact@lily.omdalat.com">contact@lily.omdalat.com</a></p>
         <p><strong>${isEn ? 'Network' : 'Hệ'}:</strong> Ôm Đà Lạt / Ấp Đà Lạt</p>
-        <form action="/api/omdalat/brands/${brand.id}/inquiry" method="POST" style="margin-top: 20px;">
+        <form action="https://api.omdalat.com/api/omdalat/brands/${brand.id}/inquiry" method="POST" style="margin-top: 20px;">
           <input type="text" name="contact" placeholder="${isEn ? 'Your contact (phone/email)' : 'Liên hệ của bạn (SĐT/email)'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
           <textarea name="message" placeholder="${isEn ? 'Your message' : 'Lời nhắn của bạn'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 100px;"></textarea>
           <input type="hidden" name="brand_id" value="${brand.id}">

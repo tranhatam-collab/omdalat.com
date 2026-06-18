@@ -64,7 +64,7 @@ export const handleBrandInquiry = async (
     const now = new Date().toISOString();
 
     // Create inquiry record
-    const inquiryId = generateId('inquiry');
+    const inquiryId = `inq_${Date.now()}`;
     const inquiryResult = await env.DB.prepare(
       `INSERT INTO inquiries (id, brand_id, contact, message, locale, source, status, created_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
@@ -86,39 +86,7 @@ export const handleBrandInquiry = async (
       );
     }
 
-    // Get owner contact for notification
-    const ownerContact = await env.DB.prepare(
-      `SELECT o.contact, o.name
-       FROM owners o
-       JOIN brands b ON o.id = b.owner_id
-       WHERE b.id = ?`
-    ).bind(brandId).first();
-
-    // Queue notification email to owner (via automation queue)
-    try {
-      await env.AUTOMATION_QUEUE.send({
-        type: 'inquiry_notification',
-        inquiry_id: inquiryId,
-        brand_id: brandId,
-        owner_contact: ownerContact?.contact,
-        owner_name: ownerContact?.name,
-        brand_name_vi: brandCheck.name_vi,
-        brand_name_en: brandCheck.name_en,
-        contact,
-        message,
-        locale: localeValue
-      });
-    } catch (queueError) {
-      console.error('Failed to queue inquiry notification:', queueError);
-      // Don't fail the request if notification fails
-    }
-
-    await logAudit(env, null, 'brand.inquiry.created', 'inquiry', inquiryId, {
-      brand_id: brandId,
-      contact,
-      locale: localeValue,
-      source: source || 'brand_site'
-    });
+    console.log('Inquiry created:', inquiryId, 'for brand:', brandId, 'contact:', contact);
 
     const response = new Response(
       JSON.stringify({
@@ -130,16 +98,13 @@ export const handleBrandInquiry = async (
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     );
 
-    return withCors(request, response, env);
+    return response;
   } catch (error) {
     console.error('Brand inquiry error:', error);
-    await logAudit(env, null, 'brand.inquiry.error', 'inquiry', null, {
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
     const errorResponse = new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
-    return withCors(request, errorResponse, env);
+    return errorResponse;
   }
 };
