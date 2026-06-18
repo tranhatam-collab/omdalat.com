@@ -154,7 +154,9 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     
     if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
       // Gate /stay on lodging_compliance (NĐ 96/2016)
-      if (page === 'stay' && brand.lodging_compliance === 'unknown') {
+      // Same allowlist as publish gate: only verified, approved, not_applicable
+      const STAY_OK = new Set(['verified', 'approved', 'not_applicable']);
+      if (page === 'stay' && !STAY_OK.has(brand.lodging_compliance)) {
         return new Response('Not Found', { status: 404 });
       }
       // Lily V2 specific pages — only accessible when published
@@ -322,7 +324,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
     <div class="container">
       <ul>
         <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        ${brand.lodging_compliance !== 'unknown' ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''}
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
         <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
@@ -563,7 +565,7 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
     <div class="container">
       <ul>
         <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        ${brand.lodging_compliance !== 'unknown' ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''}
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
         <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
@@ -2034,6 +2036,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     <div class="container">
       <ul>
         <li><a href="/${isEn ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${isEn ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
         <li><a href="#highlights">${isEn ? 'Highlights' : 'Điểm nổi bật'}</a></li>
         <li><a href="#story">${isEn ? 'Story' : 'Câu chuyện'}</a></li>
         <li><a href="#what">${isEn ? 'What' : 'Đây là nơi gì'}</a></li>
