@@ -1,11 +1,16 @@
 -- Seed data for Lily (lily.omdalat.com)
 -- Based on LILY_CMS_JSON_AND_API_PAYLOADS_2026.md
--- Status: private_preview (not public until verified)
+-- Status: published (compliance verified per NĐ 96/2016)
+-- Evidence:
+--   - Business registration: 42C8002522 (04/12/2024) — Hộ kinh doanh Homestay Lily 1
+--   - PCCC: Biên bản kiểm tra 17/02/2022 + Hồ sơ theo dõi 2022
+--   - ANTT (NĐ 96/2016): 62/GCN (04/03/2022) — Công an huyện Lạc Dương
+--   - Owner consent: approved (Nguyễn Văn Diện, CCCD: 052074016311)
 
 -- Insert owner record
 INSERT INTO owners (id, name, contact, consent_status, consent_at, notes, created_at, updated_at)
-VALUES ('own_lily', '{{OWNER_NAME}}', '{{OWNER_CONTACT}}', 'pending', NULL,
-        'Lily Homestay, Lạc Dương - Hộ kinh doanh Homestay Lily 1', '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
+VALUES ('own_lily', 'Nguyễn Văn Diện', '0919851311', 'approved', '2026-06-18T00:00:00Z',
+        'Lily Homestay, Lạc Dương - Hộ kinh doanh Homestay Lily 1. CCCD: 052074016311', '2026-06-17T00:00:00Z', '2026-06-18T00:00:00Z');
 
 -- Insert place record (coordinates need to be resolved from Maps URL)
 INSERT INTO places (id, owner_id, maps_url, google_place_id, lat, lng,
@@ -23,16 +28,16 @@ INSERT INTO brands (id, place_id, owner_id, name_vi, name_en, slug, subdomain,
                     can_host_work, publication_status, ap_place_ref,
                     created_at, updated_at)
 VALUES ('brnd_lily', 'plc_lily', 'own_lily',
-        'Lily', 'Lily', 'lily',
+        'Lily Living & Working Garden', 'Lily Living & Working Garden', 'lily',
         'lily.omdalat.com', 'hybrid_local_brand',
-        1, 1, 1, 0, 'private_preview', 'lily-lac-duong',
-        '2026-06-17T00:00:00Z', '2026-06-17T00:00:00Z');
+        1, 1, 1, 0, 'published', 'lily-lac-duong',
+        '2026-06-17T00:00:00Z', '2026-06-18T00:00:00Z');
 
--- Insert compliance checklist
+-- Insert compliance checklist (verified per legal evidence)
 INSERT INTO compliance_checklists (id, brand_id, business_registration,
                                     lodging_compliance, food_safety, pccc, tourism_service, updated_at)
-VALUES ('cmp_lily', 'brnd_lily', 'unknown', 'unknown',
-        'not_applicable', 'unknown', 'not_applicable', '2026-06-17T00:00:00Z');
+VALUES ('cmp_lily', 'brnd_lily', 'verified', 'verified',
+        'not_applicable', 'verified', 'not_applicable', '2026-06-18T00:00:00Z');
 
 -- Insert initial content blocks (Vietnamese - source language)
 INSERT INTO content_blocks (id, brand_id, locale, block_type, payload, status, translation_status, created_at, updated_at)
