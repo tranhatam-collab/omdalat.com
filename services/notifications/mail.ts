@@ -78,7 +78,7 @@ function getMailEnvironment() {
 
 async function sendMail(payload: MailPayload) {
   const { mailApiKey, mailApiUrl } = getMailEnvironment();
-  const response = await fetch(`${mailApiUrl}/emails`, {
+  const response = await fetch(`${mailApiUrl}/v1/send`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${mailApiKey}`,
