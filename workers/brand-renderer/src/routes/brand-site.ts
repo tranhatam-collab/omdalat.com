@@ -144,35 +144,87 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   const reviewsBlock = getBlock('reviews');
   const highlightsBlock = getBlock('highlights');
 
+  const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}`;
+  const ogImage = 'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg';
+
+  const organizationSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Om Dalat",
+    alternateName: ["Ôm Đà Lạt"],
+    url: "https://omdalat.com",
+    description: "A real-life living system in Da Lat where people can stay, work, learn from experience, and build long-term value."
+  });
+
+  const websiteSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Om Dalat",
+    alternateName: ["Ôm Đà Lạt"],
+    url: "https://omdalat.com",
+    description: "A real-life living system in Da Lat."
+  });
+
+  const webpageSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: heroBlock.title,
+    description: heroBlock.subtitle,
+    url: pageUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Om Dalat",
+      url: "https://omdalat.com"
+    }
+  });
+
   return `<!DOCTYPE html>
 <html lang="${locale}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="robots" content="index, follow">
   <title>${heroBlock.title} - Ôm Đà Lạt</title>
   <meta name="description" content="${heroBlock.subtitle}">
-  <link rel="canonical" href="https://${brand.subdomain}${locale === 'en' ? '/en' : ''}">
+  <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en">'}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${heroBlock.title} - Ôm Đà Lạt">
+  <meta property="og:description" content="${heroBlock.subtitle}">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:site_name" content="Om Dalat">
+  <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'vi_VN'}">
+  ${isEn ? '' : '<meta property="og:locale:alternate" content="en_US">'}
+  ${isEn ? '<meta property="og:locale:alternate" content="vi_VN">' : ''}
+  <meta property="og:image" content="${ogImage}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${heroBlock.title} - Ôm Đà Lạt">
+  <meta name="twitter:description" content="${heroBlock.subtitle}">
+  <meta name="twitter:image" content="${ogImage}">
+  <script type="application/ld+json">${organizationSchema}</script>
+  <script type="application/ld+json">${websiteSchema}</script>
+  <script type="application/ld+json">${webpageSchema}</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 0; text-align: center; }
+    .hero { background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); color: white; padding: 80px 0; text-align: center; }
     .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
     .hero p { font-size: 1.2rem; opacity: 0.9; }
     .section { padding: 60px 0; }
-    .section h2 { font-size: 2rem; margin-bottom: 2rem; color: #667eea; }
-    .cta-button { display: inline-block; background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
-    .cta-button:hover { background: #5568d3; }
+    .section h2 { font-size: 2rem; margin-bottom: 2rem; color: #1a5c43; }
+    .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+    .cta-button:hover { background: #0f3d2e; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
     .card { background: #f9f9f9; padding: 20px; border-radius: 8px; }
-    .card h3 { margin-bottom: 10px; color: #667eea; }
+    .card h3 { margin-bottom: 10px; color: #1a5c43; }
     footer { background: #333; color: white; padding: 40px 0; text-align: center; }
     .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
     .nav a { color: #333; text-decoration: none; }
-    .nav a:hover { color: #667eea; }
+    .nav a:hover { color: #1a5c43; }
   </style>
 </head>
 <body>
@@ -274,12 +326,12 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   <section class="section" id="reviews" style="background: #f0f4f8;">
     <div class="container">
       <h2>${isEn ? 'What Guests Say' : 'Khách nói gì'}</h2>
-      <p style="text-align: center; color: #667eea; font-size: 1.2rem; margin-bottom: 2rem;">★★★★☆ 4.6 / 5 (36+ ${isEn ? 'reviews' : 'đánh giá'})</p>
+      <p style="text-align: center; color: #1a5c43; font-size: 1.2rem; margin-bottom: 2rem;">★★★★☆ 4.6 / 5 (36+ ${isEn ? 'reviews' : 'đánh giá'})</p>
       <div class="grid">
         ${reviewsBlock.reviews ? reviewsBlock.reviews.map((review: any) => `
-          <div class="card" style="background: white; border-left: 4px solid #667eea;">
+          <div class="card" style="background: white; border-left: 4px solid #1a5c43;">
             <p style="font-style: italic; margin-bottom: 15px;">"${review.text}"</p>
-            <p style="color: #667eea; font-weight: 600;">— ${review.author}</p>
+            <p style="color: #1a5c43; font-weight: 600;">— ${review.author}</p>
           </div>
         `).join('') : ''}
       </div>
@@ -370,9 +422,9 @@ function generateHoldingPageHTML(status: string, slug: string, brand?: any): str
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
     .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    h1 { color: #667eea; margin-bottom: 20px; }
+    h1 { color: #1a5c43; margin-bottom: 20px; }
     p { color: #666; margin-bottom: 20px; }
-    a { color: #667eea; text-decoration: none; }
+    a { color: #1a5c43; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -395,12 +447,12 @@ function generateHoldingPageHTML(status: string, slug: string, brand?: any): str
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brandName} - Đang xây dựng</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: linear-gradient(135deg, #1a5c43 0%, #764ba2 100%); }
     .container { text-align: center; padding: 60px 40px; background: white; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 600px; }
-    h1 { color: #667eea; margin-bottom: 20px; }
+    h1 { color: #1a5c43; margin-bottom: 20px; }
     p { color: #666; line-height: 1.6; margin-bottom: 20px; }
     .badge { display: inline-block; background: #f0f0f0; padding: 8px 16px; border-radius: 20px; font-size: 14px; color: #666; margin-bottom: 20px; }
-    a { color: #667eea; text-decoration: none; }
+    a { color: #1a5c43; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -424,9 +476,9 @@ function generateHoldingPageHTML(status: string, slug: string, brand?: any): str
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
     .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    h1 { color: #667eea; margin-bottom: 20px; }
+    h1 { color: #1a5c43; margin-bottom: 20px; }
     p { color: #666; margin-bottom: 20px; }
-    a { color: #667eea; text-decoration: none; }
+    a { color: #1a5c43; text-decoration: none; }
   </style>
 </head>
 <body>

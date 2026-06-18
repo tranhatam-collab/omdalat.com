@@ -36,7 +36,7 @@ export async function Footer() {
         </p>
         <p>
           <a href={localizePath("/community", locale)}>
-            {locale === "vi" ? "Ấp Đà Lạt" : "Ap Dalat"}
+            {locale === "vi" ? "Ấp Đà Lạt" : "Ấp Đà Lạt"}
           </a>
         </p>
         <p>

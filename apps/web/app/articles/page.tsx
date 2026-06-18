@@ -46,7 +46,7 @@ export default async function ArticlesPage() {
                   {sources.webp ? <source srcSet={sources.webp} type="image/webp" /> : null}
                   <img
                     src={sources.fallback}
-                    alt={article.title}
+                    alt={locale === "vi" ? `Hình ảnh minh họa: ${article.title}` : `Featured image: ${article.title}`}
                     width={image.width}
                     height={image.height}
                     loading="lazy"
