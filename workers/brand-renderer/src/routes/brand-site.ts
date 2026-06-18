@@ -593,7 +593,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <h2>${isEn ? 'Contact' : 'Liên hệ'}</h2>
       <div class="card">
         <p><strong>${isEn ? 'Location' : 'Địa chỉ'}:</strong> ${isEn ? (brand.address_en || brand.address_vi || '') : (brand.address_vi || '')}</p>
-        <p><strong>${isEn ? 'Phone' : 'Điện thoại'}:</strong> WA/Zalo: +84919 851 311</p>
+        <p><strong>${isEn ? 'Phone' : 'Điện thoại'}:</strong> WA/Zalo: +84919 851 311 | Hotline: +84775 875 133</p>
         <p><strong>Email:</strong> <a href="mailto:contact@lily.omdalat.com">contact@lily.omdalat.com</a></p>
         <p><strong>${isEn ? 'Network' : 'Hệ'}:</strong> Ôm Đà Lạt / Ấp Đà Lạt</p>
         <form action="https://api.omdalat.com/api/omdalat/brands/${brand.id}/inquiry" method="POST" style="margin-top: 20px;">

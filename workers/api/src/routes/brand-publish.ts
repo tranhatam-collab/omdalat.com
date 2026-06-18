@@ -2,6 +2,7 @@ import type { Env } from '../index';
 import { logAudit } from '../lib/audit';
 import { handleCorsPreflight, withCors } from '../lib/cors';
 import { requireAuth, requireSuper } from '../lib/auth';
+import { validateBrandCopy } from '../lib/overclaim-validator';
 
 export const handleBrandPublish = async (
   request: Request,
@@ -125,6 +126,7 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
     images_approved: boolean;
     compliance_reviewed: boolean;
     qa_passed: boolean;
+    copy_clean: boolean;
   };
 }> {
   const gates = {
@@ -132,7 +134,8 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
     content_approved: false,
     images_approved: false,
     compliance_reviewed: false,
-    qa_passed: false
+    qa_passed: false,
+    copy_clean: false
   };
 
   // Check owner consent
@@ -146,7 +149,7 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
     gates.owner_consent = true;
   }
 
-  // Check content approval
+  // Check content approval AND overclaim validation
   const contentApproval = await env.DB.prepare(
     `SELECT COUNT(*) as count FROM approvals
      WHERE brand_id = ? AND action = 'approve_content'`
@@ -154,6 +157,22 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
 
   if (contentApproval && contentApproval.count > 0) {
     gates.content_approved = true;
+    
+    // H3: overclaim validator — check published content blocks for forbidden terms
+    const contentBlocksResult = await env.DB.prepare(
+      `SELECT payload FROM content_blocks
+       WHERE brand_id = ? AND status = 'published'`
+    ).bind(brandId).all();
+    
+    const contentBlocks = contentBlocksResult.results || [];
+    for (const block of contentBlocks) {
+      const payload = typeof block.payload === 'string' ? block.payload : JSON.stringify(block.payload);
+      const validation = validateBrandCopy(payload, 'L3'); // L3 brand microsites
+      if (!validation.valid) {
+        gates.content_approved = false;
+        break; // Stop on first violation
+      }
+    }
   }
 
   // Check images approval
@@ -209,6 +228,9 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
   if (qaCheck && qaCheck.count > 0) {
     gates.qa_passed = true;
   }
+
+  // Set copy_clean gate based on content_approved (overclaim validator result)
+  gates.copy_clean = gates.content_approved;
 
   const allPassed = Object.values(gates).every(v => v === true);
 
