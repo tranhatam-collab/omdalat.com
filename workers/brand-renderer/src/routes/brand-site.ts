@@ -151,7 +151,19 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
 
     // Check for specific Lily V2 routes — ONLY if brand is published
     const page = pathParts.find(p => p !== 'en' && p !== 'vi');
-    
+
+    // Sitemap.xml — served for all published brands
+    if (page === 'sitemap.xml' && brand.publication_status === 'published') {
+      const sitemap = generateSitemapXML(brand, locale);
+      return new Response(sitemap, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/xml; charset=utf-8',
+          'Cache-Control': 'public, max-age=3600'
+        }
+      });
+    }
+
     if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
       // Gate /stay on lodging_compliance (NĐ 96/2016)
       // Same allowlist as publish gate: only verified, approved, not_applicable
@@ -199,6 +211,62 @@ function renderHoldingPage(status: string, slug: string, brand?: any): Response 
       'Cache-Control': 'public, max-age=60'
     }
   });
+}
+
+function generateSitemapXML(brand: any, _locale: string): string {
+  const base = `https://${brand.subdomain}`;
+  const today = new Date().toISOString().split('T')[0];
+
+  // All 17 article slugs
+  const articleSlugs = [
+    'khoi-nghiep-cung-ai-khong-bat-dau-tu-cong-nghe',
+    'vi-sao-nhieu-nguoi-hoc-ai-nhung-van-khong-tao-duoc-thu-nhap',
+    'tu-mot-ky-nang-nho-den-cong-viec-dau-tien-voi-ai',
+    'mot-tuan-song-va-lam-viec-tai-lily-dien-ra-nhu-the-nao',
+    'neu-bat-dau-lai-tu-dau-nam-2026-toi-se-hoc-ai-nhu-the-nao',
+    'chung-ta-khong-thieu-y-tuong-chung-ta-thieu-nhung-nguoi-bien-y-tuong-thanh-san-pham',
+    'ai-khong-thay-the-nha-sang-tao-ai-trao-them-suc-manh-cho-nha-sang-tao',
+    'tu-da-lat-chung-ta-co-the-xay-dung-san-pham-cho-toan-the-gioi-khong',
+    'hai-tuan-tai-lily-se-dien-ra-nhu-the-nao',
+    'neu-chi-co-hai-tuan-de-bat-dau-mot-du-an-cong-nghe-toi-se-lam-gi',
+    'song-o-lily-khong-phai-nghi-duong',
+    'mot-khong-gian-lam-viec-that',
+    'o-theo-tuan-theo-thang-la-mot-cam-ket',
+    'khu-vuon-khong-phai-phong-nen',
+    'hoc-va-lam-o-lily-can-output',
+    'nguoi-nuoc-ngoai-o-lily',
+    'lily-la-node-van-hanh-that'
+  ];
+
+  const urls: string[] = [
+    `${base}/`,
+    `${base}/en/`,
+    `${base}/programs`,
+    `${base}/en/programs`,
+    `${base}/programs/startup-with-ai`,
+    `${base}/en/programs/startup-with-ai`,
+    `${base}/programs/technology-creation`,
+    `${base}/en/programs/technology-creation`,
+    `${base}/articles`,
+    `${base}/en/articles`,
+    `${base}/apply`,
+    `${base}/en/apply`,
+    `${base}/stay`,
+    `${base}/en/stay`,
+    `${base}/workspace`,
+    `${base}/en/workspace`,
+  ];
+
+  for (const slug of articleSlugs) {
+    urls.push(`${base}/articles/${slug}`);
+    urls.push(`${base}/en/articles/${slug}`);
+  }
+
+  const urlEntries = urls.map(u =>
+    `  <url>\n    <loc>${u}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+  ).join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}\n</urlset>`;
 }
 
 function generateLilyV2Page(brand: any, page: string, locale: string, url: URL): string | null {
@@ -530,6 +598,29 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
   <meta name="twitter:title" content="${title} - ${brandName}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "${title}",
+    "description": "${description}",
+    "provider": {
+      "@type": "Organization",
+      "name": "${brandName}",
+      "url": "https://${brand.subdomain}"
+    },
+    "courseMode": ["onsite"],
+    "inLanguage": ["vi", "en"],
+    "timeRequired": "P2W"
+  }</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "${isEn ? 'Home' : 'Trang chủ'}", "item": "https://${brand.subdomain}${isEn ? '/en' : ''}/" },
+      { "@type": "ListItem", "position": 2, "name": "${isEn ? 'Programs' : 'Chương trình'}", "item": "https://${brand.subdomain}${isEn ? '/en' : ''}/programs" },
+      { "@type": "ListItem", "position": 3, "name": "${title}", "item": "${pageUrl}" }
+    ]
+  }</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
@@ -1578,6 +1669,30 @@ In the end, Lily must be measured by real output: verified rooms, suitable resid
   <meta name="twitter:title" content="${title} - ${brandName}">
   <meta name="twitter:description" content="${content.substring(0, 150)}...">
   <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "${title}",
+    "description": "${content.substring(0, 150)}...",
+    "url": "${pageUrl}",
+    "inLanguage": "${isEn ? 'en' : 'vi'}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "${brandName}",
+      "url": "https://${brand.subdomain}"
+    },
+    "datePublished": "2026-06-18",
+    "dateModified": "2026-06-18"
+  }</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "${isEn ? 'Home' : 'Trang chủ'}", "item": "https://${brand.subdomain}${isEn ? '/en' : ''}/" },
+      { "@type": "ListItem", "position": 2, "name": "${isEn ? 'Articles' : 'Bài viết'}", "item": "https://${brand.subdomain}${isEn ? '/en' : ''}/articles" },
+      { "@type": "ListItem", "position": 3, "name": "${title}", "item": "${pageUrl}" }
+    ]
+  }</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: #333; }
@@ -1814,6 +1929,14 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
   <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
   <meta property="og:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "${isEn ? 'Home' : 'Trang chủ'}", "item": "https://${brand.subdomain}${isEn ? '/en' : ''}/" },
+      { "@type": "ListItem", "position": 2, "name": "${isEn ? 'Articles' : 'Bài viết'}", "item": "${pageUrl}" }
+    ]
+  }</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
@@ -2217,13 +2340,48 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
         <p><strong>${isEn ? 'Phone' : 'Điện thoại'}:</strong> WA/Zalo: +84919 851 311 | Hotline: +84775 875 133</p>
         <p><strong>Email:</strong> <a href="mailto:contact@lily.omdalat.com">contact@lily.omdalat.com</a></p>
         <p><strong>${isEn ? 'Network' : 'Hệ'}:</strong> Ôm Đà Lạt / Ấp Đà Lạt</p>
-        <form action="https://api.omdalat.com/api/omdalat/brands/${brand.id}/inquiry" method="POST" style="margin-top: 20px;">
-          <input type="text" name="contact" placeholder="${isEn ? 'Your contact (phone/email)' : 'Liên hệ của bạn (SĐT/email)'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
-          <textarea name="message" placeholder="${isEn ? 'Your message' : 'Lời nhắn của bạn'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 100px;"></textarea>
-          <input type="hidden" name="brand_id" value="${brand.id}">
-          <input type="hidden" name="locale" value="${locale}">
+        <form id="contactForm" style="margin-top: 20px;">
+          <input type="text" id="contactInput" name="contact" placeholder="${isEn ? 'Your contact (phone/email)' : 'Liên hệ của bạn (SĐT/email)'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
+          <textarea id="contactMessage" name="message" placeholder="${isEn ? 'Your message' : 'Lời nhắn của bạn'}" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 100px;"></textarea>
           <button type="submit" class="cta-button">${isEn ? 'Send Inquiry' : 'Gửi yêu cầu'}</button>
+          <p id="contactStatus" style="margin-top: 10px; font-size: 0.9rem;"></p>
         </form>
+        <script>
+          (function() {
+            const form = document.getElementById('contactForm');
+            if (!form) return;
+            form.addEventListener('submit', async function(e) {
+              e.preventDefault();
+              const status = document.getElementById('contactStatus');
+              status.textContent = '${isEn ? 'Sending...' : 'Đang gửi...'}';
+              status.style.color = '#333';
+              try {
+                const response = await fetch('https://api.omdalat.com/api/omdalat/brands/${brand.id}/inquiry', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    contact: document.getElementById('contactInput').value,
+                    message: document.getElementById('contactMessage').value,
+                    locale: '${locale}',
+                    source: 'brand-site'
+                  })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                  status.textContent = '${isEn ? 'Message sent. We will respond soon.' : 'Tin nhắn đã gửi. Chúng tôi sẽ phản hồi sớm.'}';
+                  status.style.color = '#1a5c43';
+                  form.reset();
+                } else {
+                  status.textContent = data.error || '${isEn ? 'Failed to send. Please try again.' : 'Gửi thất bại. Vui lòng thử lại.'}';
+                  status.style.color = '#c00';
+                }
+              } catch (err) {
+                status.textContent = '${isEn ? 'Network error. Please check your connection.' : 'Lỗi kết nối. Vui lòng kiểm tra kết nối.'}';
+                status.style.color = '#c00';
+              }
+            });
+          })();
+        </script>
       </div>
     </div>
   </section>
@@ -2322,11 +2480,24 @@ function generateHoldingPageHTML(status: string, slug: string, brand?: any): str
 
 // ── BRAND PORTAL ──
 
-async function renderBrandPortal(_request: Request, _env: Env, url: URL): Promise<Response> {
+async function renderBrandPortal(_request: Request, env: Env, url: URL): Promise<Response> {
   const pathParts = url.pathname.split('/').filter(Boolean);
   const queryLocale = url.searchParams.get('locale');
   const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
-  const html = generateBrandPortalHTML(locale, url);
+
+  // Query DB for published brands (no hardcode)
+  const brands = await env.DB.prepare(
+    `SELECT b.id, b.name_vi, b.name_en, b.slug, b.publication_status,
+            c.lodging_compliance, c.business_registration, c.pccc
+     FROM brands b
+     LEFT JOIN compliance_checklists c ON b.id = c.brand_id
+     WHERE b.publication_status = 'published'
+     ORDER BY b.created_at DESC`
+  ).all() as any;
+
+  const brandList = brands.results || [];
+
+  const html = generateBrandPortalHTML(locale, url, brandList);
   return new Response(html, {
     status: 200,
     headers: {
@@ -2336,10 +2507,36 @@ async function renderBrandPortal(_request: Request, _env: Env, url: URL): Promis
   });
 }
 
-function generateBrandPortalHTML(locale: string, url: URL): string {
+function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): string {
   const isEn = locale === 'en';
   const pageUrl = `https://brand.omdalat.com${isEn ? '/en' : ''}`;
   const ogImage = 'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg';
+
+  // Map DB publication_status to user-friendly label
+  const statusLabel = (status: string) => {
+    if (isEn) {
+      if (status === 'published') return 'Active';
+      if (status === 'private_preview') return 'Preparing';
+      return 'In Progress';
+    }
+    if (status === 'published') return 'Đang hoạt động';
+    if (status === 'private_preview') return 'Đang chuẩn bị';
+    return 'Đang xây';
+  };
+
+  // Render dynamic brand showcase
+  const renderBrandCards = () => {
+    if (brandList.length === 0) {
+      return `<div class="case-card"><strong>${isEn ? 'No brands published yet' : 'Chưa có thương hiệu nào công bố'}</strong></div>`;
+    }
+    return brandList.map(b => `
+      <div class="case-card">
+        <strong>${isEn ? (b.name_en || b.name_vi) : b.name_vi}</strong>
+        <span class="status${b.publication_status === 'published' ? '' : ' draft'}">${statusLabel(b.publication_status)}</span>
+        <a href="https://${b.slug}.omdalat.com" target="_blank" rel="noopener" style="display:block;margin-top:8px;color:#1a5c43;text-decoration:none;font-size:0.9rem;">${isEn ? 'View site' : 'Xem trang'} →</a>
+      </div>
+    `).join('');
+  };
 
   const t = {
     vi: {
@@ -2530,14 +2727,7 @@ function generateBrandPortalHTML(locale: string, url: URL): string {
     <div class="container">
       <h2>${c.caseTitle}</h2>
       <div class="case-list">
-        <div class="case-card">
-          <strong>Lily — Living & Working Garden</strong>
-          <span class="status">${c.lilyStatus}</span>
-        </div>
-        <div class="case-card">
-          <strong>${isEn ? 'More brands coming' : 'Thương hiệu khác sắp có'}</strong>
-          <span class="status draft">${isEn ? 'In preparation' : 'Đang chuẩn bị'}</span>
-        </div>
+        ${renderBrandCards()}
       </div>
     </div>
   </section>
