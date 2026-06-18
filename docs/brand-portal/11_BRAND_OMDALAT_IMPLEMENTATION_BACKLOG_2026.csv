@@ -1,0 +1,41 @@
+ID,Epic,Task,Priority,Status,Owner,Estimate_Hours,Dependencies,Acceptance_Criteria
+BP-001,Portal,Build brand.omdalat.com portal page,P0,In Progress,Dev,8,None,Portal renders with all 8 sections; bilingual; language switcher visible
+BP-002,Portal,Add SEO meta + schema to portal,P0,Done,Dev,2,BP-001,OG tags; Twitter cards; JSON-LD; hreflang
+BP-003,Portal,Add language switcher UI to portal nav,P0,Done,Dev,2,BP-001,VI/EN pills; active state green; aria-label
+BP-004,Migration,Separate brand.omdalat.com from Lily content,P0,Done,Dev,4,BP-001,brand.omdalat.com serves portal only; no Lily content
+BP-005,Migration,Create lily.omdalat.com DNS CNAME,P0,Pending,DevOps,2,BP-004,CNAME points to brand.omdalat.com; SSL auto; curl returns Lily
+BP-006,Migration,Update Lily DB with real address + phone,P0,Done,Dev,2,None,Address: Thon Da Tro; Phone: WA/Zalo +84919 851 311
+BP-007,Migration,Add phone + email to brand renderer contact section,P0,Done,Dev,2,BP-006,Contact section shows phone and email
+BP-008,Bilingual,Verify all properties have /en route and hreflang,P0,Done,QA,4,None,All 4 properties pass curl check for /en
+BP-009,Bilingual,Add visible language switcher to brand renderer,P0,Done,Dev,3,BP-001,Switcher visible on both / and /en
+BP-010,Bilingual,Add visible language switcher to ap.omdalat.com,P0,Done,Dev,2,BP-008,Fixed top-right switcher on index.html + en/index.html
+BP-011,Content,Write full bilingual copy for brand portal,P1,In Progress,Content,16,BP-001,All 8 sections have VI + EN; tone consistent
+BP-012,Content,Create Lily case study content for portal,P1,Pending,Content,4,BP-011,Lily card on portal; factual; no over-promotion
+BP-013,Workflow,Build intake form schema,P1,Pending,Dev,8,BP-001,Form accepts: name, maps URL, photos, description, type, owner info
+BP-014,Workflow,Build owner consent digital flow,P1,Pending,Dev,12,BP-013,Consent form sent; owner signs; logged in DB
+BP-015,Workflow,Build admin approval dashboard,P1,Pending,Dev,16,BP-014,Admin can see queue; approve/reject; log action
+BP-016,Workflow,Build evidence packet generator,P1,Pending,Dev,12,BP-015,Auto-generates evidence folder on publish
+BP-017,Agent,Build Maps Agent (Google Maps analysis),P2,Pending,Dev,24,None,Extracts name, address, type, photos, hours
+BP-018,Agent,Build SEO Agent (keyword + meta generation),P2,Pending,Dev,16,BP-017,Generates VI + EN keywords; meta; schema
+BP-019,Agent,Build Content Agent (draft generation),P2,Pending,Dev,32,BP-018,Generates hero, story, location; factual; bilingual
+BP-020,Agent,Build Image Agent (checklist + alt text),P2,Pending,Dev,12,BP-019,Lists required shots; suggests alt text
+BP-021,Agent,Build Compliance Agent (privacy + rights),P2,Pending,Dev,20,BP-020,Flags risks; checks photo rights; privacy scan
+BP-022,Agent,Build Translation Agent (VI → EN),P2,Pending,Dev,16,BP-019,Human-reviewed quality; not machine translation
+BP-023,Agent,Build QA Agent (automated checks),P2,Pending,Dev,24,BP-021,Content score; SEO check; accessibility; mobile
+BP-024,SEO,Implement sitemap generation per brand,P1,Pending,Dev,8,BP-005,Auto-generate sitemap.xml for each brand
+BP-025,SEO,Implement robots.txt for all brands,P1,Pending,Dev,4,BP-005,Allow published; disallow draft/private
+BP-026,Security,Implement audit log system,P1,Pending,Dev,12,None,Every action logged; immutable; queryable
+BP-027,Security,Implement consent revocation flow,P1,Pending,Dev,8,BP-014,Owner can revoke; triggers unpublish; notify
+BP-028,Security,Implement photo rights dispute handling,P1,Pending,Dev,8,BP-027,Dispute → immediate removal; log; notify
+BP-029,Infrastructure,Implement R2 asset upload pipeline,P1,Pending,Dev,16,None,Upload; resize; AVIF/WebP; rights tagging
+BP-030,Infrastructure,Implement preview URL generation,P1,Pending,Dev,8,BP-013,Private preview URL per brand; password optional
+BP-031,Analytics,Add basic analytics to brand microsites,P2,Pending,Dev,8,BP-005,Page views; language split; referrer
+BP-032,Analytics,Add admin dashboard metrics,P2,Pending,Dev,12,BP-015,Queue size; publish rate; brand count; language split
+BP-033,Expansion,Plan Korean (KO) localization workflow,P3,Pending,Product,8,BP-022,Workflow defined; translator identified; budget
+BP-034,Expansion,Plan Japanese (JA) localization workflow,P3,Pending,Product,8,BP-022,Workflow defined; translator identified; budget
+BP-035,Expansion,Plan Chinese (ZH) localization workflow,P3,Pending,Product,8,BP-022,Workflow defined; translator identified; budget
+BP-036,Expansion,Plan Russian (RU) localization workflow,P3,Pending,Product,8,BP-022,Workflow defined; translator identified; budget
+BP-037,Case Study,Build Tam Farm brand profile,P2,Pending,Content,8,None,Full profile; photos; content blocks
+BP-038,Case Study,Build Vuon Hong 3 brand profile,P2,Pending,Content,8,None,Full profile; photos; content blocks
+BP-039,Portal,Add submit brand form to portal CTA,P1,Pending,Dev,8,BP-013,Form on portal; submits to intake API
+BP-040,Portal,Add dynamic case study cards from DB,P1,Pending,Dev,8,BP-012,Portal reads published brands; renders cards
