@@ -20,7 +20,11 @@
       "custom_domain": true
     },
     {
-      "pattern": "*.omdalat.com/*",
+      "pattern": "lily.omdalat.com/*",
+      "zone_name": "omdalat.com"
+    },
+    {
+      "pattern": "vuonhong3.omdalat.com/*",
       "zone_name": "omdalat.com"
     }
   ],

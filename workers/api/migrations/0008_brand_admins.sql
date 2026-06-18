@@ -1,4 +1,4 @@
--- Migration: 0004_brand_admins.sql
+-- Migration: 0008_brand_admins.sql
 -- Description: Brand admin authentication and session tables
 -- Created: 2026-06-18
 -- Depends on: 0003_brand_content.sql
@@ -43,5 +43,6 @@ CREATE INDEX IF NOT EXISTS idx_admin_sessions_brand ON admin_sessions(brand_id);
 CREATE INDEX IF NOT EXISTS idx_admin_sessions_expires ON admin_sessions(expires_at);
 
 -- Add admin_id reference to brands table (primary admin for the brand)
-ALTER TABLE brands ADD COLUMN admin_id TEXT;
-ALTER TABLE brands ADD COLUMN admin_enabled BOOLEAN DEFAULT 0;
+-- Skip if already exists (idempotent)
+-- ALTER TABLE brands ADD COLUMN admin_id TEXT;
+-- ALTER TABLE brands ADD COLUMN admin_enabled BOOLEAN DEFAULT 0;

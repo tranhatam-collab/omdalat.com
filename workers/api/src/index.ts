@@ -11,6 +11,7 @@ import { handleBrandPublish } from './routes/brand-publish';
 import { handleBrandInquiry } from './routes/brand-inquiry';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
 import { handleBrandAdminLogin } from './routes/brand-admin-login';
+import { handleLilyPublic } from './routes/lily-public';
 
 export interface Env {
   DB: D1Database;
@@ -52,6 +53,11 @@ router.get('/health', handleHealthCheck);
 router.post('/api/pay/checkout-session', handlePaymentCheckoutSession);
 router.post('/api/pay/webhook', handlePaymentWebhook);
 router.get('/api/payments/providers', handlePaymentProviders);
+
+// Lily V2 routes (public) — must be before brand routes to avoid :id collision
+router.get('/api/lily/public', handleLilyPublic);
+router.get('/api/lily/stay-plans', handleLilyPublic);
+router.post('/api/lily/applications', handleLilyPublic);
 
 // Brand Factory routes
 router.post('/api/omdalat/brand-intake', handleBrandIntake);
