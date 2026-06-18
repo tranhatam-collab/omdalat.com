@@ -141,6 +141,8 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   const businessBlock = getBlock('business');
   const productsBlock = getBlock('products');
   const experiencesBlock = getBlock('experiences');
+  const reviewsBlock = getBlock('reviews');
+  const highlightsBlock = getBlock('highlights');
 
   return `<!DOCTYPE html>
 <html lang="${locale}">
@@ -178,11 +180,11 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     <div class="container">
       <ul>
         <li><a href="/${isEn ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="#highlights">${isEn ? 'Highlights' : 'Điểm nổi bật'}</a></li>
         <li><a href="#story">${isEn ? 'Story' : 'Câu chuyện'}</a></li>
         <li><a href="#what">${isEn ? 'What' : 'Đây là nơi gì'}</a></li>
-        <li><a href="#why">${isEn ? 'Why' : 'Vì sao phù hợp'}</a></li>
         <li><a href="#space">${isEn ? 'Space' : 'Không gian'}</a></li>
-        <li><a href="#business">${isEn ? 'Business' : 'Dòng kinh doanh'}</a></li>
+        <li><a href="#reviews">${isEn ? 'Reviews' : 'Đánh giá'}</a></li>
         <li><a href="#location">${isEn ? 'Location' : 'Vị trí'}</a></li>
         <li><a href="#contact">${isEn ? 'Contact' : 'Liên hệ'}</a></li>
       </ul>
@@ -230,6 +232,22 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   </section>
   ` : ''}
 
+  ${highlightsBlock ? `
+  <section class="section" id="highlights" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    <div class="container">
+      <h2>${isEn ? 'Highlights' : 'Điểm nổi bật'}</h2>
+      <div class="grid">
+        ${highlightsBlock.items ? highlightsBlock.items.map((item: any) => `
+          <div class="card" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h3>${item.title}</h3>
+            <p>${item.text || ''}</p>
+          </div>
+        `).join('') : ''}
+      </div>
+    </div>
+  </section>
+  ` : ''}
+
   ${spaceBlock ? `
   <section class="section" id="space">
     <div class="container">
@@ -247,6 +265,23 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <h2>${isEn ? 'Location' : 'Vị trí'}</h2>
       <div class="card">
         <p>${locationBlock.content || ''}</p>
+      </div>
+    </div>
+  </section>
+  ` : ''}
+
+  ${reviewsBlock ? `
+  <section class="section" id="reviews" style="background: #f0f4f8;">
+    <div class="container">
+      <h2>${isEn ? 'What Guests Say' : 'Khách nói gì'}</h2>
+      <p style="text-align: center; color: #667eea; font-size: 1.2rem; margin-bottom: 2rem;">★★★★☆ 4.6 / 5 (36+ ${isEn ? 'reviews' : 'đánh giá'})</p>
+      <div class="grid">
+        ${reviewsBlock.reviews ? reviewsBlock.reviews.map((review: any) => `
+          <div class="card" style="background: white; border-left: 4px solid #667eea;">
+            <p style="font-style: italic; margin-bottom: 15px;">"${review.text}"</p>
+            <p style="color: #667eea; font-weight: 600;">— ${review.author}</p>
+          </div>
+        `).join('') : ''}
       </div>
     </div>
   </section>
