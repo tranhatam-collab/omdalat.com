@@ -26,7 +26,17 @@ export const handleBrandSite = async (
     if (!slug) {
       // Extract from path (brand.omdalat.com/lily)
       const pathParts = url.pathname.split('/').filter(Boolean);
-      slug = pathParts[0] || 'lily';
+      slug = pathParts[0] || '';
+    }
+
+    // If host is brand.omdalat.com → always render Brand Portal
+    const hostParts = host.split('.');
+    const isBrandPortal = hostParts.length >= 3 &&
+      hostParts[0] === 'brand' &&
+      hostParts.slice(-2).join('.') === 'omdalat.com';
+
+    if (isBrandPortal) {
+      return renderBrandPortal(request, env, url);
     }
 
     if (!slug) {
@@ -498,6 +508,250 @@ function generateHoldingPageHTML(status: string, slug: string, brand?: any): str
     <p>Trang này đang trong quá trình soạn thảo.</p>
     <p><a href="https://omdalat.com">Trở về omdalat.com</a></p>
   </div>
+</body>
+</html>`;
+}
+
+// ── BRAND PORTAL ──
+
+async function renderBrandPortal(_request: Request, _env: Env, url: URL): Promise<Response> {
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const queryLocale = url.searchParams.get('locale');
+  const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
+  const html = generateBrandPortalHTML(locale, url);
+  return new Response(html, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=300'
+    }
+  });
+}
+
+function generateBrandPortalHTML(locale: string, url: URL): string {
+  const isEn = locale === 'en';
+  const pageUrl = `https://brand.omdalat.com${isEn ? '/en' : ''}`;
+  const ogImage = 'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg';
+
+  const t = {
+    vi: {
+      title: 'Om Dalat Brand System Portal',
+      heroH1: 'Xây dựng thương hiệu địa phương từ Đà Lạt ra thế giới',
+      heroSub: 'Một hệ thống giúp người dân, hộ kinh doanh, nhà vườn, quán nhỏ, homestay, farm và công ty địa phương có một thương hiệu số rõ ràng, song ngữ và có thể phát triển dài hạn.',
+      problemTitle: 'Vấn đề',
+      problemP1: 'Phần lớn thương hiệu địa phương hiện chỉ tồn tại trên Facebook, Google Maps hoặc các nền tảng trung gian.',
+      problemP2: 'Điều đó giúp được tìm thấy. Nhưng không giúp sở hữu một hiện diện số lâu dài.',
+      modelTitle: 'Mô hình 4 lớp',
+      layer1: 'Lớp 1: Om Dalat Core — Hệ vận hành thành viên, dashboard, inquiry, workflow.',
+      layer2: 'Lớp 2: Ấp Đà Lạt — Truyền thông địa phương, câu chuyện, văn hóa. Không bán hàng.',
+      layer3: 'Lớp 3: Brand Portal — Nơi tạo thương hiệu. Intake, verification, strategy, publishing.',
+      layer4: 'Lớp 4: Brand Sites — lily.omdalat.com, tamfarm.omdalat.com... Nơi thương hiệu tồn tại.',
+      whoTitle: 'Ai có thể tham gia',
+      whoList: ['Nhà vườn', 'Farm', 'Homestay', 'Café', 'Quán ăn', 'Sản phẩm địa phương', 'Xưởng nghề', 'Doanh nghiệp', 'Nghệ nhân', 'Hợp tác xã'],
+      caseTitle: 'Thương hiệu đang xây',
+      lilyStatus: 'Đã xuất bản',
+      tamfarmStatus: 'Đang xây',
+      roadmapTitle: 'Lộ trình',
+      phase1: 'Giai đoạn 1: Đà Lạt & Lạc Dương — 50 thương hiệu',
+      phase2: 'Giai đoạn 2: Toàn tỉnh Lâm Đồng — 500 thương hiệu',
+      phase3: 'Giai đoạn 3: Quốc tế hóa — 5.000 thương hiệu',
+      langTitle: 'Ngôn ngữ',
+      langLive: 'Đang hoạt động: Vietnamese, English',
+      langPlan: 'Kế hoạch: Korean, Japanese, Chinese, Russian',
+      ctaTitle: 'Gửi thương hiệu của bạn',
+      ctaLabel: 'Bắt đầu',
+      footer: 'Om Dalat Brand System Portal'
+    },
+    en: {
+      title: 'Om Dalat Brand System Portal',
+      heroH1: 'Building local brands from Dalat to the world',
+      heroSub: 'A system helping local people, household businesses, farms, cafés, homestays, and companies build clear, bilingual, long-term digital brands.',
+      problemTitle: 'The Problem',
+      problemP1: 'Most local brands today only exist through Facebook, Google Maps, or third-party platforms.',
+      problemP2: 'That helps them get discovered. It does not help them own a long-term digital presence.',
+      modelTitle: '4-Layer Model',
+      layer1: 'Layer 1: Om Dalat Core — Member system, dashboard, inquiry, workflow.',
+      layer2: 'Layer 2: Ap Dalat — Local editorial, stories, culture. No commerce.',
+      layer3: 'Layer 3: Brand Portal — Where brands are created. Intake, verification, strategy, publishing.',
+      layer4: 'Layer 4: Brand Sites — lily.omdalat.com, tamfarm.omdalat.com... Where brands live.',
+      whoTitle: 'Who Can Join',
+      whoList: ['Farmers', 'Farms', 'Homestays', 'Cafés', 'Restaurants', 'Local Products', 'Craft Workshops', 'Companies', 'Artisans', 'Cooperatives'],
+      caseTitle: 'Brands in Progress',
+      lilyStatus: 'Published',
+      tamfarmStatus: 'In Progress',
+      roadmapTitle: 'Roadmap',
+      phase1: 'Phase 1: Dalat & Lac Duong — 50 brands',
+      phase2: 'Phase 2: All of Lam Dong Province — 500 brands',
+      phase3: 'Phase 3: International expansion — 5,000 brands',
+      langTitle: 'Languages',
+      langLive: 'Live: Vietnamese, English',
+      langPlan: 'Planned: Korean, Japanese, Chinese, Russian',
+      ctaTitle: 'Submit Your Brand',
+      ctaLabel: 'Get Started',
+      footer: 'Om Dalat Brand System Portal'
+    }
+  };
+
+  const c = isEn ? t.en : t.vi;
+
+  return `<!DOCTYPE html>
+<html lang="${locale}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="robots" content="index, follow">
+  <title>${c.title}</title>
+  <meta name="description" content="${c.heroSub}">
+  <link rel="canonical" href="${pageUrl}">
+  ${isEn ? '<link rel="alternate" hreflang="vi" href="https://brand.omdalat.com">' : '<link rel="alternate" hreflang="en" href="https://brand.omdalat.com/en">'}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${c.title}">
+  <meta property="og:description" content="${c.heroSub}">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:site_name" content="Om Dalat">
+  <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
+  ${isEn ? '' : '<meta property="og:locale:alternate" content="en_US">'}
+  ${isEn ? '<meta property="og:locale:alternate" content="vi_VN">' : ''}
+  <meta property="og:image" content="${ogImage}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${c.title}">
+  <meta name="twitter:description" content="${c.heroSub}">
+  <meta name="twitter:image" content="${ogImage}">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); color: white; padding: 100px 0; text-align: center; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+    .section { padding: 60px 0; }
+    .section h2 { font-size: 2rem; margin-bottom: 2rem; color: #1a5c43; }
+    .section p { margin-bottom: 1rem; max-width: 700px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .card { background: #f9f9f9; padding: 24px; border-radius: 8px; }
+    .card h3 { margin-bottom: 10px; color: #1a5c43; }
+    .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-weight: 500; margin-top: 20px; }
+    .cta-button:hover { background: #0f3d2e; }
+    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
+    .nav a { color: #333; text-decoration: none; }
+    .nav a:hover { color: #1a5c43; }
+    .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
+    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a.active { background: #1a5c43; color: white; }
+    .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
+    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+    .case-list { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .case-card { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; }
+    .case-card .status { display: inline-block; background: #e8f5e9; color: #1a5c43; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; margin-top: 10px; }
+    .case-card .status.draft { background: #fff3e0; color: #e65100; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <ul>
+        <li><a href="https://omdalat.com">${isEn ? 'Om Dalat' : 'Ôm Đà Lạt'}</a></li>
+        <li><a href="#problem">${isEn ? 'Why' : 'Vì sao'}</a></li>
+        <li><a href="#model">${isEn ? 'Model' : 'Mô hình'}</a></li>
+        <li><a href="#who">${isEn ? 'Who' : 'Đối tượng'}</a></li>
+        <li><a href="#cases">${isEn ? 'Cases' : 'Thương hiệu'}</a></li>
+        <li><a href="#roadmap">${isEn ? 'Roadmap' : 'Lộ trình'}</a></li>
+        <li class="lang-switcher">
+          <a href="/" class="${isEn ? '' : 'active'}">Tiếng Việt</a>
+          <a href="/en" class="${isEn ? 'active' : ''}">English</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1>${c.heroH1}</h1>
+      <p>${c.heroSub}</p>
+      <a href="https://omdalat.com/contact" class="cta-button">${c.ctaLabel}</a>
+    </div>
+  </section>
+
+  <section class="section" id="problem">
+    <div class="container">
+      <h2>${c.problemTitle}</h2>
+      <p>${c.problemP1}</p>
+      <p>${c.problemP2}</p>
+    </div>
+  </section>
+
+  <section class="section" id="model" style="background: #f0f4f8;">
+    <div class="container">
+      <h2>${c.modelTitle}</h2>
+      <div class="grid">
+        <div class="card"><h3>Layer 1</h3><p>${c.layer1}</p></div>
+        <div class="card"><h3>Layer 2</h3><p>${c.layer2}</p></div>
+        <div class="card"><h3>Layer 3</h3><p>${c.layer3}</p></div>
+        <div class="card"><h3>Layer 4</h3><p>${c.layer4}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="who">
+    <div class="container">
+      <h2>${c.whoTitle}</h2>
+      <div class="grid">
+        ${c.whoList.map(item => `<div class="card"><p>${item}</p></div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cases" style="background: #f0f4f8;">
+    <div class="container">
+      <h2>${c.caseTitle}</h2>
+      <div class="case-list">
+        <div class="case-card">
+          <strong>Lily</strong>
+          <span class="status">${c.lilyStatus}</span>
+        </div>
+        <div class="case-card">
+          <strong>Tam Farm</strong>
+          <span class="status draft">${c.tamfarmStatus}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="container">
+      <h2>${c.roadmapTitle}</h2>
+      <div class="grid">
+        <div class="card"><h3>Phase 1</h3><p>${c.phase1}</p></div>
+        <div class="card"><h3>Phase 2</h3><p>${c.phase2}</p></div>
+        <div class="card"><h3>Phase 3</h3><p>${c.phase3}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lang" style="background: #f0f4f8;">
+    <div class="container">
+      <h2>${c.langTitle}</h2>
+      <p>${c.langLive}</p>
+      <p>${c.langPlan}</p>
+    </div>
+  </section>
+
+  <section class="section" id="cta">
+    <div class="container" style="text-align: center;">
+      <h2>${c.ctaTitle}</h2>
+      <a href="https://omdalat.com/contact" class="cta-button">${c.ctaLabel}</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>${c.footer}</p>
+      <p><a href="https://omdalat.com" style="color: #999;">omdalat.com</a></p>
+    </div>
+  </footer>
 </body>
 </html>`;
 }
