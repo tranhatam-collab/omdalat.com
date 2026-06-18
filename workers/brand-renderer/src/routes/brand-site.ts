@@ -44,10 +44,12 @@ export const handleBrandSite = async (
         b.can_host_stay, b.can_host_visit, b.can_sell_product, b.can_host_work,
         b.publication_status, b.ap_place_ref,
         p.lat, p.lng, p.address_vi, p.address_en, p.administrative_area,
-        o.name as owner_name, o.consent_status
+        o.name as owner_name, o.consent_status,
+        c.lodging_compliance
        FROM brands b
        JOIN places p ON b.place_id = p.id
        JOIN owners o ON b.owner_id = o.id
+       LEFT JOIN compliance_checklists c ON b.id = c.brand_id
        WHERE b.slug = ?`
     ).bind(slug).first();
 
@@ -151,6 +153,10 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     const page = pathParts.find(p => p !== 'en' && p !== 'vi');
     
     if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
+      // Gate /stay on lodging_compliance (NĐ 96/2016)
+      if (page === 'stay' && brand.lodging_compliance === 'unknown') {
+        return new Response('Not Found', { status: 404 });
+      }
       // Lily V2 specific pages — only accessible when published
       const html = generateLilyV2Page(brand, page, locale, url);
       if (html) {
@@ -316,7 +322,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
     <div class="container">
       <ul>
         <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>
+        ${brand.lodging_compliance !== 'unknown' ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''}
         <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
@@ -557,7 +563,7 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
     <div class="container">
       <ul>
         <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>
+        ${brand.lodging_compliance !== 'unknown' ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''}
         <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
         <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>

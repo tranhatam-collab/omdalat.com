@@ -236,10 +236,12 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
     ).bind(brandId).first();
 
     if (complianceValues) {
-      // Require actual values, not 'unknown'
-      if (complianceValues.lodging_compliance === 'unknown' ||
-          complianceValues.business_registration === 'unknown' ||
-          complianceValues.pccc === 'unknown') {
+      // For stay brands: only allow verified, approved, or not_applicable
+      // Block both 'unknown' (not checked) and 'pending' (in progress but not done)
+      const ok = new Set(['verified', 'approved', 'not_applicable']);
+      if (!ok.has(complianceValues.lodging_compliance) ||
+          !ok.has(complianceValues.business_registration) ||
+          !ok.has(complianceValues.pccc)) {
         gates.compliance_reviewed = false;
       }
     } else {
