@@ -93,7 +93,24 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     const queryLocale = url.searchParams.get('locale');
     const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
 
-    // Build HTML response
+    // Check for specific Lily V2 routes
+    const page = pathParts.find(p => p !== 'en' && p !== 'vi');
+    
+    if (page && brand.slug === 'lily') {
+      // Lily V2 specific pages
+      const html = generateLilyV2Page(brand, page, locale, url);
+      if (html) {
+        return new Response(html, {
+          status: 200,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=300'
+          }
+        });
+      }
+    }
+
+    // Build HTML response for homepage
     const html = generateBrandSiteHTML(brand, contentBlocks, locale, url);
 
     return new Response(html, {
@@ -118,6 +135,163 @@ function renderHoldingPage(status: string, slug: string, brand?: any): Response 
       'Cache-Control': 'public, max-age=60'
     }
   });
+}
+
+function generateLilyV2Page(brand: any, page: string, locale: string, url: URL): string | null {
+  const isEn = locale === 'en';
+  const brandName = isEn ? brand.name_en : brand.name_vi;
+  
+  const pages: Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string }> = {
+    'stay': {
+      titleVi: 'Ở theo tuần / tháng',
+      titleEn: 'Weekly / Monthly Stay',
+      contentVi: 'Lily không vận hành theo kiểu lưu trú ngắn hạn từng ngày. Người phù hợp với Lily là người muốn ở lại đủ lâu để có nhịp sống, có thời gian làm việc, học kỹ năng, tham gia một dự án và hiểu rõ mình có hợp với Đà Lạt hay không.',
+      contentEn: 'Lily does not operate as a daily short-stay accommodation. The right fit for Lily is someone who wants to stay long enough to build a rhythm, work, learn skills, join a project, and understand whether Dalat truly fits them.'
+    },
+    'workspace': {
+      titleVi: 'Không gian làm việc',
+      titleEn: 'Workspace',
+      contentVi: 'Workspace tại Lily là nơi làm việc thật trong một không gian sân vườn. Không phải coworking ồn ào, không phải café vãng lai, mà là một nơi giữ nhịp cho người ở lại làm việc đều.',
+      contentEn: 'The workspace at Lily is a real working area within a garden setting. It is not a noisy coworking space or a public café, but a place that helps residents maintain a steady work rhythm.'
+    },
+    'programs': {
+      titleVi: 'Chương trình',
+      titleEn: 'Programs',
+      contentVi: 'Lily có các chương trình: Work From Garden, AI & Online Work Starter, Brand Factory Contributor, và International Builder Residency.',
+      contentEn: 'Lily offers programs: Work From Garden, AI & Online Work Starter, Brand Factory Contributor, and International Builder Residency.'
+    },
+    'jobs': {
+      titleVi: 'Việc làm online',
+      titleEn: 'Online Jobs',
+      contentVi: 'Lily không hứa có việc cho mọi người. Lily tạo một môi trường để người phù hợp có thể học, thử việc nhỏ, nhận task phù hợp và từng bước tạo thu nhập online từ năng lực thật.',
+      contentEn: 'Lily does not promise work for everyone. Lily creates an environment where suitable people can learn, try small tasks, receive relevant work, and gradually build online income from real ability.'
+    },
+    'training': {
+      titleVi: 'Đào tạo',
+      titleEn: 'Training',
+      contentVi: 'Lily có các module đào tạo: Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm.',
+      contentEn: 'Lily offers training modules: Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm.'
+    },
+    'international': {
+      titleVi: 'Hỗ trợ quốc tế',
+      titleEn: 'International Support',
+      contentVi: 'Lily có thể tiếp nhận người nước ngoài muốn ở lại dài hơn tại Lạc Dương, Đà Lạt để làm việc từ xa, học kỹ năng, tham gia dự án và sống trong một môi trường sân vườn có kỷ luật.',
+      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work remotely, learn skills, join projects, and live within a disciplined garden-based environment.'
+    },
+    'visa-support': {
+      titleVi: 'Hỗ trợ thông tin về lưu trú, visa và làm việc hợp lệ',
+      titleEn: 'Information support for accommodation, visas, and lawful work',
+      contentVi: 'Người nước ngoài có thể cần các loại giấy tờ khác nhau tùy mục đích nhập cảnh, thời gian ở lại và hình thức làm việc. Lily không cam kết kết quả visa hoặc giấy phép lao động. Lily chỉ hỗ trợ người tham gia hiểu bước cần chuẩn bị, kết nối đơn vị tư vấn phù hợp và phối hợp với các dự án thuộc hệ Om Dalat khi có nhu cầu hợp lệ.',
+      contentEn: 'Foreign residents may need different documents depending on entry purpose, length of stay, and type of work. Lily does not guarantee visa or work permit outcomes. Lily only helps participants understand preparation steps, connect with suitable advisors, and coordinate with Om Dalat projects when there is a lawful need.'
+    },
+    'apply': {
+      titleVi: 'Gửi hồ sơ ở lại',
+      titleEn: 'Apply to Stay',
+      contentVi: 'Gửi hồ sơ để ở lại tại Lily. Chúng tôi sẽ đọc kỹ trước khi phản hồi. Đây chưa phải xác nhận lưu trú, việc làm hoặc hỗ trợ visa.',
+      contentEn: 'Submit an application to stay at Lily. We will review it carefully before responding. This is not a confirmation of accommodation, work, or visa support.'
+    }
+  };
+
+  const pageData = pages[page];
+  if (!pageData) {
+    return null;
+  }
+
+  const title = isEn ? pageData.titleEn : pageData.titleVi;
+  const content = isEn ? pageData.contentEn : pageData.contentVi;
+  const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}/${page}`;
+
+  return `<!DOCTYPE html>
+<html lang="${locale}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="robots" content="index, follow">
+  <title>${title} - ${brandName}</title>
+  <meta name="description" content="${content}">
+  <link rel="canonical" href="${pageUrl}">
+  ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/' + page + '">' : ''}
+  ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/' + page + '">'}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${title} - ${brandName}">
+  <meta property="og:description" content="${content}">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:site_name" content="Om Dalat">
+  <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
+  <meta property="og:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title} - ${brandName}">
+  <meta name="twitter:description" content="${content}">
+  <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); color: white; padding: 80px 0; text-align: center; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+    .section { padding: 60px 0; }
+    .section h2 { font-size: 2rem; margin-bottom: 2rem; color: #1a5c43; }
+    .section p { margin-bottom: 1rem; max-width: 700px; }
+    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
+    .nav a { color: #333; text-decoration: none; }
+    .nav a:hover { color: #1a5c43; }
+    .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
+    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a.active { background: #1a5c43; color: white; }
+    .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
+    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+    .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+    .cta-button:hover { background: #0f3d2e; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <ul>
+        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}training">${isEn ? 'Training' : 'Đào tạo'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}international">${isEn ? 'International' : 'Quốc tế'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+        <li class="lang-switcher">
+          <a href="/${page}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
+          <a href="/en/${page}" class="${isEn ? 'active' : ''}">English</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      <h1>${title}</h1>
+      <p>${content}</p>
+      <a href="/${locale === 'en' ? 'en/' : ''}apply" class="cta-button">${isEn ? 'Apply to Stay' : 'Gửi hồ sơ ở lại'}</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>${isEn ? 'More Information' : 'Thông tin thêm'}</h2>
+      <p>${isEn ? 'This page is part of Lily Living & Working Garden V2. We are transitioning from a daily homestay model to a weekly/monthly stay model focused on remote work, digital learning, and real project participation.' : 'Trang này là một phần của Lily Living & Working Garden V2. Chúng tôi đang chuyển đổi từ mô hình homestay theo ngày sang mô hình ở lại theo tuần/tháng, tập trung vào làm việc từ xa, học kỹ năng số và tham gia dự án thật.'}</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 ${brandName} - ${isEn ? 'Part of' : 'Thuộc hệ'} Ôm Đà Lạt</p>
+      <p><a href="https://omdalat.com" style="color: #999;">omdalat.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>`;
 }
 
 function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string, url: URL): string {
