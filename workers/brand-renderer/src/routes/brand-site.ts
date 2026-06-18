@@ -8,29 +8,23 @@ export const handleBrandSite = async (
     const url = new URL(request.url);
     const host = request.headers.get('Host') || url.hostname;
 
-    // Extract slug from subdomain (e.g., lily.omdalat.com -> lily)
-    // Fallback to path (brand.omdalat.com/lily) or query (?slug=lily)
-    let slug = url.searchParams.get('slug');
-
-    if (!slug) {
-      // Extract from subdomain: anything before .omdalat.com
-      const hostParts = host.split('.');
-      if (hostParts.length >= 3 && hostParts.slice(-2).join('.') === 'omdalat.com') {
-        const subdomain = hostParts[0];
-        if (subdomain && subdomain !== 'brand' && subdomain !== 'api' && subdomain !== 'www') {
-          slug = subdomain;
-        }
+    // Extract slug from subdomain ONLY (e.g., lily.omdalat.com -> lily)
+    // Tenant isolation: Host is the ONLY source of truth. No query/path override.
+    let slug: string | undefined;
+    const hostParts = host.split('.');
+    if (hostParts.length >= 3 && hostParts.slice(-2).join('.') === 'omdalat.com') {
+      const subdomain = hostParts[0];
+      if (subdomain && subdomain !== 'brand' && subdomain !== 'api' && subdomain !== 'www') {
+        slug = subdomain;
       }
     }
 
-    if (!slug) {
-      // Extract from path (brand.omdalat.com/lily)
-      const pathParts = url.pathname.split('/').filter(Boolean);
-      slug = pathParts[0] || '';
+    // Reject query param override (tenant leakage protection)
+    if (url.searchParams.get('slug')) {
+      return new Response('Forbidden: slug override not allowed', { status: 403 });
     }
 
     // If host is brand.omdalat.com → always render Brand Portal
-    const hostParts = host.split('.');
     const isBrandPortal = hostParts.length >= 3 &&
       hostParts[0] === 'brand' &&
       hostParts.slice(-2).join('.') === 'omdalat.com';

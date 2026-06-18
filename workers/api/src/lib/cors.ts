@@ -13,22 +13,18 @@ export interface CorsOptions {
  * Brand subdomains are checked dynamically against published brands in D1
  */
 export async function isOriginAllowed(origin: string, env: Env): Promise<boolean> {
-  // For testing purposes, allow known brand subdomains
-  // In production, this should rely solely on the database check
-  const knownBrandSubdomains = ['vuonhong3.omdalat.com', 'lily.omdalat.com'];
-  if (knownBrandSubdomains.includes(origin)) {
-    return true;
+  if (!origin || origin === 'null') {
+    return false;
   }
 
-  // Check static origins from environment variable
+  // Check static origins from environment variable (exact match only)
   const staticOrigins = env.CORS_ORIGINS.split(',').map(o => o.trim());
   if (staticOrigins.includes(origin)) {
     return true;
   }
 
-  // Check if it's a brand subdomain (*.omdalat.com)
+  // Check if it's a brand subdomain (*.omdalat.com) and the brand is published
   if (origin.endsWith('.omdalat.com')) {
-    // Check if brand is published (using full subdomain field)
     try {
       const brandCheck = await env.DB.prepare(
         `SELECT publication_status FROM brands WHERE subdomain = ?`
@@ -37,7 +33,7 @@ export async function isOriginAllowed(origin: string, env: Env): Promise<boolean
       if (brandCheck && brandCheck.publication_status === 'published') {
         return true;
       }
-    } catch (error) {
+    } catch {
       // Don't fail on DB errors, just return false
     }
   }

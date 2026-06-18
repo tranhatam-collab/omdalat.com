@@ -10,6 +10,7 @@ import { handleBrandApproval } from './routes/brand-approval';
 import { handleBrandPublish } from './routes/brand-publish';
 import { handleBrandInquiry } from './routes/brand-inquiry';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
+import { handleBrandAdminLogin } from './routes/brand-admin-login';
 
 export interface Env {
   DB: D1Database;
@@ -59,6 +60,9 @@ router.get('/api/omdalat/brands/:id/preview', handleBrandPreview);
 router.post('/api/omdalat/brands/:id/approve', handleBrandApproval);
 router.post('/api/omdalat/brands/:id/publish', handleBrandPublish);
 router.post('/api/omdalat/brands/:id/inquiry', handleBrandInquiry);
+
+// Brand admin authentication
+router.post('/api/omdalat/admin/login', handleBrandAdminLogin);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

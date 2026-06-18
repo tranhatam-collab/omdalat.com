@@ -1,6 +1,7 @@
 import type { Env } from '../index';
 import { logAudit } from '../lib/audit';
 import { handleCorsPreflight, withCors } from '../lib/cors';
+import { requireAuth, requireSuper } from '../lib/auth';
 
 export const handleBrandPublish = async (
   request: Request,
@@ -14,6 +15,12 @@ export const handleBrandPublish = async (
   if (request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
   }
+
+  // Require super admin authentication
+  const auth = await requireAuth(request, env);
+  if (auth instanceof Response) return withCors(request, auth, env);
+  const superCheck = requireSuper(auth);
+  if (superCheck instanceof Response) return withCors(request, superCheck, env);
 
   try {
     const url = new URL(request.url);
