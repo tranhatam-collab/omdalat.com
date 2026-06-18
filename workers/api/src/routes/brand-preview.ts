@@ -1,6 +1,7 @@
 import type { Env } from '../index';
 import { logAudit } from '../lib/audit';
 import { handleCorsPreflight, withCors } from '../lib/cors';
+import { validateBrandCopy } from '../lib/overclaim-validator';
 
 export const handleBrandPreview = async (
   request: Request,
@@ -61,6 +62,18 @@ export const handleBrandPreview = async (
        ORDER BY locale, block_type`
     ).bind(brandId).all();
 
+    // H3: overclaim validator — check content blocks for forbidden terms
+    const contentBlocks = contentBlocksResult.results || [];
+    const overclaimErrors: string[] = [];
+    
+    for (const block of contentBlocks) {
+      const payload = typeof block.payload === 'string' ? block.payload : JSON.stringify(block.payload);
+      const validation = validateBrandCopy(payload, 'L3'); // L3 brand microsites
+      if (!validation.valid) {
+        overclaimErrors.push(...validation.errors);
+      }
+    }
+
     // Fetch products
     const productsResult = await env.DB.prepare(
       `SELECT id, name_vi, name_en, season, notes, status
@@ -94,7 +107,8 @@ export const handleBrandPreview = async (
     ).bind(brandId).all();
 
     await logAudit(env, null, 'brand.preview.viewed', 'brand', brandId, {
-      publication_status: brandResult.publication_status
+      publication_status: brandResult.publication_status,
+      overclaim_errors: overclaimErrors.length
     });
 
     const response = new Response(
@@ -104,7 +118,11 @@ export const handleBrandPreview = async (
         products: productsResult.results || [],
         experiences: experiencesResult.results || [],
         compliance: complianceResult,
-        recent_agent_runs: agentRunsResult.results || []
+        recent_agent_runs: agentRunsResult.results || [],
+        overclaim_validation: {
+          valid: overclaimErrors.length === 0,
+          errors: overclaimErrors
+        }
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );

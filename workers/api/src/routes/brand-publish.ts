@@ -166,7 +166,7 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
     gates.images_approved = true;
   }
 
-  // Check compliance review
+  // Check compliance review AND compliance values
   const complianceApproval = await env.DB.prepare(
     `SELECT COUNT(*) as count FROM approvals
      WHERE brand_id = ? AND action = 'approve_compliance'`
@@ -174,6 +174,30 @@ async function checkPublishGates(env: Env, brandId: string): Promise<{
 
   if (complianceApproval && complianceApproval.count > 0) {
     gates.compliance_reviewed = true;
+  }
+
+  // C3: compliance-value gate — enforce actual values for lodging brands
+  const brandCheck = await env.DB.prepare(
+    `SELECT can_host_stay FROM brands WHERE id = ?`
+  ).bind(brandId).first();
+
+  if (brandCheck && brandCheck.can_host_stay === 1) {
+    const complianceValues = await env.DB.prepare(
+      `SELECT lodging_compliance, business_registration, pccc
+       FROM compliance_checklists
+       WHERE brand_id = ?`
+    ).bind(brandId).first();
+
+    if (complianceValues) {
+      // Require actual values, not 'unknown'
+      if (complianceValues.lodging_compliance === 'unknown' ||
+          complianceValues.business_registration === 'unknown' ||
+          complianceValues.pccc === 'unknown') {
+        gates.compliance_reviewed = false;
+      }
+    } else {
+      gates.compliance_reviewed = false;
+    }
   }
 
   // Check QA passed (via agent_runs with type 'qa' and status 'completed')
