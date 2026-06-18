@@ -8,6 +8,7 @@ import { handleAgentRuns } from './routes/agent-runs';
 import { handleBrandPreview } from './routes/brand-preview';
 import { handleBrandApproval } from './routes/brand-approval';
 import { handleBrandPublish } from './routes/brand-publish';
+import { handleComplianceUpdate } from './routes/compliance-update';
 import { handleBrandInquiry } from './routes/brand-inquiry';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
 import { handleBrandAdminLogin } from './routes/brand-admin-login';
@@ -65,6 +66,7 @@ router.post('/api/omdalat/agent-runs', handleAgentRuns);
 router.get('/api/omdalat/brands/:id/preview', handleBrandPreview);
 router.post('/api/omdalat/brands/:id/approve', handleBrandApproval);
 router.post('/api/omdalat/brands/:id/publish', handleBrandPublish);
+router.post('/api/omdalat/brands/:id/compliance', handleComplianceUpdate);
 router.post('/api/omdalat/brands/:id/inquiry', handleBrandInquiry);
 
 // Brand admin authentication
