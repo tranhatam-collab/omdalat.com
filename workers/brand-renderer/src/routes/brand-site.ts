@@ -93,11 +93,11 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     const queryLocale = url.searchParams.get('locale');
     const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
 
-    // Check for specific Lily V2 routes
+    // Check for specific Lily V2 routes — ONLY if brand is published
     const page = pathParts.find(p => p !== 'en' && p !== 'vi');
     
-    if (page && brand.slug === 'lily') {
-      // Lily V2 specific pages
+    if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
+      // Lily V2 specific pages — only accessible when published
       const html = generateLilyV2Page(brand, page, locale, url);
       if (html) {
         return new Response(html, {
