@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Lily V2 API
+  version: 1.0.0
+  description: API contract for Lily Living & Working Garden. Sensitive document endpoints require authenticated restricted roles.
+servers:
+  - url: https://api.omdalat.com/api/lily
+paths:
+  /public:
+    get:
+      summary: Get approved public Lily configuration
+      responses:
+        '200': {description: Approved public content}
+  /stay-plans:
+    get:
+      summary: List approved weekly/monthly plans
+      responses:
+        '200': {description: Stay plans}
+  /applications:
+    post:
+      summary: Submit minimal public application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ApplicationCreate'}
+      responses:
+        '201': {description: Application submitted}
+        '400': {description: Validation or consent failure}
+  /applications/{applicationId}:
+    get:
+      security: [{sessionAuth: []}]
+      parameters:
+        - in: path
+          name: applicationId
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Scoped application}
+        '403': {description: Forbidden}
+  /applications/{applicationId}/documents:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Request restricted document upload session
+      parameters:
+        - in: path
+          name: applicationId
+          required: true
+          schema: {type: string}
+      responses:
+        '201': {description: Short-lived upload grant}
+        '403': {description: Forbidden}
+  /room-offers:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Create room offer after conflict and permission checks
+      responses:
+        '201': {description: Offer created}
+        '409': {description: Room conflict}
+  /stays/{stayId}/check-in:
+    post:
+      security: [{sessionAuth: []}]
+      parameters:
+        - in: path
+          name: stayId
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Checked in}
+  /tasks:
+    get:
+      security: [{sessionAuth: []}]
+      summary: List tasks visible to current user and legal state
+      responses:
+        '200': {description: Scoped task list}
+  /tasks/{taskId}/apply:
+    post:
+      security: [{sessionAuth: []}]
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          schema: {type: string}
+      responses:
+        '201': {description: Task application submitted}
+        '423': {description: Legal or eligibility gate locked}
+  /legal-cases/{caseId}/decision:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Record qualified legal review decision
+      responses:
+        '200': {description: Decision recorded and activity lock updated}
+        '403': {description: Legal reviewer/admin only}
+  /incidents:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Report safety, conduct, privacy or operational incident
+      responses:
+        '201': {description: Incident created}
+  /publication/review:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Run publication gate checks
+      responses:
+        '200': {description: Gate result}
+  /publication/publish:
+    post:
+      security: [{sessionAuth: []}]
+      summary: Publish approved revision
+      responses:
+        '200': {description: Published with audit event}
+        '403': {description: Admin only}
+components:
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: cookie
+      name: omdalat_session
+  schemas:
+    ApplicationCreate:
+      type: object
+      required: [name, email, purpose, consent]
+      properties:
+        name: {type: string, minLength: 2, maxLength: 120}
+        email: {type: string, format: email}
+        phone: {type: string, maxLength: 40}
+        nationality: {type: string, maxLength: 80}
+        preferredStart: {type: string, format: date}
+        preferredDuration: {type: string, enum: [weekly, two_weeks, monthly, one_to_three_months, custom]}
+        purpose: {type: string, enum: [stay, learn, project_interest, international_support]}
+        introduction: {type: string, maxLength: 3000}
+        consent: {type: boolean, const: true}

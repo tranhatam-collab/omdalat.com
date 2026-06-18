@@ -1,0 +1,16 @@
+Resource / action,Guest,Applicant,Resident,Contributor,Mentor,Project Owner,Operator,Legal Reviewer,Admin,Founder Auditor
+Read approved public Lily content,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Allow
+Submit public application,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Allow,Read only
+Read own application,No,Own,Own,Own,Own,Own,Assigned,Assigned legal fields,All,Read only aggregated
+Upload requested restricted document,No,Own,Own,Own,No,No,Request only,Assigned cases,All,No
+View passport/visa file,No,No,Own metadata only,Own metadata only,No,No,Separate permission,Assigned cases,Separate permission,No
+View room inventory,Public approved only,Offer only,Assigned/public,Assigned/public,Public,Public,All operational,Relevant case only,All,Read only
+Create room offer,No,No,No,No,No,No,Allow,No,Allow,No
+Apply to task,No,Eligible,Eligible,Eligible,No,No,No,No,No,No
+Assign task,No,No,No,No,No,Allow,Allow,No,Allow,No
+Review learning submission,No,No,Own only,Own only,Assigned,Project scope,No,No,All,Read only
+Decide legal activity unlock,No,No,No,No,No,No,No,Allow assigned,Allow with audit,Read only
+Manage incidents,No,Report own,Report/read own,Report/read own,Assigned welfare only,Project incident only,Allow assigned,Legal aspects assigned,All,Read only
+Publish public revision,No,No,No,No,No,No,No,No,Allow,No
+Override state,No,No,No,No,No,No,Limited with reason,Limited legal only,Allow with reason,No
+Read audit logs,No,Own action receipt,Own action receipt,Own action receipt,Assigned scope,Project scope,Operational scope,Legal scope,All,All read only

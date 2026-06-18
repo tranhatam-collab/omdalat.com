@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.omdalat.com/lily/public-content-v1.json",
+  "title": "Lily Public Content",
+  "type": "object",
+  "required": [
+    "version",
+    "languages",
+    "hero",
+    "routes",
+    "roomPublicRecords",
+    "publication"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "vi",
+          "en"
+        ]
+      },
+      "minItems": 2
+    },
+    "hero": {
+      "type": "object",
+      "required": [
+        "title_vi",
+        "title_en",
+        "subtitle_vi",
+        "subtitle_en"
+      ],
+      "properties": {
+        "title_vi": {
+          "type": "string"
+        },
+        "title_en": {
+          "type": "string"
+        },
+        "subtitle_vi": {
+          "type": "string"
+        },
+        "subtitle_en": {
+          "type": "string"
+        }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "status",
+          "seo"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "review",
+              "approved",
+              "published"
+            ]
+          },
+          "seo": {
+            "type": "object"
+          },
+          "blocks": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "roomPublicRecords": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "room_id",
+          "verification_status",
+          "media_asset_ids"
+        ],
+        "properties": {
+          "room_id": {
+            "pattern": "^LIL-R0[1-5]$"
+          },
+          "verification_status": {
+            "enum": [
+              "pending",
+              "verified",
+              "blocked"
+            ]
+          },
+          "media_asset_ids": {
+            "type": "array"
+          },
+          "capacity_verified": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "admin_approved",
+        "evidence_packet_id"
+      ],
+      "properties": {
+        "admin_approved": {
+          "type": "boolean"
+        },
+        "evidence_packet_id": {
+          "type": "string"
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "pack": "LILY_V2_IMPLEMENTATION_MASTER_PACK_2026",
+  "version": "2.0",
+  "date": "2026-06-18",
+  "status": "Founder Lock / Implementation Pack",
+  "file_count": 22,
+  "files": [
+    {
+      "name": "00_README_AND_MANIFEST.md",
+      "bytes": 3931,
+      "sha256": "e0d6318e1ea54ac3f963a903ff5c4841d8845a61cfb9c015578463a887893d9b"
+    },
+    {
+      "name": "01_LILY_FOUNDER_LOCK_MASTER_SPEC_2026.md",
+      "bytes": 6237,
+      "sha256": "a941f03510e6e8107dd165dabbec9f465b066552e32ef05721a5728d8fe6a387"
+    },
+    {
+      "name": "02_LILY_INFORMATION_ARCHITECTURE_AND_BILINGUAL_COPY_2026.md",
+      "bytes": 5593,
+      "sha256": "3944cd3a965596053056904a99bc9833bc62ff5dfd78c8c6d854f408fe2f61ac"
+    },
+    {
+      "name": "03_LILY_WEEKLY_MONTHLY_RESIDENCY_SYSTEM_2026.md",
+      "bytes": 4227,
+      "sha256": "a8a63baf8f396e9d0f6de48fbf78caef0100bcfe6ae7780b603f91e3f73fc10a"
+    },
+    {
+      "name": "04_LILY_WORKSPACE_AND_REMOTE_WORK_OS_2026.md",
+      "bytes": 3007,
+      "sha256": "b93d3a4dfb617ba648e21166e46e418163fe5ff51dd1371d34b2251767adb602"
+    },
+    {
+      "name": "05_LILY_LEARNING_AND_TRAINING_SYSTEM_2026.md",
+      "bytes": 3385,
+      "sha256": "3c1e68488220d42989742700cf9ac6d57779680eedd54df4685b992c6a34057f"
+    },
+    {
+      "name": "06_LILY_JOB_BOARD_AND_PROJECT_SYSTEM_2026.md",
+      "bytes": 2797,
+      "sha256": "110be5476ff4399044946bfca0d504bfdd9ffffd5a2957a97bb0de4775509dcc"
+    },
+    {
+      "name": "07_LILY_FOREIGN_RESIDENT_AND_GLOBAL_SUPPORT_STANDARD_2026.md",
+      "bytes": 4014,
+      "sha256": "2432da437ceca4e326acf82e8006d1647ebadd51b50b5670cbb19bdfb283ba68"
+    },
+    {
+      "name": "08_LILY_ROOMS_SPACES_AND_GARDEN_CMS_SCHEMA_2026.md",
+      "bytes": 2599,
+      "sha256": "9b9389b82a20618225f22beebd5dd77c101b75dfb9256ea847078acd3d407efa"
+    },
+    {
+      "name": "09_LILY_APP_OMDALAT_WORKSPACE_SPEC_2026.md",
+      "bytes": 3184,
+      "sha256": "f0d8af154b56436de3de61bdc5a256a8dafc0011d52545981873e14ea1489349"
+    },
+    {
+      "name": "10_LILY_BRAND_PORTAL_CASE_STUDY_SPEC_2026.md",
+      "bytes": 2001,
+      "sha256": "3b555e35f3f8203286aaba6d0189c528c136ee56a3bc0b1761e1a19124218d5b"
+    },
+    {
+      "name": "11_LILY_CONTENT_AND_SEO_MASTER_PLAN_2026.md",
+      "bytes": 3290,
+      "sha256": "c855372ad95b9bf954faa2e4e5f7a664970646125d11f6143a580b9ed46afe58"
+    },
+    {
+      "name": "12_LILY_IMAGE_REALITY_STANDARD_2026.md",
+      "bytes": 2214,
+      "sha256": "50112a1c41e2330e51a2622a535242bc98fdf14cbdda1786b46cf941fe0a1df9"
+    },
+    {
+      "name": "13_LILY_PRIVACY_TERMS_COMPLIANCE_STANDARD_2026.md",
+      "bytes": 4401,
+      "sha256": "6cca2d4c0ef6576f8a6b2a1cbe262a4ebd4bc836482440199525ac60b62b6236"
+    },
+    {
+      "name": "14_LILY_QA_RELEASE_GATES_AND_EVIDENCE_PACKET_2026.md",
+      "bytes": 3940,
+      "sha256": "dfaf90412196903c6a36fed053b05effde77d2937551ddd2e4337385c4bbf2cd"
+    },
+    {
+      "name": "15_LILY_IMPLEMENTATION_BACKLOG_2026.csv",
+      "bytes": 4193,
+      "sha256": "df3c9838e259cc06750337e62fa25e3c302a6594d5cbd741c246684aec67930d"
+    },
+    {
+      "name": "16_LILY_DB_SCHEMA_V1.sql",
+      "bytes": 6415,
+      "sha256": "183a1d178421fc5a57e3e09923ebfd0aef508b4b63ba5cdd5592d28d7997252d"
+    },
+    {
+      "name": "17_LILY_API_CONTRACT_OPENAPI_V1.yaml",
+      "bytes": 4235,
+      "sha256": "a1111d5c2e6ba331f62c42a69cc2dc3d7ff720fdddd6603fdf6b582b15963b85"
+    },
+    {
+      "name": "18_LILY_PUBLIC_CONTENT_JSON_SCHEMA_2026.json",
+      "bytes": 2640,
+      "sha256": "ea535c26c09d24bd973f4162f117bbbf72815c30dce410d551b4a7f299bd4184"
+    },
+    {
+      "name": "19_LILY_ROLE_AND_PERMISSION_MATRIX_2026.csv",
+      "bytes": 1606,
+      "sha256": "72e3b15423fde5b1d27bcc4e5240eb1cc3b86fa16937531e2d13b792483791f0"
+    },
+    {
+      "name": "20_LILY_SOURCE_ASSUMPTION_AND_VERIFICATION_REGISTER_2026.md",
+      "bytes": 2603,
+      "sha256": "e0e049789f10a2053ca4e78ef9ef1401de1fe404ee90766036f565174f084ff4"
+    }
+  ]
+}

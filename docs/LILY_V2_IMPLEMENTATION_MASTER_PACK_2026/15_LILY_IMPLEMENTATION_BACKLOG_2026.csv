@@ -1,0 +1,26 @@
+ID,Phase,Priority,Workstream,Task,Owner,Dependency,Acceptance Criteria,Evidence,Status
+LIL-001,P0,Critical,Brand Portal,Remove Lily-specific homepage identity from brand.omdalat.com,Team 2,None,"Brand Portal H1, nav, metadata, reviews, map and contact are no longer Lily-specific",Before/after screenshots; SEO crawl,Planned
+LIL-002,P0,Critical,Domain,Configure lily.omdalat.com canonical domain and SSL,Team 2,LIL-001,HTTPS works; canonical and redirects correct,DNS/SSL evidence,Planned
+LIL-003,P0,Critical,Governance,Publish Founder Lock in repository,Team 1,None,All teams reference version 2.0,Commit SHA,Planned
+LIL-004,P0,Critical,Legal,Verify Công ty TNHH Thái Lâm authority and Lily operating arrangement,Team 1,LIL-003,Legal reviewer records allowed commercial scope and blockers,Review memo,Evidence required
+LIL-005,P0,Critical,Field,"Verify property, five rooms and shared spaces",Team 3,None,LIL-R01–R05 and spaces have evidence records,Field checklist; photos,Evidence required
+LIL-006,P0,Critical,Safety,Complete safety and emergency baseline,Team 3,LIL-005,Fire/electrical/water/first aid/evacuation checks recorded,Safety register,Evidence required
+LIL-007,P1,High,Public Web,Build bilingual public IA and homepage,Team 2,"LIL-002,LIL-005",Routes render VI/EN and pass copy lock,Screenshots; route test,Planned
+LIL-008,P1,High,CMS,Implement room/space/garden CMS schema,Team 2,LIL-005,Room records and media evidence drive public rendering,DB export,Planned
+LIL-009,P1,High,Application,Build public expression-of-interest form,Team 2,LIL-007,"Minimal data, consent, spam controls and confirmation work",E2E video,Planned
+LIL-010,P2,Critical,App,Create /lily workspace shell and RBAC,Team 3,LIL-003,Role-specific dashboards and forbidden access tests pass,Access test report,Planned
+LIL-011,P2,Critical,Database,Apply Lily DB schema migrations,Team 3,LIL-010,"Tables, constraints and audit events created",Migration logs,Planned
+LIL-012,P2,Critical,API,Implement application and offer APIs,Team 3,LIL-011,Application-to-offer lifecycle passes,API tests,Planned
+LIL-013,P2,Critical,Inventory,Implement no-overlap room allocation,Team 3,LIL-011,Concurrent/overlap tests fail safely,Test output,Planned
+LIL-014,P2,High,Privacy,Implement restricted document vault,Team 3,LIL-010,"Encrypted storage, short-lived URLs and view logs pass",Security evidence,Planned
+LIL-015,P2,High,Stay Ops,"Implement agreements, payment and check-in states",Team 3,"LIL-012,LIL-013",Full stay journey completes without manual state corruption,E2E video,Planned
+LIL-016,P3,High,Learning,Publish Digital Foundation pilot,Team 2/3,LIL-010,"Lesson, assignment, rubric, retry and pass work",Learner test,Planned
+LIL-017,P3,High,Workspace,Implement calendar and workspace rules,Team 3,LIL-010,Booking/noise/quiet-hour UX works,QA report,Planned
+LIL-018,P4,Critical,Jobs,Implement project/task lifecycle,Team 3,LIL-010,Task apply-assign-deliver-review-accept flow works,E2E evidence,Planned
+LIL-019,P4,Critical,Jobs,Implement compensation/IP/work-authorisation gates,Team 1/3,LIL-018,No task is assignable without required fields and legal state,Negative tests,Planned
+LIL-020,P5,Critical,International,Implement visa/work case management,Team 3,LIL-014,"Restricted case workflow, expiry and activity lock work",Security and E2E tests,Planned
+LIL-021,P5,Critical,International,Test foreign temporary-residence process,Team 1/3,LIL-015,Operator completes current official procedure and stores status evidence,Dry-run record,Evidence required
+LIL-022,P6,High,Pilot,Run controlled Weekly Stay pilot,Operations,"LIL-006,LIL-015",One full cycle completed and reviewed,Pilot evidence packet,Blocked
+LIL-023,P7,High,Pilot,Run controlled Monthly Stay pilot,Operations,LIL-022,One monthly cycle completed; weekly reviews and exit pass,Pilot evidence packet,Blocked
+LIL-024,P8,Medium,Content,Publish first 10 canonical VI/EN articles,Team 2,LIL-007,"All pass fact, language, rights and SEO review",Content report,Planned
+LIL-025,P8,Medium,Scale,Open additional rooms/programmes only after gates,Admin,"LIL-022,LIL-023",Release packet approved for each expansion,Approval record,Blocked
