@@ -1,0 +1,88 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "account_id": "f3f9e76222dcb488d5e303e29e8ba192",
+  "name": "omdalat-brand-renderer",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "APP_NAME": "omdalat-brand-renderer",
+    "APP_ENV": "production",
+    "COOKIE_DOMAIN": ".omdalat.com"
+  },
+  "routes": [
+    {
+      "pattern": "brand.omdalat.com",
+      "custom_domain": true
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "omdalat-core",
+      "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+      "migrations_dir": "../api/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "ASSETS",
+      "bucket_name": "omdalat-assets"
+    }
+  ],
+  "env": {
+    "production": {
+      "routes": [
+        {
+          "pattern": "brand.omdalat.com",
+          "custom_domain": true
+        }
+      ],
+      "vars": {
+        "APP_NAME": "omdalat-brand-renderer",
+        "APP_ENV": "production",
+        "COOKIE_DOMAIN": ".omdalat.com"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "omdalat-core",
+          "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+          "migrations_dir": "../api/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "ASSETS",
+          "bucket_name": "omdalat-assets"
+        }
+      ]
+    },
+    "sandbox": {
+      "routes": [],
+      "vars": {
+        "APP_NAME": "omdalat-brand-renderer",
+        "APP_ENV": "sandbox",
+        "COOKIE_DOMAIN": ".omdalat.com"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "omdalat-core",
+          "database_id": "eab4c371-fa07-4035-b711-315121f92d4a",
+          "migrations_dir": "../api/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "ASSETS",
+          "bucket_name": "omdalat-assets"
+        }
+      ]
+    }
+  }
+}

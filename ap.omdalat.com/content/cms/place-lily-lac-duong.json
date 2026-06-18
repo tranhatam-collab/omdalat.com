@@ -1,0 +1,50 @@
+{
+  "id": "place-lily-lac-duong",
+  "type": "place",
+  "title_vi": "Lily ở Lạc Dương: một hồ sơ nơi chốn đang được mở ra",
+  "title_en": "Lily in Lac Duong: a place profile being opened",
+  "slug": "lily-lac-duong",
+  "category": "noi-chon",
+  "status": "draft",
+  "locale": "vi",
+  "created_at": "2026-06-17T00:00:00Z",
+  "updated_at": "2026-06-17T00:00:00Z",
+  "content": {
+    "hero": {
+      "title_vi": "Lily ở Lạc Dương: một hồ sơ nơi chốn đang được mở ra",
+      "title_en": "Lily in Lac Duong: a place profile being opened",
+      "subtitle_vi": "Một hồ sơ thương hiệu địa phương đang được xác minh trong hệ Ấp Đà Lạt",
+      "subtitle_en": "A local brand profile under verification within the Ap Dalat system"
+    },
+    "story": {
+      "body_vi": "Lily được ghi nhận như một nơi chốn đang được xác minh trong hệ Ấp Đà Lạt. Điều quan trọng ở đây không phải là giới thiệu một điểm lưu trú theo cách quen thuộc, mà là hiểu một không gian nhỏ tại Lạc Dương có thể đứng trong đời sống địa phương ra sao: ai giữ nơi này, điều kiện ở lại như thế nào, nhịp sinh hoạt có gì, và nơi này có thể kết nối với Ôm Đà Lạt ở mức nào. Hồ sơ này chỉ được mở rộng khi có đủ thông tin từ chủ sở hữu, hình ảnh có quyền sử dụng và trạng thái xác minh từ đội vận hành.",
+      "body_en": "Lily is recorded as a place profile under verification within the Ap Dalat system. The purpose here is not to introduce a stay in the usual way, but to understand how a small place in Lac Duong stands within local life: who keeps it, what the staying conditions are, what rhythm exists there, and how it may connect with Om Dalat. This profile will only be expanded when owner information, image rights, and operational verification are complete."
+    },
+    "location": {
+      "coordinates": {
+        "lat": 12.15,
+        "lng": 108.45
+      },
+      "address_vi": "{{ADDRESS_VI}}",
+      "address_en": "{{ADDRESS_EN}}",
+      "administrative_area": "Lạc Dương, Lâm Đồng"
+    },
+    "brand_link": {
+      "subdomain": "lily.omdalat.com",
+      "cta_vi": "Xem hồ sơ thương hiệu Lily",
+      "cta_en": "View the Lily brand profile"
+    }
+  },
+  "metadata": {
+    "maps_url": "https://maps.app.goo.gl/eGxrWtJUQ62g2Vsy8?g_st=ic",
+    "google_place_id": "{{PLACE_ID}}",
+    "brand_ref": "brnd_lily",
+    "ap_place_ref": "place-lily-lac-duong"
+  },
+  "seo": {
+    "title_vi": "Lily ở Lạc Dương - Hồ sơ nơi chốn - Ấp Đà Lạt",
+    "title_en": "Lily in Lac Duong - Place Profile - Ap Dalat",
+    "description_vi": "Lily là một hồ sơ thương hiệu địa phương đang được xác minh trong hệ Ấp Đà Lạt, hướng tới cách ở lại rõ ràng, gần đời sống và có trách nhiệm tại Lạc Dương.",
+    "description_en": "Lily is a local brand profile being verified within the Ap Dalat system, oriented toward responsible staying, local life, and clearer expectations in Lac Duong."
+  }
+}
