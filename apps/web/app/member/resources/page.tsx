@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { localizePath } from "../../../../../packages/core";
 import { MemberShell } from "../_member-shell";
 import { getMemberResources } from "../../../lib/content-seed";
 import {
   canAccessContent,
+  canAccessSignedIn,
+  gatePathForRequirement,
   MEMBER_SESSION_COOKIE_NAME,
   parseMemberSession
 } from "../../../lib/member-auth";
@@ -28,6 +31,10 @@ export default async function MemberResourcesPage() {
     parseMemberSession(cookieStore.get(MEMBER_SESSION_COOKIE_NAME)?.value),
     reviewQueue
   );
+  if (!canAccessSignedIn(session)) {
+    redirect(gatePathForRequirement("signed_in", locale, "/member/resources"));
+  }
+
   const resources = getMemberResources(locale);
   const publishedResources = resources.filter(
     (resource) => canAccessContent(session, resource.accessLevel) && resource.status === "published"

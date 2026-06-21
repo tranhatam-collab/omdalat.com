@@ -34,7 +34,7 @@ export default async function JoinPage() {
       </p>
 
       <div className="runtime-actions">
-        <a className="runtime-button primary" href={localizePath("/member", locale)}>
+        <a className="runtime-button primary" href={localizePath("/member/register?next=/member/welcome", locale)}>
           {locale === "vi" ? "Đăng ký thành viên" : "Register as a member"}
         </a>
         <a className="runtime-button secondary" href={localizePath("/docs/getting-started", locale)}>

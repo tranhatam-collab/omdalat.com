@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { localizePath } from "../../../../packages/core";
 import { MemberShell } from "./_member-shell";
 import { pickLocalized } from "../../lib/i18n-copy";
 import { getRequestLocale } from "../../lib/locale";
 import { buildPageMetadata } from "../../lib/metadata";
+import { canAccessSignedIn, gatePathForRequirement, MEMBER_SESSION_COOKIE_NAME, parseMemberSession } from "../../lib/member-auth";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Member Area | Om Dalat",
@@ -21,6 +24,12 @@ const entryLinks = [
 
 export default async function MemberHomePage() {
   const locale = await getRequestLocale();
+  const cookieStore = await cookies();
+  const session = parseMemberSession(cookieStore.get(MEMBER_SESSION_COOKIE_NAME)?.value);
+
+  if (!canAccessSignedIn(session)) {
+    redirect(gatePathForRequirement("signed_in", locale, "/member"));
+  }
 
   return (
     <MemberShell

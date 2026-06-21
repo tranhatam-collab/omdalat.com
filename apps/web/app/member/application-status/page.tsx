@@ -179,7 +179,14 @@ export default async function MemberApplicationStatusPage({ searchParams }: { se
         en: "This page shows where your profile stands, what your review queue state is, and when reviewed access is unlocked."
       }}
       actions={[
-        { href: localizePath("/member/profile", locale), label: { vi: "Cập nhật hồ sơ", en: "Update profile" }, variant: "primary" },
+        {
+          href: localizePath(
+            shouldContinueToNext ? `/member/profile?next=${encodeURIComponent(nextPath)}` : "/member/profile",
+            locale
+          ),
+          label: { vi: "Cập nhật hồ sơ", en: "Update profile" },
+          variant: "primary"
+        },
         { href: localizePath("/member/resources", locale), label: { vi: "Xem tài nguyên", en: "View resources" } }
       ]}
     >
