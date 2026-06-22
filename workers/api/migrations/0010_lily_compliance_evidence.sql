@@ -63,26 +63,29 @@ VALUES
    'Giay chung nhan du dieu kien ve an ninh, trat tu theo Nghi dinh 96/2016/ND-CP. Co so: Ho kinh doanh Homestay Lily. Nganh: Dich vu luu tru.',
    '2026-06-18T00:00:00Z');
 
--- Update compliance checklist to verified with evidence references
-UPDATE compliance_checklists
-SET 
-  business_registration = 'verified',
-  lodging_compliance = 'verified',
-  pccc = 'verified',
-  updated_at = '2026-06-18T00:00:00Z'
-WHERE brand_id = 'brnd_lily';
+-- IMPORTANT: Compliance fields are NOT updated here.
+-- Per AGENTS.md, compliance fields (business_registration, lodging_compliance, pccc)
+-- are LEGAL ASSERTIONS and MUST be set through POST /api/omdalat/brands/:id/compliance
+-- route with evidence_map referencing the evidence rows above.
+-- Direct SQL UPDATE to compliance fields is PROHIBITED.
+--
+-- The evidence rows above are recorded for reference. To activate them:
+-- 1. Call POST /api/omdalat/brands/brnd_lily/compliance with super admin auth
+-- 2. Include evidence_map: { business_registration: ev_lily_biz_001, pccc: ev_lily_pccc_001, ... }
+-- 3. Include reason (min 20 chars)
+-- 4. Route writes audit trail to brand_approvals + audit_logs
+--
+-- The brand_approvals row below is a REFERENCE record only, not an active approval.
+-- The publish gate checks actual compliance_checklists values, not this table.
 
--- Record approval audit event
+-- Record reference approval audit event (NOT an active approval — for audit trail only)
 INSERT INTO brand_approvals (id, brand_id, action, actor, reason, created_at)
-VALUES ('apr_lily_pub_001', 'brnd_lily', 'approve_publish', 'devin_audit',
-        'Compliance verified: business registration 42C8002522, PCCC cert 17/02/2022 + monitoring file 2022, ANTT cert 62/GCN per ND 96/2016. Owner consent: Nguyen Van Dien (CCCD: 052074016311).',
+VALUES ('apr_lily_evidence_ref_001', 'brnd_lily', 'evidence_recorded', 'devin_audit',
+        'Evidence recorded for future compliance verification: business registration 42C8002522, PCCC cert 17/02/2022 + monitoring file 2022, ANTT cert 62/GCN per ND 96/2016. Owner consent: Nguyen Van Dien (CCCD: 052074016311). Compliance fields remain unknown until verified via audited route.',
         '2026-06-18T00:00:00Z');
 
--- Update brand to published
-UPDATE brands
-SET 
-  publication_status = 'published',
-  name_vi = 'Lily Living & Working Garden',
-  name_en = 'Lily Living & Working Garden',
-  updated_at = '2026-06-18T00:00:00Z'
-WHERE id = 'brnd_lily';
+-- NOTE: brand publication_status is NOT updated here.
+-- It remains 'private_preview' as set in seed_lily.sql.
+-- Publication requires compliance_reviewed=true which requires all compliance
+-- fields to be in the OK set (verified/approved/not_applicable).
+-- This can only happen through the audited compliance-update route.

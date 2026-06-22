@@ -1,0 +1,53 @@
+[
+  {
+    "name_vi": "Làm việc từ Đà Lạt",
+    "name_en": "Working from Dalat",
+    "slug_vi": "lam-viec-tu-da-lat",
+    "slug_en": "lam-viec-tu-da-lat",
+    "role_vi": "Chân dung công việc từ xa",
+    "role_en": "A portrait of remote work",
+    "excerpt_vi": "Không phải làm việc ở Đà Lạt là dễ dàng. Nhưng nếu chọn đúng nhịp, nó cho phép vừa làm nghiêm túc vừa sống chậm.",
+    "excerpt_en": "Working from Dalat is not automatically easy. But with the right rhythm, it allows both serious work and a slower life.",
+    "content_vi": "Làm việc từ Đà Lạt không phải là mang laptop lên núi rồi ngắm cảnh. Nó đòi hỏi kỷ luật với giờ giấc, rõ ràng với ưu tiên, và khả năng giữ khoảng cách với nhịp du lịch xung quanh.\n\nNhững người làm việc từ xa thành công ở Đà Lạt thường có một lịch trình cố định: sáng sớm làm việc khi đầu óc sáng nhất, chiều giao tiếp và di chuyển, tối đọc và nghỉ. Họ chọn quán yên, không chọn quán đẹp. Họ chọn nhà có góc làm việc, không chọn nhà có view.\n\nĐà Lạt cho phép làm việc từ xa, nhưng chỉ nếu bạn tôn trọng nó như một nơi sống, không chỉ một nơi nghỉ.",
+    "content_en": "Working from Dalat is not about bringing a laptop to the mountains and enjoying the view. It requires discipline with hours, clarity with priorities, and the ability to maintain distance from the tourist rhythm around you.\n\nThose who succeed at remote work in Dalat usually have a fixed schedule: early morning work when the mind is clearest, afternoon communication and movement, evening reading and rest. They choose quiet cafés, not beautiful ones. They choose homes with a work corner, not homes with a view.\n\nDalat allows remote work, but only if you respect it as a place to live, not just a place to rest.",
+    "hero_image": "work",
+    "tag_ids": ["lam-viec-tu-xa", "da-lat"],
+    "related_story_ids": ["lam-viec-tu-da-lat-khong-chi-la-mang-laptop-len-nui"],
+    "status": "published",
+    "locale": "vi"
+  },
+  {
+    "name_vi": "Khởi nghiệp ở Lâm Đồng",
+    "name_en": "Starting a Business in Lam Dong",
+    "slug_vi": "khoi-nghiep-o-lam-dong",
+    "slug_en": "khoi-nghiep-o-lam-dong",
+    "role_vi": "Chân dung kinh doanh địa phương",
+    "role_en": "A portrait of local business",
+    "excerpt_vi": "Khởi nghiệp ở Lâm Đồng không phải chạy theo số đông. Nó là tìm một ngách đủ nhỏ để làm thật, đủ lâu để bền.",
+    "excerpt_en": "Starting a business in Lam Dong is not about following the crowd. It is about finding a niche small enough to do well, long enough to last.",
+    "content_vi": "Khởi nghiệp ở Lâm Đồng thường bắt đầu từ một câu hỏi thực tế: nơi này đang thiếu gì, và mình có thể cung cấp điều đó theo cách nào mà không làm hỏng nhịp sống địa phương?\n\nNhững người thành công thường không mở cái mà thị trường đã có quá nhiều. Họ mở cái mà người dân cần nhưng chưa có ai làm đúng: một quán cà phê yên cho làm việc, một nơi lưu trú dài hạn cho người làm việc từ xa, một xưởng nhỏ chế biến nông sản địa phương.\n\nKhởi nghiệp ở đây không phải chạy nhanh. Nó là chọn đúng ngách, làm thật, và đủ kiên nhẫn để cộng đồng địa phương chấp nhận.",
+    "content_en": "Starting a business in Lam Dong usually begins with a practical question: what does this place lack, and how can I provide it without disrupting the local rhythm?\n\nThose who succeed usually do not open what the market already has too much of. They open what residents need but no one has done right: a quiet café for work, a long-term stay for remote workers, a small workshop processing local produce.\n\nStarting a business here is not about speed. It is about choosing the right niche, doing it well, and being patient enough for the local community to accept you.",
+    "hero_image": "business",
+    "tag_ids": ["khoi-nghiep", "lam-dong"],
+    "related_story_ids": ["da-lat-khong-chi-de-ghe-qua"],
+    "status": "published",
+    "locale": "vi"
+  },
+  {
+    "name_vi": "Nông nghiệp và đời sống ở Lạc Dương",
+    "name_en": "Agriculture and Life in Lac Duong",
+    "slug_vi": "nong-nghiep-va-doi-song-o-lac-duong",
+    "slug_en": "nong-nghiep-va-doi-song-o-lac-duong",
+    "role_vi": "Chân dung nông nghiệp địa phương",
+    "role_en": "A portrait of local agriculture",
+    "excerpt_vi": "Lạc Dương không chỉ là cảnh đẹp. Nó là nơi nông nghiệp vẫn giữ được vai trò trung tâm trong đời sống.",
+    "excerpt_en": "Lac Duong is not just scenery. It is a place where agriculture still holds a central role in daily life.",
+    "content_vi": "Lạc Dương là huyện cao nhất Lâm Đồng, với khí hậu mát và đất đỏ bazan. Nông nghiệp ở đây không chỉ là sinh kế. Nó là cách người dân định nghĩa quan hệ của mình với đất đai, thời tiết, và cộng đồng.\n\nCác hộ nông nghiệp nhỏ vẫn là xương sống của Lạc Dương. Họ trồng cà phê, rau ôn đới, hoa, và các loại cây ăn quả. Không phải ai cũng lớn. Nhưng tất cả đều gắn với đất một cách trực tiếp.\n\nĐời sống ở Lạc Dương, vì thế, có nhịp của mùa. Không phải nhịp của thị trường. Và đó là điều khiến nơi này khác.",
+    "content_en": "Lac Duong is the highest district in Lam Dong, with cool climate and red basalt soil. Agriculture here is not just a livelihood. It is how residents define their relationship with land, weather, and community.\n\nSmallholder farms remain the backbone of Lac Duong. They grow coffee, temperate vegetables, flowers, and fruit trees. Not everyone is large-scale. But all are directly connected to the land.\n\nLife in Lac Duong, therefore, follows the rhythm of seasons. Not the rhythm of markets. And that is what makes this place different.",
+    "hero_image": "agriculture",
+    "tag_ids": ["nong-nghiep", "lac-duong"],
+    "related_story_ids": ["mot-ngay-da-lat-bat-dau-nhu-the-nao"],
+    "status": "published",
+    "locale": "vi"
+  }
+]

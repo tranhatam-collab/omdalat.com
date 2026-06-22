@@ -51,6 +51,22 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
+  guard-sql-compliance-bypass:
+    name: Guard SQL compliance bypass
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run SQL compliance bypass guard
+        run: node scripts/guard-sql-compliance-bypass.mjs
+
   smoke-e2e-optional:
     name: Optional smoke e2e (vi/en)
     runs-on: ubuntu-latest

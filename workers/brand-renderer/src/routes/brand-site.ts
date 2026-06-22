@@ -24,12 +24,24 @@ export const handleBrandSite = async (
       return new Response('Forbidden: slug override not allowed', { status: 403 });
     }
 
-    // If host is brand.omdalat.com → always render Brand Portal
+    // If host is brand.omdalat.com → render Brand Portal OR redirect to brand subdomain
     const isBrandPortal = hostParts.length >= 3 &&
       hostParts[0] === 'brand' &&
       hostParts.slice(-2).join('.') === 'omdalat.com';
 
     if (isBrandPortal) {
+      // Check if path has a slug segment (e.g., brand.omdalat.com/lily → redirect to lily.omdalat.com)
+      const pathParts = url.pathname.split('/').filter(Boolean);
+      // First non-locale segment is treated as a potential brand slug
+      const potentialSlug = pathParts.find(p => p !== 'en' && p !== 'vi');
+      if (potentialSlug && potentialSlug !== 'favicon.ico' && !potentialSlug.startsWith('_')) {
+        // Redirect to the brand's subdomain, preserving locale and remaining path
+        const remainingParts = pathParts.filter(p => p !== potentialSlug);
+        const newPath = remainingParts.length > 0 ? '/' + remainingParts.join('/') : '/';
+        const localePrefix = pathParts.includes('en') ? '/en' : '';
+        const redirectUrl = `https://${potentialSlug}.omdalat.com${localePrefix}${newPath === '/' ? (localePrefix ? '' : '/') : newPath}${url.search}`;
+        return Response.redirect(redirectUrl, 301);
+      }
       return renderBrandPortal(request, env, url);
     }
 
@@ -55,7 +67,6 @@ export const handleBrandSite = async (
 
     if (!brandResult) {
       // Unknown brand - return holding page
-      console.log(`Brand not found for slug: ${slug}`);
       return renderHoldingPage('unknown', slug);
     }
 
@@ -2542,7 +2553,7 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
     vi: {
       title: 'Om Dalat — Hệ thương hiệu địa phương',
       heroH1: 'Xây dựng thương hiệu địa phương từ Đà Lạt ra thế giới',
-      heroSub: 'Giúp người dân, hộ kinh doanh, nhà vườn, quán nhỏ, homestay, farm và công ty địa phương có một thương hiệu số rõ ràng, song ngữ và phát triển dài hạn.',
+      heroSub: 'Giúp người dân, hộ kinh doanh, nhà vườn, quán nhỏ, nơi lưu trú, farm và công ty địa phương có một thương hiệu số rõ ràng, song ngữ và phát triển dài hạn.',
       problemTitle: 'Vấn đề',
       problemP1: 'Phần lớn thương hiệu địa phương hiện chỉ tồn tại trên Facebook, Google Maps hoặc các nền tảng trung gian.',
       problemP2: 'Điều đó giúp được tìm thấy. Nhưng không giúp sở hữu một hiện diện số lâu dài.',
@@ -2551,7 +2562,7 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
       step2Title: 'Dựng hồ sơ',
       step3Title: 'Xem và duyệt',
       step4Title: 'Có trang riêng',
-      layer1: 'Bạn gửi thông tin nơi của mình — homestay, farm, quán, xưởng, công ty.',
+      layer1: 'Bạn gửi thông tin nơi của mình — nơi lưu trú, farm, quán, xưởng, công ty.',
       layer2: 'Chúng tôi dựng hồ sơ thương hiệu — ảnh thật, câu chuyện, thông tin rõ ràng, song ngữ.',
       layer3: 'Bạn xem trước và duyệt — chỉ xuất bản khi bạn đồng ý và đủ điều kiện pháp lý.',
       layer4: 'Bạn có trang riêng — lily.omdalat.com hoặc tên miền riêng. Khách tìm thấy và liên hệ trực tiếp.',
@@ -2577,7 +2588,7 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
     en: {
       title: 'Om Dalat — Local Brand System',
       heroH1: 'Building local brands from Dalat to the world',
-      heroSub: 'Helping local people, household businesses, farms, cafés, homestays, and companies build clear, bilingual, long-term digital brands.',
+      heroSub: 'Helping local people, household businesses, farms, cafés, stay spaces, and companies build clear, bilingual, long-term digital brands.',
       problemTitle: 'The Problem',
       problemP1: 'Most local brands today only exist through Facebook, Google Maps, or third-party platforms.',
       problemP2: 'That helps them get discovered. It does not help them own a long-term digital presence.',
@@ -2586,7 +2597,7 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
       step2Title: 'Build Profile',
       step3Title: 'Preview & Approve',
       step4Title: 'Get Your Page',
-      layer1: 'You share information about your place — homestay, farm, café, workshop, or company.',
+      layer1: 'You share information about your place — stay space, farm, café, workshop, or company.',
       layer2: 'We build your brand profile — real photos, your story, clear bilingual information.',
       layer3: 'You preview and approve — only published when you agree and meet legal requirements.',
       layer4: 'You get your own page — lily.omdalat.com or your own domain. Customers find and contact you directly.',

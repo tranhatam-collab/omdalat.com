@@ -10,6 +10,8 @@ import { handleBrandApproval } from './routes/brand-approval';
 import { handleBrandPublish } from './routes/brand-publish';
 import { handleComplianceUpdate } from './routes/compliance-update';
 import { handleBrandInquiry } from './routes/brand-inquiry';
+import { handleBrandList } from './routes/brand-list';
+import { handleBrandDelete } from './routes/brand-delete';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
 import { handleBrandAdminLogin } from './routes/brand-admin-login';
 import { handleLilyPublic } from './routes/lily-public';
@@ -63,11 +65,13 @@ router.post('/api/lily/applications', handleLilyPublic);
 // Brand Factory routes
 router.post('/api/omdalat/brand-intake', handleBrandIntake);
 router.post('/api/omdalat/agent-runs', handleAgentRuns);
+router.get('/api/omdalat/brands', handleBrandList);
 router.get('/api/omdalat/brands/:id/preview', handleBrandPreview);
 router.post('/api/omdalat/brands/:id/approve', handleBrandApproval);
 router.post('/api/omdalat/brands/:id/publish', handleBrandPublish);
 router.post('/api/omdalat/brands/:id/compliance', handleComplianceUpdate);
 router.post('/api/omdalat/brands/:id/inquiry', handleBrandInquiry);
+router.delete('/api/omdalat/brands/:id', handleBrandDelete);
 
 // Brand admin authentication
 router.post('/api/omdalat/admin/login', handleBrandAdminLogin);

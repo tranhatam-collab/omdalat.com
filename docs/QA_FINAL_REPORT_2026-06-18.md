@@ -1,3 +1,12 @@
+> **CORRECTION NOTICE (2026-06-21)**: This document contains overclaims that have been superseded by `docs/OMDALAT_FULL_AUDIT_2026-06-20.md`. Key corrections:
+> - "Frontend 2/10 pages" → actually 38 web pages + 22 app pages exist
+> - "Migration 0008 pending" → 0008 exists
+> - "Git corruption blocking dev" → git is clean
+> - "lily.omdalat.com does not resolve" → it resolves and returns 200
+> - "All P0+P1+P2 fixed" → compliance bypass still existed until 2026-06-21 fix
+> - "67% complete" → self-assessed, not gate-verified
+> Refer to `docs/OMDALAT_FULL_AUDIT_2026-06-20.md` for ground-truth audit.
+
 # QA FINAL REPORT — OMDALAT.COM (2026-06-18)
 
 **Phase:** Complete 6-step QA cycle (Analyze → Audit → Fix Plan → Implement → Test → Report)

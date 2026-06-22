@@ -1,7 +1,10 @@
 -- Seed data for Lily (lily.omdalat.com)
 -- Based on LILY_CMS_JSON_AND_API_PAYLOADS_2026.md
--- Status: published (compliance verified per NĐ 96/2016)
--- Evidence:
+-- Status: private_preview (compliance NOT verified via audited route)
+-- Evidence rows exist in 0010 migration but compliance fields MUST be set
+-- through POST /api/omdalat/brands/:id/compliance route with evidence_map,
+-- NOT via direct SQL UPDATE. See AGENTS.md.
+-- Evidence (recorded in 0010, pending route-based verification):
 --   - Business registration: 42C8002522 (04/12/2024) — Hộ kinh doanh Homestay Lily 1
 --   - PCCC: Biên bản kiểm tra 17/02/2022 + Hồ sơ theo dõi 2022
 --   - ANTT (NĐ 96/2016): 62/GCN (04/03/2022) — Công an huyện Lạc Dương
@@ -30,14 +33,16 @@ INSERT INTO brands (id, place_id, owner_id, name_vi, name_en, slug, subdomain,
 VALUES ('brnd_lily', 'plc_lily', 'own_lily',
         'Lily Living & Working Garden', 'Lily Living & Working Garden', 'lily',
         'lily.omdalat.com', 'hybrid_local_brand',
-        1, 1, 1, 0, 'published', 'lily-lac-duong',
+        1, 1, 1, 0, 'private_preview', 'lily-lac-duong',
         '2026-06-17T00:00:00Z', '2026-06-18T00:00:00Z');
 
--- Insert compliance checklist (verified per legal evidence)
+-- Insert compliance checklist (unknown — must be set via audited route, NOT direct SQL)
+-- Evidence rows exist in 0010_lily_compliance_evidence.sql but compliance fields
+-- MUST remain 'unknown' until verified through POST /api/omdalat/brands/:id/compliance
 INSERT INTO compliance_checklists (id, brand_id, business_registration,
                                     lodging_compliance, food_safety, pccc, tourism_service, updated_at)
-VALUES ('cmp_lily', 'brnd_lily', 'verified', 'verified',
-        'not_applicable', 'verified', 'not_applicable', '2026-06-18T00:00:00Z');
+VALUES ('cmp_lily', 'brnd_lily', 'unknown', 'unknown',
+        'not_applicable', 'unknown', 'not_applicable', '2026-06-18T00:00:00Z');
 
 -- Insert initial content blocks (Vietnamese - source language)
 INSERT INTO content_blocks (id, brand_id, locale, block_type, payload, status, translation_status, created_at, updated_at)
