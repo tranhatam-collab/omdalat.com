@@ -188,7 +188,7 @@ omdalat-brand-portal/                 ← REPO MỚI
 | **Runtime** | Edge (Next.js) | Cloudflare Workers |
 | **DB** | omdalat-core D1 (shared) | omdalat-core D1 (shared) |
 | **Storage** | omdalat-assets R2 (shared) | omdalat-assets R2 (shared) |
-| **Team** | Team Core (member, ops) | Team Brand (intake, content) |
+| **Owner model** | Single AI Dev Team (core surfaces, app, api) | Single AI Dev Team (brand asset surfaces) |
 | **Deploy** | Vercel/Cloudflare Pages | Cloudflare Workers |
 | **CI/CD** | Vercel + Wrangler | Wrangler only |
 
@@ -239,11 +239,11 @@ npx wrangler dev
 
 | Task | Effort | Owner |
 |------|--------|-------|
-| Extract `portal.ts` from `brand-site.ts` | 4h | Dev |
-| Create component structure (Hero, Problem, Model...) | 8h | Dev |
-| Add type definitions (standalone, no monorepo dep) | 4h | Dev |
-| Create shared lib (db.ts, seo.ts, schema.ts, i18n.ts) | 8h | Dev |
-| Unit tests for components | 8h | QA |
+| Extract `portal.ts` from `brand-site.ts` | 4h | AI Dev Team |
+| Create component structure (Hero, Problem, Model...) | 8h | AI Dev Team |
+| Add type definitions (standalone, no monorepo dep) | 4h | AI Dev Team |
+| Create shared lib (db.ts, seo.ts, schema.ts, i18n.ts) | 8h | AI Dev Team |
+| Unit tests for components | 8h | AI Dev Team |
 
 **Code Change:**
 ```typescript
@@ -488,7 +488,7 @@ echo "  npm run dev"
 | Deploy | From monorepo | From standalone repo |
 | Code | Single `brand-site.ts` | `portal.ts` + `brand-site.ts` + components |
 | DB | Shared `omdalat-core` | Still shared `omdalat-core` |
-| Team | Team Core | Team Brand (dedicated) |
+| Owner model | Single AI Dev Team | Single AI Dev Team |
 
 ### Timeline
 
@@ -503,14 +503,43 @@ echo "  npm run dev"
 
 ---
 
-## CÂU KHÓA CHO TOÀN BỘ TEAM
+## CÂU KHÓA CHO KẾ HOẠCH THỰC THI
 
 > `brand.omdalat.com` không còn nằm trong repo `omdalat.com`.  
 > Nó có repo riêng: `omdalat-brand-portal`.  
-> Team Brand sẽ phát triển độc lập, không phụ thuộc vào release cycle của Team Core.  
+> Toàn bộ việc tách repo và vận hành bề mặt brand asset thuộc một `AI Dev Team` duy nhất, không chia lane thực thi nội bộ.  
 > DB và R2 vẫn dùng chung — đó là hợp đồng (contract), không phải coupling.
 
 ---
 
 **Locked:** 2026-06-18  
 **Next review:** After Phase 2 (Refactor complete)
+
+---
+
+## PART 9: BRAND ASSET NETWORK UPDATE (2026-06-29)
+
+This repo separation plan remains valid for `brand.omdalat.com`, but it is now a subset of the larger Brand Asset Network plan.
+
+New governing file:
+
+* `docs/OMDALAT_BRAND_ASSET_NETWORK_EXECUTION_LOCK_2026.md`
+
+Updated interpretation:
+
+* `brand.omdalat.com` is the Brand Factory, verification intake, and case-study surface.
+* `brand.omdalat.com` must not become the marketplace checkout surface.
+* `market.omdalat.com` is the future curated marketplace for sale, licensing, and private offers.
+* `registry.omdalat.com` is the source of public provenance, evidence summaries, verification labels, and transfer state.
+* `auction.omdalat.com` is disabled for official auction workflows until legal signoff, bidder qualification, settlement workflow, dispute rules, and kill switch exist.
+
+Additional hard stops:
+
+* Do not claim a brand asset is fully verified when only identity is verified.
+* Do not claim ownership transferred when only contract or payment state changed.
+* Do not use NFT or credential ownership as legal title.
+* Do not let Brand Portal repo own transaction settlement or escrow logic.
+
+Impact on repo separation:
+
+The future `omdalat-brand-portal` repo may render Brand Factory pages and brand microsites, but the transaction modules should remain behind API/runtime contracts owned by the single AI Dev Team and governed by the release gates in the execution lock.

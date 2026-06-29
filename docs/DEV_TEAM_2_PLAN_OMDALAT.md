@@ -1,318 +1,193 @@
 # DEV_TEAM_2_PLAN_OMDALAT.md
 
-## Version
-3.2
-
 ## Status
-Locked team execution plan
+Synced execution alias for a single AI dev team
 
 ## Date updated
-2026-05-04
+2026-06-29
 
 ## Owner
-Team 2
+Single AI Dev Team
 
-## Mission
-Design, Frontend, Public Web, responsive implementation, member UI shell support
+## Legacy note
+Filename `DEV_TEAM_2_PLAN_OMDALAT.md` is kept only for compatibility with old links and handoff references.
 
----
+This file no longer defines a separate execution lane.
 
-## 0. Source Priority Update (Brandpro Gate 0 - 2026-05-08)
-
-Team 2 phải áp dụng source theo thứ tự:
-
-1. `docs/README_DEV_HANDOFF_OMDALAT.md`
-2. `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
-3. `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
-4. `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
-5. `docs/OMDALAT_FOUNDATION_AND_POSITIONING_LOCK_2026.md`
-6. Các UI/content/sprint docs còn lại nếu không xung đột
-
-Public law đang active:
-
-- dùng `Ôm Đà Lạt / Om Dalat` làm brand signal
-- giữ `omdalat.com` và `app.omdalat.com` là hướng public/app đúng
-- không đưa `OMDALA city node`, `global system`, `docs.omdala.com`, `app.omdala.com` vào public UI
-
-Hard stop cho Team 2:
-
-- không tự diễn giải Brandpro law
-- không sửa hero/nav/footer/article/member CTA theo legacy source nếu Team 1 chưa revalidate
-- không dùng public wording đẩy Om Dalat về homestay, retreat, du lịch, travel blog
+The old multi-team model is retired.
 
 ---
 
-## 1. Nhiệm vụ chính
+## 1. Canonical source of truth
 
-Team 2 chịu trách nhiệm lớp thiết kế và frontend public của Om Dalat.
+Primary governing file:
 
-Team 2 sở hữu:
+- `docs/OMDALAT_BRAND_ASSET_NETWORK_EXECUTION_LOCK_2026.md`
 
-- design system
-- Figma implementation
-- public pages
-- homepage components
-- article pages
-- responsive behavior
-- locale-aware UI
-- stay/work/learning/community/join screens
-- public docs UI
+Required supporting files:
 
-Trong sprint hiện tại, Team 2 hỗ trợ thêm:
-
-- skeleton `/member`
-- login/register/gate screen UI shell
-- dashboard shell states cần cho Team 3 nối logic
-
-Team 2 không sở hữu:
-
-- brand wording gốc
-- route semantics
-- access model semantics
-- CMS schema ownership
-- auth/backend implementation
-
----
-
-## 2. Deliverables bắt buộc
-
-### Phase A
-
-- design system v1
-- homepage screens
-- public page shells
-- responsive header/footer/navigation
-
-### Phase B
-
-- article screen
-- stay/work/learning/community/join screens
-- public docs UI
-- member gate screen shell
-
-### Phase C
-
-- mobile QA
-- accessibility QA
-- locale UI refinement
-- support member shell rendering
-
----
-
-## 3. File và vùng code nên thuộc Team 2
-
-- `apps/web/app/*` cho public UI
-- public route components
-- article presentation components
-- navigation, footer, locale switcher UI
-- gate screen UI components
-- dashboard shell components khi cần hỗ trợ Team 3
-
----
-
-## 4. Phụ thuộc
-
-### Cần Team 1 chốt
-
-- homepage copy
-- page structure
-- CTA wording
-- locale content keys
-- SEO metadata rules
-
-### Cần Team 3 chốt
-
-- member states
-- access-level rendering rules
-- dashboard data states
-- resource teaser data
-
----
-
-## 5. Cơ chế báo cáo
-
-### Daily async
-
-- UI nào đã dựng
-- current blockers
-- state nào cần Team 1 hoặc Team 3 chốt
-
-### Weekly
-
-- public pages đã pass tới đâu
-- mobile/responsive issues
-- UI state gaps ảnh hưởng member rendering
-- change requests cần Team 1 phê duyệt
-
----
-
-## 6. KPI thành công
-
-- public UI đúng codex
-- homepage và public pages render sạch
-- responsive tốt
-- gate screens rõ
-- UI không tự đổi nghĩa spec
-- hỗ trợ Team 3 render member states đúng
-
----
-
-## 7. Cập nhật bắt buộc (Language Lock 2026-04-19)
-
-Team 2 phải áp dụng trực tiếp:
-
-- `docs/OMDALAT_AND_APDALAT_UI_MICROCOPY_SYSTEM_2026.md`
-- `docs/OMDALAT_AND_APDALAT_SEO_COPY_REWRITE_RULES_2026.md` (cho H1/intro public pages)
-- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md` (cho article UI, CTA contextual, internal link và tách locale)
-- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md` (thông báo thay đổi SOP từ vòng Codex hiện tại)
-- `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md` (cho ảnh public, article cover, card, bridge)
-
-Checklist merge bổ sung:
-
-- không còn CTA kiểu thúc ép
-- header/footer/buttons/forms/empty states theo microcopy chuẩn mới
-- bridge copy Om ↔ Ap đúng ngữ cảnh
-- mọi thay đổi copy phải gửi Team 1 review trước merge
-- article page không trộn tiếng Việt và tiếng Anh trong cùng visible page
-- article layout giữ đoạn đọc 4-6 dòng, max width dễ đọc, không trình bày kiểu mạng xã hội
-- mỗi bài chỉ render tối đa 3-4 internal link chính theo SOP
-- alt image không trống và phải theo đúng locale đang hiển thị
-
-## 8. Cập nhật bắt buộc (Content SOP 2026-05-04)
-
-Team 2 không tự sửa nghĩa bài viết, CTA hoặc heading để làm UI đẹp hơn.
-
-Khi render bài viết, Team 2 phải bảo toàn:
-
-- Title, excerpt, body và CTA đã được Team 1/Content duyệt theo SOP
-- tách locale VI/EN sạch
-- route và link pillar: `/vi/work`, `/vi/stay`, `/vi/life`, `/vi/join` hoặc bản `/en/*` tương ứng
-- hình ảnh đúng vai trò bài và không bị crop làm sai ngữ cảnh
-
-Nếu UI cần rút ngắn chữ để tránh vỡ layout, Team 2 gửi lại Team 1 duyệt wording thay vì tự viết lại.
-
-Mọi report tiếp theo của Team 2 phải có dòng xác nhận:
-
-- đã đọc `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
-- article UI không trộn VI/EN
-- ảnh/card/article cover không làm sai ngữ cảnh bài
-- internal link và CTA đi đúng payload đã duyệt
-
----
-
-## 9. Team 1 change notice áp dụng ngay (2026-05-04)
-
-Team 2 phải nhận baseline mới từ:
-
-- `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
-- `docs/TEAM1_FINAL_COMPLETION_REPORT_2026-05-04.md`
-- `docs/OMDALAT_SPRINT0_LAUNCH_EXECUTION_2026-05-05.md`
-- `docs/OMDALAT_SPRINT_0_LAUNCH_ACTION_PLAN_2026-05-04.md`
-- `docs/OMDALAT_TEAM1_ADMIN_NEXT_ACTIONS_2026-04-28.md`
-- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
-- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/BRAND_PORTAL_REPO_SEPARATION_AUDIT_AND_PLAN_2026.md`
+- `docs/README_DEV_HANDOFF_OMDALAT.md`
 - `docs/OMDALAT_BRANDPRO_TEAM_APPLICATION_LOCK_2026-05-08.md`
 - `docs/OMDALAT_BRANDPRO_GATE0_DECISION_2026-05-08.md`
 - `docs/OMDALAT_BRAND_SOURCE_CONFLICT_MATRIX_2026-05-08.md`
+- `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
+- `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
+- `docs/OMDALAT_AND_APDALAT_IMAGE_REALITY_STANDARD_2026.md`
 
-Yêu cầu bắt buộc:
+Conflict rule:
 
-- cập nhật mọi reference của bài launch sang slug mới:
-  - `/vi/articles/song-o-da-lat-la-gi`
-  - `/vi/articles/lam-viec-o-da-lat-co-thuc-te-khong`
-  - `/vi/articles/tu-mot-ky-nang-den-thu-nhap-o-da-lat`
-- không claim `DONE` ở lane Team 2 khi chưa qua vòng review mới của Team 1.
-- screenshot/evidence Sprint 0 chỉ có giá trị sau khi semantics đã theo Brandpro Gate 0.
+If any older plan assumes multiple internal execution owners, this file and the execution lock override that assumption.
 
-## 10. Cập nhật trạng thái Team 2 (2026-05-04)
+---
 
-Team 2 lane Om public đã chốt P0 theo điều kiện Team 1:
+## 2. Unified mission
 
-* `docs/OMDALAT_TEAM2_OM_PUBLIC_REPORT_2026-04-28.md` + matrix/metadata/alt/evidence đã đầy đủ cho core P0.
-* Route canonical P0 trước đây lỗi đã phục hồi:
-  * `/vi/contact` -> `200`
-  * `/en/contact` -> `200`
-  * `/vi/about` -> `200`
-* Trạng thái hiện tại: `PASS_WITH_QUEUE` (không blocker P0); P1 queue:
-  * mở rộng alt/caption audit secondary
-  * tiếng Anh leakage regression test
+A single AI Dev Team owns the full delivery chain:
 
-Thông tin điều phối tiếp theo:
+- architecture and domain boundaries
+- product wording and legal-safe copy boundaries
+- public UI and frontend implementation
+- CMS, seed data, runtime contracts, APIs, and security
+- QA, release gates, deploy verification, and documentation sync
 
-* Team 3 đang giữ `DONE_CLOSED` trong cycle này (`docs/TEAM3_APP_MEMBER_RUNTIME_AUDIT_REPORT_2026-04-28.md`).
-* Ap Team đang `PASS_WITH_QUEUE` với P1 queue riêng.
-* Team 2 tiếp tục theo dõi hardening trên các file reference đã nộp.
+There is no handoff boundary between separate dev teams inside this plan.
 
-File điều phối:
+Work may still be sequenced, but ownership stays unified.
 
-* `docs/OMDALAT_3_LANE_DECISION_LOG_2026-04-28.md` (`D-008`, `D-015`)
-* `docs/OMDALAT_3_LANE_SUBMISSION_TRACKER_2026-04-28.md`
-* `docs/OMDALAT_3_LANE_AUDIT_BOARD_2026-04-28.md`
+---
 
-Lưu ý QA vận hành mới (2026-05-04):
+## 3. Unified scope
 
-* Rerun local smoke/lock suite:
-  * `PREVIEW_BASE_URL=https://omdalat.com pnpm --filter @omdalat/web exec playwright test e2e/team2-quick-qa.spec.ts e2e/public-intro-h1-cta-lock.spec.ts --config=playwright.preview.config.ts`
-  * hiện tại bị fail do quyền launch Chromium trên host, không phải bug logic nội dung.
-* Khi có runner cho phép chromium IPC, Team 2 cần cung cấp kết quả bổ sung cho `RUN_ID` của suite này.
+### 3.1 Foundation and governance
 
-## 11. Sprint 0 Launch 3 Bài (Execution từ SOP)
+- lock route meaning and domain boundaries
+- maintain source-of-truth hierarchy
+- block overclaim language
+- preserve `omdalat.com` as core public system, not marketplace
 
-- Date start: 2026-05-04
-- Scope: 3 bài mở nền, giao ngay cho Team Content/Dev để Team 2 test UI không đợi full 30 bài.
-- Handoff payload bắt buộc:
-  - `data/seed/articles.seed.json` (runtime hiện tại, 30 record)
-  - `data/seed/articles.seed.sprint0-launch.json`
-  - `data/seed/articles.seed.launch-v2.json`
-  - `data/seed/article-images.seed.json`
-- Team 2 đọc trước khi dev:
-  - `docs/OMDALAT_CONTENT_SYSTEM_SOP.md`
-  - `docs/OMDALAT_CONTENT_SOP_TEAM_CHANGE_NOTICE_2026-05-04.md`
-  - `docs/OMDALAT_TEAM1_CHANGE_BROADCAST_2026-05-04.md`
-- Luồng team2 khi nhận file:
-  1. Dùng `articles.seed.json` nếu test runtime chuẩn, hoặc tạm copy `articles.seed.sprint0-launch.json` sang `articles.seed.json` nếu cần isolate 3 bài launch; `articles.seed.launch-v2.json` chỉ dùng để QA schema/CMS.
-  2. Chạy `pnpm run validate:content-seed` + `pnpm --filter @omdalat/web run validate:web-locales` + `pnpm --filter @omdalat/web run validate:i18n-data`.
-  3. Xác nhận UI:
-     - article layout rộng tối đa `720px`
-     - đoạn 4-6 dòng/đoạn theo mắt đọc
-     - locale `/vi` và `/en` tách sạch
-     - CTA bridge lấy theo `contextual_cta` (đã map sang component runtime).
-- Đã cập nhật runtime để phục vụ Sprint 0:
-  - `apps/web/lib/content-seed.ts` đọc `meta_title_*`, `meta_description_*`, `contextual_cta`.
-  - `apps/web/app/articles/[slug]/page.tsx` dùng seed-driven metadata + contextual bridge CTA.
+### 3.2 Public surfaces
 
-## 12. Team 3 packet handoff confirmed (2026-05-04)
+- build and maintain public pages on `omdalat.com`
+- build Brand Factory and Registry public surfaces
+- keep early `market.omdalat.com` limited to request-access/private teaser flows
+- keep `auction.omdalat.com` in non-live legal-readiness mode only
 
-Team 2 nhận payload từ Team 3 ở cả 2 lớp:
+### 3.3 Runtime, CMS, API, security
 
-* runtime seed tương thích hiện tại: `data/seed/articles.seed.json`
-* launch-only runtime snapshot 3 bài: `data/seed/articles.seed.sprint0-launch.json`
-* launch V2 payload để QA schema/CMS: `data/seed/articles.seed.launch-v2.json`
-* image reality records cho 3 bài launch: `data/seed/article-images.seed.json`
+- own schema, migrations, validators, auth, audit logs, feature flags
+- own registry, evidence, listing, offer, transfer, and workflow states
+- keep no-direct-custody and no-false-verification constraints enforced in code
 
-Lệnh bắt buộc trước khi QA giao Team 1:
+### 3.4 Editorial and bridge boundaries
 
-* `npm run validate:content-seed`
-* `pnpm --filter @omdalat/web run validate:web-locales`
-* `pnpm --filter @omdalat/web run validate:i18n-data`
+- keep `ap.omdalat.com` editorially separate
+- allow only consent-safe local partnership stories
+- block sales language and ownership claims in editorial contexts
 
-## 13. Cập nhật thực thi ngay (2026-05-04)
+### 3.5 QA and release control
 
-- Team 2 đã hoàn tất bước Sprint 0 runtime:
-  - map seed payload `meta_title_*`, `meta_description_*`, `contextual_cta`
-  - giữ ngữ cảnh locale `/vi` và `/en` nguyên bản theo payload
-  - sửa typing cục bộ cho e2e để tsc ổn định
-- `tổng quan gates`:
-  - `validate:content-seed` PASS
-  - `validate:web-locales` PASS
-  - `validate:i18n-data` PASS
-  - `tsc --noEmit` PASS
-- `smoke preview`: chưa complete do môi trường sandbox Chromium (Permission denied - bootstrap_check_in).  
-  Đã thông báo để rerun trên runner có quyền IPC.
+- run validation, tests, build, deploy, and live verification
+- preserve evidence for every claim of done/closed/live
+- keep docs in sync with runtime state
 
-### % còn lại theo Team 2 sprint này
+---
 
-- P0/Sprint0: `~85%` (còn 2 lần rerun preview smoke xác nhận thủ công)
-- P1 hardening vẫn giữ nguyên theo plan `TEAM2_EXECUTION_COMPLIANCE`:
-  - hardening image secondary/alt
-  - linguistic leakage automation ở locale secondary paths
+## 4. Hard stops
+
+The AI Dev Team must not:
+
+- turn `omdalat.com` into a marketplace homepage
+- open official auctions before legal gate completion
+- hold buyer funds directly
+- use NFT as legal title
+- claim `verified`, `sold`, `transferred`, `auction live`, or `go-live ready` without matching evidence and release gate
+- split responsibility across fictional team lanes in any updated plan
+
+---
+
+## 5. Execution order
+
+Execution order is locked as:
+
+1. Brand Factory
+2. Registry
+3. Private marketplace / request-access
+4. Verification and transfer workflow
+5. Licensing and curated offers
+6. Auction readiness only after legal gates
+
+This file does not authorize any earlier launch order.
+
+---
+
+## 6. Required deliverables
+
+The single AI Dev Team is responsible for delivering:
+
+- domain and release gate matrix
+- legal wording registry
+- public route proof
+- migrations and API contracts
+- validator/test evidence
+- responsive UI proof
+- audit log proof
+- feature flag proof
+- live verification evidence
+
+---
+
+## 7. Reporting format
+
+Every progress report should include:
+
+- what shipped
+- blockers
+- contracts changed
+- tests run
+- evidence attached
+- which release gate is still blocked or passed
+
+Do not report by legacy lane names anymore.
+
+Report only as `AI Dev Team`.
+
+---
+
+## 8. Sync rule for legacy team-plan files
+
+This file must remain synchronized with:
+
+- `docs/DEV_TEAM_1_PLAN_OMDALAT.md`
+- `docs/DEV_TEAM_3_PLAN_OMDALAT.md`
+
+If one of these three files changes, the other two must be updated in the same commit unless the change is only the filename in the title.
+
+---
+
+## 9. Brand Asset Network directive
+
+The current strategic scope is governed by:
+
+- `docs/OMDALAT_BRAND_ASSET_NETWORK_EXECUTION_LOCK_2026.md`
+
+Early build scope is limited to:
+
+- Brand Factory
+- Registry
+- private marketplace / request-access
+- verification workflow
+- transfer workflow
+
+Not allowed in early scope:
+
+- official auctions
+- direct escrow custody
+- NFT-as-title behavior
+- unsupported verified/sold/transferred claims
+
+---
+
+## 10. Stop condition
+
+No plan, sprint note, or report may assign work to separate internal teams again unless a new canonical governance file explicitly restores that model.

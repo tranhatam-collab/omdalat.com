@@ -1,5 +1,11 @@
 import { Router } from 'itty-router';
 import { handleBrandSite } from './routes/brand-site';
+import {
+  handleRegistrySite,
+  handleMarketSite,
+  handleAuctionSite,
+  handleBrandFactoryApply
+} from './routes/asset-network';
 
 export interface Env {
   DB: D1Database;
@@ -11,8 +17,33 @@ export interface Env {
 
 const router = Router<Request, [Env]>();
 
-// Brand site renderer (catches all subdomains)
-router.get('*', handleBrandSite);
+// Brand Asset Network surfaces — routed by subdomain
+// registry.omdalat.com, market.omdalat.com, auction.omdalat.com
+// brand.omdalat.com/apply — Brand Factory intake
+router.get('*', async (request: Request, env: Env) => {
+  const url = new URL(request.url);
+  const host = request.headers.get('Host') || url.hostname;
+  const hostParts = host.split('.');
+  const subdomain = hostParts.length >= 3 && hostParts.slice(-2).join('.') === 'omdalat.com'
+    ? hostParts[0] : '';
+
+  if (subdomain === 'registry') {
+    return handleRegistrySite(request, env);
+  }
+  if (subdomain === 'market') {
+    return handleMarketSite(request, env);
+  }
+  if (subdomain === 'auction') {
+    return handleAuctionSite(request, env);
+  }
+  if (subdomain === 'brand') {
+    const pathParts = url.pathname.split('/').filter(Boolean);
+    if (pathParts.includes('apply')) {
+      return handleBrandFactoryApply(request, env);
+    }
+  }
+  return handleBrandSite(request, env);
+});
 
 async function serveBrandImage(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);

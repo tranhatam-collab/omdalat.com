@@ -15,6 +15,11 @@ import { handleBrandDelete } from './routes/brand-delete';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
 import { handleBrandAdminLogin } from './routes/brand-admin-login';
 import { handleLilyPublic } from './routes/lily-public';
+import { handleAssetPackageCreate, handleAssetPackageGet, handleAssetPackageList } from './routes/asset-package';
+import { handleRegistryGet, handleRegistryEventAdd } from './routes/registry';
+import { handleMarketplaceRequestAccess, handleMarketplaceListings, handleMarketplaceListingCreate } from './routes/marketplace';
+import { handleVerificationCaseCreate, handleVerificationTaskAdd, handleVerificationCaseComplete } from './routes/verification';
+import { handleEvidenceSubmit, handleEvidenceVerify, handleTransferCreate } from './routes/evidence-transfer';
 
 export interface Env {
   DB: D1Database;
@@ -75,6 +80,30 @@ router.delete('/api/omdalat/brands/:id', handleBrandDelete);
 
 // Brand admin authentication
 router.post('/api/omdalat/admin/login', handleBrandAdminLogin);
+
+// Brand Asset Network — asset packages
+router.post('/api/omdalat/asset-packages', handleAssetPackageCreate);
+router.get('/api/omdalat/asset-packages', handleAssetPackageList);
+router.get('/api/omdalat/asset-packages/:id', handleAssetPackageGet);
+
+// Brand Asset Network — registry (public provenance)
+router.get('/api/omdalat/registry/:public_id', handleRegistryGet);
+router.post('/api/omdalat/registry/:public_id/events', handleRegistryEventAdd);
+
+// Brand Asset Network — marketplace
+router.get('/api/omdalat/marketplace/listings', handleMarketplaceListings);
+router.post('/api/omdalat/marketplace/listings', handleMarketplaceListingCreate);
+router.post('/api/omdalat/marketplace/request-access', handleMarketplaceRequestAccess);
+
+// Brand Asset Network — verification workflow
+router.post('/api/omdalat/verification/cases', handleVerificationCaseCreate);
+router.post('/api/omdalat/verification/cases/:id/tasks', handleVerificationTaskAdd);
+router.post('/api/omdalat/verification/cases/:id/complete', handleVerificationCaseComplete);
+
+// Brand Asset Network — evidence and transfer
+router.post('/api/omdalat/evidence', handleEvidenceSubmit);
+router.post('/api/omdalat/evidence/:id/verify', handleEvidenceVerify);
+router.post('/api/omdalat/transfers', handleTransferCreate);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

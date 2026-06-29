@@ -50,7 +50,15 @@
           "custom_domain": true
         },
         {
-          "pattern": "*.omdalat.com/*",
+          "pattern": "registry.omdalat.com/*",
+          "zone_name": "omdalat.com"
+        },
+        {
+          "pattern": "market.omdalat.com/*",
+          "zone_name": "omdalat.com"
+        },
+        {
+          "pattern": "auction.omdalat.com/*",
           "zone_name": "omdalat.com"
         }
       ],
