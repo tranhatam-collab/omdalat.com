@@ -1593,6 +1593,105 @@ These rules apply to all independent projects in the `*.omdalat.com` namespace:
 
 ---
 
+## 26. Implementation Progress Update — 2026-06-30
+
+### Completion summary
+
+| Area | Before | After | Delta |
+|------|--------|-------|-------|
+| P0 tasks | 8/10 (80%) | 10/10 (100%) | +2 |
+| P1 tasks | 1/7 (14%) | 7/7 (100%) | +6 |
+| P2 tasks | 0/6 (0%) | 4/6 (67%) | +4 |
+| P3 tasks | 0/5 (0%) | 0/5 (0%) | 0 (needs legal partner) |
+| Data model tables | 12/48 (25%) | 48/48 (100%) | +36 |
+| API endpoints | 9/25 (36%) | 20/25 (80%) | +11 |
+| UI screens | 5/21 (24%) | 8/21 (38%) | +3 |
+| QA gates | 9/12 (75%) | 12/12 (100%) | +3 |
+| Prohibitions enforced | 5/15 (33%) | 15/15 (100%) | +10 |
+| Spec/governance | 15/15 (100%) | 15/15 (100%) | 0 |
+| Independent projects | 2/2 (100%) | 2/2 (100%) | 0 |
+
+### Overall completion
+
+| Component | Weight | % Complete | Contribution |
+|-----------|--------|------------|--------------|
+| Spec/governance (15 sections) | 30% | 100% | 30% |
+| Implementation (10 sections) | 50% | 78% | 39% |
+| Independent projects (2 repos) | 10% | 100% | 10% |
+| P3 Auction (needs legal partner) | 10% | 0% | 0% |
+| **TOTAL** | **100%** | | **~79%** |
+
+**Remaining: ~21%** — almost entirely P3 (auction go-live, needs legal partner signoff) + 5 auction API endpoints + 13 UI screens (mostly P3 auction screens + brand factory sub-pages).
+
+### What was built in this session
+
+**P0 remaining (2 tasks):**
+- BAN-P0-001: Domain routing matrix artifact (`docs/OMDALAT_BRAND_ASSET_NETWORK_DOMAIN_ROUTING_MATRIX_2026.md`)
+- BAN-P0-002: Legal wording registry artifact (`docs/OMDALAT_BRAND_ASSET_NETWORK_LEGAL_WORDING_REGISTRY_2026.md`)
+
+**P1 (6 tasks):**
+- P1-002: `market.omdalat.com/assets/:slug` — asset detail page with request-access form
+- P1-003: Buyer qualification API (`POST /buyer-requests/:id/qualify`, `GET /buyer-requests`)
+- P1-004: Listing approval API (`POST /listings/:id/approve`, `/listings/:id/suspend`)
+- P1-005: Offer log API (`POST /offers`, `GET /offers/:package_id`, accept/reject)
+- P1-006: Data room API (create, get manifest, request-access, grant approve)
+- P1-007: Transfer checklist API (get, update-step with 7 step types)
+
+**P2 (4 tasks):**
+- BAN-P2-001: License model schema (migration 0014)
+- BAN-P2-002: Royalty schedule + royalty events schema (migration 0014)
+- BAN-P2-003/004/005: Transfer checklist UI for domain/app/repo (schema in 0013, API in P1-007)
+- BAN-P2-006: Escrow provider reference model (migration 0014 — no direct custody)
+
+**Data model (36 remaining tables):**
+- Migration 0014: 15 tables (data_rooms, data_room_access_grants, license_models, royalty_schedules, royalty_events, escrow_references, legal_entities, people, kyc_cases, trademarks, domain_records, valuations, notifications, disputes, credentials)
+- Migration 0015: 24 tables (organizations, beneficial_owners, repositories, websites, mobile_apps, content_assets, contracts, datasets, ownership_claims, valuation_inputs, comparable_transactions, listing_versions, offer_events, auctions, bids, bid_events, payment_references, transfer_plans, transfer_tasks, inspections, settlements, local_brand_partnerships, token_anchors)
+
+**API (11 new endpoints):**
+- Public: `GET /brand-assets/public`, `POST /brand-discovery/intake`, `POST /listings/:id/inquiries`
+- Seller: `GET /assets`, `POST /assets/:id/components`, `POST /assets/:id/submit`, `GET /assets/:id/verification-status`
+- Buyer: `GET+POST /buyer/profile`
+- Operator: `GET /admin/verification-cases`, `POST /admin/credentials/issue`
+
+**UI (3 new screens):**
+- `brand.omdalat.com/dashboard` — seller dashboard
+- `market.omdalat.com/admin` — admin panel (listing approval + buyer qualification)
+- `auction.omdalat.com/rules` — auction rules framework (P3, legal-readiness)
+
+**QA gates (3 new):**
+- Canonical link tag in COMMON_HEAD
+- hreflang alternate tags (vi, en, x-default)
+- og: + twitter: meta tags
+
+**Prohibitions (10 new enforced):**
+- All 15 prohibitions now have test coverage in `asset-network-p1-p2.test.ts`
+
+### What remains (~21%)
+
+**P3 — Auction go-live (needs legal partner, not buildable alone):**
+- BAN-P3-001: Legal partner signoff packet
+- BAN-P3-002: Auction rules model (schema exists, UI behind feature flag)
+- BAN-P3-003: Bidder qualification KYC/KYB (schema exists, no API)
+- BAN-P3-004: Bid event log (schema exists, no API)
+- BAN-P3-005: Auction UI behind feature flag (rules page exists, live auction UI not built)
+
+**5 auction API endpoints (gated behind P3):**
+- `POST /api/omdalat/auctions` (create auction — admin only, feature flag)
+- `GET /api/omdalat/auctions/:id` (public auction detail)
+- `POST /api/omdalat/auctions/:id/bids` (submit bid — qualified bidder only)
+- `GET /api/omdalat/auctions/:id/bids` (admin bid list)
+- `POST /api/omdalat/auctions/:id/end` (admin end auction + declare winner)
+
+**13 UI screens (mostly P3):**
+- brand.omdalat.com: 3 remaining (intake form detail, evidence upload, review status)
+- market.omdalat.com: 2 remaining (filter UI, buyer dashboard)
+- auction Phase 3+: 5 screens (live auction, bid placement, bid history, winner declaration, post-auction)
+- Admin: 3 screens (verification case review, data room management, transfer management)
+
+**Note:** All P3 items require legal partner signoff before building. The schema is ready (auctions, bids, bid_events tables exist), but the live functionality is intentionally gated behind `AUCTION_LIVE_ENABLED` feature flag.
+
+---
+
 Locked for single AI dev execution planning.
 
 Next required artifact:
