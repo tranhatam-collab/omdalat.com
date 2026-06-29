@@ -719,3 +719,251 @@ export async function handleBrandFactoryApply(request: Request, env: Env): Promi
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
   });
 }
+
+/**
+ * market.omdalat.com/assets/:slug — asset detail page (request access, no buy)
+ */
+export async function handleMarketAssetDetail(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+  const slug = pathParts.find(p => p !== 'en' && p !== 'assets' && !p.startsWith('_'));
+
+  if (!slug) {
+    return new Response('Not found', { status: 404 });
+  }
+
+  // Fetch listing by slug
+  const listing = await env.DB.prepare(
+    `SELECT ml.*, ap.public_id, ap.slug, ap.name_vi, ap.name_en, ap.summary_vi, ap.summary_en,
+            ap.asset_level, ap.market_status
+     FROM marketplace_listings ml
+     JOIN asset_packages ap ON ml.package_id = ap.id
+     WHERE ap.slug = ? AND ml.status = 'live' AND ap.publication_status = 'published'`
+  ).bind(slug).first() as any;
+
+  if (!listing) {
+    return new Response(
+      COMMON_HEAD(isEn ? 'Listing Not Found — Market' : 'Không Tìm Thấy — Market',
+        isEn ? 'This listing is not available.' : 'Listing này không khả dụng.',
+        'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg') +
+      `<body><header><div class="brand"><a href="${isEn ? '/en' : '/'}">Market</a></div></header>
+       <div class="container"><div class="hero"><h1>${isEn ? 'Listing Not Found' : 'Không Tìm Thấy Listing'}</h1>
+       <p><a href="${isEn ? '/en' : '/'}" style="color:var(--green)">${isEn ? '← Back to Market' : '← Về Market'}</a></p></div></div>` + FOOTER(isEn),
+      { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+    );
+  }
+
+  // Fetch components for this package
+  const components = await env.DB.prepare(
+    `SELECT component_class, component_name, status FROM asset_components WHERE package_id = ? ORDER BY sort_order`
+  ).bind(listing.package_id).all() as any;
+
+  const componentList = (components.results || []).map((c: any) =>
+    `<li><strong>${c.component_name}</strong> <span class="badge badge-info" style="font-size:0.7rem">${c.component_class}</span> ${STATUS_BADGE(c.status)}</li>`
+  ).join('');
+
+  const html = COMMON_HEAD(
+    `${isEn ? (listing.title_en || listing.title_vi) : listing.title_vi} — Market`,
+    isEn ? (listing.description_en || listing.description_vi || '') : (listing.description_vi || listing.description_en || ''),
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Market</a></div>
+      <div class="lang-switch">
+        <a href="/assets/${slug}" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/assets/${slug}" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="container">
+      <div class="hero">
+        <h1>${isEn ? (listing.title_en || listing.title_vi) : listing.title_vi}</h1>
+        <p>${isEn ? (listing.description_en || listing.description_vi || '') : (listing.description_vi || listing.description_en || '')}</p>
+        <p style="margin-top:12px">
+          <span class="badge badge-info">${listing.public_id}</span>
+          <span class="badge badge-verified">${ASSET_LEVEL_LABEL(listing.asset_level, isEn)}</span>
+        </p>
+      </div>
+
+      <div class="info-box">
+        ${isEn
+          ? '<strong>Price on request.</strong> No buy button. Contact via request-access to view full details and data room.'
+          : '<strong>Giá theo yêu cầu.</strong> Không có nút mua. Liên hệ qua yêu cầu truy cập để xem chi tiết và data room.'}
+      </div>
+
+      <div class="card">
+        <h2>${isEn ? 'Components' : 'Các Thành Phần'}</h2>
+        <ul style="padding-left:20px;margin-top:8px">${componentList || `<li style="color:var(--muted)">${isEn ? 'No components listed.' : 'Chưa có thành phần.'}</li>`}</ul>
+      </div>
+
+      <div class="card">
+        <h2>${isEn ? 'Request Access' : 'Yêu Cầu Truy Cập'}</h2>
+        <p style="color:var(--muted);margin-bottom:12px">${isEn ? 'Submit your details to view the full data room.' : 'Gửi thông tin để xem data room đầy đủ.'}</p>
+        <form id="requestForm">
+          <input type="hidden" name="package_id" value="${listing.package_id}">
+          <label>${isEn ? 'Your Name *' : 'Họ Tên *'}</label>
+          <input type="text" name="buyer_name" required>
+          <label>${isEn ? 'Email *' : 'Email *'}</label>
+          <input type="email" name="buyer_email" required>
+          <label>${isEn ? 'Organization' : 'Tổ chức'}</label>
+          <input type="text" name="buyer_organization">
+          <label>${isEn ? 'Buyer Type' : 'Loại người mua'}</label>
+          <select name="buyer_type">
+            <option value="individual">${isEn ? 'Individual' : 'Cá nhân'}</option>
+            <option value="company">${isEn ? 'Company' : 'Công ty'}</option>
+            <option value="investor">${isEn ? 'Investor' : 'Nhà đầu tư'}</option>
+          </select>
+          <label>${isEn ? 'Message' : 'Lời nhắn'}</label>
+          <textarea name="message" rows="3"></textarea>
+          <button type="submit">${isEn ? 'Submit Request' : 'Gửi Yêu Cầu'}</button>
+        </form>
+        <div id="result" style="margin-top:16px;display:none"></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('requestForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        const res = await fetch('https://api.omdalat.com/api/omdalat/marketplace/request-access', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        const el = document.getElementById('result');
+        el.innerHTML = res.ok
+          ? '<div class="info-box">' + (json.message || 'Request submitted.') + '</div>'
+          : '<div class="legal-block">' + (json.error || 'Failed.') + '</div>';
+        el.style.display = 'block';
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * brand.omdalat.com/verify — verification status check page
+ */
+export async function handleBrandFactoryVerify(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Check Verification Status — Brand Factory' : 'Kiểm Tra Trạng Thái Xác Minh — Brand Factory',
+    isEn ? 'Check the verification status of your brand asset package.' : 'Kiểm tra trạng thái xác minh gói tài sản thương hiệu.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? 'https://brand.omdalat.com/en' : 'https://brand.omdalat.com'}">Brand Factory</a></div>
+      <div class="lang-switch">
+        <a href="/verify" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/verify" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Check Verification Status' : 'Kiểm Tra Trạng Thái Xác Minh'}</h1>
+      <p>${isEn ? 'Enter your package public ID to see current verification status.' : 'Nhập mã công khai gói để xem trạng thái xác minh hiện tại.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <form id="verifyForm">
+          <label>${isEn ? 'Public ID (e.g., BAP-2026-0001)' : 'Mã công khai (vd, BAP-2026-0001)'}</label>
+          <input type="text" name="public_id" required placeholder="BAP-2026-XXXX">
+          <button type="submit">${isEn ? 'Check Status' : 'Kiểm Tra'}</button>
+        </form>
+        <div id="result" style="margin-top:16px;display:none"></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('verifyForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pid = e.target.public_id.value;
+        const res = await fetch('https://api.omdalat.com/api/omdalat/registry/' + encodeURIComponent(pid));
+        const el = document.getElementById('result');
+        if (res.ok) {
+          const json = await res.json();
+          const pkg = json.package || {};
+          const comps = (json.components || []).map(c => '<li><strong>' + c.component_name + '</strong>: ' + c.status + '</li>').join('');
+          const events = (json.provenance || []).map(ev => '<li>' + ev.event_type + ' — ' + ev.description + ' <em>(' + ev.created_at + ')</em></li>').join('');
+          el.innerHTML = '<div class="card"><h2>' + (pkg.name_vi || pkg.name_en) + '</h2>' +
+            '<p><span class="badge badge-info">' + pkg.public_id + '</span> <span class="badge badge-verified">Level ' + (pkg.asset_level || 0) + '</span></p>' +
+            '<h3>Components</h3><ul>' + (comps || '<li>None</li>') + '</ul>' +
+            '<h3>Provenance</h3><ul class="timeline">' + (events || '<li>None</li>') + '</ul></div>';
+        } else {
+          el.innerHTML = '<div class="legal-block">Not found or not published.</div>';
+        }
+        el.style.display = 'block';
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * brand.omdalat.com/cases — public verification cases overview
+ */
+export async function handleBrandFactoryCases(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch packages with verification status
+  const result = await env.DB.prepare(
+    `SELECT ap.public_id, ap.name_vi, ap.name_en, ap.asset_level, ap.listing_status,
+            COUNT(vc.id) as case_count,
+            MAX(vc.updated_at) as last_case_update
+     FROM asset_packages ap
+     LEFT JOIN verification_cases vc ON ap.id = vc.package_id
+     WHERE ap.publication_status = 'published'
+     GROUP BY ap.id
+     ORDER BY ap.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const rows = (result.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (r.name_en || r.name_vi) : r.name_vi}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span>
+         <span class="badge ${r.listing_status === 'approved' ? 'badge-verified' : 'badge-pending'}">${r.listing_status}</span></p>
+      <p class="level">${isEn ? 'Cases' : 'Cases'}: ${r.case_count || 0}</p>
+      <a class="no-button" href="${isEn ? '/en/verify?pid=' : '/verify?pid='}${r.public_id}">${isEn ? 'Check Status' : 'Kiểm Tra'} →</a>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Verification Cases — Brand Factory' : 'Hồ Sơ Xác Minh — Brand Factory',
+    isEn ? 'Overview of verification cases for published packages.' : 'Tổng quan hồ sơ xác minh cho các gói đã công bố.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? 'https://brand.omdalat.com/en' : 'https://brand.omdalat.com'}">Brand Factory</a></div>
+      <div class="lang-switch">
+        <a href="/cases" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/cases" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Verification Cases' : 'Hồ Sơ Xác Minh'}</h1>
+      <p>${isEn ? 'Public overview of verification activity for published brand asset packages.' : 'Tổng quan công khai hoạt động xác minh cho các gói đã công bố.'}</p>
+    </div>
+    <div class="container">
+      <div class="info-box">
+        ${isEn ? 'Trust labels are per-component. No global Verified badge.' : 'Nhãn tin cậy theo từng thành phần. Không có nhãn Verified toàn cục.'}
+      </div>
+      <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No published packages yet.' : 'Chưa có gói nào công bố.'}</p>`}</div>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}

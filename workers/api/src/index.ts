@@ -20,6 +20,15 @@ import { handleRegistryGet, handleRegistryEventAdd } from './routes/registry';
 import { handleMarketplaceRequestAccess, handleMarketplaceListings, handleMarketplaceListingCreate } from './routes/marketplace';
 import { handleVerificationCaseCreate, handleVerificationTaskAdd, handleVerificationCaseComplete } from './routes/verification';
 import { handleEvidenceSubmit, handleEvidenceVerify, handleTransferCreate } from './routes/evidence-transfer';
+import {
+  handleOfferCreate, handleOfferList, handleOfferRespond,
+  handleBuyerQualify, handleBuyerRequestList,
+  handleListingApprove
+} from './routes/offers-admin';
+import {
+  handleDataRoomCreate, handleDataRoomGet, handleDataRoomRequestAccess, handleDataRoomGrantApprove,
+  handleTransferGet, handleTransferUpdateStep
+} from './routes/data-room-transfer';
 
 export interface Env {
   DB: D1Database;
@@ -104,6 +113,24 @@ router.post('/api/omdalat/verification/cases/:id/complete', handleVerificationCa
 router.post('/api/omdalat/evidence', handleEvidenceSubmit);
 router.post('/api/omdalat/evidence/:id/verify', handleEvidenceVerify);
 router.post('/api/omdalat/transfers', handleTransferCreate);
+router.get('/api/omdalat/transfers/:id', handleTransferGet);
+router.post('/api/omdalat/transfers/:id/update-step', handleTransferUpdateStep);
+
+// Brand Asset Network — offers, buyer qualification, listing approval
+router.post('/api/omdalat/offers', handleOfferCreate);
+router.get('/api/omdalat/offers/:package_id', handleOfferList);
+router.post('/api/omdalat/offers/:id/accept', handleOfferRespond);
+router.post('/api/omdalat/offers/:id/reject', handleOfferRespond);
+router.post('/api/omdalat/buyer-requests/:id/qualify', handleBuyerQualify);
+router.get('/api/omdalat/buyer-requests', handleBuyerRequestList);
+router.post('/api/omdalat/listings/:id/approve', handleListingApprove);
+router.post('/api/omdalat/listings/:id/suspend', handleListingApprove);
+
+// Brand Asset Network — data rooms
+router.post('/api/omdalat/data-rooms', handleDataRoomCreate);
+router.get('/api/omdalat/data-rooms/:id', handleDataRoomGet);
+router.post('/api/omdalat/data-rooms/:id/request-access', handleDataRoomRequestAccess);
+router.post('/api/omdalat/data-rooms/:id/grants/:grant_id/approve', handleDataRoomGrantApprove);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

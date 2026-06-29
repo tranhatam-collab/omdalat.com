@@ -4,7 +4,10 @@ import {
   handleRegistrySite,
   handleMarketSite,
   handleAuctionSite,
-  handleBrandFactoryApply
+  handleBrandFactoryApply,
+  handleMarketAssetDetail,
+  handleBrandFactoryVerify,
+  handleBrandFactoryCases
 } from './routes/asset-network';
 
 export interface Env {
@@ -31,6 +34,10 @@ router.get('*', async (request: Request, env: Env) => {
     return handleRegistrySite(request, env);
   }
   if (subdomain === 'market') {
+    const pathParts = url.pathname.split('/').filter(Boolean);
+    if (pathParts.includes('assets')) {
+      return handleMarketAssetDetail(request, env);
+    }
     return handleMarketSite(request, env);
   }
   if (subdomain === 'auction') {
@@ -40,6 +47,12 @@ router.get('*', async (request: Request, env: Env) => {
     const pathParts = url.pathname.split('/').filter(Boolean);
     if (pathParts.includes('apply')) {
       return handleBrandFactoryApply(request, env);
+    }
+    if (pathParts.includes('verify')) {
+      return handleBrandFactoryVerify(request, env);
+    }
+    if (pathParts.includes('cases')) {
+      return handleBrandFactoryCases(request, env);
     }
   }
   return handleBrandSite(request, env);
