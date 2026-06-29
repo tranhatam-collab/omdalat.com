@@ -1196,3 +1196,411 @@ export async function handleAuctionRules(request: Request, env: Env): Promise<Re
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
   });
 }
+
+/**
+ * brand.omdalat.com/evidence — evidence upload page (seller submits rights evidence)
+ */
+export async function handleBrandFactoryEvidence(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Submit Evidence — Brand Factory' : 'Nộp Bằng Chứng — Brand Factory',
+    isEn ? 'Submit rights evidence for your brand asset package components.' : 'Nộp bằng chứng quyền cho các thành phần gói tài sản thương hiệu.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? 'https://brand.omdalat.com/en' : 'https://brand.omdalat.com'}">Brand Factory</a></div>
+      <div class="lang-switch">
+        <a href="/evidence" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/evidence" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Submit Rights Evidence' : 'Nộp Bằng Chứng Quyền'}</h1>
+      <p>${isEn ? 'Upload evidence for each component of your brand asset package.' : 'Tải lên bằng chứng cho từng thành phần gói tài sản thương hiệu.'}</p>
+    </div>
+    <div class="container">
+      <div class="info-box">
+        ${isEn ? 'Evidence is reviewed per-component. No global Verified badge.' : 'Bằng chứng được xem xét theo từng thành phần. Không có nhãn Verified toàn cục.'}
+      </div>
+      <div class="card">
+        <form id="evidenceForm">
+          <label>${isEn ? 'Package Public ID *' : 'Mã Công Khai Gói *'}</label>
+          <input type="text" name="package_id" required placeholder="BAP-2026-XXXX">
+          <label>${isEn ? 'Component Name *' : 'Tên Thành Phần *'}</label>
+          <input type="text" name="component_name" required>
+          <label>${isEn ? 'Evidence Type *' : 'Loại Bằng Chứng *'}</label>
+          <select name="evidence_type">
+            <option value="trademark_registration">${isEn ? 'Trademark Registration' : 'Đăng Bạ Thương Hiệu'}</option>
+            <option value="domain_ownership">${isEn ? 'Domain Ownership' : 'Sở Hữu Domain'}</option>
+            <option value="business_license">${isEn ? 'Business License' : 'Giấy Phép Kinh Doanh'}</option>
+            <option value="contract">${isEn ? 'Contract' : 'Hợp Đồng'}</option>
+            <option value="receipt">${isEn ? 'Receipt' : 'Biên Nhận'}</option>
+            <option value="declaration">${isEn ? 'Declaration' : 'Tờ Khai'}</option>
+            <option value="other">${isEn ? 'Other' : 'Khác'}</option>
+          </select>
+          <label>${isEn ? 'Reference Number' : 'Số Tham Chiếu'}</label>
+          <input type="text" name="reference_number">
+          <label>${isEn ? 'Issuing Authority' : 'Cơ Quan Cấp'}</label>
+          <input type="text" name="issuing_authority">
+          <label>${isEn ? 'Issue Date' : 'Ngày Cấp'}</label>
+          <input type="date" name="issue_date">
+          <label>${isEn ? 'Notes' : 'Ghi chú'}</label>
+          <textarea name="notes" rows="3"></textarea>
+          <button type="submit">${isEn ? 'Submit Evidence' : 'Nộp Bằng Chứng'}</button>
+        </form>
+        <div id="result" style="margin-top:16px;display:none"></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('evidenceForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        const res = await fetch('https://api.omdalat.com/api/omdalat/evidence', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        const el = document.getElementById('result');
+        el.innerHTML = res.ok
+          ? '<div class="info-box">' + (json.message || 'Evidence submitted for review.') + '</div>'
+          : '<div class="legal-block">' + (json.error || 'Failed.') + '</div>';
+        el.style.display = 'block';
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * brand.omdalat.com/intake — Brand Discovery intake form (lighter than full package)
+ */
+export async function handleBrandFactoryIntake(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Brand Discovery Intake — Brand Factory' : 'Khám Phá Thương Hiệu — Brand Factory',
+    isEn ? 'Quick intake form for brand discovery. No commitment.' : 'Form khám phá thương hiệu nhanh. Không cam kết.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? 'https://brand.omdalat.com/en' : 'https://brand.omdalat.com'}">Brand Factory</a></div>
+      <div class="lang-switch">
+        <a href="/intake" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/intake" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Brand Discovery Intake' : 'Khám Phá Thương Hiệu'}</h1>
+      <p>${isEn ? 'Tell us about your brand idea. We will contact you about next steps.' : 'Hãy cho chúng tôi biết về ý tưởng thương hiệu. Chúng tôi sẽ liên hệ về các bước tiếp theo.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <form id="intakeForm">
+          <label>${isEn ? 'Brand Name (Vietnamese) *' : 'Tên Thương Hiệu (Tiếng Việt) *'}</label>
+          <input type="text" name="name_vi" required>
+          <label>${isEn ? 'Brand Name (English)' : 'Tên Thương Hiệu (Tiếng Anh)'}</label>
+          <input type="text" name="name_en">
+          <label>${isEn ? 'Contact Email *' : 'Email Liên Hệ *'}</label>
+          <input type="email" name="contact_email" required>
+          <label>${isEn ? 'Discovery Notes' : 'Ghi chú khám phá'}</label>
+          <textarea name="discovery_notes" rows="4" placeholder="${isEn ? 'What is your brand about? What stage are you at?' : 'Thương hiệu của bạn về gì? Bạn đang ở giai đoạn nào?'}"></textarea>
+          <button type="submit">${isEn ? 'Submit Intake' : 'Gửi Khám Phá'}</button>
+        </form>
+        <div id="result" style="margin-top:16px;display:none"></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('intakeForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        const res = await fetch('https://api.omdalat.com/api/omdalat/brand-discovery/intake', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        const el = document.getElementById('result');
+        el.innerHTML = res.ok
+          ? '<div class="info-box">' + (json.message || 'Intake received.') + '</div>'
+          : '<div class="legal-block">' + (json.error || 'Failed.') + '</div>';
+        el.style.display = 'block';
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * market.omdalat.com/buyer-dashboard — buyer's request status page
+ */
+export async function handleMarketBuyerDashboard(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Buyer Dashboard — Market' : 'Bảng Điều Khiển Người Mua — Market',
+    isEn ? 'Track your access requests and inquiries.' : 'Theo dõi yêu cầu truy cập và thắc mắc.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Market</a> / Buyer</div>
+      <div class="lang-switch">
+        <a href="/buyer-dashboard" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/buyer-dashboard" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Buyer Dashboard' : 'Bảng Điều Khiển Người Mua'}</h1>
+      <p>${isEn ? 'Enter your email to see your request status.' : 'Nhập email để xem trạng thái yêu cầu.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <form id="lookupForm">
+          <label>${isEn ? 'Your Email *' : 'Email Của Bạn *'}</label>
+          <input type="email" name="email" required>
+          <button type="submit">${isEn ? 'View My Requests' : 'Xem Yêu Cầu'}</button>
+        </form>
+        <div id="result" style="margin-top:16px;display:none"></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('lookupForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        // Note: This is a public lookup by email — in production, this would require auth
+        // For now, we show a notice that the buyer needs to log in
+        const el = document.getElementById('result');
+        el.innerHTML = '<div class="info-box">${isEn ? 'Please log in to view your requests. Buyer dashboard requires authentication.' : 'Vui lòng đăng nhập để xem yêu cầu. Bảng điều khiển người mua yêu cầu xác thực.'}</div>';
+        el.style.display = 'block';
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * registry.omdalat.com/search — search public records
+ */
+export async function handleRegistrySearch(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+  const q = url.searchParams.get('q') || '';
+
+  let packages: any[] = [];
+  if (q) {
+    const result = await env.DB.prepare(
+      `SELECT public_id, slug, name_vi, name_en, summary_vi, summary_en, asset_level, market_status
+       FROM asset_packages
+       WHERE publication_status = 'published'
+         AND (name_vi LIKE ? OR name_en LIKE ? OR public_id LIKE ? OR slug LIKE ?)
+       ORDER BY created_at DESC LIMIT 50`
+    ).bind(`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`).all() as any;
+    packages = result.results || [];
+  }
+
+  const cards = packages.map((p: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (p.name_en || p.name_vi) : p.name_vi}</h3>
+      <p style="color:var(--muted);font-size:0.9rem">${isEn ? (p.summary_en || p.summary_vi || '') : (p.summary_vi || p.summary_en || '')}</p>
+      <p style="margin-top:8px">
+        <span class="badge badge-info">${p.public_id}</span>
+        <span class="badge badge-verified">${ASSET_LEVEL_LABEL(p.asset_level, isEn)}</span>
+      </p>
+      <a class="no-button" href="${isEn ? '/en/' : '/'}${p.public_id}">${isEn ? 'View Record' : 'Xem Hồ Sơ'} →</a>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? `Search${q ? ': ' + q : ''} — Registry` : `Tìm kiếm${q ? ': ' + q : ''} — Registry`,
+    isEn ? 'Search public provenance records.' : 'Tìm kiếm hồ sơ nguồn gốc công khai.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Registry</a></div>
+      <div class="lang-switch">
+        <a href="/search" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/search" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Search Registry' : 'Tìm Kiếm Registry'}</h1>
+      <form style="margin-top:16px" action="/search" method="GET">
+        <input type="text" name="q" value="${q.replace(/"/g, '&quot;')}" placeholder="${isEn ? 'Search by name or ID...' : 'Tìm theo tên hoặc mã...'}" style="width:60%;padding:10px">
+        <button type="submit">${isEn ? 'Search' : 'Tìm'}</button>
+      </form>
+    </div>
+    <div class="container">
+      ${q ? `<p style="margin-bottom:16px;color:var(--muted)">${packages.length} ${isEn ? 'results for' : 'kết quả cho'} "${q}"</p>` : ''}
+      <div class="grid">${cards || (q ? `<p style="color:var(--muted)">${isEn ? 'No results.' : 'Không có kết quả.'}</p>` : `<p style="color:var(--muted)">${isEn ? 'Enter a search term above.' : 'Nhập từ khóa tìm kiếm ở trên.'}</p>`)}</div>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * auction.omdalat.com/live — live auction page (gated — shows legal-readiness if flag not set)
+ */
+export async function handleAuctionLive(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Check feature flag — in production this would check env.AUCTION_LIVE_ENABLED
+  // Currently always shows legal-readiness mode
+  const auctionLive = false; // (env as any).AUCTION_LIVE_ENABLED === 'true'
+
+  if (!auctionLive) {
+    // Show legal-readiness mode
+    const html = COMMON_HEAD(
+      isEn ? 'Live Auction — Not Available' : 'Đấu Giá Trực Tiếp — Không Khả Dụng',
+      isEn ? 'Live auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá trực tiếp bị khóa cho đến khi đối tác pháp lý phê duyệt.',
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    ) + `
+    <body>
+      <header>
+        <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+        <div class="lang-switch">
+          <a href="/live" class="${isEn ? '' : 'active'}">VI</a>
+          <a href="/en/live" class="${isEn ? 'active' : ''}">EN</a>
+        </div>
+      </header>
+      <div class="hero">
+        <h1>${isEn ? 'Live Auction' : 'Đấu Giá Trực Tiếp'}</h1>
+      </div>
+      <div class="container">
+        <div class="legal-block">
+          <h2>${isEn ? 'No Live Auctions' : 'Không Có Đấu Giá Trực Tiếp'}</h2>
+          <p>${isEn ? 'Auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.'}</p>
+          <p style="margin-top:12px">${isEn ? 'The auction infrastructure (schema, API, UI framework) is ready, but the feature flag' : 'Hạ tầng đấu giá (schema, API, UI framework) đã sẵn sàng, nhưng feature flag'} <code>AUCTION_LIVE_ENABLED</code> ${isEn ? 'is not set.' : 'chưa được set.'}</p>
+        </div>
+        <div class="card">
+          <h2>${isEn ? 'What is ready' : 'Đã sẵn sàng'}</h2>
+          <ul style="padding-left:20px">
+            <li>${isEn ? 'Database schema (auctions, bids, bid_events tables)' : 'Schema cơ sở dữ liệu (bảng auctions, bids, bid_events)'}</li>
+            <li>${isEn ? 'API endpoints (create, get, bid, list bids, end auction)' : 'API endpoint (tạo, xem, thầu, danh sách, kết thúc)'}</li>
+            <li>${isEn ? 'UI framework (this page, rules page)' : 'UI framework (trang này, trang quy tắc)'}</li>
+            <li>${isEn ? 'Feature flag gating (all endpoints return 403 until flag is set)' : 'Feature flag gating (tất cả API trả 403 cho đến khi flag được set)'}</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>${isEn ? 'What is needed before go-live' : 'Cần gì trước khi go-live'}</h2>
+          <ul style="padding-left:20px">
+            <li>${isEn ? 'Legal partner signoff on auction terms' : 'Phê duyệt của đối tác pháp lý'}</li>
+            <li>${isEn ? 'Bidder KYC/KYB verification process' : 'Quy trình xác minh KYC/KYB người thầu'}</li>
+            <li>${isEn ? 'Escrow provider integration' : 'Tích hợp escrow provider'}</li>
+            <li>${isEn ? 'Dispute resolution process' : 'Quy trình giải quyết tranh chấp'}</li>
+          </ul>
+        </div>
+      </div>
+    ` + FOOTER(isEn);
+
+    return new Response(html, {
+      status: 200,
+      headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    });
+  }
+
+  // If auction is live (future): show live auction list
+  // This code path is reached only when AUCTION_LIVE_ENABLED is set
+  const html = COMMON_HEAD(
+    isEn ? 'Live Auctions' : 'Đấu Giá Trực Tiếp',
+    isEn ? 'View live and upcoming auctions.' : 'Xem đấu giá trực tiếp và sắp tới.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Live Auctions' : 'Đấu Giá Trực Tiếp'}</h1>
+      <p>${isEn ? 'Auction functionality is now live.' : 'Chức năng đấu giá đã live.'}</p>
+    </div>
+    <div class="container">
+      <p>${isEn ? 'No active auctions at this time.' : 'Không có đấu giá đang hoạt động.'}</p>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * auction.omdalat.com/history — auction history page (past auctions)
+ */
+export async function handleAuctionHistory(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch ended auctions (if any — currently none since feature flag is off)
+  const result = await env.DB.prepare(
+    `SELECT a.id, a.auction_type, a.start_date, a.end_date, a.status, a.reserve_price_vnd,
+            ap.public_id, ap.name_vi, ap.name_en
+     FROM auctions a
+     JOIN asset_packages ap ON a.package_id = ap.id
+     WHERE a.status = 'ended'
+     ORDER BY a.end_date DESC LIMIT 50`
+  ).all() as any;
+
+  const rows = (result.results || []).map((a: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (a.name_en || a.name_vi) : a.name_vi}</h3>
+      <p><span class="badge badge-info">${a.public_id}</span> <span class="badge badge-verified">${a.status}</span></p>
+      <p class="level">${isEn ? 'Type' : 'Loại'}: ${a.auction_type} | ${isEn ? 'Ended' : 'Kết thúc'}: ${a.end_date || '-'}</p>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Auction History' : 'Lịch Sử Đấu Giá',
+    isEn ? 'Past auctions and results.' : 'Đấu giá đã qua và kết quả.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+      <div class="lang-switch">
+        <a href="/history" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/history" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Auction History' : 'Lịch Sử Đấu Giá'}</h1>
+      <p>${isEn ? 'Past auctions and their results.' : 'Đấu giá đã qua và kết quả.'}</p>
+    </div>
+    <div class="container">
+      <div class="info-box">
+        ${isEn ? 'No auctions have been held yet. Auction functionality is in legal-readiness mode.' : 'Chưa có đấu giá nào được tổ chức. Chức năng đấu giá đang ở chế độ sẵn sàng pháp lý.'}
+      </div>
+      <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No auction history.' : 'Không có lịch sử đấu giá.'}</p>`}</div>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}

@@ -34,6 +34,9 @@ import {
   handleSellerAssetsList, handleSellerAddComponent, handleSellerSubmitPackage, handleSellerVerificationStatus,
   handleBuyerProfile, handleAdminVerificationCases, handleAdminCredentialIssue, handleListingInquiry
 } from './routes/seller-buyer-operator';
+import {
+  handleAuctionCreate, handleAuctionGet, handleAuctionBidSubmit, handleAuctionBidList, handleAuctionEnd
+} from './routes/auction';
 
 export interface Env {
   DB: D1Database;
@@ -149,6 +152,13 @@ router.post('/api/omdalat/buyer/profile', handleBuyerProfile);
 router.get('/api/omdalat/admin/verification-cases', handleAdminVerificationCases);
 router.post('/api/omdalat/admin/credentials/issue', handleAdminCredentialIssue);
 router.post('/api/omdalat/listings/:id/inquiries', handleListingInquiry);
+
+// Brand Asset Network — auction endpoints (ALL gated behind AUCTION_LIVE_ENABLED feature flag)
+router.post('/api/omdalat/auctions', handleAuctionCreate);
+router.get('/api/omdalat/auctions/:id', handleAuctionGet);
+router.post('/api/omdalat/auctions/:id/bids', handleAuctionBidSubmit);
+router.get('/api/omdalat/auctions/:id/bids', handleAuctionBidList);
+router.post('/api/omdalat/auctions/:id/end', handleAuctionEnd);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

@@ -10,7 +10,13 @@ import {
   handleBrandFactoryCases,
   handleBrandFactoryDashboard,
   handleMarketAdmin,
-  handleAuctionRules
+  handleAuctionRules,
+  handleBrandFactoryEvidence,
+  handleBrandFactoryIntake,
+  handleMarketBuyerDashboard,
+  handleRegistrySearch,
+  handleAuctionLive,
+  handleAuctionHistory
 } from './routes/asset-network';
 
 export interface Env {
@@ -34,6 +40,10 @@ router.get('*', async (request: Request, env: Env) => {
     ? hostParts[0] : '';
 
   if (subdomain === 'registry') {
+    const pathParts = url.pathname.split('/').filter(Boolean);
+    if (pathParts.includes('search')) {
+      return handleRegistrySearch(request, env);
+    }
     return handleRegistrySite(request, env);
   }
   if (subdomain === 'market') {
@@ -44,12 +54,21 @@ router.get('*', async (request: Request, env: Env) => {
     if (pathParts.includes('admin')) {
       return handleMarketAdmin(request, env);
     }
+    if (pathParts.includes('buyer-dashboard')) {
+      return handleMarketBuyerDashboard(request, env);
+    }
     return handleMarketSite(request, env);
   }
   if (subdomain === 'auction') {
     const pathParts = url.pathname.split('/').filter(Boolean);
     if (pathParts.includes('rules')) {
       return handleAuctionRules(request, env);
+    }
+    if (pathParts.includes('live')) {
+      return handleAuctionLive(request, env);
+    }
+    if (pathParts.includes('history')) {
+      return handleAuctionHistory(request, env);
     }
     return handleAuctionSite(request, env);
   }
@@ -66,6 +85,12 @@ router.get('*', async (request: Request, env: Env) => {
     }
     if (pathParts.includes('dashboard')) {
       return handleBrandFactoryDashboard(request, env);
+    }
+    if (pathParts.includes('evidence')) {
+      return handleBrandFactoryEvidence(request, env);
+    }
+    if (pathParts.includes('intake')) {
+      return handleBrandFactoryIntake(request, env);
     }
   }
   return handleBrandSite(request, env);
