@@ -1602,10 +1602,10 @@ These rules apply to all independent projects in the `*.omdalat.com` namespace:
 | P0 tasks | 8/10 (80%) | 10/10 (100%) | +2 |
 | P1 tasks | 1/7 (14%) | 7/7 (100%) | +6 |
 | P2 tasks | 0/6 (0%) | 4/6 (67%) | +4 |
-| P3 tasks | 0/5 (0%) | 0/5 (0%) | 0 (needs legal partner) |
+| P3 tasks | 0/5 (0%) | 2/5 (40%) | +2 (API built, gated behind flag) |
 | Data model tables | 12/48 (25%) | 48/48 (100%) | +36 |
-| API endpoints | 9/25 (36%) | 20/25 (80%) | +11 |
-| UI screens | 5/21 (24%) | 8/21 (38%) | +3 |
+| API endpoints | 9/25 (36%) | 25/25 (100%) | +16 |
+| UI screens | 5/21 (24%) | 15/21 (71%) | +10 |
 | QA gates | 9/12 (75%) | 12/12 (100%) | +3 |
 | Prohibitions enforced | 5/15 (33%) | 15/15 (100%) | +10 |
 | Spec/governance | 15/15 (100%) | 15/15 (100%) | 0 |
@@ -1616,12 +1616,12 @@ These rules apply to all independent projects in the `*.omdalat.com` namespace:
 | Component | Weight | % Complete | Contribution |
 |-----------|--------|------------|--------------|
 | Spec/governance (15 sections) | 30% | 100% | 30% |
-| Implementation (10 sections) | 50% | 78% | 39% |
+| Implementation (10 sections) | 50% | 90% | 45% |
 | Independent projects (2 repos) | 10% | 100% | 10% |
-| P3 Auction (needs legal partner) | 10% | 0% | 0% |
-| **TOTAL** | **100%** | | **~79%** |
+| P3 Auction go-live (needs legal partner) | 10% | 50% | 5% |
+| **TOTAL** | **100%** | | **~90%** |
 
-**Remaining: ~21%** — almost entirely P3 (auction go-live, needs legal partner signoff) + 5 auction API endpoints + 13 UI screens (mostly P3 auction screens + brand factory sub-pages).
+**Remaining: ~10%** — P3 auction go-live (needs legal partner signoff to enable feature flag) + 6 UI screens (P3 auction live screens: bid placement, winner declaration, post-auction — all behind feature flag).
 
 ### What was built in this session
 
