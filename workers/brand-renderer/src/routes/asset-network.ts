@@ -24,6 +24,14 @@ const COMMON_HEAD = (title: string, description: string, ogImage: string) => `<!
   <meta property="og:description" content="${description}">
   <meta property="og:image" content="${ogImage}">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${ogImage}">
+  <link rel="canonical" href="https://omdalat.com">
+  <link rel="alternate" hreflang="vi" href="https://omdalat.com">
+  <link rel="alternate" hreflang="en" href="https://omdalat.com/en">
+  <link rel="alternate" hreflang="x-default" href="https://omdalat.com">
   <link rel="icon" href="https://omdalat.com/favicon.ico">
   <style>
     :root {
@@ -959,6 +967,227 @@ export async function handleBrandFactoryCases(request: Request, env: Env): Promi
         ${isEn ? 'Trust labels are per-component. No global Verified badge.' : 'Nhãn tin cậy theo từng thành phần. Không có nhãn Verified toàn cục.'}
       </div>
       <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No published packages yet.' : 'Chưa có gói nào công bố.'}</p>`}</div>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * brand.omdalat.com/dashboard — seller dashboard (lists their packages + status)
+ */
+export async function handleBrandFactoryDashboard(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  const result = await env.DB.prepare(
+    `SELECT public_id, slug, name_vi, name_en, asset_level, listing_status, publication_status, created_at, updated_at
+     FROM asset_packages ORDER BY created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const rows = (result.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (r.name_en || r.name_vi) : r.name_vi}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span>
+         <span class="badge ${r.publication_status === 'published' ? 'badge-verified' : 'badge-pending'}">${r.publication_status}</span></p>
+      <p class="level">${isEn ? 'Level' : 'Cấp độ'}: ${r.asset_level} | ${isEn ? 'Listing' : 'Listing'}: ${r.listing_status}</p>
+      <a class="no-button" href="${isEn ? '/en/verify?pid=' : '/verify?pid='}${r.public_id}">${isEn ? 'View Status' : 'Xem Trạng Thái'} →</a>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Dashboard — Brand Factory' : 'Bảng Điều Khiển — Brand Factory',
+    isEn ? 'Your brand asset packages and their status.' : 'Các gói tài sản thương hiệu và trạng thái.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? 'https://brand.omdalat.com/en' : 'https://brand.omdalat.com'}">Brand Factory</a></div>
+      <div class="lang-switch">
+        <a href="/dashboard" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/dashboard" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Seller Dashboard' : 'Bảng Điều Khiển Người Bán'}</h1>
+      <p>${isEn ? 'Overview of your brand asset packages.' : 'Tổng quan các gói tài sản thương hiệu.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <a class="no-button" href="${isEn ? '/en/apply' : '/apply'}" style="display:inline-block;margin-bottom:16px">${isEn ? '+ Submit New Package' : '+ Gửi Gói Mới'} →</a>
+      </div>
+      <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No packages yet. Submit your first package.' : 'Chưa có gói nào. Gửi gói đầu tiên.'}</p>`}</div>
+    </div>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * market.omdalat.com/admin — admin panel for marketplace (listing approval, buyer requests)
+ */
+export async function handleMarketAdmin(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch pending listings
+  const pendingListings = await env.DB.prepare(
+    `SELECT ml.id, ml.status, ml.created_at, ap.public_id, ap.name_vi, ap.name_en
+     FROM marketplace_listings ml
+     JOIN asset_packages ap ON ml.package_id = ap.id
+     WHERE ml.status = 'pending'
+     ORDER BY ml.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  // Fetch pending buyer requests
+  const pendingBuyers = await env.DB.prepare(
+    `SELECT id, buyer_email, buyer_name, buyer_organization, buyer_type, qualification_status, created_at
+     FROM buyer_requests
+     WHERE qualification_status = 'pending'
+     ORDER BY created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const listingRows = (pendingListings.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (r.name_en || r.name_vi) : r.name_vi}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span> <span class="badge badge-pending">${r.status}</span></p>
+      <p class="level">${isEn ? 'Created' : 'Tạo'}: ${r.created_at}</p>
+      <button class="approve-btn" data-id="${r.id}" data-action="approve">${isEn ? 'Approve' : 'Duyệt'}</button>
+      <button class="suspend-btn" data-id="${r.id}" data-action="suspend">${isEn ? 'Suspend' : 'Tạm dừng'}</button>
+    </div>`).join('');
+
+  const buyerRows = (pendingBuyers.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${r.buyer_name}</h3>
+      <p>${r.buyer_email} | ${r.buyer_organization || '-'}</p>
+      <p><span class="badge badge-pending">${r.qualification_status}</span> ${r.buyer_type || ''}</p>
+      <button class="qualify-btn" data-id="${r.id}" data-action="qualified">${isEn ? 'Qualify' : 'Duyệt'}</button>
+      <button class="reject-btn" data-id="${r.id}" data-action="rejected">${isEn ? 'Reject' : 'Từ chối'}</button>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Admin — Market' : 'Quản Trị — Market',
+    isEn ? 'Marketplace admin panel for listing approval and buyer qualification.' : 'Bảng quản trị thị trường để duyệt listing và qualifying người mua.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Market</a> / Admin</div>
+      <div class="lang-switch">
+        <a href="/admin" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/admin" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Marketplace Admin' : 'Quản Trị Thị Trường'}</h1>
+      <p>${isEn ? 'Approve listings and qualify buyers.' : 'Duyệt listing và qualify người mua.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>${isEn ? 'Pending Listings' : 'Listing Chờ Duyệt'}</h2>
+        <div class="grid">${listingRows || `<p style="color:var(--muted)">${isEn ? 'No pending listings.' : 'Không có listing chờ duyệt.'}</p>`}</div>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Pending Buyer Requests' : 'Yêu Cầu Người Mua Chờ Duyệt'}</h2>
+        <div class="grid">${buyerRows || `<p style="color:var(--muted)">${isEn ? 'No pending buyer requests.' : 'Không có yêu cầu chờ duyệt.'}</p>`}</div>
+      </div>
+    </div>
+    <script>
+      async function adminAction(btn, endpoint) {
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        const res = await fetch('https://api.omdalat.com/api/omdalat/' + endpoint.replace('{id}', id).replace('{action}', action), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}'
+        });
+        if (res.ok) { btn.closest('.listing-card').style.opacity = '0.5'; btn.disabled = true; }
+        else { alert('Action failed. Are you logged in as admin?'); }
+      }
+      document.querySelectorAll('.approve-btn, .suspend-btn').forEach(btn => {
+        btn.addEventListener('click', () => adminAction(btn, 'listings/{id}/' + btn.dataset.action));
+      });
+      document.querySelectorAll('.qualify-btn, .reject-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id; const action = btn.dataset.action;
+          fetch('https://api.omdalat.com/api/omdalat/buyer-requests/' + id + '/qualify', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ qualification_status: action })
+          }).then(r => { if (r.ok) { btn.closest('.listing-card').style.opacity = '0.5'; btn.disabled = true; } else alert('Failed. Admin login required.'); });
+        });
+      });
+    </script>
+  ` + FOOTER(isEn);
+
+  return new Response(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+  });
+}
+
+/**
+ * auction.omdalat.com/rules — auction rules page (P3, behind feature flag check)
+ */
+export async function handleAuctionRules(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Check if AUCTION_LIVE_ENABLED flag exists — if not, show legal-readiness only
+  const html = COMMON_HEAD(
+    isEn ? 'Auction Rules — Legal Readiness' : 'Quy Tắc Đấu Giá — Sẵn Sàng Pháp Lý',
+    isEn ? 'Auction rules and legal readiness framework.' : 'Quy tắc đấu giá và khung sẵn sàng pháp lý.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+      <div class="lang-switch">
+        <a href="/rules" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/rules" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Auction Rules Framework' : 'Khung Quy Tắc Đấu Giá'}</h1>
+      <p>${isEn ? 'The auction rules are defined but NOT live. Legal partner signoff required.' : 'Quy tắc đấu giá đã định nghĩa nhưng CHƯA live. Cần phê duyệt của đối tác pháp lý.'}</p>
+    </div>
+    <div class="container">
+      <div class="legal-block">
+        <h2>${isEn ? 'No Live Auctions' : 'Không Có Đấu Giá Trực Tiếp'}</h2>
+        <p>${isEn ? 'Auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.'}</p>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Planned Auction Types' : 'Các Loại Đấu Giá Dự Kiến'}</h2>
+        <ul style="padding-left:20px">
+          <li><strong>${isEn ? 'English Auction' : 'Đấu giá Anh'}</strong> — ${isEn ? 'ascending bids, highest wins' : 'thầu tăng dần, cao nhất thắng'}</li>
+          <li><strong>${isEn ? 'Sealed Bid' : 'Thầu kín'}</strong> — ${isEn ? 'single hidden bid, highest wins' : 'một thầu ẩn, cao nhất thắng'}</li>
+          <li><strong>${isEn ? 'Dutch Auction' : 'Đấu giá Hà Lan'}</strong> — ${isEn ? 'descending price, first accept wins' : 'giá giảm dần, người chấp nhận đầu tiên thắng'}</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Bidder Requirements (Planned)' : 'Yêu Cầu Người Thầu (Dự Kiến)'}</h2>
+        <ul style="padding-left:20px">
+          <li>${isEn ? 'KYC/KYB verification required' : 'Xác minh KYC/KYB bắt buộc'}</li>
+          <li>${isEn ? 'Qualified buyer status' : 'Trạng thái người mua đủ điều kiện'}</li>
+          <li>${isEn ? 'Deposit or escrow confirmation' : 'Đặt cọc hoặc xác nhận escrow'}</li>
+          <li>${isEn ? 'Legal jurisdiction review' : 'Xem xét thẩm quyền pháp lý'}</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Legal Gates Before Go-Live' : 'Cổng Pháp Lý Trước Khi Go-Live'}</h2>
+        <ul style="padding-left:20px">
+          <li>${isEn ? 'Legal partner signoff on auction terms' : 'Phê duyệt của đối tác pháp lý về điều khoản đấu giá'}</li>
+          <li>${isEn ? 'Bidder qualification process approved' : 'Quy trình qualify người thầu được phê duyệt'}</li>
+          <li>${isEn ? 'Escrow provider integration confirmed' : 'Tích hợp escrow provider được xác nhận'}</li>
+          <li>${isEn ? 'Dispute resolution process documented' : 'Quy trình giải quyết tranh chấp được tài liệu hóa'}</li>
+          <li>${isEn ? 'AUCTION_LIVE_ENABLED feature flag set' : 'Feature flag AUCTION_LIVE_ENABLED được set'}</li>
+        </ul>
+      </div>
     </div>
   ` + FOOTER(isEn);
 

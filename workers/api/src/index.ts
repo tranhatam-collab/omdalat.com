@@ -29,6 +29,11 @@ import {
   handleDataRoomCreate, handleDataRoomGet, handleDataRoomRequestAccess, handleDataRoomGrantApprove,
   handleTransferGet, handleTransferUpdateStep
 } from './routes/data-room-transfer';
+import {
+  handlePublicBrandAssets, handleBrandDiscoveryIntake,
+  handleSellerAssetsList, handleSellerAddComponent, handleSellerSubmitPackage, handleSellerVerificationStatus,
+  handleBuyerProfile, handleAdminVerificationCases, handleAdminCredentialIssue, handleListingInquiry
+} from './routes/seller-buyer-operator';
 
 export interface Env {
   DB: D1Database;
@@ -131,6 +136,19 @@ router.post('/api/omdalat/data-rooms', handleDataRoomCreate);
 router.get('/api/omdalat/data-rooms/:id', handleDataRoomGet);
 router.post('/api/omdalat/data-rooms/:id/request-access', handleDataRoomRequestAccess);
 router.post('/api/omdalat/data-rooms/:id/grants/:grant_id/approve', handleDataRoomGrantApprove);
+
+// Brand Asset Network — public + seller + buyer + operator endpoints
+router.get('/api/omdalat/brand-assets/public', handlePublicBrandAssets);
+router.post('/api/omdalat/brand-discovery/intake', handleBrandDiscoveryIntake);
+router.get('/api/omdalat/assets', handleSellerAssetsList);
+router.post('/api/omdalat/assets/:id/components', handleSellerAddComponent);
+router.post('/api/omdalat/assets/:id/submit', handleSellerSubmitPackage);
+router.get('/api/omdalat/assets/:id/verification-status', handleSellerVerificationStatus);
+router.get('/api/omdalat/buyer/profile', handleBuyerProfile);
+router.post('/api/omdalat/buyer/profile', handleBuyerProfile);
+router.get('/api/omdalat/admin/verification-cases', handleAdminVerificationCases);
+router.post('/api/omdalat/admin/credentials/issue', handleAdminCredentialIssue);
+router.post('/api/omdalat/listings/:id/inquiries', handleListingInquiry);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

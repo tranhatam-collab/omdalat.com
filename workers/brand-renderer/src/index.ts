@@ -7,7 +7,10 @@ import {
   handleBrandFactoryApply,
   handleMarketAssetDetail,
   handleBrandFactoryVerify,
-  handleBrandFactoryCases
+  handleBrandFactoryCases,
+  handleBrandFactoryDashboard,
+  handleMarketAdmin,
+  handleAuctionRules
 } from './routes/asset-network';
 
 export interface Env {
@@ -38,9 +41,16 @@ router.get('*', async (request: Request, env: Env) => {
     if (pathParts.includes('assets')) {
       return handleMarketAssetDetail(request, env);
     }
+    if (pathParts.includes('admin')) {
+      return handleMarketAdmin(request, env);
+    }
     return handleMarketSite(request, env);
   }
   if (subdomain === 'auction') {
+    const pathParts = url.pathname.split('/').filter(Boolean);
+    if (pathParts.includes('rules')) {
+      return handleAuctionRules(request, env);
+    }
     return handleAuctionSite(request, env);
   }
   if (subdomain === 'brand') {
@@ -53,6 +63,9 @@ router.get('*', async (request: Request, env: Env) => {
     }
     if (pathParts.includes('cases')) {
       return handleBrandFactoryCases(request, env);
+    }
+    if (pathParts.includes('dashboard')) {
+      return handleBrandFactoryDashboard(request, env);
     }
   }
   return handleBrandSite(request, env);
