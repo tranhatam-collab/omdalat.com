@@ -436,5 +436,53 @@ describe('BAN-UI — All new screen handlers exist', () => {
     expect(source).toContain('handleAuctionHistory');
     expect(source).toContain('handleBrandFactoryEvidence');
     expect(source).toContain('handleBrandFactoryIntake');
+    expect(source).toContain('handleAuctionDetail');
+    expect(source).toContain('handleAuctionWinner');
+    expect(source).toContain('handleAuctionPost');
+    expect(source).toContain('handleRegistryAdmin');
+    expect(source).toContain('handleMarketDataRooms');
+    expect(source).toContain('handleMarketTransfers');
+  });
+
+  it('all 21 UI screen handlers exist in asset-network.ts', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const rendererPath = path.resolve(__dirname, '../../brand-renderer/src/routes/asset-network.ts');
+    const source = fs.readFileSync(rendererPath, 'utf-8');
+    const allHandlers = [
+      'handleRegistrySite', 'handleRegistrySearch', 'handleRegistryAdmin',
+      'handleMarketSite', 'handleMarketAssetDetail', 'handleMarketAdmin',
+      'handleMarketBuyerDashboard', 'handleMarketDataRooms', 'handleMarketTransfers',
+      'handleAuctionSite', 'handleAuctionRules', 'handleAuctionLive',
+      'handleAuctionHistory', 'handleAuctionDetail', 'handleAuctionWinner', 'handleAuctionPost',
+      'handleBrandFactoryApply', 'handleBrandFactoryVerify', 'handleBrandFactoryCases',
+      'handleBrandFactoryDashboard', 'handleBrandFactoryEvidence', 'handleBrandFactoryIntake',
+    ];
+    allHandlers.forEach(h => {
+      expect(source).toContain(h);
+    });
+    // Count: should be at least 21 unique handler functions
+    const handlerCount = allHandlers.filter(h => source.includes(`export async function ${h}`)).length;
+    expect(handlerCount).toBeGreaterThanOrEqual(21);
+  });
+
+  it('auction detail/winner/post pages show legal-readiness when flag is off', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const rendererPath = path.resolve(__dirname, '../../brand-renderer/src/routes/asset-network.ts');
+    const source = fs.readFileSync(rendererPath, 'utf-8');
+    // All 3 auction P3 pages should contain legal-readiness messaging
+    expect(source).toContain('legal partner signoff');
+    expect(source).toContain('AUCTION_LIVE_ENABLED');
+  });
+
+  it('transfer management page includes no-direct-custody notice', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const rendererPath = path.resolve(__dirname, '../../brand-renderer/src/routes/asset-network.ts');
+    const source = fs.readFileSync(rendererPath, 'utf-8');
+    expect(source).toContain('No direct custody');
+    expect(source).toContain('Escrow is via external provider');
+    expect(source).toContain('Secrets are never stored');
   });
 });

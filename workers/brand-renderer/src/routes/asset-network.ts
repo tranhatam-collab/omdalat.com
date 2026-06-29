@@ -1604,3 +1604,386 @@ export async function handleAuctionHistory(request: Request, env: Env): Promise<
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
   });
 }
+
+/**
+ * auction.omdalat.com/auctions/:id — auction detail with bid placement (gated)
+ */
+export async function handleAuctionDetail(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+  const auctionId = pathParts.find(p => p !== 'en' && p !== 'auctions' && !p.startsWith('_'));
+
+  // Feature flag check — currently always shows legal-readiness
+  const auctionLive = false;
+
+  if (!auctionLive) {
+    const html = COMMON_HEAD(
+      isEn ? 'Auction — Legal Readiness' : 'Đấu Giá — Sẵn Sàng Pháp Lý',
+      isEn ? 'Auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.',
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    ) + `
+    <body>
+      <header>
+        <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+        <div class="lang-switch">
+          <a href="/auctions/${auctionId}" class="${isEn ? '' : 'active'}">VI</a>
+          <a href="/en/auctions/${auctionId}" class="${isEn ? 'active' : ''}">EN</a>
+        </div>
+      </header>
+      <div class="container">
+        <div class="legal-block">
+          <h2>${isEn ? 'No Live Auctions' : 'Không Có Đấu Giá Trực Tiếp'}</h2>
+          <p>${isEn ? 'Auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.'}</p>
+          <p style="margin-top:12px"><code>AUCTION_LIVE_ENABLED</code> ${isEn ? 'is not set.' : 'chưa được set.'}</p>
+        </div>
+        <div class="card">
+          <h2>${isEn ? 'What happens when the flag is enabled' : 'Điều gì xảy ra khi flag được bật'}</h2>
+          <ul style="padding-left:20px">
+            <li>${isEn ? 'Auction details become visible' : 'Chi tiết đấu giá hiển thị'}</li>
+            <li>${isEn ? 'Qualified bidders can place bids' : 'Người thầu đủ điều kiện có thể đặt thầu'}</li>
+            <li>${isEn ? 'Bid history is recorded immutably' : 'Lịch sử thầu được ghi lại không thể thay đổi'}</li>
+            <li>${isEn ? 'Admin can end auction and declare winner' : 'Admin có thể kết thúc và công bố người thắng'}</li>
+          </ul>
+        </div>
+      </div>
+    ` + FOOTER(isEn);
+    return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  }
+
+  // Future: live auction detail with bid form
+  const html = COMMON_HEAD(
+    isEn ? 'Auction Detail' : 'Chi Tiết Đấu Giá',
+    isEn ? 'Place your bid on this brand asset package.' : 'Đặt thầu cho gói tài sản thương hiệu.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header><div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div></header>
+    <div class="container">
+      <p>${isEn ? 'Auction detail will appear here when live.' : 'Chi tiết đấu giá sẽ hiển thị ở đây khi live.'}</p>
+    </div>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
+/**
+ * auction.omdalat.com/auctions/:id/winner — winner declaration page (gated)
+ */
+export async function handleAuctionWinner(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+  const auctionId = pathParts.find(p => p !== 'en' && p !== 'auctions' && !p.startsWith('_') && p !== 'winner');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Auction Winner — Legal Readiness' : 'Người Thắng Đấu Giá — Sẵn Sàng Pháp Lý',
+    isEn ? 'Winner declaration is gated behind legal partner signoff.' : 'Công bố người thắng bị khóa cho đến khi đối tác pháp lý phê duyệt.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+      <div class="lang-switch">
+        <a href="/auctions/${auctionId}/winner" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/auctions/${auctionId}/winner" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="container">
+      <div class="legal-block">
+        <h2>${isEn ? 'Winner Declaration Not Available' : 'Công Bố Người Thắng Không Khả Dụng'}</h2>
+        <p>${isEn ? 'Winner declaration functionality is gated behind legal partner signoff.' : 'Chức năng công bố người thắng bị khóa cho đến khi đối tác pháp lý phê duyệt.'}</p>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Process when enabled' : 'Quy trình khi bật'}</h2>
+        <ul style="padding-left:20px">
+          <li>${isEn ? 'Admin ends auction via API' : 'Admin kết thúc đấu giá qua API'}</li>
+          <li>${isEn ? 'Highest accepted bid is declared winner' : 'Thầu cao nhất được chấp nhận là người thắng'}</li>
+          <li>${isEn ? 'Winner is notified and directed to transfer workflow' : 'Người thắng được thông báo và hướng dẫn qua workflow chuyển nhượng'}</li>
+          <li>${isEn ? 'Registry event is logged publicly' : 'Sự kiện registry được ghi lại công khai'}</li>
+          <li>${isEn ? 'Bid events are recorded immutably' : 'Sự kiện thầu được ghi lại không thể thay đổi'}</li>
+        </ul>
+      </div>
+    </div>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
+/**
+ * auction.omdalat.com/auctions/:id/post — post-auction transfer initiation (gated)
+ */
+export async function handleAuctionPost(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+  const auctionId = pathParts.find(p => p !== 'en' && p !== 'auctions' && !p.startsWith('_') && p !== 'post');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Post-Auction — Legal Readiness' : 'Sau Đấu Giá — Sẵn Sàng Pháp Lý',
+    isEn ? 'Post-auction transfer workflow is gated behind legal partner signoff.' : 'Workflow chuyển nhượng sau đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+      <div class="lang-switch">
+        <a href="/auctions/${auctionId}/post" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/auctions/${auctionId}/post" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="container">
+      <div class="legal-block">
+        <h2>${isEn ? 'Post-Auction Not Available' : 'Sau Đấu Giá Không Khả Dụng'}</h2>
+        <p>${isEn ? 'Post-auction transfer workflow is gated behind legal partner signoff.' : 'Workflow chuyển nhượng sau đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.'}</p>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Post-auction process when enabled' : 'Quy trình sau đấu giá khi bật'}</h2>
+        <ul style="padding-left:20px">
+          <li>${isEn ? 'Winner is directed to transfer checklist' : 'Người thắng được hướng dẫn qua checklist chuyển nhượng'}</li>
+          <li>${isEn ? 'Escrow is initiated via external provider (no direct custody)' : 'Escrow được khởi tạo qua provider bên ngoài (không giữ tiền trực tiếp)'}</li>
+          <li>${isEn ? 'Domain, app, repo, trademark transfer steps are tracked' : 'Các bước chuyển nhượng domain, app, repo, trademark được theo dõi'}</li>
+          <li>${isEn ? 'Registry records the transfer completion' : 'Registry ghi lại hoàn tất chuyển nhượng'}</li>
+          <li>${isEn ? 'Credential is issued (pointer, not legal title)' : 'Credential được cấp (con trỏ, không phải quyền sở hữu)'}</li>
+        </ul>
+      </div>
+    </div>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
+/**
+ * registry.omdalat.com/admin — admin panel for verification case review
+ */
+export async function handleRegistryAdmin(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch pending verification cases
+  const result = await env.DB.prepare(
+    `SELECT vc.id, vc.case_type, vc.status, vc.created_at, vc.updated_at,
+            ap.public_id, ap.name_vi, ap.name_en
+     FROM verification_cases vc
+     JOIN asset_packages ap ON vc.package_id = ap.id
+     WHERE vc.status IN ('open', 'in_review')
+     ORDER BY vc.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const rows = (result.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${isEn ? (r.name_en || r.name_vi) : r.name_vi}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span>
+         <span class="badge badge-pending">${r.status}</span></p>
+      <p class="level">${isEn ? 'Case type' : 'Loại hồ sơ'}: ${r.case_type} | ${isEn ? 'Created' : 'Tạo'}: ${r.created_at}</p>
+      <button class="case-btn" data-id="${r.id}" data-action="complete">${isEn ? 'Mark Complete' : 'Đánh Dấu Hoàn Thành'}</button>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Admin — Registry' : 'Quản Trị — Registry',
+    isEn ? 'Review verification cases and manage registry events.' : 'Xem xét hồ sơ xác minh và quản lý sự kiện registry.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en' : '/'}">Registry</a> / Admin</div>
+      <div class="lang-switch">
+        <a href="/admin" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/admin" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Registry Admin' : 'Quản Trị Registry'}</h1>
+      <p>${isEn ? 'Review verification cases and manage registry events.' : 'Xem xét hồ sơ xác minh và quản lý sự kiện registry.'}</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>${isEn ? 'Pending Verification Cases' : 'Hồ Sơ Xác Minh Chờ Duyệt'}</h2>
+        <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No pending cases.' : 'Không có hồ sơ chờ duyệt.'}</p>`}</div>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('.case-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          const res = await fetch('https://api.omdalat.com/api/omdalat/verification/cases/' + id + '/complete', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}'
+          });
+          if (res.ok) { btn.closest('.listing-card').style.opacity = '0.5'; btn.disabled = true; }
+          else { alert('Failed. Admin login required.'); }
+        });
+      });
+    </script>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
+/**
+ * market.omdalat.com/data-rooms — data room management (admin)
+ */
+export async function handleMarketDataRooms(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch data rooms
+  const result = await env.DB.prepare(
+    `SELECT dr.id, dr.name, dr.description, dr.status, dr.created_at,
+            ap.public_id, ap.name_vi, ap.name_en
+     FROM data_rooms dr
+     JOIN asset_packages ap ON dr.package_id = ap.id
+     ORDER BY dr.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  // Fetch pending access requests
+  const grantsResult = await env.DB.prepare(
+    `SELECT drag.id, drag.buyer_email, drag.buyer_name, drag.status, drag.created_at,
+            dr.name as data_room_name
+     FROM data_room_access_grants drag
+     JOIN data_rooms dr ON drag.data_room_id = dr.id
+     WHERE drag.status = 'pending'
+     ORDER BY drag.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const roomRows = (result.results || []).map((r: any) => `
+    <div class="listing-card">
+      <h3>${r.name}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span> <span class="badge ${r.status === 'active' ? 'badge-verified' : 'badge-pending'}">${r.status}</span></p>
+      <p class="level">${isEn ? 'Package' : 'Gói'}: ${isEn ? (r.name_en || r.name_vi) : r.name_vi}</p>
+    </div>`).join('');
+
+  const grantRows = (grantsResult.results || []).map((g: any) => `
+    <div class="listing-card">
+      <h3>${g.buyer_name}</h3>
+      <p>${g.buyer_email}</p>
+      <p><span class="badge badge-pending">${g.status}</span> | ${isEn ? 'Data room' : 'Data room'}: ${g.data_room_name}</p>
+      <button class="grant-btn" data-id="${g.id}" data-action="granted">${isEn ? 'Approve' : 'Duyệt'}</button>
+      <button class="reject-btn" data-id="${g.id}" data-action="rejected">${isEn ? 'Reject' : 'Từ chối'}</button>
+    </div>`).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Data Rooms — Market Admin' : 'Data Rooms — Quản Trị Market',
+    isEn ? 'Manage data rooms and access requests.' : 'Quản lý data room và yêu cầu truy cập.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en/admin' : '/admin'}">${isEn ? 'Admin' : 'Quản Trị'}</a> / Data Rooms</div>
+      <div class="lang-switch">
+        <a href="/data-rooms" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/data-rooms" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Data Room Management' : 'Quản Lý Data Room'}</h1>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>${isEn ? 'Active Data Rooms' : 'Data Room Hoạt Động'}</h2>
+        <div class="grid">${roomRows || `<p style="color:var(--muted)">${isEn ? 'No data rooms.' : 'Không có data room.'}</p>`}</div>
+      </div>
+      <div class="card">
+        <h2>${isEn ? 'Pending Access Requests' : 'Yêu Cầu Truy Cập Chờ Duyệt'}</h2>
+        <div class="grid">${grantRows || `<p style="color:var(--muted)">${isEn ? 'No pending requests.' : 'Không có yêu cầu chờ duyệt.'}</p>`}</div>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('.grant-btn, .reject-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          const action = btn.dataset.action;
+          const res = await fetch('https://api.omdalat.com/api/omdalat/data-rooms/dr_placeholder/grants/' + id + '/approve', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: action })
+          });
+          if (res.ok) { btn.closest('.listing-card').style.opacity = '0.5'; btn.disabled = true; }
+          else alert('Failed. Admin login required.');
+        });
+      });
+    </script>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
+/**
+ * market.omdalat.com/transfers — transfer checklist management (admin)
+ */
+export async function handleMarketTransfers(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const isEn = pathParts.includes('en');
+
+  // Fetch transfer checklists
+  const result = await env.DB.prepare(
+    `SELECT tc.id, tc.status, tc.created_at, tc.updated_at,
+            tc.domain_transfer_status, tc.app_transfer_status, tc.repo_transfer_status,
+            tc.trademark_transfer_status, tc.contract_status, tc.escrow_status, tc.recording_status,
+            ap.public_id, ap.name_vi, ap.name_en
+     FROM transfer_checklists tc
+     JOIN asset_packages ap ON tc.package_id = ap.id
+     ORDER BY tc.created_at DESC LIMIT 50`
+  ).all() as any;
+
+  const STEP_LABEL = (s: string, isEn: boolean) => {
+    const map: Record<string, string> = {
+      pending: isEn ? 'Pending' : 'Chờ',
+      in_progress: isEn ? 'In Progress' : 'Đang làm',
+      completed: isEn ? 'Completed' : 'Hoàn thành',
+      failed: isEn ? 'Failed' : 'Lỗi',
+    };
+    return map[s] || s || '-';
+  };
+
+  const STEP_BADGE = (s: string) => {
+    if (s === 'completed') return `<span class="badge badge-verified">${s}</span>`;
+    if (s === 'failed') return `<span class="badge" style="background:var(--red)">${s}</span>`;
+    if (s === 'in_progress') return `<span class="badge badge-pending">${s}</span>`;
+    return `<span class="badge badge-draft">${s || 'pending'}</span>`;
+  };
+
+  const rows = (result.results || []).map((r: any) => {
+    const steps = [
+      ['domain', r.domain_transfer_status],
+      ['app', r.app_transfer_status],
+      ['repo', r.repo_transfer_status],
+      ['trademark', r.trademark_transfer_status],
+      ['contract', r.contract_status],
+      ['escrow', r.escrow_status],
+      ['recording', r.recording_status],
+    ];
+    const stepHtml = steps.map(([step, status]) =>
+      `<span style="display:inline-block;margin:2px 4px;font-size:0.75rem">${step}: ${STEP_BADGE(status)}</span>`
+    ).join('');
+    return `
+    <div class="listing-card">
+      <h3>${isEn ? (r.name_en || r.name_vi) : r.name_vi}</h3>
+      <p><span class="badge badge-info">${r.public_id}</span>
+         <span class="badge ${r.status === 'completed' ? 'badge-verified' : 'badge-pending'}">${r.status}</span></p>
+      <div style="margin-top:8px">${stepHtml}</div>
+    </div>`;
+  }).join('');
+
+  const html = COMMON_HEAD(
+    isEn ? 'Transfers — Market Admin' : 'Chuyển Nhượng — Quản Trị Market',
+    isEn ? 'Manage transfer checklists for brand asset packages.' : 'Quản lý checklist chuyển nhượng cho gói tài sản thương hiệu.',
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+  ) + `
+  <body>
+    <header>
+      <div class="brand"><a href="${isEn ? '/en/admin' : '/admin'}">${isEn ? 'Admin' : 'Quản Trị'}</a> / Transfers</div>
+      <div class="lang-switch">
+        <a href="/transfers" class="${isEn ? '' : 'active'}">VI</a>
+        <a href="/en/transfers" class="${isEn ? 'active' : ''}">EN</a>
+      </div>
+    </header>
+    <div class="hero">
+      <h1>${isEn ? 'Transfer Management' : 'Quản Lý Chuyển Nhượng'}</h1>
+      <p>${isEn ? 'Track domain, app, repo, trademark, contract, escrow, and recording steps.' : 'Theo dõi các bước domain, app, repo, trademark, hợp đồng, escrow, và ghi nhận.'}</p>
+    </div>
+    <div class="container">
+      <div class="info-box">
+        ${isEn ? 'No direct custody. Escrow is via external provider. Secrets are never stored or transferred.' : 'Không giữ tiền trực tiếp. Escrow qua provider bên ngoài. Secrets không bao giờ lưu hoặc chuyển.'}
+      </div>
+      <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No active transfers.' : 'Không có chuyển nhượng đang hoạt động.'}</p>`}</div>
+    </div>
+  ` + FOOTER(isEn);
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}

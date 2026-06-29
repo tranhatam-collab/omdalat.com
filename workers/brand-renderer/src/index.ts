@@ -16,7 +16,13 @@ import {
   handleMarketBuyerDashboard,
   handleRegistrySearch,
   handleAuctionLive,
-  handleAuctionHistory
+  handleAuctionHistory,
+  handleAuctionDetail,
+  handleAuctionWinner,
+  handleAuctionPost,
+  handleRegistryAdmin,
+  handleMarketDataRooms,
+  handleMarketTransfers
 } from './routes/asset-network';
 
 export interface Env {
@@ -44,6 +50,9 @@ router.get('*', async (request: Request, env: Env) => {
     if (pathParts.includes('search')) {
       return handleRegistrySearch(request, env);
     }
+    if (pathParts.includes('admin')) {
+      return handleRegistryAdmin(request, env);
+    }
     return handleRegistrySite(request, env);
   }
   if (subdomain === 'market') {
@@ -57,6 +66,12 @@ router.get('*', async (request: Request, env: Env) => {
     if (pathParts.includes('buyer-dashboard')) {
       return handleMarketBuyerDashboard(request, env);
     }
+    if (pathParts.includes('data-rooms')) {
+      return handleMarketDataRooms(request, env);
+    }
+    if (pathParts.includes('transfers')) {
+      return handleMarketTransfers(request, env);
+    }
     return handleMarketSite(request, env);
   }
   if (subdomain === 'auction') {
@@ -69,6 +84,16 @@ router.get('*', async (request: Request, env: Env) => {
     }
     if (pathParts.includes('history')) {
       return handleAuctionHistory(request, env);
+    }
+    if (pathParts.includes('auctions')) {
+      // /auctions/:id, /auctions/:id/winner, /auctions/:id/post
+      if (pathParts.includes('winner')) {
+        return handleAuctionWinner(request, env);
+      }
+      if (pathParts.includes('post')) {
+        return handleAuctionPost(request, env);
+      }
+      return handleAuctionDetail(request, env);
     }
     return handleAuctionSite(request, env);
   }
