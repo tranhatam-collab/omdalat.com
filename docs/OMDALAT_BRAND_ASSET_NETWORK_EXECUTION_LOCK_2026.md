@@ -1506,6 +1506,93 @@ The Om Dalat Brand Asset Network is 100 percent ready only when:
 
 ---
 
+## 25. Independent Project Registry
+
+The Om Dalat ecosystem includes independent projects that run in their own repos, with their own deploy pipelines, but share the `*.omdalat.com` domain namespace and the same AI Dev Team ownership model.
+
+These projects are tracked here so the execution lock has a single source of truth for what is live, what is not, and what gates apply.
+
+### 25.1 cham.omdalat.com
+
+| Property | Value |
+|----------|-------|
+| Repo | `tranhatam-collab/cham.omdalat.com` (GitHub, public) |
+| Domain | `cham.omdalat.com` |
+| Stack | Next.js + Cloudflare Workers (OpenNext) |
+| DB | Cloudflare D1 |
+| Owner | Single AI Dev Team |
+| Latest commit | `24826a5` — feat: harden admin auth + dedup shared components |
+| Files changed | 17 (+389 / -376) |
+| Build | PASS — 45 routes, 0 errors |
+| Live | Yes |
+
+**What landed in `24826a5`:**
+
+- Admin auth hardened: HMAC-signed session tokens, multi-user via `ADMIN_USERS_JSON`, `timingSafeEqual`, 12h expiry
+- `/api/v1/admin/login` now requires `username` + `password`, issues signed token (no raw password cookie)
+- `/api/v1/applications` GET now requires valid admin session (was public before)
+- `/admin` and `/admin/applications` enforce server-side session guard (static → dynamic)
+- New `/admin/logout` route clears session
+- Shared components deduped: `register-form.tsx` and `faq-page.tsx` extracted to `src/components/`; per-route copies removed
+- Docs: master spec updated with gate measurement protocol (G1–G4), API contract, stack lock, R4 artifact requirements, execution governance + owner matrix; QA report + evidence packet updated to 45 routes
+
+**Open items (do not block current state):**
+
+- R4 strict closure: no axe/Lighthouse artifact yet (P5)
+- P3 content: articles placeholder, `public/images/` empty
+- P2 email: no registration notification email yet
+- P5 tests: no automated test suite yet
+
+### 25.2 dreams.omdalat.com
+
+| Property | Value |
+|----------|-------|
+| Repo | `tranhatam-collab/dreams.omdalat.com` (GitHub, public) |
+| Domain | `dreams.omdalat.com` |
+| Stack | Next.js + Cloudflare Workers (OpenNext) |
+| DB | Cloudflare D1 (was better-sqlite3 on VPS) |
+| Owner | Single AI Dev Team |
+| Latest commit | `8266d90` — refactor: migrate VPS/PM2/better-sqlite3 → Cloudflare Workers + D1 |
+| Files changed | 31 (+246 / -802) |
+| Build | PASS — `next build` (60 routes) + `cf:build` (OpenNext `.open-next/worker.js`) both pass |
+| Lint | Clean |
+| Live | Yes (via Workers route `dreams.omdalat.com/*`) |
+
+**What landed in `8266d90`:**
+
+- Database: dropped `better-sqlite3`; D1 is the single backend (`src/lib/d1.ts` uses `getCloudflareContext` to resolve `DREAMS_DB`)
+- `db-service.ts` simplified: removed dual local/cloudflare branching, added generic typed `query/queryOne/queryAll/run` helpers
+- `session.ts`: sessions persisted in D1 `sessions` table (was in-memory Map — lost on restart, broken on Workers); `createSession/getSession/destroySession` now async with 24h expiry
+- `migrations/0001_initial.sql`: added `sessions` table
+- All admin routes `await getSession` (session lookup now async)
+- Response/row typing added across dreams + admin routes (dropped `any`)
+- Admin client pages: fetchers wrapped in `useCallback`
+- `SiteHeader`/`SiteFooter` moved from root layout into per-locale layouts (admin/api no longer get site chrome)
+- `package.json`: dropped PM2 scripts; added `cf:build`, `deploy`, `migrate`, `dev:cf`; `seed` now runs SQL against remote D1 via wrangler
+- `wrangler.jsonc`: added route `dreams.omdalat.com/*`, dropped Pages output
+- GitHub Actions: replaced SSH-to-VPS deploy with wrangler D1 migrate + Workers publish
+- Removed `ecosystem.config.js` and `scripts/seed.js`
+
+**Note for local dev:**
+
+`AGENTS.md` quick start still says `npm run seed && npm run dev` — but `seed` now runs against remote D1, and plain `next dev` will not have the `DREAMS_DB` binding (need `npm run dev:cf` / `wrangler dev`). This doc note is left for a future cleanup commit.
+
+### 25.3 Cross-project rules
+
+These rules apply to all independent projects in the `*.omdalat.com` namespace:
+
+1. **Single AI Dev Team ownership** — no separate team lanes, same as the core plan.
+2. **D1 is the only DB backend** — no better-sqlite3, no in-memory session maps, no VPS SQLite files.
+3. **Cloudflare Workers is the only runtime** — no PM2, no VPS deploy, no SSH-based CI.
+4. **OpenNext for Next.js apps** — `cf:build` must pass before deploy.
+5. **Session tokens must be signed** — no raw passwords in cookies, no unsigned session IDs.
+6. **Admin routes must require auth** — no public admin endpoints, no public application list endpoints.
+7. **Domain namespace is shared** — any new `*.omdalat.com` subdomain must be registered in this section before going live.
+8. **No overclaim** — same prohibited language rules as the core plan apply to all surfaces.
+9. **Repo separation is real** — each independent project stays in its own repo; this section is the only cross-project registry.
+
+---
+
 Locked for single AI dev execution planning.
 
 Next required artifact:
