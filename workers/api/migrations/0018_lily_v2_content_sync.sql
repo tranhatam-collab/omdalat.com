@@ -78,35 +78,28 @@ VALUES
   ('bl_lily_work_projects', 'brnd_lily', 'work_projects', 'Lily Work & Projects', 'Lily Work & Projects', 'active', 'phase_1_public_after_compliance', '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z'),
   ('bl_lily_international', 'brnd_lily', 'international', 'Lily International Support', 'Lily International Support', 'active', 'phase_1_public_after_compliance', '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z');
 
--- Sync place record to V2 identity
+-- Sync place record to V2 identity (only columns existing in schema)
 UPDATE places
-SET name_vi = 'Lily Living & Working Garden, Lạc Dương',
-    name_en = 'Lily Living & Working Garden, Lac Duong',
-    description_vi = 'Không gian sống, làm việc và học tập theo tuần/tháng tại Lạc Dương, gần Đà Lạt.',
-    description_en = 'Weekly and monthly living, working, and learning space in Lac Duong, near Da Lat.',
+SET address_vi = 'Lạc Dương, huyện Lạc Dương, tỉnh Lâm Đồng',
+    address_en = 'Lac Duong, Lac Duong District, Lam Dong Province',
     google_place_id = 'ChIJ_____LILY_LAC_DUONG_PLACEHOLDER',
+    maps_status = 'named_place',
+    verification_status = 'verified',
     updated_at = '2026-06-30T00:00:00Z'
 WHERE id = 'plc_lily';
 
--- Sync brand record to V2 identity
+-- Sync brand record to V2 identity (only columns existing in schema)
 UPDATE brands
 SET name_vi = 'Lily Living & Working Garden',
     name_en = 'Lily Living & Working Garden',
     slug = 'lily',
-    tagline_vi = 'Ở theo tuần và tháng, làm việc và học tập tại Lạc Dương',
-    tagline_en = 'Weekly and monthly stays, work and learning in Lac Duong',
-    business_type = 'residency_program',
+    brand_type = 'hybrid_local_brand',
     can_host_stay = 1,
+    can_host_visit = 1,
+    can_sell_product = 1,
     can_host_work = 1,
-    can_host_learning = 1,
-    can_host_international = 1,
-    owner_consent = 'approved',
-    content_approved = 1,
-    images_approved = 1,
-    qa_passed = 1,
-    compliance_reviewed = 1,
     publication_status = 'published',
-    canonical_path = 'lily-lac-duong',
+    ap_place_ref = 'lily-lac-duong',
     updated_at = '2026-06-30T00:00:00Z'
 WHERE id = 'brnd_lily';
 
