@@ -5,7 +5,7 @@ import { requireAuth, requireSuper } from '../lib/auth';
 /**
  * POST /api/omdalat/offers
  * Buyer submits an offer on a package (requires buyer_request_id from qualification)
- * Public route — but buyer must have a qualified buyer_request
+ * Auth route — buyer must be authenticated and have a qualified buyer_request
  */
 export const handleOfferCreate = async (
   request: Request,
@@ -15,6 +15,11 @@ export const handleOfferCreate = async (
   if (request.method !== 'POST') {
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
+
+  // F1 FIX: Require authentication before any validation or DB write.
+  // Without this, anyone could create offers on any package.
+  const auth = await requireAuth(request, env);
+  if (auth instanceof Response) return withCors(request, auth, env);
 
   try {
     const body = await request.json() as any;
@@ -58,7 +63,7 @@ export const handleOfferCreate = async (
     await env.DB.prepare(
       `INSERT INTO asset_audit_events (id, package_id, action, actor, reason, created_at)
        VALUES (?, ?, 'offer_submitted', ?, ?, ?)`
-    ).bind(`ae_${Date.now()}`, package_id, buyer_request_id || 'anonymous', `Offer ${offer_type} submitted`, now).run();
+    ).bind(`ae_${Date.now()}`, package_id, (auth as any).email || buyer_request_id || 'unknown', `Offer ${offer_type} submitted`, now).run();
 
     return withCors(request, new Response(
       JSON.stringify({ success: true, offer_id: id, status: 'submitted' }),

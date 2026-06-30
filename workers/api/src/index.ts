@@ -37,6 +37,8 @@ import {
 import {
   handleAuctionCreate, handleAuctionGet, handleAuctionBidSubmit, handleAuctionBidList, handleAuctionEnd
 } from './routes/auction';
+import { handleKycSubmit } from './routes/kyc-adapter';
+import { handleEscrowCreate, handleEscrowStatus } from './routes/escrow-adapter';
 
 export interface Env {
   DB: D1Database;
@@ -159,6 +161,11 @@ router.get('/api/omdalat/auctions/:id', handleAuctionGet);
 router.post('/api/omdalat/auctions/:id/bids', handleAuctionBidSubmit);
 router.get('/api/omdalat/auctions/:id/bids', handleAuctionBidList);
 router.post('/api/omdalat/auctions/:id/end', handleAuctionEnd);
+
+// KYC/KYB + Escrow adapter endpoints (status: NOT_IMPLEMENTED — interface only)
+router.post('/api/omdalat/kyc/submit', handleKycSubmit);
+router.post('/api/omdalat/escrow/create', handleEscrowCreate);
+router.get('/api/omdalat/escrow/:id', handleEscrowStatus);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

@@ -5,6 +5,7 @@ import { requireAuth, requireSuper } from '../lib/auth';
 /**
  * POST /api/omdalat/evidence
  * Submit rights evidence for a package/component (seller or admin)
+ * Auth route — submitter must be authenticated.
  */
 export const handleEvidenceSubmit = async (
   request: Request,
@@ -14,6 +15,11 @@ export const handleEvidenceSubmit = async (
   if (request.method !== 'POST') {
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
+
+  // F2 FIX: Require authentication before any validation or DB write.
+  // Without this, anyone could inject evidence records into any package.
+  const auth = await requireAuth(request, env);
+  if (auth instanceof Response) return withCors(request, auth, env);
 
   try {
     const body = await request.json() as any;
@@ -37,8 +43,8 @@ export const handleEvidenceSubmit = async (
     // Log registry event
     await env.DB.prepare(
       `INSERT INTO registry_events (id, package_id, event_type, public_visible, actor, description, created_at)
-       VALUES (?, ?, 'evidence_submitted', 0, 'seller', ?, ?)`
-    ).bind(`rev_${Date.now()}`, package_id, `Evidence submitted: ${evidence_type} — ${description.slice(0, 80)}`, now).run();
+       VALUES (?, ?, 'evidence_submitted', 0, ?, ?)`
+    ).bind(`rev_${Date.now()}`, package_id, (auth as any).email || 'unknown', `Evidence submitted: ${evidence_type} — ${description.slice(0, 80)}`, now).run();
 
     return withCors(request, new Response(
       JSON.stringify({ success: true, evidence_id: id, status: 'uploaded' }),

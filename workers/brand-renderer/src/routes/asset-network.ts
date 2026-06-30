@@ -433,17 +433,70 @@ export async function handleMarketSite(request: Request, env: Env): Promise<Resp
 }
 
 async function renderMarketHome(env: Env, isEn: boolean, url: URL): Promise<Response> {
-  const result = await env.DB.prepare(
-    `SELECT ml.id, ml.listing_type, ml.title_vi, ml.title_en, ml.description_vi, ml.description_en,
+  // F3 FIX: Market filter UI with URL state, sort, asset_level filter, clear filters, no-result state
+  const filterAssetLevel = url.searchParams.get('asset_level') || '';
+  const filterMarketStatus = url.searchParams.get('market_status') || '';
+  const sortBy = url.searchParams.get('sort') || 'recent';
+  const page = parseInt(url.searchParams.get('page') || '1', 10);
+  const perPage = 12;
+  const offset = (page - 1) * perPage;
+
+  // Build query with filters — parameterized to prevent SQL injection
+  let query = `SELECT ml.id, ml.listing_type, ml.title_vi, ml.title_en, ml.description_vi, ml.description_en,
             ml.asking_price_vnd, ml.asking_price_usd, ml.currency,
-            ap.public_id, ap.slug, ap.name_vi, ap.name_en, ap.asset_level, ap.summary_vi, ap.summary_en
+            ap.public_id, ap.slug, ap.name_vi, ap.name_en, ap.asset_level, ap.summary_vi, ap.summary_en,
+            ap.market_status
      FROM marketplace_listings ml
      JOIN asset_packages ap ON ml.package_id = ap.id
      WHERE ml.status = 'live'
-       AND ap.publication_status = 'published'
-       AND ap.market_status IN ('request_access_only', 'private_tease', 'open_listing')
-     ORDER BY ml.updated_at DESC`
-  ).all() as any;
+       AND ap.publication_status = 'published'`;
+  const binds: any[] = [];
+  const marketStatuses = ['request_access_only', 'private_tease', 'open_listing'];
+  if (filterAssetLevel && ['registered', 'evidence_ready', 'verified', 'trademarked'].includes(filterAssetLevel)) {
+    query += ` AND ap.asset_level = ?`;
+    binds.push(filterAssetLevel);
+  }
+  if (filterMarketStatus && marketStatuses.includes(filterMarketStatus)) {
+    query += ` AND ap.market_status = ?`;
+    binds.push(filterMarketStatus);
+  } else {
+    query += ` AND ap.market_status IN ('request_access_only', 'private_tease', 'open_listing')`;
+  }
+  // Sort
+  if (sortBy === 'price_asc') {
+    query += ` ORDER BY ml.asking_price_vnd ASC NULLS LAST`;
+  } else if (sortBy === 'price_desc') {
+    query += ` ORDER BY ml.asking_price_vnd DESC NULLS LAST`;
+  } else if (sortBy === 'name') {
+    query += ` ORDER BY ap.name_vi ASC`;
+  } else {
+    query += ` ORDER BY ml.updated_at DESC`;
+  }
+  query += ` LIMIT ? OFFSET ?`;
+  binds.push(perPage, offset);
+
+  const stmt = env.DB.prepare(query);
+  const result = await (binds.length > 0 ? stmt.bind(...binds) : stmt).all() as any;
+
+  // Count total for pagination
+  let countQuery = `SELECT COUNT(*) as total FROM marketplace_listings ml
+     JOIN asset_packages ap ON ml.package_id = ap.id
+     WHERE ml.status = 'live' AND ap.publication_status = 'published'`;
+  const countBinds: any[] = [];
+  if (filterAssetLevel && ['registered', 'evidence_ready', 'verified', 'trademarked'].includes(filterAssetLevel)) {
+    countQuery += ` AND ap.asset_level = ?`;
+    countBinds.push(filterAssetLevel);
+  }
+  if (filterMarketStatus && marketStatuses.includes(filterMarketStatus)) {
+    countQuery += ` AND ap.market_status = ?`;
+    countBinds.push(filterMarketStatus);
+  } else {
+    countQuery += ` AND ap.market_status IN ('request_access_only', 'private_tease', 'open_listing')`;
+  }
+  const countStmt = env.DB.prepare(countQuery);
+  const countResult = await (countBinds.length > 0 ? countStmt.bind(...countBinds) : countStmt).first() as any;
+  const total = countResult?.total || 0;
+  const totalPages = Math.ceil(total / perPage);
 
   const listings = result.results || [];
   const cards = listings.map((l: any) => {
@@ -459,6 +512,30 @@ async function renderMarketHome(env: Env, isEn: boolean, url: URL): Promise<Resp
         <a class="no-button" href="${isEn ? '/en/' : '/'}assets/${l.slug}">${isEn ? 'View Details' : 'Xem Chi Tiết'} →</a>
       </div>`;
   }).join('');
+
+  // Build filter form — uses GET with URL state
+  const langPrefix = isEn ? '/en' : '';
+  const assetLevelOptions = ['registered', 'evidence_ready', 'verified', 'trademarked']
+    .map(v => `<option value="${v}" ${filterAssetLevel === v ? 'selected' : ''}>${ASSET_LEVEL_LABEL(v, isEn)}</option>`).join('');
+  const marketStatusOptions = marketStatuses
+    .map(v => `<option value="${v}" ${filterMarketStatus === v ? 'selected' : ''}>${v.replace(/_/g, ' ')}</option>`).join('');
+  const sortOptions = [
+    { v: 'recent', l: isEn ? 'Most Recent' : 'Mới nhất' },
+    { v: 'name', l: isEn ? 'Name (A-Z)' : 'Tên (A-Z)' },
+    { v: 'price_asc', l: isEn ? 'Price ↑' : 'Giá ↑' },
+    { v: 'price_desc', l: isEn ? 'Price ↓' : 'Giá ↓' },
+  ].map(o => `<option value="${o.v}" ${sortBy === o.v ? 'selected' : ''}>${o.l}</option>`).join('');
+
+  const hasFilters = filterAssetLevel || filterMarketStatus || sortBy !== 'recent';
+  const clearUrl = langPrefix + '/';
+
+  // Pagination
+  const paginationHtml = totalPages > 1 ? `
+    <div style="margin-top:24px;text-align:center">
+      ${page > 1 ? `<a class="no-button" href="${langPrefix}/?${new URLSearchParams({ ...(filterAssetLevel && {asset_level: filterAssetLevel}), ...(filterMarketStatus && {market_status: filterMarketStatus}), ...(sortBy !== 'recent' && {sort: sortBy}), page: String(page - 1) })}">${isEn ? '← Previous' : '← Trước'}</a>` : ''}
+      <span style="margin:0 12px">${isEn ? 'Page' : 'Trang'} ${page} / ${totalPages}</span>
+      ${page < totalPages ? `<a class="no-button" href="${langPrefix}/?${new URLSearchParams({ ...(filterAssetLevel && {asset_level: filterAssetLevel}), ...(filterMarketStatus && {market_status: filterMarketStatus}), ...(sortBy !== 'recent' && {sort: sortBy}), page: String(page + 1) })}">${isEn ? 'Next →' : 'Sau →'}</a>` : ''}
+    </div>` : '';
 
   const html = COMMON_HEAD(
     isEn ? 'Om Dalat Market — Brand Asset Marketplace' : 'Om Dalat Market — Thị Trường Tài Sản Thương Hiệu',
@@ -485,10 +562,39 @@ async function renderMarketHome(env: Env, isEn: boolean, url: URL): Promise<Resp
           ? '<strong>Phase 0:</strong> Private marketplace only. No buy/bid buttons. No direct custody. No live auction.'
           : '<strong>Giai đoạn 0:</strong> Chỉ thị trường riêng. Không nút mua/thầu. Không giữ tiền trực tiếp. Không đấu giá trực tiếp.'}
       </div>
-      <h2 style="color:var(--green);margin:24px 0 12px">${isEn ? 'Curated Listings' : 'Listing Tuyển Chọn'}</h2>
+
+      <form method="GET" action="${langPrefix}/" style="margin:24px 0;padding:16px;border:1px solid var(--border);border-radius:8px;background:var(--card)">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:end">
+          <div>
+            <label style="font-size:0.8rem;font-weight:600">${isEn ? 'Asset Level' : 'Cấp Tài Sản'}</label>
+            <select name="asset_level" style="margin-top:4px">
+              <option value="">${isEn ? 'All' : 'Tất cả'}</option>
+              ${assetLevelOptions}
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.8rem;font-weight:600">${isEn ? 'Market Status' : 'Trạng Thái Thị Trường'}</label>
+            <select name="market_status" style="margin-top:4px">
+              <option value="">${isEn ? 'All' : 'Tất cả'}</option>
+              ${marketStatusOptions}
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.8rem;font-weight:600">${isEn ? 'Sort' : 'Sắp xếp'}</label>
+            <select name="sort" style="margin-top:4px">
+              ${sortOptions}
+            </select>
+          </div>
+          <button type="submit">${isEn ? 'Filter' : 'Lọc'}</button>
+          ${hasFilters ? `<a href="${clearUrl}" style="align-self:end;padding:10px 16px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--muted)">${isEn ? 'Clear' : 'Xóa lọc'}</a>` : ''}
+        </div>
+      </form>
+
+      <h2 style="color:var(--green);margin:24px 0 12px">${isEn ? 'Curated Listings' : 'Listing Tuyển Chọn'} (${total})</h2>
       <div class="grid">
-        ${cards || `<p style="color:var(--muted)">${isEn ? 'No live listings yet.' : 'Chưa có listing nào.'}</p>`}
+        ${cards || `<p style="color:var(--muted)">${isEn ? 'No listings match your filters.' : 'Không có listing phù hợp bộ lọc.'}</p>`}
       </div>
+      ${paginationHtml}
       <div class="card" style="margin-top:24px">
         <h2>${isEn ? 'Request Access' : 'Yêu Cầu Truy Cập'}</h2>
         <p style="color:var(--muted);margin-bottom:12px">${isEn ? 'To view detailed package information, submit a request. You will be contacted about qualification.' : 'Để xem thông tin chi tiết gói, gửi yêu cầu. Bạn sẽ được liên hệ về việc đủ điều kiện.'}</p>
@@ -1613,6 +1719,33 @@ export async function handleAuctionDetail(request: Request, env: Env): Promise<R
   const pathParts = url.pathname.split('/').filter(Boolean);
   const isEn = pathParts.includes('en');
   const auctionId = pathParts.find(p => p !== 'en' && p !== 'auctions' && !p.startsWith('_'));
+
+  // F4 FIX: Validate auctionId format before querying. Real auction IDs start with "auc_".
+  // Invalid IDs (like "test", "nonexistent-id-xyz") should return 404, not a soft 200.
+  if (!auctionId || !auctionId.startsWith('auc_')) {
+    const notFoundHtml = COMMON_HEAD(
+      isEn ? 'Auction Not Found' : 'Không Tìm Thấy Đấu Giá',
+      isEn ? 'This auction does not exist.' : 'Đấu giá này không tồn tại.',
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    ) + `
+    <body>
+      <header>
+        <div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div>
+        <div class="lang-switch">
+          <a href="/auctions" class="${isEn ? '' : 'active'}">VI</a>
+          <a href="/en/auctions" class="${isEn ? 'active' : ''}">EN</a>
+        </div>
+      </header>
+      <div class="container">
+        <div class="hero">
+          <h1>${isEn ? 'Auction Not Found' : 'Không Tìm Thấy Đấu Giá'}</h1>
+          <p>${isEn ? 'This auction ID is invalid or does not exist.' : 'Mã đấu giá này không hợp lệ hoặc không tồn tại.'}</p>
+          <p style="margin-top:16px"><a href="${isEn ? '/en' : '/'}" style="color:var(--green)">${isEn ? '← Back to Auction' : '← Về trang Đấu Giá'}</a></p>
+        </div>
+      </div>
+    ` + FOOTER(isEn);
+    return new Response(notFoundHtml, { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  }
 
   // Feature flag check — currently always shows legal-readiness
   const auctionLive = false;
