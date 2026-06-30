@@ -1,0 +1,116 @@
+{
+  "audit_date": "2026-06-30",
+  "auditor": "Independent QA (Devin)",
+  "repository": "tranhatam-collab/omdalat.com",
+  "branch": "main",
+  "head_sha": "42accef961c9cd67bd19594d9541f13f69fd2a4c",
+  "verdict": "HOLD",
+  "verdict_reasons": [
+    "F1: handleOfferCreate has no auth check (P1 security)",
+    "F2: handleEvidenceSubmit has no auth check (P1 security)",
+    "F3: Market filter UI not implemented (P2 UX)",
+    "F4: Soft 404 on auction detail pages (P2 UX)",
+    "KYC/KYB integration BLOCKED",
+    "Escrow integration BLOCKED",
+    "Auction legal authorization BLOCKED"
+  ],
+  "coverage": {
+    "planning_coverage": "100%",
+    "implementation_coverage": "95%",
+    "automated_test_coverage": "VERIFIED (169/169 pass)",
+    "live_route_verification": "VERIFIED (22/22 surfaces 200)",
+    "external_integration_readiness": "BLOCKED",
+    "legal_readiness": "BLOCKED",
+    "production_readiness": "HOLD"
+  },
+  "findings": {
+    "p1_blockers": [
+      {
+        "id": "F1",
+        "description": "handleOfferCreate has no authentication check",
+        "file": "workers/api/src/routes/offers-admin.ts:10",
+        "fix": "Add requireAuth before validation"
+      },
+      {
+        "id": "F2",
+        "description": "handleEvidenceSubmit has no authentication check",
+        "file": "workers/api/src/routes/evidence-transfer.ts",
+        "fix": "Add requireAuth before validation"
+      }
+    ],
+    "p2_should_fix": [
+      {
+        "id": "F3",
+        "description": "Market filter UI not implemented",
+        "fix": "Add filter form with asset_level, market_status, sort, pagination"
+      },
+      {
+        "id": "F4",
+        "description": "Soft 404 on auction detail pages (non-existent ID returns 200)",
+        "fix": "Add auction existence check when flag is enabled"
+      }
+    ],
+    "p3_informational": [
+      {
+        "id": "F5",
+        "description": "Claim 48 tables — actually 50 BAN tables (understated)"
+      },
+      {
+        "id": "F6",
+        "description": "Claim 25 endpoints — actually 44 BAN endpoints (understated denominator)"
+      },
+      {
+        "id": "F7",
+        "description": "Claim 21 UI screens — actually 22 handlers (off by 1)"
+      }
+    ]
+  },
+  "evidence_files": [
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_FINAL_QA_AUDIT_2026.md",
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_EVIDENCE_INDEX_2026.md",
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_ROUTE_MATRIX_2026.csv",
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_API_MATRIX_2026.csv",
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_REQUIREMENT_MATRIX_2026.csv"
+  ],
+  "deployment": {
+    "api_worker": {
+      "name": "omdalat-platforms-api",
+      "deployment_id": "242918cd-b725-44e5-83c0-78d1905ee13d",
+      "deployed_at": "2026-06-29T17:30:08.219Z",
+      "route": "api.omdalat.com"
+    },
+    "brand_renderer": {
+      "name": "omdalat-brand-renderer",
+      "deployment_id": "5356173a-028a-4adb-8a5c-0db787625c36",
+      "deployed_at": "2026-06-29T17:39:24.024Z",
+      "routes": ["brand.omdalat.com", "registry.omdalat.com/*", "market.omdalat.com/*", "auction.omdalat.com/*"]
+    }
+  },
+  "tests": {
+    "command": "npx vitest run",
+    "working_dir": "workers/api/",
+    "files": 6,
+    "total": 169,
+    "passed": 169,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 2210
+  },
+  "database": {
+    "name": "omdalat-core",
+    "uuid": "eab4c371-fa07-4035-b711-315121f92d4a",
+    "total_tables": 89,
+    "ban_tables": 50,
+    "migrations_applied": 17
+  },
+  "conditions_for_pass": [
+    "Fix F1: Add requireAuth to handleOfferCreate",
+    "Fix F2: Add requireAuth to handleEvidenceSubmit",
+    "KYC/KYB provider integration verified in production",
+    "Escrow provider integration verified in production",
+    "Legal partner signoff on auction terms (documented)",
+    "Rollback procedure tested",
+    "E2E test suite covering critical user journeys",
+    "No P1 or P2 findings open"
+  ]
+}

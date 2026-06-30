@@ -1,0 +1,67 @@
+requirement_id,category,requirement,status,evidence,notes
+GOV-001,governance,Execution lock document exists,VERIFIED,docs/OMDALAT_BRAND_ASSET_NETWORK_EXECUTION_LOCK_2026.md,Section 26 has progress table
+GOV-002,governance,Domain routing matrix artifact,VERIFIED,docs/OMDALAT_BRAND_ASSET_NETWORK_DOMAIN_ROUTING_MATRIX_2026.md,P0-001
+GOV-003,governance,Legal wording registry artifact,VERIFIED,docs/OMDALAT_BRAND_ASSET_NETWORK_LEGAL_WORDING_REGISTRY_2026.md,P0-002
+DB-001,database,Migration 0011 — asset_packages,VERIFIED,migrations/0011_brand_asset_package.sql,3 tables
+DB-002,database,Migration 0012 — rights_evidence,VERIFIED,migrations/0012_rights_evidence.sql,3 tables
+DB-003,database,Migration 0013 — registry_and_marketplace,VERIFIED,migrations/0013_registry_and_marketplace.sql,6 tables
+DB-004,database,Migration 0014 — data_rooms_and_extended,VERIFIED,migrations/0014_data_rooms_and_extended.sql,15 tables
+DB-005,database,Migration 0015 — remaining_data_model,VERIFIED,migrations/0015_remaining_data_model.sql,23 tables
+DB-006,database,All migrations applied to production D1,VERIFIED,d1_migrations table has 15+2 entries,89 tables in prod
+DB-007,database,BAN table count,VERIFIED,50 unique tables in migrations 0011-0015,Claim was 48 — understated
+API-001,api,Asset package CRUD,VERIFIED,asset-packages.ts,GET+POST+GET/:id
+API-002,api,Seller endpoints,VERIFIED,seller-buyer-operator.ts,5 endpoints
+API-003,api,Buyer endpoints,VERIFIED,seller-buyer-operator.ts,2 endpoints
+API-004,api,Admin verification,VERIFIED,seller-buyer-operator.ts,2 endpoints
+API-005,api,Offer log,FAIL,offers-admin.ts,handleOfferCreate has NO auth
+API-006,api,Evidence submission,FAIL,evidence-transfer.ts,handleEvidenceSubmit has NO auth
+API-007,api,Data room,VERIFIED,data-room-transfer.ts,4 endpoints with auth
+API-008,api,Transfer checklist,VERIFIED,data-room-transfer.ts + evidence-transfer.ts,3 endpoints with auth
+API-009,api,Auction (5 endpoints),VERIFIED,auction.ts,All gated behind AUCTION_LIVE_ENABLED
+API-010,api,Auction feature flag server-side,VERIFIED,auction.ts:22-24,isAuctionLive checks env
+API-011,api,Auth on protected endpoints,FAIL,2 of 10 tested return 400 not 401,F1+F2
+UI-001,ui,Registry site,VERIFIED,handleRegistrySite,200 live
+UI-002,ui,Registry search,VERIFIED,handleRegistrySearch,200 live
+UI-003,ui,Registry admin,VERIFIED,handleRegistryAdmin,200 live
+UI-004,ui,Market site,VERIFIED,handleMarketSite,200 live
+UI-005,ui,Market asset detail,VERIFIED,handleMarketAssetDetail,200 live
+UI-006,ui,Market admin,VERIFIED,handleMarketAdmin,200 live
+UI-007,ui,Market buyer dashboard,VERIFIED,handleMarketBuyerDashboard,200 live
+UI-008,ui,Market data rooms,VERIFIED,handleMarketDataRooms,200 live
+UI-009,ui,Market transfers,VERIFIED,handleMarketTransfers,200 live
+UI-010,ui,Auction site,VERIFIED,handleAuctionSite,200 live
+UI-011,ui,Auction rules,VERIFIED,handleAuctionRules,200 live
+UI-012,ui,Auction live,VERIFIED,handleAuctionLive,200 live (legal-readiness)
+UI-013,ui,Auction history,VERIFIED,handleAuctionHistory,200 live
+UI-014,ui,Auction detail,VERIFIED,handleAuctionDetail,200 live (soft 404 issue F4)
+UI-015,ui,Auction winner,VERIFIED,handleAuctionWinner,200 live
+UI-016,ui,Auction post,VERIFIED,handleAuctionPost,200 live
+UI-017,ui,Brand factory apply,VERIFIED,handleBrandFactoryApply,200 live
+UI-018,ui,Brand factory verify,VERIFIED,handleBrandFactoryVerify,200 live
+UI-019,ui,Brand factory cases,VERIFIED,handleBrandFactoryCases,200 live
+UI-020,ui,Brand factory dashboard,VERIFIED,handleBrandFactoryDashboard,200 live
+UI-021,ui,Brand factory evidence,VERIFIED,handleBrandFactoryEvidence,200 live
+UI-022,ui,Brand factory intake,VERIFIED,handleBrandFactoryIntake,200 live
+UI-023,ui,Market filter UI,FAIL,market home has no filter form,P2 — not implemented
+UI-024,ui,Canonical tags,VERIFIED,COMMON_HEAD includes rel=canonical,All 22 surfaces
+UI-025,ui,hreflang tags,VERIFIED,COMMON_HEAD includes hreflang vi/en/x-default,All 22 surfaces
+UI-026,ui,og: meta tags,VERIFIED,COMMON_HEAD includes og:title/description/image,All 22 surfaces
+QA-001,qa,169 tests pass,VERIFIED,vitest run — 6 files 169 tests,2.21s exit 0
+QA-002,qa,Negative tests for gates,VERIFIED,gate-compliance.test.ts,15 tests
+QA-003,qa,Prohibited language scan,VERIFIED,asset-network-gates.test.ts,12 prohibited phrases checked
+QA-004,qa,Auction flag gating tests,VERIFIED,asset-network-p1-p2.test.ts,10 tests
+QA-005,qa,E2E tests,NOT_TESTED,no e2e suite,Gap
+QA-006,qa,Accessibility tests,NOT_TESTED,no a11y suite,Gap
+SEC-001,security,Auth on offer create,FAIL,offers-admin.ts:10,No requireAuth call
+SEC-002,security,Auth on evidence submit,FAIL,evidence-transfer.ts,No requireAuth call
+SEC-003,security,Auction API bypass,VERIFIED,auth + feature flag,Not bypassable
+SEC-004,security,CORS config,VERIFIED,wrangler.jsonc vars,Restricted to omdalat subdomains
+SEC-005,security,Secrets in commits,VERIFIED,git log scan,Not found
+EXT-001,external,KYC/KYB integration,BLOCKED,schema only,No adapter
+EXT-002,external,Escrow integration,BLOCKED,schema only,No adapter
+EXT-003,external,Legal auction authorization,BLOCKED,no approval record,Required before flag enabled
+DEP-001,deployment,API worker deployed,VERIFIED,242918cd-b725-44e5-83c0-78d1905ee13d,2026-06-29T17:30
+DEP-002,deployment,Brand renderer deployed,VERIFIED,5356173a-028a-4adb-8a5c-0db787625c36,2026-06-29T17:39
+DEP-003,deployment,D1 migrations applied,VERIFIED,d1_migrations table,15+2 entries
+DEP-004,deployment,Observability enabled,VERIFIED,wrangler.jsonc,Both workers
+DEP-005,deployment,Rollback procedure,NOT_TESTED,no rollback rehearsal,Gap

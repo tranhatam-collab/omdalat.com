@@ -1,0 +1,23 @@
+route,handler,subdomain,path,auth,feature_flag,http_live,title_vi,verified
+handleRegistrySite,handleRegistrySite,registry,/,public,no,200,Om Dalat Registry,YES
+handleRegistrySearch,handleRegistrySearch,registry,/search,public,no,200,Tìm kiếm — Registry,YES
+handleRegistryAdmin,handleRegistryAdmin,registry,/admin,admin,no,200,Quản Trị — Registry,YES
+handleMarketSite,handleMarketSite,market,/,public,no,200,Om Dalat Market,YES
+handleMarketAssetDetail,handleMarketAssetDetail,market,/assets/:slug,public,no,200,(dynamic),YES
+handleMarketAdmin,handleMarketAdmin,market,/admin,admin,no,200,Quản Trị — Market,YES
+handleMarketBuyerDashboard,handleMarketBuyerDashboard,market,/buyer-dashboard,buyer,no,200,Bảng Điều Khiển Người Mua,YES
+handleMarketDataRooms,handleMarketDataRooms,market,/data-rooms,admin,no,200,Data Rooms — Quản Trị Market,YES
+handleMarketTransfers,handleMarketTransfers,market,/transfers,admin,no,200,Chuyển Nhượng — Quản Trị Market,YES
+handleAuctionSite,handleAuctionSite,auction,/,public,no,200,Om Dalat Auction,YES
+handleAuctionRules,handleAuctionRules,auction,/rules,public,no,200,Quy Tắc Đấu Giá,YES
+handleAuctionLive,handleAuctionLive,auction,/live,public,AUCTION_LIVE_ENABLED,200,Đấu Giá Trực Tiếp,YES
+handleAuctionHistory,handleAuctionHistory,auction,/history,public,no,200,Lịch Sử Đấu Giá,YES
+handleAuctionDetail,handleAuctionDetail,auction,/auctions/:id,public,AUCTION_LIVE_ENABLED,200,Đấu Giá — Sẵn Sàng Pháp Lý,YES
+handleAuctionWinner,handleAuctionWinner,auction,/auctions/:id/winner,public,AUCTION_LIVE_ENABLED,200,Người Thắng Đấu Giá,YES
+handleAuctionPost,handleAuctionPost,auction,/auctions/:id/post,public,AUCTION_LIVE_ENABLED,200,Sau Đấu Giá,YES
+handleBrandFactoryApply,handleBrandFactoryApply,brand,/apply,public,no,200,Gửi Thương Hiệu Của Bạn,YES
+handleBrandFactoryVerify,handleBrandFactoryVerify,brand,/verify,public,no,200,Kiểm Tra Trạng Thái Xác Minh,YES
+handleBrandFactoryCases,handleBrandFactoryCases,brand,/cases,admin,no,200,Hồ Sơ Xác Minh,YES
+handleBrandFactoryDashboard,handleBrandFactoryDashboard,brand,/dashboard,seller,no,200,Bảng Điều Khiển,YES
+handleBrandFactoryEvidence,handleBrandFactoryEvidence,brand,/evidence,seller,no,200,Nộp Bằng Chứng,YES
+handleBrandFactoryIntake,handleBrandFactoryIntake,brand,/intake,public,no,200,Khám Phá Thương Hiệu,YES
