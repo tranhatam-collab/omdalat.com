@@ -3,7 +3,7 @@
   "auditor": "Independent QA (Devin)",
   "repository": "tranhatam-collab/omdalat.com",
   "branch": "main",
-  "head_sha": "6b41ace87293583e3b3f17dd04fc1bb3b2c8bfbc",
+  "head_sha": "b37a9ee4f57a7225fe9e1e619218e069d3799eca",
   "verdict": "HOLD",
   "verdict_status": "CONDITIONAL HOLD — NOT 100% CLOSED",
   "verdict_reasons": [
@@ -15,8 +15,8 @@
     "X2: Offer ownership checks ADDED — package status, seller self-offer block, buyer_request ownership, duplicate offer (409), currency validation (VND/USD), buyer_request_id now mandatory (P1 security)",
     "X3: Evidence ownership checks ADDED — evidence_type enum, package ownership, R2-internal file_url (P1 security)",
     "X4: Data-room request-access now requires auth and verifies room existence (P1 security)",
-    "X5: Rate limiting NOT YET IMPLEMENTED (P1 security)",
-    "X6: File upload pipeline (MIME, size, malware scan) NOT YET IMPLEMENTED (P1 security / release blocker for file flows)",
+    "X5: Rate limiting ADDED to all authenticated write endpoints (P1 security)",
+    "X6: Upload pipeline ADDED — MIME allowlist, size limit, hash, quarantine, scan hook; arbitrary file_url rejected (P1 security)",
     "KYC/KYB integration BLOCKED",
     "Escrow integration BLOCKED",
     "Auction legal authorization BLOCKED",
@@ -65,19 +65,23 @@
         "file": "workers/api/src/routes/data-room-transfer.ts",
         "fix": "Require auth; use auth.email; verify data room exists before inserting grant request",
         "behavioral_tests": "e2e-journeys.test.ts: X4 no auth 401, non-existent room 404, valid room 201"
-      }
-    ],
-    "p1_open": [
+      },
       {
         "id": "X5",
-        "description": "No rate limiting on any write endpoint",
-        "fix": "Cloudflare WAF rate-limit rules + D1 application counters per endpoint class"
+        "description": "No rate limiting on authenticated write endpoints",
+        "file": "workers/api/src/lib/rate-limit.ts",
+        "fix": "Fixed-window D1-backed rate limits applied to offer create, evidence submit, data-room request-access, KYC submit, escrow create, and auction bids",
+        "behavioral_tests": "e2e-journeys.test.ts: X5 429 tests for offers, evidence, data-room, KYC, escrow"
       },
       {
         "id": "X6",
-        "description": "No file MIME, size, or malware validation on evidence/data-room uploads",
-        "fix": "Upload → quarantine → MIME sniff → size check → malware scan → metadata strip → approved storage → signed URL"
-      },
+        "description": "No file MIME, size, or malware validation; arbitrary file_url accepted",
+        "file": "workers/api/src/lib/upload-pipeline.ts",
+        "fix": "Upload pipeline with MIME allowlist, 50MB size limit, SHA-256, quarantine, malware scan hook; evidence/KYC require clean upload_id instead of file_url",
+        "behavioral_tests": "e2e-journeys.test.ts: X6 invalid MIME, oversized, Content-Type mismatch, external URL, missing scan status, KYC upload_id"
+      }
+    ],
+    "p1_open": [
       {
         "id": "AUTH_BASELINE",
         "description": "Auth baseline incomplete: no MFA/passkey, CSRF, per-subdomain cookies, login lockout, session rotation",
@@ -117,13 +121,18 @@
       "deployment_id": "3ea67207-7f50-4956-af26-9fea4c62dbd0",
       "deployed_at": "2026-06-30T03:18:33.000Z",
       "route": "api.omdalat.com",
-      "version_sha": "bf2d2d9e558c2ea155d42b5b1711e842f822526c"
+      "version_sha": "64c25860b94d271561f3599929620a9ca3c47851"
     },
     "brand_renderer": {
       "name": "omdalat-brand-renderer",
       "deployment_id": "61a1df01-4951-4fc3-a8a9-51d6e4cd39aa",
       "deployed_at": "2026-06-30T02:27:44.000Z",
-      "routes": ["brand.omdalat.com", "registry.omdalat.com/*", "market.omdalat.com/*", "auction.omdalat.com/*"],
+      "routes": [
+        "brand.omdalat.com",
+        "registry.omdalat.com/*",
+        "market.omdalat.com/*",
+        "auction.omdalat.com/*"
+      ],
       "version_sha": "bf2d2d9e558c2ea155d42b5b1711e842f822526c"
     }
   },
@@ -131,8 +140,8 @@
     "command": "npx vitest run",
     "working_dir": "workers/api/",
     "files": 7,
-    "total": 220,
-    "passed": 220,
+    "total": 235,
+    "passed": 235,
     "failed": 0,
     "skipped": 0,
     "duration_ms": 0,
@@ -152,8 +161,8 @@
     "Fix X2: Offer ownership/duplicate/currency checks — DONE (buyer_request_id mandatory, currency VND/USD)",
     "Fix X3: Evidence ownership/type/file validation — DONE (R2 URL restriction)",
     "Fix X4: Data-room request-access auth + room existence — DONE",
-    "Fix X5: Rate limiting — OPEN",
-    "Fix X6: Upload pipeline (MIME, size, malware) — OPEN",
+    "Fix X5: Rate limiting on write endpoints — DONE",
+    "Fix X6: Upload pipeline (MIME, size, malware scan hook) — DONE (real provider wiring pending)",
     "KYC/KYB provider integration verified in production — BLOCKED",
     "Escrow provider integration verified in production — BLOCKED",
     "Legal partner signoff on auction terms (documented) — BLOCKED",
@@ -167,6 +176,7 @@
     "Extended P1 re-audit (X1-X6) found and fixed X1-X4; X5-X6 remain open.",
     "Wild *.omdalat.com ecosystem remains HOLD due to E1-E4.",
     "Auction and high-value transaction release remains BLOCKED.",
-    "Remote GitHub verification of governance docs and latest commits is pending."
+    "Remote GitHub verification of governance docs and latest commits is pending.",
+    "X6 malware scan hook is a stub. No real provider is configured. Production file flows remain BLOCKED until a provider is wired and sandbox-tested."
   ]
 }
