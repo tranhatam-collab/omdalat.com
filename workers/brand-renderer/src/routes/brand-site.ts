@@ -495,15 +495,32 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
     .section { padding: 60px 0; }
     .section h2 { font-size: 2rem; margin-bottom: 2rem; color: #1a5c43; }
     .section p { margin-bottom: 1rem; max-width: 700px; }
-    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
-    .nav a { color: #333; text-decoration: none; }
-    .nav a:hover { color: #1a5c43; }
+    .nav { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; align-items: center; transition: all 0.3s ease; }
+    .nav li { position: relative; }
+    .nav a { color: #333; text-decoration: none; display: block; padding: 20px 10px; font-weight: 500; transition: all 0.25s ease; position: relative; }
+    .nav a::after { content: ''; position: absolute; bottom: 12px; left: 50%; width: 0; height: 2px; background: #1a5c43; transition: all 0.25s ease; transform: translateX(-50%); }
+    .nav a:hover { color: #1a5c43; transform: translateY(-2px); }
+    .nav a:hover::after { width: 70%; }
     .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
-    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a { padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; transition: all 0.2s ease; }
     .lang-switcher a.active { background: #1a5c43; color: white; }
     .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
-    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    .lang-switcher a:not(.active):hover { background: #1a5c43; color: white; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; padding: 10px; margin-left: auto; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 10px 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); gap: 0; border-top: 1px solid #eee; align-items: stretch; }
+      .nav ul.active { display: flex; }
+      .nav a { padding: 14px 0; border-bottom: 1px solid #eee; }
+      .nav a::after { bottom: 8px; }
+      .nav .container { flex-wrap: wrap; }
+    }
     footer { background: #333; color: white; padding: 40px 0; text-align: center; }
     .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
     .cta-button:hover { background: #0f3d2e; }
@@ -519,16 +536,21 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
-        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}training">${isEn ? 'Training' : 'Đào tạo'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}international">${isEn ? 'International' : 'Quốc tế'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="/${locale === 'en' ? 'en' : ''}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
+        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}training" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Training' : 'Đào tạo'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}international" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'International' : 'Quốc tế'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
         <li class="lang-switcher">
           <a href="/${page}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
           <a href="/en/${page}" class="${isEn ? 'active' : ''}">English</a>
@@ -1858,15 +1880,32 @@ In the end, Lily must be measured by real output: verified rooms, suitable resid
     .hero p { font-size: 1.1rem; opacity: 0.9; }
     .article { padding: 60px 0; }
     .article p { margin-bottom: 1.5rem; }
-    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
-    .nav a { color: #333; text-decoration: none; }
-    .nav a:hover { color: #1a5c43; }
+    .nav { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; align-items: center; transition: all 0.3s ease; }
+    .nav li { position: relative; }
+    .nav a { color: #333; text-decoration: none; display: block; padding: 20px 10px; font-weight: 500; transition: all 0.25s ease; position: relative; }
+    .nav a::after { content: ''; position: absolute; bottom: 12px; left: 50%; width: 0; height: 2px; background: #1a5c43; transition: all 0.25s ease; transform: translateX(-50%); }
+    .nav a:hover { color: #1a5c43; transform: translateY(-2px); }
+    .nav a:hover::after { width: 70%; }
     .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
-    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a { padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; transition: all 0.2s ease; }
     .lang-switcher a.active { background: #1a5c43; color: white; }
     .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
-    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    .lang-switcher a:not(.active):hover { background: #1a5c43; color: white; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; padding: 10px; margin-left: auto; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 10px 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); gap: 0; border-top: 1px solid #eee; align-items: stretch; }
+      .nav ul.active { display: flex; }
+      .nav a { padding: 14px 0; border-bottom: 1px solid #eee; }
+      .nav a::after { bottom: 8px; }
+      .nav .container { flex-wrap: wrap; }
+    }
     footer { background: #333; color: white; padding: 40px 0; text-align: center; }
     .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin: 10px 5px; }
     .cta-button:hover { background: #0f3d2e; }
@@ -2314,29 +2353,51 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     .card { background: #f9f9f9; padding: 20px; border-radius: 8px; }
     .card h3 { margin-bottom: 10px; color: #1a5c43; }
     footer { background: #333; color: white; padding: 40px 0; text-align: center; }
-    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-    .nav a { color: #333; text-decoration: none; }
-    .nav a:hover { color: #1a5c43; }
+    .nav { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; transition: all 0.3s ease; }
+    .nav li { position: relative; }
+    .nav a { color: #333; text-decoration: none; display: block; padding: 20px 12px; font-weight: 500; transition: all 0.25s ease; position: relative; }
+    .nav a::after { content: ''; position: absolute; bottom: 12px; left: 50%; width: 0; height: 2px; background: #1a5c43; transition: all 0.25s ease; transform: translateX(-50%); }
+    .nav a:hover { color: #1a5c43; transform: translateY(-2px); }
+    .nav a:hover::after { width: 70%; }
     .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
-    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a { padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; transition: all 0.2s ease; }
     .lang-switcher a.active { background: #1a5c43; color: white; }
     .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
-    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    .lang-switcher a:not(.active):hover { background: #1a5c43; color: white; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; padding: 10px; margin-left: auto; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 10px 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); gap: 0; border-top: 1px solid #eee; }
+      .nav ul.active { display: flex; }
+      .nav a { padding: 14px 0; border-bottom: 1px solid #eee; }
+      .nav a::after { bottom: 8px; }
+      .nav .container { flex-wrap: wrap; }
+    }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="/${isEn ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${isEn ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
-        <li><a href="#highlights">${isEn ? 'Highlights' : 'Điểm nổi bật'}</a></li>
-        <li><a href="#story">${isEn ? 'Story' : 'Câu chuyện'}</a></li>
-        <li><a href="#what">${isEn ? 'What' : 'Đây là nơi gì'}</a></li>
-        <li><a href="#space">${isEn ? 'Space' : 'Không gian'}</a></li>
-        <li><a href="#location">${isEn ? 'Location' : 'Vị trí'}</a></li>
-        <li><a href="#contact">${isEn ? 'Contact' : 'Liên hệ'}</a></li>
+      <button class="hamburger" aria-label="${isEn ? 'Menu' : 'Menu'}" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="/${isEn ? 'en' : ''}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${isEn ? 'en/' : ''}stay" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
+        <li><a href="#highlights" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Highlights' : 'Điểm nổi bật'}</a></li>
+        <li><a href="#story" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Story' : 'Câu chuyện'}</a></li>
+        <li><a href="#what" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'What' : 'Đây là nơi gì'}</a></li>
+        <li><a href="#space" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Space' : 'Không gian'}</a></li>
+        <li><a href="#location" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Location' : 'Vị trí'}</a></li>
+        <li><a href="#contact" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Contact' : 'Liên hệ'}</a></li>
         <li class="lang-switcher">
           <a href="/" class="${isEn ? '' : 'active'}" aria-label="${isEn ? 'Switch to Vietnamese' : 'Đang xem tiếng Việt'}">Tiếng Việt</a>
           <a href="/en" class="${isEn ? 'active' : ''}" aria-label="${isEn ? 'Currently viewing English' : 'Chuyển sang tiếng Anh'}">English</a>
@@ -2823,15 +2884,32 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
     .card h3 { margin-bottom: 10px; color: #1a5c43; }
     .cta-button { display: inline-block; background: #1a5c43; color: white; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-weight: 500; margin-top: 20px; }
     .cta-button:hover { background: #0f3d2e; }
-    .nav { background: white; padding: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
-    .nav a { color: #333; text-decoration: none; }
-    .nav a:hover { color: #1a5c43; }
+    .nav { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .nav ul { list-style: none; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; align-items: center; transition: all 0.3s ease; }
+    .nav li { position: relative; }
+    .nav a { color: #333; text-decoration: none; display: block; padding: 20px 10px; font-weight: 500; transition: all 0.25s ease; position: relative; }
+    .nav a::after { content: ''; position: absolute; bottom: 12px; left: 50%; width: 0; height: 2px; background: #1a5c43; transition: all 0.25s ease; transform: translateX(-50%); }
+    .nav a:hover { color: #1a5c43; transform: translateY(-2px); }
+    .nav a:hover::after { width: 70%; }
     .lang-switcher { display: inline-flex; gap: 8px; align-items: center; }
-    .lang-switcher a { padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; }
+    .lang-switcher a { padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; transition: all 0.2s ease; }
     .lang-switcher a.active { background: #1a5c43; color: white; }
     .lang-switcher a:not(.active) { background: #f0f0f0; color: #333; }
-    .lang-switcher a:not(.active):hover { background: #e0e0e0; }
+    .lang-switcher a:not(.active):hover { background: #1a5c43; color: white; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; padding: 10px; margin-left: auto; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 10px 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); gap: 0; border-top: 1px solid #eee; align-items: stretch; }
+      .nav ul.active { display: flex; }
+      .nav a { padding: 14px 0; border-bottom: 1px solid #eee; }
+      .nav a::after { bottom: 8px; }
+      .nav .container { flex-wrap: wrap; }
+    }
     footer { background: #333; color: white; padding: 40px 0; text-align: center; }
     .case-list { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
     .case-card { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; }
