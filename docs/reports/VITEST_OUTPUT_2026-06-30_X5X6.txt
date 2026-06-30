@@ -1,0 +1,16 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.9 [39m[90m/Users/tranhatam/Documents/Devnewproject/omdalat.com/workers/api[39m
+
+ [32m✓[39m tests/gate-compliance.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/asset-network-gates.test.ts [2m([22m[2m54 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/compliance-update.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/overclaim-validator.test.ts [2m([22m[2m33 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/auth-cors-slug.test.ts [2m([22m[2m24 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m tests/e2e-journeys.test.ts [2m([22m[2m66 tests[22m[2m)[22m[32m 202[2mms[22m[39m
+ [32m✓[39m tests/asset-network-p1-p2.test.ts [2m([22m[2m33 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+[2m      Tests [22m [1m[32m235 passed[39m[22m[90m (235)[39m
+[2m   Start at [22m 11:04:01
+[2m   Duration [22m 534ms[2m (transform 933ms, setup 0ms, import 785ms, tests 460ms, environment 0ms)[22m
+
