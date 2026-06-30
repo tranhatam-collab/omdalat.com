@@ -4,26 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
-<title>Register to participate | Tam Farm</title>
-<meta name="description" content="The registration process for Tam Farm: contact WhatsApp to discuss needs, two-way assessment, confirmation based on availability. Submitting information does not mean approval.">
-<meta name="keywords" content="register Tam Farm, Tam Farm registration, register to live in Da Lat, register workation Da Lat, contact Tam Farm">
-<meta name="author" content="Trần Hà Tâm">
+<title>Member Registration | Tam Farm</title>
+<meta name="description" content="Register as a Tam Farm member with Google ID. After confirming your name, you'll receive the direct contact number.">
+<meta name="keywords" content="register, member, Google, Tam Farm, Nhung Khu Vuon Tam, sign up, experience">
 <link rel="canonical" href="https://tamfarms.omdalat.com/en/register/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Register to participate | Tam Farm">
-<meta property="og:description" content="The registration process for Tam Farm: contact WhatsApp, two-way assessment, confirmation based on availability.">
+<meta property="og:title" content="Member Registration | Tam Farm">
+<meta property="og:description" content="Register with Google ID. Enter your name to receive direct contact info.">
 <meta property="og:url" content="https://tamfarms.omdalat.com/en/register/">
+<meta property="og:site_name" content="Tam Farm">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="vi_VN">
-<link rel="alternate" hreflang="en" href="https://tamfarms.omdalat.com/en/register/">
 <link rel="alternate" hreflang="vi" href="https://tamfarms.omdalat.com/vi/dang-ky/">
+<link rel="alternate" hreflang="en" href="https://tamfarms.omdalat.com/en/register/">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Member Registration","url":"https://tamfarms.omdalat.com/en/register/","inLanguage":"en-US"}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/en/"><span class="brand-mark">T</span><span><strong>Tam Farm</strong><small>Những Khu Vườn Tâm</small></span></a>
+    <a class="brand" href="/en/">
+      <span class="brand-mark">T</span>
+      <span><strong>Tam Farm</strong><small>Những Khu Vườn Tâm</small></span>
+    </a>
     <nav aria-label="Main navigation">
       <a href="/en/">Home</a>
       <a href="/en/tam-farm-is/">About</a>
@@ -36,84 +41,230 @@
 
 <main>
 <div class="wrap">
-<article class="article">
-  <div class="article-header">
-    <p class="eyebrow">Register to participate</p>
-    <h1>Register to participate at Tam Farm</h1>
-    <p class="meta">Tam Farm · Da Lat, Lam Dong</p>
+  <div class="reg-section">
+    <div class="eyebrow">Member Registration</div>
+    <h1 style="font-size:2rem;margin:.2em 0 .5em">Join Tam Farm</h1>
+    <p class="lead" style="font-size:1rem;margin-bottom:28px">Register with your Google ID. After confirming your name, you'll receive the direct contact number (WhatsApp).</p>
+
+    <!-- Step 1: Google Sign-In -->
+    <div id="step-google" class="reg-step active">
+      <h2>Step 1: Sign in with Google</h2>
+      <p>Sign in with your Google account to verify your identity. We only receive your display name and email from Google — no password.</p>
+      <div id="google-btn-wrapper" style="margin:24px 0">
+        <div id="googleSignInDiv"></div>
+      </div>
+      <div id="google-fallback" style="display:none;margin:24px 0">
+        <button class="reg-btn reg-btn-google" onclick="triggerGooglePopup()">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" onerror="this.style.display='none'">
+          <span>Sign in with Google</span>
+        </button>
+      </div>
+      <div id="google-error" class="reg-error"></div>
+
+      <hr style="border:none;border-top:1px solid var(--line);margin:28px 0">
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:12px">Or contact us directly via:</p>
+      <a href="https://m.me/thtltdl" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2;margin-right:10px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+        Facebook Messenger
+      </a>
+      <a href="https://wa.me/84849153426" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#25d366">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Step 2: Confirm Name -->
+    <div id="step-name" class="reg-step">
+      <h2>Step 2: Confirm your name</h2>
+      <div id="user-info-box" class="reg-user-info"></div>
+      <p>Please enter or confirm your display name. After confirming, the contact number will be revealed.</p>
+      <label for="name-input" style="font-weight:700;display:block;margin-top:16px">Display name *</label>
+      <input type="text" id="name-input" class="reg-input" placeholder="Enter your name" required>
+      <label for="phone-input" style="font-weight:700;display:block">Your phone number (so we can contact you back) *</label>
+      <input type="tel" id="phone-input" class="reg-input" placeholder="e.g. +84 84 915 3426" required>
+      <div id="name-error" class="reg-error"></div>
+      <button class="reg-submit" onclick="submitName()">Confirm & Reveal contact →</button>
+      <p class="small" style="margin-top:16px">By confirming, you agree to the <a href="/en/terms/">terms</a> and <a href="/en/privacy/">privacy policy</a>.</p>
+    </div>
+
+    <!-- Step 3: Phone Reveal -->
+    <div id="step-phone" class="reg-step">
+      <h2 style="color:var(--green)">Welcome <span id="user-greeting"></span>! 🌿</h2>
+      <p>Thank you for registering. Here is the direct contact information:</p>
+      <div class="reg-phone-reveal">
+        <p style="font-size:.9rem;opacity:.85;margin-bottom:8px">WhatsApp (Trần Hà Tâm)</p>
+        <a href="https://wa.me/84849153426" target="_blank" rel="noopener">+84 84 915 3426</a>
+        <br>
+        <a href="https://wa.me/84849153426" target="_blank" rel="noopener" class="wa-btn">Send WhatsApp message →</a>
+      </div>
+      <div style="margin:24px 0">
+        <p style="font-weight:700;margin-bottom:10px">Or contact via Facebook:</p>
+        <a href="https://m.me/thtltdl" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+          Facebook Messenger
+        </a>
+        <br><br>
+        <a href="https://www.facebook.com/thtltdl/inbox" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+          Facebook Inbox (Web)
+        </a>
+      </div>
+      <div style="background:#eef2ea;border-radius:14px;padding:18px;margin:24px 0">
+        <p style="font-weight:700;margin-bottom:8px">Next steps:</p>
+        <ol style="margin:0;padding-left:20px;font-size:.92rem">
+          <li>Send a WhatsApp or Messenger message to introduce yourself</li>
+          <li>Mention which program you're interested in (1 week / 1 month / 2-3 months)</li>
+          <li>We'll discuss availability, cost, and specific conditions</li>
+        </ol>
+      </div>
+      <p class="small">Your registration: <span id="reg-summary" style="font-weight:600"></span></p>
+    </div>
   </div>
 
-  <p class="lead">Tam Farm hosts a maximum of 01–03 people each month at each location, with stays from 01 week to 03 months. Because the scale is small and the level of accompaniment is high, registration is done step by step to ensure fit for both sides.</p>
-
-  <div class="notice">
-    <strong>Important note:</strong>
-    <p style="margin:.4em 0 0">Submitting information does not mean approval. Each application is reviewed individually, and the founder reserves the right to decline a candidate when it appears not to fit the spirit or the current operating conditions.</p>
+  <div style="max-width:560px;margin:0 auto 60px">
+    <p class="small" style="text-align:center">Not a hotel, commercial homestay, medical facility, therapy center, recruitment agency, or income-guarantee program. All locations, costs, activities, and benefits are only valid after individual confirmation.</p>
   </div>
-
-  <h2>Registration process</h2>
-
-  <h3>1. Contact via WhatsApp for an initial conversation</h3>
-  <p>Message us on WhatsApp at <a href="https://wa.me/84849153426" rel="noopener">+84 84 915 3426</a> to begin the conversation. In this step, we discuss with you:</p>
-  <ul>
-    <li>the goals you want to achieve by participating;</li>
-    <li>your intended stay duration (from 01 week to 03 months);</li>
-    <li>the number of people accompanying you (if any);</li>
-    <li>the nature of your current work and your remote work needs;</li>
-    <li>your expectations for the living space, the garden, and the community;</li>
-    <li>your fit with the pace of life in the outskirts of Da Lat.</li>
-  </ul>
-  <p>This step helps both sides form an initial picture before moving on.</p>
-
-  <h3>2. Two-way assessment</h3>
-  <p>After the initial conversation, we assess fit together based on:</p>
-  <ul>
-    <li>your real needs and the location's ability to meet them;</li>
-    <li>the state of accommodation, work space, and the garden at the time of registration;</li>
-    <li>your ability to adapt to the shared living environment and house rules;</li>
-    <li>expectations about outcomes — because this is not a result-guarantee service, not a therapy program, and not a recruitment service.</li>
-  </ul>
-  <p>The two-way assessment is how we ensure you actually benefit from participating, and that the space runs smoothly when hosting you.</p>
-
-  <h3>3. Confirmation based on availability</h3>
-  <p>If both sides agree to proceed, confirmation is made based on the real availability of each location. The specific conditions — timing, cost, payment terms, and cancellation — are agreed separately for each booking, with no single fixed price list applied to all.</p>
-  <p>A schedule is only confirmed after full discussion. We do not hold a spot without clear written or message-based confirmation from both sides.</p>
-
-  <h2>Online form</h2>
-  <p>Currently, the online registration form is not yet open. Registration is done directly via WhatsApp to ensure each application is discussed seriously and fits real conditions.</p>
-  <p>When the form is ready, we will announce it on the home page and the contact page.</p>
-
-  <h2>What you should know before registering</h2>
-  <ul>
-    <li>This is not a hotel, mass-market homestay, resort, or vacation facility.</li>
-    <li>This is not a medical facility, therapy service, or healing program.</li>
-    <li>This is not a recruitment agency and does not guarantee employment or income.</li>
-    <li>This is not a form of investment and does not guarantee profit.</li>
-    <li>Participation is voluntary. Participants are responsible for their own decisions and experience.</li>
-  </ul>
-
-  <h2>Response time</h2>
-  <p>We try to respond within 24–72 hours of receiving the first message. During peak weeks or while accompanying current participants, response time may be longer. If after 05 days you have not received a response, please message once more.</p>
-
-  <div class="cta" style="background:linear-gradient(135deg,#315f43,#1f4931);color:#fff">
-    <strong style="font-size:1.12rem">Ready to begin the conversation?</strong>
-    <p>Message us on WhatsApp so we can look together at fit and availability. Any information you share is used only for registration assessment.</p>
-    <a class="btn btn-primary" href="https://wa.me/84849153426" rel="noopener" style="background:#fff;color:var(--green)">WhatsApp: +84 84 915 3426</a>
-  </div>
-
-  <p class="small" style="margin-top:26px">See also: <a href="/en/terms/">Terms of participation</a> · <a href="/en/house-rules/">House rules</a> · <a href="/en/safety/">Safety</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/faq/">FAQ</a></p>
-
-  <p class="small">Language: <a href="/vi/dang-ky/">Tiếng Việt</a></p>
-</article>
 </div>
 </main>
 
-<footer class="footer"><div class="wrap">
-  <strong>Tam Farm · Những Khu Vườn Tâm</strong>
-  <p>Live fully. Work with purpose. Grow through experience.</p>
-  <p class="small">WhatsApp: <a href="https://wa.me/84849153426">+84 84 915 3426</a> · tamfarms.omdalat.com</p>
-  <p class="small">Not a hotel, commercial homestay, medical facility, therapy center, recruitment agency, or income-guarantee program.</p>
-  <p class="small">© 2026 Tam Farm · Founded by Trần Hà Tâm · <a href="/vi/dang-ky/">Tiếng Việt</a></p>
-</div></footer>
+<footer class="footer">
+  <div class="wrap">
+    <strong>Tam Farm · Những Khu Vườn Tâm</strong>
+    <p>Live fully. Work with purpose. Grow through experience.</p>
+    <p class="small">WhatsApp: <a href="https://wa.me/84849153426">+84 84 915 3426</a> · Facebook: <a href="https://www.facebook.com/thtltdl/">thtltdl</a> · Messenger: <a href="https://m.me/thtltdl">m.me/thtltdl</a></p>
+    <p class="small">© 2026 Tam Farm · Founded by Trần Hà Tâm · <a href="/vi/dang-ky/">Tiếng Việt</a></p>
+  </div>
+</footer>
 
+<script>
+var GOOGLE_CLIENT_ID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
+
+var regData = {
+  googleName: "",
+  googleEmail: "",
+  googlePicture: "",
+  confirmedName: "",
+  confirmedPhone: ""
+};
+
+function showStep(id) {
+  document.querySelectorAll(".reg-step").forEach(function(s) {
+    s.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function onGoogleSuccess(credentialResponse) {
+  var payload = parseJwt(credentialResponse.credential);
+  regData.googleName = payload.name || "";
+  regData.googleEmail = payload.email || "";
+  regData.googlePicture = payload.picture || "";
+
+  var nameInput = document.getElementById("name-input");
+  if (nameInput && regData.googleName) {
+    nameInput.value = regData.googleName;
+  }
+
+  var box = document.getElementById("user-info-box");
+  box.innerHTML = "";
+  if (regData.googlePicture) {
+    var img = document.createElement("img");
+    img.src = regData.googlePicture;
+    img.alt = regData.googleName;
+    box.appendChild(img);
+  }
+  var info = document.createElement("div");
+  info.innerHTML = "<strong>" + (regData.googleName || "Signed in") + "</strong><small>" + (regData.googleEmail || "") + "</small>";
+  box.appendChild(info);
+
+  showStep("step-name");
+}
+
+function parseJwt(token) {
+  try {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(atob(base64).split("").map(function(c) {
+      return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(""));
+    return JSON.parse(jsonPayload);
+  } catch(e) {
+    return {};
+  }
+}
+
+function triggerGooglePopup() {
+  if (window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.prompt();
+  } else {
+    document.getElementById("google-error").textContent = "Google Sign-In is not ready. Please reload the page or contact us via WhatsApp.";
+    document.getElementById("google-error").style.display = "block";
+  }
+}
+
+function submitName() {
+  var name = document.getElementById("name-input").value.trim();
+  var phone = document.getElementById("phone-input").value.trim();
+  var errEl = document.getElementById("name-error");
+
+  if (!name || name.length < 2) {
+    errEl.textContent = "Please enter your name (minimum 2 characters).";
+    errEl.style.display = "block";
+    return;
+  }
+  if (!phone || phone.length < 6) {
+    errEl.textContent = "Please enter a valid phone number.";
+    errEl.style.display = "block";
+    return;
+  }
+
+  errEl.style.display = "none";
+  regData.confirmedName = name;
+  regData.confirmedPhone = phone;
+
+  document.getElementById("user-greeting").textContent = name;
+  document.getElementById("reg-summary").textContent = name + " · " + phone + " · " + (regData.googleEmail || "no email");
+
+  showStep("step-phone");
+}
+
+window.onGoogleLibraryLoad = function() {
+  if (GOOGLE_CLIENT_ID.indexOf("YOUR_CLIENT_ID") !== -1) {
+    document.getElementById("google-btn-wrapper").style.display = "none";
+    document.getElementById("google-fallback").style.display = "block";
+    document.getElementById("google-error").innerHTML = "⚠️ Google Client ID is not configured. Please contact the administrator or use WhatsApp/Facebook below.";
+    document.getElementById("google-error").style.display = "block";
+    return;
+  }
+
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: onGoogleSuccess,
+    auto_select: false,
+    cancel_on_tap_outside: true
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById("googleSignInDiv"),
+    {
+      theme: "outline",
+      size: "large",
+      text: "signin_with",
+      shape: "pill",
+      locale: "en"
+    }
+  );
+};
+
+setTimeout(function() {
+  if (!window.google || !google.accounts) {
+    var wrapper = document.getElementById("google-btn-wrapper");
+    if (wrapper && wrapper.children.length === 0) {
+      document.getElementById("google-fallback").style.display = "block";
+    }
+  }
+}, 5000);
+</script>
+<script src="/assets/js/lang-switcher.js" defer></script>
 </body>
 </html>

@@ -4,20 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
-<title>Đăng ký tham gia | Những Khu Vườn Tâm</title>
-<meta name="description" content="Quy trình đăng ký tham gia Những Khu Vườn Tâm: liên hệ WhatsApp để trao đổi nhu cầu, đánh giá hai chiều, xác nhận theo lịch trống. Gửi thông tin không đồng nghĩa được chấp thuận.">
-<meta name="keywords" content="đăng ký Tam Farm, đăng ký Những Khu Vườn Tâm, đăng ký sống thử Đà Lạt, đăng ký workation Đà Lạt, liên hệ Tam Farm">
-<meta name="author" content="Trần Hà Tâm">
+<title>Đăng ký thành viên | Những Khu Vườn Tâm</title>
+<meta name="description" content="Đăng ký thành viên Những Khu Vườn Tâm bằng Google ID. Sau khi xác nhận tên, bạn sẽ nhận được số liên hệ trực tiếp.">
+<meta name="keywords" content="đăng ký, thành viên, Google, Tam Farm, Những Khu Vườn Tâm, đăng ký trải nghiệm">
 <link rel="canonical" href="https://tamfarms.omdalat.com/vi/dang-ky/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Đăng ký tham gia | Những Khu Vườn Tâm">
-<meta property="og:description" content="Quy trình đăng ký tham gia Những Khu Vườn Tâm: liên hệ WhatsApp, đánh giá hai chiều, xác nhận theo lịch trống.">
+<meta property="og:title" content="Đăng ký thành viên | Những Khu Vườn Tâm">
+<meta property="og:description" content="Đăng ký bằng Google ID. Nhập tên để nhận số liên hệ trực tiếp.">
 <meta property="og:url" content="https://tamfarms.omdalat.com/vi/dang-ky/">
+<meta property="og:site_name" content="Những Khu Vườn Tâm">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:locale:alternate" content="en_US">
 <link rel="alternate" hreflang="vi" href="https://tamfarms.omdalat.com/vi/dang-ky/">
 <link rel="alternate" hreflang="en" href="https://tamfarms.omdalat.com/en/register/">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Đăng ký thành viên","url":"https://tamfarms.omdalat.com/vi/dang-ky/","inLanguage":"vi-VN"}</script>
 </head>
 <body>
 
@@ -39,74 +41,89 @@
 
 <main>
 <div class="wrap">
-<article class="article">
-  <div class="article-header">
-    <p class="eyebrow">Đăng ký tham gia</p>
-    <h1>Đăng ký tham gia Những Khu Vườn Tâm</h1>
-    <p class="meta">Những Khu Vườn Tâm · Tam Farm · Đà Lạt, Lâm Đồng</p>
+  <div class="reg-section">
+    <div class="eyebrow">Đăng ký thành viên</div>
+    <h1 style="font-size:2rem;margin:.2em 0 .5em">Tham gia Những Khu Vườn Tâm</h1>
+    <p class="lead" style="font-size:1rem;margin-bottom:28px">Đăng ký bằng Google ID. Sau khi xác nhận tên, bạn sẽ nhận được số liên hệ trực tiếp (WhatsApp).</p>
+
+    <!-- Step 1: Google Sign-In -->
+    <div id="step-google" class="reg-step active">
+      <h2>Bước 1: Đăng nhập bằng Google</h2>
+      <p>Đăng nhập bằng tài khoản Google để xác thực danh tính. Chúng tôi chỉ nhận tên hiển thị và email từ Google — không lưu mật khẩu.</p>
+      <div id="google-btn-wrapper" style="margin:24px 0">
+        <div id="googleSignInDiv"></div>
+      </div>
+      <div id="google-fallback" style="display:none;margin:24px 0">
+        <button class="reg-btn reg-btn-google" onclick="triggerGooglePopup()">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" onerror="this.style.display='none'">
+          <span>Đăng nhập với Google</span>
+        </button>
+      </div>
+      <div id="google-error" class="reg-error"></div>
+
+      <hr style="border:none;border-top:1px solid var(--line);margin:28px 0">
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:12px">Hoặc liên hệ trực tiếp qua:</p>
+      <a href="https://m.me/thtltdl" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2;margin-right:10px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+        Facebook Messenger
+      </a>
+      <a href="https://wa.me/84849153426" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#25d366">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Step 2: Confirm Name -->
+    <div id="step-name" class="reg-step">
+      <h2>Bước 2: Xác nhận tên của bạn</h2>
+      <div id="user-info-box" class="reg-user-info"></div>
+      <p>Vui lòng nhập hoặc xác nhận tên hiển thị của bạn. Sau khi xác nhận, số liên hệ sẽ được hiển thị.</p>
+      <label for="name-input" style="font-weight:700;display:block;margin-top:16px">Tên hiển thị *</label>
+      <input type="text" id="name-input" class="reg-input" placeholder="Nhập tên của bạn" required>
+      <label for="phone-input" style="font-weight:700;display:block">Số điện thoại của bạn (để chúng tôi liên hệ lại) *</label>
+      <input type="tel" id="phone-input" class="reg-input" placeholder="VD: +84 84 915 3426" required>
+      <div id="name-error" class="reg-error"></div>
+      <button class="reg-submit" onclick="submitName()">Xác nhận & Xem số liên hệ →</button>
+      <p class="small" style="margin-top:16px">Bằng việc xác nhận, bạn đồng ý với <a href="/vi/dieu-khoan/">điều khoản</a> và <a href="/vi/quyen-rieng-tu/">chính sách quyền riêng tư</a>.</p>
+    </div>
+
+    <!-- Step 3: Phone Reveal -->
+    <div id="step-phone" class="reg-step">
+      <h2 style="color:var(--green)">Chào <span id="user-greeting"></span>! 🌿</h2>
+      <p>Cảm ơn bạn đã đăng ký. Dưới đây là thông tin liên hệ trực tiếp:</p>
+      <div class="reg-phone-reveal">
+        <p style="font-size:.9rem;opacity:.85;margin-bottom:8px">WhatsApp (Trần Hà Tâm)</p>
+        <a href="https://wa.me/84849153426" target="_blank" rel="noopener">+84 84 915 3426</a>
+        <br>
+        <a href="https://wa.me/84849153426" target="_blank" rel="noopener" class="wa-btn">Gửi tin nhắn WhatsApp →</a>
+      </div>
+      <div style="margin:24px 0">
+        <p style="font-weight:700;margin-bottom:10px">Hoặc liên hệ qua Facebook:</p>
+        <a href="https://m.me/thtltdl" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+          Nhắn tin qua Facebook Messenger
+        </a>
+        <br><br>
+        <a href="https://www.facebook.com/thtltdl/inbox" target="_blank" rel="noopener" class="reg-fb-btn" style="background:#1877f2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.4 2.7.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4l-2.5-2.7L6 14.4l5.3-5.6 2.6 2.7 4.1-2.3-5 5.2z"/></svg>
+          Facebook Inbox (Web)
+        </a>
+      </div>
+      <div style="background:#eef2ea;border-radius:14px;padding:18px;margin:24px 0">
+        <p style="font-weight:700;margin-bottom:8px">Bước tiếp theo:</p>
+        <ol style="margin:0;padding-left:20px;font-size:.92rem">
+          <li>Gửi tin nhắn WhatsApp hoặc Messenger để giới thiệu bản thân</li>
+          <li>Cho biết bạn quan tâm đến chương trình nào (1 tuần / 1 tháng / 2-3 tháng)</li>
+          <li>Chúng tôi sẽ trao đổi lịch trống, chi phí và điều kiện cụ thể</li>
+        </ol>
+      </div>
+      <p class="small">Đăng ký của bạn: <span id="reg-summary" style="font-weight:600"></span></p>
+    </div>
   </div>
 
-  <p class="lead">Những Khu Vườn Tâm tiếp nhận tối đa 01–03 người mỗi tháng tại mỗi địa điểm, với thời gian lưu trú từ 01 tuần đến 03 tháng. Vì quy mô nhỏ và mức độ đồng hành cao, việc đăng ký được thực hiện theo từng bước để đảm bảo sự phù hợp cho cả hai bên.</p>
-
-  <div class="notice">
-    <strong>Lưu ý quan trọng:</strong>
-    <p style="margin:.4em 0 0">Gửi thông tin không đồng nghĩa được chấp thuận. Mỗi hồ sơ được xem xét riêng, và người sáng lập có quyền từ chối ứng viên khi nhận thấy không phù hợp với tinh thần hoặc điều kiện vận hành hiện tại.</p>
+  <div style="max-width:560px;margin:0 auto 60px">
+    <p class="small" style="text-align:center">Không phải khách sạn, homestay đại trà, cơ sở khám chữa bệnh, dịch vụ trị liệu, đơn vị tuyển dụng hay chương trình bảo đảm thu nhập. Mọi địa điểm, chi phí, hoạt động và quyền lợi chỉ có hiệu lực sau khi được xác nhận riêng.</p>
   </div>
-
-  <h2>Quy trình đăng ký</h2>
-
-  <h3>1. Liên hệ qua WhatsApp để trao đổi ban đầu</h3>
-  <p>Bạn nhắn tin qua WhatsApp tới số <a href="https://wa.me/84849153426" rel="noopener">+84 84 915 3426</a> để bắt đầu trao đổi. Trong bước này, chúng tôi cùng bạn thảo luận:</p>
-  <ul>
-    <li>mục tiêu bạn muốn đạt được khi tham gia;</li>
-    <li>thời gian dự kiến lưu trú (từ 01 tuần đến 03 tháng);</li>
-    <li>số người đi cùng (nếu có);</li>
-    <li>bản chất công việc hiện tại và nhu cầu làm việc từ xa;</li>
-    <li>những kỳ vọng về không gian sống, khu vườn và cộng đồng;</li>
-    <li>mức độ phù hợp với nhịp sống vùng ngoại ô Đà Lạt.</li>
-  </ul>
-  <p>Bước này giúp cả hai bên có hình dung ban đầu trước khi đi tiếp.</p>
-
-  <h3>2. Đánh giá hai chiều</h3>
-  <p>Sau khi trao đổi ban đầu, chúng tôi cùng bạn đánh giá mức độ phù hợp dựa trên:</p>
-  <ul>
-    <li>nhu cầu thực tế của bạn và khả năng đáp ứng của địa điểm;</li>
-    <li>tình trạng chỗ ở, không gian làm việc và khu vườn tại thời điểm đăng ký;</li>
-    <li>khả năng thích nghi với môi trường sinh hoạt chung và nội quy;</li>
-    <li>kỳ vọng về kết quả — vì đây không phải dịch vụ bảo đảm kết quả, không phải chương trình trị liệu và không phải dịch vụ tuyển dụng.</li>
-  </ul>
-  <p>Đánh giá hai chiều là cách để đảm bảo bạn thực sự có lợi khi tham gia, và không gian vận hành ổn định khi tiếp nhận bạn.</p>
-
-  <h3>3. Xác nhận theo lịch trống</h3>
-  <p>Nếu cả hai bên đồng ý tiếp tục, việc xác nhận được thực hiện theo lịch trống thực tế của từng địa điểm. Các điều kiện cụ thể — thời gian, chi phí, điều khoản thanh toán và hủy — được thống nhất riêng cho từng lần đặt, không áp dụng chung một bảng giá cố định.</p>
-  <p>Lịch chỉ được xác nhận sau khi đã trao đổi đầy đủ. Chúng tôi không cam kết giữ chỗ khi chưa có xác nhận bằng văn bản hoặc tin nhắn rõ ràng từ hai bên.</p>
-
-  <h2>Biểu mẫu trực tuyến</h2>
-  <p>Hiện tại, biểu mẫu đăng ký trực tuyến chưa được mở. Việc đăng ký được thực hiện trực tiếp qua WhatsApp để đảm bảo mỗi hồ sơ được trao đổi nghiêm túc và phù hợp với điều kiện thực tế.</p>
-  <p>Khi biểu mẫu sẵn sàng, chúng tôi sẽ thông báo trên trang chủ và trang liên hệ.</p>
-
-  <h2>Những điều bạn nên biết trước khi đăng ký</h2>
-  <ul>
-    <li>Đây không phải khách sạn, homestay đại trà, resort hay cơ sở nghỉ dưỡng.</li>
-    <li>Đây không phải cơ sở khám chữa bệnh, dịch vụ trị liệu hay chương trình chữa lành.</li>
-    <li>Đây không phải đơn vị tuyển dụng và không bảo đảm việc làm hoặc thu nhập.</li>
-    <li>Đây không phải hình thức đầu tư và không cam kết lợi nhuận.</li>
-    <li>Việc tham gia là tự nguyện. Người tham gia tự chịu trách nhiệm về quyết định và trải nghiệm của mình.</li>
-  </ul>
-
-  <h2>Thời gian phản hồi</h2>
-  <p>Chúng tôi cố gắng phản hồi trong vòng 24–72 giờ kể từ khi nhận được tin nhắn đầu tiên. Trong các tuần cao điểm hoặc khi đang đồng hành với người tham gia hiện tại, thời gian phản hồi có thể lâu hơn. Nếu sau 05 ngày bạn chưa nhận được phản hồi, vui lòng nhắn lại một lần.</p>
-
-  <div class="cta" style="background:linear-gradient(135deg,#315f43,#1f4931);color:#fff">
-    <strong style="font-size:1.12rem">Sẵn sàng bắt đầu trao đổi?</strong>
-    <p>Hãy nhắn WhatsApp để chúng tôi cùng bạn xem xét mức độ phù hợp và tình trạng lịch trống. Mọi thông tin bạn chia sẻ chỉ được sử dụng cho mục đích đánh giá đăng ký.</p>
-    <a class="btn btn-primary" href="https://wa.me/84849153426" rel="noopener" style="background:#fff;color:var(--green)">WhatsApp: +84 84 915 3426</a>
-  </div>
-
-  <p class="small" style="margin-top:26px">Xem thêm: <a href="/vi/dieu-khoan/">Điều khoản tham gia</a> · <a href="/vi/noi-quy/">Nội quy</a> · <a href="/vi/an-toan/">An toàn</a> · <a href="/vi/quyen-rieng-tu/">Quyền riêng tư</a> · <a href="/vi/cau-hoi-thuong-gap/">Câu hỏi thường gặp</a></p>
-
-  <p class="small">Ngôn ngữ: <a href="/en/register/">English</a></p>
-</article>
 </div>
 </main>
 
@@ -114,11 +131,149 @@
   <div class="wrap">
     <strong>Những Khu Vườn Tâm · Tam Farm</strong>
     <p>Sống thật. Làm thật. Lớn lên từ trải nghiệm.</p>
-    <p class="small">WhatsApp: <a href="https://wa.me/84849153426">+84 84 915 3426</a> · tamfarms.omdalat.com</p>
-    <p class="small">Không phải khách sạn, homestay đại trà, cơ sở khám chữa bệnh, dịch vụ trị liệu, đơn vị tuyển dụng hay chương trình bảo đảm thu nhập.</p>
-    <p class="small">© 2026 Những Khu Vườn Tâm · Sáng lập bởi Trần Hà Tâm · <a href="/en/">English</a></p>
+    <p class="small">WhatsApp: <a href="https://wa.me/84849153426">+84 84 915 3426</a> · Facebook: <a href="https://www.facebook.com/thtltdl/">thtltdl</a> · Messenger: <a href="https://m.me/thtltdl">m.me/thtltdl</a></p>
+    <p class="small">© 2026 Những Khu Vườn Tâm · Sáng lập bởi Trần Hà Tâm · <a href="/en/register/">English</a></p>
   </div>
 </footer>
 
+<script>
+// Google Sign-In Configuration
+// TODO: Replace CLIENT_ID with your actual Google OAuth Client ID
+// Format: xxxxx.apps.googleusercontent.com
+var GOOGLE_CLIENT_ID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
+
+var regData = {
+  googleName: "",
+  googleEmail: "",
+  googlePicture: "",
+  confirmedName: "",
+  confirmedPhone: ""
+};
+
+function showStep(id) {
+  document.querySelectorAll(".reg-step").forEach(function(s) {
+    s.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function onGoogleSuccess(credentialResponse) {
+  // Decode JWT to get user info
+  var payload = parseJwt(credentialResponse.credential);
+  regData.googleName = payload.name || "";
+  regData.googleEmail = payload.email || "";
+  regData.googlePicture = payload.picture || "";
+
+  // Pre-fill name input
+  var nameInput = document.getElementById("name-input");
+  if (nameInput && regData.googleName) {
+    nameInput.value = regData.googleName;
+  }
+
+  // Show user info box
+  var box = document.getElementById("user-info-box");
+  box.innerHTML = "";
+  if (regData.googlePicture) {
+    var img = document.createElement("img");
+    img.src = regData.googlePicture;
+    img.alt = regData.googleName;
+    box.appendChild(img);
+  }
+  var info = document.createElement("div");
+  info.innerHTML = "<strong>" + (regData.googleName || "Đã đăng nhập") + "</strong><small>" + (regData.googleEmail || "") + "</small>";
+  box.appendChild(info);
+
+  showStep("step-name");
+}
+
+function parseJwt(token) {
+  try {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(atob(base64).split("").map(function(c) {
+      return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(""));
+    return JSON.parse(jsonPayload);
+  } catch(e) {
+    return {};
+  }
+}
+
+function triggerGooglePopup() {
+  if (window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.prompt();
+  } else {
+    document.getElementById("google-error").textContent = "Google Sign-In chưa sẵn sàng. Vui lòng tải lại trang hoặc liên hệ qua WhatsApp.";
+    document.getElementById("google-error").style.display = "block";
+  }
+}
+
+function submitName() {
+  var name = document.getElementById("name-input").value.trim();
+  var phone = document.getElementById("phone-input").value.trim();
+  var errEl = document.getElementById("name-error");
+
+  if (!name || name.length < 2) {
+    errEl.textContent = "Vui lòng nhập tên (tối thiểu 2 ký tự).";
+    errEl.style.display = "block";
+    return;
+  }
+  if (!phone || phone.length < 6) {
+    errEl.textContent = "Vui lòng nhập số điện thoại hợp lệ.";
+    errEl.style.display = "block";
+    return;
+  }
+
+  errEl.style.display = "none";
+  regData.confirmedName = name;
+  regData.confirmedPhone = phone;
+
+  document.getElementById("user-greeting").textContent = name;
+  document.getElementById("reg-summary").textContent = name + " · " + phone + " · " + (regData.googleEmail || "không có email");
+
+  showStep("step-phone");
+}
+
+// Initialize Google Sign-In when library loads
+window.onGoogleLibraryLoad = function() {
+  if (GOOGLE_CLIENT_ID.indexOf("YOUR_CLIENT_ID") !== -1) {
+    // Client ID not configured — show fallback button
+    document.getElementById("google-btn-wrapper").style.display = "none";
+    document.getElementById("google-fallback").style.display = "block";
+    document.getElementById("google-error").innerHTML = "⚠️ Google Client ID chưa được cấu hình. Vui lòng liên hệ quản trị viên hoặc dùng WhatsApp/Facebook bên dưới.";
+    document.getElementById("google-error").style.display = "block";
+    return;
+  }
+
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: onGoogleSuccess,
+    auto_select: false,
+    cancel_on_tap_outside: true
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById("googleSignInDiv"),
+    {
+      theme: "outline",
+      size: "large",
+      text: "signin_with",
+      shape: "pill",
+      locale: "vi"
+    }
+  );
+};
+
+// Fallback: if GIS doesn't load after 5s, show manual button
+setTimeout(function() {
+  if (!window.google || !google.accounts) {
+    var wrapper = document.getElementById("google-btn-wrapper");
+    if (wrapper && wrapper.children.length === 0) {
+      document.getElementById("google-fallback").style.display = "block";
+    }
+  }
+}, 5000);
+</script>
+<script src="/assets/js/lang-switcher.js" defer></script>
 </body>
 </html>
