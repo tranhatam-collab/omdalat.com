@@ -1,35 +1,39 @@
-# BRAND CHARTER — Tâm Farms
+# BRAND CHARTER — Những Khu Vườn Tâm / Tam Farm
 
 **Charter ID:** OMDALAT_TAMFARMS_CHARTER_2026
-**Status:** APPROVED (Founder Lock)
-**Founder approval:** Trần Hà Tâm — 2026-06-30
+**Status:** CONCEPT_DEFINED — READY FOR FOUNDER REVIEW
+**Founder Lock:** `docs/governance/NHUNG_KHU_VUON_TAM_FOUNDER_LOCK_2026.md`
+**Brand & SEO Lock:** `docs/governance/NHUNG_KHU_VUON_TAM_BRAND_SEO_LOCK_2026.md`
+**Founder:** Trần Hà Tâm
 **Last reviewed:** 2026-06-30
 
 ---
 
 ## Identity
 
-- **Brand ID:** OMDALAT_TAMFARMS
-- **Official Vietnamese name:** Tâm Farms — Khu vườn của Tâm
-- **Official English name:** Tam Farms — Tam's Gardens
-- **Legal name:** Tâm Farms (operating under Trần Hà Tâm sole proprietorship)
+- **Brand ID:** TAMFARMS
+- **Product ID:** OMDALAT_TAMFARMS
+- **Official Vietnamese name:** Những Khu Vườn Tâm
+- **Official English name:** Tam Farm
+- **Descriptive name:** Living, Learning and Working Gardens
+- **Legal name:** Operating under Trần Hà Tâm sole proprietorship
 - **Canonical domain:** tamfarms.omdalat.com
-- **Approved abbreviation:** Tâm Farms
-- **Forbidden names:** Tam Farm Hotel, Tam Farm Homestay, Tam Farm Resort, Tam Farm Đà Lạt (as a business name — "Tâm Farms Đà Lạt" may appear in descriptive copy only)
+- **Slogan (VI):** Sống thật. Làm thật. Lớn lên từ trải nghiệm.
+- **Slogan (EN):** Live fully. Work with purpose. Grow through experience.
+- **Forbidden names:** Tam Farm Resort, Tam Farm Hotel, Tam Farms Homestay, Tâm Farm, Tamfarms, Tam Farms Đà Lạt
 - **Trademark status:** Not registered — operating as a personal brand/program name under Om Dalat ecosystem
 - **Logo/content rights owner:** Trần Hà Tâm
+- **Hashtags:** #NhungKhuVuonTam #TamFarm
 
 ---
 
 ## Role
 
-- **One-sentence role:** Tâm Farms là chuỗi khu vườn lưu trú dài hạn — nơi đồng hành cùng Trần Hà Tâm trong hoạt động giáo dục trải nghiệm, làm việc, học tập và phát triển bản thân thông qua nông nghiệp thực địa.
-- **Primary user:** Người muốn sống thử, làm việc thật, học hỏi và phát triển bản thân trong môi trường thực địa gần thiên nhiên — không phải du khách ngắn ngày.
-- **Buyer:** Người đăng ký tham gia chương trình trải nghiệm qua hệ Ôm Đà Lạt.
-- **Core problem:** Muốn thay đổi cuộc sống nhưng chưa có không gian và thời gian để thử nghiệm thật; muốn phát triển bản thân nhưng thiếu môi trường thực địa; muốn sống gần thiên nhiên nhưng vẫn cần làm việc hiệu quả.
-- **Core value:** Một không gian sống và làm việc thực địa, nơi người tham gia được đồng hành cùng Trần Hà Tâm, trải nghiệm nông nghiệp, công nghệ, học tập và định hướng cuộc đời trong một nhịp sống có thể đi đường dài.
-- **Primary CTA:** "Đăng ký trải nghiệm" → liên hệ qua hệ Ôm Đà Lạt.
-- **Lifecycle stage:** PILOT — đang vận hành thử nghiệm tại Đà Lạt, Lâm Đồng, Nam Ban Lâm Hà.
+- **One-sentence role:** Những Khu Vườn Tâm là mạng lưới các khu vườn có chỗ ở, bếp, không gian làm việc, khu học tập, cây trái, dược liệu, thực phẩm và các hoạt động thực tế để con người sống, làm, học, trải nghiệm, phát triển project và nhìn rõ hướng đi của mình.
+- **Primary user:** Người muốn sống thử, làm việc thật, học hỏi và phát triển bản thân trong môi trường thực địa gần thiên nhiên.
+- **Core problem:** Muốn thay đổi cuộc sống nhưng thiếu không gian và thời gian để thử nghiệm thật.
+- **Core value:** Môi trường thực địa để sống, làm việc, học tập, trải nghiệm nông nghiệp và phát triển bản thân.
+- **Lifecycle stage:** CONCEPT_DEFINED — chưa authorized public release.
 
 ---
 
@@ -37,102 +41,95 @@
 
 ### Must do
 - Cung cấp không gian lưu trú dài hạn (tuần đến tháng) cho người tham gia trải nghiệm.
-- Đồng hành cùng người tham gia trong hoạt động thực địa: làm vườn, làm việc online, học tập, định hướng.
-- Duy trì khu vườn sinh thái: cây trái, dược liệu, thực phẩm, không gian học tập, không gian làm việc công nghệ.
-- Kết nối với chuỗi doanh nghiệp, farm và đối tác đồng hành.
-- Giữ số lượng nhỏ (01–03 người/tháng) để đảm bảo chất lượng đồng hành.
+- Đồng hành cùng người tham gia trong hoạt động thực địa.
+- Mỗi địa điểm phải qua due diligence trước khi công bố.
+- Giữ số lượng nhỏ (01–03 người/tháng).
 
 ### May do
 - Tổ chức chương trình trải nghiệm theo tuần hoặc theo tháng.
-- Hỗ trợ định hướng nghề nghiệp và cuộc đời cho người tham gia.
-- Liên kết mềm với `omdalat.com` khi người tham gia muốn tham gia hệ sâu hơn.
+- Hỗ trợ định hướng nghề nghiệp.
+- Kết nối với chuỗi doanh nghiệp, farm và đối tác đồng hành.
 - Mở rộng địa điểm mới khi có điều kiện thực địa phù hợp.
 
 ### Must not do
-- Không hoạt động như homestay thương mại hay khách sạn.
+- Không hoạt động như khách sạn, homestay thương mại, khu nghỉ dưỡng.
+- Không hoạt động như cơ sở chữa bệnh, điều trị tâm lý.
+- Không cam kết tuyển dụng, thu nhập, lợi nhuận, ROI.
+- Không hứa hẹn tự do tài chính trong thời gian xác định.
 - Không nhận số lượng đông (tối đa 03 người/tháng).
-- Không hứa hẹn thu nhập, kết quả nhanh hay thành công tức thì.
-- Không thay thế dịch vụ trị liệu tâm lý, tư vấn tài chính hay cam kết tuyển dụng.
-- Không tự set compliance fields (phải qua API audit route nếu có lodging).
+- Không công bố địa điểm khi chưa qua due diligence.
 
 ---
 
-## Business
+## What it is NOT
 
-- **Offer:** Chương trình lưu trú trải nghiệm dài hạn (1 tuần – 3 tháng) kèm đồng hành cá nhân: sống thử, làm việc thật, định hướng nghề nghiệp, phát triển bản thân.
-- **Pricing status:** Chưa niêm yết công khai — tư vấn qua hệ Ôm Đà Lạt.
-- **Revenue model:** Phí tham gia chương trình theo tuần/tháng (cấu trúc đang hoàn thiện).
-- **Cost-to-serve:** Vận hành khu vườn, chỗ ở, thức ăn, thời gian đồng hành, không gian làm việc.
-- **Operating owner:** Trần Hà Tâm
-- **Customer evidence:** Đang thu thập — chương trình ở giai đoạn PILOT.
-- **Support policy:** Hỗ trợ trực tiếp qua khu vườn và qua `app.omdalat.com`.
-
----
-
-## Data
-
-- **Data collected:** Thông tin đăng ký tham gia (qua app), nhu cầu trải nghiệm, mục tiêu cá nhân, thời gian dự kiến, kỹ năng và kinh nghiệm.
-- **Sensitive data:** CCCD/ID (nếu cần cho lưu trú dài hạn), không lưu trên brand site.
-- **Data owner:** Trần Hà Tâm
-- **Consent:** Qua `app.omdalat.com` consent center.
-- **Retention:** Theo chính sách dữ liệu Ôm Đà Lạt.
-- **Cross-product transfer:** Chỉ chuyển khi có consent và khi phù hợp với mục tiêu người tham gia.
-- **Deletion/export:** Qua `app.omdalat.com` data rights.
+| Không phải | Lý do |
+|-----------|-------|
+| Khách sạn | Không bán phòng theo đêm, không phục vụ số lượng lớn |
+| Homestay thương mại đại trà | Lưu trú chỉ là thành phần hỗ trợ |
+| Khu nghỉ dưỡng | Không cung cấp dịch vụ nghỉ dưỡng thụ động |
+| Cơ sở chữa bệnh | Không khám bệnh, chữa bệnh, điều trị tâm lý |
+| Công ty tuyển dụng | Hỗ trợ định hướng ≠ cam kết việc làm |
+| Chương trình đầu tư sinh lời | Không hứa lợi nhuận, ROI, thu nhập cố định |
+| Một farm duy nhất | Mạng lưới, không phải một địa chỉ cố định |
 
 ---
 
-## Legal
-
-- **Operating entity:** Trần Hà Tâm (sole proprietorship).
-- **Trademark:** Tâm Farms — chưa đăng ký nhãn hiệu độc lập.
-- **Copyright:** Nội dung thuộc Trần Hà Tâm / Ôm Đà Lạt ecosystem.
-- **Domain:** tamfarms.omdalat.com — subdomain dưới zone omdalat.com.
-- **Contracts:** Thỏa thuận tham gia chương trình ký qua app hoặc trực tiếp.
-- **Permits:** Đang hoàn thiện (tùy tính chất lưu trú tại từng địa điểm).
-- **Insurance:** Đang hoàn thiện.
-- **Origin/geographic claims:** Đà Lạt, Lâm Đồng, Nam Ban Lâm Hà, và các địa điểm khác khi mở rộng.
-
----
-
-## Technology
-
-- **Repository:** `tamfarms.omdalat.com/` (static HTML, CMS-first JSON).
-- **Deployment:** Cloudflare Pages — project `omdalat-tamfarms`.
-- **API:** `api.omdalat.com` (nếu cần backend cho đăng ký/quản lý).
-- **Database:** D1 `omdalat-core` (nếu cần lưu brand record).
-- **Storage:** R2 `omdalat-assets` (hình ảnh, tài liệu).
-- **Runtime version:** Cloudflare Pages (static).
-- **Monitoring:** Cloudflare dashboard.
-- **Rollback:** Previous Pages deployment.
-
----
-
-## Programs (services within Tâm Farms)
+## Programs (3 initial)
 
 ### Program 1 — Sống thử và làm việc tại Đà Lạt
-- **Slug:** `/song-thu-lam-viec-da-lat`
-- **Đối tượng:** Người làm việc từ xa, freelancer, chuyên gia muốn thử sống tại Đà Lạt trước khi quyết định lâu dài.
+- **Slug đề xuất:** `/vi/bai-viet/song-thu-va-lam-viec-tai-da-lat`
+- **Đối tượng:** Người làm việc từ xa, freelancer, chuyên gia muốn thử sống tại Đà Lạt.
 - **Thời gian:** 1 tuần – 3 tháng.
-- **Mục tiêu:** Kiểm tra mức độ phù hợp giữa cá nhân và nhịp sống Đà Lạt trước khi thay đổi cuộc sống.
+- **Mục tiêu:** Kiểm tra mức độ phù hợp trước khi thay đổi cuộc sống.
 
-### Program 2 — Định hướng nghề nghiệp
-- **Slug:** `/dinh-huong-nghe-nghiep`
-- **Đối tượng:** Người đang hoang mang về công việc và hướng đi cuộc đời.
+### Program 2 — Định hướng công việc và hướng đi cuộc đời
+- **Slug đề xuất:** `/vi/bai-viet/dinh-huong-cong-viec-va-huong-di-cuoc-doi`
+- **Đối tượng:** Người đang hoang mang về công việc và hướng đi.
 - **Thời gian:** 1 tuần – 3 tháng.
-- **Mục tiêu:** Dừng lại, nhìn lại năng lực, xác định hướng đi, xây kế hoạch thực tế, có hỗ trợ định hướng.
+- **Mục tiêu:** Dừng lại, nhìn lại năng lực, xác định hướng đi, xây kế hoạch thực tế.
 
-### Program 3 — Cuộc Sống Muôn Nơi (Tự do thật sự)
-- **Slug:** `/tu-do-that-su`
-- **Đối tượng:** Người tìm kiếm tự do thật sự — tự do nơi sống, tự do công việc, tự do tài chính, tự do nội tâm.
+### Program 3 — Tự do sống, làm việc, tài chính và nội tâm
+- **Slug đề xuất:** `/vi/bai-viet/tu-do-va-song-co-muc-dich`
+- **Đối tượng:** Người tìm kiếm tự do thật sự — bốn tầng tự do.
 - **Thời gian:** 1 tuần – 3 tháng.
-- **Mục tiêu:** Hiểu rõ bốn tầng tự do, xây dựng hướng đi có chủ đích, không chạy trốn mà chọn trách nhiệm đáng theo đuổi.
+- **Mục tiêu:** Hiểu bốn tầng tự do, xây hướng đi có chủ đích.
+
+---
+
+## Relationship with ecosystem
+
+| Hệ | Quan hệ |
+|----|---------|
+| omdalat.com | Trust root, giới thiệu Tam Farm |
+| app.omdalat.com | Account, consent, registration |
+| lily.omdalat.com | Có thể là một địa điểm/operator thành viên |
+| cuocsong.muonnoi.org | Cung cấp phương pháp, Tam Farm cung cấp môi trường |
+
+---
+
+## Contact
+
+- WhatsApp: +84 84 915 3426
+- Link: https://wa.me/84849153426
+- Chỉ xác nhận lịch sau khi đã trao đổi về nhu cầu, thời gian, mức độ phù hợp và tình trạng chỗ ở.
+
+---
+
+## Go-Live conditions
+
+Tam Farm chỉ được public là đang hoạt động khi đủ 18 điều kiện (xem Founder Lock §15).
+
+**Hiện tại: CHƯA ĐỦ — status CONCEPT_DEFINED.**
 
 ---
 
 ## Status
 
-- **Current status:** PILOT
-- **Evidence:** Founder-defined brand identity, content đã viết, site đang xây.
+- **Current status:** CONCEPT_DEFINED
+- **Founder Lock:** READY FOR REVIEW
+- **Domain release:** NOT AUTHORIZED
+- **Location release:** NOT AUTHORIZED
+- **Public booking/application:** NOT AUTHORIZED
 - **Last reviewed:** 2026-06-30
 - **Reviewer:** Trần Hà Tâm (founder)
-- **Founder approval:** ✅ Approved 2026-06-30
