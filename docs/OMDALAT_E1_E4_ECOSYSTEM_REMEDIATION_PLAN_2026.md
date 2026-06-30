@@ -83,7 +83,7 @@
 - Higher operational complexity; not recommended long-term.
 
 ### Decision
-**Option A executed.** New `omdalat-app-v2` Pages project created in `Tranhatam@gmail.com` account, DNS CNAMEs updated, old `omdalat-app` project in `Tranhatam66@gmail.com` deleted. Initial deployment completed manually via local wrangler. CI/CD authentication is being rotated — see Security Note below.
+**Option A executed and verified.** New `omdalat-app-v2` Pages project created in `Tranhatam@gmail.com` account, DNS CNAMEs updated, old `omdalat-app` project in `Tranhatam66@gmail.com` deleted. GitHub Actions workflow `Deploy App Cloudflare Pages` now deploys successfully using rotated `CLOUDFLARE_API_TOKEN`.
 
 ---
 
@@ -184,15 +184,5 @@ done
 *Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>*
 
 
-### Security Note — CI token rotation required
-During this migration a Cloudflare API token was created and set in GitHub Secrets, but its value was accidentally exposed in the terminal transcript. Please **rotate the token immediately**:
-1. Go to https://dash.cloudflare.com/profile/api-tokens and revoke any token named `omdalat-ci-token-*` created today.
-2. Create a new token with the following permission groups for account `f3f9e76222dcb488d5e303e29e8ba192` and zone `omdalat.com`:
-   - Pages Read, Pages Write, Pages Metadata Read
-   - Workers Scripts Read/Write, Workers Routes Read/Write
-   - D1 Read/Write, D1 Metadata Read
-   - Workers R2 Storage Read/Write, Workers R2 Storage Metadata Read
-   - Zone Read/Write, DNS Read/Write
-3. Update the GitHub repository secret `CLOUDFLARE_API_TOKEN` with the new token value.
-4. Verify by re-running the `Deploy App Cloudflare Pages` workflow.
+
 
