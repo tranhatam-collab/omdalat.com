@@ -32,15 +32,49 @@ export const handleOfferCreate = async (
       ), env);
     }
 
-    // If buyer_request_id provided, verify it's qualified
+    // X2 FIX: Ownership + package status + duplicate + amount validation.
+    // Previous code only checked buyer_request qualification, not ownership.
+
+    // 1. Verify package exists and is published
+    const pkg = await env.DB.prepare(
+      `SELECT publication_status, owner_email FROM asset_packages WHERE id = ?`
+    ).bind(package_id).first() as any;
+    if (!pkg) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Package not found' }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (pkg.publication_status !== 'published') {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Package is not available for offers' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    // Seller cannot offer on their own package
+    if (pkg.owner_email && pkg.owner_email === (auth as any).email) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Cannot submit offer on your own package' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // 2. Verify buyer_request ownership + qualification
     if (buyer_request_id) {
       const brq = await env.DB.prepare(
-        `SELECT qualification_status FROM buyer_requests WHERE id = ?`
+        `SELECT qualification_status, buyer_email FROM buyer_requests WHERE id = ?`
       ).bind(buyer_request_id).first() as any;
       if (!brq) {
         return withCors(request, new Response(
           JSON.stringify({ error: 'Buyer request not found' }),
           { status: 404, headers: { 'Content-Type': 'application/json' } }
+        ), env);
+      }
+      // X2 FIX: Verify the buyer_request belongs to the authenticated user
+      if (brq.buyer_email && brq.buyer_email !== (auth as any).email && (auth as any).role !== 'super') {
+        return withCors(request, new Response(
+          JSON.stringify({ error: 'Buyer request does not belong to you' }),
+          { status: 403, headers: { 'Content-Type': 'application/json' } }
         ), env);
       }
       if (brq.qualification_status !== 'qualified') {
@@ -49,6 +83,30 @@ export const handleOfferCreate = async (
           { status: 403, headers: { 'Content-Type': 'application/json' } }
         ), env);
       }
+      // 3. Duplicate offer check
+      const existing = await env.DB.prepare(
+        `SELECT id FROM asset_offers WHERE package_id = ? AND buyer_request_id = ? AND status = 'submitted'`
+      ).bind(package_id, buyer_request_id).first();
+      if (existing) {
+        return withCors(request, new Response(
+          JSON.stringify({ error: 'An active offer already exists for this package and buyer request' }),
+          { status: 409, headers: { 'Content-Type': 'application/json' } }
+        ), env);
+      }
+    }
+
+    // 4. Amount validation — reject negative amounts
+    if (offer_amount_vnd !== null && offer_amount_vnd !== undefined && offer_amount_vnd < 0) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Offer amount cannot be negative' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (offer_amount_usd !== null && offer_amount_usd !== undefined && offer_amount_usd < 0) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Offer amount cannot be negative' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
     }
 
     const now = new Date().toISOString();

@@ -32,6 +32,44 @@ export const handleEvidenceSubmit = async (
       ), env);
     }
 
+    // X3 FIX: Validate evidence_type against allowed enum
+    const validEvidenceTypes = [
+      'trademark_registration', 'business_license', 'domain_ownership',
+      'copyright_certificate', 'social_media_proof', 'revenue_proof',
+      'contract', 'other'
+    ];
+    if (!validEvidenceTypes.includes(evidence_type)) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: `Invalid evidence_type. Must be one of: ${validEvidenceTypes.join(', ')}` }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // X3 FIX: Verify package ownership (submitter must own the package or be super admin)
+    const pkg = await env.DB.prepare(
+      `SELECT owner_email FROM asset_packages WHERE id = ?`
+    ).bind(package_id).first() as any;
+    if (!pkg) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Package not found' }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (pkg.owner_email && pkg.owner_email !== (auth as any).email && (auth as any).role !== 'super') {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'You do not own this package. Only the package owner can submit evidence.' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // X3 FIX: Validate file_url is internal R2 (not arbitrary external URL)
+    if (file_url && !file_url.startsWith('r2://') && !file_url.startsWith('https://omdalat.com/r2/') && !file_url.startsWith('https://assets.omdalat.com/')) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'file_url must point to internal R2 storage (r2:// or https://omdalat.com/r2/ or https://assets.omdalat.com/)' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
     const now = new Date().toISOString();
     const id = `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
 

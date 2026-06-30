@@ -110,7 +110,7 @@ describe('BAN-P1-006 — Data room access control', () => {
     expect(res.status).toBe(401);
   });
 
-  it('data room get returns 403 without access', async () => {
+  it('data room get returns 401 without auth (X1 fix: auth required before access check)', async () => {
     const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
     const mockReq = new Request('https://api.omdalat.com/api/omdalat/data-rooms/dr_test', {
       method: 'GET'
@@ -125,7 +125,8 @@ describe('BAN-P1-006 — Data room access control', () => {
       }
     } as any;
     const res = await handleDataRoomGet(mockReq, mockEnv);
-    expect(res.status).toBe(403);
+    // X1 FIX: Now returns 401 (auth required first) instead of 403 (which was via spoofable header)
+    expect(res.status).toBe(401);
   });
 });
 

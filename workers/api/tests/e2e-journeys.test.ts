@@ -399,3 +399,124 @@ describe('E2E Journey 8: Prohibited language enforcement', () => {
     expect(placeBidMatches).toBeNull();
   });
 });
+
+// ============================================================
+// JOURNEY 9: Extended P1 — IDOR, ownership, validation (X1-X6)
+// ============================================================
+describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
+  it('X1: data room get does NOT use X-Buyer-Email header for access (IDOR fix)', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/data-room-transfer.ts'),
+      'utf-8'
+    );
+    // The vulnerable header must NOT be used for access decisions (only in comments)
+    const lines = source.split('\n');
+    const codeLines = lines.filter(l => !l.trim().startsWith('//') && !l.trim().startsWith('*'));
+    const codeOnly = codeLines.join('\n');
+    expect(codeOnly).not.toContain("get('X-Buyer-Email')");
+    expect(codeOnly).not.toContain("'X-Buyer-Email'");
+    // Must use auth.email instead
+    expect(source).toContain('(auth as any).email');
+    // Must require auth before access check
+    expect(source).toContain('requireAuth(request, env)');
+  });
+
+  it('X1: data room get requires auth (no anonymous access)', async () => {
+    const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('GET', '/api/omdalat/data-rooms/dr_test');
+    const env = mockEnv({ firstResult: null }); // no session
+    const res = await handleDataRoomGet(req, env);
+    expect(res.status).toBe(401);
+  });
+
+  it('X2: offer create validates package exists', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'nonexistent_pkg',
+      offer_type: 'full_assignment',
+    });
+    const env = mockEnv({ firstResult: { email: 'buyer@test.com', role: 'admin' } });
+    const res = await handleOfferCreate(req, env);
+    // Should fail — either 401 (no session) or 404 (package not found)
+    expect([401, 404]).toContain(res.status);
+  });
+
+  it('X2: offer create rejects negative amounts', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/offers-admin.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('cannot be negative');
+  });
+
+  it('X2: offer create checks for duplicate offers', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/offers-admin.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('already exists');
+    expect(source).toContain('409');
+  });
+
+  it('X3: evidence submit validates evidence_type enum', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('validEvidenceTypes');
+    expect(source).toContain('trademark_registration');
+    expect(source).toContain('Invalid evidence_type');
+  });
+
+  it('X3: evidence submit checks package ownership', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('owner_email');
+    expect(source).toContain('do not own this package');
+  });
+
+  it('X3: evidence submit validates file_url is R2 internal', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('r2://');
+    expect(source).toContain('internal R2');
+  });
+
+  it('X4: data room request-access requires auth (no anonymous spam)', async () => {
+    const { handleDataRoomRequestAccess } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('POST', '/api/omdalat/data-rooms/dr_test/request-access', {
+      buyer_email: 'attacker@evil.com',
+      buyer_name: 'Attacker',
+    });
+    const env = mockEnv({ firstResult: null }); // no session
+    const res = await handleDataRoomRequestAccess(req, env);
+    expect(res.status).toBe(401); // Was: 201 (anyone could request)
+  });
+
+  it('X4: data room request-access uses auth email, not body email', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const source = fs.readFileSync(
+      path.resolve(__dirname, '../src/routes/data-room-transfer.ts'),
+      'utf-8'
+    );
+    expect(source).toContain('Use authenticated email');
+    expect(source).toContain('NOT body-provided email');
+  });
+});

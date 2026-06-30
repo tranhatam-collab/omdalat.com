@@ -81,23 +81,24 @@ export const handleDataRoomGet = async (
       ), env);
     }
 
-    // Check access: admin (super) OR buyer with granted access
+    // X1 FIX: Require authentication — buyer access verified via session, NOT spoofable header.
+    // Previous code used X-Buyer-Email header which any client can set to any email.
     const auth = await requireAuth(request, env);
+    if (auth instanceof Response) return withCors(request, auth, env);
+
     let hasAccess = false;
-    if (!(auth instanceof Response)) {
-      const superCheck = requireSuper(auth as any);
-      if (!(superCheck instanceof Response)) hasAccess = true;
+    const superCheck = requireSuper(auth as any);
+    if (!(superCheck instanceof Response)) {
+      hasAccess = true; // admin/super has full access
     }
 
     if (!hasAccess) {
-      // Check if buyer has access grant
-      const buyerEmail = request.headers.get('X-Buyer-Email') || '';
-      if (buyerEmail) {
-        const grant = await env.DB.prepare(
-          `SELECT id FROM data_room_access_grants WHERE data_room_id = ? AND buyer_email = ? AND status = 'granted' AND (expires_at IS NULL OR expires_at > ?)`
-        ).bind(dataRoomId, buyerEmail, new Date().toISOString()).first();
-        if (grant) hasAccess = true;
-      }
+      // Check if this authenticated user has a granted access row.
+      // Uses auth.email from verified session — NOT a client-controlled header.
+      const grant = await env.DB.prepare(
+        `SELECT id FROM data_room_access_grants WHERE data_room_id = ? AND buyer_email = ? AND status = 'granted' AND (expires_at IS NULL OR expires_at > ?)`
+      ).bind(dataRoomId, (auth as any).email, new Date().toISOString()).first();
+      if (grant) hasAccess = true;
     }
 
     if (!hasAccess) {
@@ -143,19 +144,21 @@ export const handleDataRoomRequestAccess = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
+  // X4 FIX: Require authentication. Previously anyone could submit access requests
+  // with any email, enabling spam and impersonation.
+  const auth = await requireAuth(request, env);
+  if (auth instanceof Response) return withCors(request, auth, env);
+
   try {
     const url = new URL(request.url);
     const pathParts = url.pathname.split('/').filter(Boolean);
     const dataRoomId = pathParts[3];
     const body = await request.json() as any;
-    const { buyer_email, buyer_name, reason } = body;
+    const { reason } = body;
 
-    if (!buyer_email || !buyer_name) {
-      return withCors(request, new Response(
-        JSON.stringify({ error: 'buyer_email and buyer_name are required' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      ), env);
-    }
+    // Use authenticated email — NOT body-provided email (prevents impersonation)
+    const buyer_email = (auth as any).email;
+    const buyer_name = (auth as any).email; // Can be enhanced with profile lookup
 
     const now = new Date().toISOString();
     const id = `drg_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
