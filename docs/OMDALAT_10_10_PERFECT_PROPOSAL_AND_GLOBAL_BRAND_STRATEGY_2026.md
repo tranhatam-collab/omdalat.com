@@ -6,7 +6,7 @@
 **Ngày:** 2026-06-30  
 **Người đề xuất:** Devin (independent QA/strategy synthesis)  
 **Repository:** https://github.com/tranhatam-collab/omdalat.com  
-**Remote HEAD:** 8b6d6073f91d8281ee714afa59f95d143529b49a  
+**Remote HEAD:** 2a965de3c21e2f33223f4006d1caf7b40582e2dd  
 **API Worker deploy SHA:** 64c25860b94d271561f3599929620a9ca3c47851  
 
 ---

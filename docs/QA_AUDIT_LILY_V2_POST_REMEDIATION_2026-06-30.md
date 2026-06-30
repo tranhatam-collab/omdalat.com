@@ -3,7 +3,7 @@
 **Date:** 2026-06-30
 **Auditor:** Devin
 **Scope:** `lily.omdalat.com` public brand site after content/SEO/UI remediation
-**Status:** LIVE — ready for senior audit sign-off
+**Status:** LIVE — code-level P0/P1 gates closed; P2 post-launch enhancements remain open
 **Method:** Automated tests + local code review + live HTTP verification + production DB query
 
 ---
@@ -25,7 +25,7 @@
 | UI/UX desktop nav | Static hover | Animated underline + lift effect | PASS |
 | UI/UX mobile nav | Wrap-only | Hamburger 3-line → X with dropdown | PASS |
 
-**Overall verdict:** All P0 and P1 items from `LILY_V2_CONTENT_SEO_AUDIT_2026-06-30.md` have been remediated. Site is ready for final senior review.
+**Overall verdict:** All P0 and P1 code-level items from `LILY_V2_CONTENT_SEO_AUDIT_2026-06-30.md` have been remediated. The public site is live and the code gates are closed; P2 post-launch enhancements (real photos, additional articles, Google Place ID verification, Lighthouse audit, OG image) remain open and scheduled for the next cycle.
 
 ---
 
@@ -71,6 +71,32 @@ Workspace typecheck preflight passed.
 ### 3.4 CI Guards
 - `node scripts/guard-subdomain-anti-confusion.mjs` → PASS
 - `node scripts/guard-sql-compliance-bypass.mjs` → PASS
+
+### 3.5 Artifact & Command Log
+All commands were run in the repository root `/Users/tranhatam/Documents/Devnewproject/omdalat.com` on 2026-06-30. Re-run the following to reproduce every claim in this report:
+
+```bash
+# Automated tests
+cd workers/api && npx vitest run
+cd workers/brand-renderer && npx vitest run
+cd /Users/tranhatam/Documents/Devnewproject/omdalat.com && pnpm typecheck
+
+# CI guards
+node scripts/guard-subdomain-anti-confusion.mjs
+node scripts/guard-sql-compliance-bypass.mjs
+
+# Production DB verification (requires wrangler auth)
+cd workers/api
+npx wrangler d1 execute omdalat-core --remote --env=production --command "SELECT id, name_vi, name_en, publication_status, can_host_stay, can_host_work FROM brands WHERE id='brnd_lily';"
+npx wrangler d1 execute omdalat-core --remote --env=production --command "SELECT id, business_registration, lodging_compliance, pccc, food_safety, tourism_service FROM compliance_checklists WHERE brand_id='brnd_lily';"
+npx wrangler d1 execute omdalat-core --remote --env=production --command "SELECT locale, block_type, COUNT(*) as cnt FROM content_blocks WHERE brand_id='brnd_lily' GROUP BY locale, block_type;"
+
+# Live site verification
+curl -s -L https://lily.omdalat.com/ | grep -E '<title>|<button class="hamburger"|<ul id="nav-menu"'
+curl -s -L https://lily.omdalat.com/stay | grep -E '<title>|<h1>|<h2>'
+curl -s -L https://lily.omdalat.com/en/stay | grep -E '<title>|<h1>|<h2>'
+curl -s -L https://lily.omdalat.com/sitemap.xml | grep -c '<url>'
+```
 
 ---
 
@@ -215,5 +241,5 @@ Mobile menu markup present on every verified page:
 
 ## 10. Recommendation to Senior Audit
 
-**Approve Lily V2 for final go-live declaration.** All blocking items have been remediated, automated gates are green, production state matches repository, and the public site renders the intended V2 identity across both languages. Remaining P2 items are content/production enhancements and do not block the current live state.
+**Approve Lily V2 as code-complete and publicly live.** All P0/P1 code-level blocking items have been remediated, automated gates are green, production state matches repository, and the public site renders the intended V2 identity across both languages. This is a sign-off on the current live implementation, not a claim that the product is 10/10 final; remaining P2 items are real-photo assets, additional articles, Google Place ID verification, Lighthouse performance, and OG image production, all scheduled for the next cycle.
 
