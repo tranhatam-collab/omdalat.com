@@ -12,9 +12,16 @@
   <url><loc>https://tamfarms.omdalat.com/vi/danh-cho-doanh-nghiep/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/dia-diem/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/khong-gian-song-lam-viec-giua-vuon-duoc-lieu/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/thanh-cong-nhung-trong-rong-tim-lai-muc-dich-song/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/song-thu-va-lam-viec-tai-da-lat/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/dinh-huong-cong-viec-va-huong-di-cuoc-doi/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/tu-do-va-song-co-muc-dich/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/sinh-vien-moi-tot-nghiep-trai-nghiem-nghe-nghiep-thuc-te/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/chuyen-gia-nha-nghien-cuu-can-khong-gian-tap-trung/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/nguoi-lam-viec-tu-xa-sang-tao-noi-dung-va-cong-nghe/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/nguoi-can-tam-dung-sau-kiet-suc-va-ap-luc-keo-dai/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/vi/bai-viet/doanh-nhan-thu-nghiem-y-tuong-va-du-an-moi/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/dang-ky/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/cau-hoi-thuong-gap/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tamfarms.omdalat.com/vi/noi-quy/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -34,9 +41,16 @@
   <url><loc>https://tamfarms.omdalat.com/en/for-businesses/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/locations/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/articles/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/living-and-working-among-herbal-gardens/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/successful-but-empty-finding-purpose-again/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/articles/live-and-work-in-da-lat/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/articles/career-orientation-and-life-direction/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/articles/freedom-and-purposeful-living/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/students-and-graduates-real-career-experience/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/experts-and-researchers-need-focused-space/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/remote-workers-creators-and-tech/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/need-to-pause-after-burnout/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tamfarms.omdalat.com/en/articles/entrepreneurs-testing-new-ideas/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/register/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/faq/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://tamfarms.omdalat.com/en/house-rules/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
