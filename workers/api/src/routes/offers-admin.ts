@@ -25,9 +25,32 @@ export const handleOfferCreate = async (
     const body = await request.json() as any;
     const { package_id, buyer_request_id, offer_type, offer_amount_vnd, offer_amount_usd, terms, expires_at } = body;
 
-    if (!package_id || !offer_type) {
+    // X2 FIX: buyer_request_id is required. Previous comment said it was required
+    // but the code only checked it if provided, allowing offers without qualification.
+    if (!package_id || !offer_type || !buyer_request_id) {
       return withCors(request, new Response(
-        JSON.stringify({ error: 'package_id and offer_type are required' }),
+        JSON.stringify({ error: 'package_id, offer_type, and buyer_request_id are required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // X2 FIX: Currency must be explicit and valid (VND or USD). No hardcoded VND.
+    const currency = (body.currency || 'VND').toUpperCase();
+    if (!['VND', 'USD'].includes(currency)) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'currency must be VND or USD' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (currency === 'VND' && (offer_amount_vnd === null || offer_amount_vnd === undefined)) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'offer_amount_vnd is required when currency is VND' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (currency === 'USD' && (offer_amount_usd === null || offer_amount_usd === undefined)) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'offer_amount_usd is required when currency is USD' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       ), env);
     }
@@ -59,40 +82,38 @@ export const handleOfferCreate = async (
       ), env);
     }
 
-    // 2. Verify buyer_request ownership + qualification
-    if (buyer_request_id) {
-      const brq = await env.DB.prepare(
-        `SELECT qualification_status, buyer_email FROM buyer_requests WHERE id = ?`
-      ).bind(buyer_request_id).first() as any;
-      if (!brq) {
-        return withCors(request, new Response(
-          JSON.stringify({ error: 'Buyer request not found' }),
-          { status: 404, headers: { 'Content-Type': 'application/json' } }
-        ), env);
-      }
-      // X2 FIX: Verify the buyer_request belongs to the authenticated user
-      if (brq.buyer_email && brq.buyer_email !== (auth as any).email && (auth as any).role !== 'super') {
-        return withCors(request, new Response(
-          JSON.stringify({ error: 'Buyer request does not belong to you' }),
-          { status: 403, headers: { 'Content-Type': 'application/json' } }
-        ), env);
-      }
-      if (brq.qualification_status !== 'qualified') {
-        return withCors(request, new Response(
-          JSON.stringify({ error: 'Buyer must be qualified before submitting offer' }),
-          { status: 403, headers: { 'Content-Type': 'application/json' } }
-        ), env);
-      }
-      // 3. Duplicate offer check
-      const existing = await env.DB.prepare(
-        `SELECT id FROM asset_offers WHERE package_id = ? AND buyer_request_id = ? AND status = 'submitted'`
-      ).bind(package_id, buyer_request_id).first();
-      if (existing) {
-        return withCors(request, new Response(
-          JSON.stringify({ error: 'An active offer already exists for this package and buyer request' }),
-          { status: 409, headers: { 'Content-Type': 'application/json' } }
-        ), env);
-      }
+    // 2. Verify buyer_request ownership + qualification (buyer_request_id is now mandatory)
+    const brq = await env.DB.prepare(
+      `SELECT qualification_status, buyer_email FROM buyer_requests WHERE id = ?`
+    ).bind(buyer_request_id).first() as any;
+    if (!brq) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Buyer request not found' }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    // X2 FIX: Verify the buyer_request belongs to the authenticated user
+    if (brq.buyer_email && brq.buyer_email !== (auth as any).email && (auth as any).role !== 'super') {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Buyer request does not belong to you' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    if (brq.qualification_status !== 'qualified') {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Buyer must be qualified before submitting offer' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+    // 3. Duplicate offer check
+    const existing = await env.DB.prepare(
+      `SELECT id FROM asset_offers WHERE package_id = ? AND buyer_request_id = ? AND status = 'submitted'`
+    ).bind(package_id, buyer_request_id).first();
+    if (existing) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'An active offer already exists for this package and buyer request' }),
+        { status: 409, headers: { 'Content-Type': 'application/json' } }
+      ), env);
     }
 
     // 4. Amount validation — reject negative amounts
@@ -114,8 +135,8 @@ export const handleOfferCreate = async (
 
     await env.DB.prepare(
       `INSERT INTO asset_offers (id, package_id, buyer_request_id, offer_type, offer_amount_vnd, offer_amount_usd, currency, status, terms, expires_at, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, 'VND', 'submitted', ?, ?, ?, ?)`
-    ).bind(id, package_id, buyer_request_id || null, offer_type, offer_amount_vnd || null, offer_amount_usd || null, terms ? JSON.stringify(terms) : null, expires_at || null, now, now).run();
+       VALUES (?, ?, ?, ?, ?, ?, ?, 'submitted', ?, ?, ?, ?)`
+    ).bind(id, package_id, buyer_request_id, offer_type, offer_amount_vnd || null, offer_amount_usd || null, currency, terms ? JSON.stringify(terms) : null, expires_at || null, now, now).run();
 
     // Log audit event
     await env.DB.prepare(

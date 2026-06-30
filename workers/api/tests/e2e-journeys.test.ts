@@ -403,27 +403,54 @@ describe('E2E Journey 8: Prohibited language enforcement', () => {
 // ============================================================
 // JOURNEY 9: Extended P1 — IDOR, ownership, validation (X1-X6)
 // ============================================================
+//
+// These are BEHAVIORAL tests: they exercise the handlers with mock requests
+// and assert on the HTTP response status/body. They prove gates block bad cases.
+// They do NOT assert on source-code strings (which would be source-code assertions).
+//
+// Helper: returns a mock env where each call to first()/all()/run() returns the
+// next value from the supplied arrays. This lets us simulate multi-step flows.
+function mockEnvSequence(sequence: { firstResults?: any[]; allResults?: any[][]; runResults?: any[]; env?: any }): any {
+  let firstIndex = 0;
+  let allIndex = 0;
+  let runIndex = 0;
+  const firstArr = sequence.firstResults || [];
+  const allArr = sequence.allResults || [];
+  const runArr = sequence.runResults || [];
+  return {
+    DB: {
+      prepare: () => ({
+        bind: (...args: any[]) => ({
+          first: async () => firstArr[firstIndex++],
+          all: async () => ({ results: allArr[allIndex++] || [], success: true }),
+          run: async () => runArr[runIndex++] || { success: true, meta: { changes: 1 } },
+        }),
+        first: async () => firstArr[firstIndex++],
+        all: async () => ({ results: allArr[allIndex++] || [], success: true }),
+        run: async () => runArr[runIndex++] || { success: true, meta: { changes: 1 } },
+      }),
+    },
+    APP_NAME: 'omdalat-platforms',
+    APP_ENV: 'production',
+    ...sequence.env,
+  };
+}
+
 describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
-  it('X1: data room get does NOT use X-Buyer-Email header for access (IDOR fix)', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/data-room-transfer.ts'),
-      'utf-8'
-    );
-    // The vulnerable header must NOT be used for access decisions (only in comments)
-    const lines = source.split('\n');
-    const codeLines = lines.filter(l => !l.trim().startsWith('//') && !l.trim().startsWith('*'));
-    const codeOnly = codeLines.join('\n');
-    expect(codeOnly).not.toContain("get('X-Buyer-Email')");
-    expect(codeOnly).not.toContain("'X-Buyer-Email'");
-    // Must use auth.email instead
-    expect(source).toContain('(auth as any).email');
-    // Must require auth before access check
-    expect(source).toContain('requireAuth(request, env)');
+  // ---- Helpers for authenticated behavioral tests ----
+  const authHeader = (email: string) => ({
+    Authorization: `Bearer ${'a'.repeat(32)}_${email}`, // token >= 32 chars for requireAuth
+  });
+  const mockSession = (email: string, role: string = 'admin') => ({
+    admin_id: `adm_${email}`,
+    brand_id: null,
+    email,
+    role,
+    is_active: true,
+    expires_at: new Date(Date.now() + 3600000).toISOString(), // 1 hour from now
   });
 
-  it('X1: data room get requires auth (no anonymous access)', async () => {
+  it('X1: data room get returns 401 without auth (IDOR fix)', async () => {
     const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
     const req = mockReq('GET', '/api/omdalat/data-rooms/dr_test');
     const env = mockEnv({ firstResult: null }); // no session
@@ -431,74 +458,277 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     expect(res.status).toBe(401);
   });
 
-  it('X2: offer create validates package exists', async () => {
+  it('X1: authenticated buyer WITHOUT grant cannot access data room (403)', async () => {
+    const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('GET', '/api/omdalat/data-rooms/dr_test', undefined, authHeader('buyer2@test.com'));
+    // Sequence: session OK, room exists, not super, no grant => 403
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer2@test.com', 'admin'), // session (requireAuth)
+        null, // grant check fails
+        null, // data room query not reached because 403 returned first
+      ],
+    });
+    const res = await handleDataRoomGet(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('Access denied');
+  });
+
+  it('X1: authenticated buyer WITH grant can access data room (200)', async () => {
+    const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('GET', '/api/omdalat/data-rooms/dr_test', undefined, authHeader('buyer1@test.com'));
+    // Sequence: session OK, room exists, not super, grant exists => 200
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer1@test.com', 'admin'), // session (requireAuth)
+        { id: 'grant_1' }, // grant exists for auth.email
+        { id: 'dr_test', package_id: 'pkg_1', name: 'test', manifest: '[]', status: 'active' }, // data room
+      ],
+    });
+    const res = await handleDataRoomGet(req, env);
+    expect(res.status).toBe(200);
+  });
+
+  // ---- X2: Offer ownership + currency ----
+  it('X2: offer create rejects request without buyer_request_id (400)', async () => {
     const { handleOfferCreate } = await import('../src/routes/offers-admin');
     const req = mockReq('POST', '/api/omdalat/offers', {
-      package_id: 'nonexistent_pkg',
+      package_id: 'pkg_1',
       offer_type: 'full_assignment',
-    });
-    const env = mockEnv({ firstResult: { email: 'buyer@test.com', role: 'admin' } });
+    }, authHeader('buyer@test.com'));
+    const env = mockEnv({ firstResult: mockSession('buyer@test.com', 'admin') });
     const res = await handleOfferCreate(req, env);
-    // Should fail — either 401 (no session) or 404 (package not found)
-    expect([401, 404]).toContain(res.status);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('buyer_request_id');
   });
 
-  it('X2: offer create rejects negative amounts', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/offers-admin.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('cannot be negative');
+  it('X2: offer create rejects unsupported currency (400)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'EUR',
+    }, authHeader('buyer@test.com'));
+    const env = mockEnv({ firstResult: mockSession('buyer@test.com', 'admin') });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('currency');
   });
 
-  it('X2: offer create checks for duplicate offers', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/offers-admin.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('already exists');
-    expect(source).toContain('409');
+  it('X2: offer create rejects VND without offer_amount_vnd (400)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_usd: 100,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnv({ firstResult: mockSession('buyer@test.com', 'admin') });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('offer_amount_vnd');
   });
 
-  it('X3: evidence submit validates evidence_type enum', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('validEvidenceTypes');
-    expect(source).toContain('trademark_registration');
-    expect(source).toContain('Invalid evidence_type');
+  it('X2: offer create rejects negative amount (400)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_vnd: -100,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        { publication_status: 'published', owner_email: 'seller@test.com' }, // package OK
+        { qualification_status: 'qualified', buyer_email: 'buyer@test.com' }, // buyer request OK
+        null, // no duplicate
+      ],
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('negative');
   });
 
-  it('X3: evidence submit checks package ownership', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('owner_email');
-    expect(source).toContain('do not own this package');
+  it('X2: offer create rejects duplicate active offer (409)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_vnd: 1000000,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        { publication_status: 'published', owner_email: 'seller@test.com' }, // package OK
+        { qualification_status: 'qualified', buyer_email: 'buyer@test.com' }, // buyer request OK
+        { id: 'existing_offer' }, // duplicate exists
+      ],
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(409);
+    const body = await res.json();
+    expect(body.error).toContain('already exists');
   });
 
-  it('X3: evidence submit validates file_url is R2 internal', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/evidence-transfer.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('r2://');
-    expect(source).toContain('internal R2');
+  it('X2: offer create blocks seller from offering on own package (403)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_vnd: 1000000,
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'), // session = seller
+        { publication_status: 'published', owner_email: 'seller@test.com' }, // own package
+      ],
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('own package');
   });
 
-  it('X4: data room request-access requires auth (no anonymous spam)', async () => {
+  it('X2: offer create succeeds for valid buyer with VND (201)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_vnd: 1000000,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        { publication_status: 'published', owner_email: 'seller@test.com' }, // package OK
+        { qualification_status: 'qualified', buyer_email: 'buyer@test.com' }, // buyer request OK
+        null, // no duplicate
+      ],
+      runResults: [{ success: true }, { success: true }], // offer insert + audit
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(201);
+    const body = await res.json();
+    expect(body.offer_id).toMatch(/^ofr_/);
+    expect(body.status).toBe('submitted');
+  });
+
+  it('X2: offer create succeeds for valid buyer with USD (201)', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'USD',
+      offer_amount_usd: 1000,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        { publication_status: 'published', owner_email: 'seller@test.com' }, // package OK
+        { qualification_status: 'qualified', buyer_email: 'buyer@test.com' }, // buyer request OK
+        null, // no duplicate
+      ],
+      runResults: [{ success: true }, { success: true }],
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(201);
+    const body = await res.json();
+    expect(body.offer_id).toMatch(/^ofr_/);
+  });
+
+  // ---- X3: Evidence ownership + validation ----
+  it('X3: evidence submit rejects invalid evidence_type (400)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'fake_type',
+      description: 'Some evidence',
+    }, authHeader('seller@test.com'));
+    const env = mockEnv({ firstResult: mockSession('seller@test.com', 'admin') });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('evidence_type');
+  });
+
+  it('X3: evidence submit rejects external file_url (400)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Trademark evidence',
+      file_url: 'https://evil.com/malware.exe',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'), // session
+        { owner_email: 'seller@test.com' }, // package OK
+      ],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('R2');
+  });
+
+  it('X3: evidence submit blocks non-owner (403)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Trademark evidence',
+      file_url: 'https://omdalat.com/r2/file.pdf',
+    }, authHeader('other@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('other@test.com', 'admin'), // session (not owner)
+        { owner_email: 'seller@test.com' }, // package owned by someone else
+      ],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('do not own');
+  });
+
+  it('X3: evidence submit succeeds for owner with valid R2 URL (201)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Trademark evidence',
+      file_url: 'https://omdalat.com/r2/file.pdf',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'), // session
+        { owner_email: 'seller@test.com' }, // package owned by same user
+      ],
+      runResults: [{ success: true }, { success: true }],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(201);
+    const body = await res.json();
+    expect(body.evidence_id).toMatch(/^ev_/);
+  });
+
+  // ---- X4: Data-room request-access auth ----
+  it('X4: data room request-access returns 401 without auth (no anonymous spam)', async () => {
     const { handleDataRoomRequestAccess } = await import('../src/routes/data-room-transfer');
     const req = mockReq('POST', '/api/omdalat/data-rooms/dr_test/request-access', {
       buyer_email: 'attacker@evil.com',
@@ -506,17 +736,38 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     });
     const env = mockEnv({ firstResult: null }); // no session
     const res = await handleDataRoomRequestAccess(req, env);
-    expect(res.status).toBe(401); // Was: 201 (anyone could request)
+    expect(res.status).toBe(401);
   });
 
-  it('X4: data room request-access uses auth email, not body email', async () => {
-    const fs = await import('fs');
-    const path = await import('path');
-    const source = fs.readFileSync(
-      path.resolve(__dirname, '../src/routes/data-room-transfer.ts'),
-      'utf-8'
-    );
-    expect(source).toContain('Use authenticated email');
-    expect(source).toContain('NOT body-provided email');
+  it('X4: data room request-access returns 404 for non-existent room', async () => {
+    const { handleDataRoomRequestAccess } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('POST', '/api/omdalat/data-rooms/dr_fake/request-access', { reason: 'Due diligence' }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        null, // room does not exist
+      ],
+    });
+    const res = await handleDataRoomRequestAccess(req, env);
+    expect(res.status).toBe(404);
+    const body = await res.json();
+    expect(body.error).toContain('Data room not found');
+  });
+
+  it('X4: data room request-access succeeds for authenticated buyer with valid room (201)', async () => {
+    const { handleDataRoomRequestAccess } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('POST', '/api/omdalat/data-rooms/dr_test/request-access', { reason: 'Due diligence' }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'), // session
+        { id: 'dr_test' }, // room exists
+      ],
+      runResults: [{ success: true }],
+    });
+    const res = await handleDataRoomRequestAccess(req, env);
+    expect(res.status).toBe(201);
+    const body = await res.json();
+    expect(body.request_id).toMatch(/^drg_/);
+    expect(body.status).toBe('pending');
   });
 });

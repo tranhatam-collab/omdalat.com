@@ -70,19 +70,8 @@ export const handleDataRoomGet = async (
     const pathParts = url.pathname.split('/').filter(Boolean);
     const dataRoomId = pathParts[3];
 
-    const dr = await env.DB.prepare(
-      `SELECT * FROM data_rooms WHERE id = ?`
-    ).bind(dataRoomId).first() as any;
-
-    if (!dr) {
-      return withCors(request, new Response(
-        JSON.stringify({ error: 'Data room not found' }),
-        { status: 404, headers: { 'Content-Type': 'application/json' } }
-      ), env);
-    }
-
-    // X1 FIX: Require authentication — buyer access verified via session, NOT spoofable header.
-    // Previous code used X-Buyer-Email header which any client can set to any email.
+    // X1 FIX: Require authentication FIRST — before any data lookup.
+    // Buyer access is verified via session, NOT a spoofable X-Buyer-Email header.
     const auth = await requireAuth(request, env);
     if (auth instanceof Response) return withCors(request, auth, env);
 
@@ -105,6 +94,18 @@ export const handleDataRoomGet = async (
       return withCors(request, new Response(
         JSON.stringify({ error: 'Access denied. Request access first.' }),
         { status: 403, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // Now fetch the data room (auth + access already established)
+    const dr = await env.DB.prepare(
+      `SELECT * FROM data_rooms WHERE id = ?`
+    ).bind(dataRoomId).first() as any;
+
+    if (!dr) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Data room not found' }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } }
       ), env);
     }
 
@@ -159,6 +160,18 @@ export const handleDataRoomRequestAccess = async (
     // Use authenticated email — NOT body-provided email (prevents impersonation)
     const buyer_email = (auth as any).email;
     const buyer_name = (auth as any).email; // Can be enhanced with profile lookup
+
+    // X4 FIX: Verify data room exists before creating a request. Prevents orphaned
+    // pending grants for rooms that don't exist (if FK is not enforced or not present).
+    const dr = await env.DB.prepare(
+      `SELECT id FROM data_rooms WHERE id = ?`
+    ).bind(dataRoomId).first();
+    if (!dr) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'Data room not found' }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
 
     const now = new Date().toISOString();
     const id = `drg_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;

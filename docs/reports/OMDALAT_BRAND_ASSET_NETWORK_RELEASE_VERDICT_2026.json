@@ -3,65 +3,97 @@
   "auditor": "Independent QA (Devin)",
   "repository": "tranhatam-collab/omdalat.com",
   "branch": "main",
-  "head_sha": "42accef961c9cd67bd19594d9541f13f69fd2a4c",
+  "head_sha": "TO_BE_SET_AFTER_PUSH",
   "verdict": "HOLD",
+  "verdict_status": "CONDITIONAL HOLD — NOT 100% CLOSED",
   "verdict_reasons": [
-    "F1: handleOfferCreate has no auth check (P1 security)",
-    "F2: handleEvidenceSubmit has no auth check (P1 security)",
-    "F3: Market filter UI not implemented (P2 UX)",
-    "F4: Soft 404 on auction detail pages (P2 UX)",
+    "F1: handleOfferCreate auth check ADDED (P1 security)",
+    "F2: handleEvidenceSubmit auth check ADDED (P1 security)",
+    "F3: Market filter UI IMPLEMENTED (P2 UX)",
+    "F4: Soft 404 on auction detail FIXED (P2 UX)",
+    "X1: Data-room IDOR fixed — buyer access verified via session, not X-Buyer-Email header (P0 security)",
+    "X2: Offer ownership checks ADDED — package status, seller self-offer block, buyer_request ownership, duplicate offer (409), currency validation (VND/USD), buyer_request_id now mandatory (P1 security)",
+    "X3: Evidence ownership checks ADDED — evidence_type enum, package ownership, R2-internal file_url (P1 security)",
+    "X4: Data-room request-access now requires auth and verifies room existence (P1 security)",
+    "X5: Rate limiting NOT YET IMPLEMENTED (P1 security)",
+    "X6: File upload pipeline (MIME, size, malware scan) NOT YET IMPLEMENTED (P1 security / release blocker for file flows)",
     "KYC/KYB integration BLOCKED",
     "Escrow integration BLOCKED",
-    "Auction legal authorization BLOCKED"
+    "Auction legal authorization BLOCKED",
+    "E1: Split-brain Cloudflare accounts — unresolved (P1 ops)",
+    "E2: cham.omdalat.com + dreams.omdalat.com HTTP 500 — unresolved (P1)",
+    "E3: lily.omdalat.com on non-production Worker — unresolved (P1)",
+    "E4: www.omdalat.com different Pages project than apex — unresolved (P2)"
   ],
   "coverage": {
     "planning_coverage": "100%",
     "implementation_coverage": "95%",
-    "automated_test_coverage": "VERIFIED (169/169 pass)",
+    "automated_test_coverage": "VERIFIED (220/220 pass)",
     "live_route_verification": "VERIFIED (22/22 surfaces 200)",
     "external_integration_readiness": "BLOCKED",
     "legal_readiness": "BLOCKED",
     "production_readiness": "HOLD"
   },
   "findings": {
-    "p1_blockers": [
+    "p0_claimed_fixed": [
       {
-        "id": "F1",
-        "description": "handleOfferCreate has no authentication check",
-        "file": "workers/api/src/routes/offers-admin.ts:10",
-        "fix": "Add requireAuth before validation"
+        "id": "X1",
+        "description": "Data-room IDOR: buyer access controlled by spoofable X-Buyer-Email header",
+        "file": "workers/api/src/routes/data-room-transfer.ts:86",
+        "fix": "Require auth first; verify grant via auth.email from session; remove X-Buyer-Email access decision",
+        "behavioral_tests": "e2e-journeys.test.ts: X1 authenticated buyer without grant 403, with grant 200"
+      }
+    ],
+    "p1_claimed_fixed": [
+      {
+        "id": "X2",
+        "description": "handleOfferCreate had no ownership/duplicate/currency validation",
+        "file": "workers/api/src/routes/offers-admin.ts",
+        "fix": "Enforce buyer_request_id; validate currency VND/USD; block seller self-offer; block duplicate; reject negative amounts; verify buyer_request ownership",
+        "behavioral_tests": "e2e-journeys.test.ts: X2 negative amount 400, duplicate 409, self-offer 403, valid VND 201, valid USD 201"
       },
       {
-        "id": "F2",
-        "description": "handleEvidenceSubmit has no authentication check",
+        "id": "X3",
+        "description": "handleEvidenceSubmit had no ownership/type/file validation",
         "file": "workers/api/src/routes/evidence-transfer.ts",
-        "fix": "Add requireAuth before validation"
+        "fix": "Validate evidence_type enum; verify package ownership; restrict file_url to R2 internal",
+        "behavioral_tests": "e2e-journeys.test.ts: X3 invalid type 400, external URL 400, non-owner 403, owner 201"
+      },
+      {
+        "id": "X4",
+        "description": "handleDataRoomRequestAccess had no auth and no room existence check",
+        "file": "workers/api/src/routes/data-room-transfer.ts",
+        "fix": "Require auth; use auth.email; verify data room exists before inserting grant request",
+        "behavioral_tests": "e2e-journeys.test.ts: X4 no auth 401, non-existent room 404, valid room 201"
+      }
+    ],
+    "p1_open": [
+      {
+        "id": "X5",
+        "description": "No rate limiting on any write endpoint",
+        "fix": "Cloudflare WAF rate-limit rules + D1 application counters per endpoint class"
+      },
+      {
+        "id": "X6",
+        "description": "No file MIME, size, or malware validation on evidence/data-room uploads",
+        "fix": "Upload → quarantine → MIME sniff → size check → malware scan → metadata strip → approved storage → signed URL"
+      },
+      {
+        "id": "AUTH_BASELINE",
+        "description": "Auth baseline incomplete: no MFA/passkey, CSRF, per-subdomain cookies, login lockout, session rotation",
+        "fix": "Implement per-product auth hardening (Phase 7)"
       }
     ],
     "p2_should_fix": [
       {
-        "id": "F3",
-        "description": "Market filter UI not implemented",
-        "fix": "Add filter form with asset_level, market_status, sort, pagination"
-      },
-      {
-        "id": "F4",
-        "description": "Soft 404 on auction detail pages (non-existent ID returns 200)",
-        "fix": "Add auction existence check when flag is enabled"
-      }
-    ],
-    "p3_informational": [
-      {
         "id": "F5",
-        "description": "Claim 48 tables — actually 50 BAN tables (understated)"
+        "description": "Canonical SEO was wrong on BAN subdomains",
+        "fix": "Self-canonical URLs added to all 29 COMMON_HEAD callers — live verified"
       },
       {
         "id": "F6",
-        "description": "Claim 25 endpoints — actually 44 BAN endpoints (understated denominator)"
-      },
-      {
-        "id": "F7",
-        "description": "Claim 21 UI screens — actually 22 handlers (off by 1)"
+        "description": "Admin routes publicly indexable",
+        "fix": "Added meta robots noindex + X-Robots-Tag + Cache-Control no-store to 12 admin handlers — live verified"
       }
     ]
   },
@@ -70,31 +102,41 @@
     "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_EVIDENCE_INDEX_2026.md",
     "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_ROUTE_MATRIX_2026.csv",
     "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_API_MATRIX_2026.csv",
-    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_REQUIREMENT_MATRIX_2026.csv"
+    "docs/reports/OMDALAT_BRAND_ASSET_NETWORK_REQUIREMENT_MATRIX_2026.csv",
+    "docs/reports/RE_AUDIT_2026-06-30_REMEDIATION_VERIFICATION.md",
+    "docs/reports/WILDCARD_OMDALAT_AUDIT_2026-06-30.md",
+    "docs/reports/BAN_EXTENDED_P1_REAUDIT_2026-06-30.md",
+    "docs/governance/ROLE_ARCHITECTURE_2026.md",
+    "docs/governance/CONSENT_IDENTITY_DATA_ARCHITECTURE_2026.md",
+    "docs/governance/SECURITY_OBSERVABILITY_RELEASE_MODEL_2026.md",
+    "docs/governance/OMDALAT_DOMAIN_REGISTRY_2026.csv"
   ],
   "deployment": {
     "api_worker": {
       "name": "omdalat-platforms-api",
-      "deployment_id": "242918cd-b725-44e5-83c0-78d1905ee13d",
-      "deployed_at": "2026-06-29T17:30:08.219Z",
-      "route": "api.omdalat.com"
+      "deployment_id": "3ea67207-7f50-4956-af26-9fea4c62dbd0",
+      "deployed_at": "2026-06-30T03:18:33.000Z",
+      "route": "api.omdalat.com",
+      "version_sha": "bf2d2d9e558c2ea155d42b5b1711e842f822526c"
     },
     "brand_renderer": {
       "name": "omdalat-brand-renderer",
-      "deployment_id": "5356173a-028a-4adb-8a5c-0db787625c36",
-      "deployed_at": "2026-06-29T17:39:24.024Z",
-      "routes": ["brand.omdalat.com", "registry.omdalat.com/*", "market.omdalat.com/*", "auction.omdalat.com/*"]
+      "deployment_id": "61a1df01-4951-4fc3-a8a9-51d6e4cd39aa",
+      "deployed_at": "2026-06-30T02:27:44.000Z",
+      "routes": ["brand.omdalat.com", "registry.omdalat.com/*", "market.omdalat.com/*", "auction.omdalat.com/*"],
+      "version_sha": "bf2d2d9e558c2ea155d42b5b1711e842f822526c"
     }
   },
   "tests": {
     "command": "npx vitest run",
     "working_dir": "workers/api/",
-    "files": 6,
-    "total": 169,
-    "passed": 169,
+    "files": 7,
+    "total": 220,
+    "passed": 220,
     "failed": 0,
     "skipped": 0,
-    "duration_ms": 2210
+    "duration_ms": 0,
+    "note": "All tests pass locally. Independent remote verification pending."
   },
   "database": {
     "name": "omdalat-core",
@@ -104,13 +146,27 @@
     "migrations_applied": 17
   },
   "conditions_for_pass": [
-    "Fix F1: Add requireAuth to handleOfferCreate",
-    "Fix F2: Add requireAuth to handleEvidenceSubmit",
-    "KYC/KYB provider integration verified in production",
-    "Escrow provider integration verified in production",
-    "Legal partner signoff on auction terms (documented)",
-    "Rollback procedure tested",
-    "E2E test suite covering critical user journeys",
-    "No P1 or P2 findings open"
+    "Fix F1: Add requireAuth to handleOfferCreate — DONE",
+    "Fix F2: Add requireAuth to handleEvidenceSubmit — DONE",
+    "Fix X1: Data-room IDOR via X-Buyer-Email — DONE",
+    "Fix X2: Offer ownership/duplicate/currency checks — DONE (buyer_request_id mandatory, currency VND/USD)",
+    "Fix X3: Evidence ownership/type/file validation — DONE (R2 URL restriction)",
+    "Fix X4: Data-room request-access auth + room existence — DONE",
+    "Fix X5: Rate limiting — OPEN",
+    "Fix X6: Upload pipeline (MIME, size, malware) — OPEN",
+    "KYC/KYB provider integration verified in production — BLOCKED",
+    "Escrow provider integration verified in production — BLOCKED",
+    "Legal partner signoff on auction terms (documented) — BLOCKED",
+    "Rollback procedure tested — DONE",
+    "E2E test suite covering critical user journeys — DONE (220/220)",
+    "No P1 or P2 findings open — NOT MET (X5, X6, AUTH_BASELINE, E1-E4 open)"
+  ],
+  "notes": [
+    "This verdict is the SINGLE SOURCE OF TRUTH for release status.",
+    "The previous RE_AUDIT_2026-06-30_REMEDIATION_VERIFICATION.md PASS verdict covered only F1-F4.",
+    "Extended P1 re-audit (X1-X6) found and fixed X1-X4; X5-X6 remain open.",
+    "Wild *.omdalat.com ecosystem remains HOLD due to E1-E4.",
+    "Auction and high-value transaction release remains BLOCKED.",
+    "Remote GitHub verification of governance docs and latest commits is pending."
   ]
 }
