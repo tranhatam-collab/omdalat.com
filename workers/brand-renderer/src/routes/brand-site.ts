@@ -114,7 +114,7 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
       const programIdx = pathParts[0] === 'en' ? 2 : 1;
       const program = pathParts[programIdx]; // startup-with-ai or technology-creation
       if (program) {
-        const html = generateLilyProgramPage(brand, program, locale, url);
+        const html = generateLilyProgramPage(brand, program, locale, url, contentBlocks);
         if (html) {
           return new Response(html, {
             status: 200,
@@ -135,7 +135,7 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
       const articleIdx = pathParts[0] === 'en' ? 2 : 1;
       const article = pathParts[articleIdx]; // article slug
       if (article) {
-        const html = generateLilyArticlePage(brand, article, locale, url);
+        const html = generateLilyArticlePage(brand, article, locale, url, contentBlocks);
         if (html) {
           return new Response(html, {
             status: 200,
@@ -147,7 +147,7 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
         }
       } else {
         // /articles or /en/articles — render article index
-        const html = generateLilyArticlesIndexPage(brand, locale, url);
+        const html = generateLilyArticlesIndexPage(brand, locale, url, contentBlocks);
         if (html) {
           return new Response(html, {
             status: 200,
@@ -297,54 +297,157 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   const isEn = locale === 'en';
   const brandName = isEn ? brand.name_en : brand.name_vi;
   
-  const pages: Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string }> = {
+  const pages: Record<string, {
+    titleVi: string;
+    titleEn: string;
+    descriptionVi: string;
+    descriptionEn: string;
+    sectionsVi: Array<{ heading: string; body: string }>;
+    sectionsEn: Array<{ heading: string; body: string }>;
+  }> = {
     'stay': {
-      titleVi: 'Ở theo tuần / tháng',
-      titleEn: 'Weekly / Monthly Stay',
-      contentVi: 'Lily không vận hành theo kiểu lưu trú ngắn hạn từng ngày. Người phù hợp với Lily là người muốn ở lại đủ lâu để có nhịp sống, có thời gian làm việc, học kỹ năng, tham gia một dự án và hiểu rõ mình có hợp với Đà Lạt hay không.',
-      contentEn: 'Lily does not operate as a daily short-stay accommodation. The right fit for Lily is someone who wants to stay long enough to build a rhythm, work, learn skills, join a project, and understand whether Dalat truly fits them.'
+      titleVi: 'Ở theo tuần và tháng tại Lạc Dương',
+      titleEn: 'Weekly and Monthly Stays in Lac Duong',
+      descriptionVi: 'Lily dành cho người muốn ở lại đủ lâu để xây nhịp sống, làm việc và học tập tại Lạc Dương, gần Đà Lạt.',
+      descriptionEn: 'Lily is for people who want to stay long enough to build a rhythm, work, and learn in Lac Duong, near Da Lat.',
+      sectionsVi: [
+        { heading: 'Giá trị của việc ở lại lâu hơn', body: 'Ở theo ngày thường chỉ đủ để trải nghiệm bề mặt. Ở theo tuần hoặc tháng giúp một người hiểu thời tiết, đường đi, bữa ăn, giấc ngủ, không gian làm việc và cách sống cùng người khác. Đó là ngưỡng cần thiết để xây một nhịp sống thật.' },
+        { heading: 'Chu kỳ ở lại', body: 'Lily mở các chu kỳ ở lại theo tuần và theo tháng. Mỗi chu kỳ đều có nhịp sinh hoạt chung, lịch làm việc, review đầu tuần và đánh giá cuối tháng. Người ở lại tham gia vào nhịp chung, không chỉ thuê một phòng.' },
+        { heading: 'Ai phù hợp', body: 'Người muốn làm việc từ xa, học kỹ năng số, tham gia một dự án thực tế, hoặc đơn giản là cần một không gian có kỷ luật để xây lại nhịp sống. Lily không phù hợp với người tìm nơi nghỉ ngắn hạn hoặc trải nghiệm du lịch nhanh.' },
+        { heading: 'Quy trình đăng ký', body: 'Mọi người đều gửi hồ sơ qua form trên trang này. Lily đọc kỹ trước khi mời phỏng vấn ngắn. Sau khi hai bên thống nhất, người tham gia nhận thông tin chi tiết về phòng, quy tắc và lịch trình. Đây chưa phải xác nhận lưu trú cho đến khi hợp đồng được ký qua app.omdalat.com.' }
+      ],
+      sectionsEn: [
+        { heading: 'The value of staying longer', body: 'A daily stay usually only shows the surface. Staying by the week or month helps a person understand the weather, roads, meals, sleep, workspace, and shared living. That is the threshold needed to build a real rhythm.' },
+        { heading: 'Stay cycles', body: 'Lily opens weekly and monthly stay cycles. Each cycle has a shared rhythm, work schedule, weekly review, and monthly retrospective. Residents join the shared rhythm, not just rent a room.' },
+        { heading: 'Who it fits', body: 'People who want to work remotely, learn digital skills, join a real project, or simply need a disciplined space to rebuild their rhythm. Lily is not for people looking for a short stay or quick tourism experience.' },
+        { heading: 'Application process', body: 'Everyone submits a profile through the form on this page. Lily reviews carefully before inviting a short interview. After mutual agreement, the participant receives detailed information about the room, rules, and schedule. This is not a stay confirmation until the contract is signed through app.omdalat.com.' }
+      ]
     },
     'workspace': {
-      titleVi: 'Không gian làm việc',
-      titleEn: 'Workspace',
-      contentVi: 'Workspace tại Lily là nơi làm việc thật trong một không gian sân vườn. Không phải coworking ồn ào, không phải café vãng lai, mà là một nơi giữ nhịp cho người ở lại làm việc đều.',
-      contentEn: 'The workspace at Lily is a real working area within a garden setting. It is not a noisy coworking space or a public café, but a place that helps residents maintain a steady work rhythm.'
+      titleVi: 'Không gian làm việc tại Lily',
+      titleEn: 'Workspace at Lily',
+      descriptionVi: 'Một nơi làm việc thật trong khu vườn, dành cho người đang ở lại tại Lily.',
+      descriptionEn: 'A real working area inside the garden, for people staying at Lily.',
+      sectionsVi: [
+        { heading: 'Workspace thật là gì', body: 'Một chiếc laptop đặt cạnh ly cà phê chưa đủ tạo thành workspace. Workspace tại Lily được tổ chức để một người có thể ngồi xuống, tập trung, hoàn thành công việc và lặp lại điều đó nhiều ngày liên tiếp. Đây là một phần của vận hành, không phải chi tiết trang trí.' },
+        { heading: 'Cấu trúc và quy tắc', body: 'Có khu vực làm việc tập trung, khu gọi video riêng, lịch yên tĩnh và quy tắc xử lý xung đột. Mọi người ở lại đều đồng ý giữ nhịp làm việc chung, để workspace không biến thành một quán cà phê ồn ào.' },
+        { heading: 'Kết nối và thiết bị', body: 'Workspace được trang bị kết nối Internet ổn định, ổ điện đủ, ánh sáng tự nhiên và khu vực dự phòng khi trời mưa. Người tham gia tự mang laptop và thiết bị cá nhân. Lily hỗ trợ cấu trúc, không cung cấp thiết bị cho từng người.' },
+        { heading: 'Dành cho ai', body: 'Dành cho người làm việc từ xa, freelancer, người đang xây sản phẩm cá nhân, hoặc nhóm nhỏ cần không gian yên tĩnh để họp và làm việc trong vài tuần. Không dành cho khách vãng lai.' }
+      ],
+      sectionsEn: [
+        { heading: 'What a real workspace means', body: 'A laptop next to a coffee cup is not enough to make a workspace. The workspace at Lily is organised so a person can sit down, focus, finish work, and repeat that for many days in a row. It is part of operations, not a decorative detail.' },
+        { heading: 'Structure and rules', body: 'There is a focused work area, a private video-call zone, quiet hours, and conflict-handling rules. Every resident agrees to keep the shared work rhythm, so the workspace does not become a noisy café.' },
+        { heading: 'Connectivity and equipment', body: 'The workspace has stable Internet, enough power outlets, natural light, and a backup area for rainy days. Participants bring their own laptops and devices. Lily provides the structure, not individual equipment.' },
+        { heading: 'Who it is for', body: 'For remote workers, freelancers, people building personal products, or small groups that need a quiet space to meet and work for a few weeks. Not for casual visitors.' }
+      ]
     },
     'programs': {
-      titleVi: 'Chương trình',
-      titleEn: 'Programs',
-      contentVi: 'Lily có hai chương trình chính: Khởi Nghiệp Cùng AI (tạo công việc, thu nhập, hệ thống làm việc) và Sáng Tạo Công Nghệ Cùng AI (xây dựng sản phẩm thật với AI).',
-      contentEn: 'Lily offers two main programs: Startup With AI (create work, income, and work systems) and Technology Creation (build real products with AI).'
+      titleVi: 'Chương trình thực hành tại Lily',
+      titleEn: 'Practical Programmes at Lily',
+      descriptionVi: 'Hai chương trình chính: Khởi Nghiệp Cùng AI và Sáng Tạo Công Nghệ Cùng AI.',
+      descriptionEn: 'Two main programmes: Startup With AI and Technology Creation With AI.',
+      sectionsVi: [
+        { heading: 'Triết lý chương trình', body: 'Lily không tổ chức khóa học lý thuyết hay lớp học online. Mỗi chương trình là một chặng thực hành ngắn, trong đó người tham gia phải tạo ra output cụ thể. Mục tiêu không phải chứng chỉ, mà là một sản phẩm, hệ thống hoặc công việc thật có thể kiểm chứng.' },
+        { heading: 'Khởi Nghiệp Cùng AI', body: 'Chặng 2 tuần dành cho người muốn bắt đầu tạo công việc, thu nhập và hệ thống làm việc với AI. Người tham gia ở lại tại Lily, làm việc hàng ngày, và hoàn thành một output đầu tiên như website, thương hiệu cá nhân, hoặc dịch vụ nhỏ.' },
+        { heading: 'Sáng Tạo Công Nghệ Cùng AI', body: 'Chặng 2 tuần dành cho developer, creator và builder muốn xây sản phẩm thật với AI. Mỗi người phải tạo ra một MVP hoặc prototype có thể hoạt động: website, app, AI system hoặc AI agent. Không phải khóa học lập trình, không lấy chứng chỉ.' },
+        { heading: 'Cách tham gia', body: 'Chương trình mở theo từng cohort giới hạn số lượng. Người quan tâm gửi hồ sơ qua form đăng ký, trả lời các câu hỏi về mục tiêu và kỹ năng hiện tại. Lily chọn người phù hợp với từng cohort dựa trên output mong muốn, không phải dựa trên kinh nghiệm dài.' }
+      ],
+      sectionsEn: [
+        { heading: 'Programme philosophy', body: 'Lily does not run theory courses or online classes. Each programme is a short practical sprint where participants must produce specific output. The goal is not a certificate, but a verifiable product, system, or piece of work.' },
+        { heading: 'Startup With AI', body: 'A 2-week sprint for people who want to start creating work, income, and work systems with AI. Participants live at Lily, work daily, and finish a first output such as a website, personal brand, or small service.' },
+        { heading: 'Technology Creation With AI', body: 'A 2-week sprint for developers, creators, and builders who want to build real products with AI. Each person must create a working MVP or prototype: a website, app, AI system, or AI agent. Not a coding course, not for certificates.' },
+        { heading: 'How to join', body: 'Programmes open in limited cohorts. Interested people submit a profile through the application form, answering questions about goals and current skills. Lily selects people who fit each cohort based on desired output, not on long experience.' }
+      ]
     },
     'jobs': {
-      titleVi: 'Việc làm online',
-      titleEn: 'Online Jobs',
-      contentVi: 'Lily không hứa có việc cho mọi người. Lily tạo một môi trường để người phù hợp có thể học, thử việc nhỏ, nhận task phù hợp và từng bước tạo thu nhập online từ năng lực thật.',
-      contentEn: 'Lily does not promise work for everyone. Lily creates an environment where suitable people can learn, try small tasks, receive relevant work, and gradually build online income from real ability.'
+      titleVi: 'Việc làm và dự án tại Lily',
+      titleEn: 'Work and Projects at Lily',
+      descriptionVi: 'Lily không hứa việc cho mọi người, mà tạo môi trường để người phù hợp tìm thấy task và xây proof of work.',
+      descriptionEn: 'Lily does not promise work for everyone. It creates an environment where suitable people find tasks and build proof of work.',
+      sectionsVi: [
+        { heading: 'Không hứa việc', body: 'Lily không đảm bảo ai cũng có thu nhập sau khi tham gia. Điều Lily làm là tạo ra một hệ thống task rõ ràng, trong đó người phù hợp có thể học, thử việc nhỏ, nhận task phù hợp và từng bước tạo thu nhập từ năng lực thật.' },
+        { heading: 'Các loại task', body: 'Task được phân loại rõ: paid task, unpaid training task, volunteer contribution và contribution credit. Mỗi loại đều có điều khoản và tiêu chí đánh giá riêng. Lily không nhập nhằng giữa học và làm việc có trả phí.' },
+        { heading: 'Proof of work', body: 'Sau mỗi tuần, người tham gia nên có ít nhất một output nhỏ. Sau một tháng, họ nên có portfolio rõ hơn. Output có thể là bài viết, đoạn code, thiết kế, báo cáo nghiên cứu, hoặc sản phẩm thử nghiệm. Đó là bằng chứng năng lực, không phải lời hứa.' },
+        { heading: 'Quy trình nhận task', body: 'Người ở lại tham gia chương trình hoặc nhận task qua workspace nội bộ. Mỗi task có mô tả, thời hạn, tiêu chí chấp nhận và cách thức thanh toán nếu là paid task. Task pháp lý nhạy cảm hoặc liên quan đến quốc tế phải qua review riêng.' }
+      ],
+      sectionsEn: [
+        { heading: 'No job guarantee', body: 'Lily does not guarantee that everyone will earn income after joining. What Lily does is create a clear task system where suitable people can learn, try small tasks, receive relevant work, and gradually build income from real ability.' },
+        { heading: 'Types of tasks', body: 'Tasks are clearly separated: paid task, unpaid training task, volunteer contribution, and contribution credit. Each type has its own terms and acceptance criteria. Lily does not blur the line between learning and paid work.' },
+        { heading: 'Proof of work', body: 'After each week, participants should have at least one small output. After a month, they should have a clearer portfolio. Output can be an article, code, design, research report, or prototype. That is evidence of ability, not a promise.' },
+        { heading: 'How tasks are assigned', body: 'Residents join a programme or receive tasks through the internal workspace. Each task has a description, deadline, acceptance criteria, and payment method if it is a paid task. Legally sensitive tasks or those involving international work require separate review.' }
+      ]
     },
     'training': {
-      titleVi: 'Đào tạo',
-      titleEn: 'Training',
-      contentVi: 'Lily có các module đào tạo: Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm.',
-      contentEn: 'Lily offers training modules: Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm.'
+      titleVi: 'Đào tạo thực hành tại Lily',
+      titleEn: 'Practical Training at Lily',
+      descriptionVi: 'Các module kỹ năng số giúp người tham gia làm được việc thật sau khi rời Lily.',
+      descriptionEn: 'Digital skills modules that help participants do real work after leaving Lily.',
+      sectionsVi: [
+        { heading: 'Học để làm được việc', body: 'Lily không tổ chức các khóa học để nghe cho vui. Mỗi module đều có mục tiêu rõ, bài tập, output và tiêu chí đánh giá. Người học phải tạo ra sản phẩm thật: hồ sơ cá nhân, email chuyên nghiệp, hệ thống quản lý công việc, hoặc một bài viết có giá trị.' },
+        { heading: 'Các module', body: 'Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm. Mỗi module kéo dài từ vài ngày đến một tuần và kết thúc bằng một output cụ thể.' },
+        { heading: 'Output đầu ra', body: 'Sau mỗi module, người học phải có một sản phẩm có thể kiểm chứng. Ví dụ: một website cá nhân, một bài viết SEO, một brief dự án, một hệ thống quản lý task, hoặc một cuộc gọi khách hàng mẫu. Output này trở thành một phần của portfolio.' },
+        { heading: 'Cách tham gia', body: 'Module có thể học độc lập hoặc trong khuôn khổ chương trình 2 tuần. Người ở lại Lily có ưu tiên đăng ký vì họ được sống trong môi trường có nhịp làm việc và được mentor hỗ trợ trực tiếp.' }
+      ],
+      sectionsEn: [
+        { heading: 'Learn to do real work', body: 'Lily does not run courses for entertainment. Every module has a clear goal, exercises, output, and evaluation criteria. Learners must create real products: a professional profile, work email, task management system, or a valuable article.' },
+        { heading: 'Modules', body: 'Digital Work Basics, AI Tools for Real Work, Content and SEO, Local Brand Building, Remote Client Communication, Portfolio and Proof of Work, Brand Factory Operations, Long-Term Work Rhythm. Each module lasts from a few days to one week and ends with a specific output.' },
+        { heading: 'Output', body: 'After each module, the learner must have a verifiable product. For example: a personal website, an SEO article, a project brief, a task management system, or a sample client call. This output becomes part of the portfolio.' },
+        { heading: 'How to join', body: 'Modules can be taken independently or within the 2-week programme. Lily residents have priority because they live in a work-rhythm environment and receive direct mentor support.' }
+      ]
     },
     'international': {
-      titleVi: 'Hỗ trợ quốc tế',
-      titleEn: 'International Support',
-      contentVi: 'Lily có thể tiếp nhận người nước ngoài muốn ở lại dài hơn tại Lạc Dương, Đà Lạt để làm việc từ xa, học kỹ năng, tham gia dự án và sống trong một môi trường sân vườn có kỷ luật.',
-      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work remotely, learn skills, join projects, and live within a disciplined garden-based environment.'
+      titleVi: 'Hỗ trợ cư dân quốc tế tại Lily',
+      titleEn: 'International Resident Support at Lily',
+      descriptionVi: 'Thông tin và hỗ trợ cho người nước ngoài muốn ở lại dài hạn tại Lạc Dương, gần Đà Lạt.',
+      descriptionEn: 'Information and support for foreign residents who want to stay longer in Lac Duong, near Da Lat.',
+      sectionsVi: [
+        { heading: 'Lily có thể tiếp nhận ai', body: 'Lily có thể tiếp nhận người nước ngoài muốn ở lại theo tuần hoặc tháng để làm việc từ xa, học kỹ năng, tham gia dự án và sống trong một môi trường sân vườn có kỷ luật. Mỗi trường hợp đều được xem xét riêng trước khi chấp nhận.' },
+        { heading: 'Bốn nhóm nhu cầu', body: 'Chúng tôi phân loại rõ: Stay Only (chỉ ở lại), Learning/Observation (học và quan sát), Remote Work for Overseas Party (làm việc từ xa cho công ty nước ngoài), và Local Project Work (tham gia dự án tại Việt Nam). Mỗi nhóm có quy trình và trách nhiệm pháp lý khác nhau.' },
+        { heading: 'Giới hạn trách nhiệm', body: 'Lily không bảo lãnh visa, không đảm bảo work permit, và không hứa có việc làm cho cư dân quốc tế. Lily chỉ hỗ trợ thông tin, chuẩn bị hồ sơ cơ bản, phối hợp khai báo lưu trú và kết nối đối tác tư vấn phù hợp khi cần.' },
+        { heading: 'Quy trình đăng ký', body: 'Người nước ngoài gửi hồ sơ qua form đăng ký, ghi rõ quốc tịch, mục đích ở lại, thời gian dự kiến và hình thức công việc. Nếu cần review pháp lý, Lily sẽ kết nối với đơn vị tư vấn trước khi xác nhận.' }
+      ],
+      sectionsEn: [
+        { heading: 'Who Lily can welcome', body: 'Lily can welcome foreign residents who want to stay by the week or month to work remotely, learn skills, join projects, and live within a disciplined garden environment. Each case is reviewed individually before acceptance.' },
+        { heading: 'Four need groups', body: 'We clearly separate: Stay Only, Learning/Observation, Remote Work for Overseas Party, and Local Project Work. Each group has different procedures and legal responsibilities.' },
+        { heading: 'Responsibility limits', body: 'Lily does not sponsor visas, guarantee work permits, or promise jobs for international residents. Lily only provides information support, basic document preparation, temporary residence coordination, and referrals to suitable advisors when needed.' },
+        { heading: 'Application process', body: 'Foreign residents submit a profile through the application form, stating nationality, purpose of stay, expected duration, and type of work. If legal review is needed, Lily connects with an advisory partner before confirming.' }
+      ]
     },
     'visa-support': {
-      titleVi: 'Hỗ trợ thông tin về lưu trú, visa và làm việc hợp lệ',
-      titleEn: 'Information support for accommodation, visas, and lawful work',
-      contentVi: 'Người nước ngoài có thể cần các loại giấy tờ khác nhau tùy mục đích nhập cảnh, thời gian ở lại và hình thức làm việc. Lily không lựa chọn có trách nhiệm kết quả visa hoặc giấy phép lao động. Lily chỉ hỗ trợ người tham gia hiểu bước cần chuẩn bị, kết nối đơn vị tư vấn phù hợp và phối hợp với các dự án thuộc hệ Om Dalat khi có nhu cầu hợp lệ.',
-      contentEn: 'Foreign residents may need different documents depending on entry purpose, length of stay, and type of work. Lily does not guarantee visa or work permit outcomes. Lily only helps participants understand preparation steps, connect with suitable advisors, and coordinate with Om Dalat projects when there is a lawful need.'
+      titleVi: 'Thông tin về lưu trú, visa và làm việc hợp lệ',
+      titleEn: 'Information on Accommodation, Visas, and Lawful Work',
+      descriptionVi: 'Lily hỗ trợ thông tin, không bảo lãnh kết quả visa hoặc giấy phép lao động.',
+      descriptionEn: 'Lily provides information support. It does not guarantee visa or work permit outcomes.',
+      sectionsVi: [
+        { heading: 'Phạm vi hỗ trợ', body: 'Lily hỗ trợ người tham gia hiểu các bước cần chuẩn bị trước khi đến Việt Nam, bao gồm loại visa phù hợp, thủ tục khai báo tạm trú, bảo hiểm, liên hệ khẩn cấp và quy tắc nhà. Hỗ trợ này là thông tin, không phải dịch vụ pháp lý.' },
+        { heading: 'Những gì Lily không làm', body: 'Lily không nộp đơn visa thay mặt người tham gia, không bảo lãnh kết quả visa, không cấp giấy phép lao động, và không đại diện pháp lý cho bất kỳ ai. Những việc này thuộc về cơ quan có thẩm quyền và đơn vị tư vấn được cấp phép.' },
+        { heading: 'Các bước chuẩn bị', body: 'Người tham gia cần xác định mục đích nhập cảnh, thời gian ở lại, nguồn thu nhập và hình thức công việc. Dựa trên thông tin này, Lily cung cấp hướng dẫn sơ bộ và danh sách các bước cần làm trước khi đến.' },
+        { heading: 'Kết nối tư vấn', body: 'Khi có nhu cầu pháp lý cụ thể, Lily kết nối người tham gia với đơn vị tư vấn visa và lao động phù hợp. Chi phí và trách nhiệm pháp lý thuộc về người tham gia và đơn vị tư vấn đó.' }
+      ],
+      sectionsEn: [
+        { heading: 'Scope of support', body: 'Lily helps participants understand the preparation steps before coming to Vietnam, including the appropriate visa type, temporary residence declaration, insurance, emergency contacts, and house rules. This support is informational, not legal service.' },
+        { heading: 'What Lily does not do', body: 'Lily does not submit visa applications on behalf of participants, guarantee visa outcomes, issue work permits, or represent anyone legally. These belong to the relevant authorities and licensed advisory firms.' },
+        { heading: 'Preparation steps', body: 'Participants need to determine their entry purpose, length of stay, income source, and type of work. Based on this, Lily provides basic guidance and a list of steps to complete before arrival.' },
+        { heading: 'Advisory referrals', body: 'When specific legal needs arise, Lily connects participants with suitable visa and labour advisory partners. Costs and legal responsibility belong to the participant and that advisory firm.' }
+      ]
     },
     'apply': {
-      titleVi: 'Gửi hồ sơ ở lại',
-      titleEn: 'Apply to Stay',
-      contentVi: 'Gửi hồ sơ để ở lại tại Lily. Chúng tôi sẽ đọc kỹ trước khi phản hồi. Đây chưa phải xác nhận lưu trú, việc làm hoặc hỗ trợ visa.',
-      contentEn: 'Submit an application to stay at Lily. We will review it carefully before responding. This is not a confirmation of accommodation, work, or visa support.'
+      titleVi: 'Gửi hồ sơ ở lại tại Lily',
+      titleEn: 'Apply to Stay at Lily',
+      descriptionVi: 'Hoàn thành form để Lily xem xét hồ sơ của bạn.',
+      descriptionEn: 'Complete the form for Lily to review your profile.',
+      sectionsVi: [
+        { heading: 'Trước khi gửi', body: 'Hãy đọc kỹ các trang Ở lại, Workspace, Chương trình và Hỗ trợ quốc tế (nếu bạn là người nước ngoài) để hiểu rõ Lily phù hợp với bạn hay không. Lily không phải nơi nghỉ ngắn hạn, không phải khách sạn, và không phải trung tâm đào tạo lấy chứng chỉ.' },
+        { heading: 'Thông tin cần cung cấp', body: 'Tên, email, số điện thoại, quốc tịch hoặc nơi sinh sống, thời gian dự kiến ở lại, mục đích (ở lại, học, dự án, hỗ trợ quốc tế), và một đoạn giới thiệu ngắn. Passport, visa và các giấy tờ pháp lý chỉ được tải lên sau khi đăng nhập vào app.omdalat.com.' },
+        { heading: 'Quy trình xét duyệt', body: 'Lily đọc mọi hồ sơ trong vòng 7 ngày. Nếu hồ sơ phù hợp, chúng tôi mời một cuộc phỏng vấn ngắn. Sau khi hai bên đồng ý, người tham gia nhận thông tin chi tiết và tiến hành ký hợp đồng qua app.' },
+        { heading: 'Lưu ý quan trọng', body: 'Gửi hồ sơ không đồng nghĩa với xác nhận lưu trú, việc làm hoặc hỗ trợ visa. Mọi xác nhận chỉ có hiệu lực sau khi hợp đồng được ký và các điều kiện pháp lý được kiểm tra đầy đủ.' }
+      ],
+      sectionsEn: [
+        { heading: 'Before you apply', body: 'Please read the Stay, Workspace, Programmes, and International Support pages carefully (if you are a foreign resident) to understand whether Lily fits you. Lily is not a short stay, not a hotel, and not a certificate-issuing training centre.' },
+        { heading: 'Information needed', body: 'Name, email, phone, nationality or country of residence, expected stay duration, purpose (stay, learn, project, international support), and a short introduction. Passport, visa, and legal documents are uploaded only after logging into app.omdalat.com.' },
+        { heading: 'Review process', body: 'Lily reads every profile within 7 days. If the profile fits, we invite a short interview. After mutual agreement, the participant receives detailed information and proceeds to sign the contract through the app.' },
+        { heading: 'Important note', body: 'Submitting a profile does not mean accommodation, work, or visa support is confirmed. Any confirmation only becomes valid after the contract is signed and legal conditions are fully checked.' }
+      ]
     }
   };
 
@@ -354,7 +457,8 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   }
 
   const title = isEn ? pageData.titleEn : pageData.titleVi;
-  const content = isEn ? pageData.contentEn : pageData.contentVi;
+  const description = isEn ? pageData.descriptionEn : pageData.descriptionVi;
+  const sections = isEn ? pageData.sectionsEn : pageData.sectionsVi;
   const pageUrl = `https://${brand.subdomain}${locale === 'en' ? '/en' : ''}/${page}`;
 
   return `<!DOCTYPE html>
@@ -365,21 +469,21 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   <meta name="theme-color" content="#0f3d2e">
   <meta name="robots" content="index, follow">
   <title>${title} - ${brandName}</title>
-  <meta name="description" content="${content}">
+  <meta name="description" content="${description}">
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/' + page + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/' + page + '">'}
   <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}/${page}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${title} - ${brandName}">
-  <meta property="og:description" content="${content}">
+  <meta property="og:description" content="${description}">
   <meta property="og:url" content="${pageUrl}">
   <meta property="og:site_name" content="Om Dalat">
   <meta property="og:locale" content="${isEn ? 'en_US' : 'vi_VN'}">
   <meta property="og:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title} - ${brandName}">
-  <meta name="twitter:description" content="${content}">
+  <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="https://${brand.subdomain}/images/hero/hero-01.jpg">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -436,10 +540,19 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   <div class="hero">
     <div class="container">
       <h1>${title}</h1>
-      <p>${content}</p>
+      <p>${description}</p>
       <a href="/${locale === 'en' ? 'en/' : ''}apply" class="cta-button">${isEn ? 'Apply to Stay' : 'Gửi hồ sơ ở lại'}</a>
     </div>
   </div>
+
+  ${sections.map(s => `
+  <div class="section">
+    <div class="container">
+      <h2>${s.heading}</h2>
+      <p>${s.body}</p>
+    </div>
+  </div>
+  `).join('')}
 
   ${page === 'programs' ? `
   <div class="section">
@@ -538,14 +651,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
       </script>
     </div>
   </div>
-  ` : `
-  <div class="section">
-    <div class="container">
-      <h2>${isEn ? 'More Information' : 'Thông tin thêm'}</h2>
-      <p>${isEn ? 'This page is part of Lily Living & Working Garden V2. We are transitioning from a daily short-stay model to a weekly/monthly stay model focused on remote work, digital learning, and real project participation.' : 'Trang này là một phần của Lily Living & Working Garden V2. Chúng tôi đang chuyển đổi từ mô hình lưu trú ngắn hạn theo ngày sang mô hình ở lại theo tuần/tháng, tập trung vào làm việc từ xa, học kỹ năng số và tham gia dự án thật.'}</p>
-    </div>
-  </div>
-  `}
+  ` : ''}
 
   <footer>
     <div class="container">
@@ -557,7 +663,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
 </html>`;
 }
 
-function generateLilyProgramPage(brand: any, program: string, locale: string, url: URL): string | null {
+function generateLilyProgramPage(brand: any, program: string, locale: string, url: URL, _contentBlocks: any[] = []): string | null {
   const isEn = locale === 'en';
   const brandName = isEn ? brand.name_en : brand.name_vi;
   
@@ -780,11 +886,34 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
 </html>`;
 }
 
-function generateLilyArticlePage(brand: any, article: string, locale: string, url: URL): string | null {
+function getArticlesFromBlocks(contentBlocks: any[]): Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string; program: string }> {
+  const result: Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string; program: string }> = {};
+  for (const block of contentBlocks) {
+    if (block.block_type !== 'article' || block.status !== 'published') continue;
+    try {
+      const payload = JSON.parse(block.payload);
+      if (!payload.slug || !payload.contentVi || !payload.contentEn) continue;
+      result[payload.slug] = {
+        titleVi: payload.titleVi || payload.title,
+        titleEn: payload.titleEn || payload.title,
+        contentVi: payload.contentVi,
+        contentEn: payload.contentEn,
+        program: payload.program || 'living-working'
+      };
+    } catch {
+      // skip malformed blocks
+    }
+  }
+  return result;
+}
+
+function generateLilyArticlePage(brand: any, article: string, locale: string, url: URL, contentBlocks: any[] = []): string | null {
   const isEn = locale === 'en';
   const brandName = isEn ? brand.name_en : brand.name_vi;
-  
+  const articlesFromBlocks = getArticlesFromBlocks(contentBlocks);
+
   const articles: Record<string, { titleVi: string; titleEn: string; contentVi: string; contentEn: string; program: string }> = {
+    ...articlesFromBlocks,
     'khoi-nghiep-cung-ai-khong-bat-dau-tu-cong-nghe': {
       titleVi: 'Khởi Nghiệp Cùng AI Không Bắt Đầu Từ Công Nghệ',
       titleEn: 'Startup With AI Does Not Start With Technology',
@@ -1786,12 +1915,25 @@ In the end, Lily must be measured by real output: verified rooms, suitable resid
 </html>`;
 }
 
-function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): string | null {
+function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL, contentBlocks: any[] = []): string | null {
   const isEn = locale === 'en';
   const brandName = isEn ? brand.name_en : brand.name_vi;
+  const articlesFromBlocks = getArticlesFromBlocks(contentBlocks);
 
   // Article data: slug → { titleVi, titleEn, excerptVi, excerptEn, program }
   const articles: Record<string, { titleVi: string; titleEn: string; excerptVi: string; excerptEn: string; program: string }> = {
+    ...Object.fromEntries(
+      Object.entries(articlesFromBlocks).map(([slug, a]) => [
+        slug,
+        {
+          titleVi: a.titleVi,
+          titleEn: a.titleEn,
+          excerptVi: a.contentVi.substring(0, 150) + '...',
+          excerptEn: a.contentEn.substring(0, 150) + '...',
+          program: a.program
+        }
+      ])
+    ),
     'khoi-nghiep-cung-ai-khong-bat-dau-tu-cong-nghe': {
       titleVi: 'Khởi Nghiệp Cùng AI Không Bắt Đầu Từ Công Nghệ',
       titleEn: 'Startup With AI Does Not Start With Technology',
