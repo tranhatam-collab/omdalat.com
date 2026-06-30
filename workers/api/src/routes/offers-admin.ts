@@ -1,6 +1,7 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
 import { requireAuth, requireSuper } from '../lib/auth';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
  * POST /api/omdalat/offers
@@ -20,6 +21,15 @@ export const handleOfferCreate = async (
   // Without this, anyone could create offers on any package.
   const auth = await requireAuth(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
+
+  const rateLimit = await rateLimitWrite(
+    env,
+    'offer:create',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.offerCreate.limit,
+    RATE_LIMIT_TIERS.offerCreate.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
 
   try {
     const body = await request.json() as any;

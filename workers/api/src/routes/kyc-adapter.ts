@@ -1,4 +1,6 @@
 import type { Env } from '../index';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
+import { requireCleanUpload } from '../lib/upload-pipeline';
 
 /**
  * KYC/KYB Provider Adapter Abstraction
@@ -38,7 +40,7 @@ export interface KycSubmissionRequest {
   callback_url: string;
   documents: {
     type: 'passport' | 'national_id' | 'driver_license' | 'business_license' | 'articles_of_incorporation';
-    file_url: string;
+    upload_id: string;
     file_hash: string;
   }[];
 }
@@ -158,9 +160,49 @@ export const handleKycSubmit = async (
   const auth = await requireAuth(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
+  const rateLimit = await rateLimitWrite(
+    env,
+    'kyc:submit',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.kycSubmit.limit,
+    RATE_LIMIT_TIERS.kycSubmit.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
+
   try {
     const body = await request.json() as any;
     const provider = getKycProvider(env);
+
+    // X6 FIX: KYC documents must reference clean upload_ids from the pipeline,
+    // not arbitrary external file_url strings.
+    const rawDocs = body.documents || [];
+    const documents: KycSubmissionRequest['documents'] = [];
+    for (const doc of rawDocs) {
+      if (doc.file_url !== undefined) {
+        return withCors(request, new Response(
+          JSON.stringify({ error: 'KYC documents must use upload_id, not file_url' }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        ), env);
+      }
+      if (!doc.upload_id) {
+        return withCors(request, new Response(
+          JSON.stringify({ error: 'Each KYC document must have upload_id' }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        ), env);
+      }
+      const uploadCheck = await requireCleanUpload(env, doc.upload_id, (auth as any).email, 'kyc');
+      if (!uploadCheck.ok) {
+        return withCors(request, new Response(
+          JSON.stringify({ error: uploadCheck.error }),
+          { status: uploadCheck.status, headers: { 'Content-Type': 'application/json' } }
+        ), env);
+      }
+      documents.push({
+        type: doc.type,
+        upload_id: doc.upload_id,
+        file_hash: doc.file_hash || uploadCheck.record.sha256_hash,
+      });
+    }
 
     const req: KycSubmissionRequest = {
       subject_type: body.subject_type || 'individual',
@@ -168,7 +210,7 @@ export const handleKycSubmit = async (
       package_id: body.package_id,
       auction_id: body.auction_id,
       callback_url: body.callback_url || 'https://omdalat.com/kyc/callback',
-      documents: body.documents || [],
+      documents,
     };
 
     const result = await provider.createCase(req, env);

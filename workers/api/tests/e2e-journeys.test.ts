@@ -28,19 +28,27 @@ function mockReq(method: string, path: string, body?: any, headers?: Record<stri
 
 // Helper: mock env with D1 that returns predictable results
 function mockEnv(overrides?: any): any {
-  const defaultFirst = { email: 'test@example.com', role: 'admin', id: 'usr_1' };
+  const defaultFirst = { email: 'test@example.com', role: 'admin', id: 'usr_1', is_active: true, expires_at: new Date(Date.now() + 3600000).toISOString() };
+  function isRateLimitSelect(sql: string) {
+    return sql.toLowerCase().includes('rate_limit_counters') && sql.toLowerCase().includes('select');
+  }
+  function isRateLimitInsert(sql: string) {
+    return sql.toLowerCase().includes('rate_limit_counters') && sql.toLowerCase().includes('insert');
+  }
   return {
     DB: {
-      prepare: () => ({
-        bind: (...args: any[]) => ({
-          first: async () => overrides?.firstResult ?? defaultFirst,
+      prepare: (sql: string) => {
+        return {
+          bind: (...args: any[]) => ({
+            first: async () => isRateLimitSelect(sql) ? { count: 0 } : (overrides?.firstResult ?? defaultFirst),
+            all: async () => ({ results: overrides?.allResults ?? [], success: true }),
+            run: async () => isRateLimitInsert(sql) ? { success: true, meta: { changes: 1 } } : { success: true, meta: { changes: 1 } },
+          }),
+          first: async () => isRateLimitSelect(sql) ? { count: 0 } : (overrides?.firstResult ?? defaultFirst),
           all: async () => ({ results: overrides?.allResults ?? [], success: true }),
-          run: async () => ({ success: true, meta: { changes: 1 } }),
-        }),
-        first: async () => overrides?.firstResult ?? defaultFirst,
-        all: async () => ({ results: overrides?.allResults ?? [], success: true }),
-        run: async () => ({ success: true, meta: { changes: 1 } }),
-      }),
+          run: async () => isRateLimitInsert(sql) ? { success: true, meta: { changes: 1 } } : { success: true, meta: { changes: 1 } },
+        };
+      },
     },
     APP_NAME: 'omdalat-platforms',
     APP_ENV: 'production',
@@ -410,25 +418,49 @@ describe('E2E Journey 8: Prohibited language enforcement', () => {
 //
 // Helper: returns a mock env where each call to first()/all()/run() returns the
 // next value from the supplied arrays. This lets us simulate multi-step flows.
-function mockEnvSequence(sequence: { firstResults?: any[]; allResults?: any[][]; runResults?: any[]; env?: any }): any {
+// Rate-limit queries are automatically handled unless rateLimitBlocked is set.
+function mockEnvSequence(sequence: { firstResults?: any[]; allResults?: any[][]; runResults?: any[]; env?: any; rateLimitBlocked?: boolean }): any {
   let firstIndex = 0;
   let allIndex = 0;
   let runIndex = 0;
   const firstArr = sequence.firstResults || [];
   const allArr = sequence.allResults || [];
   const runArr = sequence.runResults || [];
+  const blocked = sequence.rateLimitBlocked || false;
+
+  function isRateLimitSelect(sql: string) {
+    return sql.toLowerCase().includes('rate_limit_counters') && sql.toLowerCase().includes('select');
+  }
+  function isRateLimitInsert(sql: string) {
+    return sql.toLowerCase().includes('rate_limit_counters') && sql.toLowerCase().includes('insert');
+  }
+
   return {
     DB: {
-      prepare: () => ({
-        bind: (...args: any[]) => ({
-          first: async () => firstArr[firstIndex++],
+      prepare: (sql: string) => {
+        return {
+          bind: (...args: any[]) => ({
+            first: async () => {
+              if (isRateLimitSelect(sql)) return { count: blocked ? 999 : 0 };
+              return firstArr[firstIndex++];
+            },
+            all: async () => ({ results: allArr[allIndex++] || [], success: true }),
+            run: async () => {
+              if (isRateLimitInsert(sql)) return { success: true, meta: { changes: 1 } };
+              return runArr[runIndex++] || { success: true, meta: { changes: 1 } };
+            },
+          }),
+          first: async () => {
+            if (isRateLimitSelect(sql)) return { count: blocked ? 999 : 0 };
+            return firstArr[firstIndex++];
+          },
           all: async () => ({ results: allArr[allIndex++] || [], success: true }),
-          run: async () => runArr[runIndex++] || { success: true, meta: { changes: 1 } },
-        }),
-        first: async () => firstArr[firstIndex++],
-        all: async () => ({ results: allArr[allIndex++] || [], success: true }),
-        run: async () => runArr[runIndex++] || { success: true, meta: { changes: 1 } },
-      }),
+          run: async () => {
+            if (isRateLimitInsert(sql)) return { success: true, meta: { changes: 1 } };
+            return runArr[runIndex++] || { success: true, meta: { changes: 1 } };
+          },
+        };
+      },
     },
     APP_NAME: 'omdalat-platforms',
     APP_ENV: 'production',
@@ -436,20 +468,35 @@ function mockEnvSequence(sequence: { firstResults?: any[]; allResults?: any[][];
   };
 }
 
-describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
-  // ---- Helpers for authenticated behavioral tests ----
-  const authHeader = (email: string) => ({
-    Authorization: `Bearer ${'a'.repeat(32)}_${email}`, // token >= 32 chars for requireAuth
-  });
-  const mockSession = (email: string, role: string = 'admin') => ({
-    admin_id: `adm_${email}`,
-    brand_id: null,
-    email,
-    role,
-    is_active: true,
-    expires_at: new Date(Date.now() + 3600000).toISOString(), // 1 hour from now
-  });
+// Shared helpers for authenticated behavioral tests
+const authHeader = (email: string) => ({
+  Authorization: `Bearer ${'a'.repeat(32)}_${email}`,
+});
+const mockSession = (email: string, role: string = 'admin') => ({
+  admin_id: `adm_${email}`,
+  brand_id: null,
+  email,
+  role,
+  is_active: true,
+  expires_at: new Date(Date.now() + 3600000).toISOString(),
+});
+const mockCleanUpload = (id: string, email: string, targetType: string = 'evidence') => ({
+  id,
+  uploader_email: email,
+  target_type: targetType,
+  target_id: 'pkg_1',
+  original_name: 'file.pdf',
+  storage_key: `quarantine/${id}/file.pdf`,
+  size_bytes: 1024,
+  mime_type: 'application/pdf',
+  sha256_hash: 'abc123',
+  status: 'clean',
+  expires_at: new Date(Date.now() + 86400000).toISOString(),
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+});
 
+describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
   it('X1: data room get returns 401 without auth (IDOR fix)', async () => {
     const { handleDataRoomGet } = await import('../src/routes/data-room-transfer');
     const req = mockReq('GET', '/api/omdalat/data-rooms/dr_test');
@@ -658,15 +705,21 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
       package_id: 'pkg_1',
       evidence_type: 'fake_type',
       description: 'Some evidence',
+      upload_id: 'upl_1',
     }, authHeader('seller@test.com'));
-    const env = mockEnv({ firstResult: mockSession('seller@test.com', 'admin') });
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'), // session
+        mockCleanUpload('upl_1', 'seller@test.com'), // clean upload
+      ],
+    });
     const res = await handleEvidenceSubmit(req, env);
     expect(res.status).toBe(400);
     const body = await res.json();
     expect(body.error).toContain('evidence_type');
   });
 
-  it('X3: evidence submit rejects external file_url (400)', async () => {
+  it('X3: evidence submit rejects legacy file_url (400)', async () => {
     const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
     const req = mockReq('POST', '/api/omdalat/evidence', {
       package_id: 'pkg_1',
@@ -683,21 +736,64 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     const res = await handleEvidenceSubmit(req, env);
     expect(res.status).toBe(400);
     const body = await res.json();
-    expect(body.error).toContain('R2');
+    expect(body.error).toContain('upload_id');
   });
 
-  it('X3: evidence submit blocks non-owner (403)', async () => {
+  it('X3: evidence submit rejects upload not owned by submitter (403)', async () => {
     const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
     const req = mockReq('POST', '/api/omdalat/evidence', {
       package_id: 'pkg_1',
       evidence_type: 'trademark_registration',
       description: 'Trademark evidence',
-      file_url: 'https://omdalat.com/r2/file.pdf',
+      upload_id: 'upl_other',
+    }, authHeader('other@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('other@test.com', 'admin'), // session (not owner)
+        { owner_email: 'other@test.com' }, // package OK for this user
+        mockCleanUpload('upl_other', 'seller@test.com'), // upload owned by someone else
+      ],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('Upload does not belong');
+  });
+
+  it('X3: evidence submit rejects upload that is not clean (403)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Trademark evidence',
+      upload_id: 'upl_pending',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'), // session
+        { owner_email: 'seller@test.com' }, // package owned by same user
+        { ...mockCleanUpload('upl_pending', 'seller@test.com'), status: 'pending_scan' }, // not clean
+      ],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('not clean');
+  });
+
+  it('X3: evidence submit blocks non-owner of package (403)', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Trademark evidence',
+      upload_id: 'upl_1',
     }, authHeader('other@test.com'));
     const env = mockEnvSequence({
       firstResults: [
         mockSession('other@test.com', 'admin'), // session (not owner)
         { owner_email: 'seller@test.com' }, // package owned by someone else
+        mockCleanUpload('upl_1', 'other@test.com'), // upload owned by submitter
       ],
     });
     const res = await handleEvidenceSubmit(req, env);
@@ -706,18 +802,19 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     expect(body.error).toContain('do not own');
   });
 
-  it('X3: evidence submit succeeds for owner with valid R2 URL (201)', async () => {
+  it('X3: evidence submit succeeds for owner with clean upload_id (201)', async () => {
     const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
     const req = mockReq('POST', '/api/omdalat/evidence', {
       package_id: 'pkg_1',
       evidence_type: 'trademark_registration',
       description: 'Trademark evidence',
-      file_url: 'https://omdalat.com/r2/file.pdf',
+      upload_id: 'upl_1',
     }, authHeader('seller@test.com'));
     const env = mockEnvSequence({
       firstResults: [
         mockSession('seller@test.com', 'admin'), // session
         { owner_email: 'seller@test.com' }, // package owned by same user
+        mockCleanUpload('upl_1', 'seller@test.com'), // clean upload owned by same user
       ],
       runResults: [{ success: true }, { success: true }],
     });
@@ -725,6 +822,7 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     expect(res.status).toBe(201);
     const body = await res.json();
     expect(body.evidence_id).toMatch(/^ev_/);
+    expect(body.upload_id).toBe('upl_1');
   });
 
   // ---- X4: Data-room request-access auth ----
@@ -769,5 +867,290 @@ describe('E2E Journey 9: Extended P1 — IDOR + ownership + validation', () => {
     const body = await res.json();
     expect(body.request_id).toMatch(/^drg_/);
     expect(body.status).toBe('pending');
+  });
+});
+
+// ============================================================
+// JOURNEY 10: X5 Rate limiting + X6 Upload pipeline
+// ============================================================
+//
+// Behavioral tests proving rate limits and upload pipeline gates.
+//
+describe('E2E Journey 10: Rate limiting + upload pipeline', () => {
+  // ---- X5: Rate limiting ----
+  it('X5: offer create returns 429 when rate limit exceeded', async () => {
+    const { handleOfferCreate } = await import('../src/routes/offers-admin');
+    const req = mockReq('POST', '/api/omdalat/offers', {
+      package_id: 'pkg_1',
+      buyer_request_id: 'brq_1',
+      offer_type: 'full_assignment',
+      currency: 'VND',
+      offer_amount_vnd: 1000000,
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      rateLimitBlocked: true,
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+      ],
+    });
+    const res = await handleOfferCreate(req, env);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toContain('Rate limit');
+  });
+
+  it('X5: evidence submit returns 429 when rate limit exceeded', async () => {
+    const { handleEvidenceSubmit } = await import('../src/routes/evidence-transfer');
+    const req = mockReq('POST', '/api/omdalat/evidence', {
+      package_id: 'pkg_1',
+      evidence_type: 'trademark_registration',
+      description: 'Evidence',
+      upload_id: 'upl_1',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      rateLimitBlocked: true,
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+      ],
+    });
+    const res = await handleEvidenceSubmit(req, env);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toContain('Rate limit');
+  });
+
+  it('X5: data-room request-access returns 429 when rate limit exceeded', async () => {
+    const { handleDataRoomRequestAccess } = await import('../src/routes/data-room-transfer');
+    const req = mockReq('POST', '/api/omdalat/data-rooms/dr_test/request-access', { reason: 'Due diligence' }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      rateLimitBlocked: true,
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+      ],
+    });
+    const res = await handleDataRoomRequestAccess(req, env);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toContain('Rate limit');
+  });
+
+  it('X5: kyc submit returns 429 when rate limit exceeded', async () => {
+    const { handleKycSubmit } = await import('../src/routes/kyc-adapter');
+    const req = mockReq('POST', '/api/omdalat/kyc/submit', {
+      subject_type: 'individual',
+      documents: [],
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      rateLimitBlocked: true,
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+      ],
+    });
+    const res = await handleKycSubmit(req, env);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toContain('Rate limit');
+  });
+
+  it('X5: escrow create returns 429 when rate limit exceeded', async () => {
+    const { handleEscrowCreate } = await import('../src/routes/escrow-adapter');
+    const req = mockReq('POST', '/api/omdalat/escrow/create', {
+      transaction_id: 'ofr_1',
+      seller_email: 'seller@test.com',
+      package_id: 'pkg_1',
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      rateLimitBlocked: true,
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+      ],
+    });
+    const res = await handleEscrowCreate(req, env);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toContain('Rate limit');
+  });
+
+  // ---- X6: Upload pipeline ----
+  it('X6: upload request rejects invalid MIME type (400)', async () => {
+    const { handleUploadRequest } = await import('../src/routes/upload-request');
+    const req = mockReq('POST', '/api/omdalat/uploads/request', {
+      target_type: 'evidence',
+      target_id: 'pkg_1',
+      original_name: 'malware.exe',
+      size_bytes: 1024,
+      mime_type: 'application/x-msdownload',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+      ],
+    });
+    const res = await handleUploadRequest(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('PNG, JPEG, WebP, TIFF, and PDF');
+  });
+
+  it('X6: upload request rejects oversized file (400)', async () => {
+    const { handleUploadRequest } = await import('../src/routes/upload-request');
+    const req = mockReq('POST', '/api/omdalat/uploads/request', {
+      target_type: 'evidence',
+      target_id: 'pkg_1',
+      original_name: 'huge.pdf',
+      size_bytes: 51 * 1024 * 1024,
+      mime_type: 'application/pdf',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+      ],
+    });
+    const res = await handleUploadRequest(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('exceeds');
+  });
+
+  it('X6: upload request accepts valid PNG and creates quarantine record (201)', async () => {
+    const { handleUploadRequest } = await import('../src/routes/upload-request');
+    const req = mockReq('POST', '/api/omdalat/uploads/request', {
+      target_type: 'evidence',
+      target_id: 'pkg_1',
+      original_name: 'license.png',
+      size_bytes: 1024,
+      mime_type: 'image/png',
+      sha256_hash: 'deadbeef',
+    }, authHeader('seller@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+      ],
+      runResults: [{ success: true, meta: { changes: 1 } }, { success: true, meta: { changes: 1 } }],
+    });
+    const res = await handleUploadRequest(req, env);
+    expect(res.status).toBe(201);
+    const body = await res.json();
+    expect(body.upload_id).toMatch(/^upl_/);
+    expect(body.status).toBe('pending_scan');
+  });
+
+  it('X6: upload bytes rejects Content-Type mismatch (400)', async () => {
+    const { handleUploadBytes } = await import('../src/routes/upload-request');
+    const req = new Request('https://api.omdalat.com/api/omdalat/uploads/upl_1/bytes', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${'a'.repeat(32)}_seller@test.com`,
+        'Content-Type': 'image/jpeg',
+        'Content-Length': '1024',
+      },
+      body: new ArrayBuffer(1024),
+    });
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+        {
+          id: 'upl_1',
+          uploader_email: 'seller@test.com',
+          storage_key: 'quarantine/upl_1/license.png',
+          size_bytes: 1024,
+          mime_type: 'image/png',
+          status: 'pending_scan',
+        },
+      ],
+    });
+    const res = await handleUploadBytes(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('Content-Type mismatch');
+  });
+
+  it('X6: upload bytes rejects oversized payload (400)', async () => {
+    const { handleUploadBytes } = await import('../src/routes/upload-request');
+    const req = new Request('https://api.omdalat.com/api/omdalat/uploads/upl_1/bytes', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${'a'.repeat(32)}_seller@test.com`,
+        'Content-Type': 'image/png',
+        'Content-Length': '1024',
+      },
+      body: new ArrayBuffer(1024),
+    });
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('seller@test.com', 'admin'),
+        {
+          id: 'upl_1',
+          uploader_email: 'seller@test.com',
+          storage_key: 'quarantine/upl_1/license.png',
+          size_bytes: 512,
+          mime_type: 'image/png',
+          status: 'pending_scan',
+        },
+      ],
+    });
+    const res = await handleUploadBytes(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('exceed');
+  });
+
+  it('X6: KYC submit rejects document with file_url (400)', async () => {
+    const { handleKycSubmit } = await import('../src/routes/kyc-adapter');
+    const req = mockReq('POST', '/api/omdalat/kyc/submit', {
+      subject_type: 'individual',
+      documents: [
+        { type: 'passport', file_url: 'https://evil.com/passport.pdf', file_hash: 'abc' },
+      ],
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+      ],
+    });
+    const res = await handleKycSubmit(req, env);
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toContain('upload_id');
+  });
+
+  it('X6: KYC submit rejects document with missing scan status (403)', async () => {
+    const { handleKycSubmit } = await import('../src/routes/kyc-adapter');
+    const req = mockReq('POST', '/api/omdalat/kyc/submit', {
+      subject_type: 'individual',
+      documents: [
+        { type: 'passport', upload_id: 'upl_pending', file_hash: 'abc' },
+      ],
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+        { ...mockCleanUpload('upl_pending', 'buyer@test.com', 'kyc'), status: 'pending_scan' },
+      ],
+    });
+    const res = await handleKycSubmit(req, env);
+    expect(res.status).toBe(403);
+    const body = await res.json();
+    expect(body.error).toContain('not clean');
+  });
+
+  it('X6: KYC submit succeeds with clean upload_id (501 stub provider)', async () => {
+    const { handleKycSubmit } = await import('../src/routes/kyc-adapter');
+    const req = mockReq('POST', '/api/omdalat/kyc/submit', {
+      subject_type: 'individual',
+      documents: [
+        { type: 'passport', upload_id: 'upl_clean', file_hash: 'abc' },
+      ],
+    }, authHeader('buyer@test.com'));
+    const env = mockEnvSequence({
+      firstResults: [
+        mockSession('buyer@test.com', 'admin'),
+        mockCleanUpload('upl_clean', 'buyer@test.com', 'kyc'),
+      ],
+    });
+    const res = await handleKycSubmit(req, env);
+    expect(res.status).toBe(501);
+    const body = await res.json();
+    expect(body.error).toContain('KYC provider not configured');
   });
 });

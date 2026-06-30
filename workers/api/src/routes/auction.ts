@@ -1,6 +1,7 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
 import { requireAuth, requireSuper } from '../lib/auth';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
  * AUCTION LAYER — All endpoints gated behind AUCTION_LIVE_ENABLED feature flag.
@@ -182,6 +183,15 @@ export const handleAuctionBidSubmit = async (
       { status: 403, headers: { 'Content-Type': 'application/json' } }
     ), env);
   }
+
+  const rateLimit = await rateLimitWrite(
+    env,
+    'auction:bid',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.auctionBid.limit,
+    RATE_LIMIT_TIERS.auctionBid.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
 
   try {
     const url = new URL(request.url);

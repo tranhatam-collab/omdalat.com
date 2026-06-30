@@ -1,6 +1,7 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
 import { requireAuth, requireSuper } from '../lib/auth';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
  * POST /api/omdalat/data-rooms
@@ -19,6 +20,15 @@ export const handleDataRoomCreate = async (
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
+
+  const rateLimit = await rateLimitWrite(
+    env,
+    'data-room:create',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.transferCreate.limit,
+    RATE_LIMIT_TIERS.transferCreate.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
 
   try {
     const body = await request.json() as any;
@@ -149,6 +159,15 @@ export const handleDataRoomRequestAccess = async (
   // with any email, enabling spam and impersonation.
   const auth = await requireAuth(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
+
+  const rateLimit = await rateLimitWrite(
+    env,
+    'data-room:request-access',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.dataRoomRequestAccess.limit,
+    RATE_LIMIT_TIERS.dataRoomRequestAccess.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
 
   try {
     const url = new URL(request.url);

@@ -39,6 +39,7 @@ import {
 } from './routes/auction';
 import { handleKycSubmit } from './routes/kyc-adapter';
 import { handleEscrowCreate, handleEscrowStatus } from './routes/escrow-adapter';
+import { handleUploadRequest, handleUploadBytes, handleUploadScanResult } from './routes/upload-request';
 
 export interface Env {
   DB: D1Database;
@@ -168,6 +169,11 @@ router.post('/api/omdalat/auctions/:id/end', handleAuctionEnd);
 router.post('/api/omdalat/kyc/submit', handleKycSubmit);
 router.post('/api/omdalat/escrow/create', handleEscrowCreate);
 router.get('/api/omdalat/escrow/:id', handleEscrowStatus);
+
+// Upload pipeline endpoints (X6)
+router.post('/api/omdalat/uploads/request', handleUploadRequest);
+router.post('/api/omdalat/uploads/:id/bytes', handleUploadBytes);
+router.post('/api/omdalat/uploads/:id/scan-result', handleUploadScanResult);
 
 // 404 handler
 router.all('*', () => new Response('Not Found', { status: 404 }));

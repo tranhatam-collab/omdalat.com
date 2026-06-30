@@ -1,5 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
  * Escrow Provider Adapter Abstraction
@@ -171,6 +172,15 @@ export const handleEscrowCreate = async (
   const { requireAuth } = await import('../lib/auth');
   const auth = await requireAuth(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
+
+  const rateLimit = await rateLimitWrite(
+    env,
+    'escrow:create',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.escrowCreate.limit,
+    RATE_LIMIT_TIERS.escrowCreate.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
 
   try {
     const body = await request.json() as any;

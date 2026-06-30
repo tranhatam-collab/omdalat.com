@@ -1,11 +1,16 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
 import { requireAuth, requireSuper } from '../lib/auth';
+import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
+import { requireCleanUpload } from '../lib/upload-pipeline';
 
 /**
  * POST /api/omdalat/evidence
  * Submit rights evidence for a package/component (seller or admin)
  * Auth route — submitter must be authenticated.
+ *
+ * X6 FIX: Evidence no longer accepts arbitrary file_url. The client must upload
+ * the file through /api/omdalat/uploads/* pipeline and pass a clean upload_id.
  */
 export const handleEvidenceSubmit = async (
   request: Request,
@@ -17,17 +22,40 @@ export const handleEvidenceSubmit = async (
   }
 
   // F2 FIX: Require authentication before any validation or DB write.
-  // Without this, anyone could inject evidence records into any package.
   const auth = await requireAuth(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
+  const rateLimit = await rateLimitWrite(
+    env,
+    'evidence:submit',
+    (auth as any).email,
+    RATE_LIMIT_TIERS.evidenceSubmit.limit,
+    RATE_LIMIT_TIERS.evidenceSubmit.windowSeconds
+  );
+  if (!rateLimit.ok) return withCors(request, rateLimit.response, env);
+
   try {
     const body = await request.json() as any;
-    const { package_id, component_id, evidence_type, reference_number, issuing_authority, issue_date, expiry_date, jurisdiction, description, file_url, file_hash } = body;
+    const { package_id, component_id, evidence_type, reference_number, issuing_authority, issue_date, expiry_date, jurisdiction, description, upload_id, file_hash } = body;
 
     if (!package_id || !evidence_type || !description) {
       return withCors(request, new Response(
         JSON.stringify({ error: 'package_id, evidence_type, and description are required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    // X6 FIX: Reject legacy file_url submissions. Uploads must flow through the pipeline.
+    if (body.file_url !== undefined) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'file_url is not accepted. Use upload_id from the upload pipeline.' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      ), env);
+    }
+
+    if (!upload_id) {
+      return withCors(request, new Response(
+        JSON.stringify({ error: 'upload_id is required. Request an upload slot via POST /api/omdalat/uploads/request first.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       ), env);
     }
@@ -62,11 +90,12 @@ export const handleEvidenceSubmit = async (
       ), env);
     }
 
-    // X3 FIX: Validate file_url is internal R2 (not arbitrary external URL)
-    if (file_url && !file_url.startsWith('r2://') && !file_url.startsWith('https://omdalat.com/r2/') && !file_url.startsWith('https://assets.omdalat.com/')) {
+    // X6 FIX: Verify the referenced upload is clean and owned by the submitter
+    const uploadCheck = await requireCleanUpload(env, upload_id, (auth as any).email, 'evidence');
+    if (!uploadCheck.ok) {
       return withCors(request, new Response(
-        JSON.stringify({ error: 'file_url must point to internal R2 storage (r2:// or https://omdalat.com/r2/ or https://assets.omdalat.com/)' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: uploadCheck.error }),
+        { status: uploadCheck.status, headers: { 'Content-Type': 'application/json' } }
       ), env);
     }
 
@@ -74,9 +103,9 @@ export const handleEvidenceSubmit = async (
     const id = `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
 
     await env.DB.prepare(
-      `INSERT INTO rights_evidence (id, package_id, component_id, evidence_type, reference_number, issuing_authority, issue_date, expiry_date, jurisdiction, description, file_url, file_hash, upload_status, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'uploaded', ?, ?)`
-    ).bind(id, package_id, component_id || null, evidence_type, reference_number || null, issuing_authority || null, issue_date || null, expiry_date || null, jurisdiction || null, description, file_url || null, file_hash || null, now, now).run();
+      `INSERT INTO rights_evidence (id, package_id, component_id, evidence_type, reference_number, issuing_authority, issue_date, expiry_date, jurisdiction, description, upload_id, file_hash, upload_status, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'clean', ?, ?)`
+    ).bind(id, package_id, component_id || null, evidence_type, reference_number || null, issuing_authority || null, issue_date || null, expiry_date || null, jurisdiction || null, description, upload_id, file_hash || uploadCheck.record.sha256_hash, now, now).run();
 
     // Log registry event
     await env.DB.prepare(
@@ -85,7 +114,7 @@ export const handleEvidenceSubmit = async (
     ).bind(`rev_${Date.now()}`, package_id, (auth as any).email || 'unknown', `Evidence submitted: ${evidence_type} — ${description.slice(0, 80)}`, now).run();
 
     return withCors(request, new Response(
-      JSON.stringify({ success: true, evidence_id: id, status: 'uploaded' }),
+      JSON.stringify({ success: true, evidence_id: id, status: 'clean', upload_id }),
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     ), env);
   } catch (err) {
