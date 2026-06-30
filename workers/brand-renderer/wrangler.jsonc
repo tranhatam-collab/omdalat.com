@@ -12,8 +12,8 @@
   "vars": {
     "APP_NAME": "omdalat-brand-renderer",
     "APP_ENV": "production",
-        "BUILD_COMMIT_SHA": "2a98fc81121266fec4672c06896118cb273bbc36",
-        "BUILD_TIMESTAMP": "2026-06-30T09:27:28+07:00",
+        "BUILD_COMMIT_SHA": "9f41b9ba91febed9e73f9419e91113bf952b4f3a",
+        "BUILD_TIMESTAMP": "2026-06-30T09:29:03+07:00",
     "COOKIE_DOMAIN": ".omdalat.com"
   },
   "routes": [
@@ -67,8 +67,8 @@
       "vars": {
         "APP_NAME": "omdalat-brand-renderer",
         "APP_ENV": "production",
-        "BUILD_COMMIT_SHA": "2a98fc81121266fec4672c06896118cb273bbc36",
-        "BUILD_TIMESTAMP": "2026-06-30T09:27:28+07:00",
+        "BUILD_COMMIT_SHA": "9f41b9ba91febed9e73f9419e91113bf952b4f3a",
+        "BUILD_TIMESTAMP": "2026-06-30T09:29:03+07:00",
         "COOKIE_DOMAIN": ".omdalat.com"
       },
       "d1_databases": [
@@ -91,6 +91,8 @@
       "vars": {
         "APP_NAME": "omdalat-brand-renderer",
         "APP_ENV": "sandbox",
+        "BUILD_COMMIT_SHA": "9f41b9ba91febed9e73f9419e91113bf952b4f3a",
+        "BUILD_TIMESTAMP": "2026-06-30T09:29:03+07:00",
         "COOKIE_DOMAIN": ".omdalat.com"
       },
       "d1_databases": [
