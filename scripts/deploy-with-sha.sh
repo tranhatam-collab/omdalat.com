@@ -49,25 +49,26 @@ inject_sha() {
   local WRANGLER_FILE="$1"
   local WORKER_NAME="$2"
   echo "[inject] $WRANGLER_FILE"
-  # Use node to safely modify the JSONC (preserves comments via simple text replace)
-  node -e "
-    const fs = require('fs');
-    const p = process.argv[1];
-    let s = fs.readFileSync(p, 'utf-8');
-    // Remove any existing BUILD_COMMIT_SHA / BUILD_TIMESTAMP lines in vars block
-    s = s.replace(/,\s*\"BUILD_COMMIT_SHA\":\s*\"[^\"]*\"/g, '');
-    s = s.replace(/,\s*\"BUILD_TIMESTAMP\":\s*\"[^\"]*\"/g, '');
-    s = s.replace(/\"BUILD_COMMIT_SHA\":\s*\"[^\"]*\",\s*/g, '');
-    s = s.replace(/\"BUILD_TIMESTAMP\":\s*\"[^\"]*\",\s*/g, '');
-    // Insert before the closing } of the vars block — we add to APP_ENV line
-    // Find the line with APP_ENV and append after it
-    s = s.replace(
-      /(\"APP_ENV\":\s*\"[^\"]+\")/,
-      '\$1,\n    \"BUILD_COMMIT_SHA\": \"' + process.argv[3] + '\",\n    \"BUILD_TIMESTAMP\": \"' + process.argv[4] + '\"'
-    );
-    fs.writeFileSync(p, s);
-    console.log('  injected BUILD_COMMIT_SHA=' + process.argv[3].slice(0,12));
-  " "$WRANGLER_FILE" "$WORKER_NAME" "$SHA" "$TIMESTAMP"
+  # Use python to safely modify the JSONC — inject into ALL "APP_ENV" lines
+  # (both top-level vars and env.production.vars)
+  python3 -c "
+import re, sys
+p, sha, ts = sys.argv[1], sys.argv[2], sys.argv[3]
+with open(p) as f: s = f.read()
+# Remove existing BUILD_COMMIT_SHA / BUILD_TIMESTAMP
+s = re.sub(r',\s*\"BUILD_COMMIT_SHA\":\s*\"[^\"]*\"', '', s)
+s = re.sub(r',\s*\"BUILD_TIMESTAMP\":\s*\"[^\"]*\"', '', s)
+s = re.sub(r'\"BUILD_COMMIT_SHA\":\s*\"[^\"]*\",\s*', '', s)
+s = re.sub(r'\"BUILD_TIMESTAMP\":\s*\"[^\"]*\",\s*', '', s)
+# Add after EVERY 'APP_ENV': '...' line (matches both top-level and env.production)
+s = re.sub(
+    r'(\"APP_ENV\":\s*\"[^\"]+\")',
+    r'\1,\n        \"BUILD_COMMIT_SHA\": \"' + sha + '\",\n        \"BUILD_TIMESTAMP\": \"' + ts + '\"',
+    s
+)
+with open(p, 'w') as f: f.write(s)
+print('  injected BUILD_COMMIT_SHA=' + sha[:12])
+  " "$WRANGLER_FILE" "$SHA" "$TIMESTAMP"
 }
 
 # 3. Function to deploy + verify
