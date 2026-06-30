@@ -5,7 +5,8 @@
 **Domain:** tamfarms.omdalat.com
 **Product ID:** OMDALAT_TAMFARMS
 **Brand ID:** TAMFARMS
-**Trạng thái:** CONCEPT_DEFINED — READY FOR REVIEW
+**Trạng thái:** APPROVED — AUTHORIZED FOR PUBLIC RELEASE (2026-06-30)
+**Founder decision:** Duyệt Founder Lock + authorize public release (index,follow)
 
 ---
 
@@ -345,11 +346,11 @@ Tam Farm chỉ được public là đang hoạt động khi:
 
 | Trường | Giá trị |
 |--------|---------|
-| Brand status | **CONCEPT_DEFINED** |
-| Founder Lock | **READY FOR REVIEW** |
-| Domain release | **NOT AUTHORIZED** |
-| Location release | **NOT AUTHORIZED** |
-| Public booking/application | **NOT AUTHORIZED** |
+| Brand status | **APPROVED — LIVE** |
+| Founder Lock | **APPROVED** |
+| Domain release | **AUTHORIZED** |
+| Location release | **NOT YET (no verified location)** |
+| Public booking/application | **NOT YET (no intake form)** |
 
 ---
 

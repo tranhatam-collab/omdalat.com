@@ -1,7 +1,7 @@
 # BRAND CHARTER — Những Khu Vườn Tâm / Tam Farm
 
 **Charter ID:** OMDALAT_TAMFARMS_CHARTER_2026
-**Status:** CONCEPT_DEFINED — READY FOR FOUNDER REVIEW
+**Status:** APPROVED — LIVE (Founder Lock approved 2026-06-30)
 **Founder Lock:** `docs/governance/NHUNG_KHU_VUON_TAM_FOUNDER_LOCK_2026.md`
 **Brand & SEO Lock:** `docs/governance/NHUNG_KHU_VUON_TAM_BRAND_SEO_LOCK_2026.md`
 **Founder:** Trần Hà Tâm
@@ -126,10 +126,10 @@ Tam Farm chỉ được public là đang hoạt động khi đủ 18 điều ki�
 
 ## Status
 
-- **Current status:** CONCEPT_DEFINED
-- **Founder Lock:** READY FOR REVIEW
-- **Domain release:** NOT AUTHORIZED
-- **Location release:** NOT AUTHORIZED
-- **Public booking/application:** NOT AUTHORIZED
+- **Current status:** LIVE (bilingual VI/EN, index,follow)
+- **Founder Lock:** APPROVED (2026-06-30)
+- **Domain release:** AUTHORIZED
+- **Location release:** NOT YET (no verified location — due diligence pending)
+- **Public booking/application:** NOT YET (intake via WhatsApp, no form yet)
 - **Last reviewed:** 2026-06-30
 - **Reviewer:** Trần Hà Tâm (founder)

@@ -1,6 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# Status: CONCEPT_DEFINED — NOT AUTHORIZED for public release
-# Founder Lock: docs/governance/NHUNG_KHU_VUON_TAM_FOUNDER_LOCK_2026.md
-# When authorized: change to Allow: / and enable sitemap
+Sitemap: https://tamfarms.omdalat.com/sitemap.xml

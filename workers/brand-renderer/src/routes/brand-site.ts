@@ -230,16 +230,19 @@ function generateSitemapXML(brand: any, _locale: string): string {
 
   // All 17 article slugs
   const articleSlugs = [
+    // Startup With AI
     'khoi-nghiep-cung-ai-khong-bat-dau-tu-cong-nghe',
     'vi-sao-nhieu-nguoi-hoc-ai-nhung-van-khong-tao-duoc-thu-nhap',
     'tu-mot-ky-nang-nho-den-cong-viec-dau-tien-voi-ai',
     'mot-tuan-song-va-lam-viec-tai-lily-dien-ra-nhu-the-nao',
     'neu-bat-dau-lai-tu-dau-nam-2026-toi-se-hoc-ai-nhu-the-nao',
+    // Technology Creation
     'chung-ta-khong-thieu-y-tuong-chung-ta-thieu-nhung-nguoi-bien-y-tuong-thanh-san-pham',
     'ai-khong-thay-the-nha-sang-tao-ai-trao-them-suc-manh-cho-nha-sang-tao',
     'tu-da-lat-chung-ta-co-the-xay-dung-san-pham-cho-toan-the-gioi-khong',
     'hai-tuan-tai-lily-se-dien-ra-nhu-the-nao',
     'neu-chi-co-hai-tuan-de-bat-dau-mot-du-an-cong-nghe-toi-se-lam-gi',
+    // Living & Working Garden
     'song-o-lily-khong-phai-nghi-duong',
     'mot-khong-gian-lam-viec-that',
     'o-theo-tuan-theo-thang-la-mot-cam-ket',
@@ -266,6 +269,16 @@ function generateSitemapXML(brand: any, _locale: string): string {
     `${base}/en/stay`,
     `${base}/workspace`,
     `${base}/en/workspace`,
+    `${base}/jobs`,
+    `${base}/en/jobs`,
+    `${base}/training`,
+    `${base}/en/training`,
+    `${base}/international`,
+    `${base}/en/international`,
+    `${base}/visa-support`,
+    `${base}/en/visa-support`,
+    `${base}/contact`,
+    `${base}/en/contact`,
   ];
 
   for (const slug of articleSlugs) {
@@ -319,7 +332,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
       titleVi: 'Hỗ trợ quốc tế',
       titleEn: 'International Support',
       contentVi: 'Lily có thể tiếp nhận người nước ngoài muốn ở lại dài hơn tại Lạc Dương, Đà Lạt để làm việc từ xa, học kỹ năng, tham gia dự án và sống trong một môi trường sân vườn có kỷ luật.',
-      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work renhà nghỉ cấp thấpy, learn skills, join projects, and live within a disciplined garden-based environment.'
+      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work remotely, learn skills, join projects, and live within a disciplined garden-based environment.'
     },
     'visa-support': {
       titleVi: 'Hỗ trợ thông tin về lưu trú, visa và làm việc hợp lệ',
@@ -356,6 +369,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/' + page + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/' + page + '">'}
+  <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}/${page}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${title} - ${brandName}">
   <meta property="og:description" content="${content}">
@@ -598,6 +612,7 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/programs/' + program + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/programs/' + program + '">'}
+  <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}/programs/${program}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${title} - ${brandName}">
   <meta property="og:description" content="${description}">
@@ -1669,6 +1684,7 @@ In the end, Lily must be measured by real output: verified rooms, suitable resid
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/articles/' + article + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/articles/' + article + '">'}
+  <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}/articles/${article}">
   <meta property="og:type" content="article">
   <meta property="og:title" content="${title} - ${brandName}">
   <meta property="og:description" content="${content.substring(0, 150)}...">
@@ -1932,6 +1948,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '/articles">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en/articles">'}
+  <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}/articles">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${isEn ? 'Articles' : 'Bài viết'} - ${brandName}">
   <meta property="og:description" content="${isEn ? 'Articles about Startup With AI and Technology Creation programs at Lily.' : 'Bài viết về chương trình Khởi Nghiệp Cùng AI và Sáng Tạo Công Nghệ tại Lily.'}">
@@ -2123,6 +2140,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
   <link rel="canonical" href="${pageUrl}">
   ${isEn ? '<link rel="alternate" hreflang="vi" href="https://' + brand.subdomain + '">' : ''}
   ${isEn ? '' : '<link rel="alternate" hreflang="en" href="https://' + brand.subdomain + '/en">'}
+  <link rel="alternate" hreflang="x-default" href="https://${brand.subdomain}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${heroBlock.title}">
   <meta property="og:description" content="${heroBlock.subtitle}">
@@ -2185,7 +2203,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
     </div>
   </nav>
 
-  ${false && heroBlock.image ? `<div style="width:100%; height:400px; background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="${heroBlock.image}" alt="${isEn ? 'Featured image: ' : 'Hình ảnh minh họa: '}${heroBlock.title}" style="width:100%; height:100%; object-fit:cover;" loading="eager"/></div>` : ''}
+  ${false && heroBlock.image ? `<div style="width:100%; height:400px; background: linear-gradient(135deg, #0f3d2e 0%, #1a5c43 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="${heroBlock.image}" alt="${isEn ? 'Photo of ' : 'Hình ảnh '}${heroBlock.title}" style="width:100%; height:100%; object-fit:cover;" loading="eager"/></div>` : ''}
 
   <section class="hero">
     <div class="container">
@@ -2235,7 +2253,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <div class="grid">
         ${highlightsBlock.items ? highlightsBlock.items.map((item: any) => `
           <div class="card" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            ${false && item.image ? `<div style="width:100%; height:200px; margin-bottom:16px; border-radius:4px; overflow:hidden; background:#eee;"><img src="${item.image}" alt="${isEn ? 'Featured image: ' : 'Hình ảnh minh họa: '}${item.title}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/></div>` : ''}
+            ${false && item.image ? `<div style="width:100%; height:200px; margin-bottom:16px; border-radius:4px; overflow:hidden; background:#eee;"><img src="${item.image}" alt="${isEn ? 'Photo of ' : 'Hình ảnh '}${item.title}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/></div>` : ''}
             <h3>${item.title}</h3>
             <p>${item.text || ''}</p>
           </div>
