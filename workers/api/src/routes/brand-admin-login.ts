@@ -4,6 +4,7 @@ import { handleCorsPreflight, withCors } from '../lib/cors';
 import { hashPassword, verifyPassword } from '../lib/password-hash';
 import { recordFailedLogin, recordSuccessfulLogin, isLocked, MAX_FAILED_ATTEMPTS } from '../lib/login-lockout';
 import { generateToken, generateSessionId, generateCsrfToken, fingerprintHash, cookieHeader } from '../lib/session';
+import { verifyTOTP } from '../lib/totp';
 
 /**
  * Brand admin login endpoint.
@@ -87,13 +88,20 @@ export const handleBrandAdminLogin = async (
       return withCors(request, resp, env);
     }
 
-    // MFA check (stub — if enabled, require code)
+    // MFA check — verify TOTP code against admin.mfa_secret
     if (admin.mfa_enabled) {
-      // TODO: verify TOTP code against admin.mfa_secret
-      // For now, block login if MFA enabled but no code provided.
       if (!body.mfa_code) {
         const resp = new Response(
           JSON.stringify({ error: 'MFA code required' }),
+          { status: 401, headers: { 'Content-Type': 'application/json' } }
+        );
+        return withCors(request, resp, env);
+      }
+      const valid = await verifyTOTP(admin.mfa_secret, String(body.mfa_code));
+      if (!valid) {
+        await recordFailedLogin(env, email, admin.id as string, 'invalid_mfa_code', ip, ua);
+        const resp = new Response(
+          JSON.stringify({ error: 'Invalid MFA code' }),
           { status: 401, headers: { 'Content-Type': 'application/json' } }
         );
         return withCors(request, resp, env);

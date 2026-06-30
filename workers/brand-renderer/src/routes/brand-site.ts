@@ -175,13 +175,14 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
       });
     }
 
+    // C3 compliance gate: /stay route requires lodging_compliance for ALL brands with can_host_stay=1
+    // Same allowlist as publish gate: only verified, approved, not_applicable
+    const STAY_OK = new Set(['verified', 'approved', 'not_applicable']);
+    if (page === 'stay' && brand.can_host_stay === 1 && !STAY_OK.has(brand.lodging_compliance)) {
+      return new Response('Not Found', { status: 404 });
+    }
+
     if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
-      // Gate /stay on lodging_compliance (NĐ 96/2016)
-      // Same allowlist as publish gate: only verified, approved, not_applicable
-      const STAY_OK = new Set(['verified', 'approved', 'not_applicable']);
-      if (page === 'stay' && !STAY_OK.has(brand.lodging_compliance)) {
-        return new Response('Not Found', { status: 404 });
-      }
       // Lily V2 specific pages — only accessible when published
       const html = generateLilyV2Page(brand, page, locale, url);
       if (html) {
