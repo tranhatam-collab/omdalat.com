@@ -2,7 +2,7 @@ import type { Env } from '../index';
 import { generateId } from '../lib/id-gen';
 import { logAudit } from '../lib/audit';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 import { validateBrandCopy } from '../lib/overclaim-validator';
 
 export const handleBrandApproval = async (
@@ -19,7 +19,7 @@ export const handleBrandApproval = async (
   }
 
   // Require super admin authentication
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);

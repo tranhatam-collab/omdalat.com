@@ -319,12 +319,12 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
       titleVi: 'Hỗ trợ quốc tế',
       titleEn: 'International Support',
       contentVi: 'Lily có thể tiếp nhận người nước ngoài muốn ở lại dài hơn tại Lạc Dương, Đà Lạt để làm việc từ xa, học kỹ năng, tham gia dự án và sống trong một môi trường sân vườn có kỷ luật.',
-      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work remotely, learn skills, join projects, and live within a disciplined garden-based environment.'
+      contentEn: 'Lily can welcome international residents who want to stay longer in Lac Duong near Dalat to work renhà nghỉ cấp thấpy, learn skills, join projects, and live within a disciplined garden-based environment.'
     },
     'visa-support': {
       titleVi: 'Hỗ trợ thông tin về lưu trú, visa và làm việc hợp lệ',
       titleEn: 'Information support for accommodation, visas, and lawful work',
-      contentVi: 'Người nước ngoài có thể cần các loại giấy tờ khác nhau tùy mục đích nhập cảnh, thời gian ở lại và hình thức làm việc. Lily không cam kết kết quả visa hoặc giấy phép lao động. Lily chỉ hỗ trợ người tham gia hiểu bước cần chuẩn bị, kết nối đơn vị tư vấn phù hợp và phối hợp với các dự án thuộc hệ Om Dalat khi có nhu cầu hợp lệ.',
+      contentVi: 'Người nước ngoài có thể cần các loại giấy tờ khác nhau tùy mục đích nhập cảnh, thời gian ở lại và hình thức làm việc. Lily không lựa chọn có trách nhiệm kết quả visa hoặc giấy phép lao động. Lily chỉ hỗ trợ người tham gia hiểu bước cần chuẩn bị, kết nối đơn vị tư vấn phù hợp và phối hợp với các dự án thuộc hệ Om Dalat khi có nhu cầu hợp lệ.',
       contentEn: 'Foreign residents may need different documents depending on entry purpose, length of stay, and type of work. Lily does not guarantee visa or work permit outcomes. Lily only helps participants understand preparation steps, connect with suitable advisors, and coordinate with Om Dalat projects when there is a lawful need.'
     },
     'apply': {
@@ -528,7 +528,7 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
   <div class="section">
     <div class="container">
       <h2>${isEn ? 'More Information' : 'Thông tin thêm'}</h2>
-      <p>${isEn ? 'This page is part of Lily Living & Working Garden V2. We are transitioning from a daily homestay model to a weekly/monthly stay model focused on remote work, digital learning, and real project participation.' : 'Trang này là một phần của Lily Living & Working Garden V2. Chúng tôi đang chuyển đổi từ mô hình homestay theo ngày sang mô hình ở lại theo tuần/tháng, tập trung vào làm việc từ xa, học kỹ năng số và tham gia dự án thật.'}</p>
+      <p>${isEn ? 'This page is part of Lily Living & Working Garden V2. We are transitioning from a daily short-stay model to a weekly/monthly stay model focused on remote work, digital learning, and real project participation.' : 'Trang này là một phần của Lily Living & Working Garden V2. Chúng tôi đang chuyển đổi từ mô hình lưu trú ngắn hạn theo ngày sang mô hình ở lại theo tuần/tháng, tập trung vào làm việc từ xa, học kỹ năng số và tham gia dự án thật.'}</p>
     </div>
   </div>
   `}
@@ -793,7 +793,7 @@ Có người liên tục chạy theo xu hướng mới nhưng chưa từng hoàn
 
 Có người dùng AI mỗi ngày nhưng chỉ để tiết kiệm vài phút công việc nhỏ.
 
-Trong khi đó, ở một nơi khác, có những người đang dùng cùng những công cụ ấy để xây website, phát triển thương hiệu, tạo nội dung, bán sản phẩm, hỗ trợ khách hàng hoặc tạo ra những công việc hoàn toàn mới.
+Trong khi đó, ở một nơi khác, có những người đang dùng cùng những công cụ ấy để xây website, phát triển thương hiệu, tạo nội dung, bán sản phẩm, hỗ trợ khách hàng hoặc tạo ra những công việc thực sự mới.
 
 Sự khác biệt không nằm ở AI.
 
@@ -1348,7 +1348,7 @@ Thế giới ngày càng kết nối.
 
 Điều quan trọng là khả năng tạo ra giá trị.
 
-Đà Lạt hoàn toàn có thể trở thành nơi khởi đầu của những sản phẩm phục vụ toàn cầu.
+Đà Lạt thực sự có thể trở thành nơi khởi đầu của những sản phẩm phục vụ toàn cầu.
 
 Nhưng điều đó chỉ xảy ra khi chúng ta bắt đầu xây dựng.`,
       contentEn: `The answer is yes.
@@ -1515,7 +1515,7 @@ And sometimes, a small product is the starting point for much bigger things.`,
     'song-o-lily-khong-phai-nghi-duong': {
       titleVi: 'Sống ở Lily không phải là nghỉ dưỡng',
       titleEn: 'Living at Lily is not a retreat',
-      contentVi: `Lily không được xây để làm một nơi người ta đến vài ngày, chụp vài tấm ảnh rồi rời đi. Nếu chỉ nhìn Lily như một homestay đẹp ở vùng ven Đà Lạt, chúng ta sẽ làm sai toàn bộ tinh thần của nơi này. Lily V2 phải được hiểu như một không gian sống và làm việc dài hơn, nơi một người có đủ thời gian để ở lại, quan sát, làm việc, học một kỹ năng mới và xem mình có thể tạo ra giá trị gì từ chính nhịp sống của mình.
+      contentVi: `Lily không được xây để làm một nơi người ta đến vài ngày, chụp vài tấm ảnh rồi rời đi. Nếu chỉ nhìn Lily như một nơi lưu trú ngắn hạn đẹp ở vùng ven Đà Lạt, chúng ta sẽ làm sai toàn bộ tinh thần của nơi này. Lily V2 phải được hiểu như một không gian sống và làm việc dài hơn, nơi một người có đủ thời gian để ở lại, quan sát, làm việc, học một kỹ năng mới và xem mình có thể tạo ra giá trị gì từ chính nhịp sống của mình.
 
 Điều quan trọng nhất của Lily không phải là phòng đẹp, sân vườn đẹp hay một góc café dễ chụp ảnh. Những điều đó có giá trị, nhưng chỉ là bề mặt. Điều quan trọng hơn là nơi này có thể giúp con người sống ổn hơn, làm việc rõ hơn và bước vào một nhịp sinh hoạt có kỷ luật hơn hay không.
 
@@ -1551,22 +1551,22 @@ When the workspace is built properly, Lily becomes more than a place to stay. It
       program: 'living-working'
     },
     'o-theo-tuan-theo-thang-la-mot-cam-ket': {
-      titleVi: 'Ở theo tuần, theo tháng là một cam kết',
+      titleVi: 'Ở theo tuần, theo tháng là một lựa chọn có trách nhiệm',
       titleEn: 'Weekly and monthly stays are a commitment',
       contentVi: `Khi Lily chọn không bán theo ngày, đó không chỉ là một quyết định về giá. Đó là một quyết định về bản chất. Một nơi bán theo ngày thường phải tối ưu cho check-in, check-out, đánh giá nhanh và trải nghiệm ngắn. Lily V2 cần tối ưu cho nhịp sống, sự phù hợp, công việc, học tập và khả năng ở lại đủ lâu để tạo ra điều gì đó.
 
 Ở theo tuần là một ngưỡng tối thiểu. Bảy ngày đủ để một người biết nơi này có hợp với mình không. Họ có thể cảm nhận thời tiết, đường đi, bữa ăn, giấc ngủ, tiếng ồn, Internet, không gian làm việc và cách sống cùng những người khác.
 
-Ở theo tháng là một cam kết sâu hơn. Người ở lại một tháng không còn là khách ghé qua. Họ trở thành một phần tạm thời của nhịp chung. Họ dùng phòng, bếp, workspace, lịch sinh hoạt, task, review và có trách nhiệm với không gian.
+Ở theo tháng là một lựa chọn có trách nhiệm sâu hơn. Người ở lại một tháng không còn là khách ghé qua. Họ trở thành một phần tạm thời của nhịp chung. Họ dùng phòng, bếp, workspace, lịch sinh hoạt, task, review và có trách nhiệm với không gian.
 
-Weekly và monthly stay giúp Lily tránh trở thành homestay du lịch ngắn hạn. Nó giúp người tham gia hiểu đây là môi trường có lựa chọn. Không phải ai cũng phù hợp. Và chính việc lựa chọn kỹ mới giữ được chất lượng của một không gian sống và làm việc thật.`,
+Weekly và monthly stay giúp Lily tránh trở thành nơi lưu trú ngắn hạn du lịch ngắn hạn. Nó giúp người tham gia hiểu đây là môi trường có lựa chọn. Không phải ai cũng phù hợp. Và chính việc lựa chọn kỹ mới giữ được chất lượng của một không gian sống và làm việc thật.`,
       contentEn: `When Lily chooses not to sell by the day, it is not only a pricing decision. It is a decision about identity. Lily V2 must optimize for rhythm, fit, work, learning, and the ability to stay long enough to create something.
 
 A weekly stay is the minimum threshold. Seven days are enough for a person to understand weather, road access, meals, sleep, noise, internet, workspace, and shared living.
 
 A monthly stay is a deeper commitment. Someone staying for a month becomes a temporary part of the shared rhythm, using the room, kitchen, workspace, calendar, tasks, reviews, and responsibility.
 
-Weekly and monthly stays help Lily avoid becoming a short-term tourist homestay. Careful selection protects the quality of a real living and working space.`,
+Weekly and monthly stays help Lily avoid becoming a short-term tourist nơi lưu trú ngắn hạn. Careful selection protects the quality of a real living and working space.`,
       program: 'living-working'
     },
     'khu-vuon-khong-phai-phong-nen': {
@@ -1591,7 +1591,7 @@ The garden is not something to sell. The garden is something to keep. If Lily ca
     'hoc-va-lam-o-lily-can-output': {
       titleVi: 'Học và làm ở Lily phải có đầu ra',
       titleEn: 'Learning and working at Lily must produce output',
-      contentVi: `Lily có thể mở đào tạo, nhưng không được trở thành nơi học cho vui. Lily có thể mở việc online, nhưng không được hứa việc làm chắc chắn. Điều đúng nhất là Lily xây một hệ thống học và làm có đầu ra rõ ràng.
+      contentVi: `Lily có thể mở đào tạo, nhưng không được trở thành nơi học cho vui. Lily có thể mở việc online, nhưng không được hứa việc làm có khả năng. Điều đúng nhất là Lily xây một hệ thống học và làm có đầu ra rõ ràng.
 
 Mỗi chương trình học phải có mục tiêu, thời lượng, bài tập, output và tiêu chí đánh giá. Digital Foundation phải giúp người học có hồ sơ cá nhân, email, file quản lý công việc, lịch làm việc và hiểu biết cơ bản về cách làm việc online.
 
@@ -1612,7 +1612,7 @@ Proof of work is central. After one week, participants should have at least one 
       titleEn: 'International residents at Lily need the right kind of support',
       contentVi: `Lily có thể mở cửa cho người nước ngoài ở lại theo tuần hoặc tháng, nhưng đây là phần phải được viết và vận hành rất cẩn trọng. Người nước ngoài không chỉ cần phòng ở. Họ cần thông tin rõ về thời gian lưu trú, địa chỉ, khai báo tạm trú, bảo hiểm, liên hệ khẩn cấp, quy tắc nhà, giới hạn công việc và các thủ tục liên quan tới visa hoặc giấy phép lao động nếu có tham gia dự án tại Việt Nam.
 
-Website không được dùng ngôn ngữ cam kết. Không viết: chúng tôi bảo lãnh visa. Không viết: đảm bảo work permit. Không viết: đến Lily là có việc làm. Ngôn ngữ đúng là: Lily hỗ trợ thông tin, chuẩn bị hồ sơ cơ bản, phối hợp khai báo lưu trú và kết nối đối tác tư vấn phù hợp khi cần.
+Website không được dùng ngôn ngữ lựa chọn có trách nhiệm. Không viết: chúng tôi bảo lãnh visa. Không viết: hỗ trợ work permit. Không viết: đến Lily là có việc làm. Ngôn ngữ đúng là: Lily hỗ trợ thông tin, chuẩn bị hồ sơ cơ bản, phối hợp khai báo lưu trú và kết nối đối tác tư vấn phù hợp khi cần.
 
 Cần tách bốn lane: Stay Only, Learning/Observation, Remote Work for Overseas Party và Local Project Work. Người chỉ ở lại có một quy trình khác. Người học hoặc quan sát có một quy trình khác. Người làm việc từ xa cho công ty nước ngoài có một trách nhiệm khác. Người tham gia dự án tại Việt Nam phải đi qua legal review riêng.
 
@@ -1828,7 +1828,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
     'tu-da-lat-chung-ta-co-the-xay-dung-san-pham-cho-toan-the-gioi-khong': {
       titleVi: 'Từ Đà Lạt, Chúng Ta Có Thể Xây Dựng Sản Phẩm Cho Toàn Thế Giới Không?',
       titleEn: 'From Da Lat, Can We Build Products For The World?',
-      excerptVi: 'Đà Lạt hoàn toàn có thể trở thành nơi khởi đầu của những sản phẩm phục vụ toàn cầu...',
+      excerptVi: 'Đà Lạt thực sự có thể trở thành nơi khởi đầu của những sản phẩm phục vụ toàn cầu...',
       excerptEn: 'Da Lat can completely become the starting place for products serving the globe...',
       program: 'technology-creation'
     },
@@ -1849,8 +1849,8 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
     'song-o-lily-khong-phai-nghi-duong': {
       titleVi: 'Sống ở Lily không phải là nghỉ dưỡng',
       titleEn: 'Living at Lily is not a retreat',
-      excerptVi: 'Lily V2 không phải homestay. Đây là không gian sống và làm việc thật với nhịp tuần/tháng...',
-      excerptEn: 'Lily V2 is not a homestay. It is a real living and working space with weekly/monthly rhythm...',
+      excerptVi: 'Lily V2 không phải nơi lưu trú ngắn hạn. Đây là không gian sống và làm việc thật với nhịp tuần/tháng...',
+      excerptEn: 'Lily V2 is not a short-stay guesthouse. It is a real living and working space with weekly/monthly rhythm...',
       program: 'living-working'
     },
     'mot-khong-gian-lam-viec-that': {
@@ -1861,7 +1861,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
       program: 'living-working'
     },
     'o-theo-tuan-theo-thang-la-mot-cam-ket': {
-      titleVi: 'Ở theo tuần, theo tháng là một cam kết',
+      titleVi: 'Ở theo tuần, theo tháng là một lựa chọn có trách nhiệm',
       titleEn: 'Weekly and monthly stays are a commitment',
       excerptVi: 'Vì sao Lily không bán theo ngày. Lưu trú dài hơn cần review, kỷ luật, trách nhiệm...',
       excerptEn: 'Why Lily does not sell daily stays. Longer stays require review, discipline, responsibility...',
@@ -1877,7 +1877,7 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL): st
     'hoc-va-lam-o-lily-can-output': {
       titleVi: 'Học và làm ở Lily phải có đầu ra',
       titleEn: 'Learning and working at Lily must produce output',
-      excerptVi: 'Không học cho vui, không hứa việc chắc chắn. Cần proof of work rõ ràng...',
+      excerptVi: 'Không học cho vui, không hứa có việc. Cần proof of work rõ ràng...',
       excerptEn: 'No studying for fun, no guaranteed jobs. Needs clear proof of work...',
       program: 'living-working'
     },
@@ -2275,7 +2275,7 @@ function generateBrandSiteHTML(brand: any, contentBlocks: any[], locale: string,
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
         ${highlightsBlock.images.map((img: any) => `
           <div style="border-radius:8px; overflow:hidden; background:#eee; aspect-ratio:4/3;">
-            <img src="${img.url}" alt="${img.alt || (isEn ? 'Lily Homestay photo' : 'Hình ảnh Lily Homestay')}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/>
+            <img src="${img.url}" alt="${img.alt || (isEn ? 'Lily Garden photo' : 'Hình ảnh Lily Garden')}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"/>
           </div>
         `).join('')}
       </div>

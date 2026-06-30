@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 import {
   createQuarantineRecord,
@@ -25,7 +25,7 @@ export const handleUploadRequest = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   const rateLimit = await rateLimitWrite(
@@ -112,7 +112,7 @@ export const handleUploadBytes = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   const url = new URL(request.url);
@@ -203,7 +203,7 @@ export const handleUploadScanResult = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);

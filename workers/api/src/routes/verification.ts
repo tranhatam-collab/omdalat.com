@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 
 /**
  * POST /api/omdalat/verification/cases
@@ -15,7 +15,7 @@ export const handleVerificationCaseCreate = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -70,7 +70,7 @@ export const handleVerificationTaskAdd = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -122,7 +122,7 @@ export const handleVerificationCaseComplete = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);

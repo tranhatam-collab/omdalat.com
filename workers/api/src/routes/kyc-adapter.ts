@@ -156,8 +156,8 @@ export const handleKycSubmit = async (
   }
 
   // Import auth — circular dependency avoided by dynamic import
-  const { requireAuth } = await import('../lib/auth');
-  const auth = await requireAuth(request, env);
+  const { requireAuthAndCsrf } = await import('../lib/auth');
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   const rateLimit = await rateLimitWrite(

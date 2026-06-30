@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
@@ -16,7 +16,7 @@ export const handleDataRoomCreate = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -82,7 +82,7 @@ export const handleDataRoomGet = async (
 
     // X1 FIX: Require authentication FIRST — before any data lookup.
     // Buyer access is verified via session, NOT a spoofable X-Buyer-Email header.
-    const auth = await requireAuth(request, env);
+    const auth = await requireAuthAndCsrf(request, env);
     if (auth instanceof Response) return withCors(request, auth, env);
 
     let hasAccess = false;
@@ -157,7 +157,7 @@ export const handleDataRoomRequestAccess = async (
 
   // X4 FIX: Require authentication. Previously anyone could submit access requests
   // with any email, enabling spam and impersonation.
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   const rateLimit = await rateLimitWrite(
@@ -225,7 +225,7 @@ export const handleDataRoomGrantApprove = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -274,7 +274,7 @@ export const handleTransferGet = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -320,7 +320,7 @@ export const handleTransferUpdateStep = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);

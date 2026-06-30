@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 import { logAudit } from '../lib/audit';
 
 /**
@@ -23,7 +23,7 @@ export const handleBrandDelete = async (
   }
 
   // Require super admin auth
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) {
     return withCors(request, auth, env);
   }

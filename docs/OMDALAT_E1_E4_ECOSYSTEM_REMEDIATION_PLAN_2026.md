@@ -40,6 +40,28 @@
 
 ---
 
+
+
+## Execution Log
+
+| Item | Action | Status | Evidence |
+|---|---|---|---|
+| E2 — cham.omdalat.com | Deleted CNAME DNS record + `www.cham` CNAME; Pages/Worker cleanup pending | DNS retired | curl returns NXDOMAIN (000) |
+| E2 — dreams.omdalat.com | Deleted AAAA DNS record and Worker route | DNS + route retired | curl returns NXDOMAIN (000) |
+| E3 — lily.omdalat.com | Moved route from `omdalat-brand-renderer` to `omdalat-brand-renderer-production` | Live | curl https://lily.omdalat.com/ returns 200 |
+| E3 — vuonhong3.omdalat.com | Created AAAA `100::` DNS record + route on production Worker | Live | curl https://vuonhong3.omdalat.com/ returns 200 |
+| E4 — www.omdalat.com | Verified CNAME points to `omdalat-web-ezk.pages.dev` (same as apex) | Live | curl https://www.omdalat.com returns 200 |
+| E1 — app.omdalat.com | Decision pending founder approval; registry marked PENDING_MIGRATION | Pending | See Option A below |
+
+### Git commit
+- `0050664` feat(auth,content,renderer): AUTH_BASELINE, overclaim wiring, renderer parity, E1-E4 remediation
+- Includes updated `docs/governance/OMDALAT_DOMAIN_REGISTRY_2026.csv`
+
+### Cloudflare resources updated
+- Zone ID: `48817115d775cd1b80ed451acb336a5c`
+- Worker routes: lily/vuonhong3 → `omdalat-brand-renderer-production`; dreams route deleted
+- DNS records: cham + www.cham + dreams deleted; vuonhong3 AAAA created
+
 ## 1. E1 — Split-brain Cloudflare accounts
 
 ### Finding

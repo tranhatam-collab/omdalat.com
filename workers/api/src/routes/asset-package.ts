@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 
 /**
  * POST /api/omdalat/asset-packages
@@ -145,7 +145,7 @@ export const handleAssetPackageGet = async (
 
     // If package is not published, require auth
     if (pkg.publication_status !== 'published') {
-      const auth = await requireAuth(request, env);
+      const auth = await requireAuthAndCsrf(request, env);
       if (auth instanceof Response) {
         return withCors(request, auth, env);
       }
@@ -202,7 +202,7 @@ export const handleAssetPackageList = async (
     return withCors(request, response, env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) {
     return withCors(request, auth, env);
   }

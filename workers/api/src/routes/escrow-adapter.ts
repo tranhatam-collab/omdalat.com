@@ -169,8 +169,8 @@ export const handleEscrowCreate = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const { requireAuth } = await import('../lib/auth');
-  const auth = await requireAuth(request, env);
+  const { requireAuthAndCsrf } = await import('../lib/auth');
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   const rateLimit = await rateLimitWrite(
@@ -243,8 +243,8 @@ export const handleEscrowStatus = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const { requireAuth } = await import('../lib/auth');
-  const auth = await requireAuth(request, env);
+  const { requireAuthAndCsrf } = await import('../lib/auth');
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   try {

@@ -12,6 +12,7 @@ import { handleComplianceUpdate } from './routes/compliance-update';
 import { handleBrandInquiry } from './routes/brand-inquiry';
 import { handleBrandList } from './routes/brand-list';
 import { handleBrandDelete } from './routes/brand-delete';
+import { handleContentBlockCreate, handleContentBlockUpdate } from './routes/content-blocks';
 import { handleCorsPreflightRoute } from './routes/cors-preflight';
 import { handleBrandAdminLogin } from './routes/brand-admin-login';
 import { handleLilyPublic } from './routes/lily-public';
@@ -99,6 +100,10 @@ router.post('/api/omdalat/brands/:id/publish', handleBrandPublish);
 router.post('/api/omdalat/brands/:id/compliance', handleComplianceUpdate);
 router.post('/api/omdalat/brands/:id/inquiry', handleBrandInquiry);
 router.delete('/api/omdalat/brands/:id', handleBrandDelete);
+
+// Content blocks with overclaim validation
+router.post('/api/omdalat/brands/:id/content-blocks', handleContentBlockCreate);
+router.patch('/api/omdalat/brands/:id/content-blocks/:block_id', handleContentBlockUpdate);
 
 // Brand admin authentication
 router.post('/api/omdalat/admin/login', handleBrandAdminLogin);

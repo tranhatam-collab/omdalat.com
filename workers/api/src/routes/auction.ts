@@ -1,6 +1,6 @@
 import type { Env } from '../index';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 import { rateLimitWrite, RATE_LIMIT_TIERS } from '../lib/rate-limit';
 
 /**
@@ -37,7 +37,7 @@ export const handleAuctionCreate = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -173,7 +173,7 @@ export const handleAuctionBidSubmit = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
 
   // Feature flag gate — auction is NOT live
@@ -276,7 +276,7 @@ export const handleAuctionBidList = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
@@ -323,7 +323,7 @@ export const handleAuctionEnd = async (
     return withCors(request, new Response('Method not allowed', { status: 405 }), env);
   }
 
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth as any);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);

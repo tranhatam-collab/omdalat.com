@@ -1,7 +1,7 @@
 import type { Env } from '../index';
 import { logAudit } from '../lib/audit';
 import { handleCorsPreflight, withCors } from '../lib/cors';
-import { requireAuth, requireSuper } from '../lib/auth';
+import { requireAuthAndCsrf, requireSuper } from '../lib/auth';
 
 /**
  * Audited compliance update route.
@@ -31,7 +31,7 @@ export const handleComplianceUpdate = async (
   }
 
   // Require super admin
-  const auth = await requireAuth(request, env);
+  const auth = await requireAuthAndCsrf(request, env);
   if (auth instanceof Response) return withCors(request, auth, env);
   const superCheck = requireSuper(auth);
   if (superCheck instanceof Response) return withCors(request, superCheck, env);
