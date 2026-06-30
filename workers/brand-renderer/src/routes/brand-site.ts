@@ -808,16 +808,21 @@ function generateLilyProgramPage(brand: any, program: string, locale: string, ur
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
-        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}training">${isEn ? 'Training' : 'Đào tạo'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}international">${isEn ? 'International' : 'Quốc tế'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="/${locale === 'en' ? 'en' : ''}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        ${(() => { const STAY_OK = new Set(['verified', 'approved', 'not_applicable']); return STAY_OK.has(brand.lodging_compliance) ? `<li><a href="/${locale === 'en' ? 'en/' : ''}stay" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Stay' : 'Ở lại'}</a></li>` : ''; })()}
+        <li><a href="/${locale === 'en' ? 'en/' : ''}workspace" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Workspace' : 'Không gian làm việc'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}jobs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Jobs' : 'Việc làm'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}training" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Training' : 'Đào tạo'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}international" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'International' : 'Quốc tế'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}visa-support" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Visa Support' : 'Hỗ trợ Visa'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
         <li class="lang-switcher">
           <a href="/programs/${program}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
           <a href="/en/programs/${program}" class="${isEn ? 'active' : ''}">English</a>
@@ -1914,11 +1919,16 @@ In the end, Lily must be measured by real output: verified rooms, suitable resid
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}programs/${program}">${isEn ? 'Program' : 'Chương trình'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="/${locale === 'en' ? 'en' : ''}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs/${program}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Program' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
         <li class="lang-switcher">
           <a href="/articles/${article}" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
           <a href="/en/articles/${article}" class="${isEn ? 'active' : ''}">English</a>
@@ -2186,10 +2196,15 @@ function generateLilyArticlesIndexPage(brand: any, locale: string, url: URL, con
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="/${locale === 'en' ? 'en' : ''}">${isEn ? 'Home' : 'Trang chủ'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}programs">${isEn ? 'Programs' : 'Chương trình'}</a></li>
-        <li><a href="/${locale === 'en' ? 'en/' : ''}apply">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="/${locale === 'en' ? 'en' : ''}" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Home' : 'Trang chủ'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}programs" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Programs' : 'Chương trình'}</a></li>
+        <li><a href="/${locale === 'en' ? 'en/' : ''}apply" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Apply' : 'Gửi hồ sơ'}</a></li>
         <li class="lang-switcher">
           <a href="/articles" class="${!isEn ? 'active' : ''}">Tiếng Việt</a>
           <a href="/en/articles" class="${isEn ? 'active' : ''}">English</a>
@@ -2920,13 +2935,18 @@ function generateBrandPortalHTML(locale: string, url: URL, brandList: any[]): st
 <body>
   <nav class="nav">
     <div class="container">
-      <ul>
-        <li><a href="https://omdalat.com">${isEn ? 'Om Dalat' : 'Ôm Đà Lạt'}</a></li>
-        <li><a href="#problem">${isEn ? 'Why' : 'Vì sao'}</a></li>
-        <li><a href="#model">${isEn ? 'Model' : 'Mô hình'}</a></li>
-        <li><a href="#who">${isEn ? 'Who' : 'Đối tượng'}</a></li>
-        <li><a href="#cases">${isEn ? 'Cases' : 'Thương hiệu'}</a></li>
-        <li><a href="#roadmap">${isEn ? 'Roadmap' : 'Lộ trình'}</a></li>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('nav-menu').classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="https://omdalat.com" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Om Dalat' : 'Ôm Đà Lạt'}</a></li>
+        <li><a href="#problem" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Why' : 'Vì sao'}</a></li>
+        <li><a href="#model" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Model' : 'Mô hình'}</a></li>
+        <li><a href="#who" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Who' : 'Đối tượng'}</a></li>
+        <li><a href="#cases" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Cases' : 'Thương hiệu'}</a></li>
+        <li><a href="#roadmap" onclick="document.getElementById('nav-menu').classList.remove('active')">${isEn ? 'Roadmap' : 'Lộ trình'}</a></li>
         <li class="lang-switcher">
           <a href="/" class="${isEn ? '' : 'active'}">Tiếng Việt</a>
           <a href="/en" class="${isEn ? 'active' : ''}">English</a>
