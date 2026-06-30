@@ -1,0 +1,15 @@
+# Files and directories to exclude from Cloudflare Pages deployment
+# ap.omdalat.com is a pure static editorial site — only deploy content
+
+node_modules/
+reports/
+docs/
+scripts/
+test-results/
+tmp-test.html
+package.json
+package-lock.json
+.vercel/
+*.md
+!README.md
+visual-diff-threshold-rules.json

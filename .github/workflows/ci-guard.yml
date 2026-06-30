@@ -67,6 +67,22 @@ jobs:
       - name: Run SQL compliance bypass guard
         run: node scripts/guard-sql-compliance-bypass.mjs
 
+  guard-subdomain-anti-confusion:
+    name: Guard subdomain anti-confusion (15 rules)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run subdomain anti-confusion guard
+        run: node scripts/guard-subdomain-anti-confusion.mjs
+
   smoke-e2e-optional:
     name: Optional smoke e2e (vi/en)
     runs-on: ubuntu-latest

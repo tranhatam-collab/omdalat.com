@@ -2,7 +2,7 @@
 
 **Status:** AUTHORITATIVE (locks subdomain ownership; supersedes ad-hoc decisions)
 **Owner:** Tran Ha Tam
-**Last updated:** 2026-06-30
+**Last updated:** 2026-06-30 (post-remediation: F1–F6 fixed, anti-confusion CI active, brand charters created)
 **Scope:** Every hostname under `omdalat.com` + the sibling `ap.omdalat.com` editorial property + `docs.omdala.com`.
 
 > This document exists to make subdomain responsibilities **unambiguous and impossible to confuse**, especially `ap.omdalat.com` vs `app.omdalat.com`. If a change contradicts this file, the change is wrong until this file is updated and re-approved.
@@ -19,7 +19,7 @@ app.omdalat.com  →  "Ôm Đà Lạt App" →  MEMBER RUNTIME / APP   →  DO, 
 - `ap` = **một chữ p** = nội dung biên tập, bản sắc, con người, nơi chốn, nhịp sống. **Không** đăng nhập, **không** booking, **không** dashboard.
 - `app` = **hai chữ p** = ứng dụng thành viên đã đăng nhập (dashboard, hồ sơ, request, proof).
 - They are **sibling layers, not funnel stages**. `ap` is NOT a pre-landing page for `app`, and `app` is NOT a logged-in version of `ap`.
-- **No build, middleware, redirect, DNS, or copy may merge, alias, or redirect these two into each other.** (See QA finding F2 — this rule is currently violated in code and must be fixed.)
+- **No build, middleware, redirect, DNS, or copy may merge, alias, or redirect these two into each other.** (See QA finding F2 — **FIXED 2026-06-30**: `ap.omdalat.com` removed from `LEGACY_APP_HOSTS` in both `apps/web/middleware.ts` and `apps/app/middleware.ts`. Anti-confusion CI guard enforces this rule going forward.)
 
 ---
 
@@ -28,8 +28,8 @@ app.omdalat.com  →  "Ôm Đà Lạt App" →  MEMBER RUNTIME / APP   →  DO, 
 | # | Hostname | Brand name | Mission (one line) | Source of truth (repo) | Cloudflare resource | Type |
 |---|----------|-----------|--------------------|------------------------|---------------------|------|
 | 1 | `omdalat.com`, `www.omdalat.com` | **Ôm Đà Lạt** (root) | Public marketing + navigation hub: explain the system, route people in | `apps/web` (`@omdalat/web`) | `omdalat-web` | Pages |
-| 2 | `app.omdalat.com`, `www.app.omdalat.com` | **Ôm Đà Lạt App** | Authenticated member runtime: dashboard, profile, requests, proofs | `apps/app` (`@omdalat/app`) | `omdalat-app` *(currently `omdalat-app-v2` — see F1)* | Pages |
-| 3 | `ap.omdalat.com` | **Ấp Đà Lạt** | Editorial / identity layer: people, places, rhythms, stories, images | `ap.omdalat.com/` (static) | *(not yet deployed)* | Static |
+| 2 | `app.omdalat.com`, `www.app.omdalat.com` | **Ôm Đà Lạt App** | Authenticated member runtime: dashboard, profile, requests, proofs | `apps/app` (`@omdalat/app`) | `omdalat-app-v2` (Pages project, serving `apps/app` since 2026-06-30 F1 fix) | Pages |
+| 3 | `ap.omdalat.com` | **Ấp Đà Lạt** | Editorial / identity layer: people, places, rhythms, stories, images | `ap.omdalat.com/` (static) | `omdalat-ap` (Pages project `ap-omdalat`) | Static Pages |
 | 4 | `api.omdalat.com` | **BAN Platform API** | Brand Asset Network REST API + brand factory backend | `workers/api` (`omdalat-platforms-api`) | `omdalat-platforms-api-production` | Worker |
 | 5 | `brand.omdalat.com` | **Brand Factory** | Seller intake, package build, evidence submit, per-brand redirect | `workers/brand-renderer` | `omdalat-brand-renderer-production` | Worker |
 | 6 | `lily.omdalat.com` | **Lily** (brand) | Per-brand public site (residency + stay + programs) | `workers/brand-renderer` (D1-driven) | `omdalat-brand-renderer-production` | Worker route |

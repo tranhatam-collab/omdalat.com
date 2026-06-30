@@ -1,0 +1,5 @@
+# app.omdalat.com is the authenticated member runtime — fully noindex.
+# Per OMDALAT_SUBDOMAIN_RESPONSIBILITY_LOCK_2026.md §2.2, the app must never
+# compete with omdalat.com or ap.omdalat.com in search engines.
+User-agent: *
+Disallow: /

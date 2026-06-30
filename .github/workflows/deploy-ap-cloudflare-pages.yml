@@ -1,0 +1,45 @@
+name: Deploy Ap Dalat Editorial (ap.omdalat.com)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ap.omdalat.com/**'
+      - '.github/workflows/deploy-ap-cloudflare-pages.yml'
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Cloudflare Pages project name'
+        required: true
+        default: 'omdalat-ap'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy static editorial site to ap.omdalat.com
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CF_PAGES_PROJECT: ${{ github.event.inputs.project || vars.CF_PAGES_AP_PROJECT || 'omdalat-ap' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install wrangler
+        run: npm install -g wrangler@latest
+
+      - name: Deploy static content to Cloudflare Pages
+        run: |
+          PROJECT_NAME="${CF_PAGES_PROJECT:-omdalat-ap}"
+          wrangler pages deploy ap.omdalat.com --project-name "$PROJECT_NAME" --branch main

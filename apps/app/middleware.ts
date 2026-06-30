@@ -11,7 +11,10 @@ import {
 
 const PUBLIC_FILE = /\.[^/]+$/;
 const NOINDEX_VALUE = "noindex, nofollow";
-const LEGACY_APP_HOSTS = new Set(["www.app.omdalat.com", "ap.omdalat.com", "www.ap.omdalat.com"]);
+// F2 fix: ap.omdalat.com is a DISTINCT editorial property ("Ấp Đà Lạt"), NOT a legacy app host.
+// Only www.app.omdalat.com is a legitimate legacy alias of app.omdalat.com.
+// See OMDALAT_SUBDOMAIN_RESPONSIBILITY_LOCK_2026.md §0 (two-letter rule).
+const LEGACY_APP_HOSTS = new Set(["www.app.omdalat.com"]);
 const CANONICAL_APP_HOST = "app.omdalat.com";
 
 function shouldBypass(pathname: string) {

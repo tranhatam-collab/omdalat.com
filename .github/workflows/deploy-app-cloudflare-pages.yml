@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'apps/web/**'
+      - 'apps/app/**'
+      - 'packages/core/**'
       - 'scripts/build-cf.mjs'
       - 'scripts/clean-vercel-output.mjs'
       - '.github/workflows/deploy-app-cloudflare-pages.yml'
@@ -22,7 +23,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Build and deploy apps/web to app Pages project
+    name: Build and deploy @omdalat/app to app.omdalat.com
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -47,10 +48,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Cloudflare Pages output
-        run: pnpm --filter @omdalat/web build:cf
+      - name: Build Cloudflare Pages output (@omdalat/app)
+        run: pnpm --filter @omdalat/app build:cf
 
       - name: Deploy to Cloudflare Pages
         run: |
           PROJECT_NAME="${CF_PAGES_PROJECT:-omdalat-app-v2}"
-          pnpm --filter @omdalat/web exec wrangler pages deploy .vercel/output/static --project-name "$PROJECT_NAME"
+          pnpm --filter @omdalat/app exec wrangler pages deploy .vercel/output/static --project-name "$PROJECT_NAME"

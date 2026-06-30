@@ -1,0 +1,16 @@
+﻿product_id,hostname,public_name,official_role,status,owns,must_not_own
+OMDALAT_ROOT,omdalat.com,Om Dalat,MASTER_BRAND_TRUST_ROOT,LIVE,"Public narrative, trust, intent routing",No product operations
+OMDALAT_ROOT_WWW,www.omdalat.com,Om Dalat (WWW alias),MASTER_BRAND_TRUST_ROOT,LIVE,WWW alias of root,No product operations
+OMDALAT_APP,app.omdalat.com,Om Dalat App,AUTHENTICATED_RUNTIME_WORKSPACE,LIVE,"Account, consent, tasks, connected products",No marketplace or data merging
+OMDALAT_APP_WWW,www.app.omdalat.com,Om Dalat App (WWW alias),AUTHENTICATED_RUNTIME_WORKSPACE,LIVE,WWW alias of app,No marketplace or data merging
+OMDALAT_AP,ap.omdalat.com,Ap Dalat (editorial),EDITORIAL_IDENTITY_LAYER,LIVE,"Editorial content: people, places, rhythms, stories, images","No login, no booking, no dashboard, no commerce"
+OMDALAT_LILY,lily.omdalat.com,Lily,OFFLINE_RESIDENCY_OPERATIONS,LIVE,"Residency, space, onsite safety",No marketplace
+OMDALAT_VUONHONG3,vuonhong3.omdalat.com,Vuon Hong 3,PER_BRAND_PUBLIC_SITE,LIVE,Per-brand public site (brand tenant),No cross-brand content
+OMDALAT_BRAND,brand.omdalat.com,Om Dalat Brand,BRAND_FACTORY_AND_PORTFOLIO,LIVE_LIMITED,"Brand charter, formation, portfolio",No sale/auction
+OMDALAT_MARKET,market.omdalat.com,Om Dalat Market,BRAND_ASSET_MARKETPLACE,LIVE_LIMITED,"Listings, licensing, offers, data rooms",No brand formation
+OMDALAT_REGISTRY,registry.omdalat.com,Om Dalat Registry,PROVENANCE_AND_VERIFICATION,LIVE_LIMITED,Public provenance and verification states,Does not create legal rights
+OMDALAT_AUCTION,auction.omdalat.com,Om Dalat Auction,LEGAL_GATED_BIDDING,BLOCKED,Auction only after legal authorization,No ungated auction
+OMDALAT_API,api.omdalat.com,Om Dalat API,VERSIONED_PRODUCT_APIS,LIVE_LIMITED,API contracts,No public narrative
+OMDALAT_DOCS,docs.omdala.com,Om Dalat Docs,PUBLIC_STANDARDS_AND_DOCUMENTATION,PLANNED,"Standards, API and governance docs",No transactions
+OMDALAT_DREAMS,dreams.omdalat.com,Dreams Om Dalat,DREAM_INTAKE_AND_MAP,RETIRED,"Dream Statement, Dream Map, pathways",Retired 2026-06-30 — DNS and Worker deleted
+OMDALAT_CHAM,cham.omdalat.com,Cham Om Dalat,EXPERIMENT_AND_EVIDENCE,RETIRED,"Potential hypotheses, experiments, evidence",Retired 2026-06-30 — DNS, Pages and Worker deleted

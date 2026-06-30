@@ -171,7 +171,26 @@ Before declaring any deploy "live":
 - [ ] `wrangler deploy` succeeded for all workers
 - [ ] Verify prod == repo (check DB state vs committed files)
 - [ ] Negative test: confirm gate blocks bad case on prod
+- [ ] Anti-confusion CI guard passes (`node scripts/guard-subdomain-anti-confusion.mjs`)
 - [ ] No secrets in commits (check with `git log --all --source --full-diff -p | grep -i "password\|token\|secret"`)
+
+---
+
+## Subdomain Anti-Confusion Guard
+
+**Script:** `scripts/guard-subdomain-anti-confusion.mjs`
+**CI:** `.github/workflows/ci-guard.yml` → job `guard-subdomain-anti-confusion`
+**Standard:** `docs/governance/OMDALAT_ANTI_CONFUSION_CI_STANDARD_2026.md`
+
+This guard enforces 15 rules + F1/F2 specific checks. It must pass before any deploy.
+Run locally: `node scripts/guard-subdomain-anti-confusion.mjs`
+
+Key rules:
+- `ap.omdalat.com` must NOT appear in middleware redirects (F2).
+- App deploy workflow must build `@omdalat/app`, not `@omdalat/web` (F1).
+- `OMDALAT_AP` must NOT be used as a product identifier.
+- `app.omdalat.com` must be fully `noindex` (robots.txt + middleware).
+- Every brand marked LIVE must have a Brand Charter in `docs/governance/brand-charters/`.
 
 ---
 
@@ -189,6 +208,7 @@ If you discover prod != repo or compliance was set without evidence:
 
 ## Version
 
-Last updated: 2026-06-18
+Last updated: 2026-06-30
 Audit trigger: Senior review found prod≠repo gap (compliance set without migration)
 Status: Rules adopted, gates fixed, tests passing, evidence recorded
+Subdomain anti-confusion guard: ACTIVE (2026-06-30)

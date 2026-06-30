@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const LOCALES = new Set(["vi", "en"]);
-const LEGACY_APP_HOSTS = new Set(["ap.omdalat.com", "www.ap.omdalat.com"]);
+// F2 fix: ap.omdalat.com is a DISTINCT editorial property ("Ấp Đà Lạt").
+// It must NEVER be redirected to app.omdalat.com. See OMDALAT_SUBDOMAIN_RESPONSIBILITY_LOCK_2026.md §0.
+const LEGACY_APP_HOSTS = new Set<string>([]);
 const APP_CANONICAL_HOST = "app.omdalat.com";
 
 const LEGACY_ROUTE_MAP: Record<string, string> = {
