@@ -31,9 +31,39 @@ export interface Env {
   APP_NAME: string;
   APP_ENV: string;
   COOKIE_DOMAIN: string;
+  BUILD_COMMIT_SHA?: string;
+  BUILD_TIMESTAMP?: string;
 }
 
 const router = Router<Request, [Env]>();
+
+// /version endpoint — build provenance for production verification.
+// BUILD_COMMIT_SHA is injected by scripts/deploy-with-sha.sh before deploy.
+router.get('/version', async (request: Request, env: Env) => {
+  return new Response(JSON.stringify({
+    app: env.APP_NAME,
+    environment: env.APP_ENV,
+    build_commit_sha: env.BUILD_COMMIT_SHA || 'unknown',
+    build_timestamp: env.BUILD_TIMESTAMP || 'unknown',
+    runtime_timestamp: new Date().toISOString(),
+    verification_url: 'https://docs.omdalat.com/runbook/version-verification',
+  }, null, 2), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' }
+  });
+});
+router.get('/__version', async (request: Request, env: Env) => {
+  return new Response(JSON.stringify({
+    app: env.APP_NAME,
+    environment: env.APP_ENV,
+    build_commit_sha: env.BUILD_COMMIT_SHA || 'unknown',
+    build_timestamp: env.BUILD_TIMESTAMP || 'unknown',
+    runtime_timestamp: new Date().toISOString(),
+  }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' }
+  });
+});
 
 // Brand Asset Network surfaces — routed by subdomain
 // registry.omdalat.com, market.omdalat.com, auction.omdalat.com

@@ -13,7 +13,7 @@ import type { Env } from '../index';
  * - No direct custody / escrow
  */
 
-const COMMON_HEAD = (title: string, description: string, ogImage: string) => `<!DOCTYPE html>
+const COMMON_HEAD = (title: string, description: string, ogImage: string, canonical?: string, noindex?: boolean) => `<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -28,10 +28,10 @@ const COMMON_HEAD = (title: string, description: string, ogImage: string) => `<!
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${ogImage}">
-  <link rel="canonical" href="https://omdalat.com">
-  <link rel="alternate" hreflang="vi" href="https://omdalat.com">
-  <link rel="alternate" hreflang="en" href="https://omdalat.com/en">
-  <link rel="alternate" hreflang="x-default" href="https://omdalat.com">
+  <link rel="canonical" href="${canonical || 'https://omdalat.com'}">
+  ${noindex ? '<meta name="robots" content="noindex,nofollow">\n  ' : ''}<link rel="alternate" hreflang="vi" href="${canonical || 'https://omdalat.com'}">
+  <link rel="alternate" hreflang="en" href="${canonical ? canonical.replace(/\/en\/?$/, '') + '/en' : 'https://omdalat.com/en'}">
+  <link rel="alternate" hreflang="x-default" href="${canonical || 'https://omdalat.com'}">
   <link rel="icon" href="https://omdalat.com/favicon.ico">
   <style>
     :root {
@@ -255,7 +255,7 @@ export async function handleRegistrySite(request: Request, env: Env): Promise<Re
     return new Response(
       COMMON_HEAD(isEn ? 'Record Not Found — Registry' : 'Không Tìm Thấy Hồ Sơ — Registry',
         isEn ? 'This registry record does not exist or is not public.' : 'Hồ sơ này không tồn tại hoặc chưa công bố.',
-        'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg') +
+        'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg', url.origin + url.pathname) +
       `<body><header><div class="brand">Registry</div><div class="lang-switch"><a href="/" class="${isEn ? '' : 'active'}">VI</a><a href="/en" class="${isEn ? 'active' : ''}">EN</a></div></header>
        <div class="container"><div class="hero"><h1>${isEn ? 'Record Not Found' : 'Không Tìm Thấy Hồ Sơ'}</h1>
        <p>${isEn ? 'This registry record does not exist or is not yet published.' : 'Hồ sơ này không tồn tại hoặc chưa được công bố.'}</p>
@@ -313,7 +313,8 @@ export async function handleRegistrySite(request: Request, env: Env): Promise<Re
   const html = COMMON_HEAD(
     `${pkg.name_en || pkg.name_vi} — Registry`,
     isEn ? `Public provenance record for ${pkg.name_en || pkg.name_vi}` : `Hồ sơ nguồn gốc công khai cho ${pkg.name_vi}`,
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -381,7 +382,8 @@ async function renderRegistryHome(env: Env, isEn: boolean, url: URL): Promise<Re
   const html = COMMON_HEAD(
     isEn ? 'Om Dalat Registry — Brand Asset Provenance' : 'Om Dalat Registry — Nguồn Gốc Tài Sản Thương Hiệu',
     isEn ? 'Public provenance records for brand asset packages in the Om Dalat network.' : 'Hồ sơ nguồn gốc công khai cho các gói tài sản thương hiệu trong mạng lưới Om Dalat.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -540,7 +542,8 @@ async function renderMarketHome(env: Env, isEn: boolean, url: URL): Promise<Resp
   const html = COMMON_HEAD(
     isEn ? 'Om Dalat Market — Brand Asset Marketplace' : 'Om Dalat Market — Thị Trường Tài Sản Thương Hiệu',
     isEn ? 'Curated brand asset packages. Request access to view details.' : 'Gói tài sản thương hiệu được tuyển chọn. Yêu cầu truy cập để xem chi tiết.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -613,7 +616,8 @@ async function renderRequestAccess(env: Env, isEn: boolean, url: URL): Promise<R
   const html = COMMON_HEAD(
     isEn ? 'Request Access — Om Dalat Market' : 'Yêu Cầu Truy Cập — Om Dalat Market',
     isEn ? 'Submit a request to access brand asset package details.' : 'Gửi yêu cầu để truy cập chi tiết gói tài sản thương hiệu.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -695,7 +699,8 @@ export async function handleAuctionSite(request: Request, env: Env): Promise<Res
   const html = COMMON_HEAD(
     isEn ? 'Om Dalat Auction — Legal Readiness' : 'Om Dalat Auction — Sẵn Sàng Pháp Lý',
     isEn ? 'Auction capability is in legal-readiness mode. No live auctions yet.' : 'Khả năng đấu giá đang ở chế độ sẵn sàng pháp lý. Chưa có đấu giá trực tiếp.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -764,7 +769,8 @@ export async function handleBrandFactoryApply(request: Request, env: Env): Promi
   const html = COMMON_HEAD(
     isEn ? 'Submit Your Brand — Om Dalat Brand Factory' : 'Gửi Thương Hiệu Của Bạn — Om Dalat Brand Factory',
     isEn ? 'Submit your brand for the Om Dalat Brand Asset Network.' : 'Gửi thương hiệu của bạn cho Mạng Tài Sản Thương Hiệu Om Dalat.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -860,7 +866,7 @@ export async function handleMarketAssetDetail(request: Request, env: Env): Promi
     return new Response(
       COMMON_HEAD(isEn ? 'Listing Not Found — Market' : 'Không Tìm Thấy — Market',
         isEn ? 'This listing is not available.' : 'Listing này không khả dụng.',
-        'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg') +
+        'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg', url.origin + url.pathname) +
       `<body><header><div class="brand"><a href="${isEn ? '/en' : '/'}">Market</a></div></header>
        <div class="container"><div class="hero"><h1>${isEn ? 'Listing Not Found' : 'Không Tìm Thấy Listing'}</h1>
        <p><a href="${isEn ? '/en' : '/'}" style="color:var(--green)">${isEn ? '← Back to Market' : '← Về Market'}</a></p></div></div>` + FOOTER(isEn),
@@ -880,7 +886,8 @@ export async function handleMarketAssetDetail(request: Request, env: Env): Promi
   const html = COMMON_HEAD(
     `${isEn ? (listing.title_en || listing.title_vi) : listing.title_vi} — Market`,
     isEn ? (listing.description_en || listing.description_vi || '') : (listing.description_vi || listing.description_en || ''),
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -969,7 +976,8 @@ export async function handleBrandFactoryVerify(request: Request, env: Env): Prom
   const html = COMMON_HEAD(
     isEn ? 'Check Verification Status — Brand Factory' : 'Kiểm Tra Trạng Thái Xác Minh — Brand Factory',
     isEn ? 'Check the verification status of your brand asset package.' : 'Kiểm tra trạng thái xác minh gói tài sản thương hiệu.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -1054,7 +1062,8 @@ export async function handleBrandFactoryCases(request: Request, env: Env): Promi
   const html = COMMON_HEAD(
     isEn ? 'Verification Cases — Brand Factory' : 'Hồ Sơ Xác Minh — Brand Factory',
     isEn ? 'Overview of verification cases for published packages.' : 'Tổng quan hồ sơ xác minh cho các gói đã công bố.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1078,7 +1087,7 @@ export async function handleBrandFactoryCases(request: Request, env: Env): Promi
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1107,7 +1116,8 @@ export async function handleBrandFactoryDashboard(request: Request, env: Env): P
   const html = COMMON_HEAD(
     isEn ? 'Dashboard — Brand Factory' : 'Bảng Điều Khiển — Brand Factory',
     isEn ? 'Your brand asset packages and their status.' : 'Các gói tài sản thương hiệu và trạng thái.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1131,7 +1141,7 @@ export async function handleBrandFactoryDashboard(request: Request, env: Env): P
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1181,7 +1191,8 @@ export async function handleMarketAdmin(request: Request, env: Env): Promise<Res
   const html = COMMON_HEAD(
     isEn ? 'Admin — Market' : 'Quản Trị — Market',
     isEn ? 'Marketplace admin panel for listing approval and buyer qualification.' : 'Bảng quản trị thị trường để duyệt listing và qualifying người mua.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1232,7 +1243,7 @@ export async function handleMarketAdmin(request: Request, env: Env): Promise<Res
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1248,7 +1259,8 @@ export async function handleAuctionRules(request: Request, env: Env): Promise<Re
   const html = COMMON_HEAD(
     isEn ? 'Auction Rules — Legal Readiness' : 'Quy Tắc Đấu Giá — Sẵn Sàng Pháp Lý',
     isEn ? 'Auction rules and legal readiness framework.' : 'Quy tắc đấu giá và khung sẵn sàng pháp lý.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -1314,7 +1326,8 @@ export async function handleBrandFactoryEvidence(request: Request, env: Env): Pr
   const html = COMMON_HEAD(
     isEn ? 'Submit Evidence — Brand Factory' : 'Nộp Bằng Chứng — Brand Factory',
     isEn ? 'Submit rights evidence for your brand asset package components.' : 'Nộp bằng chứng quyền cho các thành phần gói tài sản thương hiệu.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1380,7 +1393,7 @@ export async function handleBrandFactoryEvidence(request: Request, env: Env): Pr
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1395,7 +1408,8 @@ export async function handleBrandFactoryIntake(request: Request, env: Env): Prom
   const html = COMMON_HEAD(
     isEn ? 'Brand Discovery Intake — Brand Factory' : 'Khám Phá Thương Hiệu — Brand Factory',
     isEn ? 'Quick intake form for brand discovery. No commitment.' : 'Form khám phá thương hiệu nhanh. Không cam kết.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1444,7 +1458,7 @@ export async function handleBrandFactoryIntake(request: Request, env: Env): Prom
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1459,7 +1473,8 @@ export async function handleMarketBuyerDashboard(request: Request, env: Env): Pr
   const html = COMMON_HEAD(
     isEn ? 'Buyer Dashboard — Market' : 'Bảng Điều Khiển Người Mua — Market',
     isEn ? 'Track your access requests and inquiries.' : 'Theo dõi yêu cầu truy cập và thắc mắc.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1498,7 +1513,7 @@ export async function handleMarketBuyerDashboard(request: Request, env: Env): Pr
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1537,7 +1552,8 @@ export async function handleRegistrySearch(request: Request, env: Env): Promise<
   const html = COMMON_HEAD(
     isEn ? `Search${q ? ': ' + q : ''} — Registry` : `Tìm kiếm${q ? ': ' + q : ''} — Registry`,
     isEn ? 'Search public provenance records.' : 'Tìm kiếm hồ sơ nguồn gốc công khai.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -1583,7 +1599,8 @@ export async function handleAuctionLive(request: Request, env: Env): Promise<Res
     const html = COMMON_HEAD(
       isEn ? 'Live Auction — Not Available' : 'Đấu Giá Trực Tiếp — Không Khả Dụng',
       isEn ? 'Live auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá trực tiếp bị khóa cho đến khi đối tác pháp lý phê duyệt.',
-      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
     ) + `
     <body>
       <header>
@@ -1634,7 +1651,8 @@ export async function handleAuctionLive(request: Request, env: Env): Promise<Res
   const html = COMMON_HEAD(
     isEn ? 'Live Auctions' : 'Đấu Giá Trực Tiếp',
     isEn ? 'View live and upcoming auctions.' : 'Xem đấu giá trực tiếp và sắp tới.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header>
@@ -1683,7 +1701,8 @@ export async function handleAuctionHistory(request: Request, env: Env): Promise<
   const html = COMMON_HEAD(
     isEn ? 'Auction History' : 'Lịch Sử Đấu Giá',
     isEn ? 'Past auctions and results.' : 'Đấu giá đã qua và kết quả.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1707,7 +1726,7 @@ export async function handleAuctionHistory(request: Request, env: Env): Promise<
 
   return new Response(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
@@ -1726,7 +1745,8 @@ export async function handleAuctionDetail(request: Request, env: Env): Promise<R
     const notFoundHtml = COMMON_HEAD(
       isEn ? 'Auction Not Found' : 'Không Tìm Thấy Đấu Giá',
       isEn ? 'This auction does not exist.' : 'Đấu giá này không tồn tại.',
-      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
     ) + `
     <body>
       <header>
@@ -1754,7 +1774,8 @@ export async function handleAuctionDetail(request: Request, env: Env): Promise<R
     const html = COMMON_HEAD(
       isEn ? 'Auction — Legal Readiness' : 'Đấu Giá — Sẵn Sàng Pháp Lý',
       isEn ? 'Auction functionality is gated behind legal partner signoff.' : 'Chức năng đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.',
-      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+      'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
     ) + `
     <body>
       <header>
@@ -1788,7 +1809,8 @@ export async function handleAuctionDetail(request: Request, env: Env): Promise<R
   const html = COMMON_HEAD(
     isEn ? 'Auction Detail' : 'Chi Tiết Đấu Giá',
     isEn ? 'Place your bid on this brand asset package.' : 'Đặt thầu cho gói tài sản thương hiệu.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname
   ) + `
   <body>
     <header><div class="brand"><a href="${isEn ? '/en' : '/'}">Auction</a></div></header>
@@ -1811,7 +1833,8 @@ export async function handleAuctionWinner(request: Request, env: Env): Promise<R
   const html = COMMON_HEAD(
     isEn ? 'Auction Winner — Legal Readiness' : 'Người Thắng Đấu Giá — Sẵn Sàng Pháp Lý',
     isEn ? 'Winner declaration is gated behind legal partner signoff.' : 'Công bố người thắng bị khóa cho đến khi đối tác pháp lý phê duyệt.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1838,7 +1861,7 @@ export async function handleAuctionWinner(request: Request, env: Env): Promise<R
       </div>
     </div>
   ` + FOOTER(isEn);
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' } });
 }
 
 /**
@@ -1853,7 +1876,8 @@ export async function handleAuctionPost(request: Request, env: Env): Promise<Res
   const html = COMMON_HEAD(
     isEn ? 'Post-Auction — Legal Readiness' : 'Sau Đấu Giá — Sẵn Sàng Pháp Lý',
     isEn ? 'Post-auction transfer workflow is gated behind legal partner signoff.' : 'Workflow chuyển nhượng sau đấu giá bị khóa cho đến khi đối tác pháp lý phê duyệt.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1880,7 +1904,7 @@ export async function handleAuctionPost(request: Request, env: Env): Promise<Res
       </div>
     </div>
   ` + FOOTER(isEn);
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' } });
 }
 
 /**
@@ -1913,7 +1937,8 @@ export async function handleRegistryAdmin(request: Request, env: Env): Promise<R
   const html = COMMON_HEAD(
     isEn ? 'Admin — Registry' : 'Quản Trị — Registry',
     isEn ? 'Review verification cases and manage registry events.' : 'Xem xét hồ sơ xác minh và quản lý sự kiện registry.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -1946,7 +1971,7 @@ export async function handleRegistryAdmin(request: Request, env: Env): Promise<R
       });
     </script>
   ` + FOOTER(isEn);
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' } });
 }
 
 /**
@@ -1995,7 +2020,8 @@ export async function handleMarketDataRooms(request: Request, env: Env): Promise
   const html = COMMON_HEAD(
     isEn ? 'Data Rooms — Market Admin' : 'Data Rooms — Quản Trị Market',
     isEn ? 'Manage data rooms and access requests.' : 'Quản lý data room và yêu cầu truy cập.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -2033,7 +2059,7 @@ export async function handleMarketDataRooms(request: Request, env: Env): Promise
       });
     </script>
   ` + FOOTER(isEn);
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' } });
 }
 
 /**
@@ -2097,7 +2123,8 @@ export async function handleMarketTransfers(request: Request, env: Env): Promise
   const html = COMMON_HEAD(
     isEn ? 'Transfers — Market Admin' : 'Chuyển Nhượng — Quản Trị Market',
     isEn ? 'Manage transfer checklists for brand asset packages.' : 'Quản lý checklist chuyển nhượng cho gói tài sản thương hiệu.',
-    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg'
+    'https://omdalat.com/images/ready/og/dalat-city-panorama-2020.jpg',
+    url.origin + url.pathname, true
   ) + `
   <body>
     <header>
@@ -2118,5 +2145,5 @@ export async function handleMarketTransfers(request: Request, env: Env): Promise
       <div class="grid">${rows || `<p style="color:var(--muted)">${isEn ? 'No active transfers.' : 'Không có chuyển nhượng đang hoạt động.'}</p>`}</div>
     </div>
   ` + FOOTER(isEn);
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store, no-cache, must-revalidate', 'X-Robots-Tag': 'noindex, nofollow' } });
 }

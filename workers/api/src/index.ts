@@ -2,7 +2,7 @@ import { Router } from 'itty-router';
 import { handlePaymentCheckoutSession } from './routes/payment-checkout-session';
 import { handlePaymentWebhook } from './routes/payment-webhook';
 import { handlePaymentProviders } from './routes/payment-providers';
-import { handleHealthCheck } from './routes/health';
+import { handleHealthCheck, handleVersionCheck } from './routes/health';
 import { handleBrandIntake } from './routes/brand-intake';
 import { handleAgentRuns } from './routes/agent-runs';
 import { handleBrandPreview } from './routes/brand-preview';
@@ -75,6 +75,8 @@ router.options('*', handleCorsPreflightRoute);
 
 // Health check
 router.get('/health', handleHealthCheck);
+router.get('/version', handleVersionCheck);
+router.get('/__version', handleVersionCheck);
 
 // Payment routes
 router.post('/api/pay/checkout-session', handlePaymentCheckoutSession);

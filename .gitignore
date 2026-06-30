@@ -13,3 +13,7 @@ apps/web/test-results
 **/tsconfig.tsbuildinfo
 
 .pnpm-store
+
+# macOS Finder duplicate directories ("en 2", "vi 2") — never commit these
+apps/web/.static-pages/* 2/
+apps/web/.static-pages/*/ 2/
