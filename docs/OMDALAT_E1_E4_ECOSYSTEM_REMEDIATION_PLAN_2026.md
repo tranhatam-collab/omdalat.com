@@ -51,7 +51,7 @@
 | E3 — lily.omdalat.com | Moved route from `omdalat-brand-renderer` to `omdalat-brand-renderer-production` | Live | curl https://lily.omdalat.com/ returns 200 |
 | E3 — vuonhong3.omdalat.com | Created AAAA `100::` DNS record + route on production Worker | Live | curl https://vuonhong3.omdalat.com/ returns 200 |
 | E4 — www.omdalat.com | Verified CNAME points to `omdalat-web-ezk.pages.dev` (same as apex) | Live | curl https://www.omdalat.com returns 200 |
-| E1 — app.omdalat.com | Decision pending founder approval; registry marked PENDING_MIGRATION | Pending | See Option A below |
+| E1 — app.omdalat.com | New Pages project `omdalat-app-v2` created in main account; DNS updated; old project deleted | Live | curl https://app.omdalat.com returns 200 after redirect; CI token rotation pending |
 
 ### Git commit
 - `0050664` feat(auth,content,renderer): AUTH_BASELINE, overclaim wiring, renderer parity, E1-E4 remediation
@@ -83,7 +83,7 @@
 - Higher operational complexity; not recommended long-term.
 
 ### Decision
-**Option A pending founder approval.** This plan documents Option A as the target.
+**Option A executed.** New `omdalat-app-v2` Pages project created in `Tranhatam@gmail.com` account, DNS CNAMEs updated, old `omdalat-app` project in `Tranhatam66@gmail.com` deleted. Initial deployment completed manually via local wrangler. CI/CD authentication is being rotated — see Security Note below.
 
 ---
 
@@ -182,3 +182,17 @@ done
 
 *Generated with [Devin](https://devin.ai)*  
 *Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>*
+
+
+### Security Note — CI token rotation required
+During this migration a Cloudflare API token was created and set in GitHub Secrets, but its value was accidentally exposed in the terminal transcript. Please **rotate the token immediately**:
+1. Go to https://dash.cloudflare.com/profile/api-tokens and revoke any token named `omdalat-ci-token-*` created today.
+2. Create a new token with the following permission groups for account `f3f9e76222dcb488d5e303e29e8ba192` and zone `omdalat.com`:
+   - Pages Read, Pages Write, Pages Metadata Read
+   - Workers Scripts Read/Write, Workers Routes Read/Write
+   - D1 Read/Write, D1 Metadata Read
+   - Workers R2 Storage Read/Write, Workers R2 Storage Metadata Read
+   - Zone Read/Write, DNS Read/Write
+3. Update the GitHub repository secret `CLOUDFLARE_API_TOKEN` with the new token value.
+4. Verify by re-running the `Deploy App Cloudflare Pages` workflow.
+
