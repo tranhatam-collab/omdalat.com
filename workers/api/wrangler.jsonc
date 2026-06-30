@@ -12,8 +12,8 @@
   "vars": {
     "APP_NAME": "omdalat-platforms",
     "APP_ENV": "production",
-        "BUILD_COMMIT_SHA": "bf2d2d9e558c2ea155d42b5b1711e842f822526c",
-        "BUILD_TIMESTAMP": "2026-06-30T10:18:33+07:00",
+        "BUILD_COMMIT_SHA": "4b823d58cf47ec897d777fb7ba2d8bd73f2370b0",
+        "BUILD_TIMESTAMP": "2026-06-30T10:43:58+07:00",
     "SESSION_COOKIE": "omd_session",
     "COOKIE_DOMAIN": ".omdalat.com",
     "GATEWAY_PRICE_VND": "100000",
@@ -76,8 +76,8 @@
       "vars": {
         "APP_NAME": "omdalat-platforms",
         "APP_ENV": "production",
-        "BUILD_COMMIT_SHA": "bf2d2d9e558c2ea155d42b5b1711e842f822526c",
-        "BUILD_TIMESTAMP": "2026-06-30T10:18:33+07:00",
+        "BUILD_COMMIT_SHA": "4b823d58cf47ec897d777fb7ba2d8bd73f2370b0",
+        "BUILD_TIMESTAMP": "2026-06-30T10:43:58+07:00",
         "SESSION_COOKIE": "omd_session",
         "COOKIE_DOMAIN": ".omdalat.com",
         "GATEWAY_PRICE_VND": "100000",
@@ -124,8 +124,8 @@
       "vars": {
         "APP_NAME": "omdalat-platforms",
         "APP_ENV": "sandbox",
-        "BUILD_COMMIT_SHA": "bf2d2d9e558c2ea155d42b5b1711e842f822526c",
-        "BUILD_TIMESTAMP": "2026-06-30T10:18:33+07:00",
+        "BUILD_COMMIT_SHA": "4b823d58cf47ec897d777fb7ba2d8bd73f2370b0",
+        "BUILD_TIMESTAMP": "2026-06-30T10:43:58+07:00",
         "SESSION_COOKIE": "omd_session",
         "COOKIE_DOMAIN": ".omdalat.com",
         "GATEWAY_PRICE_VND": "100000",
