@@ -20,14 +20,6 @@
     {
       "pattern": "brand.omdalat.com",
       "custom_domain": true
-    },
-    {
-      "pattern": "lily.omdalat.com/*",
-      "zone_name": "omdalat.com"
-    },
-    {
-      "pattern": "vuonhong3.omdalat.com/*",
-      "zone_name": "omdalat.com"
     }
   ],
   "d1_databases": [
@@ -50,6 +42,14 @@
         {
           "pattern": "brand.omdalat.com",
           "custom_domain": true
+        },
+        {
+          "pattern": "lily.omdalat.com/*",
+          "zone_name": "omdalat.com"
+        },
+        {
+          "pattern": "vuonhong3.omdalat.com/*",
+          "zone_name": "omdalat.com"
         },
         {
           "pattern": "registry.omdalat.com/*",
