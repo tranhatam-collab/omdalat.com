@@ -1,0 +1,12 @@
+# Deploy
+node_modules/
+.wrangler/
+.git
+.gitignore
+.DS_Store
+*.log
+reports/
+docs/
+scripts/
+workers/
+apps/
