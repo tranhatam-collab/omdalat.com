@@ -190,25 +190,25 @@ INSERT INTO business_lines (id, brand_id, line_key, label_vi, label_en, status, 
 VALUES
   ('bl_lily_residency', 'brnd_lily', 'residency',
    'Lily Residency', 'Lily Residency',
-   'live', 'v2_living_working_garden',
+   'active', 'phase_1_public_after_compliance',
    '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z'),
 
   ('bl_lily_workspace', 'brnd_lily', 'workspace',
    'Lily Workspace', 'Lily Workspace',
-   'live', 'v2_living_working_garden',
+   'active', 'phase_1_public_after_compliance',
    '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z'),
 
   ('bl_lily_learning', 'brnd_lily', 'learning',
    'Lily Learning', 'Lily Learning',
-   'live', 'v2_living_working_garden',
+   'active', 'phase_1_public_after_compliance',
    '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z'),
 
   ('bl_lily_work_projects', 'brnd_lily', 'work_projects',
    'Lily Work & Projects', 'Lily Work & Projects',
-   'live', 'v2_living_working_garden',
+   'active', 'phase_1_public_after_compliance',
    '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z'),
 
   ('bl_lily_international', 'brnd_lily', 'international',
    'Lily International Support', 'Lily International Support',
-   'live', 'v2_living_working_garden',
+   'active', 'phase_1_public_after_compliance',
    '2026-06-17T00:00:00Z', '2026-06-30T00:00:00Z');
