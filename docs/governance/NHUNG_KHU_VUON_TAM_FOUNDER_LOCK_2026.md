@@ -99,7 +99,7 @@ Kết luận đó không còn đúng về chiến lược Founder.
 | Trường | Giá trị |
 |---------|---------|
 | Tên tiếng Việt | **Những Khu Vườn Tâm** |
-| Tên tiếng Anh | **Tam Farm** |
+| Tên tiếng Anh | **Tam Farms** |
 | Tên mô tả | Living, Learning and Working Gardens |
 | Domain | tamfarms.omdalat.com |
 | Product ID | OMDALAT_TAMFARMS |
@@ -112,7 +112,7 @@ Kết luận đó không còn đúng về chiến lược Founder.
 
 ### Tên KHÔNG được dùng lẫn lộn
 
-- Tam Farm (số ít) — chỉ dùng cho tên tiếng Anh
+- Tam Farm (số ít) — KHÔNG DÙNG (per ADR-003, phải dùng "Tam Farms" số nhiều)
 - Tâm Farm — không dùng
 - Tamfarms — không dùng
 - Tâm farm — không dùng
@@ -125,7 +125,7 @@ Kết luận đó không còn đúng về chiến lược Founder.
 
 - Logo và thương hiệu chính dùng **Những Khu Vườn Tâm**
 - URL và nội dung kỹ thuật dùng **tamfarms**
-- Bản tiếng Anh dùng **Tam Farm**
+- Bản tiếng Anh dùng **Tam Farms**
 
 ---
 
@@ -133,7 +133,7 @@ Kết luận đó không còn đúng về chiến lược Founder.
 
 Những Khu Vườn Tâm là mạng lưới các khu vườn có chỗ ở, bếp, không gian làm việc, khu học tập, cây trái, dược liệu, thực phẩm và các hoạt động thực tế để con người sống, làm, học, trải nghiệm, phát triển project và nhìn rõ hướng đi của mình.
 
-### Một nơi có thể trở thành Tam Farm khi
+### Một nơi có thể trở thành Tam Farms location khi
 
 - Trần Hà Tâm hoặc operator được duyệt có thể vận hành tại đó
 - Có quyền sử dụng địa điểm hợp pháp
@@ -187,21 +187,21 @@ Những Khu Vườn Tâm là mạng lưới các khu vườn có chỗ ở, bế
 
 ## 6. Mối quan hệ với toàn hệ
 
-| Hệ | Vai trò | Quan hệ với Tam Farm |
-|----|---------|---------------------|
-| omdalat.com | Trust root, narrative | Giới thiệu Tam Farm trong hệ sinh thái |
-| tamfarms.omdalat.com | Brand site | Site chính thức của Tam Farm |
+| Hệ | Vai trò | Quan hệ với Tam Farms |
+|----|---------|----------------------|
+| omdalat.com | Trust root, narrative | Giới thiệu Tam Farms trong hệ sinh thái |
+| tamfarms.omdalat.com | Brand site | Site chính thức của Tam Farms |
 | lily.omdalat.com | Residency brand | Có thể là một địa điểm/operator thành viên |
-| dreams.omdalat.com | Dream intake | Không sở hữu vận hành Tam Farm |
-| cham.omdalat.com | Experiment | Không sở hữu vận hành Tam Farm |
-| cuocsong.muonnoi.org | Phương pháp/định hướng | Cung cấp tư duy, Tam Farm cung cấp môi trường |
+| dreams.omdalat.com | Dream intake | Không sở hữu vận hành Tam Farms |
+| cham.omdalat.com | Experiment | Không sở hữu vận hành Tam Farms |
+| cuocsong.muonnoi.org | Phương pháp/định hướng | Cung cấp tư duy, Tam Farms cung cấp môi trường |
 | app.omdalat.com | Account/consent | Quản lý account, consent, task |
 
-### Quan hệ Cuộc Sống Muôn Nơi ↔ Tam Farm
+### Quan hệ Cuộc Sống Muôn Nơi ↔ Tam Farms
 
 - Cuộc Sống Muôn Nơi cung cấp tư duy, lộ trình và phương pháp
-- Tam Farm cung cấp môi trường để thử nghiệm phương pháp trong đời sống thật
-- Không tự động tuyên bố mọi chương trình CSMN đều diễn ra tại Tam Farm
+- Tam Farms cung cấp môi trường để thử nghiệm phương pháp trong đời sống thật
+- Không tự động tuyên bố mọi chương trình CSMN đều diễn ra tại Tam Farms
 
 ---
 
