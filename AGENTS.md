@@ -1,5 +1,28 @@
 # Om Dalat Project Rules for AI Agents
 
+## Legal Entity (ADR-003)
+
+**CÔNG TY TNHH SX-TM-DV THÁI LÂM** is the legal entity for the entire Om Dalat ecosystem.
+
+- MST: 5801443073
+- Address: 42 Cao Bá Quát, Phường Lang Biang, Đà Lạt, Lâm Đồng
+- Representative: TRẦN NGUYỄN HẠ THI
+- Type: Công ty TNHH 2 thành viên trở lên
+- Active since: 2020-09-17
+- Status: Đang hoạt động
+
+This entity covers: Tam Farms (chain model), Lily (reference location), and all future brands/locations.
+
+**Rule:** All legal references in charters, terms, privacy policies, and contracts MUST reference this entity. Do NOT use "Tran Ha Tam sole proprietorship" — that was the pre-2026-07-01 placeholder.
+
+## Architecture (ADR-003)
+
+- **Tam Farms** = Chain Model (brand_type: `chain_model`). NOT a location. Audited under TAMFARMS_MODEL_STANDARD.
+- **Lily** = Reference Location 01 (brand_type: `reference_location`). Audited under TAMFARMS_LOCATION_STANDARD.
+- **English name:** "Tam Farms" (plural), NOT "Tam Farm" (singular).
+- Compliance rules (lodging, PCCC, business_registration) apply to LOCATIONS, not to the chain model.
+- 5-tier standard system: see `docs/governance/standards/`
+
 ## Definition of "CLOSED" / "DONE" / "VERIFIED"
 
 An issue, gate, or blocker is **CLOSED** only when ALL four conditions are met:
