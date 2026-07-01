@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" role="img" aria-label="Tam Farms horizontal logo">
+  <title>Tam Farms — horizontal</title>
+  <desc>Horizontal lockup: Tam Farms mark on the left with Vietnamese and English wordmarks to the right.</desc>
+
+  <defs>
+    <linearGradient id="tf-h-green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a5c43"/>
+      <stop offset="100%" stop-color="#315f43"/>
+    </linearGradient>
+    <linearGradient id="tf-h-sage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8d5ba"/>
+      <stop offset="100%" stop-color="#8cc4a3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: scaled to 48x48 at x=6, y=6 -->
+  <g transform="translate(6 6) scale(0.48)">
+    <circle cx="50" cy="50" r="47" fill="url(#tf-h-green)"/>
+    <circle cx="50" cy="50" r="37" fill="#f6f2e8"/>
+    <g stroke="#1a5c43" stroke-width="1.6" stroke-linecap="round" opacity="0.55" fill="none">
+      <line x1="50" y1="50" x2="50" y2="27"/>
+      <line x1="50" y1="50" x2="70" y2="38.5"/>
+      <line x1="50" y1="50" x2="70" y2="61.5"/>
+      <line x1="50" y1="50" x2="50" y2="73"/>
+      <line x1="50" y1="50" x2="30" y2="61.5"/>
+      <line x1="50" y1="50" x2="30" y2="38.5"/>
+    </g>
+    <g fill="#1a5c43">
+      <circle cx="50" cy="27" r="2"/>
+      <circle cx="70" cy="38.5" r="2"/>
+      <circle cx="70" cy="61.5" r="2"/>
+      <circle cx="50" cy="73" r="2"/>
+      <circle cx="30" cy="61.5" r="2"/>
+      <circle cx="30" cy="38.5" r="2"/>
+    </g>
+    <path d="M50 30 C 58 35, 61 47, 58 55 C 55 63, 47 64, 42 59 C 37.5 54.5, 39 45, 44.5 39 C 47 36.5, 49 33, 50 30 Z" fill="url(#tf-h-sage)" stroke="#1a5c43" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M50 31 L 50 61" stroke="#1a5c43" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#1a5c43">
+    <text x="64" y="28" font-size="17" font-weight="700" letter-spacing="0.5">Tam Farms</text>
+    <text x="64" y="46" font-size="10" font-weight="400" fill="#6b6b6b" letter-spacing="1.2">NHỮNG KHU VƯỜN TÂM</text>
+  </g>
+</svg>

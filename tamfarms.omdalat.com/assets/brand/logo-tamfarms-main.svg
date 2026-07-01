@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Tam Farms logo - Những Khu Vườn Tâm">
+  <title>Tam Farms — Những Khu Vườn Tâm</title>
+  <desc>Circular emblem representing a network of gardens. Central leaf motif surrounded by connected nodes symbolizing the chain of reference locations.</desc>
+
+  <defs>
+    <linearGradient id="tf-green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a5c43"/>
+      <stop offset="100%" stop-color="#315f43"/>
+    </linearGradient>
+    <linearGradient id="tf-sage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8d5ba"/>
+      <stop offset="100%" stop-color="#8cc4a3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="188" fill="url(#tf-green)"/>
+  <circle cx="200" cy="200" r="188" fill="none" stroke="#f6f2e8" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- Inner cream disc -->
+  <circle cx="200" cy="200" r="150" fill="#f6f2e8"/>
+
+  <!-- Network nodes: 6 connected points around center (chain concept) -->
+  <g stroke="#1a5c43" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.55">
+    <line x1="200" y1="200" x2="200" y2="110"/>
+    <line x1="200" y1="200" x2="278" y2="155"/>
+    <line x1="200" y1="200" x2="278" y2="245"/>
+    <line x1="200" y1="200" x2="200" y2="290"/>
+    <line x1="200" y1="200" x2="122" y2="245"/>
+    <line x1="200" y1="200" x2="122" y2="155"/>
+  </g>
+
+  <!-- Node dots -->
+  <g fill="#1a5c43">
+    <circle cx="200" cy="110" r="7"/>
+    <circle cx="278" cy="155" r="7"/>
+    <circle cx="278" cy="245" r="7"/>
+    <circle cx="200" cy="290" r="7"/>
+    <circle cx="122" cy="245" r="7"/>
+    <circle cx="122" cy="155" r="7"/>
+  </g>
+
+  <!-- Central leaf motif (stylized T + leaf) -->
+  <g>
+    <!-- Leaf body -->
+    <path d="M200 130 C 232 150, 244 188, 232 218 C 220 248, 188 252, 168 232 C 150 214, 156 178, 178 156 C 188 146, 196 138, 200 130 Z" fill="url(#tf-sage)" stroke="#1a5c43" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Leaf vein (also forms the stem of T) -->
+    <path d="M200 132 L 200 244" stroke="#1a5c43" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- T crossbar suggestion via side veins -->
+    <path d="M200 176 C 212 180, 222 188, 228 200" stroke="#1a5c43" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M200 176 C 188 180, 178 188, 172 200" stroke="#1a5c43" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Vietnamese name (top arc text) -->
+  <defs>
+    <path id="tf-arc-top" d="M 70 200 A 130 130 0 0 1 330 200" fill="none"/>
+    <path id="tf-arc-bottom" d="M 330 200 A 130 130 0 0 1 70 200" fill="none"/>
+  </defs>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="600" fill="#f6f2e8" letter-spacing="3">
+    <textPath href="#tf-arc-top" startOffset="50%" text-anchor="middle">NHỮNG KHU VƯỜN TÂM</textPath>
+  </text>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="500" fill="#f6f2e8" letter-spacing="6">
+    <textPath href="#tf-arc-bottom" startOffset="50%" text-anchor="middle">TAM FARMS</textPath>
+  </text>
+
+  <!-- Small decorative dots flanking bottom text -->
+  <circle cx="92" cy="200" r="2.5" fill="#a8d5ba"/>
+  <circle cx="308" cy="200" r="2.5" fill="#a8d5ba"/>
+</svg>

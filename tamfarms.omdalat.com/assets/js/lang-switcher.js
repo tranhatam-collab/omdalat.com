@@ -1,4 +1,4 @@
-// Tam Farm — Language Switcher + Facebook Messenger
+// Tam Farms — Language Switcher + Facebook Messenger
 // Auto-detects current language and computes alternate URL
 (function() {
   'use strict';
