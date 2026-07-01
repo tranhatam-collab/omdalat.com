@@ -1,0 +1,11 @@
+{
+  "app": "tamfarms-static-pages",
+  "environment": "production",
+  "renderer": "static-pages (migration source per ADR-001)",
+  "target_renderer": "brand-renderer Worker (Phase 1)",
+  "d1_brand_id": "brnd_tamfarms",
+  "publication_status": "draft",
+  "operational_status": "not_open",
+  "build_date": "2026-07-01",
+  "note": "Static Pages serve content while brand-renderer migration is pending. D1 record exists for administrative state (compliance, consent, content_blocks). DNS will switch to brand-renderer when generic renderer is ready."
+}

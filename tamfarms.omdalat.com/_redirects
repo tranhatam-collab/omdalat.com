@@ -1,0 +1,9 @@
+# Cloudflare Pages _redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Root redirect to /vi/ (language detection in index.html)
+/ /vi/ 302
+
+# 404 fallback — Cloudflare Pages serves 404.html with 404 status
+# when a file is not found AND 404.html exists in the output directory.
+# No _redirects rule needed for this — Pages handles it automatically.

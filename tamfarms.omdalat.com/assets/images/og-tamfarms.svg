@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f3d2e"/>
+      <stop offset="100%" style="stop-color:#1a5c43"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="280" font-family="Georgia, serif" font-size="56" fill="white" text-anchor="middle" font-weight="bold">Những Khu Vườn Tâm</text>
+  <text x="600" y="340" font-family="Georgia, serif" font-size="36" fill="#a8d5ba" text-anchor="middle">Tam Farm</text>
+  <text x="600" y="420" font-family="Helvetica, sans-serif" font-size="24" fill="white" text-anchor="middle" opacity="0.9">Sống thật. Làm thật. Lớn lên từ trải nghiệm.</text>
+  <text x="600" y="480" font-family="Helvetica, sans-serif" font-size="20" fill="white" text-anchor="middle" opacity="0.7">Live fully. Work with purpose. Grow through experience.</text>
+  <text x="600" y="560" font-family="Helvetica, sans-serif" font-size="18" fill="white" text-anchor="middle" opacity="0.5">tamfarms.omdalat.com</text>
+</svg>
