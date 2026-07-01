@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Một chương trình Tam Farms được thiết kế và kiểm định thế nào? | Những Khu Vườn Tâm</title>
+<meta name="description" content="Quy trình thiết kế và kiểm định chương trình Tam Farms: mục tiêu, nhóm mục tiêu, điều kiện, chương trình, người đồng hành, kết quả, bằng chứng, an toàn, giá, hoàn tiền, QA.">
+<meta name="keywords" content="thiết kế chương trình, kiểm định chương trình, Tam Farms, tiêu chuẩn chương trình, TAMFARMS_PROGRAM_STANDARD, QA, hoàn tiền, Những Khu Vườn Tâm">
+<meta name="author" content="Trần Hà Tâm">
+<link rel="canonical" href="https://tamfarms.omdalat.com/vi/bai-viet/mot-chuong-trinh-tam-farms-duoc-thiet-ke-va-kiem-dinh-the-nao/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Một chương trình Tam Farms được thiết kế và kiểm định thế nào? | Những Khu Vườn Tâm">
+<meta property="og:description" content="Quy trình thiết kế và kiểm định chương trình Tam Farms: mục tiêu, nhóm mục tiêu, điều kiện, chương trình, người đồng hành, kết quả, bằng chứng, an toàn, giá, hoàn tiền, QA.">
+<meta property="og:url" content="https://tamfarms.omdalat.com/vi/bai-viet/mot-chuong-trinh-tam-farms-duoc-thiet-ke-va-kiem-dinh-the-nao/">
+<meta property="og:site_name" content="Những Khu Vườn Tâm">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="vi" href="https://tamfarms.omdalat.com/vi/bai-viet/mot-chuong-trinh-tam-farms-duoc-thiet-ke-va-kiem-dinh-the-nao/">
+<link rel="alternate" hreflang="en" href="https://tamfarms.omdalat.com/en/articles/how-a-tam-farms-program-is-designed-and-certified/">
+<link rel="alternate" hreflang="x-default" href="https://tamfarms.omdalat.com/vi/bai-viet/mot-chuong-trinh-tam-farms-duoc-thiet-ke-va-kiem-dinh-the-nao/">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Một chương trình Tam Farms được thiết kế và kiểm định thế nào?",
+  "description": "Quy trình thiết kế và kiểm định chương trình Tam Farms: mục tiêu, nhóm mục tiêu, điều kiện, chương trình, người đồng hành, kết quả, bằng chứng, an toàn, giá, hoàn tiền, QA.",
+  "inLanguage": "vi-VN",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "author": {"@type": "Person", "name": "Trần Hà Tâm"},
+  "publisher": {"@type": "Organization", "name": "Những Khu Vườn Tâm", "alternateName": "Tam Farms"},
+  "image": "https://tamfarms.omdalat.com/assets/images/og-tamfarms.jpg",
+  "mainEntityOfPage": "https://tamfarms.omdalat.com/vi/bai-viet/mot-chuong-trinh-tam-farms-duoc-thiet-ke-va-kiem-dinh-the-nao/",
+  "articleSection": "Tiêu chuẩn",
+  "keywords": ["thiết kế chương trình", "kiểm định chương trình", "Tam Farms", "TAMFARMS_PROGRAM_STANDARD", "QA", "hoàn tiền"]
+}
+</script>
+  <meta property="og:image" content="https://tamfarms.omdalat.com/assets/images/og-tamfarms.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Những Khu Vườn Tâm — Tam Farms">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Một chương trình Tam Farms được thiết kế và kiểm định thế nào? | Những Khu Vườn Tâm">
+  <meta name="twitter:description" content="Quy trình thiết kế và kiểm định chương trình Tam Farms: mục tiêu, nhóm mục tiêu, điều kiện, chương trình, người đồng hành, kết quả, bằng chứng, an toàn, giá, hoàn tiền, QA.">
+  <meta name="twitter:image" content="https://tamfarms.omdalat.com/assets/images/og-tamfarms.jpg">
+</head>
+<body class="no-social">
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/vi/">
+      <img src="/assets/brand/logo-tamfarms-mark.svg" alt="Tam Farms" class="brand-mark" width="44" height="44">
+      <span><strong>Những Khu Vườn Tâm</strong><small>Tam Farms</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="Điều hướng chính" id="main-nav">
+      <a href="/vi/">Trang chủ</a>
+      <a href="/vi/tam-farms-la-gi/">Giới thiệu</a>
+      <a href="/vi/song-thu-va-lam-viec/">Mô hình</a>
+      <a href="/vi/dinh-huong-cong-viec/">Chương trình</a>
+      <a href="/vi/bai-viet/">Bài viết</a>
+      <a href="/vi/dia-diem/">Địa điểm</a>
+      <a href="/vi/danh-cho-chuyen-gia/">Chuyên gia</a>
+      <a href="/vi/danh-cho-doanh-nghiep/">Doanh nghiệp</a>
+      <a href="/vi/dang-ky/">Đăng ký</a>
+      <a href="/vi/lien-he/">Liên hệ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+<article class="article">
+  <div class="article-header">
+    <p class="eyebrow">Những Khu Vườn Tâm · Bài 16</p>
+    <h1>Một chương trình Tam Farms được thiết kế và kiểm định thế nào?</h1>
+    <p class="lead">Mỗi chương trình trong Tam Farms đi qua một quy trình thiết kế và kiểm định có cấu trúc — không phải ý tưởng tự phát.</p>
+  </div>
+
+  <p>Một chương trình Tam Farms không được mở ra chỉ vì có nhu cầu. Nó phải đi qua một quy trình thiết kế và kiểm định có cấu trúc, đảm bảo mục tiêu rõ ràng, an toàn được đánh giá, và kết quả có thể kiểm chứng. Bài viết này mô tả quy trình đó.</p>
+
+  <h2>1. Mục tiêu</h2>
+  <p>Mỗi chương trình bắt đầu bằng một mục tiêu cụ thể: người tham gia sẽ đạt được gì sau khi hoàn thành? Mục tiêu phải đo lường được hoặc quan sát được — không phải khẩu hiệu chung chung.</p>
+
+  <h2>2. Nhóm mục tiêu</h2>
+  <p>Chương trình phải xác định rõ nhóm mục tiêu: độ tuổi, giai đoạn cuộc đời, điều kiện cá nhân. Không phải ai cũng phù hợp với mọi chương trình — và điều đó được nói rõ ngay từ đầu.</p>
+
+  <h2>3. Điều kiện tham gia</h2>
+  <p>Chương trình phải liệt kê điều kiện tham gia: kỹ năng cần có, thiết bị cần mang, tình trạng sức khỏe tương thích. Người không đáp ứng điều kiện sẽ được sàng lọc trước khi xác nhận.</p>
+
+  <h2>4. Chương trình và bản đồ trải nghiệm</h2>
+  <p>Chương trình phải có bản đồ trải nghiệm chi tiết: hoạt động theo tuần, theo ngày, milestone, thời gian tự làm việc và thời gian đồng hành. Bản đồ được công bố cho người tham gia trước khi bắt đầu.</p>
+
+  <h2>5. Người đồng hành</h2>
+  <p>Mỗi chương trình phải chỉ định người đồng hành (facilitator) — người có chuyên môn phù hợp, được công nhận theo tiêu chuẩn chuyên gia. Người đồng hành chịu trách nhiệm điều phối và đánh giá.</p>
+
+  <h2>6. Kết quả đầu ra</h2>
+  <p>Chương trình phải định nghĩa kết quả đầu ra cụ thể: sản phẩm, báo cáo, portfolio, kế hoạch, hoặc nhật ký. Kết quả phải có thể lưu trữ và trình bày.</p>
+
+  <h2>7. Bằng chứng</h2>
+  <p>Mọi kết quả phải có bằng chứng: file, ảnh, bản thảo, ghi chép. Bằng chứng được lưu theo chính sách quyền riêng tư và có thể được yêu cầu trình lại trong kiểm định.</p>
+
+  <h2>8. Phản hồi</h2>
+  <p>Sau mỗi chương trình, người tham gia cung cấp phản hồi có cấu trúc. Phản hồi được sử dụng để cải tiến chương trình trong phiên bản tiếp theo.</p>
+
+  <h2>9. An toàn</h2>
+  <p>Mỗi chương trình phải có đánh giá an toàn: rủi ro thể chất, tâm lý, môi trường. Nếu chương trình có hoạt động ngoài trời hoặc dùng công cụ, phải có quy trình hướng dẫn và ứng phó.</p>
+
+  <h2>10. Đồng thuận</h2>
+  <p>Người tham gia phải ký đồng thuận trước khi bắt đầu — xác nhận đã hiểu mục tiêu, điều kiện, rủi ro và giới hạn trách nhiệm.</p>
+
+  <h2>11. Giá và hoàn tiền</h2>
+  <p>Giá chương trình phải công bố rõ ràng. Chính sách hoàn tiền phải bằng văn bản: hoàn bao nhiêu, trong thời gian nào, điều kiện gì. Không có điều khoản ẩn.</p>
+
+  <h2>12. Đảm bảo chất lượng (QA)</h2>
+  <p>Chương trình được đánh giá QA định kỳ: kết quả người tham gia, phản hồi, tỷ lệ hoàn thành, sự phù hợp với mục tiêu ban đầu. Nếu QA không đạt, chương trình bị tạm ngưng để sửa.</p>
+
+  <h2>13. Lịch sử phiên bản</h2>
+  <p>Mỗi chương trình có lịch sử phiên bản: thay đổi gì, khi nào, tại sao. Lịch sử được lưu trữ để truy xuất khi cần.</p>
+
+  <blockquote>Chương trình tốt không phải là chương trình hoàn hảo — mà là chương trình có quy trình kiểm định rõ ràng và sẵn sàng sửa khi cần.</blockquote>
+
+  <div class="cta">
+    <h2 style="margin-top:0;color:#fff">Khám phá các chương trình</h2>
+    <p>Xem các chương trình đang mở và điều kiện tham gia.</p>
+    <a class="btn btn-primary" href="/vi/dang-ky/" style="background:#fff;color:var(--green)">Đăng ký trải nghiệm</a>
+  </div>
+
+  <p class="small">Nội dung mang tính định hướng và giới thiệu mô hình. Không phải tư vấn y tế, tâm lý, pháp lý, đầu tư hoặc cam kết việc làm, thu nhập, chỗ ở hay kết quả cá nhân.</p>
+
+  <p class="hashtags" style="font-size:.92rem;color:#4d695a;margin-top:26px">#ThietKeChuongTrinh #KiemDinh #TAMFARMS_PROGRAM_STANDARD #TamFarms #NhungKhuVuonTam</p>
+
+  <p class="small" style="margin-top:18px">Xem thêm: <a href="/vi/bai-viet/">Tất cả bài viết</a> · <a href="/vi/dang-ky/">Đăng ký trải nghiệm</a></p>
+  <p class="small">Ngôn ngữ: <a href="/en/articles/how-a-tam-farms-program-is-designed-and-certified/">English</a></p>
+</article>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <strong>Những Khu Vườn Tâm · Tam Farms</strong>
+    <p>Mô hình do Trần Hà Tâm sáng lập.</p>
+    <p>Sống thật. Làm thật. Lớn lên từ trải nghiệm.</p>
+    <p class="small">WhatsApp: <a href="https://wa.me/84849153426">+84 84 915 3426</a> · Facebook: <a href="https://www.facebook.com/thtltdl/">thtltdl</a> · Messenger: <a href="https://m.me/thtltdl">m.me/thtltdl</a></p>
+    <p class="small">CÔNG TY TNHH SX-TM-DV THÁI LÂM · MST: 5801443073 · Đà Lạt, Lâm Đồng</p>
+    <p class="small">Không phải khách sạn, homestay đại trà, cơ sở khám chữa bệnh, đơn vị tuyển dụng hay chương trình bảo đảm thu nhập.</p>
+    <p class="small"><a href="https://omdalat.com/vi/phap-ly/">Pháp lý</a> · <a href="https://omdalat.com/en/legal/">Legal</a></p>
+    <p class="small">© 2026 Những Khu Vườn Tâm · Sáng lập bởi Trần Hà Tâm · <a href="/en/">English</a></p>
+  </div>
+</footer>
+
+<script src="/assets/js/lang-switcher.js" defer></script>
+<script src="/assets/js/menu-toggle.js" defer></script>
+</body>
+</html>

@@ -1,5 +1,54 @@
 import type { Env } from '../index';
 
+// ADR-003 — Lily route structure (Vietnamese slugs per lily-charter.md)
+// Maps the new Vietnamese route slugs to the existing V2 page keys.
+// This keeps the D1 content_blocks structure unchanged — only the rendering
+// layer is updated. Old English slugs remain supported for backward compat.
+const LILY_ROUTE_ALIASES: Record<string, string> = {
+  'lily-la-gi': 'lily-la-gi',    // What is Lily (new page)
+  'khong-gian': 'khong-gian',    // Space (new page)
+  'cho-o': 'stay',               // Accommodation → maps to existing 'stay'
+  'lam-viec': 'workspace',       // Workspace → maps to existing 'workspace'
+  'khu-vuon': 'khu-vuon',        // Garden (new page)
+  'chuong-trinh': 'programs',    // Programs → maps to existing 'programs'
+  'lich': 'lich',                // Schedule (new page)
+  'chi-phi': 'chi-phi',          // Pricing (new page)
+  'noi-quy': 'noi-quy',          // House rules (new page)
+  'an-toan': 'an-toan',          // Safety (new page)
+  'lien-he': 'lien-he',          // Contact (new page)
+  'dang-ky': 'apply',            // Register → maps to existing 'apply'
+};
+
+// Reverse map: V2 page key → Vietnamese slug (for canonical URLs in VI locale)
+const LILY_VI_SLUGS: Record<string, string> = {
+  'stay': 'cho-o',
+  'workspace': 'lam-viec',
+  'programs': 'chuong-trinh',
+  'apply': 'dang-ky',
+  'jobs': 'jobs',
+  'training': 'training',
+  'international': 'international',
+  'visa-support': 'visa-support',
+  'lily-la-gi': 'lily-la-gi',
+  'khong-gian': 'khong-gian',
+  'khu-vuon': 'khu-vuon',
+  'lich': 'lich',
+  'chi-phi': 'chi-phi',
+  'noi-quy': 'noi-quy',
+  'an-toan': 'an-toan',
+  'lien-he': 'lien-he',
+};
+
+// Legal entity info (ADR-003) — used in all footers
+const LEGAL_ENTITY = 'CÔNG TY TNHH SX-TM-DV THÁI LÂM';
+const LEGAL_MST = '5801443073';
+const LEGAL_HUB_URL = 'https://omdalat.com/vi/phap-ly/';
+const TAMFARMS_URL = 'https://tamfarms.omdalat.com';
+
+// ADR-003 / TAMFARMS_LOCATION_STANDARD §0.2 — NON-WAIVABLE required label
+const TAMFARMS_LABEL_VI = 'ĐỊA ĐIỂM MẪU THUỘC HỆ NHỮNG KHU VƯỜN TÂM';
+const TAMFARMS_LABEL_EN = 'A TAM FARMS REFERENCE LOCATION';
+
 export const handleBrandSite = async (
   request: Request,
   env: Env
@@ -107,11 +156,17 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     const locale = (pathParts.includes('en') || queryLocale === 'en') ? 'en' : 'vi';
 
     // Check for Lily program routes — must be before general Lily V2 routes
-    // Handle both /programs/... and /en/programs/...
+    // Handle /programs/..., /en/programs/..., /vi/chuong-trinh/..., /chuong-trinh/...
     const isProgramsRoute = (pathParts[0] === 'programs') ||
-      (pathParts[0] === 'en' && pathParts[1] === 'programs');
+      (pathParts[0] === 'en' && pathParts[1] === 'programs') ||
+      (pathParts[0] === 'chuong-trinh') ||
+      (pathParts[0] === 'vi' && pathParts[1] === 'chuong-trinh') ||
+      (pathParts[0] === 'en' && pathParts[1] === 'chuong-trinh');
     if (isProgramsRoute && brand.slug === 'lily' && brand.publication_status === 'published') {
-      const programIdx = pathParts[0] === 'en' ? 2 : 1;
+      // Determine the index where the program slug appears
+      let programIdx = 1; // default for /programs/...
+      if (pathParts[0] === 'en' && (pathParts[1] === 'programs' || pathParts[1] === 'chuong-trinh')) programIdx = 2;
+      if (pathParts[0] === 'vi' && pathParts[1] === 'chuong-trinh') programIdx = 2;
       const program = pathParts[programIdx]; // startup-with-ai or technology-creation
       if (program) {
         const html = generateLilyProgramPage(brand, program, locale, url, contentBlocks);
@@ -128,11 +183,12 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     }
 
     // Check for Lily article routes
-    // Handle both /articles/... and /en/articles/...
+    // Handle /articles/..., /en/articles/..., /vi/articles/...
     const isArticlesRoute = (pathParts[0] === 'articles') ||
-      (pathParts[0] === 'en' && pathParts[1] === 'articles');
+      (pathParts[0] === 'en' && pathParts[1] === 'articles') ||
+      (pathParts[0] === 'vi' && pathParts[1] === 'articles');
     if (isArticlesRoute && brand.slug === 'lily' && brand.publication_status === 'published') {
-      const articleIdx = pathParts[0] === 'en' ? 2 : 1;
+      const articleIdx = (pathParts[0] === 'en' || pathParts[0] === 'vi') ? 2 : 1;
       const article = pathParts[articleIdx]; // article slug
       if (article) {
         const html = generateLilyArticlePage(brand, article, locale, url, contentBlocks);
@@ -161,7 +217,11 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
     }
 
     // Check for specific Lily V2 routes — ONLY if brand is published
-    const page = pathParts.find(p => p !== 'en' && p !== 'vi');
+    // ADR-003: resolve new Vietnamese slugs (lily-la-gi, khong-gian, cho-o, etc.)
+    // to the existing V2 page keys via LILY_ROUTE_ALIASES.
+    const rawPage = pathParts.find(p => p !== 'en' && p !== 'vi');
+    // Resolve Vietnamese slug alias to the V2 page key (falls back to rawPage)
+    const page = rawPage ? (LILY_ROUTE_ALIASES[rawPage] || rawPage) : undefined;
 
     // Sitemap.xml — served for all published brands
     if (page === 'sitemap.xml' && brand.publication_status === 'published') {
@@ -177,6 +237,7 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
 
     // C3 compliance gate: /stay route requires lodging_compliance for ALL brands with can_host_stay=1
     // Same allowlist as publish gate: only verified, approved, not_applicable
+    // This covers both 'stay' (en) and 'cho-o' (vi, resolved to 'stay' above)
     const STAY_OK = new Set(['verified', 'approved', 'not_applicable']);
     if (page === 'stay' && brand.can_host_stay === 1 && !STAY_OK.has(brand.lodging_compliance)) {
       return new Response('Not Found', { status: 404 });
@@ -184,7 +245,7 @@ async function renderBrandSite(env: Env, brand: any, url: URL): Promise<Response
 
     if (page && brand.slug === 'lily' && brand.publication_status === 'published') {
       // Lily V2 specific pages — only accessible when published
-      const html = generateLilyV2Page(brand, page, locale, url);
+      const html = generateLilyV2Page(brand, page, locale, url, rawPage);
       if (html) {
         return new Response(html, {
           status: 200,
@@ -294,9 +355,11 @@ function generateSitemapXML(brand: any, _locale: string): string {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}\n</urlset>`;
 }
 
-function generateLilyV2Page(brand: any, page: string, locale: string, url: URL): string | null {
+function generateLilyV2Page(brand: any, page: string, locale: string, url: URL, rawSlug?: string): string | null {
   const isEn = locale === 'en';
   const brandName = isEn ? brand.name_en : brand.name_vi;
+  // Use the raw Vietnamese slug for canonical URLs in VI locale when available
+  const urlSlug = rawSlug || page;
   
   const pages: Record<string, {
     titleVi: string;
@@ -448,6 +511,139 @@ function generateLilyV2Page(brand: any, page: string, locale: string, url: URL):
         { heading: 'Information needed', body: 'Name, email, phone, nationality or country of residence, expected stay duration, purpose (stay, learn, project, international support), and a short introduction. Passport, visa, and legal documents are uploaded only after logging into app.omdalat.com.' },
         { heading: 'Review process', body: 'Lily reads every profile within 7 days. If the profile fits, we invite a short interview. After mutual agreement, the participant receives detailed information and proceeds to sign the contract through the app.' },
         { heading: 'Important note', body: 'Submitting a profile does not mean accommodation, work, or visa support is confirmed. Any confirmation only becomes valid after the contract is signed and legal conditions are fully checked.' }
+      ]
+    },
+    // --- ADR-003 new Vietnamese route pages (lily-charter.md) ---
+    'lily-la-gi': {
+      titleVi: 'Lily là gì',
+      titleEn: 'What is Lily',
+      descriptionVi: 'Lily là địa điểm thực tế đầu tiên dùng để demo, kiểm chứng và hoàn thiện mô hình Tam Farms.',
+      descriptionEn: 'Lily is the first real-world location used to demonstrate, validate, and refine the Tam Farms model.',
+      sectionsVi: [
+        { heading: 'Lily là gì', body: 'Lily là địa điểm thực tế đầu tiên thuộc hệ Tam Farms (Những Khu Vườn Tâm). Nơi đây dùng để demo, kiểm chứng và hoàn thiện mô hình Tam Farms — nơi người dùng có thể sống, làm việc, học tập, trải nghiệm khu vườn, tham gia chương trình, phát triển project và làm việc cùng chuyên gia.' },
+        { heading: 'Vai trò trong hệ', body: 'Lily là REFERENCE LOCATION 01 — địa điểm mẫu. Lily không sở hữu quyền nhân bản mô hình Tam Farms. Lily trình diễn và kiểm chứng mô hình, thu thập evidence vận hành thật.' },
+        { heading: 'Mô hình tổng', body: 'Tam Farms (Những Khu Vườn Tâm) là mô hình chuỗi. Lily là một địa điểm trong hệ đó. Khi bạn muốn hiểu mô hình tổng, hãy tham khảo tamfarms.omdalat.com.' },
+        { heading: 'Ai nên quan tâm', body: 'Người muốn ở lại Đà Lạt đủ lâu để hiểu nhịp sống, tham gia mô hình Tam Farms, và cần một địa điểm thực tế để kiểm chứng.' }
+      ],
+      sectionsEn: [
+        { heading: 'What is Lily', body: 'Lily is the first real-world location in the Tam Farms system (Những Khu Vườn Tâm). It is used to demonstrate, validate, and refine the Tam Farms model — a place where people can live, work, learn, experience the garden, join programmes, develop projects, and work with experts.' },
+        { heading: 'Role in the system', body: 'Lily is REFERENCE LOCATION 01 — a reference location. Lily does not own the right to replicate the Tam Farms model. Lily demonstrates and validates the model, collecting real operational evidence.' },
+        { heading: 'The parent model', body: 'Tam Farms is the chain model. Lily is one location within that system. When you want to understand the overall model, refer to tamfarms.omdalat.com.' },
+        { heading: 'Who should be interested', body: 'People who want to stay in Da Lat long enough to understand the rhythm of life, join the Tam Farms model, and need a real location to validate it.' }
+      ]
+    },
+    'khong-gian': {
+      titleVi: 'Không gian tại Lily',
+      titleEn: 'The Space at Lily',
+      descriptionVi: 'Tổng quan về không gian vật lý tại Lily: phòng ở, bếp, khu làm việc, khu học tập, khu vườn.',
+      descriptionEn: 'Overview of the physical space at Lily: rooms, kitchen, workspace, study area, and garden.',
+      sectionsVi: [
+        { heading: 'Tổng quan không gian', body: 'Lily nằm tại Lạc Dương, gần Đà Lạt. Không gian bao gồm phòng ở, bếp chung, khu làm việc, khu học tập và khu vườn. Mỗi khu vực được tổ chức để phục vụ nhịp sống và làm việc của người ở lại.' },
+        { heading: 'Phòng ở', body: 'Phòng ở được bố trí đơn giản, sạch sẽ và đủ dụng cụ cơ bản. Người ở lại tự mang đồ cá nhân. Mỗi phòng có giường, bàn nhỏ và chỗ để đồ.' },
+        { heading: 'Bếp và khu sinh hoạt chung', body: 'Bếp chung là nơi mọi người có thể nấu ăn cùng nhau. Khu sinh hoạt chung dùng cho buổi chia sẻ, đọc sách, và trò chuyện vào buổi tối.' },
+        { heading: 'Khu vườn', body: 'Khu vườn là phần quan trọng nhất của Lily. Nơi đây có cây trái, dược liệu và không gian xanh. Người ở lại tham gia chăm sóc khu vườn theo nhịp chung.' }
+      ],
+      sectionsEn: [
+        { heading: 'Space overview', body: 'Lily is located in Lac Duong, near Da Lat. The space includes rooms, a shared kitchen, workspace, study area, and garden. Each area is organised to serve the rhythm of life and work for residents.' },
+        { heading: 'Rooms', body: 'Rooms are simply furnished, clean, and have basic amenities. Residents bring their own personal items. Each room has a bed, small desk, and storage.' },
+        { heading: 'Kitchen and common area', body: 'The shared kitchen is where people can cook together. The common area is used for sharing sessions, reading, and evening conversations.' },
+        { heading: 'Garden', body: 'The garden is the most important part of Lily. It has fruit trees, herbs, and green space. Residents participate in garden care as part of the shared rhythm.' }
+      ]
+    },
+    'khu-vuon': {
+      titleVi: 'Khu vườn tại Lily',
+      titleEn: 'The Garden at Lily',
+      descriptionVi: 'Khu vườn là phần quan trọng nhất của Lily — cây trái, dược liệu và không gian xanh.',
+      descriptionEn: 'The garden is the most important part of Lily — fruit trees, herbs, and green space.',
+      sectionsVi: [
+        { heading: 'Khu vườn không phải phòng cảnh', body: 'Khu vườn tại Lily không phải chi tiết trang trí. Nó là một phần của vận hành. Người ở lại tham gia chăm sóc, thu hoạch và hiểu nhịp của cây trồng theo mùa.' },
+        { heading: 'Cây trái và dược liệu', body: 'Khu vườn có cây trái theo mùa và dược liệu bản địa. Mỗi mùa có việc riêng: trồng, tưới, cắt, thu hoạch. Người ở lại học qua việc làm thật.' },
+        { heading: 'Vai trò trong mô hình Tam Farms', body: 'Khu vườn là nơi trình diễn nguyên lý Tam Farms: sống gần tự nhiên, làm việc có kỷ luật, và tạo giá trị từ đất thật. Đây là phần không thể thiếu của mô hình.' }
+      ],
+      sectionsEn: [
+        { heading: 'The garden is not decoration', body: 'The garden at Lily is not a decorative detail. It is part of operations. Residents participate in care, harvest, and understanding the seasonal rhythm of plants.' },
+        { heading: 'Fruit and herbs', body: 'The garden has seasonal fruit trees and native herbs. Each season has its own work: planting, watering, pruning, harvesting. Residents learn by doing.' },
+        { heading: 'Role in the Tam Farms model', body: 'The garden is where Tam Farms principles are demonstrated: living close to nature, working with discipline, and creating value from real land. This is an essential part of the model.' }
+      ]
+    },
+    'lich': {
+      titleVi: 'Lịch hoạt động tại Lily',
+      titleEn: 'Schedule at Lily',
+      descriptionVi: 'Nhịp sinh hoạt chung tại Lily: review đầu tuần, đánh giá cuối tháng, lịch làm việc và học tập.',
+      descriptionEn: 'The shared rhythm at Lily: weekly review, monthly retrospective, work and study schedule.',
+      sectionsVi: [
+        { heading: 'Nhịp chung', body: 'Lily có nhịp sinh hoạt chung. Mỗi tuần có review đầu tuần, mỗi tháng có đánh giá cuối tháng. Người ở lại tham gia vào nhịp chung, không chỉ thuê một phòng.' },
+        { heading: 'Lịch làm việc', body: 'Có lịch yên tĩnh cho làm việc tập trung, khu gọi video riêng, và khung giờ chung cho chia sẻ. Mọi người đồng ý giữ nhịp để không ảnh hưởng nhau.' },
+        { heading: 'Lịch khu vườn', body: 'Khu vườn có lịch theo mùa: trồng, tưới, cắt, thu hoạch. Người ở lại tham gia theo lịch chung.' }
+      ],
+      sectionsEn: [
+        { heading: 'Shared rhythm', body: 'Lily has a shared rhythm. Each week has a weekly review, each month has a monthly retrospective. Residents join the shared rhythm, not just rent a room.' },
+        { heading: 'Work schedule', body: 'There are quiet hours for focused work, a private video-call zone, and shared time for discussion. Everyone agrees to keep the rhythm so as not to disturb each other.' },
+        { heading: 'Garden schedule', body: 'The garden has a seasonal schedule: planting, watering, pruning, harvesting. Residents participate according to the shared schedule.' }
+      ]
+    },
+    'chi-phi': {
+      titleVi: 'Chi phí ở lại tại Lily',
+      titleEn: 'Pricing at Lily',
+      descriptionVi: 'Thông tin về chi phí residency tại Lily. Giá chưa niêm yết công khai — tư vấn qua app.',
+      descriptionEn: 'Information about residency pricing at Lily. Prices are not publicly listed — consult via the app.',
+      sectionsVi: [
+        { heading: 'Cấu trúc chi phí', body: 'Chi phí ở lại tại Lily bao gồm phí residency (theo tuần hoặc tháng) và phí chương trình (nếu tham gia). Cấu trúc đang hoàn thiện.' },
+        { heading: 'Chưa niêm yết công khai', body: 'Giá chưa niêm yết công khai trên website. Người quan tâm gửi hồ sơ qua form đăng ký để được tư vấn chi tiết.' },
+        { heading: 'Thanh toán qua app', body: 'Mọi xác nhận và thanh toán chỉ có hiệu lực sau khi hợp đồng được ký qua app.omdalat.com. Lily không xử lý thanh toán trực tiếp ngoài app.' }
+      ],
+      sectionsEn: [
+        { heading: 'Fee structure', body: 'The cost of staying at Lily includes a residency fee (weekly or monthly) and a programme fee (if participating). The structure is being refined.' },
+        { heading: 'Not publicly listed', body: 'Prices are not publicly listed on the website. Interested people submit a profile through the application form for detailed consultation.' },
+        { heading: 'Payment via app', body: 'All confirmations and payments only take effect after the contract is signed through app.omdalat.com. Lily does not process payments directly outside the app.' }
+      ]
+    },
+    'noi-quy': {
+      titleVi: 'Nội quy tại Lily',
+      titleEn: 'House Rules at Lily',
+      descriptionVi: 'Nội quy giúp giữ nhịp sống và làm việc chung tại Lily.',
+      descriptionEn: 'House rules help maintain the shared rhythm of life and work at Lily.',
+      sectionsVi: [
+        { heading: 'Nhịp chung', body: 'Mọi người ở lại đều đồng ý giữ nhịp sinh hoạt chung: giờ yên tĩnh, lịch làm việc, lịch khu vườn, và review đầu tuần. Đây là điều kiện để ở lại.' },
+        { heading: 'Không phải nơi nghỉ ngắn hạn', body: 'Lily không phù hợp với người tìm nơi nghỉ ngắn hạn hoặc trải nghiệm du lịch nhanh. Lily dành cho người muốn ở lại đủ lâu để xây nhịp sống thật.' },
+        { heading: 'Xử lý xung đột', body: 'Khi có xung đột, mọi người cùng thảo luận trong buổi review. Lily không có quy tắc cứng nhưng có kỷ luật chung.' }
+      ],
+      sectionsEn: [
+        { heading: 'Shared rhythm', body: 'All residents agree to keep the shared rhythm: quiet hours, work schedule, garden schedule, and weekly review. This is a condition of staying.' },
+        { heading: 'Not for short stays', body: 'Lily is not for people looking for a short stay or quick tourism experience. Lily is for people who want to stay long enough to build a real rhythm.' },
+        { heading: 'Conflict resolution', body: 'When conflicts arise, everyone discusses them in the review session. Lily does not have rigid rules but has shared discipline.' }
+      ]
+    },
+    'an-toan': {
+      titleVi: 'An toàn tại Lily',
+      titleEn: 'Safety at Lily',
+      descriptionVi: 'Thông tin an toàn: PCCC, lưu trú, và quy trình khẩn cấp tại Lily.',
+      descriptionEn: 'Safety information: fire safety, lodging compliance, and emergency procedures at Lily.',
+      sectionsVi: [
+        { heading: 'PCCC / Phòng cháy chữa cháy', body: 'Lily có báo cáo kiểm tra PCCC (BBKT-17022022 — Phòng Cảnh sát PCCC&CNCH). Trang bị phòng cháy được kiểm tra định kỳ.' },
+        { heading: 'Lưu trú hợp lệ', body: 'Lily có giấy chứng nhận lưu trú (62/GCN — Công an huyện Lạc Dương, NĐ 96/2016). Việc khai báo tạm trú được phối hợp với cơ quan chức năng.' },
+        { heading: 'Quy trình khẩn cấp', body: 'Có liên hệ khẩn cấp, sơ đồ thoát hiểm, và hướng dẫn xử lý khi có sự cố. Người ở lại được giới thiệu quy trình khi đến.' }
+      ],
+      sectionsEn: [
+        { heading: 'Fire safety (PCCC)', body: 'Lily has a fire safety inspection report (BBKT-17022022 — Fire Prevention & Fighting Police). Fire equipment is inspected periodically.' },
+        { heading: 'Lodging compliance', body: 'Lily has a lodging certificate (62/GCN — Lac Duong District Police, Decree 96/2016). Temporary residence declaration is coordinated with authorities.' },
+        { heading: 'Emergency procedures', body: 'There are emergency contacts, evacuation plans, and incident handling guidelines. Residents are briefed on procedures upon arrival.' }
+      ]
+    },
+    'lien-he': {
+      titleVi: 'Liên hệ Lily',
+      titleEn: 'Contact Lily',
+      descriptionVi: 'Thông tin liên hệ và form gửi yêu cầu tìm hiểu về Lily.',
+      descriptionEn: 'Contact information and inquiry form for Lily.',
+      sectionsVi: [
+        { heading: 'Địa chỉ', body: '42 Cao Bá Quát, Phường Lang Biang, Đà Lạt, Lâm Đồng (khu vực Lạc Dương).' },
+        { heading: 'Liên hệ trực tiếp', body: 'WA/Zalo: +84919 851 311 | Hotline: +84775 875 133. Email: contact@lily.omdalat.com' },
+        { heading: 'Gửi yêu cầu', body: 'Bạn có thể gửi yêu cầu tìm hiểu qua form bên dưới. Lily sẽ phản hồi trong vòng 7 ngày.' }
+      ],
+      sectionsEn: [
+        { heading: 'Address', body: '42 Cao Bá Quát, Lang Biang Ward, Da Lat, Lam Dong (Lac Duong area).' },
+        { heading: 'Direct contact', body: 'WA/Zalo: +84919 851 311 | Hotline: +84775 875 133. Email: contact@lily.omdalat.com' },
+        { heading: 'Send inquiry', body: 'You can send an inquiry through the form below. Lily will respond within 7 days.' }
       ]
     }
   };

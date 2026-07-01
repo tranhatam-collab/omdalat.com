@@ -102,6 +102,8 @@ h3{font-size:1.3rem;margin-top:1.6em}
 }
 
 /* Language Switcher + Social Bar */
+/* Social bar hidden on public pages — only visible after registration */
+body.no-social .social-bar{display:none !important}
 .header-controls{display:flex;align-items:center;gap:16px;flex-shrink:0}
 .lang-switcher{display:flex;align-items:center;gap:2px;font-size:.88rem;font-weight:700}
 .lang-switcher a{text-decoration:none;padding:4px 8px;border-radius:6px;color:var(--muted);transition:all .15s}

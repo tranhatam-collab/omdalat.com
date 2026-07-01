@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * SEO enhancement script for Tam Farm static pages.
+ * SEO enhancement script for Tam Farms static pages.
  * Adds: hreflang, schema.org JSON-LD, OG image, Twitter cards.
  *
  * Usage: node assets/js/seo-enhance.mjs
@@ -56,12 +56,12 @@ function orgSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Những Khu Vườn Tâm",
-    "alternateName": "Tam Farm",
+    "alternateName": "Tam Farms",
     "url": BASE_URL,
-    "description": "Không gian trải nghiệm sống và làm việc tại Đà Lạt, dành cho 01–03 người mỗi tháng.",
+    "description": "Mô hình chuỗi phát triển các địa điểm sống, học tập, làm việc và trải nghiệm thực tế cùng chuyên gia.",
     "slogan": "Sống thật. Làm thật. Lớn lên từ trải nghiệm.",
     "founder": { "@type": "Person", "name": "Trần Hà Tâm" },
-    "areaServed": "Đà Lạt, Lạc Dương, Lâm Đồng",
+    "areaServed": ["Vietnam"],
     "sameAs": ["https://wa.me/84849153426"]
   };
 }
@@ -70,7 +70,7 @@ function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Những Khu Vườn Tâm — Tam Farm",
+    "name": "Những Khu Vườn Tâm — Tam Farms",
     "url": BASE_URL,
     "inLanguage": ["vi", "en"]
   };
@@ -172,7 +172,7 @@ function buildSocialTags(title, description, url, locale) {
     `<meta property="og:image:height" content="630">`,
     `<meta property="og:locale" content="${localeTag}">`,
     `<meta property="og:locale:alternate" content="${altLocale}">`,
-    `<meta property="og:site_name" content="Những Khu Vườn Tâm — Tam Farm">`,
+    `<meta property="og:site_name" content="Những Khu Vườn Tâm — Tam Farms">`,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${title}">`,
     `<meta name="twitter:description" content="${description}">`,

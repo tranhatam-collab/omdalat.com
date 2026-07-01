@@ -1,8 +1,15 @@
 # BÁO CÁO QA AUDIT — tamfarms.omdalat.com (CẬP NHẬT)
 
+> **⚠️ STATUS: SUPERSEDED**
+> **Superseded by:** `docs/governance/brand-charters/tamfarms-audit-v2-2026-07-01.md`
+> **Reason:** This audit was based on the incorrect assumption that Tam Farms is a location.
+> Per ADR-003 (2026-07-01), Tam Farms is a CHAIN MODEL, not a location.
+> The findings below are outdated and should not be used for current decisions.
+
 **Ngày audit gốc:** 2026-06-30
 **Ngày cập nhật:** 2026-06-30 (post-Founder Lock)
 **Phạm vi:** DNS, DB, Worker routes, code, docs, live, Founder Lock
+**Status:** SUPERSEDED (2026-07-01)
 
 ## 1. Phán quyết cập nhật
 
